@@ -1,0 +1,182 @@
+export type CountryProfile = {
+  slug: string;
+  name: string;
+  iso: string;
+  region: "North Africa" | "West Africa" | "East Africa" | "Central Africa" | "Southern Africa";
+  currency: string;
+  sectors: string[];
+  tape?: { label: string; href: string };
+};
+
+export const countries: CountryProfile[] = [
+  { slug: "algeria", name: "Algeria", iso: "DZ", region: "North Africa", currency: "DZD", sectors: ["Energy", "Banks"] },
+  { slug: "angola", name: "Angola", iso: "AO", region: "Southern Africa", currency: "AOA", sectors: ["Oil", "Infrastructure"] },
+  { slug: "benin", name: "Benin", iso: "BJ", region: "West Africa", currency: "XOF", sectors: ["Agriculture", "Ports"] },
+  { slug: "botswana", name: "Botswana", iso: "BW", region: "Southern Africa", currency: "BWP", sectors: ["Mining", "Banks"] },
+  { slug: "burkina-faso", name: "Burkina Faso", iso: "BF", region: "West Africa", currency: "XOF", sectors: ["Gold", "Agriculture"] },
+  { slug: "burundi", name: "Burundi", iso: "BI", region: "East Africa", currency: "BIF", sectors: ["Agriculture"] },
+  { slug: "cabo-verde", name: "Cabo Verde", iso: "CV", region: "West Africa", currency: "CVE", sectors: ["Tourism", "Services"] },
+  { slug: "cameroon", name: "Cameroon", iso: "CM", region: "Central Africa", currency: "XAF", sectors: ["Energy", "Agriculture"] },
+  { slug: "central-african-republic", name: "Central African Republic", iso: "CF", region: "Central Africa", currency: "XAF", sectors: ["Mining"] },
+  { slug: "chad", name: "Chad", iso: "TD", region: "Central Africa", currency: "XAF", sectors: ["Oil"] },
+  { slug: "comoros", name: "Comoros", iso: "KM", region: "East Africa", currency: "KMF", sectors: ["Agriculture"] },
+  { slug: "congo", name: "Congo", iso: "CG", region: "Central Africa", currency: "XAF", sectors: ["Oil"] },
+  { slug: "cote-divoire", name: "Côte d’Ivoire", iso: "CI", region: "West Africa", currency: "XOF", sectors: ["Cocoa", "Banks"] },
+  { slug: "djibouti", name: "Djibouti", iso: "DJ", region: "East Africa", currency: "DJF", sectors: ["Ports", "Logistics"] },
+  {
+    slug: "dr-congo",
+    name: "DR Congo",
+    iso: "CD",
+    region: "Central Africa",
+    currency: "CDF",
+    sectors: ["Mining", "Infrastructure"],
+  },
+  {
+    slug: "egypt",
+    name: "Egypt",
+    iso: "EG",
+    region: "North Africa",
+    currency: "EGP",
+    sectors: ["Energy", "Suez / trade", "Banks", "Real estate", "Tourism"],
+    tape: { label: "CBE", href: "https://www.cbe.org.eg/" },
+  },
+  { slug: "equatorial-guinea", name: "Equatorial Guinea", iso: "GQ", region: "Central Africa", currency: "XAF", sectors: ["Oil"] },
+  { slug: "eritrea", name: "Eritrea", iso: "ER", region: "East Africa", currency: "ERN", sectors: ["Mining"] },
+  { slug: "eswatini", name: "Eswatini", iso: "SZ", region: "Southern Africa", currency: "SZL", sectors: ["Agriculture"] },
+  {
+    slug: "ethiopia",
+    name: "Ethiopia",
+    iso: "ET",
+    region: "East Africa",
+    currency: "ETB",
+    sectors: ["Agriculture", "Aviation", "Energy"],
+    tape: { label: "NBE", href: "https://nbe.gov.et/" },
+  },
+  { slug: "gabon", name: "Gabon", iso: "GA", region: "Central Africa", currency: "XAF", sectors: ["Oil", "Timber"] },
+  { slug: "gambia", name: "Gambia", iso: "GM", region: "West Africa", currency: "GMD", sectors: ["Agriculture"] },
+  {
+    slug: "ghana",
+    name: "Ghana",
+    iso: "GH",
+    region: "West Africa",
+    currency: "GHS",
+    sectors: ["Cocoa", "Gold", "Oil", "Banks", "Power"],
+    tape: { label: "BoG", href: "https://www.bog.gov.gh/" },
+  },
+  { slug: "guinea", name: "Guinea", iso: "GN", region: "West Africa", currency: "GNF", sectors: ["Mining"] },
+  { slug: "guinea-bissau", name: "Guinea-Bissau", iso: "GW", region: "West Africa", currency: "XOF", sectors: ["Agriculture"] },
+  {
+    slug: "kenya",
+    name: "Kenya",
+    iso: "KE",
+    region: "East Africa",
+    currency: "KES",
+    sectors: ["Banking", "Agriculture", "Energy", "Telecoms", "Logistics"],
+    tape: { label: "CBK", href: "https://www.centralbank.go.ke/" },
+  },
+  { slug: "lesotho", name: "Lesotho", iso: "LS", region: "Southern Africa", currency: "LSL", sectors: ["Water", "Apparel"] },
+  { slug: "liberia", name: "Liberia", iso: "LR", region: "West Africa", currency: "LRD", sectors: ["Mining"] },
+  { slug: "libya", name: "Libya", iso: "LY", region: "North Africa", currency: "LYD", sectors: ["Oil"] },
+  { slug: "madagascar", name: "Madagascar", iso: "MG", region: "East Africa", currency: "MGA", sectors: ["Agriculture"] },
+  { slug: "malawi", name: "Malawi", iso: "MW", region: "Southern Africa", currency: "MWK", sectors: ["Agriculture"] },
+  { slug: "mali", name: "Mali", iso: "ML", region: "West Africa", currency: "XOF", sectors: ["Gold", "Agriculture"] },
+  { slug: "mauritania", name: "Mauritania", iso: "MR", region: "West Africa", currency: "MRU", sectors: ["Mining"] },
+  { slug: "mauritius", name: "Mauritius", iso: "MU", region: "East Africa", currency: "MUR", sectors: ["Finance", "Services"] },
+  {
+    slug: "morocco",
+    name: "Morocco",
+    iso: "MA",
+    region: "North Africa",
+    currency: "MAD",
+    sectors: ["Phosphates", "Banks", "Renewables"],
+    tape: { label: "BAM", href: "https://www.bkam.ma/" },
+  },
+  { slug: "mozambique", name: "Mozambique", iso: "MZ", region: "Southern Africa", currency: "MZN", sectors: ["LNG", "Energy"] },
+  { slug: "namibia", name: "Namibia", iso: "NA", region: "Southern Africa", currency: "NAD", sectors: ["Mining", "Banks"] },
+  { slug: "niger", name: "Niger", iso: "NE", region: "West Africa", currency: "XOF", sectors: ["Uranium"] },
+  {
+    slug: "nigeria",
+    name: "Nigeria",
+    iso: "NG",
+    region: "West Africa",
+    currency: "NGN",
+    sectors: ["Oil & gas", "Banking", "Telecoms", "Consumer", "Fintech"],
+    tape: { label: "CBN", href: "https://www.cbn.gov.ng/" },
+  },
+  {
+    slug: "rwanda",
+    name: "Rwanda",
+    iso: "RW",
+    region: "East Africa",
+    currency: "RWF",
+    sectors: ["Services", "Agriculture", "ICT", "Energy", "Logistics"],
+    tape: { label: "BNR", href: "https://www.bnr.rw/" },
+  },
+  { slug: "sao-tome-and-principe", name: "São Tomé and Príncipe", iso: "ST", region: "Central Africa", currency: "STN", sectors: ["Agriculture"] },
+  { slug: "senegal", name: "Senegal", iso: "SN", region: "West Africa", currency: "XOF", sectors: ["Energy", "Ports"] },
+  { slug: "seychelles", name: "Seychelles", iso: "SC", region: "East Africa", currency: "SCR", sectors: ["Tourism", "Finance"] },
+  { slug: "sierra-leone", name: "Sierra Leone", iso: "SL", region: "West Africa", currency: "SLE", sectors: ["Mining"] },
+  { slug: "somalia", name: "Somalia", iso: "SO", region: "East Africa", currency: "SOS", sectors: ["Livestock", "Remittances"] },
+  {
+    slug: "south-africa",
+    name: "South Africa",
+    iso: "ZA",
+    region: "Southern Africa",
+    currency: "ZAR",
+    sectors: ["Mining", "Banks", "Energy", "Retail", "Capital markets"],
+    tape: { label: "SARB", href: "https://www.resbank.co.za/" },
+  },
+  { slug: "south-sudan", name: "South Sudan", iso: "SS", region: "East Africa", currency: "SSP", sectors: ["Oil"] },
+  { slug: "sudan", name: "Sudan", iso: "SD", region: "North Africa", currency: "SDG", sectors: ["Agriculture"] },
+  {
+    slug: "tanzania",
+    name: "Tanzania",
+    iso: "TZ",
+    region: "East Africa",
+    currency: "TZS",
+    sectors: ["Mining", "Tourism", "Ports"],
+    tape: { label: "BoT", href: "https://www.bot.go.tz/" },
+  },
+  { slug: "togo", name: "Togo", iso: "TG", region: "West Africa", currency: "XOF", sectors: ["Ports"] },
+  { slug: "tunisia", name: "Tunisia", iso: "TN", region: "North Africa", currency: "TND", sectors: ["Industry", "Tourism"] },
+  {
+    slug: "uganda",
+    name: "Uganda",
+    iso: "UG",
+    region: "East Africa",
+    currency: "UGX",
+    sectors: ["Agriculture", "Oil", "Banks"],
+    tape: { label: "BoU", href: "https://www.bou.or.ug/" },
+  },
+  { slug: "zambia", name: "Zambia", iso: "ZM", region: "Southern Africa", currency: "ZMW", sectors: ["Copper", "Energy"] },
+  { slug: "zimbabwe", name: "Zimbabwe", iso: "ZW", region: "Southern Africa", currency: "ZWG", sectors: ["Mining", "Agriculture"] },
+];
+
+export function getCountry(slug: string) {
+  return countries.find((c) => c.slug === slug);
+}
+
+export const featuredCountrySlugs = ["kenya", "nigeria", "south-africa", "egypt", "ghana", "rwanda"] as const;
+
+export const indicatorSlots = [
+  "GDP",
+  "GDP per capita",
+  "Inflation",
+  "Policy rate",
+  "FX",
+  "Public debt",
+  "Trade balance",
+  "FDI",
+] as const;
+
+export const kenyaGraph = [
+  { from: "Kenya", rel: "currency", to: "KES" },
+  { from: "Kenya", rel: "central bank", to: "CBK" },
+  { from: "CBK", rel: "policy", to: "Interest rates" },
+  { from: "CBK", rel: "supervises", to: "Banks" },
+  { from: "Kenya", rel: "exchange", to: "NSE" },
+  { from: "Kenya", rel: "sector", to: "Agriculture" },
+  { from: "Kenya", rel: "sector", to: "Energy" },
+  { from: "Energy", rel: "exposes", to: "Inflation / manufacturing costs" },
+  { from: "Kenya", rel: "corridor", to: "Northern Corridor" },
+] as const;

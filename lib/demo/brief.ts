@@ -1,0 +1,42 @@
+export const fiveThings = [
+  {
+    happened: "A Kenya-file brief on how to read a CBK MPC statement is on the desk.",
+    why: "The rate line is not the whole decision; operations bind interbank conditions.",
+    number: "No official print republished here.",
+    affected: "ALCO, treasury, bank research.",
+    watch: "The Bank’s monetary-policy page when a statement posts.",
+    href: "/brief/how-to-read-a-cbk-mpc-statement",
+  },
+  {
+    happened: "T-bill result method: file only after the CBK notice exists.",
+    why: "Chat yields are not prints.",
+    number: "Four fields — offered, bids, accepted, WAR — from the notice only.",
+    affected: "Treasury / ALM.",
+    watch: "centralbank.go.ke bills & bonds.",
+    href: "/brief/when-the-tbill-result-notice-posts",
+  },
+  {
+    happened: "NSE issuer-announcement anatomy is in the file.",
+    why: "The notice is a disclosure event, not the tape.",
+    number: "No equity print carried.",
+    affected: "Research, company secretariat.",
+    watch: "nse.co.ke announcements.",
+    href: "/brief/anatomy-of-an-nse-issuer-announcement",
+  },
+  {
+    happened: "Climate Capital and Africa Pulse pages are methodology scaffolds.",
+    why: "The graph must exist before scores are claimed.",
+    number: "No Africa Pulse score is in production.",
+    affected: "DFIs, climate funds, governments.",
+    watch: "/climate and /data.",
+    href: "/climate",
+  },
+  {
+    happened: "Country terminals opened for KE, NG, ZA, EG, GH, RW.",
+    why: "Programmatic country intelligence is the SEO and product spine.",
+    number: "Indicator cells are blank pending primary series.",
+    affected: "Investors, banks, consultants.",
+    watch: "/countries/kenya as the first populated file.",
+    href: "/countries/kenya",
+  },
+] as const;

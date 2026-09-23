@@ -1,26 +1,242 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f6f7f9;
+  --paper-2: #eef0f4;
+  --paper-3: #e2e5ec;
+  --ink: #0a1b4b;
+  --ink-soft: #24325f;
+  --muted: #5c6684;
+  --forest: #0a1b4b;
+  --forest-deep: #06102c;
+  --forest-mid: #14265e;
+  --gold: #c41e3a;
+  --gold-soft: #e24b5f;
+  --rule: #d4d8e2;
+  --tape: #0a1b4b;
+  --tape-ink: #f6f7f9;
+  --facts: #0a1b4b;
+  --analysis: #2c3f5c;
+  --opinion: #7a4a24;
+  --danger: #c41e3a;
+}
+
+.dark {
+  --paper: #06102c;
+  --paper-2: #0a1b4b;
+  --paper-3: #12245a;
+  --ink: #f4f6fb;
+  --ink-soft: #c5cce0;
+  --muted: #8b94b0;
+  --forest: #9bb0e8;
+  --forest-deep: #d5def4;
+  --forest-mid: #7d93d4;
+  --gold: #e24b5f;
+  --gold-soft: #c41e3a;
+  --rule: #1c2c5c;
+  --tape: #06102c;
+  --tape-ink: #f4f6fb;
+  --facts: #9bb0e8;
+  --analysis: #9db0cc;
+  --opinion: #d4a574;
+  --danger: #e24b5f;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-forest-mid: var(--forest-mid);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-rule: var(--rule);
+  --color-tape: var(--tape);
+  --color-tape-ink: var(--tape-ink);
+  --color-facts: var(--facts);
+  --color-analysis: var(--analysis);
+  --color-opinion: var(--opinion);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold) 35%, transparent);
+}
+
+.masthead-rule {
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--forest));
+}
+
+.af-logo {
+  display: block;
+  width: auto;
+  height: 3.6rem;
+}
+
+@media (min-width: 640px) {
+  .af-logo {
+    height: 4.5rem;
+  }
+}
+
+.af-logo-compact {
+  height: 2.75rem;
+}
+
+.af-logo-dark {
+  display: none;
+}
+
+.dark .af-logo-light {
+  display: none;
+}
+
+.dark .af-logo-dark {
+  display: block;
+}
+
+.article-body {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.article-body > * + * {
+  margin-top: 1.15rem;
+}
+
+.article-body h2 {
+  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-top: 2.25rem;
+  scroll-margin-top: 5rem;
+}
+
+.article-body h3 {
+  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-top: 1.75rem;
+}
+
+.article-body a {
+  color: var(--forest);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-body a:hover {
+  color: var(--gold);
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.25rem;
+}
+
+.article-body li + li {
+  margin-top: 0.4rem;
+}
+
+.article-body ul {
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 1.5rem 0;
+}
+
+.article-body th,
+.article-body td {
+  border: 1px solid var(--rule);
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-body th {
+  background: var(--paper-2);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.article-body strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.data-table th,
+.data-table td {
+  border-bottom: 1px solid var(--rule);
+  padding: 0.65rem 0.55rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table th {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.data-table tbody tr:hover {
+  background: color-mix(in srgb, var(--paper-2) 70%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }

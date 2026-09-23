@@ -159,6 +159,30 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Seats",
       summary: "Free, Pro, Professional, Enterprise and Kenya desk trial.",
     },
+    {
+      href: "/graph",
+      title: "Graph",
+      kicker: "Knowledge graph",
+      summary: "Kenya desk edges and entity resolution stubs.",
+    },
+    {
+      href: "/graph/kenya",
+      title: "Kenya graph desk",
+      kicker: "Graph",
+      summary: "Typed edges from Kenya to CBK, NSE, corridors and issuers.",
+    },
+    {
+      href: "/watchlists",
+      title: "Watchlists",
+      kicker: "Seat",
+      summary: "Saved watches require Auth. Templates only until then.",
+    },
+    {
+      href: "/alerts",
+      title: "Alerts",
+      kicker: "Seat",
+      summary: "Alert kinds for prints and filings. Delivery not live.",
+    },
     ...navHits,
   ];
 }

@@ -16,6 +16,7 @@ import { agencyCountryParams, agencyKinds } from "@/lib/demo/agencies";
 import { cities } from "@/lib/demo/cities";
 import { investors } from "@/lib/demo/investors";
 import { personCountryParams, personRoles } from "@/lib/demo/people";
+import { graphDesks } from "@/lib/demo/graph";
 import { articleHref } from "@/lib/format";
 import { site } from "@/lib/site";
 import { institutions, topics } from "@/lib/taxonomy";
@@ -68,6 +69,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/developers",
     "/account",
     "/signup",
+    "/graph",
+    "/graph/resolve",
+    "/watchlists",
+    "/alerts",
   ];
 
   const now = new Date();
@@ -211,6 +216,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...personCountryParams().map((item) => ({
       url: `${site.url}/people/${item.role}/${item.country}`,
+      lastModified: now,
+    })),
+    ...graphDesks.map((desk) => ({
+      url: `${site.url}/graph/${desk.slug}`,
       lastModified: now,
     })),
   ];

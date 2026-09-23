@@ -192,6 +192,14 @@ export default function HomePage() {
               People
             </Link>
             {" · "}
+            <Link href="/graph" className="text-forest underline underline-offset-2">
+              Graph
+            </Link>
+            {" · "}
+            <Link href="/watchlists" className="text-forest underline underline-offset-2">
+              Watchlists
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

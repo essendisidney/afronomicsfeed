@@ -43,7 +43,7 @@ NEWS → DATA → CONTEXT → SIGNALS → DECISIONS
 **Utility:** Search · Brief · Terminal · PRO  
 
 **Programmatic SEO:**  
-`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`
+`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`, `/graph/[desk]`, `/graph/resolve`, `/account`, `/watchlists`, `/alerts`
 
 ---
 
@@ -95,7 +95,8 @@ RLS on from day one. Service role never in the client.
 | 9 | Ask Afronomics (RAG + pgvector) | **Question files + empty corpus refuse; RAG still unconnected** |
 | 10 | Subscriptions | **Entitlement matrix + `/account`; checkout/Auth still stubs** |
 | 11 | API keys + usage | **`/developers` + `/api/meta` catalogue; keys not issued** |
-| 12 | Full graph + entity resolution jobs | Schema + Kenya edges |
+| 12 | Full graph + entity resolution jobs | **`/graph` + Kenya edges + resolve stub; jobs listed, not scheduled** |
+| 13 | Decisions (watches / alerts / opinion rubrics) | **`/watchlists` + `/alerts` shells; Opinion rubrics; no fake deliveries** |
 
 The app stays runnable after every phase.
 
@@ -130,7 +131,7 @@ Editorial and sponsored surfaces stay visually separate. No sponsor inventory in
 
 ## 7. Analytics hooks (north star)
 
-Events to emit when analytics lands: `brief_open`, `country_view`, `signal_open`, `search`, `ask_query`, `watchlist_add`, `pro_cta`, `export_csv`.  
+Events to emit when analytics lands: `brief_open`, `country_view`, `signal_open`, `search`, `ask_query`, `watchlist_add`, `alert_subscribe`, `graph_open`, `pro_cta`, `export_csv`.  
 Phase 1: typed event names in `lib/analytics.ts` only — no fake dashboards.
 
 ---

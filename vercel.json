@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "afronomicsfeed.com" }],
+      "destination": "https://www.afronomicsfeed.com/:path*",
+      "permanent": true
+    }
+  ]
+}

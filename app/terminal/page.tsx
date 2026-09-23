@@ -42,6 +42,9 @@ const side = [
   { href: "/cities", label: "Cities" },
   { href: "/investors", label: "Investors" },
   { href: "/people", label: "People" },
+  { href: "/graph", label: "Graph" },
+  { href: "/watchlists", label: "Watchlists" },
+  { href: "/alerts", label: "Alerts" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -261,6 +264,15 @@ export default function TerminalPage() {
           <div>
             <h2 className="font-serif text-xl">Watchlist news</h2>
             <p className="mt-2 text-sm text-muted">No signed-in watchlist. Saved searches require a seat.</p>
+            <p className="mt-3 text-sm">
+              <Link href="/watchlists" className="text-forest underline underline-offset-2">
+                Watchlists
+              </Link>
+              {" · "}
+              <Link href="/alerts" className="text-forest underline underline-offset-2">
+                Alerts
+              </Link>
+            </p>
           </div>
         </section>
 
@@ -308,6 +320,11 @@ export default function TerminalPage() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/graph/kenya" className="hover:text-forest">
+                  Kenya graph
+                </Link>
+              </li>
               <li>
                 <Link href="/developers" className="hover:text-forest">
                   Developers

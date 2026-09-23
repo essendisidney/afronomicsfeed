@@ -10,7 +10,8 @@ import { agencyFileHref } from "@/lib/demo/agencies";
 import { citiesInCountry } from "@/lib/demo/cities";
 import { climateSlots } from "@/lib/demo/climate";
 import { countryDoors, countrySeries, currencyFileHref, regionalPeers } from "@/lib/demo/country-series";
-import { countries, getCountry, indicatorSlots, kenyaGraph } from "@/lib/demo/countries";
+import { countries, getCountry, indicatorSlots } from "@/lib/demo/countries";
+import { edgesForDesk, getGraphNode } from "@/lib/demo/graph";
 import { industriesForCountry, industryFileHref } from "@/lib/demo/industries";
 import { getAllArticles, toIndexItem } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -51,6 +52,7 @@ export default async function CountryPage({
   const doors = countryDoors(country);
   const fx = currencyFileHref(country.currency);
   const peers = regionalPeers(country, 5);
+  const deskEdges = country.slug === "kenya" ? edgesForDesk("kenya") : [];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -187,14 +189,25 @@ export default async function CountryPage({
         </div>
         <div>
           <h2 className="font-serif text-2xl">Graph</h2>
-          {country.slug === "kenya" ? (
-            <ul className="mt-4 space-y-1 font-mono text-[11px] text-ink-soft">
-              {kenyaGraph.map((edge) => (
-                <li key={`${edge.from}-${edge.to}`}>
-                  {edge.from} → {edge.rel} → {edge.to}
-                </li>
-              ))}
-            </ul>
+          {deskEdges.length > 0 ? (
+            <>
+              <ul className="mt-4 space-y-1 font-mono text-[11px] text-ink-soft">
+                {deskEdges.slice(0, 8).map((edge) => {
+                  const from = getGraphNode(edge.from);
+                  const to = getGraphNode(edge.to);
+                  return (
+                    <li key={edge.id}>
+                      {from?.label ?? edge.from} → {edge.rel} → {to?.label ?? edge.to}
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="mt-3 text-sm">
+                <Link href="/graph/kenya" className="text-forest underline underline-offset-2">
+                  Open Kenya graph desk
+                </Link>
+              </p>
+            </>
           ) : (
             <p className="mt-3 text-sm text-muted">
               Entity edges publish as articles and filings are tagged. Kenya is the first populated graph.

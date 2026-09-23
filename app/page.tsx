@@ -200,6 +200,14 @@ export default function HomePage() {
               Watchlists
             </Link>
             {" · "}
+            <Link href="/exports" className="text-forest underline underline-offset-2">
+              Exports
+            </Link>
+            {" · "}
+            <Link href="/ask/corpus" className="text-forest underline underline-offset-2">
+              Ask corpus
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

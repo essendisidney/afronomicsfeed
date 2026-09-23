@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
 import { Provenance } from "@/components/ui/Provenance";
-import { graphDesks, graphEdges, graphNodes } from "@/lib/demo/graph";
+import { edgesForDesk, graphDesks, graphEdges, graphNodes } from "@/lib/demo/graph";
 import { scheduledJobs } from "@/lib/ingestion/jobs";
 
 export const metadata: Metadata = {
   title: "Graph",
-  description: "Afronomics knowledge graph — Kenya desk edges first. No invented relationships.",
+  description: "Afronomics knowledge graph — Kenya, Nigeria, South Africa and Egypt desks. No invented relationships.",
 };
 
 export default function GraphPage() {
@@ -18,20 +18,38 @@ export default function GraphPage() {
       title="Entities connected by a source"
       lede="Edges are editorial scaffolds until a filing or article tags them. Resolution jobs do not invent nodes."
     >
-      <section>
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="border border-rule px-4 py-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Desks</p>
+          <p className="mt-1 font-serif text-xl">{graphDesks.length}</p>
+        </div>
+        <div className="border border-rule px-4 py-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Nodes</p>
+          <p className="mt-1 font-serif text-xl">{graphNodes.length}</p>
+        </div>
+        <div className="border border-rule px-4 py-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Edges</p>
+          <p className="mt-1 font-serif text-xl">{graphEdges.length}</p>
+        </div>
+      </div>
+
+      <section className="mt-12">
         <h2 className="font-serif text-2xl">Desks</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          {graphDesks.map((desk) => (
-            <li key={desk.slug}>
-              <Link href={`/graph/${desk.slug}`} className="block border border-rule px-4 py-3 hover:border-gold">
-                <p className="font-serif text-xl">{desk.label}</p>
-                <p className="mt-1 text-sm text-ink-soft">{desk.lede}</p>
-                <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
-                  {graphEdges.length} edges · {graphNodes.length} nodes
-                </p>
-              </Link>
-            </li>
-          ))}
+          {graphDesks.map((desk) => {
+            const edges = edgesForDesk(desk.slug);
+            return (
+              <li key={desk.slug}>
+                <Link href={`/graph/${desk.slug}`} className="block border border-rule px-4 py-3 hover:border-gold">
+                  <p className="font-serif text-xl">{desk.label}</p>
+                  <p className="mt-1 text-sm text-ink-soft">{desk.lede}</p>
+                  <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+                    {edges.length} edges · {desk.nodeIds.length} nodes
+                  </p>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
@@ -61,7 +79,10 @@ export default function GraphPage() {
         </ul>
       </section>
 
-      <Provenance source="Kenya desk scaffold" methodology="No silent overwrite. No invented edges." />
+      <Provenance
+        source="Multi-desk scaffold (KE · NG · ZA · EG)"
+        methodology="No silent overwrite. No invented edges."
+      />
     </LayerPage>
   );
 }

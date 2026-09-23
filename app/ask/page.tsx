@@ -18,6 +18,19 @@ export default function AskPage() {
       lede="Questions retrieve stored documents and observations. Model text cannot write a verified GDP, FX print, or funding ticket. Citations are mandatory."
     >
       <AskPanel />
+      <p className="mt-6 text-sm">
+        <Link href="/ask/corpus" className="text-forest underline underline-offset-2">
+          Corpus slots
+        </Link>
+        {" · "}
+        <Link href="/exports" className="text-forest underline underline-offset-2">
+          Exports
+        </Link>
+        {" · "}
+        <Link href="/graph" className="text-forest underline underline-offset-2">
+          Graph
+        </Link>
+      </p>
       <section className="mt-10">
         <h2 className="font-serif text-2xl">Question files</h2>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-ink-soft">

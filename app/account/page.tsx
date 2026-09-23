@@ -50,6 +50,14 @@ export default function AccountPage() {
         <Link href="/developers" className="text-forest underline underline-offset-2">
           Developers
         </Link>
+        {" · "}
+        <Link href="/exports" className="text-forest underline underline-offset-2">
+          Exports
+        </Link>
+        {" · "}
+        <Link href="/watchlists" className="text-forest underline underline-offset-2">
+          Watchlists
+        </Link>
       </p>
 
       <section className="mt-12">

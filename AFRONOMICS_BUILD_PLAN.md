@@ -43,7 +43,7 @@ NEWS → DATA → CONTEXT → SIGNALS → DECISIONS
 **Utility:** Search · Brief · Terminal · PRO  
 
 **Programmatic SEO:**  
-`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`, `/graph/[desk]`, `/graph/resolve`, `/account`, `/watchlists`, `/alerts`
+`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/ask/corpus`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`, `/graph/[desk]`, `/graph/resolve`, `/account`, `/watchlists`, `/alerts`, `/exports`
 
 ---
 
@@ -92,11 +92,12 @@ RLS on from day one. Service role never in the client.
 | 6 | Climate Capital | **54 country climate files + Project Lens** |
 | 7 | Signals | **Signal files + 13 category hubs** |
 | 8 | Terminal | **Monitor wired to market, economy, tech, capital, climate, company and signal files** |
-| 9 | Ask Afronomics (RAG + pgvector) | **Question files + empty corpus refuse; RAG still unconnected** |
+| 9 | Ask Afronomics (RAG + pgvector) | **Question files + `/ask/corpus` empty slots; RAG still unconnected** |
 | 10 | Subscriptions | **Entitlement matrix + `/account`; checkout/Auth still stubs** |
 | 11 | API keys + usage | **`/developers` + `/api/meta` catalogue; keys not issued** |
-| 12 | Full graph + entity resolution jobs | **`/graph` + Kenya edges + resolve stub; jobs listed, not scheduled** |
+| 12 | Full graph + entity resolution jobs | **`/graph` + KE/NG/ZA/EG desks + resolve stub; jobs listed, not scheduled** |
 | 13 | Decisions (watches / alerts / opinion rubrics) | **`/watchlists` + `/alerts` shells; Opinion rubrics; no fake deliveries** |
+| 14 | Multi-desk graph + exports + Ask corpus | **NG/ZA/EG desks; `/exports` shells; `/ask/corpus` empty index** |
 
 The app stays runnable after every phase.
 

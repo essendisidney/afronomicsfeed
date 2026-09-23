@@ -183,6 +183,18 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Seat",
       summary: "Alert kinds for prints and filings. Delivery not live.",
     },
+    {
+      href: "/exports",
+      title: "Exports",
+      kicker: "Professional",
+      summary: "Extract packages. No download without a live seat.",
+    },
+    {
+      href: "/ask/corpus",
+      title: "Ask corpus",
+      kicker: "Ask",
+      summary: "Document slots for retrieval. Index empty.",
+    },
     ...navHits,
   ];
 }

@@ -52,7 +52,7 @@ export default async function CountryPage({
   const doors = countryDoors(country);
   const fx = currencyFileHref(country.currency);
   const peers = regionalPeers(country, 5);
-  const deskEdges = country.slug === "kenya" ? edgesForDesk("kenya") : [];
+  const deskEdges = edgesForDesk(country.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -203,8 +203,8 @@ export default async function CountryPage({
                 })}
               </ul>
               <p className="mt-3 text-sm">
-                <Link href="/graph/kenya" className="text-forest underline underline-offset-2">
-                  Open Kenya graph desk
+                <Link href={`/graph/${country.slug}`} className="text-forest underline underline-offset-2">
+                  Open {country.name} graph desk
                 </Link>
               </p>
             </>

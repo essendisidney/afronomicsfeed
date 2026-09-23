@@ -45,6 +45,7 @@ const side = [
   { href: "/graph", label: "Graph" },
   { href: "/watchlists", label: "Watchlists" },
   { href: "/alerts", label: "Alerts" },
+  { href: "/exports", label: "Exports" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -272,6 +273,14 @@ export default function TerminalPage() {
               <Link href="/alerts" className="text-forest underline underline-offset-2">
                 Alerts
               </Link>
+              {" · "}
+              <Link href="/exports" className="text-forest underline underline-offset-2">
+                Exports
+              </Link>
+              {" · "}
+              <Link href="/ask/corpus" className="text-forest underline underline-offset-2">
+                Corpus
+              </Link>
             </p>
           </div>
         </section>
@@ -323,6 +332,16 @@ export default function TerminalPage() {
               <li>
                 <Link href="/graph/kenya" className="hover:text-forest">
                   Kenya graph
+                </Link>
+              </li>
+              <li>
+                <Link href="/exports" className="hover:text-forest">
+                  Exports
+                </Link>
+              </li>
+              <li>
+                <Link href="/ask/corpus" className="hover:text-forest">
+                  Ask corpus
                 </Link>
               </li>
               <li>

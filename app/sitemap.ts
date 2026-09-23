@@ -73,6 +73,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/graph/resolve",
     "/watchlists",
     "/alerts",
+    "/exports",
+    "/ask/corpus",
   ];
 
   const now = new Date();

@@ -75,6 +75,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/alerts",
     "/exports",
     "/ask/corpus",
+    "/method/registry",
+    "/account/usage",
+    "/packs",
+    "/sources",
+    "/compare",
+    "/ingestion",
   ];
 
   const now = new Date();

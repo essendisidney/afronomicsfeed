@@ -10,6 +10,12 @@ export const analyticsEvents = [
   "pro_cta",
   "export_csv",
   "graph_open",
+  "pack_open",
+  "usage_view",
+  "method_open",
+  "source_open",
+  "compare_open",
+  "ingestion_view",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

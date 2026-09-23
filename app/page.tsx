@@ -208,6 +208,22 @@ export default function HomePage() {
               Ask corpus
             </Link>
             {" · "}
+            <Link href="/packs" className="text-forest underline underline-offset-2">
+              Packs
+            </Link>
+            {" · "}
+            <Link href="/method/registry" className="text-forest underline underline-offset-2">
+              Method registry
+            </Link>
+            {" · "}
+            <Link href="/sources" className="text-forest underline underline-offset-2">
+              Sources
+            </Link>
+            {" · "}
+            <Link href="/compare" className="text-forest underline underline-offset-2">
+              Compare
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

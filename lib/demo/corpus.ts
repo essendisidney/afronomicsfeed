@@ -81,6 +81,22 @@ export const corpusDocs: CorpusDoc[] = [
     lede: "Industry file is a shell until a cited facility is stored.",
     href: "/industries/energy/egypt",
   },
+  {
+    slug: "ghana-markets",
+    title: "Ghana markets desk",
+    kind: "notice",
+    status: "empty",
+    lede: "BoG / GSE shells. Amounts stay blank until cited.",
+    href: "/countries/ghana",
+  },
+  {
+    slug: "rwanda-fintech",
+    title: "Rwanda fintech lens",
+    kind: "notice",
+    status: "empty",
+    lede: "Technology file is a shell until a cited product is stored.",
+    href: "/technology/fintech/rwanda",
+  },
 ];
 
 export function getCorpusDoc(slug: string) {

@@ -129,6 +129,7 @@ const extraDoors: Partial<Record<string, CountryDoor[]>> = {
     { label: "JSE", href: "https://www.jse.co.za/", kind: "exchange" },
     { label: "National Treasury", href: "https://www.treasury.gov.za/", kind: "treasury" },
   ],
+  ghana: [{ label: "GSE", href: "https://gse.com.gh/", kind: "exchange" }],
 };
 
 export function countryDoors(country: CountryProfile): CountryDoor[] {

@@ -67,6 +67,13 @@ export default function MethodPage() {
           filed brief.
         </p>
 
+        <h2>Method registry</h2>
+        <p>
+          Data and label standards live in the{" "}
+          <Link href="/method/registry">method registry</Link>. Draft and empty rows mean
+          the file is not finished — the desk does not invent a completed methodology.
+        </p>
+
         <h2>What is gated</h2>
         <p>
           Free readers get the headline, three bullets, the lede, and the citations.

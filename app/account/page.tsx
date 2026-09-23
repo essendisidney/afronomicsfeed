@@ -55,6 +55,10 @@ export default function AccountPage() {
           Exports
         </Link>
         {" · "}
+        <Link href="/account/usage" className="text-forest underline underline-offset-2">
+          Usage
+        </Link>
+        {" · "}
         <Link href="/watchlists" className="text-forest underline underline-offset-2">
           Watchlists
         </Link>

@@ -62,6 +62,13 @@ export const entitlementRows: EntitlementRow[] = [
     enterprise: "Custom",
   },
   {
+    feature: "Briefing packs",
+    free: "Teasers",
+    pro: "Yes",
+    professional: "Yes",
+    enterprise: "Custom",
+  },
+  {
     feature: "API keys",
     free: "—",
     pro: "—",

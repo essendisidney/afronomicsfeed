@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
 
 export const metadata: Metadata = {
@@ -30,7 +31,18 @@ export default function AdminPage() {
         <li>Draft signals and charts</li>
         <li>Feature homepage stories and assemble briefs</li>
       </ul>
-      <p className="mt-6 text-sm text-muted">Audit log: empty. No client write path is exposed.</p>
+      <p className="mt-6 text-sm">
+        Ops board:{" "}
+        <Link href="/ingestion" className="text-forest underline underline-offset-2">
+          /ingestion
+        </Link>
+        . Source registry:{" "}
+        <Link href="/sources" className="text-forest underline underline-offset-2">
+          /sources
+        </Link>
+        .
+      </p>
+      <p className="mt-4 text-sm text-muted">Audit log: empty. No client write path is exposed.</p>
     </LayerPage>
   );
 }

@@ -7,7 +7,7 @@ import { scheduledJobs } from "@/lib/ingestion/jobs";
 
 export const metadata: Metadata = {
   title: "Graph",
-  description: "Afronomics knowledge graph — Kenya, Nigeria, South Africa and Egypt desks. No invented relationships.",
+  description: "Afronomics knowledge graph — featured desks KE · NG · ZA · EG · GH · RW. No invented relationships.",
 };
 
 export default function GraphPage() {
@@ -67,8 +67,24 @@ export default function GraphPage() {
 
       <section className="mt-12">
         <h2 className="font-serif text-2xl">Ingestion jobs</h2>
+        <p className="mt-2 text-sm text-ink-soft">
+          Listed on the ops board. Nothing is scheduled against a live queue.
+        </p>
+        <p className="mt-4 text-sm">
+          <Link href="/ingestion" className="text-forest underline underline-offset-2">
+            Open ingestion
+          </Link>
+          {" · "}
+          <Link href="/sources" className="text-forest underline underline-offset-2">
+            Sources
+          </Link>
+          {" · "}
+          <Link href="/compare" className="text-forest underline underline-offset-2">
+            Compare
+          </Link>
+        </p>
         <ul className="mt-4 space-y-3 text-sm">
-          {scheduledJobs.map((job) => (
+          {scheduledJobs.slice(0, 4).map((job) => (
             <li key={job.id} className="border-b border-rule pb-3">
               <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
                 {job.id} · {job.cadence} · {job.status}
@@ -80,7 +96,7 @@ export default function GraphPage() {
       </section>
 
       <Provenance
-        source="Multi-desk scaffold (KE · NG · ZA · EG)"
+        source="Featured desks scaffold (KE · NG · ZA · EG · GH · RW)"
         methodology="No silent overwrite. No invented edges."
       />
     </LayerPage>

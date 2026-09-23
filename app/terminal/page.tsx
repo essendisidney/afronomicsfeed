@@ -46,6 +46,9 @@ const side = [
   { href: "/watchlists", label: "Watchlists" },
   { href: "/alerts", label: "Alerts" },
   { href: "/exports", label: "Exports" },
+  { href: "/packs", label: "Packs" },
+  { href: "/sources", label: "Sources" },
+  { href: "/compare", label: "Compare" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -281,6 +284,14 @@ export default function TerminalPage() {
               <Link href="/ask/corpus" className="text-forest underline underline-offset-2">
                 Corpus
               </Link>
+              {" · "}
+              <Link href="/packs" className="text-forest underline underline-offset-2">
+                Packs
+              </Link>
+              {" · "}
+              <Link href="/compare" className="text-forest underline underline-offset-2">
+                Compare
+              </Link>
             </p>
           </div>
         </section>
@@ -342,6 +353,36 @@ export default function TerminalPage() {
               <li>
                 <Link href="/ask/corpus" className="hover:text-forest">
                   Ask corpus
+                </Link>
+              </li>
+              <li>
+                <Link href="/packs" className="hover:text-forest">
+                  Packs
+                </Link>
+              </li>
+              <li>
+                <Link href="/sources" className="hover:text-forest">
+                  Sources
+                </Link>
+              </li>
+              <li>
+                <Link href="/compare" className="hover:text-forest">
+                  Compare
+                </Link>
+              </li>
+              <li>
+                <Link href="/ingestion" className="hover:text-forest">
+                  Ingestion
+                </Link>
+              </li>
+              <li>
+                <Link href="/method/registry" className="hover:text-forest">
+                  Method registry
+                </Link>
+              </li>
+              <li>
+                <Link href="/account/usage" className="hover:text-forest">
+                  Usage
                 </Link>
               </li>
               <li>

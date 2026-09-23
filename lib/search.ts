@@ -195,6 +195,42 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Ask",
       summary: "Document slots for retrieval. Index empty.",
     },
+    {
+      href: "/method/registry",
+      title: "Method registry",
+      kicker: "Method",
+      summary: "House standards and data methods. Draft rows stay unfinished.",
+    },
+    {
+      href: "/account/usage",
+      title: "Usage",
+      kicker: "Seat",
+      summary: "Allowances for Ask, exports and API. Meters stay at zero.",
+    },
+    {
+      href: "/packs",
+      title: "Briefing packs",
+      kicker: "Brief",
+      summary: "Packaged morning and weekly shapes. Delivery not live.",
+    },
+    {
+      href: "/sources",
+      title: "Source registry",
+      kicker: "Method",
+      summary: "Official doors. Pending rows are not production citations.",
+    },
+    {
+      href: "/compare",
+      title: "Compare desks",
+      kicker: "Countries",
+      summary: "Featured desk matrix. Observation cells stay blank.",
+    },
+    {
+      href: "/ingestion",
+      title: "Ingestion",
+      kicker: "Ops",
+      summary: "Job board. Nothing scheduled against a live queue.",
+    },
     ...navHits,
   ];
 }

@@ -1,18 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-
-const examples = [
-  "How has Kenya’s currency performed against regional peers?",
-  "Show climate finance deployed into East Africa.",
-  "Which African countries attracted the most fintech capital?",
-  "What happened to Nigerian inflation over the last 24 months?",
-  "Which sectors are receiving DFI capital in Kenya?",
-];
+import { askQuestions } from "@/lib/demo/ask";
 
 export function AskPanel() {
   const [question, setQuestion] = useState("");
   const [asked, setAsked] = useState<string | null>(null);
+  const matched = asked ? askQuestions.find((item) => item.title === asked) : undefined;
 
   return (
     <form
@@ -34,14 +29,14 @@ export function AskPanel() {
         />
       </label>
       <div className="mt-3 flex flex-wrap gap-2">
-        {examples.map((item) => (
+        {askQuestions.map((item) => (
           <button
-            key={item}
+            key={item.slug}
             type="button"
-            onClick={() => setQuestion(item)}
+            onClick={() => setQuestion(item.title)}
             className="border border-rule px-2 py-1 text-left text-[11px] text-ink-soft hover:border-gold"
           >
-            {item}
+            {item.title}
           </button>
         ))}
       </div>
@@ -62,6 +57,13 @@ export function AskPanel() {
           <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
             Fact / calculation / model signal / interpretation stay separate
           </p>
+          {matched ? (
+            <p className="mt-3">
+              <Link href={`/ask/${matched.slug}`} className="text-forest underline underline-offset-2">
+                Open the question file
+              </Link>
+            </p>
+          ) : null}
         </div>
       ) : null}
     </form>

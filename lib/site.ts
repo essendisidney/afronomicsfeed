@@ -58,6 +58,11 @@ export const footerNav = [
   { href: "/legal/disclaimer", label: "Disclaimer" },
   { href: "/legal/privacy", label: "Privacy" },
   { href: "/legal/terms", label: "Terms" },
+  { href: "/account", label: "Account" },
+  { href: "/industries", label: "Industries" },
+  { href: "/agencies", label: "Agencies" },
+  { href: "/cities", label: "Cities" },
+  { href: "/developers", label: "Developers" },
 ] as const;
 
 export const disclaimer =

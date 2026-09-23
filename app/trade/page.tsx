@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
-import { corridors } from "@/lib/demo/trade";
+import { getCountry } from "@/lib/demo/countries";
+import { corridors, ports, tradeRegimes } from "@/lib/demo/trade";
 
 export const metadata: Metadata = {
   title: "Trade",
@@ -14,22 +15,63 @@ export default function TradePage() {
       crumbs={[{ href: "/", label: "Home" }, { label: "Trade" }]}
       kicker="Afronomics Trade"
       title="Corridors, ports and the constraints between them"
-      lede="Imports, exports, partners, commodities, AfCFTA, logistics and FX. Corridor pages exist so the graph has somewhere to land a disruption or a rail print."
+      lede="Imports, exports, partners, commodities, AfCFTA, logistics and FX. Corridor and port files exist so the graph has somewhere to land a disruption or a rail print."
     >
-      <ul className="grid gap-4 lg:grid-cols-2">
-        {corridors.map((corridor) => (
-          <li key={corridor.slug} className="border border-rule p-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold">Corridor</p>
-            <h2 className="mt-2 font-serif text-2xl">
-              <Link href={`/trade/${corridor.slug}`} className="hover:text-forest">
-                {corridor.name}
-              </Link>
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-ink-soft">{corridor.geography}</p>
-            <p className="mt-2 text-xs text-muted">{corridor.modes.join(" · ")}</p>
-          </li>
-        ))}
-      </ul>
+      <section>
+        <h2 className="font-serif text-2xl">Corridors</h2>
+        <ul className="mt-4 grid gap-4 lg:grid-cols-2">
+          {corridors.map((corridor) => (
+            <li key={corridor.slug} className="border border-rule p-5">
+              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold">Corridor</p>
+              <h3 className="mt-2 font-serif text-2xl">
+                <Link href={`/trade/${corridor.slug}`} className="hover:text-forest">
+                  {corridor.name}
+                </Link>
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-ink-soft">{corridor.geography}</p>
+              <p className="mt-2 text-xs text-muted">{corridor.modes.join(" · ")}</p>
+              <p className="mt-3 text-xs text-muted">{corridor.countrySlugs.length} country files</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-2xl">
+          <Link href="/trade/ports" className="hover:text-forest">
+            Ports
+          </Link>
+        </h2>
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          {ports.map((port) => {
+            const country = getCountry(port.countrySlug);
+            return (
+              <li key={port.slug}>
+                <Link href={`/trade/ports/${port.slug}`} className="block border border-rule px-3 py-3 hover:border-gold">
+                  <p className="font-serif text-lg">{port.name}</p>
+                  <p className="mt-1 text-xs text-muted">{country?.name}</p>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-2xl">Regimes</h2>
+        <ul className="mt-4 space-y-3">
+          {tradeRegimes.map((regime) => (
+            <li key={regime.slug} className="border border-rule p-5">
+              <h3 className="font-serif text-2xl">
+                <Link href={`/trade/regimes/${regime.slug}`} className="hover:text-forest">
+                  {regime.name}
+                </Link>
+              </h3>
+              <p className="mt-2 text-sm text-ink-soft">{regime.lede}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
     </LayerPage>
   );
 }

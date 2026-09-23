@@ -6,9 +6,12 @@ import { LayerPage } from "@/components/intelligence/LayerPage";
 import { ArticleCard } from "@/components/ui/ArticleCard";
 import { EmptyMetric } from "@/components/ui/EmptyMetric";
 import { Provenance } from "@/components/ui/Provenance";
+import { agencyFileHref } from "@/lib/demo/agencies";
+import { citiesInCountry } from "@/lib/demo/cities";
 import { climateSlots } from "@/lib/demo/climate";
 import { countryDoors, countrySeries, currencyFileHref, regionalPeers } from "@/lib/demo/country-series";
 import { countries, getCountry, indicatorSlots, kenyaGraph } from "@/lib/demo/countries";
+import { industriesForCountry, industryFileHref } from "@/lib/demo/industries";
 import { getAllArticles, toIndexItem } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -102,8 +105,52 @@ export default async function CountryPage({
         </div>
       </section>
 
+      <p className="mt-6 text-sm">
+        <Link href={`/economy/${country.slug}`} className="text-forest underline underline-offset-2">
+          Economy file
+        </Link>
+        {" · "}
+        <Link href={`/climate/${country.slug}`} className="text-forest underline underline-offset-2">
+          Climate capital
+        </Link>
+        {" · "}
+        <Link href={`/technology/fintech/${country.slug}`} className="text-forest underline underline-offset-2">
+          Fintech
+        </Link>
+        {" · "}
+        <Link href={`/projects/${country.slug}`} className="text-forest underline underline-offset-2">
+          Project Lens
+        </Link>
+        {" · "}
+        <Link href={agencyFileHref("central-bank", country.slug)} className="text-forest underline underline-offset-2">
+          Central bank
+        </Link>
+        {industriesForCountry(country.slug)
+          .slice(0, 2)
+          .map((item) => (
+            <span key={item.slug}>
+              {" · "}
+              <Link href={industryFileHref(item.slug, country.slug)} className="text-forest underline underline-offset-2">
+                {item.label}
+              </Link>
+            </span>
+          ))}
+        {citiesInCountry(country.slug).map((city) => (
+          <span key={city.slug}>
+            {" · "}
+            <Link href={`/cities/${city.slug}`} className="text-forest underline underline-offset-2">
+              {city.name}
+            </Link>
+          </span>
+        ))}
+      </p>
+
       <section id="climate" className="mt-10">
-        <h2 className="font-serif text-2xl">{country.name} climate capital</h2>
+        <h2 className="font-serif text-2xl">
+          <Link href={`/climate/${country.slug}`} className="hover:text-forest">
+            {country.name} climate capital
+          </Link>
+        </h2>
         <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-5">
           {climateSlots.map((slot) => (
             <EmptyMetric key={slot} label={slot} />

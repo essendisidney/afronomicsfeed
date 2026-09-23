@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
 import { EmptyMetric } from "@/components/ui/EmptyMetric";
-import { featuredCountrySlugs, getCountry, indicatorSlots } from "@/lib/demo/countries";
+import { countries, featuredCountrySlugs, getCountry, indicatorSlots } from "@/lib/demo/countries";
 import { indicators } from "@/lib/demo/indicators";
 import { pulseComponents } from "@/lib/demo/pulse";
 
@@ -47,7 +47,7 @@ export default function EconomyPage() {
       </section>
 
       <section className="mt-12">
-        <h2 className="font-serif text-2xl">Country watch</h2>
+        <h2 className="font-serif text-2xl">Featured files</h2>
         <div className="mt-4 grid gap-6 lg:grid-cols-2">
           {featuredCountrySlugs.map((slug) => {
             const country = getCountry(slug);
@@ -56,7 +56,7 @@ export default function EconomyPage() {
               <article key={slug} className="border border-rule p-4">
                 <p className="font-mono text-[10px] uppercase text-gold">{country.iso}</p>
                 <h3 className="mt-1 font-serif text-2xl">
-                  <Link href={`/countries/${slug}`} className="hover:text-forest">
+                  <Link href={`/economy/${slug}`} className="hover:text-forest">
                     {country.name}
                   </Link>
                 </h3>
@@ -69,6 +69,21 @@ export default function EconomyPage() {
             );
           })}
         </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-2xl">All economy files</h2>
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {countries.map((country) => (
+            <li key={country.slug}>
+              <Link href={`/economy/${country.slug}`} className="block border border-rule px-3 py-3 hover:border-gold">
+                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">{country.iso}</p>
+                <p className="mt-1 font-serif text-lg">{country.name}</p>
+                <p className="mt-1 text-xs text-muted">{country.currency} · no sourced print</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
     </LayerPage>
   );

@@ -1,7 +1,15 @@
 import { getAllArticles, toIndexItem } from "./content";
 import { companies } from "./demo/companies";
 import { countries } from "./demo/countries";
-import { corridors } from "./demo/trade";
+import { askQuestions } from "./demo/ask";
+import { datasets } from "./demo/datasets";
+import { techLenses } from "./demo/tech";
+import { corridors, ports } from "./demo/trade";
+import { industries } from "./demo/industries";
+import { agencyKinds } from "./demo/agencies";
+import { cities, cityCountryName } from "./demo/cities";
+import { investors } from "./demo/investors";
+import { personRoles } from "./demo/people";
 import { articleHref, categoryLabel } from "./format";
 import { nav, utilityNav } from "./site";
 
@@ -41,6 +49,76 @@ export function buildSearchIndex(): SearchHit[] {
     summary: corridor.geography,
   }));
 
+  const economyHits = countries.map((country) => ({
+    href: `/economy/${country.slug}`,
+    title: `${country.name} economy`,
+    kicker: "Economy file",
+    summary: `Macro file for ${country.name}. Pulse unpublished until a primary series is stored.`,
+  }));
+
+  const techHits = techLenses.map((lens) => ({
+    href: `/technology/${lens.slug}`,
+    title: lens.label,
+    kicker: "Technology lens",
+    summary: lens.lede,
+  }));
+
+  const portHits = ports.map((port) => ({
+    href: `/trade/ports/${port.slug}`,
+    title: port.name,
+    kicker: "Port",
+    summary: port.waters,
+  }));
+
+  const askHits = askQuestions.map((item) => ({
+    href: `/ask/${item.slug}`,
+    title: item.title,
+    kicker: "Ask file",
+    summary: item.lede,
+  }));
+
+  const dataHits = datasets.map((item) => ({
+    href: `/data/${item.slug}`,
+    title: item.name,
+    kicker: "Data file",
+    summary: item.lede,
+  }));
+
+  const industryHits = industries.map((item) => ({
+    href: `/industries/${item.slug}`,
+    title: item.label,
+    kicker: "Industry",
+    summary: item.lede,
+  }));
+
+  const agencyHits = agencyKinds.map((kind) => ({
+    href: `/agencies/${kind.slug}`,
+    title: kind.label,
+    kicker: "Agency",
+    summary: kind.lede,
+  }));
+
+  const cityHits = cities.map((city) => ({
+    href: `/cities/${city.slug}`,
+    title: city.name,
+    kicker: "City",
+    summary: `${city.role} · ${cityCountryName(city)}`,
+  }));
+
+  const investorHits = investors.map((investor) => ({
+    href: `/investors/${investor.slug}`,
+    title: investor.name,
+    kicker: "Investor · EXAMPLE",
+    summary: investor.lede,
+  }));
+
+  const peopleHits = personRoles.map((role) => ({
+    href: `/people/${role.slug}`,
+    title: role.label,
+    kicker: "Role",
+    summary: role.lede,
+  }));
+
   const navHits = [...nav, ...utilityNav].map((item) => ({
     href: item.href,
     title: item.label,
@@ -48,7 +126,41 @@ export function buildSearchIndex(): SearchHit[] {
     summary: `Open the ${item.label} intelligence layer`,
   }));
 
-  return [...articles, ...countryHits, ...companyHits, ...corridorHits, ...navHits];
+  return [
+    ...articles,
+    ...countryHits,
+    ...companyHits,
+    ...corridorHits,
+    ...economyHits,
+    ...techHits,
+    ...portHits,
+    ...askHits,
+    ...dataHits,
+    ...industryHits,
+    ...agencyHits,
+    ...cityHits,
+    ...investorHits,
+    ...peopleHits,
+    {
+      href: "/developers",
+      title: "Developers",
+      kicker: "API",
+      summary: "Public routes. Keys are not issued.",
+    },
+    {
+      href: "/account",
+      title: "Account",
+      kicker: "Seat",
+      summary: "Seat status. Sign-in and billing are not live.",
+    },
+    {
+      href: "/pricing",
+      title: "Pricing",
+      kicker: "Seats",
+      summary: "Free, Pro, Professional, Enterprise and Kenya desk trial.",
+    },
+    ...navHits,
+  ];
 }
 
 export function searchIndex(query: string, index = buildSearchIndex(), limit = 24): SearchHit[] {

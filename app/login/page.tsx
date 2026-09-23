@@ -41,6 +41,10 @@ export default function LoginPage() {
         <Link href="/signup" className="text-forest underline underline-offset-2">
           Request access
         </Link>
+        . Current seat:{" "}
+        <Link href="/account" className="text-forest underline underline-offset-2">
+          Account
+        </Link>
         .
       </p>
     </LayerPage>

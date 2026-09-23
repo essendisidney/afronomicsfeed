@@ -1,3 +1,5 @@
+import { countries } from "./countries";
+
 export const indicators = [
   {
     slug: "inflation",
@@ -5,6 +7,7 @@ export const indicators = [
     unit: "percent, period as published",
     geography: "Country / regional",
     note: "National statistics agencies and central banks are the primary doors. No series is stored yet.",
+    countrySeries: "economy",
   },
   {
     slug: "gdp",
@@ -12,6 +15,7 @@ export const indicators = [
     unit: "as published",
     geography: "Country",
     note: "Awaiting a licensed national-accounts or World Bank / IMF observation table.",
+    countrySeries: "economy",
   },
   {
     slug: "policy-rate",
@@ -19,6 +23,7 @@ export const indicators = [
     unit: "percent",
     geography: "Country",
     note: "Only the issuing central bank’s published rate is a fact.",
+    countrySeries: "markets",
   },
   {
     slug: "public-debt",
@@ -26,6 +31,7 @@ export const indicators = [
     unit: "as published",
     geography: "Country",
     note: "Sovereign stock and service figures require a cited fiscal or IMF print.",
+    countrySeries: "economy",
   },
   {
     slug: "fdi",
@@ -33,9 +39,18 @@ export const indicators = [
     unit: "as published",
     geography: "Country / corridor",
     note: "UNCTAD / national investment authorities — not modelled here.",
+    countrySeries: "capital",
   },
 ] as const;
 
 export function getIndicator(slug: string) {
   return indicators.find((item) => item.slug === slug);
+}
+
+export function indicatorCountryHref(indicatorSlug: string, countrySlug: string) {
+  return `/indicators/${indicatorSlug}/${countrySlug}`;
+}
+
+export function indicatorCountryParams() {
+  return indicators.flatMap((indicator) => countries.map((country) => ({ slug: indicator.slug, country: country.slug })));
 }

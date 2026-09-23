@@ -46,7 +46,7 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
     <header className="no-print border-b border-rule bg-paper/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
         <Wordmark />
-        <p className="hidden max-w-xs text-right font-mono text-[10px] uppercase tracking-[0.16em] text-muted xl:block">
+        <p className="hidden max-w-xs text-right font-mono text-[11px] uppercase tracking-[0.12em] text-muted xl:block">
           {site.line}
         </p>
         <div className="flex items-center gap-2">
@@ -54,7 +54,7 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
             <Link
               key={item.href}
               href={item.href}
-              className="hidden font-mono text-[10px] uppercase tracking-[0.12em] text-ink-soft hover:text-forest md:inline"
+              className="hidden font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft hover:text-forest md:inline"
             >
               {item.label}
             </Link>
@@ -62,32 +62,38 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
-            className="border border-rule px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-soft hover:border-gold"
+            className="border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft hover:border-gold"
           >
             Search <span className="hidden sm:inline">⌘K</span>
           </button>
           <button
             type="button"
             onClick={toggleTheme}
-            className="border border-rule px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-soft hover:border-gold"
+            className="border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft hover:border-gold"
           >
             <span suppressHydrationWarning>{dark ? "Light" : "Dark"}</span>
           </button>
           <Link
             href="/login"
-            className="hidden border border-rule px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-soft sm:inline"
+            className="hidden border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft sm:inline"
           >
             Sign in
           </Link>
           <Link
+            href="/account"
+            className="hidden border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft md:inline"
+          >
+            Account
+          </Link>
+          <Link
             href="/pro"
-            className="bg-forest px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-paper hover:bg-forest-mid"
+            className="bg-forest px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-paper hover:bg-forest-mid"
           >
             Pro
           </Link>
           <button
             type="button"
-            className="border border-rule px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] lg:hidden"
+            className="border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] lg:hidden"
             onClick={() => setMenuPath((current) => (current === pathname ? null : pathname))}
             aria-expanded={open}
           >

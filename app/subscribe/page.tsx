@@ -20,8 +20,15 @@ export default function SubscribePage() {
         <SubscribeForm />
       </div>
       <p className="mt-6 text-sm text-muted">
-        See <Link href="/pricing" className="text-forest underline underline-offset-4">full pricing</Link>{" "}
-        for Pro, Professional, Enterprise, and the Kenya desk trial.
+        See{" "}
+        <Link href="/pricing" className="text-forest underline underline-offset-4">
+          full pricing
+        </Link>{" "}
+        and your{" "}
+        <Link href="/account" className="text-forest underline underline-offset-4">
+          account
+        </Link>{" "}
+        seat. Checkout is not live.
       </p>
     </div>
   );

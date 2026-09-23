@@ -8,7 +8,7 @@ import "./globals.css";
 const sans = Source_Sans_3({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "600", "800"],
+  weight: ["400", "500", "600", "800"],
   display: "swap",
 });
 

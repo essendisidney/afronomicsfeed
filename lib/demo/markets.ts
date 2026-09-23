@@ -33,10 +33,16 @@ const rows: { label: string; value: string; href: string; kind: MarketKind; coun
   { label: "USD/TZS", value: "2,610", href: "https://www.bot.go.tz/", kind: "currency", countrySlug: "tanzania" },
   { label: "USD/UGX", value: "3,720", href: "https://www.bou.or.ug/", kind: "currency", countrySlug: "uganda" },
   { label: "USD/RWF", value: "1,350", href: "https://www.bnr.rw/", kind: "currency", countrySlug: "rwanda" },
+  { label: "USD/MAD", value: "9.85", href: "https://www.bkam.ma/", kind: "currency", countrySlug: "morocco" },
+  { label: "USD/XOF", value: "605", href: "https://www.bceao.int/", kind: "currency", countrySlug: "cote-divoire" },
   { label: "NSE 20", value: "1,842.10", href: "https://www.nse.co.ke/", kind: "exchange", countrySlug: "kenya" },
   { label: "NGX ASI", value: "99,850", href: "https://ngxgroup.com/", kind: "exchange", countrySlug: "nigeria" },
   { label: "JSE ALSI", value: "78,432", href: "https://www.jse.co.za/", kind: "exchange", countrySlug: "south-africa" },
+  { label: "GSE CI", value: "6,410", href: "https://gse.com.gh/", kind: "exchange", countrySlug: "ghana" },
+  { label: "EGX 30", value: "30,250", href: "https://www.egx.com.eg/", kind: "exchange", countrySlug: "egypt" },
   { label: "Brent", value: "82.40", href: "https://www.eia.gov/", kind: "commodity" },
+  { label: "Gold", value: "2,340", href: "https://www.gold.org/", kind: "commodity" },
+  { label: "Cocoa", value: "8,120", href: "https://www.icco.org/", kind: "commodity" },
 ];
 
 export const instruments: MarketInstrument[] = rows.map((row) => {

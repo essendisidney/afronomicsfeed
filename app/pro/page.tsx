@@ -38,6 +38,10 @@ export default function ProPage() {
         <Link href="/pricing" className="text-forest underline underline-offset-2">
           pricing
         </Link>
+        . Seat status on{" "}
+        <Link href="/account" className="text-forest underline underline-offset-2">
+          account
+        </Link>
         . Kenya desk trial remains {pricing.trial.price}.
       </p>
     </LayerPage>

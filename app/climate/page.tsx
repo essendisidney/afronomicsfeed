@@ -3,8 +3,8 @@ import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
 import { EmptyMetric } from "@/components/ui/EmptyMetric";
 import { Provenance } from "@/components/ui/Provenance";
-import { climateGap, climateSlots } from "@/lib/demo/climate";
-import { featuredCountrySlugs, getCountry } from "@/lib/demo/countries";
+import { climateDoors, climateFileHref, climateGap, climateSlots } from "@/lib/demo/climate";
+import { countries } from "@/lib/demo/countries";
 import { projectDisclaimer, projectLensFields } from "@/lib/demo/projects";
 
 export const metadata: Metadata = {
@@ -33,18 +33,23 @@ export default function ClimatePage() {
       <section className="mt-12">
         <h2 className="font-serif text-2xl">Country climate profiles</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredCountrySlugs.map((slug) => {
-            const country = getCountry(slug);
-            if (!country) return null;
-            return (
-              <li key={slug} className="border border-rule p-4">
-                <Link href={`/countries/${slug}#climate`} className="font-serif text-xl hover:text-forest">
-                  {country.name} climate capital
-                </Link>
-                <p className="mt-2 text-sm text-muted">All {climateSlots.length} slots empty until sourced.</p>
-              </li>
-            );
-          })}
+          {countries.map((country) => (
+            <li key={country.slug} className="border border-rule p-4">
+              <Link href={climateFileHref(country.slug)} className="font-serif text-xl hover:text-forest">
+                {country.name} climate capital
+              </Link>
+              <p className="mt-2 text-sm text-muted">All {climateSlots.length} slots empty until sourced.</p>
+            </li>
+          ))}
+        </ul>
+        <ul className="mt-6 flex flex-wrap gap-3 text-sm">
+          {climateDoors.map((door) => (
+            <li key={door.href}>
+              <Link href={door.href} className="text-forest underline underline-offset-2">
+                {door.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </section>
 
@@ -58,6 +63,11 @@ export default function ClimatePage() {
             </li>
           ))}
         </ul>
+        <p className="mt-4 text-sm">
+          <Link href="/projects" className="text-forest underline underline-offset-2">
+            Open Project Lens files
+          </Link>
+        </p>
       </section>
     </LayerPage>
   );

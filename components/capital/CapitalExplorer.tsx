@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { DemoMark } from "@/components/ui/DemoMark";
-import { capitalRows, capitalTypes } from "@/lib/demo/capital";
+import Link from "next/link";
+import { capitalBookByName, capitalFileHref, capitalRows, capitalTypes } from "@/lib/demo/capital";
 import { featuredCountrySlugs } from "@/lib/demo/countries";
 
 export function CapitalExplorer() {
@@ -82,8 +83,27 @@ export function CapitalExplorer() {
                     {row.target}
                     <p className="text-[11px] text-muted">{row.sector}</p>
                   </td>
-                  <td>{row.country}</td>
-                  <td>{row.type}</td>
+                  <td>
+                    {row.countrySlug ? (
+                      <Link href={`/countries/${row.countrySlug}/capital`} className="hover:text-forest">
+                        {row.country}
+                      </Link>
+                    ) : (
+                      row.country
+                    )}
+                  </td>
+                  <td>
+                    {(() => {
+                      const book = capitalBookByName(row.type);
+                      return book && row.countrySlug ? (
+                        <Link href={capitalFileHref(book.slug, row.countrySlug)} className="hover:text-forest">
+                          {row.type}
+                        </Link>
+                      ) : (
+                        row.type
+                      );
+                    })()}
+                  </td>
                   <td>
                     {row.amount} {row.currency}
                   </td>

@@ -42,8 +42,8 @@ NEWS → DATA → CONTEXT → SIGNALS → DECISIONS
 
 **Utility:** Search · Brief · Terminal · PRO  
 
-**Programmatic SEO (later phases):**  
-`/countries/[slug]/[topic]`, `/markets/currencies/[code]`, `/capital/[type]/[country]`, `/indicators/[slug]`
+**Programmatic SEO:**  
+`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`
 
 ---
 
@@ -87,14 +87,14 @@ RLS on from day one. Service role never in the client.
 | 1 | Terminal chrome, nav, premium homepage, demo widgets labelled | **Shipped** |
 | 2 | Country intelligence pages (seed 6) | **54 terminals + 10 series files each** |
 | 3 | Articles + editorial (MD remains; `/admin` shell) | MD live; `/admin` shell |
-| 4 | Markets + indicators (demo, sourced fields) | Scaffold + currency files |
-| 5 | Capital Tracker | Scaffold + demo table |
-| 6 | Climate Capital | Scaffold + demo profiles |
-| 7 | Signals | Scaffold + demo cards |
-| 8 | Terminal | Scaffold |
-| 9 | Ask Afronomics (RAG + pgvector) | Schema + retrieval-refusing UI |
-| 10 | Subscriptions | Pricing copy + stubs |
-| 11 | API keys + usage | Schema + metadata routes |
+| 4 | Markets + indicators (demo, sourced fields) | **Currency, exchange, commodity files + indicator×country** |
+| 5 | Capital Tracker | **12 books × 54 country files + demo table** |
+| 6 | Climate Capital | **54 country climate files + Project Lens** |
+| 7 | Signals | **Signal files + 13 category hubs** |
+| 8 | Terminal | **Monitor wired to market, economy, tech, capital, climate, company and signal files** |
+| 9 | Ask Afronomics (RAG + pgvector) | **Question files + empty corpus refuse; RAG still unconnected** |
+| 10 | Subscriptions | **Entitlement matrix + `/account`; checkout/Auth still stubs** |
+| 11 | API keys + usage | **`/developers` + `/api/meta` catalogue; keys not issued** |
 | 12 | Full graph + entity resolution jobs | Schema + Kenya edges |
 
 The app stays runnable after every phase.

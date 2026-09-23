@@ -144,9 +144,7 @@ export function countryDoors(country: CountryProfile): CountryDoor[] {
 
 export function currencyFileHref(currency: string) {
   const row = ticker.find((item) => item.label === `USD/${currency}`);
-  if (!row) return null;
-  const code = row.label.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  return `/markets/currencies/${code}`;
+  return row?.fileHref ?? null;
 }
 
 export function regionalPeers(country: CountryProfile, limit = 4) {

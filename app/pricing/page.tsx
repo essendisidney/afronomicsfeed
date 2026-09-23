@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckoutStub } from "@/components/ui/CheckoutStub";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { entitlementRows } from "@/lib/demo/entitlements";
 import { pricing } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -110,6 +111,41 @@ export default function PricingPage() {
           </Link>
         </article>
       </div>
+
+      <section className="mt-14">
+        <h2 className="font-serif text-2xl">Seat matrix</h2>
+        <p className="mt-2 text-sm text-ink-soft">
+          What each tier is meant to unlock. Nothing here takes payment.{" "}
+          <Link href="/account" className="text-forest underline underline-offset-2">
+            Account
+          </Link>
+          .
+        </p>
+        <div className="mt-6 overflow-x-auto">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Free</th>
+                <th>Pro</th>
+                <th>Professional</th>
+                <th>Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              {entitlementRows.map((row) => (
+                <tr key={row.feature}>
+                  <td>{row.feature}</td>
+                  <td>{row.free}</td>
+                  <td>{row.pro}</td>
+                  <td>{row.professional}</td>
+                  <td>{row.enterprise}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   );
 }

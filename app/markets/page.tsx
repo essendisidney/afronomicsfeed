@@ -37,7 +37,7 @@ export default function MarketsPage() {
                 {board.items.map((row) => (
                   <tr key={row.label}>
                     <td className="font-mono text-xs">
-                      <Link href={`/markets/currencies/${row.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="hover:text-forest">
+                      <Link href={row.fileHref} className="hover:text-forest">
                         {row.label}
                       </Link>
                     </td>

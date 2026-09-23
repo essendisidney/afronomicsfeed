@@ -2,12 +2,13 @@ import Link from "next/link";
 import { DemoMark } from "@/components/ui/DemoMark";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { fiveThings } from "@/lib/demo/brief";
-import { capitalRows } from "@/lib/demo/capital";
+import { capitalBookByName, capitalFileHref, capitalRows } from "@/lib/demo/capital";
 import { climateGap } from "@/lib/demo/climate";
 import { countries } from "@/lib/demo/countries";
 import { marketBoards } from "@/lib/demo/markets";
 import { countryPulses, pulseComponents } from "@/lib/demo/pulse";
 import { signals } from "@/lib/demo/signals";
+import { techLenses } from "@/lib/demo/tech";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
 import { getDeskLead } from "@/lib/relations";
 import { site } from "@/lib/site";
@@ -32,15 +33,15 @@ export default function HomePage() {
         <div className="lg:col-span-7">
           {lead ? (
             <article>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-gold">
                 Lead · {categoryLabel(lead.category)}
               </p>
-              <h1 className="mt-2 font-serif text-3xl leading-[1.15] text-ink sm:text-5xl">
+              <h1 className="mt-2 font-serif text-3xl leading-[1.25] text-ink sm:text-5xl">
                 <Link href={articleHref(lead.category, lead.slug)} className="hover:text-forest">
                   {lead.title}
                 </Link>
               </h1>
-              <p className="mt-4 text-[15px] leading-7 text-ink-soft">{lead.summary}</p>
+              <p className="mt-4 max-w-xl text-base leading-8 text-ink-soft">{lead.summary}</p>
               <ul className="mt-4 space-y-2 text-sm leading-6 text-ink-soft">
                 {lead.teaser.slice(0, 3).map((item) => (
                   <li key={item} className="flex gap-2">
@@ -99,7 +100,11 @@ export default function HomePage() {
               <tbody>
                 {marketBoards[0].items.slice(0, 6).map((row) => (
                   <tr key={row.label}>
-                    <td className="font-mono text-xs">{row.label}</td>
+                    <td className="font-mono text-xs">
+                      <Link href={row.fileHref} className="hover:text-forest">
+                        {row.label}
+                      </Link>
+                    </td>
                     <td>{row.value}</td>
                     <td>
                       <a href={row.href} className="text-forest underline underline-offset-2" target="_blank" rel="noopener noreferrer">
@@ -115,17 +120,23 @@ export default function HomePage() {
         <div>
           <SectionHead kicker="Capital" title="Capital moving Africa" href="/capital" />
           <ul className="mt-4 space-y-3 text-sm">
-            {capitalRows.map((row) => (
-              <li key={row.id} className="border-b border-rule pb-3">
-                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
-                  {row.type} · {row.country}
-                </p>
-                <p className="mt-1 text-ink">
-                  {row.investor} → {row.target}
-                </p>
-                <p className="text-muted">{row.amount} {row.currency} · {row.stage}</p>
-              </li>
-            ))}
+            {capitalRows.map((row) => {
+              const book = capitalBookByName(row.type);
+              const href = book ? capitalFileHref(book.slug, row.countrySlug) : "/capital";
+              return (
+                <li key={row.id} className="border-b border-rule pb-3">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
+                    {row.type} · {row.country}
+                  </p>
+                  <p className="mt-1 text-ink">
+                    <Link href={href} className="hover:text-forest">
+                      {row.investor} → {row.target}
+                    </Link>
+                  </p>
+                  <p className="text-muted">{row.amount} {row.currency} · {row.stage}</p>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
@@ -155,6 +166,36 @@ export default function HomePage() {
             Funding, regulation, failures and acquisitions — not startup PR. The startup
             database is a schema plus this door. No invented rounds.
           </p>
+          <ul className="mt-3 space-y-1 text-sm">
+            {techLenses.map((lens) => (
+              <li key={lens.slug}>
+                <Link href={`/technology/${lens.slug}`} className="text-forest underline underline-offset-2">
+                  {lens.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-sm">
+            <Link href="/industries" className="text-forest underline underline-offset-2">
+              Industries
+            </Link>
+            {" · "}
+            <Link href="/agencies" className="text-forest underline underline-offset-2">
+              Agencies
+            </Link>
+            {" · "}
+            <Link href="/cities" className="text-forest underline underline-offset-2">
+              Cities
+            </Link>
+            {" · "}
+            <Link href="/people" className="text-forest underline underline-offset-2">
+              People
+            </Link>
+            {" · "}
+            <Link href="/developers" className="text-forest underline underline-offset-2">
+              Developers
+            </Link>
+          </p>
           <Link href="/companies" className="mt-4 inline-block font-mono text-[10px] uppercase tracking-[0.14em] text-forest">
             Company intelligence →
           </Link>
@@ -182,11 +223,15 @@ export default function HomePage() {
           <SectionHead kicker="Signals" title="Africa signals" href="/signals" methodology />
           <ul className="mt-4 space-y-4">
             {signals.map((s) => (
-              <li key={s.title} className="border-b border-rule pb-3">
+              <li key={s.slug} className="border-b border-rule pb-3">
                 <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
                   {s.category} · {s.country}
                 </p>
-                <p className="mt-1 font-serif text-lg">{s.title}</p>
+                <p className="mt-1 font-serif text-lg">
+                  <Link href={`/signals/${s.slug}`} className="hover:text-forest">
+                    {s.title}
+                  </Link>
+                </p>
                 <p className="mt-1 text-xs text-muted">
                   Fact / interpretation separated · {s.confidence}
                 </p>
@@ -201,6 +246,15 @@ export default function HomePage() {
             <p className="mt-3 font-serif text-2xl">No verified observation selected</p>
             <p className="mt-2 text-sm leading-6 text-ink-soft">
               Chart of the Day and Number of the Day publish only when a sourced series exists.
+            </p>
+            <p className="mt-3 text-sm">
+              <Link href="/data/chart-of-the-day" className="text-forest underline underline-offset-2">
+                Chart of the Day
+              </Link>
+              {" · "}
+              <Link href="/data/number-of-the-day" className="text-forest underline underline-offset-2">
+                Number of the Day
+              </Link>
             </p>
           </div>
         </div>

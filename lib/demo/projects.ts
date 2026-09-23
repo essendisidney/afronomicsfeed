@@ -1,3 +1,5 @@
+import { countries } from "./countries";
+
 export const projectLensFields = [
   "project",
   "country",
@@ -15,3 +17,11 @@ export const projectLensFields = [
 
 export const projectDisclaimer =
   "Project Lens is a discovery file, not a marketplace execution and not a bankability certificate. Criteria and evidence must be visible before any project is listed.";
+
+export function projectFileHref(countrySlug: string) {
+  return `/projects/${countrySlug}`;
+}
+
+export function projectCountryParams() {
+  return countries.map((country) => ({ slug: country.slug }));
+}

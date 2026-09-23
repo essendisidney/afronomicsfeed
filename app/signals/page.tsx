@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
 import { DemoMark } from "@/components/ui/DemoMark";
-import { signalCategories, signals } from "@/lib/demo/signals";
+import { signalCategories, signalCategorySlug, signals } from "@/lib/demo/signals";
 
 export const metadata: Metadata = {
   title: "Signals",
@@ -16,17 +17,32 @@ export default function SignalsPage() {
       title="Changes that matter, before they are obvious"
       lede="A signal is not a prediction sold as fact. Each card separates the document, any calculation, a model note, and the desk’s interpretation."
     >
-      <p className="mb-6 text-sm text-ink-soft">Categories: {signalCategories.join(" · ")}.</p>
+      <ul className="mb-8 flex flex-wrap gap-2">
+        {signalCategories.map((category) => (
+          <li key={category}>
+            <Link
+              href={`/signals/categories/${signalCategorySlug(category)}`}
+              className="border border-rule px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] hover:border-gold"
+            >
+              {category}
+            </Link>
+          </li>
+        ))}
+      </ul>
       <ul className="space-y-6">
         {signals.map((signal) => (
-          <li key={signal.title} className="border border-rule p-5">
+          <li key={signal.slug} className="border border-rule p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold">
                 {signal.category} · {signal.country} · {signal.sector}
               </p>
               <DemoMark kind="methodology" />
             </div>
-            <h2 className="mt-2 font-serif text-2xl">{signal.title}</h2>
+            <h2 className="mt-2 font-serif text-2xl">
+              <Link href={`/signals/${signal.slug}`} className="hover:text-forest">
+                {signal.title}
+              </Link>
+            </h2>
             <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-4">
               <div>
                 <dt className="font-mono text-[10px] uppercase text-muted">Direction</dt>

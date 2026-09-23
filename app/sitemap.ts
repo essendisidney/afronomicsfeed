@@ -83,6 +83,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/ingestion",
     "/feeds",
     "/status",
+    "/searches",
+    "/licensing",
+    "/notifications",
+    "/changelog",
+    "/audit",
+    "/reports",
+    "/calendar",
+    "/partners",
   ];
 
   const now = new Date();

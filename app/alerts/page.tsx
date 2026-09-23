@@ -39,6 +39,18 @@ export default function AlertsPage() {
           Account
         </Link>
         {" · "}
+        <Link href="/notifications" className="text-forest underline underline-offset-2">
+          Notifications
+        </Link>
+        {" · "}
+        <Link href="/searches" className="text-forest underline underline-offset-2">
+          Searches
+        </Link>
+        {" · "}
+        <Link href="/login" className="text-forest underline underline-offset-2">
+          Sign in
+        </Link>
+        {" · "}
         <Link href="/signals" className="text-forest underline underline-offset-2">
           Signals
         </Link>

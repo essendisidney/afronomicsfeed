@@ -26,6 +26,16 @@ const routes = [
   },
   {
     method: "GET",
+    path: "/api/graph",
+    note: "Desk, node and edge counts. No invented upserts.",
+  },
+  {
+    method: "GET",
+    path: "/api/status",
+    note: "Honest live / scaffold / offline counts.",
+  },
+  {
+    method: "GET",
     path: "/api/meta",
     note: "This catalogue.",
   },
@@ -37,7 +47,7 @@ export default function DevelopersPage() {
       crumbs={[{ href: "/", label: "Home" }, { label: "Developers" }]}
       kicker="Developers"
       title="The public surface"
-      lede="Four routes, no keys. Anything that would invent an official print stays unpublished."
+      lede="Six routes, no keys. Anything that would invent an official print stays unpublished."
     >
       <p className="mb-6 font-mono text-xs uppercase tracking-[0.14em] text-muted">Keys are not issued.</p>
       <ul className="divide-y divide-rule border border-rule">

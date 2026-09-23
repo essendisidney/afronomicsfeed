@@ -62,6 +62,18 @@ export default function AccountPage() {
         <Link href="/watchlists" className="text-forest underline underline-offset-2">
           Watchlists
         </Link>
+        {" · "}
+        <Link href="/notifications" className="text-forest underline underline-offset-2">
+          Notifications
+        </Link>
+        {" · "}
+        <Link href="/searches" className="text-forest underline underline-offset-2">
+          Searches
+        </Link>
+        {" · "}
+        <Link href="/licensing" className="text-forest underline underline-offset-2">
+          Licensing
+        </Link>
       </p>
 
       <section className="mt-12">

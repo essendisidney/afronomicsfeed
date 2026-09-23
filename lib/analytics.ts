@@ -18,6 +18,14 @@ export const analyticsEvents = [
   "ingestion_view",
   "feed_open",
   "status_view",
+  "search_save",
+  "licence_view",
+  "notification_pref",
+  "changelog_open",
+  "audit_view",
+  "report_open",
+  "calendar_open",
+  "partner_view",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

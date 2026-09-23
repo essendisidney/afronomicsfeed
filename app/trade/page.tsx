@@ -17,6 +17,27 @@ export default function TradePage() {
       title="Corridors, ports and the constraints between them"
       lede="Imports, exports, partners, commodities, AfCFTA, logistics and FX. Corridor and port files exist so the graph has somewhere to land a disruption or a rail print."
     >
+      <p className="mb-8 text-sm">
+        <Link href="/graph/northern-corridor" className="text-forest underline underline-offset-2">
+          Northern Corridor graph desk
+        </Link>
+        {" · "}
+        <Link href="/graph/central-corridor" className="text-forest underline underline-offset-2">
+          Central Corridor graph desk
+        </Link>
+        {" · "}
+        <Link href="/calendar" className="text-forest underline underline-offset-2">
+          Calendar
+        </Link>
+        {" · "}
+        <Link href="/compare" className="text-forest underline underline-offset-2">
+          Compare desks
+        </Link>
+        {" · "}
+        <Link href="/sources" className="text-forest underline underline-offset-2">
+          Sources
+        </Link>
+      </p>
       <section>
         <h2 className="font-serif text-2xl">Corridors</h2>
         <ul className="mt-4 grid gap-4 lg:grid-cols-2">

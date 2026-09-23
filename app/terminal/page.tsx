@@ -51,6 +51,12 @@ const side = [
   { href: "/compare", label: "Compare" },
   { href: "/feeds", label: "Feeds" },
   { href: "/status", label: "Status" },
+  { href: "/searches", label: "Searches" },
+  { href: "/licensing", label: "Licensing" },
+  { href: "/reports", label: "Reports" },
+  { href: "/changelog", label: "Changelog" },
+  { href: "/calendar", label: "Calendar" },
+  { href: "/partners", label: "Partners" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -298,6 +304,10 @@ export default function TerminalPage() {
               <Link href="/feeds" className="text-forest underline underline-offset-2">
                 Feeds
               </Link>
+              {" · "}
+              <Link href="/graph/northern-corridor" className="text-forest underline underline-offset-2">
+                Corridor graph
+              </Link>
             </p>
           </div>
         </section>
@@ -389,6 +399,46 @@ export default function TerminalPage() {
               <li>
                 <Link href="/status" className="hover:text-forest">
                   Status
+                </Link>
+              </li>
+              <li>
+                <Link href="/searches" className="hover:text-forest">
+                  Searches
+                </Link>
+              </li>
+              <li>
+                <Link href="/licensing" className="hover:text-forest">
+                  Licensing
+                </Link>
+              </li>
+              <li>
+                <Link href="/notifications" className="hover:text-forest">
+                  Notifications
+                </Link>
+              </li>
+              <li>
+                <Link href="/reports" className="hover:text-forest">
+                  Reports
+                </Link>
+              </li>
+              <li>
+                <Link href="/changelog" className="hover:text-forest">
+                  Changelog
+                </Link>
+              </li>
+              <li>
+                <Link href="/audit" className="hover:text-forest">
+                  Audit
+                </Link>
+              </li>
+              <li>
+                <Link href="/calendar" className="hover:text-forest">
+                  Calendar
+                </Link>
+              </li>
+              <li>
+                <Link href="/partners" className="hover:text-forest">
+                  Partners
                 </Link>
               </li>
               <li>

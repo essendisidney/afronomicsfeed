@@ -71,6 +71,48 @@ export const systemSurfaces: SystemSurface[] = [
     note: "Catalogue only. No licensed delivery.",
     href: "/feeds",
   },
+  {
+    id: "notifications",
+    label: "Notification delivery",
+    state: "offline",
+    note: "Channels listed. Nothing is pushed.",
+    href: "/notifications",
+  },
+  {
+    id: "licensing",
+    label: "Enterprise licensing",
+    state: "offline",
+    note: "Catalogue only. No fake quotes.",
+    href: "/licensing",
+  },
+  {
+    id: "audit",
+    label: "Editorial audit log",
+    state: "offline",
+    note: "Action kinds listed. Event store empty.",
+    href: "/audit",
+  },
+  {
+    id: "reports",
+    label: "Research reports",
+    state: "scaffold",
+    note: "Memo shells. Published count is zero.",
+    href: "/reports",
+  },
+  {
+    id: "calendar",
+    label: "Desk calendar",
+    state: "offline",
+    note: "Slots listed. Dates blank until cited.",
+    href: "/calendar",
+  },
+  {
+    id: "partners",
+    label: "Partner inventory",
+    state: "offline",
+    note: "Sponsor surfaces empty. Editorial separate.",
+    href: "/partners",
+  },
 ];
 
 export function surfacesByState(state: SystemSurface["state"]) {

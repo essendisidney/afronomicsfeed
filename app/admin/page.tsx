@@ -40,6 +40,10 @@ export default function AdminPage() {
         <Link href="/sources" className="text-forest underline underline-offset-2">
           /sources
         </Link>
+        . Audit:{" "}
+        <Link href="/audit" className="text-forest underline underline-offset-2">
+          /audit
+        </Link>
         .
       </p>
       <p className="mt-4 text-sm text-muted">Audit log: empty. No client write path is exposed.</p>

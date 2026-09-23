@@ -243,6 +243,54 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Ops",
       summary: "What is live, scaffold, or offline. No fake uptime.",
     },
+    {
+      href: "/searches",
+      title: "Saved searches",
+      kicker: "Seat",
+      summary: "Search templates. Store empty until Auth.",
+    },
+    {
+      href: "/licensing",
+      title: "Licensing",
+      kicker: "Enterprise",
+      summary: "Licence catalogue. No fake quotes.",
+    },
+    {
+      href: "/notifications",
+      title: "Notifications",
+      kicker: "Seat",
+      summary: "Channels offline. Prefs require Auth.",
+    },
+    {
+      href: "/changelog",
+      title: "Changelog",
+      kicker: "Product",
+      summary: "Shipped shells by phase. No vanity KPIs.",
+    },
+    {
+      href: "/audit",
+      title: "Audit",
+      kicker: "Editorial",
+      summary: "CMS action kinds. Event store empty.",
+    },
+    {
+      href: "/reports",
+      title: "Reports",
+      kicker: "Research",
+      summary: "Research memo shells. Published stays zero.",
+    },
+    {
+      href: "/calendar",
+      title: "Calendar",
+      kicker: "Desk",
+      summary: "MPC and desk slots. Dates blank until cited.",
+    },
+    {
+      href: "/partners",
+      title: "Partners",
+      kicker: "Commercial",
+      summary: "Sponsor inventory empty. Editorial stays separate.",
+    },
     ...navHits,
   ];
 }

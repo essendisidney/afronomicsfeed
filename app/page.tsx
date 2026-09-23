@@ -232,6 +232,30 @@ export default function HomePage() {
               Status
             </Link>
             {" · "}
+            <Link href="/searches" className="text-forest underline underline-offset-2">
+              Searches
+            </Link>
+            {" · "}
+            <Link href="/licensing" className="text-forest underline underline-offset-2">
+              Licensing
+            </Link>
+            {" · "}
+            <Link href="/reports" className="text-forest underline underline-offset-2">
+              Reports
+            </Link>
+            {" · "}
+            <Link href="/changelog" className="text-forest underline underline-offset-2">
+              Changelog
+            </Link>
+            {" · "}
+            <Link href="/calendar" className="text-forest underline underline-offset-2">
+              Calendar
+            </Link>
+            {" · "}
+            <Link href="/partners" className="text-forest underline underline-offset-2">
+              Partners
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

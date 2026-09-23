@@ -43,7 +43,7 @@ NEWS → DATA → CONTEXT → SIGNALS → DECISIONS
 **Utility:** Search · Brief · Terminal · PRO  
 
 **Programmatic SEO:**  
-`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/ask/corpus`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`, `/graph/[desk]`, `/graph/resolve`, `/account`, `/account/usage`, `/watchlists`, `/alerts`, `/exports`, `/method/registry`, `/packs`, `/sources`, `/compare`, `/ingestion`, `/feeds`, `/status`, `/searches`, `/licensing`, `/notifications`, `/changelog`, `/audit`, `/reports`, `/calendar`, `/partners`
+`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/ask/corpus`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`, `/graph/[desk]`, `/graph/resolve`, `/account`, `/account/usage`, `/watchlists`, `/alerts`, `/exports`, `/method/registry`, `/packs`, `/sources`, `/compare`, `/ingestion`, `/feeds`, `/status`, `/searches`, `/licensing`, `/notifications`, `/changelog`, `/audit`, `/reports`, `/calendar`, `/partners`, `/coverage`, `/glossary`
 
 ---
 
@@ -95,7 +95,7 @@ RLS on from day one. Service role never in the client.
 | 9 | Ask Afronomics (RAG + pgvector) | **Question files + `/ask/corpus` empty slots; RAG still unconnected** |
 | 10 | Subscriptions | **Entitlement matrix + `/account`; checkout/Auth still stubs** |
 | 11 | API keys + usage | **`/developers` + `/api/meta` catalogue; keys not issued** |
-| 12 | Full graph + entity resolution jobs | **`/graph` + featured + UG/TZ/ET/MA + Northern/Central Corridor desks; resolve stub** |
+| 12 | Full graph + entity resolution jobs | **`/graph` + featured + EAC/ET/MA/CI/AO + Northern/Central/Lobito Corridor desks; resolve stub** |
 | 13 | Decisions (watches / alerts / opinion rubrics) | **`/watchlists` + `/alerts` shells; Opinion rubrics; no fake deliveries** |
 | 14 | Multi-desk graph + exports + Ask corpus | **NG/ZA/EG desks; `/exports` shells; `/ask/corpus` empty index** |
 | 15 | Featured desks complete + method/usage/packs | **GH/RW desks; `/method/registry`; `/account/usage`; `/packs` shells** |
@@ -104,6 +104,7 @@ RLS on from day one. Service role never in the client.
 | 18 | Searches + licensing + notifications + corridor desk | **`/searches`; `/licensing`; `/notifications`; ET + Northern Corridor desks** |
 | 19 | Changelog + audit + reports + Morocco | **`/changelog`; `/audit`; `/reports`; Morocco graph desk** |
 | 20 | Calendar + partners + Central Corridor + API | **`/calendar`; `/partners`; Central Corridor desk; `/api/graph` + `/api/status`** |
+| 21 | Coverage + glossary + WA/Lobito desks | **`/coverage`; `/glossary`; CI + Angola + Lobito Corridor desks** |
 
 The app stays runnable after every phase.
 
@@ -138,7 +139,7 @@ Editorial and sponsored surfaces stay visually separate. No sponsor inventory in
 
 ## 7. Analytics hooks (north star)
 
-Events to emit when analytics lands: `brief_open`, `country_view`, `signal_open`, `search`, `ask_query`, `watchlist_add`, `alert_subscribe`, `graph_open`, `pro_cta`, `export_csv`, `pack_open`, `usage_view`, `method_open`, `source_open`, `compare_open`, `ingestion_view`, `feed_open`, `status_view`, `search_save`, `licence_view`, `notification_pref`, `changelog_open`, `audit_view`, `report_open`, `calendar_open`, `partner_view`.  
+Events to emit when analytics lands: `brief_open`, `country_view`, `signal_open`, `search`, `ask_query`, `watchlist_add`, `alert_subscribe`, `graph_open`, `pro_cta`, `export_csv`, `pack_open`, `usage_view`, `method_open`, `source_open`, `compare_open`, `ingestion_view`, `feed_open`, `status_view`, `search_save`, `licence_view`, `notification_pref`, `changelog_open`, `audit_view`, `report_open`, `calendar_open`, `partner_view`, `coverage_view`, `glossary_open`.  
 Phase 1: typed event names in `lib/analytics.ts` only — no fake dashboards.
 
 ---

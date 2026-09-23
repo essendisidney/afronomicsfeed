@@ -91,6 +91,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/reports",
     "/calendar",
     "/partners",
+    "/coverage",
+    "/glossary",
   ];
 
   const now = new Date();

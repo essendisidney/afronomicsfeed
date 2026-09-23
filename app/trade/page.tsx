@@ -26,6 +26,10 @@ export default function TradePage() {
           Central Corridor graph desk
         </Link>
         {" · "}
+        <Link href="/graph/lobito-corridor" className="text-forest underline underline-offset-2">
+          Lobito Corridor graph desk
+        </Link>
+        {" · "}
         <Link href="/calendar" className="text-forest underline underline-offset-2">
           Calendar
         </Link>

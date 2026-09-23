@@ -113,6 +113,13 @@ export const systemSurfaces: SystemSurface[] = [
     note: "Sponsor surfaces empty. Editorial separate.",
     href: "/partners",
   },
+  {
+    id: "coverage",
+    label: "Coverage board",
+    state: "scaffold",
+    note: "Honest scaffold counts. No vanity score.",
+    href: "/coverage",
+  },
 ];
 
 export function surfacesByState(state: SystemSurface["state"]) {

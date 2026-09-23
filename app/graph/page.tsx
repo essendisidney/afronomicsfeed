@@ -96,7 +96,7 @@ export default function GraphPage() {
       </section>
 
       <Provenance
-        source="Desk scaffold (featured · EAC · ET · MA · Northern + Central Corridor)"
+        source="Desk scaffold (featured · EAC · WA · AO · corridor desks)"
         methodology="No silent overwrite. No invented edges."
       />
     </LayerPage>

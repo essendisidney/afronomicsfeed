@@ -57,6 +57,8 @@ const side = [
   { href: "/changelog", label: "Changelog" },
   { href: "/calendar", label: "Calendar" },
   { href: "/partners", label: "Partners" },
+  { href: "/coverage", label: "Coverage" },
+  { href: "/glossary", label: "Glossary" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -439,6 +441,16 @@ export default function TerminalPage() {
               <li>
                 <Link href="/partners" className="hover:text-forest">
                   Partners
+                </Link>
+              </li>
+              <li>
+                <Link href="/coverage" className="hover:text-forest">
+                  Coverage
+                </Link>
+              </li>
+              <li>
+                <Link href="/glossary" className="hover:text-forest">
+                  Glossary
                 </Link>
               </li>
               <li>

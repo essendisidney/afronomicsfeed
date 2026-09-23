@@ -72,6 +72,7 @@ export default function MethodPage() {
           Data and label standards live in the{" "}
           <Link href="/method/registry">method registry</Link>. Draft and empty rows mean
           the file is not finished — the desk does not invent a completed methodology.
+          House terms are indexed in the <Link href="/glossary">glossary</Link>.
         </p>
 
         <h2>What is gated</h2>

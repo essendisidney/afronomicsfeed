@@ -26,6 +26,8 @@ export const analyticsEvents = [
   "report_open",
   "calendar_open",
   "partner_view",
+  "coverage_view",
+  "glossary_open",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

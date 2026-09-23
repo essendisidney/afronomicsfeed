@@ -256,6 +256,14 @@ export default function HomePage() {
               Partners
             </Link>
             {" · "}
+            <Link href="/coverage" className="text-forest underline underline-offset-2">
+              Coverage
+            </Link>
+            {" · "}
+            <Link href="/glossary" className="text-forest underline underline-offset-2">
+              Glossary
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

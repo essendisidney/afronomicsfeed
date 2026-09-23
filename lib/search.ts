@@ -291,6 +291,18 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Commercial",
       summary: "Sponsor inventory empty. Editorial stays separate.",
     },
+    {
+      href: "/coverage",
+      title: "Coverage",
+      kicker: "Ops",
+      summary: "Honest scaffold counts. No vanity completion score.",
+    },
+    {
+      href: "/glossary",
+      title: "Glossary",
+      kicker: "Method",
+      summary: "House terms linked to method files.",
+    },
     ...navHits,
   ];
 }

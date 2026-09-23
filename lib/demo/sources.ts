@@ -146,6 +146,15 @@ export const officialSources: OfficialSource[] = [
     note: "MAD door for Morocco desk.",
   },
   {
+    slug: "bceao",
+    label: "BCEAO",
+    kind: "central-bank",
+    countrySlug: "cote-divoire",
+    href: "https://www.bceao.int/",
+    status: "linked",
+    note: "XOF door for WAEMU desks. Côte d’Ivoire file points here.",
+  },
+  {
     slug: "afdb",
     label: "African Development Bank",
     kind: "dfi",

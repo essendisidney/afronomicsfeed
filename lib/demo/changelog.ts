@@ -34,6 +34,14 @@ export const changelogEntries: ChangelogEntry[] = [
     hrefs: ["/calendar", "/partners", "/graph/central-corridor", "/developers"],
   },
   {
+    slug: "phase-21",
+    title: "Coverage, glossary, CI/Angola/Lobito desks",
+    phase: "21",
+    status: "draft",
+    lede: "Honest coverage board, house glossary, Côte d’Ivoire, Angola and Lobito Corridor desks.",
+    hrefs: ["/coverage", "/glossary", "/graph/cote-divoire", "/graph/lobito-corridor"],
+  },
+  {
     slug: "phase-17",
     title: "Feeds, status, UG/TZ desks",
     phase: "17",

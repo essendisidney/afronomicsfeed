@@ -66,6 +66,8 @@ export const footerNav = [
   { href: "/packs", label: "Packs" },
   { href: "/sources", label: "Sources" },
   { href: "/compare", label: "Compare" },
+  { href: "/feeds", label: "Feeds" },
+  { href: "/status", label: "Status" },
   { href: "/industries", label: "Industries" },
   { href: "/agencies", label: "Agencies" },
   { href: "/cities", label: "Cities" },

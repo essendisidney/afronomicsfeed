@@ -224,6 +224,14 @@ export default function HomePage() {
               Compare
             </Link>
             {" · "}
+            <Link href="/feeds" className="text-forest underline underline-offset-2">
+              Feeds
+            </Link>
+            {" · "}
+            <Link href="/status" className="text-forest underline underline-offset-2">
+              Status
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

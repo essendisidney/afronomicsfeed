@@ -81,6 +81,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sources",
     "/compare",
     "/ingestion",
+    "/feeds",
+    "/status",
   ];
 
   const now = new Date();

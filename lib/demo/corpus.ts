@@ -97,6 +97,22 @@ export const corpusDocs: CorpusDoc[] = [
     lede: "Technology file is a shell until a cited product is stored.",
     href: "/technology/fintech/rwanda",
   },
+  {
+    slug: "uganda-corridor",
+    title: "Northern Corridor · Uganda",
+    kind: "methodology",
+    status: "empty",
+    lede: "Corridor editorial file. Volumes unpublished.",
+    href: "/trade/northern-corridor/uganda",
+  },
+  {
+    slug: "tanzania-central-corridor",
+    title: "Central Corridor · Tanzania",
+    kind: "methodology",
+    status: "empty",
+    lede: "Dar es Salaam corridor shell. Throughput blank until sourced.",
+    href: "/trade/central-corridor/tanzania",
+  },
 ];
 
 export function getCorpusDoc(slug: string) {

@@ -64,6 +64,14 @@ export default function DevelopersPage() {
         <Link href="/account/usage" className="text-forest underline underline-offset-2">
           /account/usage
         </Link>
+        . Feeds:{" "}
+        <Link href="/feeds" className="text-forest underline underline-offset-2">
+          /feeds
+        </Link>
+        . Status:{" "}
+        <Link href="/status" className="text-forest underline underline-offset-2">
+          /status
+        </Link>
         .
       </p>
       <Provenance source="Live route catalogue" methodology="No invented payloads. Keys are not issued." />

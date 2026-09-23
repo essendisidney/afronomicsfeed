@@ -49,6 +49,8 @@ const side = [
   { href: "/packs", label: "Packs" },
   { href: "/sources", label: "Sources" },
   { href: "/compare", label: "Compare" },
+  { href: "/feeds", label: "Feeds" },
+  { href: "/status", label: "Status" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -292,6 +294,10 @@ export default function TerminalPage() {
               <Link href="/compare" className="text-forest underline underline-offset-2">
                 Compare
               </Link>
+              {" · "}
+              <Link href="/feeds" className="text-forest underline underline-offset-2">
+                Feeds
+              </Link>
             </p>
           </div>
         </section>
@@ -373,6 +379,16 @@ export default function TerminalPage() {
               <li>
                 <Link href="/ingestion" className="hover:text-forest">
                   Ingestion
+                </Link>
+              </li>
+              <li>
+                <Link href="/feeds" className="hover:text-forest">
+                  Feeds
+                </Link>
+              </li>
+              <li>
+                <Link href="/status" className="hover:text-forest">
+                  Status
                 </Link>
               </li>
               <li>

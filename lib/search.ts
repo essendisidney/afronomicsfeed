@@ -231,6 +231,18 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Ops",
       summary: "Job board. Nothing scheduled against a live queue.",
     },
+    {
+      href: "/feeds",
+      title: "Feeds",
+      kicker: "Enterprise",
+      summary: "Feed catalogue. No licensed delivery yet.",
+    },
+    {
+      href: "/status",
+      title: "Status",
+      kicker: "Ops",
+      summary: "What is live, scaffold, or offline. No fake uptime.",
+    },
     ...navHits,
   ];
 }

@@ -16,6 +16,8 @@ export const analyticsEvents = [
   "source_open",
   "compare_open",
   "ingestion_view",
+  "feed_open",
+  "status_view",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

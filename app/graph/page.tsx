@@ -7,7 +7,7 @@ import { scheduledJobs } from "@/lib/ingestion/jobs";
 
 export const metadata: Metadata = {
   title: "Graph",
-  description: "Afronomics knowledge graph — featured desks KE · NG · ZA · EG · GH · RW. No invented relationships.",
+  description: "Afronomics knowledge graph — featured and EAC desks. No invented relationships.",
 };
 
 export default function GraphPage() {
@@ -96,7 +96,7 @@ export default function GraphPage() {
       </section>
 
       <Provenance
-        source="Featured desks scaffold (KE · NG · ZA · EG · GH · RW)"
+        source="Desk scaffold (featured + UG · TZ corridors)"
         methodology="No silent overwrite. No invented edges."
       />
     </LayerPage>

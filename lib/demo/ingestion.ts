@@ -20,7 +20,7 @@ export const ingestionJobs: IngestionJob[] = [
     cadence: "manual",
     status: "stub",
     desk: null,
-    note: "Would refresh NG · ZA · EG · GH · RW edges from tagged filings.",
+    note: "Would refresh NG · ZA · EG · GH · RW · UG · TZ edges from tagged filings.",
   },
   {
     id: "dedupe-observations",

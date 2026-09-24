@@ -2,27 +2,27 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
 import { Provenance } from "@/components/ui/Provenance";
-import { openSupportCount, supportChannels } from "@/lib/demo/support";
+import { contactDoors, openContactCount } from "@/lib/demo/contact";
 
 export const metadata: Metadata = {
-  title: "Support",
-  description: "Support doors for Afronomics. No fake ticket queue or response SLA.",
+  title: "Contact",
+  description: "Contact doors for Afronomics Feed. No fake form delivery.",
 };
 
-export default function SupportPage() {
-  const open = openSupportCount();
+export default function ContactPage() {
+  const open = openContactCount();
 
   return (
     <LayerPage
-      crumbs={[{ href: "/", label: "Home" }, { label: "Support" }]}
-      kicker="Support"
-      title="Help without a fake ticket"
-      lede="Open doors point at live pages. Offline means there is no helpdesk runner. Empty means no inbox is published yet."
+      crumbs={[{ href: "/", label: "Home" }, { label: "Contact" }]}
+      kicker="Contact"
+      title="Doors without a fake form"
+      lede="Open doors point at live pages. Empty means no public inbox is published. This desk does not pretend a message was delivered."
     >
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="border border-rule px-4 py-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Channels</p>
-          <p className="mt-1 font-serif text-xl">{supportChannels.length}</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Doors</p>
+          <p className="mt-1 font-serif text-xl">{contactDoors.length}</p>
         </div>
         <div className="border border-rule px-4 py-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Open</p>
@@ -31,29 +31,25 @@ export default function SupportPage() {
       </div>
 
       <p className="mt-6 text-sm">
+        <Link href="/about" className="text-forest underline underline-offset-2">
+          About
+        </Link>
+        {" · "}
         <Link href="/advisory" className="text-forest underline underline-offset-2">
           Advisory
         </Link>
         {" · "}
-        <Link href="/sla" className="text-forest underline underline-offset-2">
-          SLA
+        <Link href="/support" className="text-forest underline underline-offset-2">
+          Support
         </Link>
         {" · "}
-        <Link href="/status" className="text-forest underline underline-offset-2">
-          Status
-        </Link>
-        {" · "}
-        <Link href="/templates" className="text-forest underline underline-offset-2">
-          Templates
-        </Link>
-        {" · "}
-        <Link href="/faq" className="text-forest underline underline-offset-2">
-          FAQ
+        <Link href="/social" className="text-forest underline underline-offset-2">
+          Social
         </Link>
       </p>
 
       <ul className="mt-10 space-y-3">
-        {supportChannels.map((item) => (
+        {contactDoors.map((item) => (
           <li key={item.slug} className="border-b border-rule pb-3">
             <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
               {item.kind} · {item.status}
@@ -70,7 +66,7 @@ export default function SupportPage() {
         ))}
       </ul>
 
-      <Provenance source="Support catalogue" methodology="No channel invents a ticket ID or response time." />
+      <Provenance source="Contact catalogue" methodology="No door invents a delivered message." />
     </LayerPage>
   );
 }

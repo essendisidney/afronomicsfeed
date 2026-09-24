@@ -40,6 +40,19 @@ export const cities: City[] = [
   { slug: "tripoli", name: "Tripoli", countrySlug: "libya", role: "Capital" },
   { slug: "harare", name: "Harare", countrySlug: "zimbabwe", role: "Capital" },
   { slug: "port-louis", name: "Port Louis", countrySlug: "mauritius", role: "Capital / finance" },
+  { slug: "libreville", name: "Libreville", countrySlug: "gabon", role: "Capital" },
+  { slug: "lilongwe", name: "Lilongwe", countrySlug: "malawi", role: "Capital" },
+  { slug: "cotonou", name: "Cotonou", countrySlug: "benin", role: "Commercial / port" },
+  { slug: "lome", name: "Lomé", countrySlug: "togo", role: "Capital / port", portSlug: "lome" },
+  { slug: "bamako", name: "Bamako", countrySlug: "mali", role: "Capital" },
+  { slug: "niamey", name: "Niamey", countrySlug: "niger", role: "Capital" },
+  { slug: "ouagadougou", name: "Ouagadougou", countrySlug: "burkina-faso", role: "Capital" },
+  { slug: "conakry", name: "Conakry", countrySlug: "guinea", role: "Capital / port" },
+  { slug: "monrovia", name: "Monrovia", countrySlug: "liberia", role: "Capital" },
+  { slug: "freetown", name: "Freetown", countrySlug: "sierra-leone", role: "Capital / port" },
+  { slug: "nouakchott", name: "Nouakchott", countrySlug: "mauritania", role: "Capital" },
+  { slug: "banjul", name: "Banjul", countrySlug: "gambia", role: "Capital" },
+  { slug: "ndjamena", name: "N’Djamena", countrySlug: "chad", role: "Capital" },
 ];
 
 export function getCity(slug: string) {

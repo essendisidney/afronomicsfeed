@@ -53,7 +53,8 @@ export default function AboutPage() {
           <Link href="/press">press</Link>
           {" · "}
           <Link href="/brand">brand</Link>. Layer map:{" "}
-          <Link href="/layers">layers</Link>. LinkedIn:{" "}
+          <Link href="/layers">layers</Link>. Careers:{" "}
+          <Link href="/careers">careers</Link>. LinkedIn:{" "}
           <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer">
             AfronomicsFeed
           </a>
@@ -66,7 +67,7 @@ export default function AboutPage() {
           <a href={site.houseUrl} target="_blank" rel="noopener noreferrer">
             a product of Pesara
           </a>
-          .
+          . Credits: <Link href="/credits">credits</Link>.
         </p>
       </div>
     </div>

@@ -60,6 +60,10 @@ export default function GoLivePage() {
         <Link href="/roadmap" className="text-forest underline underline-offset-2">
           Roadmap
         </Link>
+        {" · "}
+        <Link href="/trust" className="text-forest underline underline-offset-2">
+          Trust
+        </Link>
       </p>
 
       <ul className="mt-10 space-y-3">

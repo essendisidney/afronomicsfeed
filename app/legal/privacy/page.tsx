@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { DraftBanner } from "@/components/ui/DraftBanner";
 import { PageHeader } from "@/components/ui/PageHeader";
 
@@ -27,7 +28,8 @@ export default function PrivacyPage() {
         </p>
         <p>
           Official policy, lawful bases, retention, and cross-border language
-          will replace this page after counsel review.
+          will replace this page after counsel review. Cookie posture:{" "}
+          <Link href="/legal/cookies">cookies</Link>.
         </p>
       </div>
     </div>

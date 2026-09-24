@@ -2,27 +2,27 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
 import { Provenance } from "@/components/ui/Provenance";
-import { openSupportCount, supportChannels } from "@/lib/demo/support";
+import { careerRoles, openCareerCount } from "@/lib/demo/careers";
 
 export const metadata: Metadata = {
-  title: "Support",
-  description: "Support doors for Afronomics. No fake ticket queue or response SLA.",
+  title: "Careers",
+  description: "Roles at Afronomics Feed. Empty means nothing is posted — no invented openings.",
 };
 
-export default function SupportPage() {
-  const open = openSupportCount();
+export default function CareersPage() {
+  const open = openCareerCount();
 
   return (
     <LayerPage
-      crumbs={[{ href: "/", label: "Home" }, { label: "Support" }]}
-      kicker="Support"
-      title="Help without a fake ticket"
-      lede="Open doors point at live pages. Offline means there is no helpdesk runner. Empty means no inbox is published yet."
+      crumbs={[{ href: "/", label: "Home" }, { label: "Careers" }]}
+      kicker="Careers"
+      title="Roles without a fake opening"
+      lede="Shape of desks we will staff. Empty means the role is not posted. This page does not invent a hiring pipeline or applicant count."
     >
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="border border-rule px-4 py-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Channels</p>
-          <p className="mt-1 font-serif text-xl">{supportChannels.length}</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Shapes</p>
+          <p className="mt-1 font-serif text-xl">{careerRoles.length}</p>
         </div>
         <div className="border border-rule px-4 py-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Open</p>
@@ -31,32 +31,32 @@ export default function SupportPage() {
       </div>
 
       <p className="mt-6 text-sm">
+        <Link href="/about" className="text-forest underline underline-offset-2">
+          About
+        </Link>
+        {" · "}
         <Link href="/advisory" className="text-forest underline underline-offset-2">
           Advisory
         </Link>
         {" · "}
-        <Link href="/sla" className="text-forest underline underline-offset-2">
-          SLA
+        <Link href="/press" className="text-forest underline underline-offset-2">
+          Press
         </Link>
         {" · "}
-        <Link href="/status" className="text-forest underline underline-offset-2">
-          Status
+        <Link href="/support" className="text-forest underline underline-offset-2">
+          Support
         </Link>
         {" · "}
-        <Link href="/templates" className="text-forest underline underline-offset-2">
-          Templates
-        </Link>
-        {" · "}
-        <Link href="/faq" className="text-forest underline underline-offset-2">
-          FAQ
+        <Link href="/contact" className="text-forest underline underline-offset-2">
+          Contact
         </Link>
       </p>
 
       <ul className="mt-10 space-y-3">
-        {supportChannels.map((item) => (
+        {careerRoles.map((item) => (
           <li key={item.slug} className="border-b border-rule pb-3">
             <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
-              {item.kind} · {item.status}
+              {item.desk} · {item.status}
             </p>
             {item.href ? (
               <Link href={item.href} className="mt-1 block font-serif text-xl hover:text-forest">
@@ -70,7 +70,7 @@ export default function SupportPage() {
         ))}
       </ul>
 
-      <Provenance source="Support catalogue" methodology="No channel invents a ticket ID or response time." />
+      <Provenance source="Careers catalogue" methodology="No role invents an open hiring slot." />
     </LayerPage>
   );
 }

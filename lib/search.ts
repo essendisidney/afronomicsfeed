@@ -411,6 +411,54 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Help",
       summary: "Open doors only. No fake ticket queue.",
     },
+    {
+      href: "/newsletters",
+      title: "Newsletters",
+      kicker: "Delivery",
+      summary: "Digest catalogue. Nothing sent from this build.",
+    },
+    {
+      href: "/careers",
+      title: "Careers",
+      kicker: "House",
+      summary: "Role shapes. No invented openings.",
+    },
+    {
+      href: "/contact",
+      title: "Contact",
+      kicker: "House",
+      summary: "Doors only. No fake form delivery.",
+    },
+    {
+      href: "/faq",
+      title: "FAQ",
+      kicker: "Help",
+      summary: "Straight answers. No invented coverage claims.",
+    },
+    {
+      href: "/legal/cookies",
+      title: "Cookies",
+      kicker: "Legal",
+      summary: "Cookie posture. No fake consent banner.",
+    },
+    {
+      href: "/trust",
+      title: "Trust",
+      kicker: "Trust",
+      summary: "Method, security, SLA and go-live in one door.",
+    },
+    {
+      href: "/credits",
+      title: "Credits",
+      kicker: "House",
+      summary: "Pesara and stack acknowledgements. No fake partners.",
+    },
+    {
+      href: "/manifesto",
+      title: "Manifesto",
+      kicker: "Product",
+      summary: "Empty until sourced. Cite or refuse.",
+    },
     ...navHits,
   ];
 }

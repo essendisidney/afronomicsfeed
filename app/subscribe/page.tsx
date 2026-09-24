@@ -28,7 +28,11 @@ export default function SubscribePage() {
         <Link href="/account" className="text-forest underline underline-offset-4">
           account
         </Link>{" "}
-        seat. Checkout is not live.
+        seat. Digest catalogue:{" "}
+        <Link href="/newsletters" className="text-forest underline underline-offset-4">
+          newsletters
+        </Link>
+        . Checkout is not live.
       </p>
     </div>
   );

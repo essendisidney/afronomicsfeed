@@ -43,6 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/corrections",
     "/advisory",
     "/legal/privacy",
+    "/legal/cookies",
     "/legal/terms",
     "/legal/disclaimer",
     "/markets",
@@ -112,6 +113,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sdk",
     "/templates",
     "/support",
+    "/newsletters",
+    "/careers",
+    "/contact",
+    "/faq",
+    "/trust",
+    "/credits",
+    "/manifesto",
   ];
 
   const now = new Date();

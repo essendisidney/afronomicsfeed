@@ -77,6 +77,14 @@ const side = [
   { href: "/sdk", label: "SDK" },
   { href: "/templates", label: "Templates" },
   { href: "/support", label: "Support" },
+  { href: "/newsletters", label: "Newsletters" },
+  { href: "/careers", label: "Careers" },
+  { href: "/contact", label: "Contact" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/legal/cookies", label: "Cookies" },
+  { href: "/trust", label: "Trust" },
+  { href: "/credits", label: "Credits" },
+  { href: "/manifesto", label: "Manifesto" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -559,6 +567,46 @@ export default function TerminalPage() {
               <li>
                 <Link href="/support" className="hover:text-forest">
                   Support
+                </Link>
+              </li>
+              <li>
+                <Link href="/newsletters" className="hover:text-forest">
+                  Newsletters
+                </Link>
+              </li>
+              <li>
+                <Link href="/careers" className="hover:text-forest">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-forest">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="hover:text-forest">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal/cookies" className="hover:text-forest">
+                  Cookies
+                </Link>
+              </li>
+              <li>
+                <Link href="/trust" className="hover:text-forest">
+                  Trust
+                </Link>
+              </li>
+              <li>
+                <Link href="/credits" className="hover:text-forest">
+                  Credits
+                </Link>
+              </li>
+              <li>
+                <Link href="/manifesto" className="hover:text-forest">
+                  Manifesto
                 </Link>
               </li>
               <li>

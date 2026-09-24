@@ -246,6 +246,62 @@ export const systemSurfaces: SystemSurface[] = [
     note: "Open pages linked. Ticket queue offline.",
     href: "/support",
   },
+  {
+    id: "newsletters",
+    label: "Newsletters",
+    state: "scaffold",
+    note: "Catalogue only. Mail runner offline.",
+    href: "/newsletters",
+  },
+  {
+    id: "careers",
+    label: "Careers",
+    state: "scaffold",
+    note: "Role shapes only. No open posts.",
+    href: "/careers",
+  },
+  {
+    id: "contact",
+    label: "Contact",
+    state: "scaffold",
+    note: "Doors only. Form delivery offline.",
+    href: "/contact",
+  },
+  {
+    id: "faq",
+    label: "FAQ",
+    state: "scaffold",
+    note: "Honest product answers. No fake coverage.",
+    href: "/faq",
+  },
+  {
+    id: "cookies",
+    label: "Cookies",
+    state: "scaffold",
+    note: "Posture only. No consent invent.",
+    href: "/legal/cookies",
+  },
+  {
+    id: "trust",
+    label: "Trust center",
+    state: "scaffold",
+    note: "Index of method, security, SLA and gates.",
+    href: "/trust",
+  },
+  {
+    id: "credits",
+    label: "Credits",
+    state: "scaffold",
+    note: "House and stack lines. No fake partners.",
+    href: "/credits",
+  },
+  {
+    id: "manifesto",
+    label: "Manifesto",
+    state: "scaffold",
+    note: "Principles only. No coverage invent.",
+    href: "/manifesto",
+  },
 ];
 
 export function surfacesByState(state: SystemSurface["state"]) {

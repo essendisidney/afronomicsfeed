@@ -46,6 +46,14 @@ export const analyticsEvents = [
   "sdk_open",
   "template_view",
   "support_open",
+  "newsletter_view",
+  "careers_open",
+  "contact_open",
+  "faq_open",
+  "cookies_open",
+  "trust_open",
+  "credits_open",
+  "manifesto_open",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

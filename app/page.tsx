@@ -336,6 +336,38 @@ export default function HomePage() {
               Support
             </Link>
             {" · "}
+            <Link href="/newsletters" className="text-forest underline underline-offset-2">
+              Newsletters
+            </Link>
+            {" · "}
+            <Link href="/careers" className="text-forest underline underline-offset-2">
+              Careers
+            </Link>
+            {" · "}
+            <Link href="/contact" className="text-forest underline underline-offset-2">
+              Contact
+            </Link>
+            {" · "}
+            <Link href="/faq" className="text-forest underline underline-offset-2">
+              FAQ
+            </Link>
+            {" · "}
+            <Link href="/legal/cookies" className="text-forest underline underline-offset-2">
+              Cookies
+            </Link>
+            {" · "}
+            <Link href="/trust" className="text-forest underline underline-offset-2">
+              Trust
+            </Link>
+            {" · "}
+            <Link href="/credits" className="text-forest underline underline-offset-2">
+              Credits
+            </Link>
+            {" · "}
+            <Link href="/manifesto" className="text-forest underline underline-offset-2">
+              Manifesto
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

@@ -17,6 +17,7 @@ import { cities } from "@/lib/demo/cities";
 import { investors } from "@/lib/demo/investors";
 import { personCountryParams, personRoles } from "@/lib/demo/people";
 import { graphDesks } from "@/lib/demo/graph";
+import { regionHubs } from "@/lib/demo/regions";
 import { articleHref } from "@/lib/format";
 import { site } from "@/lib/site";
 import { institutions, topics } from "@/lib/taxonomy";
@@ -93,6 +94,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/partners",
     "/coverage",
     "/glossary",
+    "/onboarding",
+    "/webhooks",
+    "/regions",
+    "/runbooks",
+    "/layers",
+    "/press",
+    "/golive",
+    "/social",
+    "/embeds",
+    "/security",
+    "/integrations",
+    "/sla",
+    "/brand",
+    "/roadmap",
+    "/accessibility",
+    "/sdk",
   ];
 
   const now = new Date();
@@ -240,6 +257,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...graphDesks.map((desk) => ({
       url: `${site.url}/graph/${desk.slug}`,
+      lastModified: now,
+    })),
+    ...regionHubs().map((hub) => ({
+      url: `${site.url}/regions/${hub.slug}`,
       lastModified: now,
     })),
   ];

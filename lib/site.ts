@@ -15,6 +15,8 @@ export const site = {
   cmaUrl: "https://www.cma.or.ke/",
   sasraUrl: "https://www.sasra.go.ke/",
   iraUrl: "https://www.ira.go.ke/",
+  /** LinkedIn company page. */
+  linkedinUrl: "https://www.linkedin.com/company/afronomicsfeed/",
 } as const;
 
 export const nav = [
@@ -76,6 +78,22 @@ export const footerNav = [
   { href: "/partners", label: "Partners" },
   { href: "/coverage", label: "Coverage" },
   { href: "/glossary", label: "Glossary" },
+  { href: "/onboarding", label: "Onboarding" },
+  { href: "/webhooks", label: "Webhooks" },
+  { href: "/regions", label: "Regions" },
+  { href: "/runbooks", label: "Runbooks" },
+  { href: "/layers", label: "Layers" },
+  { href: "/press", label: "Press" },
+  { href: "/golive", label: "Go live" },
+  { href: "/social", label: "Social" },
+  { href: "/embeds", label: "Embeds" },
+  { href: "/security", label: "Security" },
+  { href: "/integrations", label: "Integrations" },
+  { href: "/sla", label: "SLA" },
+  { href: "/brand", label: "Brand" },
+  { href: "/roadmap", label: "Roadmap" },
+  { href: "/accessibility", label: "Accessibility" },
+  { href: "/sdk", label: "SDK" },
   { href: "/industries", label: "Industries" },
   { href: "/agencies", label: "Agencies" },
   { href: "/cities", label: "Cities" },

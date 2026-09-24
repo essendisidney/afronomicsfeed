@@ -21,6 +21,10 @@ export default function CountriesPage() {
           Compare featured desks
         </Link>
         {" · "}
+        <Link href="/regions" className="text-forest underline underline-offset-2">
+          Regions
+        </Link>
+        {" · "}
         <Link href="/sources" className="text-forest underline underline-offset-2">
           Source registry
         </Link>

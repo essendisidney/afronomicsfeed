@@ -78,9 +78,41 @@ export default function DevelopersPage() {
         <Link href="/feeds" className="text-forest underline underline-offset-2">
           /feeds
         </Link>
+        . Webhooks:{" "}
+        <Link href="/webhooks" className="text-forest underline underline-offset-2">
+          /webhooks
+        </Link>
+        . Embeds:{" "}
+        <Link href="/embeds" className="text-forest underline underline-offset-2">
+          /embeds
+        </Link>
+        . Security:{" "}
+        <Link href="/security" className="text-forest underline underline-offset-2">
+          /security
+        </Link>
+        . Integrations:{" "}
+        <Link href="/integrations" className="text-forest underline underline-offset-2">
+          /integrations
+        </Link>
+        . SLA:{" "}
+        <Link href="/sla" className="text-forest underline underline-offset-2">
+          /sla
+        </Link>
+        . Roadmap:{" "}
+        <Link href="/roadmap" className="text-forest underline underline-offset-2">
+          /roadmap
+        </Link>
+        . SDK:{" "}
+        <Link href="/sdk" className="text-forest underline underline-offset-2">
+          /sdk
+        </Link>
         . Status:{" "}
         <Link href="/status" className="text-forest underline underline-offset-2">
           /status
+        </Link>
+        . Onboarding:{" "}
+        <Link href="/onboarding" className="text-forest underline underline-offset-2">
+          /onboarding
         </Link>
         .
       </p>

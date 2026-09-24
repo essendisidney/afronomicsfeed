@@ -59,6 +59,22 @@ const side = [
   { href: "/partners", label: "Partners" },
   { href: "/coverage", label: "Coverage" },
   { href: "/glossary", label: "Glossary" },
+  { href: "/onboarding", label: "Onboarding" },
+  { href: "/webhooks", label: "Webhooks" },
+  { href: "/regions", label: "Regions" },
+  { href: "/runbooks", label: "Runbooks" },
+  { href: "/layers", label: "Layers" },
+  { href: "/press", label: "Press" },
+  { href: "/golive", label: "Go live" },
+  { href: "/social", label: "Social" },
+  { href: "/embeds", label: "Embeds" },
+  { href: "/security", label: "Security" },
+  { href: "/integrations", label: "Integrations" },
+  { href: "/sla", label: "SLA" },
+  { href: "/brand", label: "Brand" },
+  { href: "/roadmap", label: "Roadmap" },
+  { href: "/accessibility", label: "Accessibility" },
+  { href: "/sdk", label: "SDK" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -451,6 +467,86 @@ export default function TerminalPage() {
               <li>
                 <Link href="/glossary" className="hover:text-forest">
                   Glossary
+                </Link>
+              </li>
+              <li>
+                <Link href="/onboarding" className="hover:text-forest">
+                  Onboarding
+                </Link>
+              </li>
+              <li>
+                <Link href="/webhooks" className="hover:text-forest">
+                  Webhooks
+                </Link>
+              </li>
+              <li>
+                <Link href="/regions" className="hover:text-forest">
+                  Regions
+                </Link>
+              </li>
+              <li>
+                <Link href="/runbooks" className="hover:text-forest">
+                  Runbooks
+                </Link>
+              </li>
+              <li>
+                <Link href="/layers" className="hover:text-forest">
+                  Layers
+                </Link>
+              </li>
+              <li>
+                <Link href="/press" className="hover:text-forest">
+                  Press
+                </Link>
+              </li>
+              <li>
+                <Link href="/golive" className="hover:text-forest">
+                  Go live
+                </Link>
+              </li>
+              <li>
+                <Link href="/social" className="hover:text-forest">
+                  Social
+                </Link>
+              </li>
+              <li>
+                <Link href="/embeds" className="hover:text-forest">
+                  Embeds
+                </Link>
+              </li>
+              <li>
+                <Link href="/security" className="hover:text-forest">
+                  Security
+                </Link>
+              </li>
+              <li>
+                <Link href="/integrations" className="hover:text-forest">
+                  Integrations
+                </Link>
+              </li>
+              <li>
+                <Link href="/sla" className="hover:text-forest">
+                  SLA
+                </Link>
+              </li>
+              <li>
+                <Link href="/brand" className="hover:text-forest">
+                  Brand
+                </Link>
+              </li>
+              <li>
+                <Link href="/roadmap" className="hover:text-forest">
+                  Roadmap
+                </Link>
+              </li>
+              <li>
+                <Link href="/accessibility" className="hover:text-forest">
+                  Accessibility
+                </Link>
+              </li>
+              <li>
+                <Link href="/sdk" className="hover:text-forest">
+                  SDK
                 </Link>
               </li>
               <li>

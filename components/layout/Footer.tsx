@@ -17,6 +17,16 @@ export function Footer() {
             >
               {site.houseCredit}
             </a>
+            {site.linkedinUrl ? (
+              <a
+                href={site.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted no-underline hover:text-forest"
+              >
+                LinkedIn
+              </a>
+            ) : null}
             <p className="mt-4 max-w-sm text-sm leading-6 text-ink-soft">{site.promise}</p>
             <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">{site.line}</p>
           </div>
@@ -60,6 +70,23 @@ export function Footer() {
                 <a href="/rss.xml" className="text-ink-soft hover:text-forest">
                   RSS
                 </a>
+              </li>
+              {site.linkedinUrl ? (
+                <li>
+                  <a
+                    href={site.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ink-soft hover:text-forest"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+              ) : null}
+              <li>
+                <Link href="/social" className="text-ink-soft hover:text-forest">
+                  Social desk
+                </Link>
               </li>
             </ul>
           </div>

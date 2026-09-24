@@ -48,6 +48,14 @@ export default function FeedsPage() {
           Pricing
         </Link>
         {" · "}
+        <Link href="/webhooks" className="text-forest underline underline-offset-2">
+          Webhooks
+        </Link>
+        {" · "}
+        <Link href="/embeds" className="text-forest underline underline-offset-2">
+          Embeds
+        </Link>
+        {" · "}
         <Link href="/status" className="text-forest underline underline-offset-2">
           Status
         </Link>

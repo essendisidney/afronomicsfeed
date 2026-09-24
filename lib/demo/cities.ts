@@ -34,6 +34,12 @@ export const cities: City[] = [
   { slug: "kinshasa", name: "Kinshasa", countrySlug: "dr-congo", role: "Capital" },
   { slug: "tunis", name: "Tunis", countrySlug: "tunisia", role: "Capital" },
   { slug: "algiers", name: "Algiers", countrySlug: "algeria", role: "Capital" },
+  { slug: "gaborone", name: "Gaborone", countrySlug: "botswana", role: "Capital" },
+  { slug: "douala", name: "Douala", countrySlug: "cameroon", role: "Commercial / port" },
+  { slug: "windhoek", name: "Windhoek", countrySlug: "namibia", role: "Capital" },
+  { slug: "tripoli", name: "Tripoli", countrySlug: "libya", role: "Capital" },
+  { slug: "harare", name: "Harare", countrySlug: "zimbabwe", role: "Capital" },
+  { slug: "port-louis", name: "Port Louis", countrySlug: "mauritius", role: "Capital / finance" },
 ];
 
 export function getCity(slug: string) {

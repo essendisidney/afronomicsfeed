@@ -49,6 +49,10 @@ export default function StatusPage() {
           Feeds
         </Link>
         {" · "}
+        <Link href="/sla" className="text-forest underline underline-offset-2">
+          SLA
+        </Link>
+        {" · "}
         <Link href="/about" className="text-forest underline underline-offset-2">
           About
         </Link>

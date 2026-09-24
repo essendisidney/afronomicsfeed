@@ -35,6 +35,10 @@ export default function ChangelogPage() {
           Status
         </Link>
         {" · "}
+        <Link href="/roadmap" className="text-forest underline underline-offset-2">
+          Roadmap
+        </Link>
+        {" · "}
         <Link href="/method/registry" className="text-forest underline underline-offset-2">
           Method registry
         </Link>

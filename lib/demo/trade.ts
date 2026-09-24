@@ -31,6 +31,22 @@ export const corridors = [
     countrySlugs: ["mozambique", "south-africa"],
     note: "No invented trade volumes.",
   },
+  {
+    slug: "trans-kalahari",
+    name: "Trans-Kalahari Corridor",
+    geography: "Walvis Bay — Windhoek — Gaborone — Johannesburg",
+    modes: ["Port", "Road"],
+    countrySlugs: ["namibia", "botswana", "south-africa"],
+    note: "Volumes and border dwell stay blank until sourced.",
+  },
+  {
+    slug: "beira-corridor",
+    name: "Beira Corridor",
+    geography: "Beira — Harare hinterland",
+    modes: ["Port", "Road", "Rail"],
+    countrySlugs: ["mozambique", "zimbabwe"],
+    note: "No invented throughput or dwell times.",
+  },
 ] as const;
 
 export type Port = {
@@ -56,8 +72,8 @@ export const ports: Port[] = [
   { slug: "abidjan", name: "Abidjan", countrySlug: "cote-divoire", waters: "Atlantic" },
   { slug: "dakar", name: "Dakar", countrySlug: "senegal", waters: "Atlantic" },
   { slug: "lome", name: "Lomé", countrySlug: "togo", waters: "Atlantic" },
-  { slug: "walvis-bay", name: "Walvis Bay", countrySlug: "namibia", waters: "Atlantic" },
-  { slug: "beira", name: "Beira", countrySlug: "mozambique", waters: "Indian Ocean" },
+  { slug: "walvis-bay", name: "Walvis Bay", countrySlug: "namibia", waters: "Atlantic", corridorSlug: "trans-kalahari" },
+  { slug: "beira", name: "Beira", countrySlug: "mozambique", waters: "Indian Ocean", corridorSlug: "beira-corridor" },
 ];
 
 export const tradeRegimes = [

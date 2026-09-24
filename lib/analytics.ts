@@ -28,6 +28,22 @@ export const analyticsEvents = [
   "partner_view",
   "coverage_view",
   "glossary_open",
+  "onboarding_open",
+  "webhook_view",
+  "region_open",
+  "runbook_open",
+  "layers_open",
+  "press_open",
+  "golive_open",
+  "social_open",
+  "embed_view",
+  "security_open",
+  "integration_view",
+  "sla_open",
+  "brand_open",
+  "roadmap_open",
+  "a11y_open",
+  "sdk_open",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

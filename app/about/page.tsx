@@ -49,7 +49,15 @@ export default function AboutPage() {
           Facts / Analysis / Opinion labels, citations, as-of stamps, and a public{" "}
           <Link href="/corrections">corrections log</Link>. The house standard is on{" "}
           <Link href="/method">method</Link>. The Kenya file is in the{" "}
-          <Link href="/archive">archive</Link>.
+          <Link href="/archive">archive</Link>. Media kit:{" "}
+          <Link href="/press">press</Link>
+          {" · "}
+          <Link href="/brand">brand</Link>. Layer map:{" "}
+          <Link href="/layers">layers</Link>. LinkedIn:{" "}
+          <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer">
+            AfronomicsFeed
+          </a>
+          .
         </p>
 
         <h2>House</h2>

@@ -264,6 +264,70 @@ export default function HomePage() {
               Glossary
             </Link>
             {" · "}
+            <Link href="/onboarding" className="text-forest underline underline-offset-2">
+              Onboarding
+            </Link>
+            {" · "}
+            <Link href="/webhooks" className="text-forest underline underline-offset-2">
+              Webhooks
+            </Link>
+            {" · "}
+            <Link href="/regions" className="text-forest underline underline-offset-2">
+              Regions
+            </Link>
+            {" · "}
+            <Link href="/runbooks" className="text-forest underline underline-offset-2">
+              Runbooks
+            </Link>
+            {" · "}
+            <Link href="/layers" className="text-forest underline underline-offset-2">
+              Layers
+            </Link>
+            {" · "}
+            <Link href="/press" className="text-forest underline underline-offset-2">
+              Press
+            </Link>
+            {" · "}
+            <Link href="/golive" className="text-forest underline underline-offset-2">
+              Go live
+            </Link>
+            {" · "}
+            <Link href="/social" className="text-forest underline underline-offset-2">
+              Social
+            </Link>
+            {" · "}
+            <Link href="/embeds" className="text-forest underline underline-offset-2">
+              Embeds
+            </Link>
+            {" · "}
+            <Link href="/security" className="text-forest underline underline-offset-2">
+              Security
+            </Link>
+            {" · "}
+            <Link href="/integrations" className="text-forest underline underline-offset-2">
+              Integrations
+            </Link>
+            {" · "}
+            <Link href="/sla" className="text-forest underline underline-offset-2">
+              SLA
+            </Link>
+            {" · "}
+            <Link href="/brand" className="text-forest underline underline-offset-2">
+              Brand
+            </Link>
+            {" · "}
+            <Link href="/roadmap" className="text-forest underline underline-offset-2">
+              Roadmap
+            </Link>
+            {" · "}
+            <Link href="/accessibility" className="text-forest underline underline-offset-2">
+              Accessibility
+            </Link>
+            {" · "}
+            <Link href="/sdk" className="text-forest underline underline-offset-2">
+              SDK
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

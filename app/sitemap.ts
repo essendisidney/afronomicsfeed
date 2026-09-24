@@ -120,6 +120,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/trust",
     "/credits",
     "/manifesto",
+    "/imprint",
   ];
 
   const now = new Date();

@@ -53,6 +53,8 @@ export const cities: City[] = [
   { slug: "nouakchott", name: "Nouakchott", countrySlug: "mauritania", role: "Capital" },
   { slug: "banjul", name: "Banjul", countrySlug: "gambia", role: "Capital" },
   { slug: "ndjamena", name: "N’Djamena", countrySlug: "chad", role: "Capital" },
+  { slug: "antananarivo", name: "Antananarivo", countrySlug: "madagascar", role: "Capital" },
+  { slug: "brazzaville", name: "Brazzaville", countrySlug: "congo", role: "Capital" },
 ];
 
 export function getCity(slug: string) {

@@ -368,6 +368,10 @@ export default function HomePage() {
               Manifesto
             </Link>
             {" · "}
+            <Link href="/imprint" className="text-forest underline underline-offset-2">
+              Imprint
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

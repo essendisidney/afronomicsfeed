@@ -459,6 +459,12 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Product",
       summary: "Empty until sourced. Cite or refuse.",
     },
+    {
+      href: "/imprint",
+      title: "Imprint",
+      kicker: "Legal",
+      summary: "Publisher notice. Empty legal fields stay empty.",
+    },
     ...navHits,
   ];
 }

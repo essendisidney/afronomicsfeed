@@ -85,6 +85,7 @@ const side = [
   { href: "/trust", label: "Trust" },
   { href: "/credits", label: "Credits" },
   { href: "/manifesto", label: "Manifesto" },
+  { href: "/imprint", label: "Imprint" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -607,6 +608,11 @@ export default function TerminalPage() {
               <li>
                 <Link href="/manifesto" className="hover:text-forest">
                   Manifesto
+                </Link>
+              </li>
+              <li>
+                <Link href="/imprint" className="hover:text-forest">
+                  Imprint
                 </Link>
               </li>
               <li>

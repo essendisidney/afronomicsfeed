@@ -302,6 +302,13 @@ export const systemSurfaces: SystemSurface[] = [
     note: "Principles only. No coverage invent.",
     href: "/manifesto",
   },
+  {
+    id: "imprint",
+    label: "Imprint",
+    state: "scaffold",
+    note: "Publisher notice. Address fields empty.",
+    href: "/imprint",
+  },
 ];
 
 export function surfacesByState(state: SystemSurface["state"]) {

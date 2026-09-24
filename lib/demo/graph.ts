@@ -231,6 +231,14 @@ export const graphNodes: GraphNode[] = [
   { id: "xaf-td", label: "XAF · TD", kind: "currency", href: "/countries/chad" },
   { id: "ndjamena", label: "N’Djamena", kind: "city", href: "/cities/ndjamena" },
   { id: "td-oil", label: "Oil · Chad", kind: "industry", href: "/industries/oil/chad" },
+  { id: "madagascar", label: "Madagascar", kind: "country", href: "/countries/madagascar" },
+  { id: "mga", label: "MGA", kind: "currency", href: "/countries/madagascar" },
+  { id: "antananarivo", label: "Antananarivo", kind: "city", href: "/cities/antananarivo" },
+  { id: "mg-agriculture", label: "Agriculture · Madagascar", kind: "industry", href: "/industries/agriculture/madagascar" },
+  { id: "congo", label: "Congo", kind: "country", href: "/countries/congo" },
+  { id: "xaf-cg", label: "XAF · CG", kind: "currency", href: "/countries/congo" },
+  { id: "brazzaville", label: "Brazzaville", kind: "city", href: "/cities/brazzaville" },
+  { id: "cg-oil", label: "Oil · Congo", kind: "industry", href: "/industries/oil/congo" },
 ];
 
 export const graphEdges: GraphEdge[] = [
@@ -1899,6 +1907,60 @@ export const graphEdges: GraphEdge[] = [
     asOf: null,
     status: "editorial",
   },
+  {
+    id: "mg-mga",
+    from: "madagascar",
+    rel: "currency",
+    to: "mga",
+    source: "Editorial scaffold",
+    asOf: null,
+    status: "editorial",
+  },
+  {
+    id: "mg-antananarivo",
+    from: "madagascar",
+    rel: "capital desk",
+    to: "antananarivo",
+    source: "City file",
+    asOf: null,
+    status: "editorial",
+  },
+  {
+    id: "mg-agriculture",
+    from: "madagascar",
+    rel: "sector",
+    to: "mg-agriculture",
+    source: "Country sector tag",
+    asOf: null,
+    status: "editorial",
+  },
+  {
+    id: "cg-xaf",
+    from: "congo",
+    rel: "currency",
+    to: "xaf-cg",
+    source: "Editorial scaffold",
+    asOf: null,
+    status: "editorial",
+  },
+  {
+    id: "cg-brazzaville",
+    from: "congo",
+    rel: "capital desk",
+    to: "brazzaville",
+    source: "City file",
+    asOf: null,
+    status: "editorial",
+  },
+  {
+    id: "cg-oil",
+    from: "congo",
+    rel: "sector",
+    to: "cg-oil",
+    source: "Country sector tag",
+    asOf: null,
+    status: "editorial",
+  },
 ];
 
 export const graphDesks = [
@@ -2194,6 +2256,18 @@ export const graphDesks = [
     label: "Chad desk",
     lede: "N’Djamena and oil scaffolds. No invented prints.",
     nodeIds: ["chad", "xaf-td", "ndjamena", "td-oil"],
+  },
+  {
+    slug: "madagascar",
+    label: "Madagascar desk",
+    lede: "Antananarivo and agriculture scaffolds. FX cells blank until cited.",
+    nodeIds: ["madagascar", "mga", "antananarivo", "mg-agriculture"],
+  },
+  {
+    slug: "congo",
+    label: "Congo desk",
+    lede: "Brazzaville and oil scaffolds. No invented prints.",
+    nodeIds: ["congo", "xaf-cg", "brazzaville", "cg-oil"],
   },
 ] as const;
 

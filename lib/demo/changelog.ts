@@ -202,6 +202,14 @@ export const changelogEntries: ChangelogEntry[] = [
     hrefs: ["/manifesto", "/graph/sierra-leone", "/graph/mauritania", "/graph/gambia", "/graph/chad"],
   },
   {
+    slug: "phase-42",
+    title: "Imprint + Madagascar / Congo desks",
+    phase: "42",
+    status: "draft",
+    lede: "Publisher imprint with empty counsel fields; Madagascar and Congo graph desks.",
+    hrefs: ["/imprint", "/graph/madagascar", "/graph/congo"],
+  },
+  {
     slug: "phase-17",
     title: "Feeds, status, UG/TZ desks",
     phase: "17",

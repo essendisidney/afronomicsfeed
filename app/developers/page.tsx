@@ -106,6 +106,10 @@ export default function DevelopersPage() {
         <Link href="/sdk" className="text-forest underline underline-offset-2">
           /sdk
         </Link>
+        . Support:{" "}
+        <Link href="/support" className="text-forest underline underline-offset-2">
+          /support
+        </Link>
         . Status:{" "}
         <Link href="/status" className="text-forest underline underline-offset-2">
           /status

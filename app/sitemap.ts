@@ -110,6 +110,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/roadmap",
     "/accessibility",
     "/sdk",
+    "/templates",
+    "/support",
   ];
 
   const now = new Date();

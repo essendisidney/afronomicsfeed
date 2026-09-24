@@ -399,6 +399,18 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Developers",
       summary: "Client catalogue. No package published.",
     },
+    {
+      href: "/templates",
+      title: "Templates",
+      kicker: "Desk",
+      summary: "Brief and pack outlines. No fake fills.",
+    },
+    {
+      href: "/support",
+      title: "Support",
+      kicker: "Help",
+      summary: "Open doors only. No fake ticket queue.",
+    },
     ...navHits,
   ];
 }

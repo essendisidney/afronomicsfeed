@@ -130,6 +130,14 @@ export const changelogEntries: ChangelogEntry[] = [
     hrefs: ["/sdk", "/graph/mauritius"],
   },
   {
+    slug: "phase-33",
+    title: "Templates, support, Djibouti desk",
+    phase: "33",
+    status: "draft",
+    lede: "Desk template catalogue, honest support doors, Djibouti ports graph desk.",
+    hrefs: ["/templates", "/support", "/graph/djibouti"],
+  },
+  {
     slug: "phase-17",
     title: "Feeds, status, UG/TZ desks",
     phase: "17",

@@ -75,6 +75,8 @@ const side = [
   { href: "/roadmap", label: "Roadmap" },
   { href: "/accessibility", label: "Accessibility" },
   { href: "/sdk", label: "SDK" },
+  { href: "/templates", label: "Templates" },
+  { href: "/support", label: "Support" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -547,6 +549,16 @@ export default function TerminalPage() {
               <li>
                 <Link href="/sdk" className="hover:text-forest">
                   SDK
+                </Link>
+              </li>
+              <li>
+                <Link href="/templates" className="hover:text-forest">
+                  Templates
+                </Link>
+              </li>
+              <li>
+                <Link href="/support" className="hover:text-forest">
+                  Support
                 </Link>
               </li>
               <li>

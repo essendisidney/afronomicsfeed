@@ -170,6 +170,11 @@ export const graphNodes: GraphNode[] = [
   { id: "port-louis", label: "Port Louis", kind: "city", href: "/cities/port-louis" },
   { id: "mu-finance", label: "Finance · Mauritius", kind: "industry", href: "/industries/finance/mauritius" },
   { id: "mu-services", label: "Services · Mauritius", kind: "industry", href: "/industries/services/mauritius" },
+  { id: "djibouti", label: "Djibouti", kind: "country", href: "/countries/djibouti" },
+  { id: "djf", label: "DJF", kind: "currency", href: "/countries/djibouti" },
+  { id: "djibouti-city", label: "Djibouti City", kind: "city", href: "/cities/djibouti-city" },
+  { id: "dj-ports", label: "Ports · Djibouti", kind: "industry", href: "/industries/logistics/djibouti" },
+  { id: "dj-logistics", label: "Logistics · Djibouti", kind: "industry", href: "/industries/logistics/djibouti" },
 ];
 
 export const graphEdges: GraphEdge[] = [
@@ -1415,6 +1420,42 @@ export const graphEdges: GraphEdge[] = [
     asOf: null,
     status: "editorial",
   },
+  {
+    id: "dj-djf",
+    from: "djibouti",
+    rel: "currency",
+    to: "djf",
+    source: "Editorial scaffold",
+    asOf: null,
+    status: "editorial",
+  },
+  {
+    id: "dj-city",
+    from: "djibouti",
+    rel: "capital desk",
+    to: "djibouti-city",
+    source: "City file",
+    asOf: null,
+    status: "editorial",
+  },
+  {
+    id: "dj-ports",
+    from: "djibouti",
+    rel: "sector",
+    to: "dj-ports",
+    source: "Country sector tag",
+    asOf: null,
+    status: "editorial",
+  },
+  {
+    id: "dj-logistics",
+    from: "djibouti",
+    rel: "sector",
+    to: "dj-logistics",
+    source: "Country sector tag",
+    asOf: null,
+    status: "editorial",
+  },
 ];
 
 export const graphDesks = [
@@ -1626,6 +1667,12 @@ export const graphDesks = [
     label: "Mauritius desk",
     lede: "Port Louis, finance and services scaffolds. FX cells blank until cited.",
     nodeIds: ["mauritius", "mur", "port-louis", "mu-finance", "mu-services"],
+  },
+  {
+    slug: "djibouti",
+    label: "Djibouti desk",
+    lede: "Port and logistics scaffolds. Volumes blank until sourced.",
+    nodeIds: ["djibouti", "djf", "djibouti-city", "dj-ports", "dj-logistics"],
   },
 ] as const;
 

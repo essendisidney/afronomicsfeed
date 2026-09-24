@@ -328,6 +328,14 @@ export default function HomePage() {
               SDK
             </Link>
             {" · "}
+            <Link href="/templates" className="text-forest underline underline-offset-2">
+              Templates
+            </Link>
+            {" · "}
+            <Link href="/support" className="text-forest underline underline-offset-2">
+              Support
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

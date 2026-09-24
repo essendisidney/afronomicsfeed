@@ -94,6 +94,8 @@ export const footerNav = [
   { href: "/roadmap", label: "Roadmap" },
   { href: "/accessibility", label: "Accessibility" },
   { href: "/sdk", label: "SDK" },
+  { href: "/templates", label: "Templates" },
+  { href: "/support", label: "Support" },
   { href: "/industries", label: "Industries" },
   { href: "/agencies", label: "Agencies" },
   { href: "/cities", label: "Cities" },

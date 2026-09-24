@@ -44,6 +44,8 @@ export const analyticsEvents = [
   "roadmap_open",
   "a11y_open",
   "sdk_open",
+  "template_view",
+  "support_open",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

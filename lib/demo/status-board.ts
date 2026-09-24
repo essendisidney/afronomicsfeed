@@ -232,6 +232,20 @@ export const systemSurfaces: SystemSurface[] = [
     note: "Catalogue only. No npm/PyPI publish.",
     href: "/sdk",
   },
+  {
+    id: "templates",
+    label: "Desk templates",
+    state: "scaffold",
+    note: "Outlines only. No minted fills.",
+    href: "/templates",
+  },
+  {
+    id: "support",
+    label: "Support doors",
+    state: "scaffold",
+    note: "Open pages linked. Ticket queue offline.",
+    href: "/support",
+  },
 ];
 
 export function surfacesByState(state: SystemSurface["state"]) {

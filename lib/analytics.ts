@@ -55,6 +55,12 @@ export const analyticsEvents = [
   "credits_open",
   "manifesto_open",
   "imprint_open",
+  "syndication_open",
+  "notices_open",
+  "languages_open",
+  "units_open",
+  "correspondents_open",
+  "citations_open",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

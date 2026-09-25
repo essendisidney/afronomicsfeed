@@ -43,7 +43,7 @@ NEWS → DATA → CONTEXT → SIGNALS → DECISIONS
 **Utility:** Search · Brief · Terminal · PRO  
 
 **Programmatic SEO:**  
-`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/ask/corpus`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`, `/graph/[desk]`, `/graph/resolve`, `/account`, `/account/usage`, `/watchlists`, `/alerts`, `/exports`, `/method/registry`, `/packs`, `/sources`, `/compare`, `/ingestion`, `/feeds`, `/status`, `/searches`, `/licensing`, `/notifications`, `/changelog`, `/audit`, `/reports`, `/calendar`, `/partners`, `/coverage`, `/glossary`, `/onboarding`, `/webhooks`, `/regions`, `/regions/[slug]`, `/runbooks`, `/layers`, `/press`, `/golive`, `/social`, `/embeds`, `/security`, `/integrations`, `/sla`, `/brand`, `/roadmap`, `/accessibility`, `/sdk`, `/templates`, `/support`, `/newsletters`, `/careers`, `/contact`, `/faq`, `/legal/cookies`, `/trust`, `/credits`, `/manifesto`, `/imprint`
+`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/ask/corpus`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`, `/graph/[desk]`, `/graph/resolve`, `/account`, `/account/usage`, `/watchlists`, `/alerts`, `/exports`, `/method/registry`, `/packs`, `/sources`, `/compare`, `/ingestion`, `/feeds`, `/status`, `/searches`, `/licensing`, `/notifications`, `/changelog`, `/audit`, `/reports`, `/calendar`, `/partners`, `/coverage`, `/glossary`, `/onboarding`, `/webhooks`, `/regions`, `/regions/[slug]`, `/runbooks`, `/layers`, `/press`, `/golive`, `/social`, `/embeds`, `/security`, `/integrations`, `/sla`, `/brand`, `/roadmap`, `/accessibility`, `/sdk`, `/templates`, `/support`, `/newsletters`, `/careers`, `/contact`, `/faq`, `/legal/cookies`, `/trust`, `/credits`, `/manifesto`, `/imprint`, `/syndication`, `/notices`, `/languages`, `/units`, `/correspondents`, `/citations`
 
 ---
 
@@ -126,6 +126,12 @@ RLS on from day one. Service role never in the client.
 | 40 | Credits + BF/GN/LR desks | **`/credits`; Burkina Faso, Guinea, Liberia graph desks** |
 | 41 | Manifesto + SL/MR/GM/TD desks | **`/manifesto`; Sierra Leone, Mauritania, Gambia, Chad desks** |
 | 42 | Imprint + Madagascar / Congo desks | **`/imprint`; Madagascar + Congo graph desks** |
+| 43 | Syndication + BI/CF/GQ desks | **`/syndication`; Burundi, CAR and Equatorial Guinea graph desks** |
+| 44 | Notices + CD/ST/SS desks | **`/notices`; DR Congo, São Tomé and Príncipe, and South Sudan graph desks** |
+| 45 | Languages + SD/ER/SO desks | **`/languages`; Sudan, Eritrea and Somalia graph desks** |
+| 46 | Units + CV/GW/KM desks | **`/units`; Cabo Verde, Guinea-Bissau and Comoros graph desks** |
+| 47 | Correspondents + SZ/LS desks | **`/correspondents`; Eswatini and Lesotho graph desks** |
+| 48 | Citations + Seychelles desk | **`/citations`; Seychelles graph desk. Country desks cover the full set** |
 
 The app stays runnable after every phase.
 
@@ -160,7 +166,7 @@ Editorial and sponsored surfaces stay visually separate. No sponsor inventory in
 
 ## 7. Analytics hooks (north star)
 
-Events to emit when analytics lands: `brief_open`, `country_view`, `signal_open`, `search`, `ask_query`, `watchlist_add`, `alert_subscribe`, `graph_open`, `pro_cta`, `export_csv`, `pack_open`, `usage_view`, `method_open`, `source_open`, `compare_open`, `ingestion_view`, `feed_open`, `status_view`, `search_save`, `licence_view`, `notification_pref`, `changelog_open`, `audit_view`, `report_open`, `calendar_open`, `partner_view`, `coverage_view`, `glossary_open`, `onboarding_open`, `webhook_view`, `region_open`, `runbook_open`, `layers_open`, `press_open`, `golive_open`, `social_open`, `embed_view`, `security_open`, `integration_view`, `sla_open`, `brand_open`, `roadmap_open`, `a11y_open`, `sdk_open`, `template_view`, `support_open`, `newsletter_view`, `careers_open`, `contact_open`, `faq_open`, `cookies_open`, `trust_open`, `credits_open`, `manifesto_open`, `imprint_open`.  
+Events to emit when analytics lands: `brief_open`, `country_view`, `signal_open`, `search`, `ask_query`, `watchlist_add`, `alert_subscribe`, `graph_open`, `pro_cta`, `export_csv`, `pack_open`, `usage_view`, `method_open`, `source_open`, `compare_open`, `ingestion_view`, `feed_open`, `status_view`, `search_save`, `licence_view`, `notification_pref`, `changelog_open`, `audit_view`, `report_open`, `calendar_open`, `partner_view`, `coverage_view`, `glossary_open`, `onboarding_open`, `webhook_view`, `region_open`, `runbook_open`, `layers_open`, `press_open`, `golive_open`, `social_open`, `embed_view`, `security_open`, `integration_view`, `sla_open`, `brand_open`, `roadmap_open`, `a11y_open`, `sdk_open`, `template_view`, `support_open`, `newsletter_view`, `careers_open`, `contact_open`, `faq_open`, `cookies_open`, `trust_open`, `credits_open`, `manifesto_open`, `imprint_open`, `syndication_open`, `notices_open`, `languages_open`, `units_open`, `correspondents_open`, `citations_open`.  
 Phase 1: typed event names in `lib/analytics.ts` only — no fake dashboards.
 
 ---

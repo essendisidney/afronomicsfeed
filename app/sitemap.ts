@@ -121,6 +121,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/credits",
     "/manifesto",
     "/imprint",
+    "/syndication",
+    "/notices",
+    "/languages",
+    "/units",
+    "/correspondents",
+    "/citations",
   ];
 
   const now = new Date();

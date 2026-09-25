@@ -309,6 +309,48 @@ export const systemSurfaces: SystemSurface[] = [
     note: "Publisher notice. Address fields empty.",
     href: "/imprint",
   },
+  {
+    id: "syndication",
+    label: "Syndication",
+    state: "scaffold",
+    note: "RSS, sitemap and status doors. No audience or uptime figures.",
+    href: "/syndication",
+  },
+  {
+    id: "notices",
+    label: "Notices",
+    state: "scaffold",
+    note: "Notice slots. Nothing posted.",
+    href: "/notices",
+  },
+  {
+    id: "languages",
+    label: "Languages",
+    state: "scaffold",
+    note: "English is live. Other editions empty.",
+    href: "/languages",
+  },
+  {
+    id: "units",
+    label: "Units",
+    state: "scaffold",
+    note: "Unit words only. No series stored.",
+    href: "/units",
+  },
+  {
+    id: "correspondents",
+    label: "Correspondents",
+    state: "scaffold",
+    note: "Seats only. No invented bylines.",
+    href: "/correspondents",
+  },
+  {
+    id: "citations",
+    label: "Citations",
+    state: "scaffold",
+    note: "Citation shapes. No sample print.",
+    href: "/citations",
+  },
 ];
 
 export function surfacesByState(state: SystemSurface["state"]) {

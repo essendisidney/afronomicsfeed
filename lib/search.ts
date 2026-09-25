@@ -465,6 +465,42 @@ export function buildSearchIndex(): SearchHit[] {
       kicker: "Legal",
       summary: "Publisher notice. Empty legal fields stay empty.",
     },
+    {
+      href: "/syndication",
+      title: "Syndication",
+      kicker: "Build",
+      summary: "RSS, sitemap and status doors. No invented audience.",
+    },
+    {
+      href: "/notices",
+      title: "Notices",
+      kicker: "Legal",
+      summary: "House notice slots. Nothing posted.",
+    },
+    {
+      href: "/languages",
+      title: "Languages",
+      kicker: "Product",
+      summary: "English is live. Other editions stay empty.",
+    },
+    {
+      href: "/units",
+      title: "Units",
+      kicker: "Data",
+      summary: "Unit words. No series stored.",
+    },
+    {
+      href: "/correspondents",
+      title: "Correspondents",
+      kicker: "Company",
+      summary: "Desk seats. No invented bylines.",
+    },
+    {
+      href: "/citations",
+      title: "Citations",
+      kicker: "Data",
+      summary: "Citation shapes. No sample print.",
+    },
     ...navHits,
   ];
 }

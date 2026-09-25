@@ -86,6 +86,12 @@ const side = [
   { href: "/credits", label: "Credits" },
   { href: "/manifesto", label: "Manifesto" },
   { href: "/imprint", label: "Imprint" },
+  { href: "/syndication", label: "Syndication" },
+  { href: "/notices", label: "Notices" },
+  { href: "/languages", label: "Languages" },
+  { href: "/units", label: "Units" },
+  { href: "/correspondents", label: "Correspondents" },
+  { href: "/citations", label: "Citations" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -613,6 +619,36 @@ export default function TerminalPage() {
               <li>
                 <Link href="/imprint" className="hover:text-forest">
                   Imprint
+                </Link>
+              </li>
+              <li>
+                <Link href="/syndication" className="hover:text-forest">
+                  Syndication
+                </Link>
+              </li>
+              <li>
+                <Link href="/notices" className="hover:text-forest">
+                  Notices
+                </Link>
+              </li>
+              <li>
+                <Link href="/languages" className="hover:text-forest">
+                  Languages
+                </Link>
+              </li>
+              <li>
+                <Link href="/units" className="hover:text-forest">
+                  Units
+                </Link>
+              </li>
+              <li>
+                <Link href="/correspondents" className="hover:text-forest">
+                  Correspondents
+                </Link>
+              </li>
+              <li>
+                <Link href="/citations" className="hover:text-forest">
+                  Citations
                 </Link>
               </li>
               <li>

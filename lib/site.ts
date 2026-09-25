@@ -64,6 +64,7 @@ export const footerGroups = [
       { href: "/coverage", label: "Coverage" },
       { href: "/roadmap", label: "Roadmap" },
       { href: "/faq", label: "FAQ" },
+      { href: "/languages", label: "Languages" },
     ],
   },
   {
@@ -91,6 +92,8 @@ export const footerGroups = [
       { href: "/cities", label: "Cities" },
       { href: "/agencies", label: "Agencies" },
       { href: "/glossary", label: "Glossary" },
+      { href: "/units", label: "Units" },
+      { href: "/citations", label: "Citations" },
     ],
   },
   {
@@ -99,6 +102,7 @@ export const footerGroups = [
       { href: "/developers", label: "Developers" },
       { href: "/sdk", label: "SDK" },
       { href: "/feeds", label: "Feeds" },
+      { href: "/syndication", label: "Syndication" },
       { href: "/webhooks", label: "Webhooks" },
       { href: "/embeds", label: "Embeds" },
       { href: "/integrations", label: "Integrations" },
@@ -117,6 +121,7 @@ export const footerGroups = [
       { href: "/brand", label: "Brand" },
       { href: "/partners", label: "Partners" },
       { href: "/careers", label: "Careers" },
+      { href: "/correspondents", label: "Correspondents" },
       { href: "/contact", label: "Contact" },
       { href: "/support", label: "Support" },
       { href: "/newsletters", label: "Newsletters" },
@@ -128,6 +133,7 @@ export const footerGroups = [
     title: "Legal",
     links: [
       { href: "/corrections", label: "Corrections" },
+      { href: "/notices", label: "Notices" },
       { href: "/legal/disclaimer", label: "Disclaimer" },
       { href: "/legal/privacy", label: "Privacy" },
       { href: "/legal/cookies", label: "Cookies" },

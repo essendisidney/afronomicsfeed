@@ -372,6 +372,30 @@ export default function HomePage() {
               Imprint
             </Link>
             {" · "}
+            <Link href="/syndication" className="text-forest underline underline-offset-2">
+              Syndication
+            </Link>
+            {" · "}
+            <Link href="/notices" className="text-forest underline underline-offset-2">
+              Notices
+            </Link>
+            {" · "}
+            <Link href="/languages" className="text-forest underline underline-offset-2">
+              Languages
+            </Link>
+            {" · "}
+            <Link href="/units" className="text-forest underline underline-offset-2">
+              Units
+            </Link>
+            {" · "}
+            <Link href="/correspondents" className="text-forest underline underline-offset-2">
+              Correspondents
+            </Link>
+            {" · "}
+            <Link href="/citations" className="text-forest underline underline-offset-2">
+              Citations
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

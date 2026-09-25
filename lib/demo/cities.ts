@@ -55,6 +55,20 @@ export const cities: City[] = [
   { slug: "ndjamena", name: "N’Djamena", countrySlug: "chad", role: "Capital" },
   { slug: "antananarivo", name: "Antananarivo", countrySlug: "madagascar", role: "Capital" },
   { slug: "brazzaville", name: "Brazzaville", countrySlug: "congo", role: "Capital" },
+  { slug: "bujumbura", name: "Bujumbura", countrySlug: "burundi", role: "Commercial capital" },
+  { slug: "bangui", name: "Bangui", countrySlug: "central-african-republic", role: "Capital" },
+  { slug: "malabo", name: "Malabo", countrySlug: "equatorial-guinea", role: "Capital" },
+  { slug: "sao-tome", name: "São Tomé", countrySlug: "sao-tome-and-principe", role: "Capital" },
+  { slug: "juba", name: "Juba", countrySlug: "south-sudan", role: "Capital" },
+  { slug: "khartoum", name: "Khartoum", countrySlug: "sudan", role: "Capital" },
+  { slug: "asmara", name: "Asmara", countrySlug: "eritrea", role: "Capital" },
+  { slug: "mogadishu", name: "Mogadishu", countrySlug: "somalia", role: "Capital" },
+  { slug: "praia", name: "Praia", countrySlug: "cabo-verde", role: "Capital" },
+  { slug: "bissau", name: "Bissau", countrySlug: "guinea-bissau", role: "Capital" },
+  { slug: "moroni", name: "Moroni", countrySlug: "comoros", role: "Capital" },
+  { slug: "mbabane", name: "Mbabane", countrySlug: "eswatini", role: "Administrative capital" },
+  { slug: "maseru", name: "Maseru", countrySlug: "lesotho", role: "Capital" },
+  { slug: "victoria", name: "Victoria", countrySlug: "seychelles", role: "Capital" },
 ];
 
 export function getCity(slug: string) {

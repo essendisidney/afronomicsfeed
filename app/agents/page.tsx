@@ -22,7 +22,7 @@ export default async function AgentsPage() {
       crumbs={[{ href: "/", label: "Home" }, { label: "Agents" }]}
       kicker="Agents"
       title="The desk reads the publisher"
-      lede="Four agents keep the desk current. The prints agent stores a number only when World Bank Open Data returns a finite value and a year. Price, flow, dwell and the policy rate stay empty."
+      lede="Three agents keep the desk current. The prints agent stores a number only when World Bank Open Data returns a finite value and a year. Price, flow, dwell and the policy rate stay empty."
     >
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="border border-rule px-4 py-3">

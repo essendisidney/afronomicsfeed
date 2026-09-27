@@ -2,8 +2,8 @@
 -- Observations are append-only. Model output never writes verified facts.
 -- Apply on a dedicated Afronomics Supabase project. Service role stays server-side.
 
-create extension if not exists pgcrypto;
-create extension if not exists vector;
+create extension if not exists pgcrypto with schema extensions;
+create extension if not exists vector with schema extensions;
 
 do $$ begin
   create type data_status as enum (
@@ -373,7 +373,7 @@ create table if not exists public.document_chunks (
   document_id uuid not null references public.documents (id) on delete cascade,
   chunk_index int not null,
   content text not null,
-  embedding vector(1536)
+  embedding extensions.vector(1536)
 );
 
 create table if not exists public.citations (
@@ -436,7 +436,7 @@ create index if not exists document_chunks_doc_idx on public.document_chunks (do
 do $$ begin
   create index document_chunks_embedding_idx
     on public.document_chunks
-    using hnsw (embedding vector_cosine_ops);
+    using hnsw (embedding extensions.vector_cosine_ops);
 exception when undefined_object then null;
 end $$;
 
@@ -481,6 +481,7 @@ alter table public.citations enable row level security;
 alter table public.newsletters enable row level security;
 alter table public.newsletter_subscribers enable row level security;
 alter table public.api_keys enable row level security;
+-- No policies: only the service role can read usage and audit rows.
 alter table public.api_usage enable row level security;
 alter table public.audit_logs enable row level security;
 

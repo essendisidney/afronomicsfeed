@@ -24,8 +24,8 @@ export const goLiveGates: GoLiveGate[] = [
     id: "observation-store",
     layer: "store",
     label: "Append-only observation store",
-    status: "blocked",
-    lede: "No database writes for prints. SQL migration is stub only.",
+    status: "partial",
+    lede: "Core schema is applied. Reference rows are loaded: countries, corridors, the graph, and the published briefs. Observation and price tables are still empty. Nothing writes a print yet.",
     href: "/ingestion",
   },
   {

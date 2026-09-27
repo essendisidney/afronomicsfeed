@@ -92,6 +92,61 @@ const side = [
   { href: "/units", label: "Units" },
   { href: "/correspondents", label: "Correspondents" },
   { href: "/citations", label: "Citations" },
+  { href: "/corridors", label: "Corridors" },
+  { href: "/identifiers", label: "Identifiers" },
+  { href: "/series", label: "Series" },
+  { href: "/revisions", label: "Revisions" },
+  { href: "/classifications", label: "Classifications" },
+  { href: "/releases", label: "Releases" },
+  { href: "/datelines", label: "Datelines" },
+  { href: "/borders", label: "Borders" },
+  { href: "/customs", label: "Customs" },
+  { href: "/modes", label: "Modes" },
+  { href: "/observations", label: "Observations" },
+  { href: "/frequencies", label: "Frequencies" },
+  { href: "/vintages", label: "Vintages" },
+  { href: "/lineage", label: "Lineage" },
+  { href: "/gaps", label: "Gaps" },
+  { href: "/periods", label: "Periods" },
+  { href: "/lags", label: "Lags" },
+  { href: "/benchmarks", label: "Benchmarks" },
+  { href: "/baskets", label: "Baskets" },
+  { href: "/thresholds", label: "Thresholds" },
+  { href: "/peers", label: "Peers" },
+  { href: "/weights", label: "Weights" },
+  { href: "/constituents", label: "Constituents" },
+  { href: "/horizons", label: "Horizons" },
+  { href: "/baselines", label: "Baselines" },
+  { href: "/spreads", label: "Spreads" },
+  { href: "/seasons", label: "Seasons" },
+  { href: "/adjustments", label: "Adjustments" },
+  { href: "/footnotes", label: "Footnotes" },
+  { href: "/scales", label: "Scales" },
+  { href: "/precision", label: "Precision" },
+  { href: "/rounding", label: "Rounding" },
+  { href: "/crosswalks", label: "Crosswalks" },
+  { href: "/aliases", label: "Aliases" },
+  { href: "/embargoes", label: "Embargoes" },
+  { href: "/sessions", label: "Sessions" },
+  { href: "/holidays", label: "Holidays" },
+  { href: "/factors", label: "Factors" },
+  { href: "/tenors", label: "Tenors" },
+  { href: "/grades", label: "Grades" },
+  { href: "/flags", label: "Flags" },
+  { href: "/windows", label: "Windows" },
+  { href: "/cutoffs", label: "Cutoffs" },
+  { href: "/stamps", label: "Stamps" },
+  { href: "/breaks", label: "Breaks" },
+  { href: "/curves", label: "Curves" },
+  { href: "/fixes", label: "Fixes" },
+  { href: "/lots", label: "Lots" },
+  { href: "/quotes", label: "Quotes" },
+  { href: "/contracts", label: "Contracts" },
+  { href: "/samples", label: "Samples" },
+  { href: "/indices", label: "Indices" },
+  { href: "/manifests", label: "Manifests" },
+  { href: "/parcels", label: "Parcels" },
+  { href: "/draws", label: "Draws" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -649,6 +704,281 @@ export default function TerminalPage() {
               <li>
                 <Link href="/citations" className="hover:text-forest">
                   Citations
+                </Link>
+              </li>
+              <li>
+                <Link href="/corridors" className="hover:text-forest">
+                  Corridors
+                </Link>
+              </li>
+              <li>
+                <Link href="/identifiers" className="hover:text-forest">
+                  Identifiers
+                </Link>
+              </li>
+              <li>
+                <Link href="/series" className="hover:text-forest">
+                  Series
+                </Link>
+              </li>
+              <li>
+                <Link href="/revisions" className="hover:text-forest">
+                  Revisions
+                </Link>
+              </li>
+              <li>
+                <Link href="/classifications" className="hover:text-forest">
+                  Classifications
+                </Link>
+              </li>
+              <li>
+                <Link href="/releases" className="hover:text-forest">
+                  Releases
+                </Link>
+              </li>
+              <li>
+                <Link href="/datelines" className="hover:text-forest">
+                  Datelines
+                </Link>
+              </li>
+              <li>
+                <Link href="/borders" className="hover:text-forest">
+                  Borders
+                </Link>
+              </li>
+              <li>
+                <Link href="/customs" className="hover:text-forest">
+                  Customs
+                </Link>
+              </li>
+              <li>
+                <Link href="/modes" className="hover:text-forest">
+                  Modes
+                </Link>
+              </li>
+              <li>
+                <Link href="/observations" className="hover:text-forest">
+                  Observations
+                </Link>
+              </li>
+              <li>
+                <Link href="/frequencies" className="hover:text-forest">
+                  Frequencies
+                </Link>
+              </li>
+              <li>
+                <Link href="/vintages" className="hover:text-forest">
+                  Vintages
+                </Link>
+              </li>
+              <li>
+                <Link href="/lineage" className="hover:text-forest">
+                  Lineage
+                </Link>
+              </li>
+              <li>
+                <Link href="/gaps" className="hover:text-forest">
+                  Gaps
+                </Link>
+              </li>
+              <li>
+                <Link href="/periods" className="hover:text-forest">
+                  Periods
+                </Link>
+              </li>
+              <li>
+                <Link href="/lags" className="hover:text-forest">
+                  Lags
+                </Link>
+              </li>
+              <li>
+                <Link href="/benchmarks" className="hover:text-forest">
+                  Benchmarks
+                </Link>
+              </li>
+              <li>
+                <Link href="/baskets" className="hover:text-forest">
+                  Baskets
+                </Link>
+              </li>
+              <li>
+                <Link href="/thresholds" className="hover:text-forest">
+                  Thresholds
+                </Link>
+              </li>
+              <li>
+                <Link href="/peers" className="hover:text-forest">
+                  Peers
+                </Link>
+              </li>
+              <li>
+                <Link href="/weights" className="hover:text-forest">
+                  Weights
+                </Link>
+              </li>
+              <li>
+                <Link href="/constituents" className="hover:text-forest">
+                  Constituents
+                </Link>
+              </li>
+              <li>
+                <Link href="/horizons" className="hover:text-forest">
+                  Horizons
+                </Link>
+              </li>
+              <li>
+                <Link href="/baselines" className="hover:text-forest">
+                  Baselines
+                </Link>
+              </li>
+              <li>
+                <Link href="/spreads" className="hover:text-forest">
+                  Spreads
+                </Link>
+              </li>
+              <li>
+                <Link href="/seasons" className="hover:text-forest">
+                  Seasons
+                </Link>
+              </li>
+              <li>
+                <Link href="/adjustments" className="hover:text-forest">
+                  Adjustments
+                </Link>
+              </li>
+              <li>
+                <Link href="/footnotes" className="hover:text-forest">
+                  Footnotes
+                </Link>
+              </li>
+              <li>
+                <Link href="/scales" className="hover:text-forest">
+                  Scales
+                </Link>
+              </li>
+              <li>
+                <Link href="/precision" className="hover:text-forest">
+                  Precision
+                </Link>
+              </li>
+              <li>
+                <Link href="/rounding" className="hover:text-forest">
+                  Rounding
+                </Link>
+              </li>
+              <li>
+                <Link href="/crosswalks" className="hover:text-forest">
+                  Crosswalks
+                </Link>
+              </li>
+              <li>
+                <Link href="/aliases" className="hover:text-forest">
+                  Aliases
+                </Link>
+              </li>
+              <li>
+                <Link href="/embargoes" className="hover:text-forest">
+                  Embargoes
+                </Link>
+              </li>
+              <li>
+                <Link href="/sessions" className="hover:text-forest">
+                  Sessions
+                </Link>
+              </li>
+              <li>
+                <Link href="/holidays" className="hover:text-forest">
+                  Holidays
+                </Link>
+              </li>
+              <li>
+                <Link href="/factors" className="hover:text-forest">
+                  Factors
+                </Link>
+              </li>
+              <li>
+                <Link href="/tenors" className="hover:text-forest">
+                  Tenors
+                </Link>
+              </li>
+              <li>
+                <Link href="/grades" className="hover:text-forest">
+                  Grades
+                </Link>
+              </li>
+              <li>
+                <Link href="/flags" className="hover:text-forest">
+                  Flags
+                </Link>
+              </li>
+              <li>
+                <Link href="/windows" className="hover:text-forest">
+                  Windows
+                </Link>
+              </li>
+              <li>
+                <Link href="/cutoffs" className="hover:text-forest">
+                  Cutoffs
+                </Link>
+              </li>
+              <li>
+                <Link href="/stamps" className="hover:text-forest">
+                  Stamps
+                </Link>
+              </li>
+              <li>
+                <Link href="/breaks" className="hover:text-forest">
+                  Breaks
+                </Link>
+              </li>
+              <li>
+                <Link href="/curves" className="hover:text-forest">
+                  Curves
+                </Link>
+              </li>
+              <li>
+                <Link href="/fixes" className="hover:text-forest">
+                  Fixes
+                </Link>
+              </li>
+              <li>
+                <Link href="/lots" className="hover:text-forest">
+                  Lots
+                </Link>
+              </li>
+              <li>
+                <Link href="/quotes" className="hover:text-forest">
+                  Quotes
+                </Link>
+              </li>
+              <li>
+                <Link href="/contracts" className="hover:text-forest">
+                  Contracts
+                </Link>
+              </li>
+              <li>
+                <Link href="/samples" className="hover:text-forest">
+                  Samples
+                </Link>
+              </li>
+              <li>
+                <Link href="/indices" className="hover:text-forest">
+                  Indices
+                </Link>
+              </li>
+              <li>
+                <Link href="/manifests" className="hover:text-forest">
+                  Manifests
+                </Link>
+              </li>
+              <li>
+                <Link href="/parcels" className="hover:text-forest">
+                  Parcels
+                </Link>
+              </li>
+              <li>
+                <Link href="/draws" className="hover:text-forest">
+                  Draws
                 </Link>
               </li>
               <li>

@@ -396,6 +396,226 @@ export default function HomePage() {
               Citations
             </Link>
             {" · "}
+            <Link href="/corridors" className="text-forest underline underline-offset-2">
+              Corridors
+            </Link>
+            {" · "}
+            <Link href="/identifiers" className="text-forest underline underline-offset-2">
+              Identifiers
+            </Link>
+            {" · "}
+            <Link href="/series" className="text-forest underline underline-offset-2">
+              Series
+            </Link>
+            {" · "}
+            <Link href="/revisions" className="text-forest underline underline-offset-2">
+              Revisions
+            </Link>
+            {" · "}
+            <Link href="/classifications" className="text-forest underline underline-offset-2">
+              Classifications
+            </Link>
+            {" · "}
+            <Link href="/releases" className="text-forest underline underline-offset-2">
+              Releases
+            </Link>
+            {" · "}
+            <Link href="/datelines" className="text-forest underline underline-offset-2">
+              Datelines
+            </Link>
+            {" · "}
+            <Link href="/borders" className="text-forest underline underline-offset-2">
+              Borders
+            </Link>
+            {" · "}
+            <Link href="/customs" className="text-forest underline underline-offset-2">
+              Customs
+            </Link>
+            {" · "}
+            <Link href="/modes" className="text-forest underline underline-offset-2">
+              Modes
+            </Link>
+            {" · "}
+            <Link href="/observations" className="text-forest underline underline-offset-2">
+              Observations
+            </Link>
+            {" · "}
+            <Link href="/frequencies" className="text-forest underline underline-offset-2">
+              Frequencies
+            </Link>
+            {" · "}
+            <Link href="/vintages" className="text-forest underline underline-offset-2">
+              Vintages
+            </Link>
+            {" · "}
+            <Link href="/lineage" className="text-forest underline underline-offset-2">
+              Lineage
+            </Link>
+            {" · "}
+            <Link href="/gaps" className="text-forest underline underline-offset-2">
+              Gaps
+            </Link>
+            {" · "}
+            <Link href="/periods" className="text-forest underline underline-offset-2">
+              Periods
+            </Link>
+            {" · "}
+            <Link href="/lags" className="text-forest underline underline-offset-2">
+              Lags
+            </Link>
+            {" · "}
+            <Link href="/benchmarks" className="text-forest underline underline-offset-2">
+              Benchmarks
+            </Link>
+            {" · "}
+            <Link href="/baskets" className="text-forest underline underline-offset-2">
+              Baskets
+            </Link>
+            {" · "}
+            <Link href="/thresholds" className="text-forest underline underline-offset-2">
+              Thresholds
+            </Link>
+            {" · "}
+            <Link href="/peers" className="text-forest underline underline-offset-2">
+              Peers
+            </Link>
+            {" · "}
+            <Link href="/weights" className="text-forest underline underline-offset-2">
+              Weights
+            </Link>
+            {" · "}
+            <Link href="/constituents" className="text-forest underline underline-offset-2">
+              Constituents
+            </Link>
+            {" · "}
+            <Link href="/horizons" className="text-forest underline underline-offset-2">
+              Horizons
+            </Link>
+            {" · "}
+            <Link href="/baselines" className="text-forest underline underline-offset-2">
+              Baselines
+            </Link>
+            {" · "}
+            <Link href="/spreads" className="text-forest underline underline-offset-2">
+              Spreads
+            </Link>
+            {" · "}
+            <Link href="/seasons" className="text-forest underline underline-offset-2">
+              Seasons
+            </Link>
+            {" · "}
+            <Link href="/adjustments" className="text-forest underline underline-offset-2">
+              Adjustments
+            </Link>
+            {" · "}
+            <Link href="/footnotes" className="text-forest underline underline-offset-2">
+              Footnotes
+            </Link>
+            {" · "}
+            <Link href="/scales" className="text-forest underline underline-offset-2">
+              Scales
+            </Link>
+            {" · "}
+            <Link href="/precision" className="text-forest underline underline-offset-2">
+              Precision
+            </Link>
+            {" · "}
+            <Link href="/rounding" className="text-forest underline underline-offset-2">
+              Rounding
+            </Link>
+            {" · "}
+            <Link href="/crosswalks" className="text-forest underline underline-offset-2">
+              Crosswalks
+            </Link>
+            {" · "}
+            <Link href="/aliases" className="text-forest underline underline-offset-2">
+              Aliases
+            </Link>
+            {" · "}
+            <Link href="/embargoes" className="text-forest underline underline-offset-2">
+              Embargoes
+            </Link>
+            {" · "}
+            <Link href="/sessions" className="text-forest underline underline-offset-2">
+              Sessions
+            </Link>
+            {" · "}
+            <Link href="/holidays" className="text-forest underline underline-offset-2">
+              Holidays
+            </Link>
+            {" · "}
+            <Link href="/factors" className="text-forest underline underline-offset-2">
+              Factors
+            </Link>
+            {" · "}
+            <Link href="/tenors" className="text-forest underline underline-offset-2">
+              Tenors
+            </Link>
+            {" · "}
+            <Link href="/grades" className="text-forest underline underline-offset-2">
+              Grades
+            </Link>
+            {" · "}
+            <Link href="/flags" className="text-forest underline underline-offset-2">
+              Flags
+            </Link>
+            {" · "}
+            <Link href="/windows" className="text-forest underline underline-offset-2">
+              Windows
+            </Link>
+            {" · "}
+            <Link href="/cutoffs" className="text-forest underline underline-offset-2">
+              Cutoffs
+            </Link>
+            {" · "}
+            <Link href="/stamps" className="text-forest underline underline-offset-2">
+              Stamps
+            </Link>
+            {" · "}
+            <Link href="/breaks" className="text-forest underline underline-offset-2">
+              Breaks
+            </Link>
+            {" · "}
+            <Link href="/curves" className="text-forest underline underline-offset-2">
+              Curves
+            </Link>
+            {" · "}
+            <Link href="/fixes" className="text-forest underline underline-offset-2">
+              Fixes
+            </Link>
+            {" · "}
+            <Link href="/lots" className="text-forest underline underline-offset-2">
+              Lots
+            </Link>
+            {" · "}
+            <Link href="/quotes" className="text-forest underline underline-offset-2">
+              Quotes
+            </Link>
+            {" · "}
+            <Link href="/contracts" className="text-forest underline underline-offset-2">
+              Contracts
+            </Link>
+            {" · "}
+            <Link href="/samples" className="text-forest underline underline-offset-2">
+              Samples
+            </Link>
+            {" · "}
+            <Link href="/indices" className="text-forest underline underline-offset-2">
+              Indices
+            </Link>
+            {" · "}
+            <Link href="/manifests" className="text-forest underline underline-offset-2">
+              Manifests
+            </Link>
+            {" · "}
+            <Link href="/parcels" className="text-forest underline underline-offset-2">
+              Parcels
+            </Link>
+            {" · "}
+            <Link href="/draws" className="text-forest underline underline-offset-2">
+              Draws
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

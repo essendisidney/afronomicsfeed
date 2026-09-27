@@ -147,6 +147,11 @@ const side = [
   { href: "/manifests", label: "Manifests" },
   { href: "/parcels", label: "Parcels" },
   { href: "/draws", label: "Draws" },
+  { href: "/settlements", label: "Settlements" },
+  { href: "/positions", label: "Positions" },
+  { href: "/auctions", label: "Auctions" },
+  { href: "/ledgers", label: "Ledgers" },
+  { href: "/agents", label: "Agents" },
   { href: "/developers", label: "Developers" },
 ];
 
@@ -982,6 +987,26 @@ export default function TerminalPage() {
                 </Link>
               </li>
               <li>
+                <Link href="/settlements" className="hover:text-forest">
+                  Settlements
+                </Link>
+              </li>
+              <li>
+                <Link href="/positions" className="hover:text-forest">
+                  Positions
+                </Link>
+              </li>
+              <li>
+                <Link href="/auctions" className="hover:text-forest">
+                  Auctions
+                </Link>
+              </li>
+              <li>
+                <Link href="/ledgers" className="hover:text-forest">
+                  Ledgers
+                </Link>
+              </li>
+              <li>
                 <Link href="/method/registry" className="hover:text-forest">
                   Method registry
                 </Link>
@@ -989,6 +1014,11 @@ export default function TerminalPage() {
               <li>
                 <Link href="/account/usage" className="hover:text-forest">
                   Usage
+                </Link>
+              </li>
+              <li>
+                <Link href="/agents" className="hover:text-forest">
+                  Agents
                 </Link>
               </li>
               <li>

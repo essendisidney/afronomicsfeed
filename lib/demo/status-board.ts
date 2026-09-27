@@ -60,8 +60,8 @@ export const systemSurfaces: SystemSurface[] = [
   {
     id: "ingestion",
     label: "Ingestion runner",
-    state: "offline",
-    note: "Ops board lists stubs. No cron against a live queue.",
+    state: "scaffold",
+    note: "Prints agent is scheduled daily. Parsed World Bank annual values are stored. A missing series stays blank.",
     href: "/ingestion",
   },
   {
@@ -735,6 +735,34 @@ export const systemSurfaces: SystemSurface[] = [
     state: "scaffold",
     note: "Draw shapes. No selection.",
     href: "/draws",
+  },
+  {
+    id: "settlements",
+    label: "Settlements",
+    state: "scaffold",
+    note: "Settlement shapes. No movement.",
+    href: "/settlements",
+  },
+  {
+    id: "positions",
+    label: "Positions",
+    state: "scaffold",
+    note: "Position shapes. No holding.",
+    href: "/positions",
+  },
+  {
+    id: "auctions",
+    label: "Auctions",
+    state: "scaffold",
+    note: "Auction shapes. No sale.",
+    href: "/auctions",
+  },
+  {
+    id: "ledgers",
+    label: "Ledgers",
+    state: "scaffold",
+    note: "Ledger shapes. No book.",
+    href: "/ledgers",
   },
 ];
 

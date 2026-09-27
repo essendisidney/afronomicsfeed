@@ -1,13 +1,20 @@
 export type IngestionJob = {
   id: string;
   cadence: string;
-  status: "stub" | "idle" | "blocked";
+  status: "stub" | "idle" | "blocked" | "scheduled";
   desk: string | null;
   note: string;
 };
 
-/** Ops board. Nothing is scheduled against a live queue. */
+/** Ops board. The prints agent is scheduled. The other jobs are not. */
 export const ingestionJobs: IngestionJob[] = [
+  {
+    id: "world-bank-prints",
+    cadence: "daily",
+    status: "scheduled",
+    desk: null,
+    note: "Cron at /api/cron/agents reads World Bank Open Data. Parsed vintages are stored. A later write from the site needs the service role. A null response is not stored.",
+  },
   {
     id: "resolve-kenya-edges",
     cadence: "manual",

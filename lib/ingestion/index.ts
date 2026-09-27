@@ -1,5 +1,5 @@
 /**
- * Ingestion spine. Jobs are not live.
+ * Ingestion spine. The prints agent is the live reader.
  * SOURCE → FETCH → VALIDATE → NORMALIZE → DEDUPE → RESOLVE → RAW → STRUCTURED → SIGNALS → PUBLISH
  */
 export const ingestionStages = [

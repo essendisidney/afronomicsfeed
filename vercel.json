@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/cron/agents",
+      "schedule": "15 4 * * *"
+    }
+  ],
   "redirects": [
     {
       "source": "/:path*",

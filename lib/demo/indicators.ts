@@ -6,7 +6,7 @@ export const indicators = [
     name: "Inflation",
     unit: "percent, period as published",
     geography: "Country / regional",
-    note: "National statistics agencies and central banks are the primary doors. No series is stored yet.",
+    note: "The prints agent reads the latest non-null World Bank annual series. A missing year stays blank.",
     countrySeries: "economy",
   },
   {
@@ -14,7 +14,7 @@ export const indicators = [
     name: "Gross domestic product",
     unit: "as published",
     geography: "Country",
-    note: "Awaiting a licensed national-accounts or World Bank / IMF observation table.",
+    note: "The prints agent reads World Bank GDP (current US$) when that year is published.",
     countrySeries: "economy",
   },
   {
@@ -30,7 +30,7 @@ export const indicators = [
     name: "Public debt",
     unit: "as published",
     geography: "Country",
-    note: "Sovereign stock and service figures require a cited fiscal or IMF print.",
+    note: "The prints agent reads central government debt as a percent of GDP when World Bank publishes it.",
     countrySeries: "economy",
   },
   {
@@ -38,7 +38,7 @@ export const indicators = [
     name: "Foreign direct investment",
     unit: "as published",
     geography: "Country / corridor",
-    note: "UNCTAD / national investment authorities — not modelled here.",
+    note: "The prints agent reads World Bank FDI net inflows when that year is published.",
     countrySeries: "capital",
   },
 ] as const;

@@ -40,4 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# one-off agent fetch output
+scripts/prints.json
+scripts/prints.sql
+
 .vercel

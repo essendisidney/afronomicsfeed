@@ -116,6 +116,11 @@ export const analyticsEvents = [
   "manifests_open",
   "parcels_open",
   "draws_open",
+  "settlements_open",
+  "positions_open",
+  "auctions_open",
+  "ledgers_open",
+  "agents_open",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

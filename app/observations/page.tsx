@@ -2,20 +2,25 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
 import { Provenance } from "@/components/ui/Provenance";
-import { observationSlots, storedObservationCount } from "@/lib/demo/observations";
+import { formatPrint, loadPrints, sortPrints } from "@/lib/agents/worldbank";
+import { observationSlots } from "@/lib/demo/observations";
 
 export const metadata: Metadata = {
   title: "Observations",
-  description: "Observation shapes for Afronomics Feed. No dated print is stored.",
+  description: "Observation shapes, plus World Bank annual values when the API returns a number.",
 };
 
-export default function ObservationsPage() {
+export const revalidate = 86400;
+
+export default async function ObservationsPage() {
+  const prints = sortPrints(await loadPrints());
+
   return (
     <LayerPage
       crumbs={[{ href: "/", label: "Home" }, { label: "Observations" }]}
       kicker="Observations"
       title="What one print would carry"
-      lede="A slot stays empty until a source, a unit and an as-of date exist. This page does not store a sample observation."
+      lede="Price, flow and dwell stay empty. Annual World Bank series appear below only when the response includes a finite value and a year."
     >
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="border border-rule px-4 py-3">
@@ -23,22 +28,22 @@ export default function ObservationsPage() {
           <p className="mt-1 font-serif text-xl">{observationSlots.length}</p>
         </div>
         <div className="border border-rule px-4 py-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Stored</p>
-          <p className="mt-1 font-serif text-xl">{storedObservationCount()}</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Retrieved</p>
+          <p className="mt-1 font-serif text-xl">{prints.length}</p>
         </div>
       </div>
 
       <p className="mt-6 text-sm">
+        <Link href="/agents" className="text-forest underline underline-offset-2">
+          Agents
+        </Link>
+        {" · "}
         <Link href="/series" className="text-forest underline underline-offset-2">
           Series
         </Link>
         {" · "}
         <Link href="/citations" className="text-forest underline underline-offset-2">
           Citations
-        </Link>
-        {" · "}
-        <Link href="/units" className="text-forest underline underline-offset-2">
-          Units
         </Link>
       </p>
 
@@ -54,7 +59,29 @@ export default function ObservationsPage() {
         ))}
       </ul>
 
-      <Provenance source="Observation shapes" methodology="Stored count is zero. No dated print is attached." />
+      <ul className="mt-10 space-y-3">
+        {prints.map((print) => (
+          <li key={`${print.indicatorSlug}-${print.iso}`} className="border-b border-rule pb-3">
+            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
+              {print.countryName} · {print.indicatorSlug} · {print.year}
+            </p>
+            <Link
+              href={`/indicators/${print.indicatorSlug}/${print.countrySlug}`}
+              className="mt-1 block font-serif text-xl hover:text-forest"
+            >
+              {formatPrint(print.value)} {print.unit}
+            </Link>
+            <a href={print.sourceUrl} className="mt-1 inline-block text-sm text-forest underline underline-offset-2">
+              {print.seriesCode}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <Provenance
+        source="World Bank Open Data"
+        methodology="Retrieved count is the number of finite annual values in the latest API response. Empty shapes are not filled."
+      />
     </LayerPage>
   );
 }

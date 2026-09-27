@@ -226,10 +226,16 @@ export function buildSearchIndex(): SearchHit[] {
       summary: "Featured desk matrix. Observation cells stay blank.",
     },
     {
+      href: "/agents",
+      title: "Agents",
+      kicker: "Ops",
+      summary: "Daily World Bank reader. A cell stays empty when the response has no number.",
+    },
+    {
       href: "/ingestion",
       title: "Ingestion",
       kicker: "Ops",
-      summary: "Job board. Nothing scheduled against a live queue.",
+      summary: "Prints agent is scheduled. The other jobs stay stubbed.",
     },
     {
       href: "/feeds",
@@ -830,6 +836,30 @@ export function buildSearchIndex(): SearchHit[] {
       title: "Draws",
       kicker: "Data",
       summary: "Selection shapes. None stored.",
+    },
+    {
+      href: "/settlements",
+      title: "Settlements",
+      kicker: "Desk",
+      summary: "Clearing shapes. None stored.",
+    },
+    {
+      href: "/positions",
+      title: "Positions",
+      kicker: "Data",
+      summary: "Holding shapes. None stored.",
+    },
+    {
+      href: "/auctions",
+      title: "Auctions",
+      kicker: "Desk",
+      summary: "Sale shapes. None stored.",
+    },
+    {
+      href: "/ledgers",
+      title: "Ledgers",
+      kicker: "Build",
+      summary: "Book shapes. None stored.",
     },
     ...navHits,
   ];

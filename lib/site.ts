@@ -94,6 +94,8 @@ export const footerGroups = [
       { href: "/fixes", label: "Fixes" },
       { href: "/quotes", label: "Quotes" },
       { href: "/manifests", label: "Manifests" },
+      { href: "/settlements", label: "Settlements" },
+      { href: "/auctions", label: "Auctions" },
       { href: "/onboarding", label: "Onboarding" },
     ],
   },
@@ -146,12 +148,14 @@ export const footerGroups = [
       { href: "/indices", label: "Indices" },
       { href: "/parcels", label: "Parcels" },
       { href: "/draws", label: "Draws" },
+      { href: "/positions", label: "Positions" },
     ],
   },
   {
     title: "Build",
     links: [
       { href: "/developers", label: "Developers" },
+      { href: "/agents", label: "Agents" },
       { href: "/sdk", label: "SDK" },
       { href: "/feeds", label: "Feeds" },
       { href: "/syndication", label: "Syndication" },
@@ -163,6 +167,7 @@ export const footerGroups = [
       { href: "/status", label: "Status" },
       { href: "/changelog", label: "Changelog" },
       { href: "/golive", label: "Go live" },
+      { href: "/ledgers", label: "Ledgers" },
     ],
   },
   {

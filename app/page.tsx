@@ -616,6 +616,26 @@ export default function HomePage() {
               Draws
             </Link>
             {" · "}
+            <Link href="/settlements" className="text-forest underline underline-offset-2">
+              Settlements
+            </Link>
+            {" · "}
+            <Link href="/positions" className="text-forest underline underline-offset-2">
+              Positions
+            </Link>
+            {" · "}
+            <Link href="/auctions" className="text-forest underline underline-offset-2">
+              Auctions
+            </Link>
+            {" · "}
+            <Link href="/ledgers" className="text-forest underline underline-offset-2">
+              Ledgers
+            </Link>
+            {" · "}
+            <Link href="/agents" className="text-forest underline underline-offset-2">
+              Agents
+            </Link>
+            {" · "}
             <Link href="/developers" className="text-forest underline underline-offset-2">
               Developers
             </Link>

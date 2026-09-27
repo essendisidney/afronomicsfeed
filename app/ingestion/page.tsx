@@ -6,7 +6,7 @@ import { ingestionJobs, jobsByStatus } from "@/lib/demo/ingestion";
 
 export const metadata: Metadata = {
   title: "Ingestion",
-  description: "Ops board for Afronomics jobs. Nothing is scheduled against a live queue.",
+  description: "Ops board for Afronomics jobs. The World Bank prints agent runs daily. Other jobs stay stubbed.",
 };
 
 export default function IngestionPage() {
@@ -17,8 +17,8 @@ export default function IngestionPage() {
     <LayerPage
       crumbs={[{ href: "/", label: "Home" }, { label: "Ingestion" }]}
       kicker="Ingestion"
-      title="Jobs without a fake run"
-      lede="The board lists what would tick when Auth, stores and billing exist. Status is stub, idle or blocked — never a green success that did not happen."
+      title="One scheduled reader"
+      lede="The prints agent runs daily and keeps a cell empty when World Bank returns no number. The remaining jobs are still stub, idle or blocked."
     >
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="border border-rule px-4 py-3">
@@ -26,12 +26,12 @@ export default function IngestionPage() {
           <p className="mt-1 font-serif text-xl">{ingestionJobs.length}</p>
         </div>
         <div className="border border-rule px-4 py-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Stub</p>
-          <p className="mt-1 font-serif text-xl">{stubs}</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Scheduled</p>
+          <p className="mt-1 font-serif text-xl">{jobsByStatus("scheduled").length}</p>
         </div>
         <div className="border border-rule px-4 py-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Blocked</p>
-          <p className="mt-1 font-serif text-xl">{blocked}</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Stub / blocked</p>
+          <p className="mt-1 font-serif text-xl">{stubs + blocked}</p>
         </div>
       </div>
 
@@ -44,8 +44,8 @@ export default function IngestionPage() {
           Graph
         </Link>
         {" · "}
-        <Link href="/sources" className="text-forest underline underline-offset-2">
-          Sources
+        <Link href="/agents" className="text-forest underline underline-offset-2">
+          Agents
         </Link>
         {" · "}
         <Link href="/developers" className="text-forest underline underline-offset-2">
@@ -65,7 +65,7 @@ export default function IngestionPage() {
         ))}
       </ul>
 
-      <Provenance source="No job runner" methodology="Listed shape only. No cron, no silent overwrite." />
+      <Provenance source="Prints agent" methodology="Daily cron reads World Bank Open Data. Other jobs do not run. No silent fill of an empty cell." />
     </LayerPage>
   );
 }

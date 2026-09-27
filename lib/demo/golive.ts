@@ -25,7 +25,7 @@ export const goLiveGates: GoLiveGate[] = [
     layer: "store",
     label: "Append-only observation store",
     status: "partial",
-    lede: "Core schema is applied. Reference rows are loaded: countries, corridors, the graph, and the published briefs. Observation and price tables are still empty. Nothing writes a print yet.",
+    lede: "Parsed World Bank annual values are in the observation table. The daily prints agent reads the API again and writes a row only when a finite value and a year are present. Price and market tapes stay empty.",
     href: "/ingestion",
   },
   {
@@ -33,7 +33,7 @@ export const goLiveGates: GoLiveGate[] = [
     layer: "store",
     label: "Ingestion validators + as-of",
     status: "partial",
-    lede: "Validator stubs exist. Nothing is scheduled against a live queue.",
+    lede: "The prints agent accepts a finite number with a four-digit year and a series code. A null cell is dropped, not estimated.",
     href: "/ingestion",
   },
   {

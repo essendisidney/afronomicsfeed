@@ -1,4 +1,4 @@
-/** Licensed/permitted source adapters. None are connected in Phase 1. */
+/** Source adapters. World Bank is read by the prints agent. The others are not connected. */
 export const intendedProviders = [
   "world-bank",
   "imf",

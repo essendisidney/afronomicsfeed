@@ -83,6 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sources",
     "/compare",
     "/ingestion",
+    "/agents",
     "/feeds",
     "/status",
     "/searches",
@@ -182,6 +183,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/manifests",
     "/parcels",
     "/draws",
+    "/settlements",
+    "/positions",
+    "/auctions",
+    "/ledgers",
   ];
 
   const now = new Date();

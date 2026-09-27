@@ -9,7 +9,7 @@ import { getCountry } from "@/lib/demo/countries";
 import { getIndicator, indicatorCountryParams, indicators } from "@/lib/demo/indicators";
 import { site } from "@/lib/site";
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return indicatorCountryParams();

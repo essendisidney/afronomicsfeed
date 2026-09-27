@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Observation shapes, plus World Bank annual values when the API returns a number.",
 };
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export default async function ObservationsPage() {
   const prints = sortPrints(await loadPrints());

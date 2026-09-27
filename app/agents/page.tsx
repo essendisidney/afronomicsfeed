@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Desk agents that read official series and leave a cell empty when the response has no number.",
 };
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export default async function AgentsPage() {
   const report = await runAgents();

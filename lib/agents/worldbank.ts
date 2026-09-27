@@ -77,21 +77,30 @@ async function fetchSeriesChunk(series: (typeof SERIES)[number], countryPath: st
   const response = await fetch(url, {
     headers: { Accept: "application/json" },
     signal: AbortSignal.timeout(12000),
-    next: { revalidate: 86400 },
+    next: { revalidate: 3600 },
   });
-  if (!response.ok) return [];
+  if (!response.ok) throw new Error(`World Bank responded ${response.status}`);
   const body: unknown = await response.json();
   return parseSeries(body, series);
 }
 
+const featuredPath = "KE;NG;ZA;EG;GH;RW;TZ;UG";
+
 /** Latest non-null annual values. A failed or empty response contributes nothing. */
 export async function loadPrints(): Promise<SourcedPrint[]> {
-  const jobs = SERIES.flatMap((series) => countryChunks(6).map((countryPath) => ({ series, countryPath })));
+  const jobs = [
+    ...SERIES.flatMap((series) => countryChunks(6).map((countryPath) => ({ series, countryPath }))),
+    ...SERIES.map((series) => ({ series, countryPath: featuredPath })),
+  ];
   const batches = await Promise.all(jobs.map(async (job) => {
     try {
       return await fetchSeriesChunk(job.series, job.countryPath);
     } catch {
-      return [];
+      try {
+        return await fetchSeriesChunk(job.series, job.countryPath);
+      } catch {
+        return [];
+      }
     }
   }));
   return latestPrints(batches.flat());

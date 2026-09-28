@@ -145,6 +145,11 @@ export const cities: City[] = [
   { slug: "musanze", name: "Musanze", countrySlug: "rwanda", role: "Inland city" },
   { slug: "mzuzu", name: "Mzuzu", countrySlug: "malawi", role: "Inland city" },
   { slug: "hawassa", name: "Hawassa", countrySlug: "ethiopia", role: "Inland city" },
+  { slug: "zinder", name: "Zinder", countrySlug: "niger", role: "Inland city" },
+  { slug: "gitega", name: "Gitega", countrySlug: "burundi", role: "Inland city" },
+  { slug: "bambari", name: "Bambari", countrySlug: "central-african-republic", role: "Inland city" },
+  { slug: "wau", name: "Wau", countrySlug: "south-sudan", role: "Inland city" },
+  { slug: "fes", name: "Fès", countrySlug: "morocco", role: "Inland city" },
 ];
 
 export function getCity(slug: string) {

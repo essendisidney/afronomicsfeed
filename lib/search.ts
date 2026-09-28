@@ -856,6 +856,30 @@ export function buildSearchIndex(): SearchHit[] {
       summary: "Sale shapes. None stored.",
     },
     {
+      href: "/clearances",
+      title: "Clearances",
+      kicker: "Desk",
+      summary: "Decision shapes. None stored.",
+    },
+    {
+      href: "/warehouses",
+      title: "Warehouses",
+      kicker: "Data",
+      summary: "Stock shapes. None stored.",
+    },
+    {
+      href: "/permits",
+      title: "Permits",
+      kicker: "Desk",
+      summary: "Authorisation shapes. None stored.",
+    },
+    {
+      href: "/guarantees",
+      title: "Guarantees",
+      kicker: "Build",
+      summary: "Security shapes. None stored.",
+    },
+    {
       href: "/ledgers",
       title: "Ledgers",
       kicker: "Build",

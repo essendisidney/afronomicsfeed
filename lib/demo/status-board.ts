@@ -764,6 +764,34 @@ export const systemSurfaces: SystemSurface[] = [
     note: "Ledger shapes. No book.",
     href: "/ledgers",
   },
+  {
+    id: "clearances",
+    label: "Clearances",
+    state: "scaffold",
+    note: "Clearance shapes. No decision.",
+    href: "/clearances",
+  },
+  {
+    id: "warehouses",
+    label: "Warehouses",
+    state: "scaffold",
+    note: "Warehouse shapes. No stock.",
+    href: "/warehouses",
+  },
+  {
+    id: "permits",
+    label: "Permits",
+    state: "scaffold",
+    note: "Permit shapes. No authorisation.",
+    href: "/permits",
+  },
+  {
+    id: "guarantees",
+    label: "Guarantees",
+    state: "scaffold",
+    note: "Guarantee shapes. No security.",
+    href: "/guarantees",
+  },
 ];
 
 export function surfacesByState(state: SystemSurface["state"]) {

@@ -632,6 +632,22 @@ export default function HomePage() {
               Ledgers
             </Link>
             {" · "}
+            <Link href="/clearances" className="text-forest underline underline-offset-2">
+              Clearances
+            </Link>
+            {" · "}
+            <Link href="/warehouses" className="text-forest underline underline-offset-2">
+              Warehouses
+            </Link>
+            {" · "}
+            <Link href="/permits" className="text-forest underline underline-offset-2">
+              Permits
+            </Link>
+            {" · "}
+            <Link href="/guarantees" className="text-forest underline underline-offset-2">
+              Guarantees
+            </Link>
+            {" · "}
             <Link href="/agents" className="text-forest underline underline-offset-2">
               Agents
             </Link>

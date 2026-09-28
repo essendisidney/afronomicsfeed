@@ -151,6 +151,10 @@ const side = [
   { href: "/positions", label: "Positions" },
   { href: "/auctions", label: "Auctions" },
   { href: "/ledgers", label: "Ledgers" },
+  { href: "/clearances", label: "Clearances" },
+  { href: "/warehouses", label: "Warehouses" },
+  { href: "/permits", label: "Permits" },
+  { href: "/guarantees", label: "Guarantees" },
   { href: "/agents", label: "Agents" },
   { href: "/developers", label: "Developers" },
 ];
@@ -1004,6 +1008,26 @@ export default function TerminalPage() {
               <li>
                 <Link href="/ledgers" className="hover:text-forest">
                   Ledgers
+                </Link>
+              </li>
+              <li>
+                <Link href="/clearances" className="hover:text-forest">
+                  Clearances
+                </Link>
+              </li>
+              <li>
+                <Link href="/warehouses" className="hover:text-forest">
+                  Warehouses
+                </Link>
+              </li>
+              <li>
+                <Link href="/permits" className="hover:text-forest">
+                  Permits
+                </Link>
+              </li>
+              <li>
+                <Link href="/guarantees" className="hover:text-forest">
+                  Guarantees
                 </Link>
               </li>
               <li>

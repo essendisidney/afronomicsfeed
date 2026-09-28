@@ -187,6 +187,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/positions",
     "/auctions",
     "/ledgers",
+    "/clearances",
+    "/warehouses",
+    "/permits",
+    "/guarantees",
   ];
 
   const now = new Date();

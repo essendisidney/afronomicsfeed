@@ -121,6 +121,10 @@ export const analyticsEvents = [
   "auctions_open",
   "ledgers_open",
   "agents_open",
+  "clearances_open",
+  "warehouses_open",
+  "permits_open",
+  "guarantees_open",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];

@@ -1,11 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export function Wordmark({ compact = false }: { compact?: boolean }) {
+export function Wordmark({ compact = false, night = false }: { compact?: boolean; night?: boolean }) {
   const size = compact ? "af-logo af-logo-compact" : "af-logo";
 
   return (
-    <Link href="/" className="inline-flex min-w-0 shrink-0 items-center no-underline" aria-label="Afronomics Feed">
+    <Link
+      href="/"
+      className={`inline-flex min-w-0 shrink-0 items-center no-underline ${night ? "on-night" : ""}`}
+      aria-label="Afronomics Feed"
+    >
       <Image
         src="/brand/logo-light.png"
         alt=""

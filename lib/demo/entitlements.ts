@@ -181,7 +181,7 @@ export const seats = [
     price: pricing.trial.price,
     cadence: "14 days",
     detail: pricing.trial.detail,
-    note: "M-Pesa checkout not live.",
+    note: "Paystack opens when the secret is set. A seat stays closed until an account exists.",
   },
 ] as const;
 

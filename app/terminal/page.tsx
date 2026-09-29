@@ -6,6 +6,7 @@ import { climateFileHref } from "@/lib/demo/climate";
 import { companies } from "@/lib/demo/companies";
 import { featuredCountrySlugs, getCountry } from "@/lib/demo/countries";
 import { instruments } from "@/lib/demo/markets";
+import { fxForLabel, loadFxQuote } from "@/lib/fx/reference";
 import { pulseComponents } from "@/lib/demo/pulse";
 import { signals } from "@/lib/demo/signals";
 import { techLenses } from "@/lib/demo/tech";
@@ -155,11 +156,36 @@ const side = [
   { href: "/warehouses", label: "Warehouses" },
   { href: "/permits", label: "Permits" },
   { href: "/guarantees", label: "Guarantees" },
+  { href: "/inspections", label: "Inspections" },
+  { href: "/waybills", label: "Waybills" },
+  { href: "/consignments", label: "Consignments" },
+  { href: "/certificates", label: "Certificates" },
+  { href: "/surveys", label: "Surveys" },
+  { href: "/duties", label: "Duties" },
+  { href: "/quotas", label: "Quotas" },
+  { href: "/assays", label: "Assays" },
+  { href: "/tallies", label: "Tallies" },
+  { href: "/seals", label: "Seals" },
+  { href: "/stowage", label: "Stowage" },
+  { href: "/nominations", label: "Nominations" },
+  { href: "/berths", label: "Berths" },
+  { href: "/laytime", label: "Laytime" },
+  { href: "/shortages", label: "Shortages" },
+  { href: "/endorsements", label: "Endorsements" },
+  { href: "/demurrage", label: "Demurrage" },
+  { href: "/handovers", label: "Handovers" },
+  { href: "/receipts", label: "Receipts" },
+  { href: "/waivers", label: "Waivers" },
+  { href: "/laycans", label: "Laycans" },
+  { href: "/protests", label: "Protests" },
+  { href: "/discharges", label: "Discharges" },
+  { href: "/bonds", label: "Bonds" },
   { href: "/agents", label: "Agents" },
   { href: "/developers", label: "Developers" },
 ];
 
-export default function TerminalPage() {
+export default async function TerminalPage() {
+  const quote = await loadFxQuote();
   return (
     <div className="mx-auto grid max-w-[1400px] gap-0 lg:grid-cols-[13rem_1fr]">
       <aside className="border-b border-rule px-4 py-4 lg:border-b-0 lg:border-r">
@@ -207,7 +233,7 @@ export default function TerminalPage() {
               <thead>
                 <tr>
                   <th>Print</th>
-                  <th>Demo</th>
+                  <th>Reference</th>
                   <th>File</th>
                 </tr>
               </thead>
@@ -215,7 +241,7 @@ export default function TerminalPage() {
                 {instruments.slice(0, 10).map((row) => (
                   <tr key={row.slug}>
                     <td className="font-mono text-xs">{row.label}</td>
-                    <td>{row.value}</td>
+                    <td>{row.kind === "currency" ? (fxForLabel(row.label, quote) ?? "—") : "—"}</td>
                     <td>
                       <Link href={row.fileHref} className="text-forest underline underline-offset-2">
                         Open
@@ -1028,6 +1054,126 @@ export default function TerminalPage() {
               <li>
                 <Link href="/guarantees" className="hover:text-forest">
                   Guarantees
+                </Link>
+              </li>
+              <li>
+                <Link href="/inspections" className="hover:text-forest">
+                  Inspections
+                </Link>
+              </li>
+              <li>
+                <Link href="/waybills" className="hover:text-forest">
+                  Waybills
+                </Link>
+              </li>
+              <li>
+                <Link href="/consignments" className="hover:text-forest">
+                  Consignments
+                </Link>
+              </li>
+              <li>
+                <Link href="/certificates" className="hover:text-forest">
+                  Certificates
+                </Link>
+              </li>
+              <li>
+                <Link href="/surveys" className="hover:text-forest">
+                  Surveys
+                </Link>
+              </li>
+              <li>
+                <Link href="/duties" className="hover:text-forest">
+                  Duties
+                </Link>
+              </li>
+              <li>
+                <Link href="/quotas" className="hover:text-forest">
+                  Quotas
+                </Link>
+              </li>
+              <li>
+                <Link href="/assays" className="hover:text-forest">
+                  Assays
+                </Link>
+              </li>
+              <li>
+                <Link href="/tallies" className="hover:text-forest">
+                  Tallies
+                </Link>
+              </li>
+              <li>
+                <Link href="/seals" className="hover:text-forest">
+                  Seals
+                </Link>
+              </li>
+              <li>
+                <Link href="/stowage" className="hover:text-forest">
+                  Stowage
+                </Link>
+              </li>
+              <li>
+                <Link href="/nominations" className="hover:text-forest">
+                  Nominations
+                </Link>
+              </li>
+              <li>
+                <Link href="/berths" className="hover:text-forest">
+                  Berths
+                </Link>
+              </li>
+              <li>
+                <Link href="/laytime" className="hover:text-forest">
+                  Laytime
+                </Link>
+              </li>
+              <li>
+                <Link href="/shortages" className="hover:text-forest">
+                  Shortages
+                </Link>
+              </li>
+              <li>
+                <Link href="/endorsements" className="hover:text-forest">
+                  Endorsements
+                </Link>
+              </li>
+              <li>
+                <Link href="/demurrage" className="hover:text-forest">
+                  Demurrage
+                </Link>
+              </li>
+              <li>
+                <Link href="/handovers" className="hover:text-forest">
+                  Handovers
+                </Link>
+              </li>
+              <li>
+                <Link href="/receipts" className="hover:text-forest">
+                  Receipts
+                </Link>
+              </li>
+              <li>
+                <Link href="/waivers" className="hover:text-forest">
+                  Waivers
+                </Link>
+              </li>
+              <li>
+                <Link href="/laycans" className="hover:text-forest">
+                  Laycans
+                </Link>
+              </li>
+              <li>
+                <Link href="/protests" className="hover:text-forest">
+                  Protests
+                </Link>
+              </li>
+              <li>
+                <Link href="/discharges" className="hover:text-forest">
+                  Discharges
+                </Link>
+              </li>
+              <li>
+                <Link href="/bonds" className="hover:text-forest">
+                  Bonds
                 </Link>
               </li>
               <li>

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LayerPage } from "@/components/intelligence/LayerPage";
 import { Provenance } from "@/components/ui/Provenance";
-import { formatPrint, loadPrints, sortPrints } from "@/lib/agents/worldbank";
+import { formatPrint, latestPrints, loadCataloguePrints, loadPrints, sortPrints } from "@/lib/agents/worldbank";
+import { getIndicator } from "@/lib/demo/indicators";
 import { observationSlots } from "@/lib/demo/observations";
 
 export const metadata: Metadata = {
@@ -13,7 +14,8 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function ObservationsPage() {
-  const prints = sortPrints(await loadPrints());
+  const [core, catalogue] = await Promise.all([loadPrints(), loadCataloguePrints()]);
+  const prints = sortPrints(latestPrints([...core, ...catalogue]));
 
   return (
     <LayerPage
@@ -65,12 +67,23 @@ export default async function ObservationsPage() {
             <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
               {print.countryName} · {print.indicatorSlug} · {print.year}
             </p>
-            <Link
-              href={`/indicators/${print.indicatorSlug}/${print.countrySlug}`}
-              className="mt-1 block font-serif text-xl hover:text-forest"
-            >
-              {formatPrint(print.value)} {print.unit}
-            </Link>
+            {getIndicator(print.indicatorSlug) ? (
+              <Link
+                href={`/indicators/${print.indicatorSlug}/${print.countrySlug}`}
+                className="mt-1 block font-serif text-xl hover:text-forest"
+              >
+                {formatPrint(print.value)} {print.unit}
+              </Link>
+            ) : (
+              <a
+                href={print.sourceUrl}
+                className="mt-1 block font-serif text-xl hover:text-forest"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {formatPrint(print.value)} {print.unit}
+              </a>
+            )}
             <a href={print.sourceUrl} className="mt-1 inline-block text-sm text-forest underline underline-offset-2">
               {print.seriesCode}
             </a>

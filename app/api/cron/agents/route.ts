@@ -17,6 +17,7 @@ export async function GET(request: Request) {
   }
 
   const report = await runAgents({ includeDoors: true });
+  revalidatePath("/");
   revalidatePath("/agents");
   revalidatePath("/observations");
   revalidatePath("/ingestion");

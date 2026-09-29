@@ -19,6 +19,11 @@
   --analysis: #4a5568;
   --opinion: #7a4a24;
   --danger: #a51d32;
+  --night: #07090d;
+  --night-ink: #f4f0e8;
+  --night-soft: #c8c2b6;
+  --night-muted: #8f897e;
+  --night-line: rgba(244, 240, 232, 0.14);
 }
 
 .dark {
@@ -40,6 +45,11 @@
   --analysis: #c4bfb4;
   --opinion: #d4a574;
   --danger: #d45a68;
+  --night: #0c1016;
+  --night-ink: #f4f0e8;
+  --night-soft: #c8c2b6;
+  --night-muted: #8f897e;
+  --night-line: rgba(244, 240, 232, 0.14);
 }
 
 @theme inline {
@@ -61,6 +71,11 @@
   --color-analysis: var(--analysis);
   --color-opinion: var(--opinion);
   --color-danger: var(--danger);
+  --color-night: var(--night);
+  --color-night-ink: var(--night-ink);
+  --color-night-soft: var(--night-soft);
+  --color-night-muted: var(--night-muted);
+  --color-night-line: var(--night-line);
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
@@ -154,6 +169,14 @@ body {
 
 .af-logo-dark {
   display: none;
+}
+
+.on-night .af-logo-light {
+  display: none;
+}
+
+.on-night .af-logo-dark {
+  display: block;
 }
 
 .dark .af-logo-light {

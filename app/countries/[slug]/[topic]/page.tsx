@@ -17,6 +17,7 @@ import {
 import { getCountry } from "@/lib/demo/countries";
 import { getIndicator } from "@/lib/demo/indicators";
 import { getAllArticles, getArticlesByTopic, toIndexItem } from "@/lib/content";
+import { fxForLabel, loadFxQuote } from "@/lib/fx/reference";
 import { site } from "@/lib/site";
 import { getTopic } from "@/lib/taxonomy";
 
@@ -56,6 +57,8 @@ export default async function CountrySeriesPage({
 
   const doors = countryDoors(country);
   const fx = currencyFileHref(country.currency);
+  const quote = series.slug === "markets" && fx ? await loadFxQuote() : null;
+  const fxRate = quote ? fxForLabel(`USD/${country.currency}`, quote) : null;
   const peers = regionalPeers(country);
   const deskRaw =
     country.slug === "kenya"
@@ -146,10 +149,10 @@ export default async function CountrySeriesPage({
               <Link href={fx} className="text-forest underline underline-offset-2">
                 USD/{country.currency}
               </Link>{" "}
-              — demonstration print only.
+              {fxRate ? `· ${fxRate}` : "· no rate returned this hour"}.
             </p>
           ) : (
-            <p className="mt-4 text-sm text-muted">USD/{country.currency} is not on the demonstration tape.</p>
+            <p className="mt-4 text-sm text-muted">USD/{country.currency} is not in the reference file.</p>
           )}
           {series.deskTopics.length > 0 && country.slug === "kenya" ? (
             <ul className="mt-5 space-y-1.5 text-sm text-ink-soft">

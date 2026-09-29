@@ -58,7 +58,7 @@ export default async function AgentsPage() {
           <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">prints · daily</p>
           <p className="mt-1 font-serif text-xl">World Bank annual series</p>
           <p className="mt-1 text-sm text-ink-soft">
-            Inflation, GDP, foreign direct investment and public debt. {report.prints.length} values parsed on this run.
+            Inflation, GDP, foreign direct investment, public debt, and a featured catalogue of population, unemployment, GDP per capita, exports, the current account and electricity access. {report.prints.length} values parsed on this run.
             {report.store.reason ? ` ${report.store.reason}` : " Matching vintages already stored were left in place."}
           </p>
         </li>

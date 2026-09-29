@@ -1,7 +1,19 @@
 import { countries } from "@/lib/demo/countries";
 
+export type IndicatorSlug =
+  | "inflation"
+  | "gdp"
+  | "fdi"
+  | "public-debt"
+  | "population"
+  | "unemployment"
+  | "gdp-per-capita"
+  | "exports"
+  | "current-account"
+  | "electricity";
+
 export type SourcedPrint = {
-  indicatorSlug: "inflation" | "gdp" | "fdi" | "public-debt";
+  indicatorSlug: IndicatorSlug;
   countrySlug: string;
   countryName: string;
   iso: string;
@@ -14,12 +26,25 @@ export type SourcedPrint = {
   sourceUrl: string;
 };
 
-const SERIES = [
+type SeriesDef = { indicatorSlug: IndicatorSlug; code: string };
+
+/** Full-continent annual file. Policy rate is intentionally absent. */
+const CORE: SeriesDef[] = [
   { indicatorSlug: "inflation", code: "FP.CPI.TOTL.ZG" },
   { indicatorSlug: "gdp", code: "NY.GDP.MKTP.CD" },
   { indicatorSlug: "fdi", code: "BX.KLT.DINV.CD.WD" },
   { indicatorSlug: "public-debt", code: "GC.DOD.TOTL.GD.ZS" },
-] as const;
+];
+
+/** Extra official series for the featured desks. A null cell is dropped. */
+const CATALOGUE: SeriesDef[] = [
+  { indicatorSlug: "population", code: "SP.POP.TOTL" },
+  { indicatorSlug: "unemployment", code: "SL.UEM.TOTL.ZS" },
+  { indicatorSlug: "gdp-per-capita", code: "NY.GDP.PCAP.CD" },
+  { indicatorSlug: "exports", code: "NE.EXP.GNFS.ZS" },
+  { indicatorSlug: "current-account", code: "BN.CAB.XOKA.GD.ZS" },
+  { indicatorSlug: "electricity", code: "EG.ELC.ACCS.ZS" },
+];
 
 const byIso = new Map(countries.map((country) => [country.iso.toUpperCase(), country]));
 
@@ -44,7 +69,7 @@ function unitFromSeriesName(seriesName: string): string {
   return match?.[1] ?? seriesName;
 }
 
-function parseSeries(body: unknown, series: (typeof SERIES)[number]): SourcedPrint[] {
+function parseSeries(body: unknown, series: SeriesDef): SourcedPrint[] {
   if (!Array.isArray(body) || !Array.isArray(body[1])) return [];
   const prints: SourcedPrint[] = [];
   for (const row of body[1] as WorldBankRow[]) {
@@ -72,7 +97,7 @@ function parseSeries(body: unknown, series: (typeof SERIES)[number]): SourcedPri
   return prints;
 }
 
-async function fetchSeriesChunk(series: (typeof SERIES)[number], countryPath: string): Promise<SourcedPrint[]> {
+async function fetchSeriesChunk(series: SeriesDef, countryPath: string): Promise<SourcedPrint[]> {
   const url = `https://api.worldbank.org/v2/country/${countryPath}/indicator/${series.code}?format=json&mrnev=1&per_page=60`;
   const response = await fetch(url, {
     headers: { Accept: "application/json" },
@@ -86,11 +111,42 @@ async function fetchSeriesChunk(series: (typeof SERIES)[number], countryPath: st
 
 const featuredPath = "KE;NG;ZA;EG;GH;RW;TZ;UG";
 
+/** Kenya and the other featured desks only. A failed response contributes nothing. */
+async function loadSeries(seriesList: SeriesDef[], countryPath: string): Promise<SourcedPrint[]> {
+  const batches = await Promise.all(seriesList.map(async (series) => {
+    try {
+      return await fetchSeriesChunk(series, countryPath);
+    } catch {
+      try {
+        return await fetchSeriesChunk(series, countryPath);
+      } catch {
+        return [];
+      }
+    }
+  }));
+  return latestPrints(batches.flat());
+}
+
+export async function loadFeaturedPrints(): Promise<SourcedPrint[]> {
+  return loadSeries(CORE, featuredPath);
+}
+
+/** Population, unemployment, GDP per capita, exports, current account, electricity. Featured desks only. */
+export async function loadCataloguePrints(): Promise<SourcedPrint[]> {
+  return loadSeries(CATALOGUE, featuredPath);
+}
+
+/** Featured core series plus the catalogue. Used where the page should fill quickly. */
+export async function loadDeskPrints(): Promise<SourcedPrint[]> {
+  const [core, catalogue] = await Promise.all([loadFeaturedPrints(), loadCataloguePrints()]);
+  return latestPrints([...core, ...catalogue]);
+}
+
 /** Latest non-null annual values. A failed or empty response contributes nothing. */
 export async function loadPrints(): Promise<SourcedPrint[]> {
   const jobs = [
-    ...SERIES.flatMap((series) => countryChunks(6).map((countryPath) => ({ series, countryPath }))),
-    ...SERIES.map((series) => ({ series, countryPath: featuredPath })),
+    ...CORE.flatMap((series) => countryChunks(6).map((countryPath) => ({ series, countryPath }))),
+    ...CORE.map((series) => ({ series, countryPath: featuredPath })),
   ];
   const batches = await Promise.all(jobs.map(async (job) => {
     try {

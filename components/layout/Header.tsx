@@ -43,18 +43,18 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
   }
 
   return (
-    <header className="no-print border-b border-rule bg-paper/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
-        <Wordmark />
-        <p className="hidden max-w-xs text-right font-mono text-[11px] uppercase tracking-[0.12em] text-muted xl:block">
+    <header className="no-print sticky top-0 z-40 border-b border-night-line bg-night text-night-ink">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
+        <Wordmark compact night />
+        <p className="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-night-muted xl:block">
           {site.line}
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           {utilityNav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="hidden font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft hover:text-forest md:inline"
+              className="hidden text-[12px] font-medium tracking-wide text-night-soft hover:text-night-ink lg:inline"
             >
               {item.label}
             </Link>
@@ -62,38 +62,29 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
-            className="border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft hover:border-gold"
+            className="text-[12px] font-medium tracking-wide text-night-soft hover:text-night-ink"
           >
-            Search <span className="hidden sm:inline">⌘K</span>
+            Search
           </button>
           <button
             type="button"
             onClick={toggleTheme}
-            className="border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft hover:border-gold"
+            className="text-[12px] font-medium tracking-wide text-night-soft hover:text-night-ink"
           >
             <span suppressHydrationWarning>{dark ? "Light" : "Dark"}</span>
           </button>
-          <Link
-            href="/login"
-            className="hidden border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft sm:inline"
-          >
+          <Link href="/login" className="hidden text-[12px] font-medium tracking-wide text-night-soft hover:text-night-ink sm:inline">
             Sign in
           </Link>
           <Link
-            href="/account"
-            className="hidden border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft md:inline"
-          >
-            Account
-          </Link>
-          <Link
             href="/pro"
-            className="bg-forest px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-paper hover:bg-forest-mid"
+            className="bg-gold px-3 py-1.5 text-[12px] font-semibold tracking-wide text-night-ink hover:bg-gold-soft"
           >
             Pro
           </Link>
           <button
             type="button"
-            className="border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-[0.1em] lg:hidden"
+            className="text-[12px] font-medium tracking-wide text-night-soft lg:hidden"
             onClick={() => setMenuPath((current) => (current === pathname ? null : pathname))}
             aria-expanded={open}
           >
@@ -101,16 +92,16 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
           </button>
         </div>
       </div>
-      <nav className="hidden border-t border-rule lg:block">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-5 gap-y-1 px-4 py-2 sm:px-6">
+      <nav className="hidden border-t border-night-line lg:block">
+        <div className="mx-auto flex max-w-7xl items-center gap-x-6 overflow-x-auto px-4 py-2.5 sm:px-6">
           {nav.map((item) => {
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`font-mono text-[11px] font-semibold uppercase tracking-[0.12em] ${
-                  active ? "text-forest" : "text-ink-soft hover:text-forest"
+                className={`text-[13px] font-medium tracking-wide ${
+                  active ? "text-night-ink" : "text-night-muted hover:text-night-ink"
                 }`}
               >
                 {item.label}
@@ -119,15 +110,14 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
           })}
         </div>
       </nav>
-      <div className="masthead-rule" />
 
       {open ? (
-        <nav className="border-t border-rule px-4 py-4 lg:hidden">
+        <nav className="border-t border-night-line bg-night px-4 py-5 lg:hidden">
           <ul className="grid grid-cols-2 gap-3">
             {[...nav, ...utilityNav, { href: "/pro", label: "Pro" }, { href: "/today", label: "Morning file" }].map(
               (item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em]">
+                  <Link href={item.href} className="text-[14px] font-medium text-night-ink">
                     {item.label}
                   </Link>
                 </li>

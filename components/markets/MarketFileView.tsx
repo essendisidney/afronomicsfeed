@@ -10,14 +10,33 @@ const kindLabel = {
   commodity: "Commodity file",
 } as const;
 
-export function MarketFileView({ item }: { item: MarketInstrument }) {
+export function MarketFileView({
+  item,
+  reference = null,
+  peerValues = {},
+}: {
+  item: MarketInstrument;
+  reference?: { value: string; updated: string; sourceName: string; sourceUrl: string } | null;
+  peerValues?: Record<string, string>;
+}) {
   const country = item.countrySlug ? getCountry(item.countrySlug) : undefined;
   const peers = peerInstruments(item);
 
   return (
     <>
       <div className="grid gap-3 sm:grid-cols-3">
-        <EmptyMetric label="Official print" note={`Demo layout shows ${item.value}`} />
+        {reference ? (
+          <div className="border border-rule px-4 py-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Reference</p>
+            <p className="mt-2 font-serif text-3xl tracking-[-0.03em]">{reference.value}</p>
+            <p className="mt-2 text-xs text-ink-soft">{reference.updated}</p>
+            <a href={reference.sourceUrl} className="mt-1 inline-block text-xs text-forest underline underline-offset-2" target="_blank" rel="noopener noreferrer">
+              {reference.sourceName}
+            </a>
+          </div>
+        ) : (
+          <EmptyMetric label="Official print" note="No print is stored." />
+        )}
         <EmptyMetric label="Change" note="No derived move without two sourced prints" />
         <EmptyMetric label="As-of" note="Not a live feed" />
       </div>
@@ -55,7 +74,7 @@ export function MarketFileView({ item }: { item: MarketInstrument }) {
               <li key={peer.slug}>
                 <Link href={peer.fileHref} className="block border border-rule px-3 py-3 hover:border-gold">
                   <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">{peer.label}</p>
-                  <p className="mt-1 text-xs text-muted">Demo {peer.value} · not a live print</p>
+                  <p className="mt-1 text-xs text-muted">{peerValues[peer.label] ?? "—"}</p>
                 </Link>
               </li>
             ))}
@@ -63,7 +82,11 @@ export function MarketFileView({ item }: { item: MarketInstrument }) {
         </section>
       ) : null}
 
-      <Provenance source={item.href} updated="Not a live feed" methodology="No tape redistribution. Demonstration print only." />
+      <Provenance
+        source={reference ? reference.sourceName : item.href}
+        updated={reference ? reference.updated : "Not stored"}
+        methodology={reference ? "Daily mid-market reference. Not a central-bank dealing rate." : "No print is stored for this file."}
+      />
     </>
   );
 }

@@ -1,106 +1,92 @@
 import Link from "next/link";
 import { Wordmark } from "@/components/brand/Wordmark";
-import { deskNav, disclaimer, footerGroups, nav, site } from "@/lib/site";
+import { deskNav, disclaimer, nav, site } from "@/lib/site";
+
+const product = [
+  { href: "/about", label: "About" },
+  { href: "/pro", label: "Pro" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/subscribe", label: "Subscribe" },
+  { href: "/manifesto", label: "Manifesto" },
+  { href: "/terminal", label: "Directory" },
+] as const;
+
+const company = [
+  { href: "/advisory", label: "Advisory" },
+  { href: "/press", label: "Press" },
+  { href: "/careers", label: "Careers" },
+  { href: "/contact", label: "Contact" },
+] as const;
+
+const legal = [
+  { href: "/legal/disclaimer", label: "Disclaimer" },
+  { href: "/legal/privacy", label: "Privacy" },
+  { href: "/legal/terms", label: "Terms" },
+  { href: "/imprint", label: "Imprint" },
+] as const;
+
+function Column({ title, links }: { title: string; links: readonly { href: string; label: string }[] }) {
+  return (
+    <div>
+      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-night-muted">{title}</p>
+      <ul className="mt-4 space-y-2">
+        {links.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href} className="text-sm text-night-soft hover:text-night-ink">
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function Footer() {
   return (
-    <footer className="no-print mt-auto border-t border-rule bg-paper-2">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <Wordmark />
+    <footer className="no-print mt-16 bg-night text-night-ink">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Wordmark compact night />
+            <p className="mt-5 max-w-xs text-sm leading-6 text-night-soft">{site.promise}</p>
             <a
               href={site.houseUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-block font-mono text-[10px] uppercase tracking-[0.16em] text-muted no-underline hover:text-forest"
+              className="mt-4 inline-block font-mono text-[10px] uppercase tracking-[0.16em] text-night-muted hover:text-night-ink"
             >
               {site.houseCredit}
             </a>
-            {site.linkedinUrl ? (
-              <a
-                href={site.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted no-underline hover:text-forest"
-              >
-                LinkedIn
-              </a>
-            ) : null}
-            <p className="mt-4 max-w-sm text-sm leading-6 text-ink-soft">{site.promise}</p>
-            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">{site.line}</p>
           </div>
-          <div className="md:col-span-4">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">Layers</p>
-            <ul className="mt-3 columns-2 gap-x-6 space-y-1.5 text-sm">
-              {nav.map((item) => (
-                <li key={item.href} className="break-inside-avoid">
-                  <Link href={item.href} className="text-ink-soft hover:text-forest">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="md:col-span-4">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">
-              Kenya desk file
-            </p>
-            <ul className="mt-3 columns-2 gap-x-6 space-y-1.5 text-sm">
-              {deskNav.map((item) => (
-                <li key={item.href} className="break-inside-avoid">
-                  <Link href={item.href} className="text-ink-soft hover:text-forest">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-4">
+            <Column title="Product" links={product} />
+            <Column title="Read" links={deskNav} />
+            <Column title="Desks" links={nav} />
+            <Column title="House" links={company} />
           </div>
         </div>
 
-        <div className="mt-10 grid gap-8 border-t border-rule pt-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-          {footerGroups.map((group) => (
-            <div key={group.title}>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">
-                {group.title}
-              </p>
-              <ul className="mt-3 space-y-1.5 text-sm">
-                {group.links.map((item) => (
-                  <li key={`${group.title}-${item.href}`}>
-                    <Link href={item.href} className="text-ink-soft hover:text-forest">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-                {group.title === "Company" ? (
-                  <li>
-                    <a href="/rss.xml" className="text-ink-soft hover:text-forest">
-                      RSS
-                    </a>
-                  </li>
-                ) : null}
-              </ul>
-            </div>
+        <div className="mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-night-line pt-6">
+          {legal.map((item) => (
+            <Link key={item.href} href={item.href} className="text-xs text-night-muted hover:text-night-ink">
+              {item.label}
+            </Link>
           ))}
+          <a href="/rss.xml" className="text-xs text-night-muted hover:text-night-ink">
+            RSS
+          </a>
+          {site.linkedinUrl ? (
+            <a href={site.linkedinUrl} className="text-xs text-night-muted hover:text-night-ink" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+          ) : null}
         </div>
 
-        <div className="mt-10 border-t border-rule pt-6">
-          <p className="max-w-5xl text-xs leading-6 text-muted">{disclaimer}</p>
-          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
-            © {new Date().getFullYear()} {site.legalName}
-            <span className="mx-2" aria-hidden>
-              ·
-            </span>
-            <a
-              href={site.houseUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-forest"
-            >
-              {site.houseCredit}
-            </a>
-          </p>
-        </div>
+        <p className="mt-6 max-w-3xl text-xs leading-5 text-night-muted">{disclaimer}</p>
+        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-night-muted">
+          © {new Date().getFullYear()} {site.legalName}
+        </p>
       </div>
     </footer>
   );

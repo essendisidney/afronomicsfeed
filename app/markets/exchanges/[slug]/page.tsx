@@ -19,7 +19,7 @@ export async function generateMetadata({
   if (!row) return {};
   return {
     title: `${row.label} exchange file`,
-    description: `${row.label} — demonstration print only. Official door: ${row.href}`,
+    description: `${row.label} file. No index print is stored. Official door: ${row.href}`,
     alternates: { canonical: `${site.url}${row.fileHref}` },
   };
 }

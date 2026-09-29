@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Source_Sans_3, Source_Serif_4 } from "next/font/google";
+import { IBM_Plex_Mono, Outfit, Source_Serif_4 } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { ThemeScript } from "@/components/layout/ThemeScript";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const sans = Source_Sans_3({
+const sans = Outfit({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "800"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 

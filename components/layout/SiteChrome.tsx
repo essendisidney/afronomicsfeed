@@ -3,6 +3,7 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { MarketStrip } from "@/components/ui/MarketStrip";
 import { PageCounter } from "./PageCounter";
+import { AppInstall } from "./AppInstall";
 import { PageFeedback } from "@/components/ui/PageFeedback";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
@@ -26,6 +27,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       </div>
       <Footer />
       <PageCounter />
+      <AppInstall />
     </>
   );
 }

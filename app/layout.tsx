@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { ThemeScript } from "@/components/layout/ThemeScript";
@@ -31,8 +31,18 @@ const mono = localFont({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#16263f" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f1b2e" },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
+  applicationName: "Afronomics",
+  appleWebApp: { capable: true, title: "Afronomics", statusBarStyle: "black-translucent" },
+  icons: { apple: "/icons/apple-touch-icon.png" },
   title: {
     default: `${site.name} — ${site.tagline}`,
     template: `%s — ${site.name}`,

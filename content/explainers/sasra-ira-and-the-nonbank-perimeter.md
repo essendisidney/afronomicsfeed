@@ -66,4 +66,3 @@ Do not treat an insurance product headline as a capital-markets event unless CMA
 
 In the first ninety days, Afronomics Feed will treat SASRA and IRA decisions as in-scope when they are public, dated, and material to Kenya’s financial-intermediation file. We will not build a consumer-product desk, and we will not turn sacco or insurance stories into personal-finance tips.
 
-If a figure appears in our [regulatory tracker](/trackers/regulatory) without a regulator URL, treat it as **EXAMPLE DATA**.

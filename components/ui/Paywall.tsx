@@ -7,33 +7,32 @@ export function Paywall({ title }: { title: string }) {
         aria-hidden="true"
         className="pointer-events-none space-y-3 px-6 pt-8 text-sm leading-7 text-muted blur-[3px] select-none"
       >
-        <p>Desk memo: what to file from this primary, and what remains unknown.</p>
-        <p>The annotated method continues for Individual seats.</p>
+        <p>The full analysis continues for Pro subscribers.</p>
+        <p>What changed, who is exposed, and what to watch next.</p>
       </div>
       <div className="relative z-10 -mt-6 px-6 pb-8 pt-2 text-center sm:px-10">
         <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">
-          The memo is the product
+          Pro analysis
         </p>
         <h2 className="mt-3 font-serif text-2xl text-ink sm:text-3xl">
-          “{title}” — what to file is for subscribers
+          Continue reading “{title}”
         </h2>
         <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-ink-soft">
-          Free readers get the headline, three bullets, the lede, and citations.
-          Individual unlocks the desk memo: what to put in the pack, and what
-          you must not invent. Checkout is not live yet.
+          The data and headlines on Afronomics are free. Pro unlocks the full
+          analysis behind them.
         </p>
         <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
-            href="/subscribe"
+            href="/pricing"
             className="bg-forest px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-paper hover:bg-forest-mid"
           >
-            Start KES 500 trial
+            See Pro plans
           </Link>
           <Link
-            href="/pricing"
+            href="/subscribe"
             className="border border-ink/20 px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-ink hover:border-gold hover:text-forest"
           >
-            Why a desk pays
+            Get the free weekly
           </Link>
         </div>
       </div>

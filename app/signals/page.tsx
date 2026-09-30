@@ -1,79 +1,66 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LayerPage } from "@/components/intelligence/LayerPage";
-import { DemoMark } from "@/components/ui/DemoMark";
-import { signalCategories, signalCategorySlug, signals } from "@/lib/demo/signals";
+import { PageShell } from "@/components/data/PageShell";
+import { SectionTitle, SourceLine } from "@/components/data/parts";
+import { deskLabels } from "@/lib/data/indicators";
+import { loadDataSignals, type DataSignal } from "@/lib/data/signals";
+import { site } from "@/lib/site";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Signals",
-  description: "Afronomics Signal Engine — fact, calculation, model signal and interpretation kept apart.",
+  title: "Signals — the biggest moves in African data",
+  description: "The largest year-on-year moves in inflation, growth, FDI, reserves, debt service and more across 54 African economies, generated from published data.",
+  alternates: { canonical: `${site.url}/signals` },
 };
 
-export default function SignalsPage() {
+const toneClass: Record<DataSignal["tone"], string> = {
+  positive: "text-forest",
+  negative: "text-gold",
+  neutral: "text-ink-soft",
+};
+
+export default async function SignalsPage() {
+  const signals = await loadDataSignals(4);
+  const bySeries = new Map<string, DataSignal[]>();
+  for (const signal of signals) bySeries.set(signal.def.slug, [...(bySeries.get(signal.def.slug) ?? []), signal]);
+
   return (
-    <LayerPage
+    <PageShell
       crumbs={[{ href: "/", label: "Home" }, { label: "Signals" }]}
-      kicker="Signal engine"
-      title="Changes that matter, before they are obvious"
-      lede="A signal is not a prediction sold as fact. Each card separates the document, any calculation, a model note, and the desk’s interpretation."
+      kicker="Signals"
+      title="What changed in the latest prints"
+      lede={
+        <p>
+          For each tracked series we compare every country’s newest annual value with the year before and surface the largest moves.
+          Every sentence is generated from the published figures and links to the full table.
+        </p>
+      }
     >
-      <ul className="mb-8 flex flex-wrap gap-2">
-        {signalCategories.map((category) => (
-          <li key={category}>
-            <Link
-              href={`/signals/categories/${signalCategorySlug(category)}`}
-              className="border border-rule px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] hover:border-gold"
-            >
-              {category}
-            </Link>
-          </li>
+      <div className="grid gap-12 md:grid-cols-2">
+        {[...bySeries.entries()].map(([slug, list]) => (
+          <section key={slug}>
+            <SectionTitle kicker={deskLabels[list[0].def.desk]} title={list[0].def.label} href={`/data/${slug}`} />
+            <ul className="mt-2 divide-y divide-rule">
+              {list.map((signal) => (
+                <li key={signal.id} className="py-3">
+                  <p className="flex items-baseline gap-2">
+                    <span aria-hidden className={`font-mono text-xs ${toneClass[signal.tone]}`}>
+                      {signal.direction === "up" ? "▲" : "▼"}
+                    </span>
+                    <Link href={`/countries/${signal.mover.country.slug}`} className="text-[15px] leading-snug text-ink hover:text-forest">
+                      {signal.headline}
+                    </Link>
+                  </p>
+                  <p className="mt-0.5 pl-5 text-xs text-ink-soft">{signal.detail}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
-      </ul>
-      <ul className="space-y-6">
-        {signals.map((signal) => (
-          <li key={signal.slug} className="border border-rule p-5">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold">
-                {signal.category} · {signal.country} · {signal.sector}
-              </p>
-              <DemoMark kind="methodology" />
-            </div>
-            <h2 className="mt-2 font-serif text-2xl">
-              <Link href={`/signals/${signal.slug}`} className="hover:text-forest">
-                {signal.title}
-              </Link>
-            </h2>
-            <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-4">
-              <div>
-                <dt className="font-mono text-[10px] uppercase text-muted">Direction</dt>
-                <dd>{signal.direction}</dd>
-              </div>
-              <div>
-                <dt className="font-mono text-[10px] uppercase text-muted">Confidence</dt>
-                <dd>{signal.confidence}</dd>
-              </div>
-              <div>
-                <dt className="font-mono text-[10px] uppercase text-muted">Severity</dt>
-                <dd>{signal.severity}</dd>
-              </div>
-              <div>
-                <dt className="font-mono text-[10px] uppercase text-muted">Horizon</dt>
-                <dd>{signal.horizon}</dd>
-              </div>
-            </dl>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <p className="text-sm leading-6">
-                <span className="font-semibold">Fact. </span>
-                {signal.fact}
-              </p>
-              <p className="text-sm leading-6 text-ink-soft">
-                <span className="font-semibold text-ink">Interpretation. </span>
-                {signal.interpretation}
-              </p>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </LayerPage>
+      </div>
+      {signals.length === 0 ? <p className="text-sm text-muted">The source did not return data this hour.</p> : null}
+      <SourceLine name="World Bank Open Data" href="https://data.worldbank.org/" detail="▲▼ direction of the move; colour marks whether it is usually read as an improvement" />
+    </PageShell>
   );
 }

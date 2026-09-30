@@ -1,88 +1,123 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { ProsePage } from "@/components/data/ProsePage";
+import { deskLabels, indicatorDefs } from "@/lib/data/indicators";
+import { projectsSource } from "@/lib/data/projects";
+import { feeds } from "@/lib/data/wire";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Method",
-  description:
-    "How Afronomics Feed labels facts, analysis, and opinion — and what this desk will not write.",
+  title: "Sources and method",
+  description: "Where every Afronomics number comes from, how often it refreshes, how we rank and compare countries, and how we correct mistakes.",
+  alternates: { canonical: `${site.url}/method` },
 };
 
 export default function MethodPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-14 sm:px-6">
-      <PageHeader
-        kicker="Method"
-        title="How a piece gets onto this desk"
-        lede="The product is the file discipline, not the volume. This page is the house standard for the first ninety days."
-      />
+    <ProsePage
+      crumbs={[{ href: "/", label: "Home" }, { label: "Sources & method" }]}
+      kicker="Sources & method"
+      title="Where every number comes from"
+      lede="Afronomics does not type numbers in by hand. Every figure is read from a named publisher, stamped with its year or time, and linked back to its source."
+    >
+      <h2>The rule</h2>
+      <p>
+        A number appears on Afronomics only when a publisher has printed it. If the publisher has no value for a country, the cell is blank and
+        says so. We never estimate, interpolate or let a language model write a figure.
+      </p>
 
-      <div className="article-body mt-10">
-        <h2>How to move through the file</h2>
-        <p>
-          Start at <Link href="/today">this morning’s file</Link>, then move by{" "}
-          <Link href="/institutions">institution</Link> or <Link href="/topics">topic</Link>.
-          The archive can filter series, label, and subject. None of those views is a
-          live wire.
-        </p>
+      <h2>Sources</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>Publisher</th>
+            <th>Refresh</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Macro, debt, trade, technology and climate series</td>
+            <td>
+              <a href="https://data.worldbank.org/">World Bank Open Data</a> (World Development Indicators, International Debt Statistics)
+            </td>
+            <td>Daily check; the publisher updates quarterly</td>
+          </tr>
+          <tr>
+            <td>Development-finance projects</td>
+            <td>
+              <a href={projectsSource.url}>{projectsSource.name}</a>
+            </td>
+            <td>Every 6 hours</td>
+          </tr>
+          <tr>
+            <td>Currency reference</td>
+            <td>
+              <a href="https://www.exchangerate-api.com/">ExchangeRate-API</a> mid-market rates
+            </td>
+            <td>Hourly</td>
+          </tr>
+          <tr>
+            <td>Headlines (the Wire)</td>
+            <td>{feeds.length} African publishers’ public RSS feeds</td>
+            <td>Every 15 minutes</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <h2>What we cover</h2>
-        <p>
-          Kenya banking, capital markets, and financial regulation: listed banks, NSE and
-          fixed income, and public decisions from CBK, CMA, SASRA, and IRA. We do not
-          run a youth desk, a funding blog, a pan-African firehose, or a tip community.
-        </p>
+      <h2>The {indicatorDefs.length} tracked series</h2>
+      <ul>
+        {indicatorDefs.map((def) => (
+          <li key={def.slug}>
+            <Link href={`/data/${def.slug}`}>{def.label}</Link> — {deskLabels[def.desk]} · <code>{def.code}</code>
+          </li>
+        ))}
+      </ul>
 
-        <h2>Labels</h2>
-        <p>
-          Every piece carries one or more of <strong>Facts</strong>, <strong>Analysis</strong>,
-          and <strong>Opinion</strong>. Facts are what a primary document says. Analysis is
-          how we read its structure. Opinion, if used, is a signed desk judgement — not a
-          hidden adjective inside a news sentence.
-        </p>
+      <h2>Rankings and comparisons</h2>
+      <p>
+        Rankings use each country’s latest print from the last three years, so a country is not dropped because its statistics office is a year
+        behind. The year of every value is shown; an older print carries a small ’YY mark. Continental totals are summed only for the year in
+        which at least 90% of the best-covered year’s countries reported, and the number of reporting countries is printed next to the total.
+        “Movers” compare a country’s latest annual value with the year immediately before it.
+      </p>
 
-        <h2>Citations and as-of</h2>
-        <p>
-          A claim that needs a number needs a source with a name, a URL, and a date. Market
-          figures need an as-of stamp. If we cannot point to a public document, the figure
-          is labelled <strong>EXAMPLE DATA</strong> or it does not ship. We do not scrape or
-          republish the NSE tape; the official window is{" "}
-          <a href="https://www.nse.co.ke/" target="_blank" rel="noopener noreferrer">
-            nse.co.ke
-          </a>
-          .
-        </p>
+      <h2>Currencies</h2>
+      <p>
+        The live reference is a mid-market rate for comparison, not a dealing rate or a central-bank fixing. The annual figure is the official
+        period average reported to the World Bank. Where a parallel market exists, it can differ materially from both.
+      </p>
 
-        <h2>What we will not write</h2>
-        <p>
-          Buy, sell, hold, or overweight language. Price targets as advice. Guaranteed
-          returns. Personalized “for your portfolio” copy. A remembered yield presented as
-          this week’s print.
-        </p>
+      <h2>Development finance</h2>
+      <p>
+        Commitments are IBRD and IDA amounts as the World Bank publishes them; co-financing is not included. Pipeline projects carry the Bank’s
+        expected Board date, which moves. Themes are assigned from each project’s title and abstract and are a guide, not the Bank’s own
+        sector coding.
+      </p>
 
-        <h2>When we are wrong</h2>
-        <p>
-          Corrections are public. The log is at{" "}
-          <Link href="/corrections">/corrections</Link>. We do not silently overwrite a
-          filed brief.
-        </p>
+      <h2>Headlines</h2>
+      <p>
+        The Wire shows a publisher’s headline, a short excerpt from its feed, and a link to the original article. We tag countries and desks
+        automatically from the text; tags can be wrong and are corrected on request. Publishers can ask to join or leave the Wire at{" "}
+        <a href={`mailto:${site.contactEmail}?subject=Wire`}>{site.contactEmail}</a>.
+      </p>
 
-        <h2>Method registry</h2>
-        <p>
-          Data and label standards live in the{" "}
-          <Link href="/method/registry">method registry</Link>. Draft and empty rows mean
-          the file is not finished — the desk does not invent a completed methodology.
-          House terms are indexed in the <Link href="/glossary">glossary</Link>.
-        </p>
+      <h2>Analysis</h2>
+      <p>
+        Briefs are labelled Facts, Analysis or Opinion, cite their primary documents with dates, and carry an as-of stamp. We do not give
+        buy, sell or hold recommendations.
+      </p>
 
-        <h2>What is gated</h2>
-        <p>
-          Free readers get the headline, three bullets, the lede, and the citations.
-          Daily Brief and Weekly Intelligence <strong>desk memos</strong> — what to
-          file, and what is still unknown — sit behind Individual access.
-          Explainers stay open so the map of who-sets-what is usable without a seat.
-        </p>
-      </div>
-    </div>
+      <h2>Corrections</h2>
+      <p>
+        If a figure, date or tag is wrong, tell us and we fix it and log it publicly on the <Link href="/corrections">corrections page</Link>.
+      </p>
+
+      <h2>Reusing our data</h2>
+      <p>
+        Every series can be downloaded as CSV from its data page. Cite it as “Source: Afronomics, compiled from [publisher]”. The underlying
+        World Bank data is licensed CC BY 4.0.
+      </p>
+    </ProsePage>
   );
 }

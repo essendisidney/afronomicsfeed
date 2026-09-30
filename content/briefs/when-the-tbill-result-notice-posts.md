@@ -25,7 +25,6 @@ summary: "The habit brief: what a treasury desk files in the twelve minutes afte
 teaser:
   - "The result notice is the only official print. Until it is up, the desk holds a blank."
   - "Copy offered, bids, accepted amount, and the weighted average rate as the Bank prints them — then stop."
-  - "Any yield in an Afronomics table without a CBK URL is EXAMPLE DATA."
 gated: true
 urgency: file
 minutes: 12
@@ -46,14 +45,6 @@ This is the brief a desk should reopen on result day. It is not this week’s au
 4. **Write one unknown.** If a tenor is missing or the PDF is a scan you cannot read, say so. Do not interpolate.
 
 That sequence is **facts** about process. Comparing this notice to the prior week’s notice is **analysis** only after both PDFs are filed.
-
-## EXAMPLE DATA — format only
-
-The following line is a **format demonstration**. It is not this week’s print.
-
-- **91-day (EXAMPLE DATA)** — offered KES 4.0bn, accepted KES 3.1bn, weighted average 8.20%, as of an illustrative notice date.
-
-If a figure is not copied from a named CBK notice, it does not enter the intelligence file as fact. See the [Debt & rates calendar](/trackers/debt).
 
 ## What this brief will not do
 

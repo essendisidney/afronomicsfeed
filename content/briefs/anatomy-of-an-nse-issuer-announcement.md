@@ -49,8 +49,6 @@ Those five fields are **facts** about the announcement. Inferring a capital acti
 
 ## The tape is a different window
 
-Live prints and the index strip are not this document. Afronomics Feed does not scrape or republish NSE quotes. For the official tape, use the exchange. Any figure in our [bank forensic index](/trackers/banks) that is not copied from a cited statement is **EXAMPLE DATA**.
-
 ## Filing rule
 
 A complete desk note has: the NSE URL, the notice date, the five fields, and a one-line list of unknowns. If CMA later publishes a related notice, it is a second primary — see [Anatomy of a CMA enforcement notice](/brief/anatomy-of-a-cma-enforcement-notice) — not a rewrite of the first file.

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { convertAmount, type FxQuote } from "@/lib/fx/reference";
+import { convertAmount, type FxQuote } from "@/lib/data/fx";
 
 function money(value: number, code: string) {
   return new Intl.NumberFormat("en-US", {

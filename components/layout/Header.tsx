@@ -6,7 +6,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { SearchDialog } from "@/components/search/SearchDialog";
 import { nav, site, utilityNav } from "@/lib/site";
-import type { ArticleIndexItem } from "@/lib/types";
+import type { SearchHit } from "@/lib/search-core";
 
 function subscribeTheme(onStoreChange: () => void) {
   const observer = new MutationObserver(onStoreChange);
@@ -18,7 +18,7 @@ function themeSnapshot() {
   return document.documentElement.classList.contains("dark");
 }
 
-export function Header({ articles }: { articles: ArticleIndexItem[] }) {
+export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
   const pathname = usePathname();
   const [menuPath, setMenuPath] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -73,11 +73,14 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
           >
             <span suppressHydrationWarning>{dark ? "Light" : "Dark"}</span>
           </button>
-          <Link href="/login" className="hidden text-[12px] font-medium tracking-wide text-night-soft hover:text-night-ink sm:inline">
-            Sign in
+          <Link
+            href="/subscribe"
+            className="hidden text-[12px] font-medium tracking-wide text-night-soft hover:text-night-ink sm:inline"
+          >
+            Newsletter
           </Link>
           <Link
-            href="/pro"
+            href="/pricing"
             className="bg-gold px-3 py-1.5 text-[12px] font-semibold tracking-wide text-night-ink hover:bg-gold-soft"
           >
             Pro
@@ -114,7 +117,7 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
       {open ? (
         <nav className="border-t border-night-line bg-night px-4 py-5 lg:hidden">
           <ul className="grid grid-cols-2 gap-3">
-            {[...nav, ...utilityNav, { href: "/pro", label: "Pro" }, { href: "/today", label: "Morning file" }].map(
+            {[...nav, ...utilityNav, { href: "/pricing", label: "Pro" }, { href: "/subscribe", label: "Newsletter" }].map(
               (item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="text-[14px] font-medium text-night-ink">
@@ -127,7 +130,7 @@ export function Header({ articles }: { articles: ArticleIndexItem[] }) {
         </nav>
       ) : null}
 
-      <SearchDialog articles={articles} open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SearchDialog index={searchIndex} open={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

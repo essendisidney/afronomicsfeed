@@ -1,10 +1,10 @@
-import { getAllArticles, toIndexItem } from "@/lib/content";
+import { buildSearchIndex } from "@/lib/search";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { MarketStrip } from "@/components/ui/MarketStrip";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
-  const articles = getAllArticles().map(toIndexItem);
+  const searchIndex = buildSearchIndex();
 
   return (
     <>
@@ -15,7 +15,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
       <MarketStrip />
-      <Header articles={articles} />
+      <Header searchIndex={searchIndex} />
       <div id="main" className="flex-1">
         {children}
       </div>

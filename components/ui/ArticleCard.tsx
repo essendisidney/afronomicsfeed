@@ -43,7 +43,7 @@ export function ArticleCard({
         href={href}
         className="mt-1 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-forest hover:text-gold"
       >
-        Open brief →
+        Read →
       </Link>
     </article>
   );

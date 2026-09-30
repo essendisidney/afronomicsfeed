@@ -1,4 +1,3 @@
-import { site } from "./site";
 
 export type InstitutionSlug = "cbk" | "cma" | "nse" | "treasury" | "sasra" | "ira";
 export type TopicSlug =
@@ -34,7 +33,7 @@ export const institutions: Institution[] = [
     name: "Central Bank of Kenya",
     short: "CBK",
     mandate: "Monetary policy, bank supervision, and payment-system matters within its published remit.",
-    url: site.cbkUrl,
+    url: "https://www.centralbank.go.ke/",
     topics: ["mpc", "bank-supervision", "treasury-bills", "money-markets"],
   },
   {
@@ -42,7 +41,7 @@ export const institutions: Institution[] = [
     name: "Capital Markets Authority",
     short: "CMA",
     mandate: "Licensing, conduct, disclosure, and enforcement in Kenya’s capital markets.",
-    url: site.cmaUrl,
+    url: "https://www.cma.or.ke/",
     topics: ["capital-markets-conduct", "nse-disclosures", "listed-banks"],
   },
   {
@@ -50,7 +49,7 @@ export const institutions: Institution[] = [
     name: "Nairobi Securities Exchange",
     short: "NSE",
     mandate: "Listing and trading venue for equities and listed fixed income. The official tape lives here.",
-    url: site.nseTapeUrl,
+    url: "https://www.nse.co.ke/",
     topics: ["nse-disclosures", "listed-banks"],
   },
   {
@@ -66,7 +65,7 @@ export const institutions: Institution[] = [
     name: "Sacco Societies Regulatory Authority",
     short: "SASRA",
     mandate: "Supervision of sacco societies under its published mandate, including deposit-taking saccos.",
-    url: site.sasraUrl,
+    url: "https://www.sasra.go.ke/",
     topics: ["saccos"],
   },
   {
@@ -74,7 +73,7 @@ export const institutions: Institution[] = [
     name: "Insurance Regulatory Authority",
     short: "IRA",
     mandate: "Insurance licensing, solvency publications, and conduct in that domain.",
-    url: site.iraUrl,
+    url: "https://www.ira.go.ke/",
     topics: ["insurance"],
   },
 ];

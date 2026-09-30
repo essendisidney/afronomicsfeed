@@ -1,72 +1,47 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LayerPage } from "@/components/intelligence/LayerPage";
-import { Provenance } from "@/components/ui/Provenance";
-import { contactDoors, openContactCount } from "@/lib/demo/contact";
+import { ProsePage } from "@/components/data/ProsePage";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact doors for Afronomics Feed. No fake form delivery.",
+  description: "Reach the Afronomics desk for data questions, corrections, subscriptions, licensing and research.",
+  alternates: { canonical: `${site.url}/contact` },
 };
 
 export default function ContactPage() {
-  const open = openContactCount();
-
+  const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
   return (
-    <LayerPage
-      crumbs={[{ href: "/", label: "Home" }, { label: "Contact" }]}
-      kicker="Contact"
-      title="Doors without a fake form"
-      lede="Open doors point at live pages. Empty means no public inbox is published. This desk does not pretend a message was delivered."
-    >
-      <div className="grid gap-3 sm:grid-cols-2">
-        <div className="border border-rule px-4 py-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Doors</p>
-          <p className="mt-1 font-serif text-xl">{contactDoors.length}</p>
-        </div>
-        <div className="border border-rule px-4 py-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Open</p>
-          <p className="mt-1 font-serif text-xl">{open}</p>
-        </div>
-      </div>
-
-      <p className="mt-6 text-sm">
-        <Link href="/about" className="text-forest underline underline-offset-2">
-          About
-        </Link>
-        {" · "}
-        <Link href="/advisory" className="text-forest underline underline-offset-2">
-          Advisory
-        </Link>
-        {" · "}
-        <Link href="/support" className="text-forest underline underline-offset-2">
-          Support
-        </Link>
-        {" · "}
-        <Link href="/social" className="text-forest underline underline-offset-2">
-          Social
-        </Link>
+    <ProsePage crumbs={[{ href: "/", label: "Home" }, { label: "Contact" }]} kicker="Contact" title="Reach the desk" lede="One inbox, read every working day in Nairobi.">
+      <p>
+        Write to <a href={mail("Afronomics")}>{site.contactEmail}</a> and put one of these in the subject so it reaches the right queue:
       </p>
-
-      <ul className="mt-10 space-y-3">
-        {contactDoors.map((item) => (
-          <li key={item.slug} className="border-b border-rule pb-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
-              {item.kind} · {item.status}
-            </p>
-            {item.href ? (
-              <Link href={item.href} className="mt-1 block font-serif text-xl hover:text-forest">
-                {item.label}
-              </Link>
-            ) : (
-              <p className="mt-1 font-serif text-xl">{item.label}</p>
-            )}
-            <p className="mt-1 text-sm text-ink-soft">{item.lede}</p>
-          </li>
-        ))}
+      <ul>
+        <li>
+          <a href={mail("Correction")}>Correction</a> — a figure, a date or a headline that is wrong. See the <Link href="/corrections">corrections policy</Link>.
+        </li>
+        <li>
+          <a href={mail("Data request")}>Data request</a> — a series or a country you want tracked.
+        </li>
+        <li>
+          <a href={mail("Subscription")}>Subscription</a> — Pro and Team access, invoices and receipts.
+        </li>
+        <li>
+          <a href={mail("Licensing")}>Licensing</a> — feeds, embeds and white-label country files.
+        </li>
+        <li>
+          <a href={mail("Research")}>Research</a> — commissioned work. See <Link href="/advisory">research and advisory</Link>.
+        </li>
+        <li>
+          <a href={mail("Press")}>Press</a> — interviews and permission to republish charts.
+        </li>
       </ul>
-
-      <Provenance source="Contact catalogue" methodology="No door invents a delivered message." />
-    </LayerPage>
+      <p>
+        Publishers who want their feed on <Link href="/news">the Wire</Link>, or removed from it, can write with the subject “Wire”.
+      </p>
+      <p>
+        On LinkedIn: <a href={site.linkedinUrl}>Afronomics Feed</a>.
+      </p>
+    </ProsePage>
   );
 }

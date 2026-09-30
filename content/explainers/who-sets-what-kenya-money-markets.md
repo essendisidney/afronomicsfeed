@@ -58,8 +58,6 @@ CMA is the wrong citation for the Central Bank Rate, and it is the wrong citatio
 
 ## Nairobi Securities Exchange
 
-The [Nairobi Securities Exchange](https://www.nse.co.ke/) operates the listing and trading venue for equities and listed fixed income. Official announcements and the exchange’s own market data pages are the tape. Afronomics Feed does not scrape or republish live NSE quotes. When this site shows index or FX figures, they are static placeholders with an as-of stamp and, unless cited, an **EXAMPLE DATA** label.
-
 ## The National Treasury
 
 The [National Treasury](https://www.treasury.go.ke/) is the sovereign fiscal authority and the issuer of government securities. Auction *operations* are typically visible through CBK’s bills-and-bonds publications; issuer policy and budget documents sit with the Treasury. Cite the document you actually used.

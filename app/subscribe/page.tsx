@@ -1,39 +1,55 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { PageShell } from "@/components/data/PageShell";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Subscribe",
-  description: "Request a KES 500 14-day Individual trial. Checkout is not live.",
+  title: "The Afronomics Weekly — free newsletter",
+  description: "Africa’s markets, economies and capital flows in one Monday email: the prints that moved, new DFI approvals, and what to watch.",
+  alternates: { canonical: `${site.url}/subscribe` },
 };
 
 export default function SubscribePage() {
   return (
-    <div className="mx-auto max-w-xl px-4 py-14 sm:px-6">
-      <PageHeader
-        kicker="Subscribe"
-        title="Fourteen days of the file"
-        lede="KES 500 unlocks Individual access for 14 days when billing ships. This form does not take money."
-      />
-      <div className="mt-10 border border-rule bg-paper-2 p-6">
-        <SubscribeForm />
+    <PageShell
+      crumbs={[{ href: "/", label: "Home" }, { label: "Newsletter" }]}
+      kicker="Free · every Monday"
+      title="The Afronomics Weekly"
+      lede={<p>Five minutes on 54 economies, sent Monday morning East Africa time.</p>}
+    >
+      <div className="grid gap-10 lg:grid-cols-2">
+        <div className="border border-rule bg-paper-2 p-6">
+          <SubscribeForm />
+          <p className="mt-4 text-xs leading-5 text-muted">
+            One email a week. Unsubscribe from any issue. We never sell or share your address — see the{" "}
+            <Link href="/legal/privacy" className="underline underline-offset-2">
+              privacy notice
+            </Link>
+            .
+          </p>
+        </div>
+        <div className="article-body">
+          <h2>In every issue</h2>
+          <ul>
+            <li>
+              <strong>Currencies</strong> — the week’s moves against the dollar, and which central bank acted.
+            </li>
+            <li>
+              <strong>The prints</strong> — inflation, growth and reserve figures that changed, with the source link.
+            </li>
+            <li>
+              <strong>Capital</strong> — development-finance approvals and pipeline, and the largest private deals on the Wire.
+            </li>
+            <li>
+              <strong>What to watch</strong> — rate decisions, auctions, budgets and elections in the week ahead.
+            </li>
+          </ul>
+          <p>
+            Want more than the weekly? <Link href="/pricing">Pro</Link> adds full analysis and alerts.
+          </p>
+        </div>
       </div>
-      <p className="mt-6 text-sm text-muted">
-        See{" "}
-        <Link href="/pricing" className="text-forest underline underline-offset-4">
-          full pricing
-        </Link>{" "}
-        and your{" "}
-        <Link href="/account" className="text-forest underline underline-offset-4">
-          account
-        </Link>{" "}
-        seat. Digest catalogue:{" "}
-        <Link href="/newsletters" className="text-forest underline underline-offset-4">
-          newsletters
-        </Link>
-        . Checkout is not live.
-      </p>
-    </div>
+    </PageShell>
   );
 }

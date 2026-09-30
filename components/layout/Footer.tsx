@@ -1,22 +1,6 @@
 import Link from "next/link";
 import { Wordmark } from "@/components/brand/Wordmark";
-import { deskNav, disclaimer, nav, site } from "@/lib/site";
-
-const product = [
-  { href: "/about", label: "About" },
-  { href: "/pro", label: "Pro" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/subscribe", label: "Subscribe" },
-  { href: "/manifesto", label: "Manifesto" },
-  { href: "/terminal", label: "Directory" },
-] as const;
-
-const company = [
-  { href: "/advisory", label: "Advisory" },
-  { href: "/press", label: "Press" },
-  { href: "/careers", label: "Careers" },
-  { href: "/contact", label: "Contact" },
-] as const;
+import { disclaimer, footerGroups, site } from "@/lib/site";
 
 const legal = [
   { href: "/legal/disclaimer", label: "Disclaimer" },
@@ -60,10 +44,9 @@ export function Footer() {
             </a>
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-4">
-            <Column title="Product" links={product} />
-            <Column title="Read" links={deskNav} />
-            <Column title="Desks" links={nav} />
-            <Column title="House" links={company} />
+            {footerGroups.map((group) => (
+              <Column key={group.title} title={group.title} links={group.links} />
+            ))}
           </div>
         </div>
 
@@ -75,6 +58,9 @@ export function Footer() {
           ))}
           <a href="/rss.xml" className="text-xs text-night-muted hover:text-night-ink">
             RSS
+          </a>
+          <a href={`mailto:${site.contactEmail}`} className="text-xs text-night-muted hover:text-night-ink">
+            {site.contactEmail}
           </a>
           {site.linkedinUrl ? (
             <a href={site.linkedinUrl} className="text-xs text-night-muted hover:text-night-ink" target="_blank" rel="noopener noreferrer">

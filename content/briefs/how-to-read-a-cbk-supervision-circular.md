@@ -55,4 +55,3 @@ It is not an MPC rate decision. It is not a CMA enforcement notice. It is not a 
 
 A complete note has: the Bank URL, the circular’s own date, the four fields, and a one-line list of what the circular does *not* say. If a later circular amends the first, the amendment gets its own as-of stamp. We do not silently overwrite.
 
-Any ratio, threshold, or circular number that appears in an Afronomics tracker without a CBK URL is **EXAMPLE DATA**. See the [regulatory tracker](/trackers/regulatory) for the stub format.

@@ -1,75 +1,68 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { ProsePage } from "@/components/data/ProsePage";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Afronomics is the economic intelligence graph for Africa — news connected to data, signals and decisions.",
+  description: "Afronomics is a single source for African markets, economies and capital flows — live, sourced and free to read.",
+  alternates: { canonical: `${site.url}/about` },
 };
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-14 sm:px-6">
-      <PageHeader kicker="About" title="Africa’s economic intelligence layer" lede={site.promise} />
+    <ProsePage crumbs={[{ href: "/", label: "Home" }, { label: "About" }]} kicker="About" title="One desk for a continent" lede={site.promise}>
+      <h2>Why Afronomics exists</h2>
+      <p>
+        Africa’s economic information is scattered across 54 statistics offices, dozens of central banks and exchanges, multilateral databases
+        and hundreds of newsrooms. Anyone who needs a clear view — an investor, a bank treasury, a development-finance officer, a founder — has
+        to stitch it together by hand. Afronomics does that stitching once, in the open, for everyone.
+      </p>
 
-      <div className="article-body mt-10">
-        <h2>Mission</h2>
-        <p>
-          Africa generates enormous economic activity, policy change, climate risk and
-          investment data. The information is fragmented, delayed, hard to compare across
-          countries, and rarely converted into decisions. Afronomics turns that
-          fragmentation into structured intelligence.
-        </p>
+      <h2>What you get</h2>
+      <ul>
+        <li>
+          <Link href="/news">The Wire</Link> — headlines from African business, markets, technology and energy publishers, refreshed every 15 minutes.
+        </li>
+        <li>
+          <Link href="/countries">54 country files</Link> — growth, prices, debt, capital flows, connectivity and energy, each with history.
+        </li>
+        <li>
+          <Link href="/capital">The capital tracker</Link> — development finance heading to African Boards, by country and theme.
+        </li>
+        <li>
+          <Link href="/data">The data hub</Link> — every series ranked across the continent, with free CSV downloads.
+        </li>
+        <li>
+          <Link href="/brief">Analysis</Link> — field guides to the documents that move African markets.
+        </li>
+      </ul>
 
-        <h2>The thesis</h2>
-        <p>
-          NEWS → DATA → CONTEXT → SIGNALS → DECISIONS. Most publications stop at news.
-          Every important story should connect to the graph: country, currency, regulator,
-          sector, capital, climate and the companies exposed.
-        </p>
+      <h2>How we earn trust</h2>
+      <p>
+        Every number links to the publisher that printed it and carries its year. Blank means the publisher has no value. We correct mistakes in
+        public. The full standard is on <Link href="/method">sources and method</Link>.
+      </p>
 
-        <h2>The first populated file</h2>
-        <p>
-          Kenya banking, capital markets and financial regulation remains the first deep
-          desk — CBK, CMA, NSE, SASRA, IRA — because trust systems have to be proven
-          somewhere. The brand is continental. The wedge is still Nairobi.
-        </p>
+      <h2>How we are funded</h2>
+      <p>
+        Reading and citing Afronomics is free. Institutions pay for depth — full analysis, alerts, bulk data, licensed feeds and commissioned
+        research. See <Link href="/pricing">pricing</Link> and <Link href="/advisory">research and advisory</Link>. We do not take payment for
+        coverage.
+      </p>
 
-        <h2>What we are not</h2>
-        <p>
-          We are not “Bloomberg for Africa.” We are not a generic news site. We are not
-          personalized financial advice. Nothing here is a recommendation to buy, sell, or
-          hold. Demonstration figures are labelled. Model output never becomes a verified
-          fact.
-        </p>
-
-        <h2>Trust</h2>
-        <p>
-          Facts / Analysis / Opinion labels, citations, as-of stamps, and a public{" "}
-          <Link href="/corrections">corrections log</Link>. The house standard is on{" "}
-          <Link href="/method">method</Link>. The Kenya file is in the{" "}
-          <Link href="/archive">archive</Link>. Media kit:{" "}
-          <Link href="/press">press</Link>
-          {" · "}
-          <Link href="/brand">brand</Link>. Layer map:{" "}
-          <Link href="/layers">layers</Link>. Careers:{" "}
-          <Link href="/careers">careers</Link>. LinkedIn:{" "}
-          <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer">
-            AfronomicsFeed
-          </a>
-          .
-        </p>
-
-        <h2>House</h2>
-        <p>
-          Afronomics Feed is{" "}
-          <a href={site.houseUrl} target="_blank" rel="noopener noreferrer">
-            a product of Pesara
-          </a>
-          . Credits: <Link href="/credits">credits</Link>.
-        </p>
-      </div>
-    </div>
+      <h2>Who we are</h2>
+      <p>
+        Afronomics is published from Nairobi by{" "}
+        <a href={site.houseUrl} target="_blank" rel="noopener noreferrer">
+          Pesara
+        </a>
+        . Write to <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a> or follow us on{" "}
+        <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+        .
+      </p>
+    </ProsePage>
   );
 }

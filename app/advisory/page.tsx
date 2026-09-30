@@ -1,79 +1,48 @@
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ProsePage } from "@/components/data/ProsePage";
+import { site } from "@/lib/site";
 
-import { useState } from "react";
-import { PageHeader } from "@/components/ui/PageHeader";
+export const metadata: Metadata = {
+  title: "Research and advisory",
+  description: "Commissioned research, country and sector briefings, licensed data feeds and embedded widgets from Afronomics.",
+  alternates: { canonical: `${site.url}/advisory` },
+};
 
 export default function AdvisoryPage() {
-  const [sent, setSent] = useState(false);
-
+  const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
   return (
-    <div className="mx-auto max-w-xl px-4 py-14 sm:px-6">
-      <PageHeader
-        kicker="Advisory"
-        title="Enterprise and licensed desks"
-        lede="A contact stub for institutions that need seats, compliance packs, or a conversation — not a tips hotline. This form does not open a mandate."
-      />
-      <form
-        className="mt-10 space-y-4 border border-rule bg-paper-2 p-6"
-        onSubmit={(event) => {
-          event.preventDefault();
-          setSent(true);
-        }}
-      >
-        <label className="block">
-          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-            Name
-          </span>
-          <input
-            required
-            name="name"
-            className="mt-2 w-full border border-rule bg-paper px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40"
-          />
-        </label>
-        <label className="block">
-          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-            Institution
-          </span>
-          <input
-            required
-            name="institution"
-            className="mt-2 w-full border border-rule bg-paper px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40"
-          />
-        </label>
-        <label className="block">
-          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-            Work email
-          </span>
-          <input
-            required
-            type="email"
-            name="email"
-            className="mt-2 w-full border border-rule bg-paper px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40"
-          />
-        </label>
-        <label className="block">
-          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-            What you need
-          </span>
-          <textarea
-            required
-            name="message"
-            rows={5}
-            className="mt-2 w-full border border-rule bg-paper px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40"
-          />
-        </label>
-        <button
-          type="submit"
-          className="bg-forest px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-paper hover:bg-forest-mid"
-        >
-          Send (stub)
-        </button>
-        {sent ? (
-          <p role="status" className="font-mono text-[11px] text-forest">
-            Recorded locally. No ticket system is wired in this build.
-          </p>
-        ) : null}
-      </form>
-    </div>
+    <ProsePage
+      crumbs={[{ href: "/", label: "Home" }, { label: "Research & advisory" }]}
+      kicker="For institutions"
+      title="Research, data and briefings on commission"
+      lede="The same sourced data and desk that power the site, pointed at your question."
+    >
+      <h2>What we do</h2>
+      <ul>
+        <li>
+          <strong>Country and sector briefings</strong> — a sourced file on a market before you enter it, lend into it or report on it.
+        </li>
+        <li>
+          <strong>Regulatory and banking forensics</strong> — what a circular, licence regime or capital rule changes for a named institution.
+        </li>
+        <li>
+          <strong>Data licensing</strong> — Afronomics series, the capital tracker and the Wire as a feed for your systems, with attribution.
+        </li>
+        <li>
+          <strong>Embeds and white-label files</strong> — country and indicator widgets for your own site, portal or annual report.
+        </li>
+        <li>
+          <strong>Datasets on request</strong> — a series we don’t yet track, built once and maintained.
+        </li>
+      </ul>
+      <h2>Who we work with</h2>
+      <p>Investors, banks and insurers, development-finance institutions, climate funds, corporates entering African markets, and the advisers who serve them.</p>
+      <h2>Start a conversation</h2>
+      <p>
+        Email <a href={mail("Research request")}>{site.contactEmail}</a> with the market, the question and your timeline. You’ll get a scope and a
+        fixed quote. For data and seats, see <Link href="/pricing">pricing</Link>.
+      </p>
+    </ProsePage>
   );
 }

@@ -28,7 +28,6 @@ summary: "A weekly method for reading listed-bank financial statements and NSE a
 teaser:
   - "A results week is a filing event. The primary objects are the issuer statement and the NSE announcement, not the first headline."
   - "Four files matter more than a single earnings print: capital, credit quality, funding mix, and operating costs."
-  - "Illustrative ratios in our trackers are EXAMPLE DATA until they are copied from a cited statement with an as-of date."
 gated: true
 urgency: cadence
 minutes: 12
@@ -53,14 +52,6 @@ For each issuer that publishes in the week, file the following from the **statem
 6. **Supervisory or legal items.** Contingencies, CMA or CBK matters, restatements.
 
 That list is **analysis** of how to read a pack. It is not a model of “quality.”
-
-## EXAMPLE DATA — do not file as fact
-
-The following line is a **format demonstration** for the [Bank forensic index](/trackers/banks). It is not a real issuer print.
-
-- **EXAMPLE Bank A** — cost-to-income **48.0% (EXAMPLE DATA)**, as of 30 Jun 2026. Do not file as fact.
-
-If a figure is not copied from a named statement with a URL and a page or note reference, it does not enter the intelligence file as fact.
 
 ## What the week is not
 

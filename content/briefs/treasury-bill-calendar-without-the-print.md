@@ -52,8 +52,6 @@ If a chat message gives you a yield before the result notice, file it as unverif
 
 Structural facts (the existence of 91-, 182-, and 364-day tenors; that CBK conducts the auction; that results are published) do not require a new number each week. Prints do. A remembered “last week’s 91-day” is not a citation.
 
-Any yield, bid-cover, or offered amount that appears in an Afronomics tracker without a CBK URL and an as-of stamp is **EXAMPLE DATA** and must be labelled as such. See the [Debt & rates calendar](/trackers/debt) for the stub format.
-
 ## Analysis that stays inside the document
 
 It is fair **analysis** to note whether the Bank’s result notice shows a tenor that was undersubscribed, or whether the announcement offered a different mix than the prior week — *after* you have both PDFs. It is not analysis to infer what a bank treasury “should” bid.

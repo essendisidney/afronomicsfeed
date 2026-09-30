@@ -1,74 +1,30 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { LayerPage } from "@/components/intelligence/LayerPage";
-import { EmptyMetric } from "@/components/ui/EmptyMetric";
-import { Provenance } from "@/components/ui/Provenance";
-import { climateDoors, climateFileHref, climateGap, climateSlots } from "@/lib/demo/climate";
-import { countries } from "@/lib/demo/countries";
-import { projectDisclaimer, projectLensFields } from "@/lib/demo/projects";
+import { DeskView, type DeskConfig } from "@/components/data/DeskView";
+import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Climate Capital",
-  description: "Afronomics Climate Capital — committed vs deployed vs requirement, country profiles and Project Lens. No fabricated climate numbers.",
+export const revalidate = 900;
+
+const config: DeskConfig = {
+  slug: "climate",
+  kicker: "Climate",
+  title: "Climate finance and the energy transition in Africa",
+  lede: "Power access, renewable share and the climate-tagged development finance heading to African Boards, with the day’s energy and climate headlines.",
+  wireDesk: "climate",
+  panels: [
+    { slug: "electricity", title: "Lowest access to electricity", order: "asc" },
+    { slug: "renewables", title: "Highest renewable share of energy" },
+    { slug: "agriculture", title: "Most agriculture-dependent economies" },
+  ],
+  projectFilter: (project) => project.climate || project.theme === "Climate & energy",
+  projectTitle: "Climate and energy projects in the World Bank book",
 };
 
-export default function ClimatePage() {
-  return (
-    <LayerPage
-      crumbs={[{ href: "/", label: "Home" }, { label: "Climate" }]}
-      kicker="Afronomics Climate Capital"
-      title="Climate money, projects and the financing gap"
-      lede="Committed, deployed and estimated requirement stay empty until each figure carries a source, URL, publication date and observation date."
-    >
-      <section>
-        <h2 className="font-serif text-2xl">Climate finance gap</h2>
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <EmptyMetric label="Committed" note={climateGap.committed === "—" ? climateGap.note : undefined} />
-          <EmptyMetric label="Deployed" />
-          <EmptyMetric label="Estimated requirement" />
-        </div>
-        <Provenance source="Not stored" methodology={climateGap.note} />
-      </section>
+export const metadata: Metadata = {
+  title: config.title,
+  description: config.lede,
+  alternates: { canonical: `${site.url}/climate` },
+};
 
-      <section className="mt-12">
-        <h2 className="font-serif text-2xl">Country climate profiles</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {countries.map((country) => (
-            <li key={country.slug} className="border border-rule p-4">
-              <Link href={climateFileHref(country.slug)} className="font-serif text-xl hover:text-forest">
-                {country.name} climate capital
-              </Link>
-              <p className="mt-2 text-sm text-muted">All {climateSlots.length} slots empty until sourced.</p>
-            </li>
-          ))}
-        </ul>
-        <ul className="mt-6 flex flex-wrap gap-3 text-sm">
-          {climateDoors.map((door) => (
-            <li key={door.href}>
-              <Link href={door.href} className="text-forest underline underline-offset-2">
-                {door.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-12" id="project-lens">
-        <h2 className="font-serif text-2xl">Project Lens</h2>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-ink-soft">{projectDisclaimer}</p>
-        <ul className="mt-4 grid grid-cols-2 gap-2 text-sm sm:grid-cols-3">
-          {projectLensFields.map((field) => (
-            <li key={field} className="border border-rule px-3 py-2 text-muted">
-              {field} —
-            </li>
-          ))}
-        </ul>
-        <p className="mt-4 text-sm">
-          <Link href="/projects" className="text-forest underline underline-offset-2">
-            Open Project Lens files
-          </Link>
-        </p>
-      </section>
-    </LayerPage>
-  );
+export default function Page() {
+  return <DeskView config={config} />;
 }

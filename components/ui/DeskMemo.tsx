@@ -13,12 +13,10 @@ export function DeskMemo({
     return (
       <aside className="mt-8 border border-gold/35 bg-gold/10 px-5 py-5">
         <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">
-          Desk memo — Individual
+          Desk memo — Pro
         </p>
         <p className="mt-3 text-sm leading-6 text-ink-soft">
-          What to file, and what is still unknown, sits behind a seat. Free
-          readers keep the teaser, the lede, and the citations. That is the
-          product a desk pays for — not a longer explainer.
+          What this changes and what is still unknown is part of Pro analysis.
         </p>
       </aside>
     );

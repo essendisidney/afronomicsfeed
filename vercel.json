@@ -1,7 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/cron/agents",
+      "path": "/api/cron/archive",
       "schedule": "15 4 * * *"
     }
   ],

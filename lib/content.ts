@@ -71,7 +71,8 @@ function assertFrontmatter(data: unknown, filePath: string): ArticleFrontmatter 
     teaser: fm.teaser!,
     summary: fm.summary!,
     asOf: fm.asOf,
-    gated: fm.gated ?? fm.category !== "explainer",
+    // Accounts are not live yet, so nothing is locked: a paywall nobody can pass only costs readers and search.
+    gated: process.env.AFRONOMICS_PAYWALL === "on" ? (fm.gated ?? fm.category !== "explainer") : false,
     topics: articleTopics,
     institutions: articleInstitutions,
     urgency: fm.urgency,

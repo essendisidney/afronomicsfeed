@@ -1,151 +1,224 @@
 import Link from "next/link";
-import { SourcedPrints } from "@/components/desk/SourcedPrints";
-import { SectionHead } from "@/components/ui/SectionHead";
-import { fiveThings } from "@/lib/demo/brief";
-import { countries } from "@/lib/demo/countries";
-import { countryPulses } from "@/lib/demo/pulse";
-import { signals } from "@/lib/demo/signals";
+import { NewsletterBand } from "@/components/data/NewsletterBand";
+import { ProjectTable } from "@/components/data/ProjectTable";
+import { WireList } from "@/components/data/WireList";
+import { Kicker, RankBars, SectionTitle, SourceLine, usd } from "@/components/data/parts";
+import { getLatestArticles } from "@/lib/content";
+import { countries } from "@/lib/data/countries";
+import { formatFx, loadFxQuote, pairHref, tapeCodes } from "@/lib/data/fx";
+import { formatValue, getIndicatorDef } from "@/lib/data/indicators";
+import { loadAfricaProjects, projectsSource, sumAmounts } from "@/lib/data/projects";
+import { continentalMedian, coveredTotal, loadIndicators, ranked } from "@/lib/data/series";
+import { loadDataSignals } from "@/lib/data/signals";
+import { loadWire, publishersLive } from "@/lib/data/wire";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
-import { getDeskLead } from "@/lib/relations";
 import { site } from "@/lib/site";
 
-const desks = [
-  { href: "/markets", kicker: "Markets", title: "Currencies and exchanges", lede: "Convert with the daily reference. Dealing prices stay blank until a licensed feed exists." },
-  { href: "/capital", kicker: "Capital", title: "Money moving", lede: "Investors and targets. Amounts stay empty until a filing is cited." },
-  { href: "/climate", kicker: "Climate", title: "Climate capital", lede: "Committed, deployed, required. A cell appears only with a source." },
-  { href: "/technology", kicker: "Technology", title: "Tech and innovation", lede: "Funding, regulation, failures. No invented rounds." },
-  { href: "/trade", kicker: "Trade", title: "Corridors", lede: "Ports, roads and rail. Volumes stay unpublished." },
-  { href: "/countries", kicker: "Countries", title: "Fifty-four desks", lede: "Kenya first. Every country has a file." },
-  { href: "/data", kicker: "Data", title: "The file", lede: "Series, observations and the method behind a number." },
-  { href: "/signals", kicker: "Signals", title: "What changed", lede: "Fact and interpretation kept apart." },
-] as const;
+export const revalidate = 900;
 
-export const revalidate = 3600;
+const regions = ["North Africa", "West Africa", "Central Africa", "East Africa", "Southern Africa"] as const;
 
-export default function HomePage() {
-  const { lead, supporting } = getDeskLead();
-  const extras = supporting.slice(0, 3);
+export default async function HomePage() {
+  const now = Date.now();
+  const [wire, files, projects, fx, signals] = await Promise.all([
+    loadWire(),
+    loadIndicators(["gdp", "gdp-growth", "inflation", "fdi", "remittances", "reserves", "population"]),
+    loadAfricaProjects(),
+    loadFxQuote(),
+    loadDataSignals(2),
+  ]);
+  const file = (slug: string) => files.find((item) => item.def.slug === slug);
+  const articles = getLatestArticles(4);
+
+  const gdp = file("gdp");
+  const fdi = file("fdi");
+  const remit = file("remittances");
+  const pop = file("population");
+  const inflation = file("inflation");
+  const growth = file("gdp-growth");
+  const reserves = file("reserves");
+
+  const total = (f: typeof gdp, label: string, href: string, fmt: (n: number) => string) => {
+    const t = f ? coveredTotal(f) : null;
+    return t ? { label: `${label} · ${t.year}`, value: fmt(t.sum), href, note: `${t.reporting} of 54 reporting` } : null;
+  };
+  const headline = [
+    total(gdp, "Africa GDP", "/data/gdp", usd),
+    pop ? total(pop, "Population", "/data/population", (n) => formatValue(pop.def, n)) : null,
+    inflation
+      ? { label: "Median inflation", value: formatValue(inflation.def, continentalMedian(inflation) ?? 0), href: "/data/inflation", note: "latest print per country" }
+      : null,
+    total(fdi, "FDI inflows", "/data/fdi", usd),
+    total(remit, "Remittances", "/data/remittances", usd),
+    projects.length ? { label: "World Bank book", value: usd(sumAmounts(projects)), href: "/capital", note: `${projects.length} projects, pipeline + recent` } : null,
+  ].filter((item): item is { label: string; value: string; href: string; note: string } => item !== null);
+
+  const pipeline = projects.filter((project) => project.status === "Pipeline").slice(0, 8);
+  const fastest = growth ? ranked(growth, 1).slice(0, 8) : [];
+  const hottest = inflation ? ranked(inflation, 1).slice(0, 8) : [];
+  const thinnest = reserves ? [...ranked(reserves, 2)].reverse().slice(0, 8) : [];
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-gold">{site.tagline}</p>
-          <p className="mt-2 max-w-xl text-sm leading-6 text-ink-soft">{site.promise}</p>
+      <section className="grid gap-6 lg:grid-cols-12 lg:items-end">
+        <div className="lg:col-span-8">
+          <Kicker>{site.tagline}</Kicker>
+          <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.05] tracking-[-0.03em] text-ink sm:text-5xl">
+            One desk for Africa’s markets, economies and capital.
+          </h1>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-ink-soft">{site.promise}</p>
         </div>
-        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
-          {lead ? `Kenya file as of ${formatDate(lead.date)}` : "Africa desk"}
-        </p>
-      </div>
-
-      <section className="mt-8 grid gap-10 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          {lead ? (
-            <article>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">
-                Lead · {categoryLabel(lead.category)}
-              </p>
-              <h1 className="mt-3 font-serif text-4xl leading-[1.08] tracking-[-0.03em] text-ink sm:text-6xl">
-                <Link href={articleHref(lead.category, lead.slug)} className="hover:text-forest">
-                  {lead.title}
-                </Link>
-              </h1>
-              <p className="mt-5 max-w-xl text-lg leading-8 text-ink-soft">{lead.summary}</p>
-              <ul className="mt-5 space-y-2 text-sm leading-6 text-ink-soft">
-                {lead.teaser.slice(0, 3).map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ) : null}
-        </div>
-        <div className="space-y-6 lg:col-span-5 lg:border-l lg:border-rule lg:pl-10">
-          {(extras.length ? extras : supporting).slice(0, 4).map((article) => (
-            <article key={`${article.category}-${article.slug}`}>
-              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-                {categoryLabel(article.category)}
-              </p>
-              <h2 className="mt-1 font-serif text-2xl leading-snug tracking-[-0.02em]">
-                <Link href={articleHref(article.category, article.slug)} className="hover:text-forest">
-                  {article.title}
-                </Link>
-              </h2>
-            </article>
+        <dl className="grid grid-cols-3 gap-px bg-rule text-center lg:col-span-4">
+          {[
+            { k: "Economies", v: "54" },
+            { k: "Publishers on the wire", v: String(publishersLive(wire) || "—") },
+            { k: "Headlines, 10 days", v: String(wire.length || "—") },
+          ].map((item) => (
+            <div key={item.k} className="bg-paper px-2 py-3">
+              <dd className="font-serif text-2xl text-ink">{item.v}</dd>
+              <dt className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{item.k}</dt>
+            </div>
           ))}
-        </div>
+        </dl>
       </section>
 
-      <section className="mt-14">
-        <SourcedPrints compact />
-      </section>
-
-      <section className="mt-16">
-        <SectionHead kicker="Desks" title="Open a file" href="/terminal" demo={false} />
-        <div className="mt-6 grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-4">
-          {desks.map((desk) => (
-            <Link key={desk.href} href={desk.href} className="bg-paper px-5 py-6 hover:bg-paper-2">
-              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-gold">{desk.kicker}</p>
-              <p className="mt-2 font-serif text-2xl tracking-[-0.02em]">{desk.title}</p>
-              <p className="mt-2 text-sm leading-6 text-ink-soft">{desk.lede}</p>
+      {headline.length > 0 ? (
+        <section className="mt-8 grid grid-cols-2 gap-px bg-rule sm:grid-cols-3 lg:grid-cols-6">
+          {headline.map((item) => (
+            <Link key={item.label} href={item.href} className="bg-paper-2 px-4 py-4 hover:bg-paper-3">
+              <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{item.label}</p>
+              <p className="mt-1 font-serif text-2xl tracking-[-0.02em] text-ink">{item.value}</p>
+              <p className="mt-0.5 text-[11px] text-muted">{item.note}</p>
             </Link>
           ))}
+        </section>
+      ) : null}
+
+      <section className="mt-12 grid gap-10 lg:grid-cols-12">
+        <div className="lg:col-span-7">
+          <SectionTitle kicker="The Wire" title="Latest from African business media" href="/news" hrefLabel="All headlines →" />
+          <WireList items={wire.slice(0, 14)} now={now} />
         </div>
+        <aside className="space-y-10 lg:col-span-5">
+          <div>
+            <SectionTitle kicker="Markets" title="US dollar reference" href="/markets" />
+            {fx ? (
+              <>
+                <table className="data-table mt-2">
+                  <tbody>
+                    {tapeCodes.flatMap((code) => {
+                      const rate = fx.rates[code];
+                      if (rate == null) return [];
+                      return [
+                        <tr key={code}>
+                          <td>
+                            <Link href={pairHref(code)} className="font-mono text-xs hover:text-forest">
+                              USD/{code}
+                            </Link>
+                          </td>
+                          <td className="text-right font-mono text-sm">{formatFx(rate)}</td>
+                        </tr>,
+                      ];
+                    })}
+                  </tbody>
+                </table>
+                <SourceLine name={fx.sourceName} href="https://www.exchangerate-api.com/" detail={`mid-market · ${fx.updated.replace(/ \+0000$/, " UTC")}`} />
+              </>
+            ) : (
+              <p className="mt-4 text-sm text-muted">The rate feed did not respond this hour.</p>
+            )}
+          </div>
+          <div>
+            <SectionTitle kicker="Signals" title="What moved on the latest print" href="/signals" />
+            <ul className="mt-2 divide-y divide-rule">
+              {signals.slice(0, 6).map((signal) => (
+                <li key={signal.id} className="py-3">
+                  <Link href={`/data/${signal.def.slug}`} className="text-[15px] leading-snug text-ink hover:text-forest">
+                    {signal.headline}
+                  </Link>
+                  <p className="mt-0.5 text-xs text-ink-soft">{signal.detail}</p>
+                </li>
+              ))}
+              {signals.length === 0 ? <li className="py-3 text-sm text-muted">Signals appear when the next annual prints load.</li> : null}
+            </ul>
+          </div>
+        </aside>
       </section>
 
       <section className="mt-16">
-        <SectionHead kicker="Countries" title="Featured desks" href="/countries" demo={false} />
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {countryPulses.map((item) => {
-            const country = countries.find((entry) => entry.slug === item.slug);
-            return (
-              <Link key={item.slug} href={`/countries/${item.slug}`} className="bg-paper-2 px-4 py-5 hover:bg-paper-3">
-                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-gold">{country?.iso}</p>
-                <p className="mt-2 font-serif text-xl tracking-[-0.02em]">{item.name}</p>
-              </Link>
-            );
-          })}
+        <SectionTitle
+          kicker="Capital"
+          title="Development finance heading to African boards"
+          href="/capital"
+          hrefLabel="Full pipeline →"
+          note="World Bank Group projects in the pipeline, with expected Board dates and commitments as published."
+        />
+        <div className="mt-4">
+          <ProjectTable projects={pipeline} />
+        </div>
+        <SourceLine name={projectsSource.name} href={projectsSource.url} />
+      </section>
+
+      <section className="mt-16 grid gap-10 lg:grid-cols-3">
+        {[
+          { title: "Fastest-growing economies", def: getIndicatorDef("gdp-growth")!, rows: fastest, href: "/data/gdp-growth" },
+          { title: "Highest inflation", def: getIndicatorDef("inflation")!, rows: hottest, href: "/data/inflation" },
+          { title: "Thinnest import cover", def: getIndicatorDef("reserves")!, rows: thinnest, href: "/data/reserves" },
+        ].map((panel) => (
+          <div key={panel.title}>
+            <SectionTitle kicker="League table" title={panel.title} href={panel.href} />
+            <div className="mt-4">
+              {panel.rows.length ? <RankBars def={panel.def} readings={panel.rows} /> : <p className="text-sm text-muted">Series did not load this hour.</p>}
+            </div>
+            <SourceLine name="World Bank Open Data" href={`https://data.worldbank.org/indicator/${panel.def.code}`} detail={panel.def.unit} />
+          </div>
+        ))}
+      </section>
+
+      <section className="mt-16">
+        <SectionTitle kicker="Countries" title="Fifty-four country files" href="/countries" hrefLabel="All countries →" />
+        <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+          {regions.map((region) => (
+            <div key={region}>
+              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">{region}</p>
+              <ul className="mt-2 space-y-1 text-sm">
+                {countries
+                  .filter((country) => country.region === region)
+                  .map((country) => (
+                    <li key={country.slug}>
+                      <Link href={`/countries/${country.slug}`} className="text-ink-soft hover:text-forest">
+                        {country.name}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="mt-16 grid gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          <SectionHead kicker="Brief" title="Five things moving Africa" href="/brief" demo={false} />
-          <ol className="mt-6 space-y-6">
-            {fiveThings.map((item, index) => (
-              <li key={item.href} className="grid grid-cols-[2rem_1fr] gap-3">
-                <p className="font-serif text-2xl text-gold">{index + 1}</p>
-                <div>
-                  <p className="text-sm leading-6">{item.happened}</p>
-                  <p className="mt-1 text-sm leading-6 text-ink-soft">{item.why}</p>
-                  <Link href={item.href} className="mt-2 inline-block text-sm text-forest">
-                    Open file
-                  </Link>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-        <div className="lg:col-span-5">
-          <SectionHead kicker="Signals" title="What to watch" href="/signals" demo={false} />
-          <ul className="mt-6 space-y-5">
-            {signals.map((signal) => (
-              <li key={signal.slug}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-                  {signal.category} · {signal.country}
+      {articles.length > 0 ? (
+        <section className="mt-16">
+          <SectionTitle kicker="Analysis" title="From the Afronomics desk" href="/brief" />
+          <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {articles.map((article) => (
+              <article key={`${article.category}-${article.slug}`}>
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+                  {categoryLabel(article.category)} · {formatDate(article.date)}
                 </p>
-                <p className="mt-1 font-serif text-xl leading-snug">
-                  <Link href={`/signals/${signal.slug}`} className="hover:text-forest">
-                    {signal.title}
+                <h3 className="mt-2 font-serif text-xl leading-snug">
+                  <Link href={articleHref(article.category, article.slug)} className="hover:text-forest">
+                    {article.title}
                   </Link>
-                </p>
-              </li>
+                </h3>
+                <p className="mt-2 line-clamp-3 text-sm leading-6 text-ink-soft">{article.summary}</p>
+              </article>
             ))}
-          </ul>
-        </div>
-      </section>
+          </div>
+        </section>
+      ) : null}
+
+      <NewsletterBand />
     </div>
   );
 }

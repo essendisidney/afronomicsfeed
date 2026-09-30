@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { corrections, sampleCorrectionFormat } from "@/lib/corrections";
+import { corrections, type Correction } from "@/lib/corrections";
 import { formatDate } from "@/lib/format";
 
 export const metadata: Metadata = {
@@ -19,9 +19,8 @@ export default function CorrectionsPage() {
 
       {corrections.length === 0 ? (
         <p className="mt-10 border border-rule bg-paper-2 px-5 py-6 text-sm leading-6 text-ink-soft">
-          No corrections have been logged yet. The desk is current against the
-          seed file. When a live correction ships, it will appear above the
-          sample format.
+          No corrections logged yet. When we fix a figure, a date or a claim, the
+          change is recorded here with what was wrong and what we changed.
         </p>
       ) : (
         <ul className="mt-10 space-y-8">
@@ -33,14 +32,6 @@ export default function CorrectionsPage() {
         </ul>
       )}
 
-      <section className="mt-14 border border-dashed border-rule p-6">
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-          Sample format — not a live correction
-        </p>
-        <div className="mt-4">
-          <CorrectionCard {...sampleCorrectionFormat} />
-        </div>
-      </section>
     </div>
   );
 }
@@ -52,7 +43,7 @@ function CorrectionCard({
   whatWasWrong,
   whatWasCorrected,
   editor,
-}: (typeof sampleCorrectionFormat)) {
+}: Correction) {
   return (
     <article>
       <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">

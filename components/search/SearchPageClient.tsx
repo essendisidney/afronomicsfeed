@@ -2,34 +2,30 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import type { SearchHit } from "@/lib/search";
+import { searchIndex, type SearchHit } from "@/lib/search-core";
 
 export function SearchPageClient({ index }: { index: SearchHit[] }) {
   const [query, setQuery] = useState("");
 
-  const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return index.slice(0, 12);
-    return index.filter((hit) => `${hit.title} ${hit.kicker} ${hit.summary}`.toLowerCase().includes(q)).slice(0, 40);
-  }, [index, query]);
+  const results = useMemo(() => searchIndex(query, index, 40), [index, query]);
 
   return (
     <div>
       <label className="block">
-        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Search the graph</span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Search</span>
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Kenya inflation, climate capital, Safaricom, Northern Corridor…"
+          placeholder="Kenya, inflation, FDI, remittances, electricity…"
           className="mt-2 w-full border border-rule bg-paper-2 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40"
         />
       </label>
       <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
-        {results.length} files · free search is limited to published desks and scaffolds
+        {results.length} results
       </p>
       <ul className="mt-6 divide-y divide-rule border-t border-rule">
         {results.length === 0 ? (
-          <li className="py-6 text-sm text-muted">Nothing matches. Try a country, corridor, or Kenya desk term.</li>
+          <li className="py-6 text-sm text-muted">Nothing matches. Try a country or an indicator.</li>
         ) : (
           results.map((hit) => (
             <li key={`${hit.href}-${hit.title}`}>

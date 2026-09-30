@@ -3,6 +3,7 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { MarketStrip } from "@/components/ui/MarketStrip";
 import { PageCounter } from "./PageCounter";
+import { PageFeedback } from "@/components/ui/PageFeedback";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const searchIndex = buildSearchIndex();
@@ -19,6 +20,9 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <Header searchIndex={searchIndex} />
       <div id="main" className="flex-1">
         {children}
+        <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6">
+          <PageFeedback />
+        </div>
       </div>
       <Footer />
       <PageCounter />

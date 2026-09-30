@@ -15,5 +15,20 @@ export function PageCounter() {
       }
     } catch {}
   }, [pathname]);
+  // Downloads are the strongest demand signal: count clicks on any data file link.
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const link = (event.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!link) return;
+      const url = new URL(link.href, window.location.href);
+      if (url.origin !== window.location.origin || !url.pathname.startsWith("/api/data/")) return;
+      const body = JSON.stringify({ path: `/download${url.pathname.slice(4)}`, referrer: document.referrer });
+      try {
+        navigator.sendBeacon?.("/api/hit", new Blob([body], { type: "application/json" }));
+      } catch {}
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
   return null;
 }

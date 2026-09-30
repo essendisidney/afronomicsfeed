@@ -74,3 +74,8 @@ export function fetchJson<T = unknown>(url: string, options: FetchOptions): Prom
 export function fetchText(url: string, options: FetchOptions): Promise<string | null> {
   return read(url, "text", options) as Promise<string | null>;
 }
+
+/** Time of this server render. Pages are regenerated on a schedule, so "3h ago" is relative to the last regeneration. */
+export function renderTime() {
+  return Date.now();
+}

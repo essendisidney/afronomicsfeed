@@ -1,3 +1,4 @@
+import { renderTime } from "@/lib/data/fetcher";
 import Link from "next/link";
 import { formatValue, getIndicatorDef } from "@/lib/data/indicators";
 import { loadAfricaProjects, projectsSource, type Project, type ProjectTheme } from "@/lib/data/projects";
@@ -23,7 +24,7 @@ export type DeskConfig = {
 };
 
 export async function DeskView({ config }: { config: DeskConfig }) {
-  const now = Date.now();
+  const now = renderTime();
   const needsProjects = Boolean(config.projectFilter || config.projectThemes);
   const [files, wire, projects] = await Promise.all([
     loadIndicators([...new Set(config.panels.map((panel) => panel.slug))]),

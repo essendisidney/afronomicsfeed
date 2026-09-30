@@ -34,7 +34,6 @@ export const feeds: Feed[] = [
   { name: "Nairametrics", url: "https://nairametrics.com/feed/", home: "https://nairametrics.com", home_country: "NG", default_desk: "markets" },
   { name: "BusinessDay", url: "https://businessday.ng/feed/", home: "https://businessday.ng", home_country: "NG", default_desk: "economy" },
   { name: "Moneyweb", url: "https://www.moneyweb.co.za/feed/", home: "https://www.moneyweb.co.za", home_country: "ZA", default_desk: "markets" },
-  { name: "MyJoyOnline Business", url: "https://www.myjoyonline.com/business/feed/", home: "https://www.myjoyonline.com/business", home_country: "GH", default_desk: "economy" },
   { name: "The Africa Report", url: "https://www.theafricareport.com/feed/", home: "https://www.theafricareport.com", default_desk: "economy" },
   { name: "African Business", url: "https://african.business/feed", home: "https://african.business", default_desk: "economy" },
   { name: "ESI Africa", url: "https://www.esi-africa.com/feed/", home: "https://www.esi-africa.com", default_desk: "climate" },

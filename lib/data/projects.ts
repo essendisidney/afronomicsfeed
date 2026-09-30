@@ -72,8 +72,11 @@ function normalize(raw: Raw): Project | null {
   const country = code ? byIso.get(code.toUpperCase()) : undefined;
   if (!raw.id || !raw.project_name || !country) return null;
   const abstract = text(raw.project_abstract).replace(/\s+/g, " ").trim();
-  const haystack = `${raw.project_name} ${abstract}`;
-  const theme = THEME_RULES.find(([, rule]) => rule.test(haystack))?.[0] ?? "Other";
+  // Title first: abstracts mention climate and jobs almost universally, so they only break ties.
+  const theme =
+    THEME_RULES.find(([, rule]) => rule.test(raw.project_name!))?.[0] ??
+    THEME_RULES.find(([, rule]) => rule.test(abstract.slice(0, 400)))?.[0] ??
+    "Other";
   return {
     id: raw.id,
     name: raw.project_name.trim(),
@@ -84,7 +87,7 @@ function normalize(raw: Raw): Project | null {
     abstract,
     url: `https://projects.worldbank.org/en/projects-operations/project-detail/${raw.id}`,
     theme,
-    climate: CLIMATE.test(haystack),
+    climate: CLIMATE.test(raw.project_name) || /\b(climate|renewable|adaptation)\b/i.test(abstract.slice(0, 400)),
   };
 }
 

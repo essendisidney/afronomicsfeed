@@ -1,3 +1,4 @@
+import { renderTime } from "@/lib/data/fetcher";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { ProjectTable } from "@/components/data/ProjectTable";
@@ -19,7 +20,7 @@ export const revalidate = 900;
 const regions = ["North Africa", "West Africa", "Central Africa", "East Africa", "Southern Africa"] as const;
 
 export default async function HomePage() {
-  const now = Date.now();
+  const now = renderTime();
   const [wire, files, projects, fx, signals] = await Promise.all([
     loadWire(),
     loadIndicators(["gdp", "gdp-growth", "inflation", "fdi", "remittances", "reserves", "population"]),

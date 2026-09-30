@@ -1,3 +1,4 @@
+import { renderTime } from "@/lib/data/fetcher";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CurrencyConverter } from "@/components/markets/CurrencyConverter";
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default async function MarketsPage() {
-  const now = Date.now();
+  const now = renderTime();
   const [fx, files, wire] = await Promise.all([loadFxQuote(), loadIndicators(["fx-official", "lending-rate", "reserves"]), loadWire()]);
   const official = files.find((file) => file.def.slug === "fx-official");
   const lending = files.find((file) => file.def.slug === "lending-rate");

@@ -1,3 +1,4 @@
+import { renderTime } from "@/lib/data/fetcher";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CapitalPage() {
-  const now = Date.now();
+  const now = renderTime();
   const [projects, files, wire] = await Promise.all([loadAfricaProjects(), loadIndicators(["fdi", "remittances"]), loadWire()]);
   const pipeline = projects.filter((project) => project.status === "Pipeline");
   const approved = projects.filter((project) => project.status !== "Pipeline");

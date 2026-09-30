@@ -1,3 +1,4 @@
+import { renderTime } from "@/lib/data/fetcher";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
@@ -24,7 +25,7 @@ const desks: Array<{ desk: WireDesk; label: string }> = [
 ];
 
 export default async function NewsPage() {
-  const now = Date.now();
+  const now = renderTime();
   const wire = await loadWire();
   const countryCounts = new Map<string, { name: string; slug: string; count: number }>();
   for (const item of wire) {

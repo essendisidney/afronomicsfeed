@@ -1,3 +1,4 @@
+import { renderTime } from "@/lib/data/fetcher";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -44,7 +45,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
   const country = getCountry(slug);
   if (!country) notFound();
 
-  const now = Date.now();
+  const now = renderTime();
   const [files, projects, wire, fx] = await Promise.all([
     loadIndicators(),
     loadCountryProjects(country.iso, 30),

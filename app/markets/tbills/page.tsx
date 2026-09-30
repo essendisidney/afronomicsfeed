@@ -54,7 +54,7 @@ export default function BillMonitorPage() {
       lede={
         <p>
           The latest government bill auctions across African markets, side by side, each compiled from the central bank’s own results. More markets
-          are being added: Uganda and Tanzania next.
+          are being added: Uganda and Tanzania next. Ghana history runs from 2018, Nigeria from 2002, Kenya from 2011.
         </p>
       }
     >

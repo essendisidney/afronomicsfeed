@@ -8,9 +8,15 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "afronomicsfeed.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "afronomicsfeed.com"
+        }
+      ],
       "destination": "https://www.afronomicsfeed.com/:path*",
       "permanent": true
     }
-  ]
+  ],
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)brand' ':(exclude)editions' ':(exclude)scripts' ':(exclude)supabase' ':(exclude).github' ':(exclude)*.md'"
 }

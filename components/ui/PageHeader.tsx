@@ -10,7 +10,7 @@ export function PageHeader({
   return (
     <header className="max-w-2xl">
       {kicker ? (
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-gold">
+        <p className="text-[12.5px] font-semibold text-gold">
           {kicker}
         </p>
       ) : null}

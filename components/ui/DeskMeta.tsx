@@ -10,7 +10,7 @@ export function DeskMeta({
   if (!urgencyText && !minutes && !fileFor) return null;
 
   return (
-    <p className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+    <p className="flex flex-wrap gap-x-4 gap-y-1 font-medium text-[12.5px] text-muted">
       {urgencyText ? <span className="text-gold">{urgencyText}</span> : null}
       {minutes ? <span>{minutes} min</span> : null}
       {fileFor ? <span>{fileFor}</span> : null}

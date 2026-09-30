@@ -52,7 +52,7 @@ export default async function MarketsPage() {
             hrefLabel="Full history →"
             note={`Every CBK auction in one table — ${tbills.rows.length.toLocaleString("en-US")} results, free CSV.`}
           />
-          <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em]">
+          <p className="mt-2 text-[12px] font-semibold">
             <Link href="/markets/tbills" className="text-forest hover:text-gold">
               Compare five markets on the Africa T-bill monitor →
             </Link>
@@ -62,7 +62,7 @@ export default async function MarketsPage() {
               const item = tbillLatest.get(tenor);
               return (
                 <Link key={tenor} href="/markets/kenya-tbills" className="bg-paper-2 px-4 py-4 hover:bg-paper-3">
-                  <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">
+                  <p className="font-medium text-[12px] text-muted">
                     {tenorLabel[tenor]}
                     {item ? ` · ${item.latest.value_date}` : ""}
                   </p>

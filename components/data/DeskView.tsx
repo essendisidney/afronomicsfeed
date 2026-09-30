@@ -58,7 +58,7 @@ export async function DeskView({ config }: { config: DeskConfig }) {
         <div className="grid grid-cols-2 gap-px bg-rule lg:grid-cols-4">
           {keyStats.map((stat) => (
             <Link key={stat.slug} href={`/data/${stat.slug}`} className="bg-paper-2 px-4 py-4 hover:bg-paper-3">
-              <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{stat.label}</p>
+              <p className="font-medium text-[12px] text-muted">{stat.label}</p>
               <p className="mt-1 font-serif text-3xl tracking-[-0.02em] text-ink">{stat.value}</p>
             </Link>
           ))}

@@ -66,7 +66,7 @@ export default async function CapitalPage() {
       <div className="grid grid-cols-2 gap-px bg-rule lg:grid-cols-4">
         {stats.map((stat) => (
           <div key={stat.label} className="bg-paper-2 px-4 py-4">
-            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{stat.label}</p>
+            <p className="font-medium text-[12px] text-muted">{stat.label}</p>
             <p className="mt-1 font-serif text-3xl tracking-[-0.02em] text-ink">{stat.value}</p>
             <p className="text-[11px] text-muted">{stat.note}</p>
           </div>

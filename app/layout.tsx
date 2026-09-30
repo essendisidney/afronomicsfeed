@@ -8,33 +8,18 @@ import "./globals.css";
 /* Self-hosted: no build-time or runtime call to Google Fonts. */
 const sans = localFont({
   variable: "--font-sans",
-  src: [{ path: "./fonts/outfit-latin-wght-normal.woff2", weight: "100 900", style: "normal" }],
-  display: "swap",
-});
-
-const serif = localFont({
-  variable: "--font-serif",
   src: [
-    { path: "./fonts/source-serif-4-latin-wght-normal.woff2", weight: "200 900", style: "normal" },
-    { path: "./fonts/source-serif-4-latin-wght-italic.woff2", weight: "200 900", style: "italic" },
+    { path: "./fonts/archivo-latin-wdth-normal.woff2", weight: "100 900", style: "normal" },
+    { path: "./fonts/archivo-latin-wdth-italic.woff2", weight: "100 900", style: "italic" },
   ],
-  display: "swap",
-});
-
-const mono = localFont({
-  variable: "--font-mono",
-  src: [
-    { path: "./fonts/ibm-plex-mono-latin-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/ibm-plex-mono-latin-600-normal.woff2", weight: "600", style: "normal" },
-  ],
+  declarations: [{ prop: "font-stretch", value: "62% 125%" }],
   display: "swap",
 });
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#16263f" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f1b2e" },
+    { media: "(prefers-color-scheme: light)", color: "#0e1524" },
+    { media: "(prefers-color-scheme: dark)", color: "#070b16" },
   ],
 };
 
@@ -67,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${sans.variable} ${serif.variable} ${mono.variable} h-full antialiased`}
+      className={`${sans.variable} h-full antialiased`}
     >
       <head>
         <ThemeScript />

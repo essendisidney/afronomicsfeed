@@ -80,7 +80,7 @@ export default async function AdvertisePage() {
         {stats.map((item) => (
           <div key={item.k} className="bg-paper-2 px-4 py-5">
             <dd className="font-serif text-3xl text-ink">{item.v}</dd>
-            <dt className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">{item.k}</dt>
+            <dt className="mt-1 font-medium text-[12px] text-muted">{item.k}</dt>
           </div>
         ))}
       </dl>
@@ -91,7 +91,7 @@ export default async function AdvertisePage() {
         <div className="mt-6 grid gap-px bg-rule md:grid-cols-2">
           {packages.map((item) => (
             <div key={item.name} className="bg-paper px-5 py-6">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">{item.name}</p>
+              <p className="text-[12px] font-semibold text-gold">{item.name}</p>
               <p className="mt-2 font-serif text-3xl text-ink">
                 {item.price} <span className="text-base text-muted">{item.unit}</span>
               </p>

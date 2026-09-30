@@ -42,7 +42,7 @@ export function EnquiryForm({ interest = "other", cta = "Send enquiry" }: { inte
   }
 
   const field = "mt-1 w-full border border-rule bg-paper px-3 py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
-  const label = "font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted";
+  const label = "text-[13px] font-medium text-muted";
 
   if (state === "done") {
     return <p className="border border-forest/40 bg-paper-2 px-4 py-4 text-sm text-ink">{message}</p>;
@@ -81,7 +81,7 @@ export function EnquiryForm({ interest = "other", cta = "Send enquiry" }: { inte
         <button
           type="submit"
           disabled={state === "pending"}
-          className="bg-forest px-5 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-paper hover:bg-forest-deep disabled:opacity-60"
+          className="rounded-full bg-forest px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest-deep disabled:opacity-60"
         >
           {state === "pending" ? "Sending…" : cta}
         </button>

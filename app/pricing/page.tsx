@@ -75,7 +75,7 @@ export default async function PricingPage({
       <div className="grid gap-px bg-rule md:grid-cols-2 lg:grid-cols-4">
         {tiers.map((tier) => (
           <div key={tier.name} className="flex flex-col bg-paper px-5 py-6">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">{tier.name}</p>
+            <p className="text-[12px] font-semibold text-gold">{tier.name}</p>
             <p className="mt-3 font-serif text-4xl text-ink">
               {tier.name === pricing.pro.name ? chargeLabel("pro") : tier.name === pricing.professional.name ? chargeLabel("professional") : tier.price}
               <span className="text-base text-muted">{tier.period}</span>
@@ -83,7 +83,7 @@ export default async function PricingPage({
             <p className="mt-3 flex-1 text-sm leading-6 text-ink-soft">{tier.detail}</p>
             <div className="mt-6">
               {tier.name === pricing.free.name ? (
-                <Link href="/subscribe" className="block bg-forest px-4 py-3 text-center font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-paper hover:bg-forest-mid">
+                <Link href="/subscribe" className="block bg-forest px-4 py-3 text-center text-[12.5px] font-semibold text-paper hover:bg-forest-mid">
                   Get the weekly
                 </Link>
               ) : tier.name === pricing.pro.name && live ? (
@@ -93,7 +93,7 @@ export default async function PricingPage({
               ) : (
                 <Link
                   href={`/contact?interest=${tier.name === pricing.enterprise.name ? "licensing" : "access"}#enquiry`}
-                  className="block border border-ink/20 px-4 py-3 text-center font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-ink hover:border-gold"
+                  className="block border border-ink/20 px-4 py-3 text-center text-[12.5px] font-semibold text-ink hover:border-gold"
                 >
                   {tier.name === pricing.enterprise.name ? "Talk to us" : "Request access"}
                 </Link>
@@ -106,7 +106,7 @@ export default async function PricingPage({
       {live ? (
         <div className="mt-8 grid gap-6 border border-gold/40 bg-paper-2 px-5 py-5 md:grid-cols-[1fr_20rem] md:items-end">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">{pricing.trial.name}</p>
+            <p className="text-[12px] font-semibold text-gold">{pricing.trial.name}</p>
             <p className="mt-2 font-serif text-2xl text-ink">{pricing.trial.price} for 14 days</p>
             <p className="mt-1 text-sm text-ink-soft">{pricing.trial.detail}</p>
           </div>

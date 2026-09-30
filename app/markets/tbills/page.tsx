@@ -122,7 +122,7 @@ export default function BillMonitorPage() {
       <section className="mt-14 grid gap-px bg-rule sm:grid-cols-3 lg:grid-cols-5">
         {markets.map(({ market, rows }) => (
           <Link key={market.slug} href={market.href} className="bg-paper-2 px-5 py-5 hover:bg-paper-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">{market.publisher}</p>
+            <p className="font-medium text-[12px] text-muted">{market.publisher}</p>
             <p className="mt-2 font-serif text-2xl text-ink">{market.country} auctions →</p>
             <p className="mt-1 text-xs text-ink-soft">
               {rows.length ? `${rows.length.toLocaleString("en-US")} results since ${rows.at(-1)!.date.slice(0, 4)}` : "Being compiled"}

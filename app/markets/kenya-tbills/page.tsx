@@ -67,7 +67,7 @@ export default function KenyaTbillsPage() {
       }
       aside={
         <a href="/api/data/kenya-tbills" download className="block bg-gold px-5 py-5 text-white hover:bg-gold-soft">
-          <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/80">Download</p>
+          <p className="font-medium text-[12px] text-white/80">Download</p>
           <p className="mt-1 font-serif text-2xl">Full history · CSV</p>
           <p className="text-[11px] text-white/80">Every row links to its CBK notice</p>
         </a>
@@ -86,7 +86,7 @@ export default function KenyaTbillsPage() {
               const { latest: row, previous } = item;
               return (
                 <div key={tenor} className="bg-paper-2 px-5 py-5">
-                  <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+                  <p className="flex items-center gap-2 font-medium text-[12px] text-muted">
                     <span className="inline-block h-2 w-2 rounded-full" style={{ background: tenorColor[tenor] }} />
                     {tenorLabel[tenor]} · {dateFmt.format(new Date(row.value_date))}
                   </p>
@@ -134,7 +134,7 @@ export default function KenyaTbillsPage() {
                 { label: `Subscription, ${year}`, value: ytdOffered ? pct((ytdReceived / ytdOffered) * 100, 0) : "—" },
               ].map((stat) => (
                 <div key={stat.label} className="bg-paper-2 px-4 py-4">
-                  <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{stat.label}</p>
+                  <p className="font-medium text-[12px] text-muted">{stat.label}</p>
                   <p className="mt-1 font-serif text-2xl text-ink">{stat.value}</p>
                 </div>
               ))}

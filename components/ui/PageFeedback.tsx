@@ -55,7 +55,7 @@ export function PageFeedback() {
                 void send({ found: option.value });
                 setState("detail");
               }}
-              className="border border-rule px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink hover:border-gold"
+              className="border border-rule px-3 py-1 font-medium text-[12.5px] text-ink hover:border-gold"
             >
               {option.label}
             </button>
@@ -84,7 +84,7 @@ export function PageFeedback() {
               </option>
             ))}
           </select>
-          <button type="submit" className="bg-forest px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-paper hover:bg-forest-deep">
+          <button type="submit" className="rounded-full bg-forest px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest-deep">
             Send
           </button>
         </form>

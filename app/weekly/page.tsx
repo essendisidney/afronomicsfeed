@@ -50,7 +50,7 @@ export default async function WeeklyPage() {
       }
       aside={
         <div className="border border-rule bg-paper-2 px-4 py-4 text-sm text-ink-soft">
-          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">How this edition is made</p>
+          <p className="font-medium text-[12px] text-muted">How this edition is made</p>
           <p className="mt-2 leading-6">
             Assembled from the datasets on this site as they update — central-bank auction notices, the archived FX reference, the World Bank
             project register and publisher feeds. Every figure links to its source.
@@ -202,7 +202,7 @@ export default async function WeeklyPage() {
             Newsrooms, analysts and bloggers may use this chart in print, online or on social media, unchanged, with the credit “Source: Afronomics,
             compiled from central-bank auction results”. It updates as each market reports.
           </p>
-          <a href="/charts/week.png" download="afronomics-chart-of-the-week.png" className="mt-4 inline-block bg-forest px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-paper hover:bg-forest-deep">
+          <a href="/charts/week.png" download="afronomics-chart-of-the-week.png" className="mt-4 inline-block rounded-full bg-forest px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest-deep">
             Download PNG
           </a>
         </div>

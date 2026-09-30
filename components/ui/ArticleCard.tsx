@@ -41,7 +41,7 @@ export function ArticleCard({
       </ul>
       <Link
         href={href}
-        className="mt-1 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-forest hover:text-gold"
+        className="mt-1 text-[12.5px] font-semibold text-forest hover:text-gold"
       >
         Read →
       </Link>

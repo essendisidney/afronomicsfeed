@@ -53,7 +53,7 @@ export function SubscribeForm({ tone = "paper" }: { tone?: "paper" | "night" }) 
     <form className="space-y-3" onSubmit={submit}>
       <div className="grid gap-3 sm:grid-cols-[1fr_12rem]">
         <label className="block">
-          <span className={`font-mono text-[10px] font-semibold uppercase tracking-[0.14em] ${labelTone}`}>Work email</span>
+          <span className={`text-[13px] font-medium ${labelTone}`}>Work email</span>
           <input
             required
             type="email"
@@ -62,16 +62,16 @@ export function SubscribeForm({ tone = "paper" }: { tone?: "paper" | "night" }) 
             onChange={(event) => setEmail(event.target.value)}
             autoComplete="email"
             placeholder="you@company.com"
-            className={`mt-1 w-full border px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40 ${field}`}
+            className={`mt-1 w-full rounded-xl border px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40 ${field}`}
           />
         </label>
         <label className="block">
-          <span className={`font-mono text-[10px] font-semibold uppercase tracking-[0.14em] ${labelTone}`}>I work in</span>
+          <span className={`text-[13px] font-medium ${labelTone}`}>I work in</span>
           <select
             name="role"
             value={role}
             onChange={(event) => setRole(event.target.value)}
-            className={`mt-1 w-full border px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40 ${field}`}
+            className={`mt-1 w-full rounded-xl border px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40 ${field}`}
           >
             {roles.map((item) => (
               <option key={item.value} value={item.value}>
@@ -84,7 +84,7 @@ export function SubscribeForm({ tone = "paper" }: { tone?: "paper" | "night" }) 
       <button
         type="submit"
         disabled={state === "pending"}
-        className="bg-gold px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-white hover:bg-gold-soft disabled:opacity-60"
+        className={`rounded-full px-6 py-3 text-[15px] font-semibold disabled:opacity-60 ${night ? "bg-accent text-night hover:bg-gold-soft" : "bg-ink text-paper hover:bg-forest"}`}
       >
         {state === "pending" ? "Adding you" : "Get the weekly"}
       </button>

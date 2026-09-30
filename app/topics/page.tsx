@@ -25,7 +25,7 @@ export default function TopicsPage() {
               <Link href={`/topics/${topic.slug}`} className="block border border-rule px-5 py-5 hover:border-gold">
                 <div className="flex items-baseline justify-between gap-4">
                   <h2 className="font-serif text-2xl text-ink">{topic.name}</h2>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+                  <span className="font-medium text-[12.5px] text-muted">
                     {count}
                   </span>
                 </div>

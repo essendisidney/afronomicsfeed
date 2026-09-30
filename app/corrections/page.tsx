@@ -46,7 +46,7 @@ function CorrectionCard({
 }: Correction) {
   return (
     <article>
-      <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+      <p className="font-medium text-[12.5px] text-muted">
         {formatDate(date)} · {editor}
       </p>
       <h2 className="mt-2 font-serif text-xl">
@@ -56,11 +56,11 @@ function CorrectionCard({
       </h2>
       <dl className="mt-4 space-y-3 text-sm leading-6">
         <div>
-          <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">What was wrong</dt>
+          <dt className="font-medium text-[12px] text-muted">What was wrong</dt>
           <dd className="mt-1 text-ink-soft">{whatWasWrong}</dd>
         </div>
         <div>
-          <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">What was corrected</dt>
+          <dt className="font-medium text-[12px] text-muted">What was corrected</dt>
           <dd className="mt-1 text-ink-soft">{whatWasCorrected}</dd>
         </div>
       </dl>

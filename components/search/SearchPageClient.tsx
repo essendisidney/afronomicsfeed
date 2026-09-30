@@ -12,7 +12,7 @@ export function SearchPageClient({ index }: { index: SearchHit[] }) {
   return (
     <div>
       <label className="block">
-        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Search</span>
+        <span className="font-medium text-[12px] text-muted">Search</span>
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
@@ -20,7 +20,7 @@ export function SearchPageClient({ index }: { index: SearchHit[] }) {
           className="mt-2 w-full border border-rule bg-paper-2 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/40"
         />
       </label>
-      <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+      <p className="mt-3 font-medium text-[12px] text-muted">
         {results.length} results
       </p>
       <ul className="mt-6 divide-y divide-rule border-t border-rule">
@@ -30,7 +30,7 @@ export function SearchPageClient({ index }: { index: SearchHit[] }) {
           results.map((hit) => (
             <li key={`${hit.href}-${hit.title}`}>
               <Link href={hit.href} className="block py-4 hover:bg-paper-2">
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold">{hit.kicker}</p>
+                <p className="font-medium text-[12px] text-gold">{hit.kicker}</p>
                 <p className="mt-1 font-serif text-xl">{hit.title}</p>
                 <p className="mt-1 text-sm text-ink-soft">{hit.summary}</p>
               </Link>

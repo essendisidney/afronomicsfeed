@@ -17,14 +17,14 @@ export function CopyCitation({ text }: { text: string }) {
       <button
         type="button"
         onClick={() => copy(text, "citation")}
-        className="border border-rule px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-soft hover:border-gold"
+        className="border border-rule px-3 py-1.5 font-medium text-[12px] text-ink-soft hover:border-gold"
       >
         {copied === "citation" ? "Citation copied" : "Copy citation"}
       </button>
       <button
         type="button"
         onClick={() => copy(url, "link")}
-        className="border border-rule px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-soft hover:border-gold"
+        className="border border-rule px-3 py-1.5 font-medium text-[12px] text-ink-soft hover:border-gold"
       >
         {copied === "link" ? "Link copied" : "Copy link"}
       </button>

@@ -6,7 +6,7 @@ export function Breadcrumbs({
   items: { href?: string; label: string }[];
 }) {
   return (
-    <nav aria-label="Breadcrumb" className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+    <nav aria-label="Breadcrumb" className="font-medium text-[12.5px] text-muted">
       <ol className="flex flex-wrap items-center gap-2">
         {items.map((item, index) => (
           <li key={`${item.label}-${index}`} className="flex items-center gap-2">

@@ -98,7 +98,7 @@ export default async function ArchivePage({
         </div>
       </div>
 
-      <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+      <p className="mt-6 font-medium text-[12.5px] text-muted">
         {articles.length} {articles.length === 1 ? "piece" : "pieces"}
       </p>
       <div className="mt-10 space-y-12">

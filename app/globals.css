@@ -1,30 +1,44 @@
 @import "tailwindcss";
 
+/*
+ * Afronomics design tokens.
+ * Concrete: cool, light city-grey paper rather than newsprint cream.
+ * Night: the header, footer and hero band, the colour of the city after dark.
+ * Jacaranda: the one accent, after the trees that line Nairobi, Harare and Pretoria each October.
+ * Up and down moves keep their own green and red, so the accent never reads as a market signal.
+ */
 :root {
-  --paper: #f4f1ea;
-  --paper-2: #ebe6dc;
-  --paper-3: #e0dacd;
-  --ink: #1c2433;
-  --ink-soft: #3d4656;
-  --muted: #6a7384;
-  --forest: #1e3a5f;
-  --forest-deep: #16263f;
-  --forest-mid: #2a4a73;
-  --gold: #a51d32;
-  --gold-soft: #c44a58;
-  --rule: #d8d2c6;
-  --tape: #ebe6dc;
-  --tape-ink: #3d4656;
-  --facts: #1e3a5f;
+  --font-serif: var(--font-sans);
+  --font-mono: var(--font-sans);
+  --paper: #f5f6f4;
+  --paper-2: #ebedea;
+  --paper-3: #e0e3df;
+  --surface: #ffffff;
+  --ink: #121826;
+  --ink-soft: #3b4354;
+  --muted: #636b7d;
+  --forest: #26335a;
+  --forest-deep: #0e1524;
+  --forest-mid: #3a4a7a;
+  --gold: #5b3fd6;
+  --gold-soft: #a08cff;
+  --brand-accent: #5b3fd6;
+  --rule: #d9dcd7;
+  --tape: #ebedea;
+  --tape-ink: #3b4354;
+  --facts: #26335a;
   --analysis: #4a5568;
-  --opinion: #7a4a24;
-  --danger: #a51d32;
-  --night: #07090d;
-  --night-ink: #f4f0e8;
-  --night-soft: #c8c2b6;
-  --night-muted: #8f897e;
-  --night-line: rgba(244, 240, 232, 0.14);
-  /* Chart series: validated categorical slots 1-3 (light). */
+  --opinion: #8a4b1f;
+  --danger: #c2352b;
+  --up: #0f7f57;
+  --down: #c2352b;
+  --night: #0e1524;
+  --night-2: #141d33;
+  --night-ink: #f5f6f4;
+  --night-soft: #c3c8d4;
+  --night-muted: #8b93a7;
+  --night-line: rgba(245, 246, 244, 0.12);
+  /* Chart series: validated categorical slots (light). */
   --series-1: #2a78d6;
   --series-2: #eb6834;
   --series-3: #1baf7a;
@@ -33,34 +47,43 @@
 }
 
 .dark {
-  --paper: #141820;
-  --paper-2: #1b202a;
-  --paper-3: #252b38;
-  --ink: #e8e4db;
-  --ink-soft: #c4bfb4;
-  --muted: #8e887c;
-  --forest: #b8c4d4;
-  --forest-deep: #d8deea;
-  --forest-mid: #9aabc0;
-  --gold: #d45a68;
-  --gold-soft: #c44a58;
-  --rule: #2f3542;
-  --tape: #1b202a;
-  --tape-ink: #c4bfb4;
-  --facts: #b8c4d4;
-  --analysis: #c4bfb4;
-  --opinion: #d4a574;
-  --danger: #d45a68;
-  --night: #0c1016;
-  --night-ink: #f4f0e8;
-  --night-soft: #c8c2b6;
-  --night-muted: #8f897e;
-  --night-line: rgba(244, 240, 232, 0.14);
+  --paper: #0b1120;
+  --paper-2: #111a2e;
+  --paper-3: #1a2440;
+  --surface: #111a2e;
+  --ink: #e9ebf0;
+  --ink-soft: #c3c8d4;
+  --muted: #8b93a7;
+  --forest: #c9d2ea;
+  --forest-deep: #e9ebf0;
+  --forest-mid: #a9b5d6;
+  --gold: #a08cff;
+  --gold-soft: #b9a9ff;
+  --brand-accent: #a08cff;
+  --rule: #243049;
+  --tape: #111a2e;
+  --tape-ink: #c3c8d4;
+  --facts: #c9d2ea;
+  --analysis: #c3c8d4;
+  --opinion: #e0a574;
+  --danger: #ff8a7a;
+  --up: #5cd6a8;
+  --down: #ff8a7a;
+  --night: #070b16;
+  --night-2: #0e1524;
+  --night-ink: #f5f6f4;
+  --night-soft: #c3c8d4;
+  --night-muted: #8b93a7;
+  --night-line: rgba(245, 246, 244, 0.1);
   --series-1: #3987e5;
   --series-2: #d95926;
   --series-3: #199e70;
   --series-4: #c98500;
   --series-5: #d55181;
+}
+
+.on-night {
+  --brand-accent: #a08cff;
 }
 
 @theme inline {
@@ -83,6 +106,11 @@
   --color-opinion: var(--opinion);
   --color-danger: var(--danger);
   --color-night: var(--night);
+  --color-night-2: var(--night-2);
+  --color-surface: var(--surface);
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-accent: var(--brand-accent);
   --color-night-ink: var(--night-ink);
   --color-night-soft: var(--night-soft);
   --color-night-muted: var(--night-muted);
@@ -167,42 +195,6 @@ body {
   }
 }
 
-.af-logo {
-  display: block;
-  width: auto;
-  height: 3.6rem;
-}
-
-@media (min-width: 640px) {
-  .af-logo {
-    height: 4.5rem;
-  }
-}
-
-.af-logo-compact {
-  height: 2.75rem;
-}
-
-.af-logo-dark {
-  display: none;
-}
-
-.on-night .af-logo-light {
-  display: none;
-}
-
-.on-night .af-logo-dark {
-  display: block;
-}
-
-.dark .af-logo-light {
-  display: none;
-}
-
-.dark .af-logo-dark {
-  display: block;
-}
-
 .article-body {
   font-size: 1.125rem;
   line-height: 1.8;
@@ -215,8 +207,10 @@ body {
 }
 
 .article-body h2 {
-  font-family: var(--font-serif), ui-serif, Georgia, serif;
-  font-size: 1.35rem;
+  font-family: var(--font-serif), ui-sans-serif, system-ui, sans-serif;
+  font-stretch: 76%;
+  font-weight: 640;
+  font-size: 1.6rem;
   line-height: 1.3;
   color: var(--ink);
   margin-top: 2.25rem;
@@ -224,7 +218,8 @@ body {
 }
 
 .article-body h3 {
-  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  font-family: var(--font-serif), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
   font-size: 1.1rem;
   color: var(--ink);
   margin-top: 1.75rem;
@@ -274,9 +269,8 @@ body {
 
 .article-body th {
   background: var(--paper-2);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
   color: var(--muted);
 }
 
@@ -288,7 +282,7 @@ body {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.86rem;
+  font-size: 0.9rem;
 }
 
 .data-table th,
@@ -300,20 +294,18 @@ body {
 }
 
 .data-table th {
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 0.78rem;
   color: var(--muted);
   font-weight: 600;
+  white-space: nowrap;
+}
+
+.data-table td {
+  font-variant-numeric: tabular-nums;
 }
 
 .data-table tbody tr:hover {
   background: color-mix(in srgb, var(--paper-2) 70%, transparent);
-}
-
-:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
 }
 
 @media print {
@@ -329,5 +321,54 @@ body {
   a {
     color: inherit;
     text-decoration: none;
+  }
+}
+
+/* One family, three widths: condensed for headlines, standard for reading, tabular figures for data. */
+@layer components {
+  .font-serif {
+    font-stretch: 76%;
+    font-weight: 640;
+  }
+
+  .font-mono {
+    font-stretch: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .font-expanded {
+    font-stretch: 125%;
+    font-weight: 700;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-accent);
+  outline-offset: 2px;
+}
+
+/* The rates board on the home page: city-signage figures that settle into place once on load. */
+.af-board-figure {
+  font-stretch: 76%;
+  font-weight: 640;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .af-board-row {
+    animation: af-flip 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+}
+
+@keyframes af-flip {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotateX(-70deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }

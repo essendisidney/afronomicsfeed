@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function AuctionNav({ base, newer, older }: { base: string; newer: string | null; older: string | null }) {
   return (
-    <nav className="mt-10 flex flex-wrap justify-between gap-4 border-t border-rule pt-4 font-mono text-[11px] uppercase tracking-[0.12em]">
+    <nav className="mt-10 flex flex-wrap justify-between gap-4 border-t border-rule pt-4 font-medium text-[12.5px]">
       {older ? (
         <Link href={`${base}/${older}`} className="text-forest hover:text-gold">
           ← Auction of {older}

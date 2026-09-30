@@ -35,7 +35,7 @@ export default function WidgetsPage() {
               <div className="lg:col-span-5">
                 <SectionTitle kicker="Widget" title={widget.name} />
                 <p className="mt-3 text-sm leading-6 text-ink-soft">{widget.detail}</p>
-                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Embed code</p>
+                <p className="mt-4 font-medium text-[12px] text-muted">Embed code</p>
                 <pre className="mt-2 overflow-x-auto whitespace-pre-wrap break-all border border-rule bg-paper-2 p-3 font-mono text-[11px] leading-5 text-ink">
                   {embedSnippet(widget.slug, widget.height, query)}
                 </pre>

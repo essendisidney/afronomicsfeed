@@ -11,7 +11,7 @@ export function Paywall({ title }: { title: string }) {
         <p>What changed, who is exposed, and what to watch next.</p>
       </div>
       <div className="relative z-10 -mt-6 px-6 pb-8 pt-2 text-center sm:px-10">
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">
+        <p className="text-[12.5px] font-semibold text-gold">
           Pro analysis
         </p>
         <h2 className="mt-3 font-serif text-2xl text-ink sm:text-3xl">
@@ -24,13 +24,13 @@ export function Paywall({ title }: { title: string }) {
         <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/pricing"
-            className="bg-forest px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-paper hover:bg-forest-mid"
+            className="rounded-full bg-forest px-5 py-3 text-[14px] font-semibold text-paper hover:bg-forest-mid"
           >
             See Pro plans
           </Link>
           <Link
             href="/subscribe"
-            className="border border-ink/20 px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-ink hover:border-gold hover:text-forest"
+            className="border border-ink/20 px-5 py-3 text-[12.5px] font-semibold text-ink hover:border-gold hover:text-forest"
           >
             Get the free weekly
           </Link>

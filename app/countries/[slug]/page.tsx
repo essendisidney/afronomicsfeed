@@ -109,19 +109,19 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
         </div>
         <div className="grid grid-cols-2 gap-px bg-rule lg:col-span-4">
           <Link href={pairHref(country.currency)} className="bg-paper-2 px-4 py-4 hover:bg-paper-3">
-            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">USD/{country.currency}</p>
+            <p className="font-medium text-[12px] text-muted">USD/{country.currency}</p>
             <p className="mt-1 font-serif text-2xl text-ink">{rate ? formatFx(rate) : "—"}</p>
             <p className="text-[11px] text-muted">{currencyName(country.currency)}</p>
           </Link>
           <a href="#capital" className="bg-paper-2 px-4 py-4 hover:bg-paper-3">
-            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">WB pipeline</p>
+            <p className="font-medium text-[12px] text-muted">WB pipeline</p>
             <p className="mt-1 font-serif text-2xl text-ink">{pipeline.length ? usd(sumAmounts(pipeline)) : "—"}</p>
             <p className="text-[11px] text-muted">{pipeline.length} project{pipeline.length === 1 ? "" : "s"} to the Board</p>
           </a>
         </div>
       </header>
 
-      <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y border-rule py-2.5 font-mono text-[10px] uppercase tracking-[0.14em]">
+      <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y border-rule py-2.5 font-medium text-[12px]">
         {[
           ["#data", "Data"],
           ["#news", "Headlines"],
@@ -150,7 +150,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
                   <div key={file.def.slug} className="relative">
                     <StatTile def={file.def} reading={reading} href={`/data/${file.def.slug}#${country.iso.toLowerCase()}`} />
                     {rank ? (
-                      <span className="pointer-events-none absolute right-3 top-4 font-mono text-[9px] uppercase tracking-[0.1em] text-muted">
+                      <span className="pointer-events-none absolute right-3 top-4 font-medium text-[12px] text-muted">
                         #{rank.position} of {rank.of}
                       </span>
                     ) : null}
@@ -180,20 +180,20 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
                 <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-sm text-ink hover:text-forest">
                   {item.name}
                 </a>
-                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">{item.kind}</span>
+                <span className="font-medium text-[12px] text-muted">{item.kind}</span>
               </li>
             ))}
             <li className="flex items-baseline justify-between gap-3 py-2.5">
               <a href={`https://data.worldbank.org/country/${country.iso}`} target="_blank" rel="noopener noreferrer" className="text-sm text-ink hover:text-forest">
                 World Bank country data
               </a>
-              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">Multilateral</span>
+              <span className="font-medium text-[12px] text-muted">Multilateral</span>
             </li>
             <li className="flex items-baseline justify-between gap-3 py-2.5">
               <a href={`https://www.imf.org/en/Countries/${country.iso}`} target="_blank" rel="noopener noreferrer" className="text-sm text-ink hover:text-forest">
                 IMF country page
               </a>
-              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">Multilateral</span>
+              <span className="font-medium text-[12px] text-muted">Multilateral</span>
             </li>
           </ul>
           {analysis.length > 0 ? (
@@ -202,7 +202,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
               <ul className="mt-2 divide-y divide-rule">
                 {analysis.map((article) => (
                   <li key={article.slug} className="py-3">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+                    <p className="font-medium text-[12px] text-muted">
                       {categoryLabel(article.category)} · {formatDate(article.date)}
                     </p>
                     <Link href={articleHref(article.category, article.slug)} className="mt-1 block font-serif text-lg leading-snug hover:text-forest">

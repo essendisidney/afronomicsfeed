@@ -63,7 +63,7 @@ export default function KenyaBondsPage() {
       }
       aside={
         <a href="/api/data/kenya-bonds" download className="block bg-gold px-5 py-5 text-white hover:bg-gold-soft">
-          <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/80">Download</p>
+          <p className="font-medium text-[12px] text-white/80">Download</p>
           <p className="mt-1 font-serif text-2xl">Full history · CSV</p>
           <p className="text-[11px] text-white/80">Every row links to its CBK notice</p>
         </a>
@@ -94,7 +94,7 @@ export default function KenyaBondsPage() {
               { label: `Infrastructure bonds, ${year}`, value: ifbShare == null ? "—" : `${ifbShare.toFixed(0)}% of accepted` },
             ].map((stat) => (
               <div key={stat.label} className="bg-paper-2 px-4 py-4">
-                <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{stat.label}</p>
+                <p className="font-medium text-[12px] text-muted">{stat.label}</p>
                 <p className="mt-1 font-serif text-xl text-ink">{stat.value}</p>
               </div>
             ))}

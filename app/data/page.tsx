@@ -32,7 +32,7 @@ export default async function DataHubPage() {
       }
     >
       <section className="mb-12 border border-gold/40 bg-paper-2 px-5 py-5">
-        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">Afronomics datasets</p>
+        <p className="text-[12px] font-semibold text-gold">Afronomics datasets</p>
         <p className="mt-2 font-serif text-2xl">
           <Link href="/markets/tbills" className="hover:text-forest">
             Africa Treasury bill monitor: Kenya, Nigeria, Ghana, Uganda, Tanzania →

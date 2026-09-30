@@ -19,7 +19,7 @@ export function TopicChips({
           <li key={`inst-${slug}`}>
             <Link
               href={`/institutions/${slug}`}
-              className="border border-forest/25 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-forest hover:border-gold"
+              className="border border-forest/25 px-2 py-0.5 text-[12px] font-semibold text-forest hover:border-gold"
             >
               {institution.short}
             </Link>
@@ -33,7 +33,7 @@ export function TopicChips({
           <li key={`topic-${slug}`}>
             <Link
               href={`/topics/${slug}`}
-              className="border border-rule px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-soft hover:border-gold"
+              className="border border-rule px-2 py-0.5 font-medium text-[12px] text-ink-soft hover:border-gold"
             >
               {topic.name}
             </Link>

@@ -52,19 +52,19 @@ export default async function CurrencyPage({ params }: { params: Promise<{ code:
     >
       <div className="grid gap-px bg-rule sm:grid-cols-3">
         <div className="bg-paper-2 px-5 py-5">
-          <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">Live reference</p>
+          <p className="font-medium text-[12px] text-muted">Live reference</p>
           <p className="mt-1 font-serif text-4xl text-ink">{rate ? formatFx(rate) : "—"}</p>
           <p className="text-[11px] text-muted">{fx ? fx.updated.replace(/ \+0000$/, " UTC") : ""}</p>
         </div>
         <div className="bg-paper-2 px-5 py-5">
-          <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">Official average · {reading?.year ?? "—"}</p>
+          <p className="font-medium text-[12px] text-muted">Official average · {reading?.year ?? "—"}</p>
           <p className="mt-1 font-serif text-4xl text-ink">{reading ? formatFx(reading.value) : "—"}</p>
           <p className="text-[11px] text-muted">
             {reading?.previous ? `${formatChange({ format: "rate" }, reading.previous.value, reading.value)} vs ${reading.previous.year}` : ""}
           </p>
         </div>
         <div className="bg-paper-2 px-5 py-5">
-          <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">Since 2010 (annual average)</p>
+          <p className="font-medium text-[12px] text-muted">Since 2010 (annual average)</p>
           {reading ? <Sparkline points={reading.points} format={formatFx} label={`USD/${currency}`} /> : <p className="mt-2 text-sm text-muted">—</p>}
         </div>
       </div>

@@ -38,7 +38,7 @@ export function ArticleTemplate({
           { label: article.title },
         ]}
       />
-      <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">
+      <p className="mt-6 text-[12.5px] font-semibold text-gold">
         <Link href={categoryPath(article.category)} className="hover:text-forest">
           {categoryLabel(article.category)}
         </Link>
@@ -50,7 +50,7 @@ export function ArticleTemplate({
         <time dateTime={article.date}>{formatDate(article.date)}</time>
         <span>{article.authors.join(", ")}</span>
         {article.asOf ? (
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em]">
+          <span className="font-medium text-[12.5px]">
             Figures as of {formatDate(article.asOf)}
           </span>
         ) : null}
@@ -70,7 +70,7 @@ export function ArticleTemplate({
       </div>
 
       <section className="mt-10 border border-rule bg-paper-2 px-5 py-6">
-        <h2 className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+        <h2 className="text-[12.5px] font-semibold text-muted">
           Free teaser
         </h2>
         <ul className="mt-4 space-y-3 text-[15px] leading-7 text-ink-soft">
@@ -87,7 +87,7 @@ export function ArticleTemplate({
 
       {headings.length > 1 ? (
         <nav className="mt-8 border border-rule px-5 py-4">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+          <p className="text-[12.5px] font-semibold text-muted">
             In this file
           </p>
           <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm">
@@ -123,7 +123,7 @@ export function ArticleTemplate({
         <nav className="no-print mt-12 grid gap-4 border-t border-rule pt-8 sm:grid-cols-2">
           {older ? (
             <Link href={articleHref(older.category, older.slug)} className="border border-rule p-4 hover:border-gold">
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Older in this file</p>
+              <p className="font-medium text-[12px] text-muted">Older in this file</p>
               <p className="mt-2 font-serif text-lg text-ink">{older.title}</p>
             </Link>
           ) : (
@@ -131,7 +131,7 @@ export function ArticleTemplate({
           )}
           {newer ? (
             <Link href={articleHref(newer.category, newer.slug)} className="border border-rule p-4 text-right hover:border-gold">
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Newer in this file</p>
+              <p className="font-medium text-[12px] text-muted">Newer in this file</p>
               <p className="mt-2 font-serif text-lg text-ink">{newer.title}</p>
             </Link>
           ) : null}
@@ -140,14 +140,14 @@ export function ArticleTemplate({
 
       {related.length > 0 ? (
         <section className="no-print mt-12 border-t border-rule pt-8">
-          <h2 className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+          <h2 className="text-[12.5px] font-semibold text-muted">
             Related on the desk
           </h2>
           <ul className="mt-5 space-y-4">
             {related.map((item) => (
               <li key={`${item.category}-${item.slug}`}>
                 <Link href={articleHref(item.category, item.slug)} className="group block">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold">
+                  <p className="font-medium text-[12px] text-gold">
                     {categoryLabel(item.category)} · {formatDate(item.date)}
                   </p>
                   <p className="mt-1 font-serif text-xl text-ink group-hover:text-forest">{item.title}</p>

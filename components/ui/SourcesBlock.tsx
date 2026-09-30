@@ -4,7 +4,7 @@ import type { Source } from "@/lib/types";
 export function SourcesBlock({ sources }: { sources: Source[] }) {
   return (
     <section className="border-t border-rule pt-8">
-      <h2 className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+      <h2 className="text-[12.5px] font-semibold text-muted">
         Citations
       </h2>
       <ol className="mt-4 space-y-3">

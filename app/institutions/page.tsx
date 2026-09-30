@@ -28,7 +28,7 @@ export default function InstitutionsPage() {
               >
                 <div className="flex items-baseline justify-between gap-4">
                   <h2 className="font-serif text-2xl text-ink">{institution.short}</h2>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+                  <span className="font-medium text-[12.5px] text-muted">
                     {count} {count === 1 ? "piece" : "pieces"}
                   </span>
                 </div>

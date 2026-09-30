@@ -50,7 +50,7 @@ export default async function InstitutionPage({
           href={institution.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-forest hover:text-gold"
+          className="text-[12.5px] font-semibold text-forest hover:text-gold"
         >
           Official site ↗
         </a>

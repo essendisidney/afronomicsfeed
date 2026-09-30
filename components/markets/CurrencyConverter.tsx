@@ -24,7 +24,7 @@ export function CurrencyConverter({ quote }: { quote: FxQuote }) {
 
   return (
     <form className="mb-12 bg-paper-2 px-5 py-6 sm:px-8" onSubmit={(event) => event.preventDefault()}>
-      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-gold">Converter</p>
+      <p className="font-medium text-[12px] text-gold">Converter</p>
       <h2 className="mt-2 font-serif text-3xl tracking-[-0.02em]">Convert a currency</h2>
       <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-soft">
         Daily mid-market reference. This is not a central-bank print and not a dealing price.
@@ -32,7 +32,7 @@ export function CurrencyConverter({ quote }: { quote: FxQuote }) {
 
       <div className="mt-6 grid gap-4 sm:grid-cols-[1fr_1fr_auto_1fr] sm:items-end">
         <label className="block">
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Amount</span>
+          <span className="font-medium text-[12px] text-muted">Amount</span>
           <input
             inputMode="decimal"
             value={amount}
@@ -41,7 +41,7 @@ export function CurrencyConverter({ quote }: { quote: FxQuote }) {
           />
         </label>
         <label className="block">
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">From</span>
+          <span className="font-medium text-[12px] text-muted">From</span>
           <select
             value={from}
             onChange={(event) => setFrom(event.target.value)}
@@ -65,7 +65,7 @@ export function CurrencyConverter({ quote }: { quote: FxQuote }) {
           Swap
         </button>
         <label className="block">
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">To</span>
+          <span className="font-medium text-[12px] text-muted">To</span>
           <select
             value={to}
             onChange={(event) => setTo(event.target.value)}

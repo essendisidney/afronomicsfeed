@@ -15,7 +15,7 @@ function TapeItems({
           <Link
             href={print.fileHref}
             tabIndex={duplicate ? -1 : undefined}
-            className="font-mono uppercase tracking-[0.08em] text-night-ink hover:text-gold-soft"
+            className="font-medium text-night-ink hover:text-gold-soft"
           >
             {print.label}
           </Link>
@@ -38,14 +38,14 @@ export async function MarketStrip() {
   return (
     <div className="no-print border-b border-night-line bg-night text-night-soft">
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-1.5 sm:px-6">
-        <Link href="/markets" className="shrink-0 font-mono text-[9px] uppercase tracking-[0.14em] text-night-muted hover:text-night-ink">FX</Link>
+        <Link href="/markets" className="shrink-0 font-medium text-[12px] text-night-muted hover:text-night-ink">FX</Link>
         <div className="af-tape-viewport min-w-0 flex-1">
           <div className="af-tape-track text-[11px]">
             <TapeItems rows={rows} />
             <TapeItems rows={rows} duplicate />
           </div>
         </div>
-        <span className="hidden shrink-0 font-mono text-[9px] uppercase tracking-[0.12em] text-night-muted lg:block">
+        <span className="hidden shrink-0 font-medium text-[12px] text-night-muted lg:block">
           Mid-market reference · {quote.updated.replace(/ \+0000$/, " UTC")}
         </span>
       </div>

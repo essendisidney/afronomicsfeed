@@ -31,7 +31,7 @@ export function WireList({
           {showSummary && item.summary ? (
             <p className="mt-1 line-clamp-2 text-sm leading-6 text-ink-soft">{item.summary}</p>
           ) : null}
-          <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
+          <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 font-medium text-[12px] text-muted">
             <span className="text-ink-soft">{item.publisher}</span>
             <span>·</span>
             <time dateTime={item.publishedAt}>{timeAgo(item.publishedAt, now)}</time>

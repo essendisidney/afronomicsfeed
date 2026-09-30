@@ -4,7 +4,7 @@ import { indicatorPageUrl, type Reading } from "@/lib/data/series";
 import { Sparkline } from "./Sparkline";
 
 export function Kicker({ children }: { children: React.ReactNode }) {
-  return <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-gold">{children}</p>;
+  return <p className="text-[13px] font-semibold text-gold">{children}</p>;
 }
 
 export function SectionTitle({
@@ -21,14 +21,14 @@ export function SectionTitle({
   note?: string;
 }) {
   return (
-    <div className="flex flex-wrap items-end justify-between gap-3 border-b border-rule pb-2">
+    <div className="flex flex-wrap items-end justify-between gap-3 border-b border-rule pb-3">
       <div>
         <Kicker>{kicker}</Kicker>
-        <h2 className="mt-1 font-serif text-xl text-ink sm:text-2xl">{title}</h2>
+        <h2 className="mt-0.5 font-serif text-2xl leading-tight text-ink sm:text-[1.75rem]">{title}</h2>
         {note ? <p className="mt-1 max-w-2xl text-xs leading-5 text-muted">{note}</p> : null}
       </div>
       {href ? (
-        <Link href={href} className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-forest hover:text-gold">
+        <Link href={href} className="rounded-full border border-rule px-3 py-1 text-[13px] font-medium text-forest hover:border-gold hover:text-gold">
           {hrefLabel}
         </Link>
       ) : null}
@@ -60,7 +60,7 @@ export function StatTile({
 }) {
   const body = (
     <>
-      <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
+      <p className="font-medium text-[12px] text-gold">
         {def.short}
         {reading ? ` · ${reading.year}` : ""}
       </p>

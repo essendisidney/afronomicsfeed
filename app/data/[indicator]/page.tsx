@@ -66,12 +66,12 @@ export default async function IndicatorPage({ params }: { params: Promise<{ indi
       aside={
         <div className="grid grid-cols-2 gap-px bg-rule">
           <div className="bg-paper-2 px-4 py-4">
-            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{total ? `Africa total · ${total.year}` : "Africa median"}</p>
+            <p className="font-medium text-[12px] text-muted">{total ? `Africa total · ${total.year}` : "Africa median"}</p>
             <p className="mt-1 font-serif text-2xl text-ink">{total ? fmt(total.sum) : median != null ? fmt(median) : "—"}</p>
             <p className="text-[11px] text-muted">{total ? `${total.reporting} countries reporting` : `${rows.length} countries`}</p>
           </div>
           <a href={`/api/data/${def.slug}`} className="bg-gold px-4 py-4 text-white hover:bg-gold-soft">
-            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/80">Download</p>
+            <p className="font-medium text-[12px] text-white/80">Download</p>
             <p className="mt-1 font-serif text-2xl">CSV</p>
             <p className="text-[11px] text-white/80">54 countries × every year</p>
           </a>

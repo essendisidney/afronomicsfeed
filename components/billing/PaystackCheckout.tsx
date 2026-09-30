@@ -48,7 +48,7 @@ export function PaystackCheckout({
   return (
     <form onSubmit={submit} className="space-y-2">
       <label className="block">
-        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Email for the receipt</span>
+        <span className="font-medium text-[12px] text-muted">Email for the receipt</span>
         <input
           type="email"
           required
@@ -61,7 +61,7 @@ export function PaystackCheckout({
       <button
         type="submit"
         disabled={pending}
-        className={`w-full px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] disabled:opacity-60 ${styles}`}
+        className={`w-full px-4 py-3 text-[12.5px] font-semibold disabled:opacity-60 ${styles}`}
       >
         {pending ? "Opening Paystack" : label}
       </button>

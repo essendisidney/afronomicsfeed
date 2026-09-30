@@ -79,7 +79,7 @@ export default async function BillMarketPage({ params }: Props) {
       aside={
         rows.length ? (
           <a href={`/api/data/tbills/${market.slug}`} download className="block bg-gold px-5 py-5 text-white hover:bg-gold-soft">
-            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/80">Download</p>
+            <p className="font-medium text-[12px] text-white/80">Download</p>
             <p className="mt-1 font-serif text-2xl">Full history · CSV</p>
             <p className="text-[11px] text-white/80">Source: {market.publisher}</p>
           </a>
@@ -97,7 +97,7 @@ export default async function BillMarketPage({ params }: Props) {
               if (!item) return <div key={tenor} className="bg-paper-2 px-5 py-5 text-sm text-muted">No {tenorLabel[tenor]} result</div>;
               return (
                 <div key={tenor} className="bg-paper-2 px-5 py-5">
-                  <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+                  <p className="flex items-center gap-2 font-medium text-[12px] text-muted">
                     <span className="inline-block h-2 w-2 rounded-full" style={{ background: tenorColor[tenor] }} />
                     {tenorLabel[tenor]} · {dateFmt.format(new Date(item.latest.date))}
                   </p>

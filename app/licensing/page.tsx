@@ -119,7 +119,7 @@ export default function LicensingPage() {
         <div className="mt-6 grid gap-px bg-rule md:grid-cols-2 lg:grid-cols-4">
           {tiers.map((tier) => (
             <div key={tier.name} className="bg-paper px-5 py-6">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">{tier.name}</p>
+              <p className="text-[12px] font-semibold text-gold">{tier.name}</p>
               <p className="mt-2 font-serif text-3xl text-ink">{tier.price}</p>
               <p className="mt-3 text-sm leading-6 text-ink-soft">{tier.detail}</p>
             </div>

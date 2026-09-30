@@ -12,7 +12,7 @@ export function LabelBadges({ labels }: { labels: ContentLabel[] }) {
       {labels.map((label) => (
         <li
           key={label}
-          className={`rounded-sm border bg-paper px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] ${styles[label]}`}
+          className={`rounded-sm border bg-paper px-2 py-0.5 text-[12px] font-semibold ${styles[label]}`}
         >
           {label}
         </li>

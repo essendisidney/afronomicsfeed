@@ -1,5 +1,7 @@
 "use client";
 
+import { Mark } from "@/components/brand/Wordmark";
+
 import { useEffect, useState } from "react";
 
 type InstallEvent = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: "accepted" | "dismissed" }> };
@@ -34,13 +36,9 @@ export function AppInstall() {
         await prompt.userChoice.catch(() => undefined);
         setPrompt(null);
       }}
-      className="fixed bottom-4 right-4 z-40 flex items-center gap-2 bg-forest px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-paper shadow-lg hover:bg-forest-deep"
+      className="on-night fixed bottom-4 right-4 z-40 flex items-center gap-2.5 rounded-full bg-night py-2.5 pl-3 pr-5 text-[14px] font-semibold text-night-ink shadow-[0_12px_40px_-12px_rgba(0,0,0,0.6)] ring-1 ring-night-line hover:bg-night-2"
     >
-      <span aria-hidden className="flex items-end gap-[2px]">
-        {[6, 10, 13, 9].map((h, i) => (
-          <span key={i} className="inline-block w-[3px] bg-gold-soft" style={{ height: h }} />
-        ))}
-      </span>
+      <Mark className="h-6 w-auto" />
       Install the Afronomics app
     </button>
   );

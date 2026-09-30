@@ -12,7 +12,7 @@ const legal = [
 function Column({ title, links }: { title: string; links: readonly { href: string; label: string }[] }) {
   return (
     <div>
-      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-night-muted">{title}</p>
+      <p className="text-[13px] font-semibold text-night-ink">{title}</p>
       <ul className="mt-4 space-y-2">
         {links.map((item) => (
           <li key={item.href}>
@@ -28,7 +28,7 @@ function Column({ title, links }: { title: string; links: readonly { href: strin
 
 export function Footer() {
   return (
-    <footer className="no-print mt-16 bg-night text-night-ink">
+    <footer className="no-print on-night mt-16 bg-night text-night-ink">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -38,7 +38,7 @@ export function Footer() {
               href={site.houseUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-block font-mono text-[10px] uppercase tracking-[0.16em] text-night-muted hover:text-night-ink"
+              className="mt-4 inline-block font-medium text-[12px] text-night-muted hover:text-night-ink"
             >
               {site.houseCredit}
             </a>
@@ -70,7 +70,7 @@ export function Footer() {
         </div>
 
         <p className="mt-6 max-w-3xl text-xs leading-5 text-night-muted">{disclaimer}</p>
-        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-night-muted">
+        <p className="mt-4 font-medium text-[12px] text-night-muted">
           © {new Date().getFullYear()} {site.legalName}
         </p>
       </div>

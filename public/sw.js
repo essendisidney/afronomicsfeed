@@ -4,7 +4,7 @@
  * - Build assets, fonts and icons: cache first (their file names change when they change).
  * - Data downloads, APIs, embeds and other sites: never touched.
  */
-const VERSION = "af-v1";
+const VERSION = "af-v2";
 const PAGES = `${VERSION}-pages`;
 const ASSETS = `${VERSION}-assets`;
 const OFFLINE = "/offline";

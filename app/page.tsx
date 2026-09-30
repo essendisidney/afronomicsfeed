@@ -15,6 +15,9 @@ import { loadWire, publishersLive } from "@/lib/data/wire";
 import { latestByTenor, loadTbills, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
 import { site } from "@/lib/site";
+import { billMarkets, latestBills, loadBillMarket } from "@/lib/data/sovereign-bills";
+
+const boardDate = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 
 export const revalidate = 900;
 
@@ -61,52 +64,120 @@ export default async function HomePage() {
   const hottest = inflation ? ranked(inflation, 1).slice(0, 8) : [];
   const thinnest = reserves ? [...ranked(reserves, 2)].reverse().slice(0, 8) : [];
 
+  const board = billMarkets.flatMap((market) => {
+    const item = latestBills(loadBillMarket(market.slug).rows).get(364);
+    if (!item) return [];
+    const bps = item.previous ? Math.round((item.latest.rate - item.previous.rate) * 100) : null;
+    return [{ market, rate: item.latest.rate, bps, date: item.latest.date }];
+  });
+  const boardFx = fx ? (["KES", "NGN", "ZAR", "GHS", "EGP"] as const).flatMap((code) => (fx.rates[code] == null ? [] : [{ code, rate: fx.rates[code] }])) : [];
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <section className="grid gap-6 lg:grid-cols-12 lg:items-end">
-        <div className="lg:col-span-8">
-          <Kicker>{site.tagline}</Kicker>
-          <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.05] tracking-[-0.03em] text-ink sm:text-5xl">
-            One desk for Africa’s markets, economies and capital.
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-ink-soft">{site.promise}</p>
-        </div>
-        <dl className="grid grid-cols-3 gap-px bg-rule text-center lg:col-span-4">
-          {[
-            { k: "Economies", v: "54" },
-            { k: "Publishers on the wire", v: String(publishersLive(wire) || "—") },
-            { k: "Headlines, 10 days", v: String(wire.length || "—") },
-          ].map((item) => (
-            <div key={item.k} className="bg-paper px-2 py-3">
-              <dd className="font-serif text-2xl text-ink">{item.v}</dd>
-              <dt className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{item.k}</dt>
+    <>
+      <section className="on-night bg-night text-night-ink">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-14 pt-10 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-16">
+          <div className="lg:col-span-6 lg:pt-4">
+            <p className="text-[14px] font-medium text-accent">{site.tagline}</p>
+            <h1 className="mt-4 font-serif text-[2.75rem] leading-[0.95] tracking-[-0.02em] sm:text-6xl lg:text-7xl">
+              One desk for Africa’s markets, economies and capital.
+            </h1>
+            <p className="mt-6 max-w-xl text-[17px] leading-7 text-night-soft">{site.promise}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/markets/tbills" className="rounded-full bg-accent px-5 py-2.5 text-[15px] font-semibold text-night hover:bg-gold-soft">
+                Open the T-bill monitor
+              </Link>
+              <Link href="/weekly" className="rounded-full border border-night-line px-5 py-2.5 text-[15px] font-medium text-night-ink hover:border-night-soft/50 hover:bg-night-2">
+                Read this week’s edition
+              </Link>
             </div>
-          ))}
-        </dl>
+            <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 sm:gap-8">
+              {[
+                { k: "economies covered", v: "54" },
+                { k: "publishers on the wire", v: String(publishersLive(wire) || "—") },
+                { k: "headlines in 10 days", v: String(wire.length || "—") },
+              ].map((item) => (
+                <div key={item.k} className="flex flex-col-reverse">
+                  <dt className="text-[13px] text-night-muted">{item.k}</dt>
+                  <dd className="af-board-figure text-3xl">{item.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div className="lg:col-span-6">
+            <div className="rounded-3xl border border-night-line bg-night-2 p-2 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]">
+              <div className="flex items-baseline justify-between px-4 pb-3 pt-3">
+                <h2 className="text-[15px] font-semibold">364-day Treasury bills</h2>
+                <Link href="/markets/tbills" className="text-[13px] text-night-muted hover:text-night-ink">
+                  All five markets
+                </Link>
+              </div>
+              <table className="w-full border-separate border-spacing-y-1 text-left">
+                <thead className="sr-only">
+                  <tr>
+                    <th>Market</th>
+                    <th>Rate</th>
+                    <th>Change since previous auction</th>
+                    <th>Auction</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {board.map((row, i) => (
+                    <tr key={row.market.slug} className="af-board-row" style={{ "--i": i } as React.CSSProperties}>
+                      <td className="rounded-l-2xl bg-night py-3 pl-4">
+                        <Link href={row.market.href} className="flex items-center gap-3 hover:text-accent">
+                          <span className="grid h-8 w-10 place-items-center rounded-lg bg-night-2 text-[12px] font-semibold tracking-wide text-night-soft">
+                            {row.market.iso}
+                          </span>
+                          <span className="text-[15px] font-medium">{row.market.country}</span>
+                        </Link>
+                      </td>
+                      <td className="af-board-figure bg-night py-3 text-right text-[26px] sm:text-3xl">{row.rate.toFixed(2)}%</td>
+                      <td
+                        className={`bg-night py-3 pl-4 text-right text-[13px] font-medium tabular-nums ${
+                          row.bps == null || row.bps === 0 ? "text-night-muted" : row.bps > 0 ? "text-[#ff8a7a]" : "text-[#5cd6a8]"
+                        }`}
+                      >
+                        {row.bps == null ? "" : row.bps === 0 ? "unch." : `${row.bps > 0 ? "+" : "−"}${Math.abs(row.bps)} bp`}
+                      </td>
+                      <td className="hidden rounded-r-2xl bg-night py-3 pl-4 pr-4 text-right text-[13px] text-night-muted sm:table-cell">
+                        {boardDate.format(new Date(row.date))}
+                      </td>
+                      <td className="rounded-r-2xl bg-night pr-3 sm:hidden" />
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {boardFx.length ? (
+                <div className="mt-1 grid grid-cols-5 gap-1">
+                  {boardFx.map((item) => (
+                    <Link key={item.code} href={pairHref(item.code)} className="rounded-2xl bg-night px-2 py-3 text-center hover:bg-night/60 sm:px-3">
+                      <span className="block text-[12px] text-night-muted">USD/{item.code}</span>
+                      <span className="af-board-figure mt-0.5 block text-lg sm:text-xl">{formatFx(item.rate)}</span>
+                    </Link>
+                  ))}
+                </div>
+              ) : null}
+              <p className="px-4 pb-2 pt-3 text-[12px] leading-5 text-night-muted">
+                Central-bank auction results, compiled by Afronomics. Dollar rates are the daily mid-market reference.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       {headline.length > 0 ? (
-        <section className="mt-8 grid grid-cols-2 gap-px bg-rule sm:grid-cols-3 lg:grid-cols-6">
+        <section className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-3 lg:grid-cols-6">
           {headline.map((item) => (
-            <Link key={item.label} href={item.href} className="bg-paper-2 px-4 py-4 hover:bg-paper-3">
-              <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{item.label}</p>
-              <p className="mt-1 font-serif text-2xl tracking-[-0.02em] text-ink">{item.value}</p>
+            <Link key={item.label} href={item.href} className="bg-surface px-4 py-4 hover:bg-paper-2">
+              <p className="text-[12px] font-medium text-muted">{item.label}</p>
+              <p className="mt-1 font-serif text-[1.7rem] leading-tight text-ink">{item.value}</p>
               <p className="mt-0.5 text-[11px] text-muted">{item.note}</p>
             </Link>
           ))}
         </section>
       ) : null}
-
-      <Link
-        href="/weekly"
-        className="mt-6 flex flex-wrap items-center justify-between gap-3 border border-rule bg-paper-2 px-4 py-3 text-sm text-ink hover:border-gold"
-      >
-        <span>
-          <span className="mr-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-gold">This week</span>
-          Rates, currencies, Board dates and the stories that moved African markets — in one page.
-        </span>
-        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-forest">Read the Weekly →</span>
-      </Link>
 
       <section className="mt-12 grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
@@ -151,7 +222,7 @@ export default async function HomePage() {
                   const delta = item?.previous ? Math.round((item.latest.weighted_avg_rate - item.previous.weighted_avg_rate) * 100) : null;
                   return (
                     <Link key={tenor} href="/markets/kenya-tbills" className="bg-paper-2 px-3 py-3 hover:bg-paper-3">
-                      <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{tenorLabel[tenor]}</p>
+                      <p className="font-medium text-[12px] text-muted">{tenorLabel[tenor]}</p>
                       <p className="mt-1 font-serif text-xl text-ink">{item ? `${item.latest.weighted_avg_rate.toFixed(2)}%` : "—"}</p>
                       <p className="text-[11px] text-muted">{delta == null ? "" : `${delta > 0 ? "+" : delta < 0 ? "−" : "±"}${Math.abs(delta)} bps`}</p>
                     </Link>
@@ -159,7 +230,7 @@ export default async function HomePage() {
                 })}
               </div>
               <SourceLine name="Central Bank of Kenya" href="https://www.centralbank.go.ke/bills-bonds/treasury-bills/" detail="latest auction, weighted average of accepted bids" />
-              <p className="mt-2 flex flex-wrap gap-x-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em]">
+              <p className="mt-2 flex flex-wrap gap-x-4 text-[12px] font-semibold">
                 {tbills.get(91) ? (
                   <Link href={`/markets/kenya-tbills/${tbills.get(91)!.latest.value_date}`} className="text-forest hover:text-gold">
                     Latest auction report →
@@ -223,7 +294,7 @@ export default async function HomePage() {
         <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {regions.map((region) => (
             <div key={region}>
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">{region}</p>
+              <p className="text-[13px] font-semibold text-ink">{region}</p>
               <ul className="mt-2 space-y-1 text-sm">
                 {countries
                   .filter((country) => country.region === region)
@@ -246,7 +317,7 @@ export default async function HomePage() {
           <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {articles.map((article) => (
               <article key={`${article.category}-${article.slug}`}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+                <p className="font-medium text-[12px] text-muted">
                   {categoryLabel(article.category)} · {formatDate(article.date)}
                 </p>
                 <h3 className="mt-2 font-serif text-xl leading-snug">
@@ -263,5 +334,6 @@ export default async function HomePage() {
 
       <NewsletterBand />
     </div>
+    </>
   );
 }

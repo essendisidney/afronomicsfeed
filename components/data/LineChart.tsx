@@ -170,7 +170,7 @@ export function LineChart({
           className="pointer-events-none absolute top-8 z-10 min-w-40 border border-rule bg-paper px-3 py-2 text-xs shadow-sm"
           style={{ left: `${Math.min(78, Math.max(2, (x(hover) / width) * 100))}%` }}
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">{active.date}</p>
+          <p className="font-medium text-[12px] text-muted">{active.date}</p>
           {series.map((s) => {
             const v = active.values[s.key];
             return (

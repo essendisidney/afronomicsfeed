@@ -28,8 +28,10 @@ PAGE = "https://www.boz.zm/markets-securities/treasury-bills"
 
 
 def parse_notice(text: str) -> dict[int, dict]:
-    """Tenor lines read: '91 DAYS ZM3000012994 K440.00 Mn K400.23 Mn K389.18 Mn K399.17 Mn K388.04 Mn 97.2163 11.5000 ...'
-    = offered, bids (face), bids (cost), allocated (face), allocated (cost), cut-off price, cut-off yield."""
+    """Tenor lines read, e.g. (2025): '91 DAYS ZM3000012994 K440.00 Mn K400.23 Mn K389.18 Mn K399.17 Mn K388.04 Mn 97.2163 11.5000 ...'
+    = offered, bids (face), bids (cost), allocated (face), allocated (cost), cut-off price, cut-off yield.
+    Older notices (2021) omit bids at cost: offered, bids (face), allocated (face), allocated (cost), price, yield.
+    The cut-off price (a 4-decimal figure between 40 and 100) anchors the layout."""
     out = {}
     for line in text.splitlines():
         m = re.match(r"^\s*(91|182|273|364)\s*-?\s*DAYS?\b(.*)$", line, flags=re.I)
@@ -37,13 +39,22 @@ def parse_notice(text: str) -> dict[int, dict]:
             continue
         rest = re.sub(r"\bZM\d{6,}\b", " ", m.group(2))
         rest = re.sub(r"\d+(?:\.\d+)?\s*-\s*\d+(?:\.\d+)?", " ", rest)  # yield ranges
-        nums = [float(x.replace(",", "")) for x in re.findall(r"\d[\d,]*\.?\d*", rest)]
-        if len(nums) < 7:
+        tokens = re.findall(r"\d[\d,]*(?:\.\d+)?", rest)
+        nums = [float(t.replace(",", "")) for t in tokens]
+        price_at = next((i for i, t in enumerate(tokens) if i >= 4 and re.fullmatch(r"\d{2,3}\.\d{3,}", t) and 40 < nums[i] <= 100), None)
+        if price_at is None or price_at + 1 >= len(nums):
             continue
-        offered, bid_face, _bid_cost, alloc_face, _alloc_cost, price, rate = nums[:7]
-        if not (40 < price <= 100) or not (0 < rate < 80):
+        amounts = nums[:price_at]
+        price, rate = nums[price_at], nums[price_at + 1]
+        if not (0 < rate < 80):
             continue
-        out[int(m.group(1))] = {"offered": offered, "received": bid_face, "accepted": alloc_face, "price": price, "rate": rate}
+        if len(amounts) >= 5:
+            offered, received, accepted = amounts[0], amounts[1], amounts[3]
+        elif len(amounts) == 4:
+            offered, received, accepted = amounts[0], amounts[1], amounts[2]
+        else:
+            continue
+        out[int(m.group(1))] = {"offered": offered, "received": received, "accepted": accepted, "price": price, "rate": rate}
     return out
 
 

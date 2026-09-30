@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProsePage } from "@/components/data/ProsePage";
+import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -9,12 +10,17 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/contact` },
 };
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ interest?: string }> }) {
+  const { interest } = await searchParams;
   const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
   return (
     <ProsePage crumbs={[{ href: "/", label: "Home" }, { label: "Contact" }]} kicker="Contact" title="Reach the desk" lede="One inbox, read every working day in Nairobi.">
+      <div id="enquiry" className="not-prose mb-10 border border-rule bg-paper-2 p-5">
+        <p className="mb-4 font-serif text-xl text-ink">Access, sponsorship, data or research</p>
+        <EnquiryForm interest={interest ?? "access"} />
+      </div>
       <p>
-        Write to <a href={mail("Afronomics")}>{site.contactEmail}</a> and put one of these in the subject so it reaches the right queue:
+        Or write to <a href={mail("Afronomics")}>{site.contactEmail}</a> and put one of these in the subject so it reaches the right queue:
       </p>
       <ul>
         <li>

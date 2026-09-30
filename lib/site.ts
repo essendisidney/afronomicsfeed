@@ -29,6 +29,7 @@ export const nav = [
 ] as const;
 
 export const utilityNav = [
+  { href: "/weekly", label: "Weekly" },
   { href: "/signals", label: "Signals" },
   { href: "/method", label: "Sources" },
 ] as const;
@@ -52,6 +53,8 @@ export const footerGroups = [
       { href: "/countries", label: "54 country files" },
       { href: "/data", label: "Data hub" },
       { href: "/signals", label: "Signals" },
+      { href: "/widgets", label: "Free widgets" },
+      { href: "/licensing", label: "Data licensing" },
       { href: "/method", label: "Sources & method" },
     ],
   },
@@ -70,6 +73,7 @@ export const footerGroups = [
       { href: "/about", label: "About" },
       { href: "/pricing", label: "Pricing" },
       { href: "/advisory", label: "Research & advisory" },
+      { href: "/advertise", label: "Advertise" },
       { href: "/subscribe", label: "Newsletter" },
       { href: "/contact", label: "Contact" },
       { href: "/corrections", label: "Corrections" },

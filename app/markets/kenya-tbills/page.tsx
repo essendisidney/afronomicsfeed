@@ -58,7 +58,11 @@ export default function KenyaTbillsPage() {
         <p>
           Every result the Central Bank of Kenya has published{first ? ` since ${dateFmt.format(new Date(first))}` : ""} —{" "}
           {file.rows.length.toLocaleString("en-US")} tenor results from {file.notices.toLocaleString("en-US")} notices — read from the
-          CBK’s PDFs into one table. The CBK publishes each week as a separate document; this is the only place they sit together.
+          CBK’s PDFs into one table. The CBK publishes each week as a separate document; this is the only place they sit together. See also{" "}
+          <Link href="/markets/kenya-bonds" className="underline underline-offset-2">
+            bond auctions and the yield curve
+          </Link>
+          .
         </p>
       }
       aside={

@@ -60,3 +60,18 @@ export async function upsertRows(table: string, rows: unknown[], onConflict: str
   }
   return { ok: true as const, count: rows.length };
 }
+
+/** Read-only database function call, cached for `revalidate` seconds so pages stay static (ISR). */
+export async function rpcRead(fn: string, args: Record<string, unknown>, revalidate = 3600): Promise<Result> {
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? PUBLISHABLE_KEY;
+  const response = await fetch(`${url()}/rest/v1/rpc/${fn}`, {
+    method: "POST",
+    headers: headers(key),
+    body: JSON.stringify(args),
+    next: { revalidate },
+  }).catch(() => null);
+  if (!response) return { ok: false, reason: "network" };
+  const text = await response.text();
+  if (!response.ok) return { ok: false, reason: `${response.status} ${text.slice(0, 200)}` };
+  return { ok: true, value: text ? JSON.parse(text) : null };
+}

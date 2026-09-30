@@ -97,6 +97,17 @@ export default async function HomePage() {
         </section>
       ) : null}
 
+      <Link
+        href="/weekly"
+        className="mt-6 flex flex-wrap items-center justify-between gap-3 border border-rule bg-paper-2 px-4 py-3 text-sm text-ink hover:border-gold"
+      >
+        <span>
+          <span className="mr-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-gold">This week</span>
+          Rates, currencies, Board dates and the stories that moved African markets — in one page.
+        </span>
+        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-forest">Read the Weekly →</span>
+      </Link>
+
       <section className="mt-12 grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <SectionTitle kicker="The Wire" title="Latest from African business media" href="/news" hrefLabel="All headlines →" />
@@ -148,6 +159,10 @@ export default async function HomePage() {
                 })}
               </div>
               <SourceLine name="Central Bank of Kenya" href="https://www.centralbank.go.ke/bills-bonds/treasury-bills/" detail="latest auction, weighted average of accepted bids" />
+              <p className="mt-2 flex flex-wrap gap-x-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em]">
+                <Link href="/markets/kenya-bonds" className="text-forest hover:text-gold">Bond yield curve →</Link>
+                <Link href="/widgets" className="text-forest hover:text-gold">Put these rates on your site →</Link>
+              </p>
             </div>
           ) : null}
           <div>

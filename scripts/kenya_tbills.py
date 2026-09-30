@@ -245,6 +245,9 @@ def main() -> int:
     if args.limit:
         notices = notices[: args.limit]
     print(f"{len(notices)} new notices to read", flush=True)
+    if not notices and OUT.exists():
+        print("Nothing new; dataset unchanged.")
+        return 0
 
     rows = list(existing.get("rows", []))
     sources = dict(existing.get("sources", {}))

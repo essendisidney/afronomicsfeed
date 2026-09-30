@@ -38,7 +38,12 @@ export default async function DataHubPage() {
             Kenya Treasury bill auctions →
           </Link>
         </p>
-        <p className="mt-1 text-sm text-ink-soft">Every Central Bank of Kenya auction result, read from the CBK’s notices into one table with a free CSV.</p>
+        <p className="mt-2 font-serif text-2xl">
+          <Link href="/markets/kenya-bonds" className="hover:text-forest">
+            Kenya Treasury bond auctions and yield curve →
+          </Link>
+        </p>
+        <p className="mt-1 text-sm text-ink-soft">Every Central Bank of Kenya auction result, read from the CBK’s notices into tables with free CSVs.</p>
       </section>
       <div className="space-y-12">
         {desks.map((desk) => (

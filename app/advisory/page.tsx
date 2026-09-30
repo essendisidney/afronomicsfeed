@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProsePage } from "@/components/data/ProsePage";
+import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -41,8 +42,11 @@ export default function AdvisoryPage() {
       <h2>Start a conversation</h2>
       <p>
         Email <a href={mail("Research request")}>{site.contactEmail}</a> with the market, the question and your timeline. You’ll get a scope and a
-        fixed quote. For data and seats, see <Link href="/pricing">pricing</Link>.
+        fixed quote. For data and seats, see <Link href="/pricing">pricing</Link>; for feeds, see <Link href="/licensing">data licensing</Link>.
       </p>
+      <div className="not-prose mt-6 border border-rule bg-paper-2 p-5">
+        <EnquiryForm interest="research" cta="Request a scope" />
+      </div>
     </ProsePage>
   );
 }

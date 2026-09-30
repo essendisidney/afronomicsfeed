@@ -45,3 +45,4 @@ scripts/prints.json
 scripts/prints.sql
 
 .vercel
+__pycache__/

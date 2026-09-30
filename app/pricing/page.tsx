@@ -41,7 +41,6 @@ export default async function PricingPage({
   const reference = query.reference ?? query.trxref;
   const payment = query.checkout === "returned" && reference ? await verifyTransaction(reference) : null;
   const live = paystackConfigured();
-  const contact = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
   const tiers = [pricing.free, pricing.pro, pricing.professional, pricing.enterprise];
 
   return (
@@ -92,12 +91,12 @@ export default async function PricingPage({
               ) : tier.name === pricing.professional.name && live ? (
                 <PaystackCheckout plan="professional" label={`Subscribe · ${chargeLabel("professional")}/mo`} variant="ghost" />
               ) : (
-                <a
-                  href={contact(`Afronomics ${tier.name}`)}
+                <Link
+                  href={`/contact?interest=${tier.name === pricing.enterprise.name ? "licensing" : "access"}#enquiry`}
                   className="block border border-ink/20 px-4 py-3 text-center font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-ink hover:border-gold"
                 >
                   {tier.name === pricing.enterprise.name ? "Talk to us" : "Request access"}
-                </a>
+                </Link>
               )}
             </div>
           </div>
@@ -148,7 +147,7 @@ export default async function PricingPage({
       <section className="mt-14 grid gap-8 md:grid-cols-3">
         {[
           ["Who subscribes", "Investors, banks, DFIs, climate funds, corporates and advisers who need a defensible view of African markets."],
-          ["Paying from Africa", "Kenyan and Nigerian cards, M-Pesa and bank transfer through Paystack. Invoices in USD or KES for teams."],
+          ["Paying from Africa", live ? "Kenyan and Nigerian cards, M-Pesa and bank transfer through Paystack. Invoices in USD or KES for teams." : "Invoiced in USD or KES, payable by bank transfer or M-Pesa. Request access and the desk sends an invoice within one business day."],
           ["Citing our data", "Free with attribution: “Source: Afronomics, compiled from [publisher]”. Every CSV carries its source lines."],
         ].map(([title, body]) => (
           <div key={title}>

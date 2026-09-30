@@ -3,12 +3,50 @@
  "publisher": "Central Bank of Kenya",
  "source_page": "https://www.centralbank.go.ke/bills-bonds/treasury-bonds/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-09-30T08:38:44+00:00",
+ "updated_at": "2026-09-30T18:31:56+00:00",
  "units": {
   "amounts": "KES millions",
   "rates": "percent per annum"
  },
  "rows": [
+  {
+   "value_date": "2026-10-05",
+   "issue": "FXD3/2019/015",
+   "type": "Fixed coupon",
+   "tenor_years": 15,
+   "maturity": "2034-07-10",
+   "kind": "reopening",
+   "offered_total_kes_m": 50000.0,
+   "received_kes_m": 34559.26,
+   "accepted_kes_m": 28602.5,
+   "competitive_kes_m": 1764.3,
+   "noncompetitive_kes_m": 26838.2,
+   "bid_to_cover": 1.21,
+   "market_weighted_avg_rate": 12.874,
+   "weighted_avg_rate": 12.7338,
+   "price_per_100": 100.6538,
+   "coupon": 12.34,
+   "source": "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/250350777_RESULTS%20FOR%20FXD3-2019-015%20AND%20%20FXD1-2019-020%20DATED%2005-10-2026.pdf"
+  },
+  {
+   "value_date": "2026-10-05",
+   "issue": "FXD1/2019/020",
+   "type": "Fixed coupon",
+   "tenor_years": 20,
+   "maturity": "2039-03-21",
+   "kind": "reopening",
+   "offered_total_kes_m": 50000.0,
+   "received_kes_m": 46003.11,
+   "accepted_kes_m": 28902.51,
+   "competitive_kes_m": 1058.45,
+   "noncompetitive_kes_m": 27844.06,
+   "bid_to_cover": 1.59,
+   "market_weighted_avg_rate": 13.8015,
+   "weighted_avg_rate": 13.6016,
+   "price_per_100": 95.6773,
+   "coupon": 12.873,
+   "source": "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/250350777_RESULTS%20FOR%20FXD3-2019-015%20AND%20%20FXD1-2019-020%20DATED%2005-10-2026.pdf"
+  },
   {
    "value_date": "2026-09-21",
    "issue": "FXD1/2026/030",
@@ -8995,6 +9033,13 @@
   "https://www.centralbank.go.ke/images/may%202014-%202yr%20fxd2-2014-2.pdf": {
    "status": "unparsed",
    "reason": "no table found"
+  },
+  "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/250350777_RESULTS%20FOR%20FXD3-2019-015%20AND%20%20FXD1-2019-020%20DATED%2005-10-2026.pdf": {
+   "status": "parsed",
+   "issues": [
+    "FXD3/2019/015",
+    "FXD1/2019/020"
+   ]
   }
  }
 }

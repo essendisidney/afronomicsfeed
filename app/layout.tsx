@@ -1,27 +1,33 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Outfit, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { ThemeScript } from "@/components/layout/ThemeScript";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const sans = Outfit({
+/* Self-hosted: no build-time or runtime call to Google Fonts. */
+const sans = localFont({
   variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  src: [{ path: "./fonts/outfit-latin-wght-normal.woff2", weight: "100 900", style: "normal" }],
   display: "swap",
 });
 
-const serif = Source_Serif_4({
+const serif = localFont({
   variable: "--font-serif",
-  subsets: ["latin"],
+  src: [
+    { path: "./fonts/source-serif-4-latin-wght-normal.woff2", weight: "200 900", style: "normal" },
+    { path: "./fonts/source-serif-4-latin-wght-italic.woff2", weight: "200 900", style: "italic" },
+  ],
   display: "swap",
 });
 
-const mono = IBM_Plex_Mono({
+const mono = localFont({
   variable: "--font-mono",
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
+  src: [
+    { path: "./fonts/ibm-plex-mono-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-latin-600-normal.woff2", weight: "600", style: "normal" },
+  ],
   display: "swap",
 });
 

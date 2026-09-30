@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { PageShell } from "@/components/data/PageShell";
-import { paystackConfigured } from "@/lib/billing/paystack";
+import { paystackConfigured, verifyTransaction } from "@/lib/billing/paystack";
+import { chargeLabel } from "@/lib/billing/plans";
 import { pricing, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -31,8 +32,14 @@ function cell(value: boolean | string) {
   return <span className="text-xs text-ink-soft">{value}</span>;
 }
 
-export default async function PricingPage({ searchParams }: { searchParams: Promise<{ checkout?: string }> }) {
+export default async function PricingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ checkout?: string; reference?: string; trxref?: string }>;
+}) {
   const query = await searchParams;
+  const reference = query.reference ?? query.trxref;
+  const payment = query.checkout === "returned" && reference ? await verifyTransaction(reference) : null;
   const live = paystackConfigured();
   const contact = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
   const tiers = [pricing.free, pricing.pro, pricing.professional, pricing.enterprise];
@@ -50,9 +57,20 @@ export default async function PricingPage({ searchParams }: { searchParams: Prom
       }
     >
       {query.checkout === "returned" ? (
-        <p className="mb-8 border border-forest/40 bg-paper-2 px-4 py-3 text-sm text-ink">
-          Payment received by Paystack. Your access is set up by email within one business day — reply to the receipt if you need it sooner.
-        </p>
+        payment?.status === "success" ? (
+          <p className="mb-8 border border-forest/40 bg-paper-2 px-4 py-3 text-sm text-ink">
+            Payment confirmed — thank you. Reference <span className="font-mono">{payment.reference}</span>. Your access is sent to {payment.email}{" "}
+            within one business day; reply to the Paystack receipt if you need it sooner.
+          </p>
+        ) : (
+          <p className="mb-8 border border-gold/40 bg-paper-2 px-4 py-3 text-sm text-ink">
+            We couldn’t confirm a completed payment{reference ? ` for reference ${reference}` : ""}. If you were charged, email{" "}
+            <a className="underline" href={`mailto:${site.contactEmail}?subject=Payment`}>
+              {site.contactEmail}
+            </a>{" "}
+            with the reference and we’ll sort it out.
+          </p>
+        )
       ) : null}
 
       <div className="grid gap-px bg-rule md:grid-cols-2 lg:grid-cols-4">
@@ -60,7 +78,7 @@ export default async function PricingPage({ searchParams }: { searchParams: Prom
           <div key={tier.name} className="flex flex-col bg-paper px-5 py-6">
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">{tier.name}</p>
             <p className="mt-3 font-serif text-4xl text-ink">
-              {tier.price}
+              {tier.name === pricing.pro.name ? chargeLabel("pro") : tier.name === pricing.professional.name ? chargeLabel("professional") : tier.price}
               <span className="text-base text-muted">{tier.period}</span>
             </p>
             <p className="mt-3 flex-1 text-sm leading-6 text-ink-soft">{tier.detail}</p>
@@ -70,9 +88,9 @@ export default async function PricingPage({ searchParams }: { searchParams: Prom
                   Get the weekly
                 </Link>
               ) : tier.name === pricing.pro.name && live ? (
-                <PaystackCheckout plan="pro" label="Subscribe · $29/mo" />
+                <PaystackCheckout plan="pro" label={`Subscribe · ${chargeLabel("pro")}/mo`} />
               ) : tier.name === pricing.professional.name && live ? (
-                <PaystackCheckout plan="professional" label="Subscribe · $149/mo" variant="ghost" />
+                <PaystackCheckout plan="professional" label={`Subscribe · ${chargeLabel("professional")}/mo`} variant="ghost" />
               ) : (
                 <a
                   href={contact(`Afronomics ${tier.name}`)}
@@ -93,7 +111,7 @@ export default async function PricingPage({ searchParams }: { searchParams: Prom
             <p className="mt-2 font-serif text-2xl text-ink">{pricing.trial.price} for 14 days</p>
             <p className="mt-1 text-sm text-ink-soft">{pricing.trial.detail}</p>
           </div>
-          <PaystackCheckout plan="trial" label="Start trial · KES 500" variant="secondary" />
+          <PaystackCheckout plan="trial" label={`Start trial · ${chargeLabel("trial")}`} variant="secondary" />
         </div>
       ) : null}
 

@@ -28,10 +28,18 @@ daily African FX since launch, and a searchable, country-tagged index of African
 | `SUPABASE_SERVICE_ROLE_KEY` | same (server only, never exposed) |
 | `CRON_SECRET` | protects the archive cron; Vercel sends it automatically |
 | `PAYSTACK_SECRET_KEY` | turns on Pro/Team/trial checkout on /pricing |
+| `PAYSTACK_PLAN_PRO`, `PAYSTACK_PLAN_TEAM` | optional Paystack plan codes; makes Pro/Team recurring subscriptions |
+| `PAYSTACK_CURRENCY` | `USD` (default, needs USD enabled on Paystack) or `KES` (Pro KES 3,900, Team KES 19,500) |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | public contact address (default desk@afronomicsfeed.com) |
 | `AFRONOMICS_PAYWALL` | set to `on` only once accounts exist |
 
-Database migrations live in `supabase/migrations`; 0003 and 0004 add `subscribers`, `fx_daily`, `wire_archive`.
+Database migrations live in `supabase/migrations`; 0003–0005 add `subscribers`, `fx_daily`, `wire_archive`,
+`payments` and `paid_subscriptions`. Set everything in one go with `scripts/setup-env.ps1`.
+
+## Payments
+
+Paystack webhook URL: `https://www.afronomicsfeed.com/api/paystack/webhook`. Verified charges land in `payments`,
+subscriptions in `paid_subscriptions`. There are no user accounts yet: grant access by email from those tables.
 
 ## Adding coverage
 

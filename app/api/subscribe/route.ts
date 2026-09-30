@@ -1,13 +1,10 @@
+import { upsertRows } from "@/lib/store";
+
 export const runtime = "nodejs";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const roles = new Set(["investor", "bank", "dfi", "corporate", "research", "founder", "other"]);
 
-function store() {
-  const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  return url && key ? { url: url.replace(/\/$/, ""), key } : null;
-}
 
 /** Newsletter sign-up. Writes to the `subscribers` table (migration 0003). */
 export async function POST(request: Request) {
@@ -20,26 +17,10 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, reason: "Please enter a valid email address." }, { status: 400 });
   }
 
-  const cfg = store();
-  if (!cfg) {
+  const result = await upsertRows("subscribers", [{ email, role, source }], "email");
+  if (!result.ok) {
     // Still visible in the deployment's function logs so no sign-up is lost.
-    console.log(`[subscribe] ${JSON.stringify({ email, role, source, at: new Date().toISOString() })}`);
-    return Response.json({ ok: true, stored: false });
-  }
-
-  const response = await fetch(`${cfg.url}/rest/v1/subscribers?on_conflict=email`, {
-    method: "POST",
-    headers: {
-      apikey: cfg.key,
-      Authorization: `Bearer ${cfg.key}`,
-      "Content-Type": "application/json",
-      Prefer: "resolution=merge-duplicates,return=minimal",
-    },
-    body: JSON.stringify({ email, role, source }),
-  }).catch(() => null);
-
-  if (!response || !response.ok) {
-    console.log(`[subscribe:fallback] ${JSON.stringify({ email, role, source, status: response?.status ?? "network" })}`);
+    console.log(`[subscribe] ${JSON.stringify({ email, role, source, at: new Date().toISOString(), reason: result.reason })}`);
     return Response.json({ ok: true, stored: false });
   }
   return Response.json({ ok: true, stored: true });

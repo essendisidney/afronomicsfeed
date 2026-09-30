@@ -26,6 +26,10 @@ export default function PrivacyPage() {
       </ul>
       <h2>What we don’t do</h2>
       <p>We don’t sell or rent personal data, and we don’t run advertising trackers.</p>
+      <p>
+        To know which pages are read, we count page views: the page, the day, the referring website and the visitor’s country as reported by our
+        host. No cookie is set and no IP address, device identifier or other personal data is stored with the count.
+      </p>
       <h2>Where it is kept</h2>
       <p>
         Data is stored with our hosting and database providers, which may process it outside Kenya under appropriate safeguards. Newsletter data

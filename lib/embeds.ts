@@ -42,7 +42,7 @@ ul{list-style:none;margin:0;padding:0}li{padding:7px 0;border-bottom:1px solid v
 .f{display:flex;justify-content:space-between;gap:8px;margin-top:8px;font-size:10px;color:var(--muted)}.f a{color:var(--accent);font-weight:600}
 </style></head><body><div class="w">${body}
 <div class="f"><span>${sourceNote}</span><a href="${esc(utm(sourcePath, widget))}" target="_blank" rel="noopener">${site.name} ↗</a></div>
-</div></body></html>`;
+</div><script>try{navigator.sendBeacon('/api/hit',JSON.stringify({path:'/embed/${widget}',referrer:document.referrer}))}catch(e){}</script></body></html>`;
 }
 
 const shortDate = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });

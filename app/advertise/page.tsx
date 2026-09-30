@@ -8,6 +8,7 @@ import { loadBonds } from "@/lib/data/kenya-bonds";
 import { loadTbills } from "@/lib/data/kenya-tbills";
 import { loadWire, publishersLive } from "@/lib/data/wire";
 import { site } from "@/lib/site";
+import { rpcRead } from "@/lib/store";
 
 export const revalidate = 3600;
 
@@ -46,7 +47,9 @@ const packages = [
 ];
 
 export default async function AdvertisePage() {
-  const [wire] = await Promise.all([loadWire()]);
+  const [wire, traffic] = await Promise.all([loadWire(), rpcRead("af_traffic", { p_days: 30 }, 3600)]);
+  const t = traffic.ok && Array.isArray(traffic.value) ? (traffic.value[0] as { views: number; countries: number } | undefined) : undefined;
+  const views30 = Number(t?.views ?? 0);
   const bills = loadTbills();
   const bonds = loadBonds();
   const stats = [
@@ -55,6 +58,11 @@ export default async function AdvertisePage() {
     { k: "Publishers on the Wire", v: String(publishersLive(wire) || "—") },
     { k: "Kenya auction results tracked", v: (bills.rows.length + bonds.rows.length).toLocaleString("en-US") },
   ];
+  // Audience figures appear once there is a month of meaningful traffic to show.
+  if (views30 >= 1000) {
+    stats.push({ k: "Page views, last 30 days", v: views30.toLocaleString("en-US") });
+    stats.push({ k: "Countries reading", v: String(t?.countries ?? "—") });
+  }
 
   return (
     <PageShell
@@ -68,7 +76,7 @@ export default async function AdvertisePage() {
         </p>
       }
     >
-      <dl className="grid grid-cols-2 gap-px bg-rule lg:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-px bg-rule lg:grid-cols-3">
         {stats.map((item) => (
           <div key={item.k} className="bg-paper-2 px-4 py-5">
             <dd className="font-serif text-3xl text-ink">{item.v}</dd>

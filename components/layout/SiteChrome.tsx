@@ -2,6 +2,7 @@ import { buildSearchIndex } from "@/lib/search";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { MarketStrip } from "@/components/ui/MarketStrip";
+import { PageCounter } from "./PageCounter";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const searchIndex = buildSearchIndex();
@@ -20,6 +21,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         {children}
       </div>
       <Footer />
+      <PageCounter />
     </>
   );
 }

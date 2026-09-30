@@ -25,7 +25,8 @@ PAGE = "https://www.cbe.org.eg/en/auctions/egp-t-bills/historical-data"
 API = "https://www.cbe.org.eg/api/statistics/GetHistoricalData"
 
 
-def fetch_workbook() -> bytes:
+def fetch_workbook(start: str, end: str) -> bytes:
+    """One Excel file for a date range (dd/mm/yyyy). The CBE form mis-handles very long ranges, so callers go year by year."""
     s = requests.Session()
     s.headers.update(UA)
     html = s.get(PAGE, timeout=(15, 60), verify=False).text
@@ -33,25 +34,30 @@ def fetch_workbook() -> bytes:
     form = form[: form.find("</form>")]
     data = dict(re.findall(r'<input name="([^"]+)" type="hidden" value="([^"]*)"', form))
     data["uid"] = re.search(r'name="uid" type="hidden" value="([^"]+)"', form).group(1)
-    data.update(FromDateRaw="01/01/2000", ToDateRaw=date.today().strftime("%d/%m/%Y"), SubmitAction="2")
+    data.update(FromDateRaw=start, ToDateRaw=end, SubmitAction="2")
     r = s.post(API, data=data, headers={"Referer": PAGE}, timeout=(15, 180), verify=False)
     if r.content[:2] != b"PK":
-        raise SystemExit(f"CBE did not return a workbook (status {r.status_code})")
+        raise RuntimeError(f"CBE did not return a workbook for {start}-{end} (status {r.status_code})")
     return r.content
 
 
-def main() -> int:
+def nominal(days: int) -> int:
+    """CBE quotes exact days to maturity (89, 91, 175, 182, 266, 357, 364...); map to the standard tenor."""
+    return min((91, 182, 273, 364), key=lambda t: abs(t - days))
+
+
+def parse(content: bytes) -> list[dict]:
     import openpyxl
 
-    wb = openpyxl.load_workbook(io.BytesIO(fetch_workbook()), read_only=True, data_only=True)
-    ws = wb.worksheets[0]
+    ws = openpyxl.load_workbook(io.BytesIO(content), read_only=True, data_only=True).worksheets[0]
     header = None
     rows = []
     for raw in ws.iter_rows(values_only=True):
         cells = list(raw)
+        if cells and str(cells[0] or "").strip().lower().startswith("tenor"):
+            header = [str(c or "").strip().lower() for c in cells]
+            continue
         if header is None:
-            if cells and str(cells[0]).strip().lower().startswith("tenor"):
-                header = [str(c or "").strip().lower() for c in cells]
             continue
         rec = dict(zip(header, cells))
         tenor = num(rec.get("tenor (days)"))
@@ -61,7 +67,8 @@ def main() -> int:
             continue
         m = lambda k: (num(rec.get(k)) or 0) / 1e6 or None  # noqa: E731
         rows.append({
-            "tenor": int(tenor),
+            "tenor": nominal(int(tenor)),
+            "days": int(tenor),
             "auction_date": None,
             "value_date": issue.date().isoformat(),
             "isin": rec.get("isin"),
@@ -73,8 +80,21 @@ def main() -> int:
             "weighted_avg_rate": rate,
             "source": PAGE,
         })
+    return rows
+
+
+def main() -> int:
+    rows = []
+    for year in range(2000, date.today().year + 1):
+        try:
+            got = parse(fetch_workbook(f"01/01/{year}", f"31/12/{year}"))
+        except Exception as error:
+            print(f"{year}: {error}")
+            continue
+        print(f"{year}: {len(got)} rows")
+        rows += got
     if not rows:
-        raise SystemExit("No rows parsed from the CBE workbook")
+        raise SystemExit("No rows parsed from the CBE workbooks")
     write(
         "egypt",
         dataset="Egypt Treasury bill auctions",

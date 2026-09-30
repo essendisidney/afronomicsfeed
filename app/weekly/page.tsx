@@ -191,6 +191,23 @@ export default async function WeeklyPage() {
         </section>
       ) : null}
 
+      <section className="mt-14 grid gap-8 lg:grid-cols-12 lg:items-center">
+        <div className="lg:col-span-7">
+          {/* eslint-disable-next-line @next/next/no-img-element -- generated chart image, served as-is so it can be republished */}
+          <img src="/charts/week.png" alt="Chart of the week: 364-day Treasury bill rates across five African markets" width={1200} height={630} className="h-auto w-full border border-rule" />
+        </div>
+        <div className="lg:col-span-5">
+          <SectionTitle kicker="Chart of the week" title="Free to republish" />
+          <p className="mt-3 text-sm leading-6 text-ink-soft">
+            Newsrooms, analysts and bloggers may use this chart in print, online or on social media, unchanged, with the credit “Source: Afronomics,
+            compiled from central-bank auction results”. It updates as each market reports.
+          </p>
+          <a href="/charts/week.png" download="afronomics-chart-of-the-week.png" className="mt-4 inline-block bg-forest px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-paper hover:bg-forest-deep">
+            Download PNG
+          </a>
+        </div>
+      </section>
+
       <NewsletterBand lede="This edition, in your inbox every Monday morning, East Africa time. Free." />
 
       {archive.length ? (

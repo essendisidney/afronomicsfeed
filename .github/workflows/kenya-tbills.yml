@@ -1,6 +1,6 @@
 # Weekly: read new Central Bank of Kenya Treasury bill result notices and commit the updated dataset.
 # The commit triggers a Vercel deploy, so the site updates itself. No secrets are needed.
-name: Kenya auctions (T-bills and bonds)
+name: African auctions (Kenya, Nigeria, Ghana)
 
 on:
   schedule:
@@ -24,14 +24,19 @@ jobs:
       - run: pip install pdfplumber requests
       - run: python scripts/kenya_tbills.py
       - run: python scripts/kenya_bonds.py
+      # Each market is independent: one publisher being down must not stop the others.
+      - run: python scripts/nigeria_tbills.py
+        continue-on-error: true
+      - run: python scripts/ghana_tbills.py
+        continue-on-error: true
       - name: Commit if the dataset changed
         run: |
-          if git diff --quiet -- data/kenya; then
+          if git diff --quiet -- data && [ -z "$(git ls-files --others --exclude-standard data)" ]; then
             echo "No new auctions."
             exit 0
           fi
           git config user.name "afronomics-bot"
           git config user.email "afronomics-bot@users.noreply.github.com"
-          git add data/kenya
-          git commit -m "Kenya auctions: add latest CBK results"
+          git add data
+          git commit -m "African auctions: add latest results"
           git push

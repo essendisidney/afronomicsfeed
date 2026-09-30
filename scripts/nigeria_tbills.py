@@ -59,6 +59,9 @@ def normalise(item: dict) -> dict | None:
         return None
     received = num(item.get("totalSubscription"))
     accepted = num(item.get("totalSuccessful"))
+    # The CBN feed has occasional unit slips (an allotment keyed in naira, not millions); drop what cannot be true.
+    if accepted is not None and received is not None and accepted > received * 1.01:
+        accepted = None
     low, high = rate_range(item.get("rangeBid"))
     return {
         "tenor": tenor,

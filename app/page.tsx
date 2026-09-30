@@ -166,6 +166,7 @@ export default async function HomePage() {
                   </Link>
                 ) : null}
                 <Link href="/markets/kenya-bonds" className="text-forest hover:text-gold">Bond yield curve →</Link>
+                <Link href="/markets/tbills" className="text-forest hover:text-gold">Africa T-bill monitor →</Link>
                 <Link href="/widgets" className="text-forest hover:text-gold">Put these rates on your site →</Link>
               </p>
             </div>

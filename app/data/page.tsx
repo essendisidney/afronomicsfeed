@@ -34,6 +34,11 @@ export default async function DataHubPage() {
       <section className="mb-12 border border-gold/40 bg-paper-2 px-5 py-5">
         <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">Afronomics datasets</p>
         <p className="mt-2 font-serif text-2xl">
+          <Link href="/markets/tbills" className="hover:text-forest">
+            Africa Treasury bill monitor: Kenya, Nigeria, Ghana →
+          </Link>
+        </p>
+        <p className="mt-2 font-serif text-2xl">
           <Link href="/markets/kenya-tbills" className="hover:text-forest">
             Kenya Treasury bill auctions →
           </Link>
@@ -43,7 +48,7 @@ export default async function DataHubPage() {
             Kenya Treasury bond auctions and yield curve →
           </Link>
         </p>
-        <p className="mt-1 text-sm text-ink-soft">Every Central Bank of Kenya auction result, read from the CBK’s notices into tables with free CSVs.</p>
+        <p className="mt-1 text-sm text-ink-soft">Every auction result, compiled from each central bank’s own publications into tables with free CSVs.</p>
       </section>
       <div className="space-y-12">
         {desks.map((desk) => (

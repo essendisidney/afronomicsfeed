@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LineChart } from "@/components/data/LineChart";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
+import { AlertButton } from "@/components/ui/AlertButton";
+import { CiteBlock } from "@/components/ui/CiteBlock";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { auctionWeeks, latestByTenor, loadTbills, rateHistory, tenorColor, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
@@ -66,10 +68,10 @@ export default function KenyaTbillsPage() {
         </p>
       }
       aside={
-        <a href="/api/data/kenya-tbills" download className="block bg-gold px-5 py-5 text-white hover:bg-gold-soft">
-          <p className="font-medium text-[12px] text-white/80">Download</p>
+        <a href="/api/data/kenya-tbills" download className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
+          <p className="font-medium text-[12px] opacity-80">Download</p>
           <p className="mt-1 font-serif text-2xl">Full history · CSV</p>
-          <p className="text-[11px] text-white/80">Every row links to its CBK notice</p>
+          <p className="text-[11px] opacity-80">Every row links to its CBK notice</p>
         </a>
       }
     >
@@ -109,6 +111,9 @@ export default function KenyaTbillsPage() {
             })}
           </section>
           <SourceLine name="Central Bank of Kenya" href={file.sourcePage} detail="weighted average rate of accepted bids" />
+          <div className="mt-6">
+            <AlertButton market="kenya" label="Alert me on Kenya results" />
+          </div>
 
           <section className="mt-14">
             <SectionTitle
@@ -206,6 +211,7 @@ export default function KenyaTbillsPage() {
         </>
       )}
 
+      <CiteBlock title="Kenya Treasury bill auction results" path="/markets/kenya-tbills" publisher="the Central Bank of Kenya" csv="/api/data/kenya-tbills" />
       <NewsletterBand lede="Kenya’s auction results, plus 53 other economies, in one Monday email." />
     </PageShell>
   );

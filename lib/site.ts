@@ -50,8 +50,11 @@ export const footerGroups = [
   {
     title: "Data",
     links: [
+      { href: "/markets/tbills", label: "T-bill monitor" },
+      { href: "/markets/borrowing-costs", label: "Borrowing costs" },
       { href: "/countries", label: "54 country files" },
       { href: "/data", label: "Data hub" },
+      { href: "/developers", label: "Data API" },
       { href: "/signals", label: "Signals" },
       { href: "/widgets", label: "Free widgets" },
       { href: "/licensing", label: "Data licensing" },

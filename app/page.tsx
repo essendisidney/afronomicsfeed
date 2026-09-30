@@ -69,7 +69,10 @@ export default async function HomePage() {
     if (!item) return [];
     const bps = item.previous ? Math.round((item.latest.rate - item.previous.rate) * 100) : null;
     return [{ market, rate: item.latest.rate, bps, date: item.latest.date }];
-  });
+  })
+    // the six markets that auctioned most recently
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 6);
   const boardFx = fx ? (["KES", "NGN", "ZAR", "GHS", "EGP"] as const).flatMap((code) => (fx.rates[code] == null ? [] : [{ code, rate: fx.rates[code] }])) : [];
 
   return (
@@ -107,9 +110,9 @@ export default async function HomePage() {
           <div className="lg:col-span-6">
             <div className="rounded-3xl border border-night-line bg-night-2 p-2 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]">
               <div className="flex items-baseline justify-between px-4 pb-3 pt-3">
-                <h2 className="text-[15px] font-semibold">364-day Treasury bills</h2>
+                <h2 className="text-[15px] font-semibold">Latest 364-day bill auctions</h2>
                 <Link href="/markets/tbills" className="text-[13px] text-night-muted hover:text-night-ink">
-                  All five markets
+                  All ten markets
                 </Link>
               </div>
               <table className="w-full border-separate border-spacing-y-1 text-left">

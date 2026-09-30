@@ -14,7 +14,7 @@ export function monitorBars() {
   });
 }
 
-export function monitorCard(kicker = "Africa T-bill monitor", title = "364-day Treasury bill rates across five African markets"): Promise<Response> {
+export function monitorCard(kicker = "Africa T-bill monitor", title = "364-day Treasury bill rates across ten African markets"): Promise<Response> {
   const bars = monitorBars();
   const newest = bars.map((b) => b.date).sort().at(-1);
   const card: Card = {
@@ -22,7 +22,7 @@ export function monitorCard(kicker = "Africa T-bill monitor", title = "364-day T
     title,
     bars,
     barsCaption: `Latest primary auctions${newest ? ` to ${shortDate.format(new Date(newest))}` : ""} · central-bank data`,
-    source: "Central banks of Kenya, Nigeria, Ghana, Uganda and Tanzania",
+    source: "Ten African central banks",
   };
   return renderCard(card);
 }

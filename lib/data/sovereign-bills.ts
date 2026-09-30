@@ -22,7 +22,8 @@ export type BillRow = {
 };
 
 export type BillMarket = {
-  slug: "kenya" | "nigeria" | "ghana" | "uganda" | "tanzania";
+  slug: "kenya" | "nigeria" | "ghana" | "uganda" | "tanzania" | "egypt" | "southafrica" | "zambia" | "malawi" | "mozambique";
+  region: "East" | "West" | "North" | "Southern";
   country: string;
   iso: string;
   currency: string;
@@ -36,6 +37,7 @@ export type BillMarket = {
 export const billMarkets: BillMarket[] = [
   {
     slug: "kenya",
+    region: "East",
     country: "Kenya",
     iso: "KE",
     currency: "KES",
@@ -47,6 +49,7 @@ export const billMarkets: BillMarket[] = [
   },
   {
     slug: "nigeria",
+    region: "West",
     country: "Nigeria",
     iso: "NG",
     currency: "NGN",
@@ -58,6 +61,7 @@ export const billMarkets: BillMarket[] = [
   },
   {
     slug: "ghana",
+    region: "West",
     country: "Ghana",
     iso: "GH",
     currency: "GHS",
@@ -69,6 +73,7 @@ export const billMarkets: BillMarket[] = [
   },
   {
     slug: "uganda",
+    region: "East",
     country: "Uganda",
     iso: "UG",
     currency: "UGX",
@@ -80,6 +85,7 @@ export const billMarkets: BillMarket[] = [
   },
   {
     slug: "tanzania",
+    region: "East",
     country: "Tanzania",
     iso: "TZ",
     currency: "TZS",
@@ -88,6 +94,66 @@ export const billMarkets: BillMarket[] = [
     rateLabel: "Weighted average yield",
     rateNote: "weighted average yield of successful bids",
     href: "/markets/tbills/tanzania",
+  },
+  {
+    slug: "egypt",
+    region: "North",
+    country: "Egypt",
+    iso: "EG",
+    currency: "EGP",
+    publisher: "Central Bank of Egypt",
+    sourcePage: "https://www.cbe.org.eg/en/auctions/egp-t-bills/historical-data",
+    rateLabel: "Weighted average yield",
+    rateNote: "weighted average yield of accepted bids",
+    href: "/markets/tbills/egypt",
+  },
+  {
+    slug: "southafrica",
+    region: "Southern",
+    country: "South Africa",
+    iso: "ZA",
+    currency: "ZAR",
+    publisher: "South African Reserve Bank",
+    sourcePage: "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates",
+    rateLabel: "Average tender rate",
+    rateNote: "average rate at which bills are allotted in the weekly auction",
+    href: "/markets/tbills/southafrica",
+  },
+  {
+    slug: "zambia",
+    region: "Southern",
+    country: "Zambia",
+    iso: "ZM",
+    currency: "ZMW",
+    publisher: "Bank of Zambia",
+    sourcePage: "https://www.boz.zm/markets-securities/treasury-bills",
+    rateLabel: "Cut-off yield",
+    rateNote: "cut-off yield rate at the auction",
+    href: "/markets/tbills/zambia",
+  },
+  {
+    slug: "malawi",
+    region: "Southern",
+    country: "Malawi",
+    iso: "MW",
+    currency: "MWK",
+    publisher: "Reserve Bank of Malawi",
+    sourcePage: "https://www.rbm.mw/FinancialMarkets/TreasuryBills/",
+    rateLabel: "Average yield",
+    rateNote: "average yield of allotted bids",
+    href: "/markets/tbills/malawi",
+  },
+  {
+    slug: "mozambique",
+    region: "Southern",
+    country: "Mozambique",
+    iso: "MZ",
+    currency: "MZN",
+    publisher: "Banco de Moçambique",
+    sourcePage: "https://www.bancomoc.mz/pt/areas-de-actuacao/mercados/mercado-monetario/",
+    rateLabel: "Weighted average rate",
+    rateNote: "weighted average subscription rate",
+    href: "/markets/tbills/mozambique",
   },
 ];
 
@@ -100,16 +166,21 @@ const FILES = {
   ghana: path.join(process.cwd(), "data", "ghana", "tbill_auctions.json"),
   uganda: path.join(process.cwd(), "data", "uganda", "tbill_auctions.json"),
   tanzania: path.join(process.cwd(), "data", "tanzania", "tbill_auctions.json"),
+  egypt: path.join(process.cwd(), "data", "egypt", "tbill_auctions.json"),
+  southafrica: path.join(process.cwd(), "data", "southafrica", "tbill_auctions.json"),
+  zambia: path.join(process.cwd(), "data", "zambia", "tbill_auctions.json"),
+  malawi: path.join(process.cwd(), "data", "malawi", "tbill_auctions.json"),
+  mozambique: path.join(process.cwd(), "data", "mozambique", "tbill_auctions.json"),
 };
 
-function readJson(file: string): { updated_at?: string; rows?: Record<string, unknown>[] } | null {
+function readJson(file: string): { updated_at?: string; notes?: string; rows?: Record<string, unknown>[] } | null {
   if (!fs.existsSync(file)) return null;
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
 const n = (value: unknown) => (typeof value === "number" && Number.isFinite(value) ? value : null);
 
-export const loadBillMarket = cache((slug: BillMarket["slug"]): { rows: BillRow[]; updatedAt: string | null } => {
+export const loadBillMarket = cache((slug: BillMarket["slug"]): { rows: BillRow[]; updatedAt: string | null; notes?: string } => {
   if (slug === "kenya") {
     const file = loadTbills();
     return {
@@ -127,11 +198,13 @@ export const loadBillMarket = cache((slug: BillMarket["slug"]): { rows: BillRow[
   }
   const raw = readJson(FILES[slug]);
   if (!raw?.rows) return { rows: [], updatedAt: null };
-  const cur = { nigeria: "ngn", ghana: "ghs", uganda: "ugx", tanzania: "tzs" }[slug];
+  const cur = { nigeria: "ngn", ghana: "ghs", uganda: "ugx", tanzania: "tzs", egypt: "egp", southafrica: "zar", zambia: "zmw", malawi: "mwk", mozambique: "mzn" }[slug];
   const rows: BillRow[] = raw.rows.flatMap((r) => {
     const tenor = Number(r.tenor) as BillTenor;
     const date = String(r.value_date ?? "");
     const rate = slug === "nigeria" ? n(r.stop_rate) : n(r.weighted_avg_rate);
+    // Reopenings (Malawi) are extra sales of an existing bill; the series tracks primary auctions only.
+    if (r.kind != null && r.kind !== "primary") return [];
     if (!billTenors.includes(tenor) || !/^\d{4}-\d{2}-\d{2}$/.test(date) || rate == null) return [];
     return [
       {
@@ -146,7 +219,7 @@ export const loadBillMarket = cache((slug: BillMarket["slug"]): { rows: BillRow[
     ];
   });
   rows.sort((a, b) => b.date.localeCompare(a.date) || a.tenor - b.tenor);
-  return { rows, updatedAt: raw.updated_at ?? null };
+  return { rows, updatedAt: raw.updated_at ?? null, notes: raw.notes };
 });
 
 export function latestBills(rows: BillRow[]) {

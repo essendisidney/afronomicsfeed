@@ -6,12 +6,13 @@ import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { indicatorDefs } from "@/lib/data/indicators";
 import { loadBonds } from "@/lib/data/kenya-bonds";
 import { loadTbills } from "@/lib/data/kenya-tbills";
+import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Data licensing and API — Kenya auctions, African FX and the Wire",
+  title: "Data licensing and API — African government auctions, FX and the Wire",
   description:
-    "License Afronomics datasets for your products and models: every Kenya T-bill and Treasury bond auction, the African FX archive, the Wire headline archive and 22 series for 54 economies.",
+    "License Afronomics datasets for your products and models: Treasury bill auctions in ten African markets, every Kenya bond auction, derived borrowing-cost measures, the African FX archive, the Wire headline archive and 22 series for 54 economies.",
   alternates: { canonical: `${site.url}/licensing` },
 };
 
@@ -26,7 +27,7 @@ const tiers = [
   {
     name: "Startup",
     price: "$99/mo",
-    detail: "Commercial use inside one product: JSON feed of the Kenya auction datasets and the FX archive, refreshed as each notice is published.",
+    detail: "Commercial use inside one product: the auction datasets for all ten markets, the measures and the FX archive, with an email or webhook on every new result.",
   },
   {
     name: "Institution",
@@ -43,7 +44,21 @@ const tiers = [
 export default function LicensingPage() {
   const bills = loadTbills();
   const bonds = loadBonds();
+  const markets = billMarkets.map((m) => ({ m, rows: loadBillMarket(m.slug).rows })).filter((x) => x.rows.length);
+  const results = markets.reduce((n, x) => n + x.rows.length, 0);
   const datasets = [
+    {
+      name: "African Treasury bill auctions",
+      href: "/markets/tbills",
+      coverage: `${markets.length} markets · ${results.toLocaleString("en-US")} results`,
+      detail: `${markets.map((x) => `${x.m.country} from ${year(x.rows.at(-1)?.date)}`).join(", ")}. Rates and, where published, amounts offered, bid and accepted, each row linked to its source.`,
+    },
+    {
+      name: "Borrowing-cost measures",
+      href: "/markets/borrowing-costs",
+      coverage: "Updated with every auction",
+      detail: "Real yields on one-year bills, bids-to-offer demand by market, and the expected date of each market's next result.",
+    },
     {
       name: "Kenya Treasury bill auctions",
       href: "/markets/kenya-tbills",
@@ -84,7 +99,11 @@ export default function LicensingPage() {
       lede={
         <p>
           Datasets compiled from primary publications — central-bank notices, official registers, publisher feeds — checked, structured and kept
-          current. Every row carries the link to the document it came from.
+          current. Every row carries the link to the document it came from. Developers can start on the free{" "}
+          <Link href="/developers" className="underline underline-offset-2">
+            JSON API
+          </Link>{" "}
+          today.
         </p>
       }
     >
@@ -106,7 +125,7 @@ export default function LicensingPage() {
                     {item.name}
                   </Link>
                 </td>
-                <td className="whitespace-nowrap font-mono text-[11px]">{item.coverage}</td>
+                <td className="whitespace-nowrap text-[12px]">{item.coverage}</td>
                 <td className="text-sm text-ink-soft">{item.detail}</td>
               </tr>
             ))}
@@ -116,9 +135,9 @@ export default function LicensingPage() {
 
       <section className="mt-14">
         <SectionTitle kicker="Terms" title="Licences" note="Annual billing takes two months off. Invoiced in USD or KES." />
-        <div className="mt-6 grid gap-px bg-rule md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2 lg:grid-cols-4">
           {tiers.map((tier) => (
-            <div key={tier.name} className="bg-paper px-5 py-6">
+            <div key={tier.name} className="bg-surface px-5 py-6">
               <p className="text-[12px] font-semibold text-gold">{tier.name}</p>
               <p className="mt-2 font-serif text-3xl text-ink">{tier.price}</p>
               <p className="mt-3 text-sm leading-6 text-ink-soft">{tier.detail}</p>
@@ -131,6 +150,11 @@ export default function LicensingPage() {
         <div className="lg:col-span-5">
           <SectionTitle kicker="Try it" title="Free samples" />
           <ul className="mt-4 space-y-2 text-sm">
+            <li>
+              <Link className="text-forest underline" href="/developers">
+                Latest rates, ten markets (free JSON API)
+              </Link>
+            </li>
             <li>
               <a className="text-forest underline" href="/api/data/kenya-tbills" download>
                 Kenya T-bill auctions (CSV)

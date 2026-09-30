@@ -54,7 +54,7 @@ export default async function MarketsPage() {
           />
           <p className="mt-2 text-[12px] font-semibold">
             <Link href="/markets/tbills" className="text-forest hover:text-gold">
-              Compare five markets on the Africa T-bill monitor →
+              Compare ten markets on the Africa T-bill monitor →
             </Link>
           </p>
           <div className="mt-4 grid gap-px bg-rule sm:grid-cols-3">

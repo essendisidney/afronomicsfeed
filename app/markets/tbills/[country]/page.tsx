@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AlertButton } from "@/components/ui/AlertButton";
+import { CiteBlock } from "@/components/ui/CiteBlock";
 import { notFound, redirect } from "next/navigation";
 import { LineChart } from "@/components/data/LineChart";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
@@ -35,7 +37,7 @@ export default async function BillMarketPage({ params }: Props) {
   const market = getBillMarket(country);
   if (!market) notFound();
   if (market.slug === "kenya") redirect("/markets/kenya-tbills");
-  const { rows, updatedAt } = loadBillMarket(market.slug);
+  const { rows, updatedAt, notes } = loadBillMarket(market.slug);
   const latest = latestBills(rows);
   const weeks = billWeeks(rows, 52);
   const since = rows[0] ? `${Number(rows[0].date.slice(0, 4)) - 5}${rows[0].date.slice(4)}` : undefined;
@@ -78,10 +80,10 @@ export default async function BillMarketPage({ params }: Props) {
       }
       aside={
         rows.length ? (
-          <a href={`/api/data/tbills/${market.slug}`} download className="block bg-gold px-5 py-5 text-white hover:bg-gold-soft">
-            <p className="font-medium text-[12px] text-white/80">Download</p>
-            <p className="mt-1 font-serif text-2xl">Full history · CSV</p>
-            <p className="text-[11px] text-white/80">Source: {market.publisher}</p>
+          <a href={`/api/data/tbills/${market.slug}`} download className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
+            <p className="text-[13px] font-medium opacity-80">Download</p>
+            <p className="mt-1 font-serif text-2xl">Full history as CSV</p>
+            <p className="text-[12px] opacity-80">Source: {market.publisher}</p>
           </a>
         ) : null
       }
@@ -114,6 +116,10 @@ export default async function BillMarketPage({ params }: Props) {
             })}
           </section>
           <SourceLine name={market.publisher} href={market.sourcePage} detail={market.rateNote} />
+          {notes ? <p className="mt-2 max-w-3xl text-xs leading-5 text-muted">{notes}</p> : null}
+          <div className="mt-6">
+            <AlertButton market={market.slug} label={`Alert me on ${market.country} results`} />
+          </div>
 
           <section className="mt-14">
             <SectionTitle kicker="History" title={`${market.rateLabel}, last five years`} note="One point per auction. Hover or tap for the exact figures." />
@@ -173,6 +179,9 @@ export default async function BillMarketPage({ params }: Props) {
           </section>
         </>
       )}
+      {rows.length ? (
+        <CiteBlock title={`${market.country} Treasury bill auction results`} path={`/markets/tbills/${market.slug}`} publisher={`the ${market.publisher}`} csv={`/api/data/tbills/${market.slug}`} />
+      ) : null}
       <NewsletterBand />
     </PageShell>
   );

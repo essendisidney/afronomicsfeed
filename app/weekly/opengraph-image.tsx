@@ -7,5 +7,5 @@ export const contentType = "image/png";
 export const revalidate = 3600;
 
 export default function Image() {
-  return monitorCard("The Afronomics Weekly", "Africa's week in numbers: government borrowing rates across five markets");
+  return monitorCard("The Afronomics Weekly", "Africa's week in numbers: government borrowing rates across ten markets");
 }

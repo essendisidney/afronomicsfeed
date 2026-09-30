@@ -194,7 +194,7 @@ export default async function WeeklyPage() {
       <section className="mt-14 grid gap-8 lg:grid-cols-12 lg:items-center">
         <div className="lg:col-span-7">
           {/* eslint-disable-next-line @next/next/no-img-element -- generated chart image, served as-is so it can be republished */}
-          <img src="/charts/week.png" alt="Chart of the week: 364-day Treasury bill rates across five African markets" width={1200} height={630} className="h-auto w-full border border-rule" />
+          <img src="/charts/week.png" alt="Chart of the week: 364-day Treasury bill rates across ten African markets" width={1200} height={630} className="h-auto w-full border border-rule" />
         </div>
         <div className="lg:col-span-5">
           <SectionTitle kicker="Chart of the week" title="Free to republish" />

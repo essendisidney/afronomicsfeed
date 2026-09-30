@@ -4,7 +4,7 @@
  * - Build assets, fonts and icons: cache first (their file names change when they change).
  * - Data downloads, APIs, embeds and other sites: never touched.
  */
-const VERSION = "af-v2";
+const VERSION = "af-v3";
 const PAGES = `${VERSION}-pages`;
 const ASSETS = `${VERSION}-assets`;
 const OFFLINE = "/offline";
@@ -71,4 +71,34 @@ self.addEventListener("fetch", (event) => {
       ),
     );
   }
+});
+
+/* Auction alerts: show the notification sent by the af-push-check function, open the market on tap. */
+self.addEventListener("push", (event) => {
+  let data = {};
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch {
+    data = { body: event.data ? event.data.text() : "" };
+  }
+  event.waitUntil(
+    self.registration.showNotification(data.title || "Afronomics", {
+      body: data.body || "A new auction result is in.",
+      icon: "/icons/icon-192.png",
+      badge: "/icons/icon-192.png",
+      tag: data.tag || "afronomics",
+      data: { url: data.url || "/markets/tbills" },
+    }),
+  );
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const url = new URL(event.notification.data?.url || "/markets/tbills", self.location.origin).href;
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((wins) => {
+      const open = wins.find((w) => w.url === url);
+      return open ? open.focus() : self.clients.openWindow(url);
+    }),
+  );
 });

@@ -1,0 +1,38 @@
+# Monday: snapshot the weekly edition and its LinkedIn post into the repo (editions/<week>/).
+# The scheduled publishing agent reads editions/latest/linkedin.txt and posts it to the
+# AfronomicsFeed LinkedIn page, so what goes out is exactly what the site generated.
+name: Weekly edition snapshot
+
+on:
+  schedule:
+    - cron: "0 4 * * 1" # Monday 07:00 Nairobi
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch the edition from the live site
+        run: |
+          set -euo pipefail
+          base="https://www.afronomicsfeed.com/api/edition/weekly"
+          curl -fsS --retry 4 --retry-delay 20 -m 120 "$base" -o edition.json
+          week=$(python3 -c "import json;print(json.load(open('edition.json'))['weekOf'])")
+          mkdir -p "editions/$week" editions/latest
+          mv edition.json "editions/$week/edition.json"
+          curl -fsS --retry 4 --retry-delay 20 -m 120 "$base?format=linkedin" -o "editions/$week/linkedin.txt"
+          cp "editions/$week/edition.json" "editions/$week/linkedin.txt" editions/latest/
+          echo "$week" > editions/latest/WEEK
+      - name: Commit
+        run: |
+          git config user.name "afronomics-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add editions
+          if git diff --cached --quiet; then echo "Unchanged."; exit 0; fi
+          git commit -m "Weekly edition snapshot $(cat editions/latest/WEEK)"
+          git push

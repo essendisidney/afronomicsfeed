@@ -14,7 +14,7 @@ import { deskLabels, formatValue, indicatorDefs, type Desk } from "@/lib/data/in
 import { officialSources } from "@/lib/data/official";
 import { loadCountryProjects, projectsSource, sumAmounts } from "@/lib/data/projects";
 import { loadIndicators, ranked, readingFor } from "@/lib/data/series";
-import { loadWire, wireFor } from "@/lib/data/wire";
+import { loadCountryWire, loadWire } from "@/lib/data/wire";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
 import { site } from "@/lib/site";
 
@@ -63,7 +63,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
 
   const pipeline = projects.filter((project) => project.status === "Pipeline");
   const active = projects.filter((project) => project.status === "Active");
-  const headlines = wireFor(wire, { iso: country.iso }, 12);
+  const headlines = await loadCountryWire(country, wire, 12);
   const rate = fx?.rates[country.currency];
   const official = officialSources(country);
   const peers = countries.filter((item) => item.region === country.region && item.slug !== country.slug);

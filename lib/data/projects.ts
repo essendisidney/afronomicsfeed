@@ -133,7 +133,11 @@ export async function loadAfricaProjects(sinceYear = new Date().getUTCFullYear()
 }
 
 export async function loadCountryProjects(iso: string, rows = 25): Promise<Project[]> {
-  const list = await query({ countrycode_exact: iso.toUpperCase(), rows: String(rows) });
+  let list = await query({ countrycode_exact: iso.toUpperCase(), rows: String(rows) });
+  if (list.length === 0) {
+    // The country query can fail on a busy build; fall back to the continental book, which is shared and cached.
+    list = (await loadAfricaProjects()).filter((project) => project.country.iso === iso.toUpperCase());
+  }
   return dedupe(list).filter((project) => project.status !== "Dropped");
 }
 

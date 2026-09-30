@@ -37,7 +37,21 @@ export const feeds: Feed[] = [
   { name: "The Africa Report", url: "https://www.theafricareport.com/feed/", home: "https://www.theafricareport.com", default_desk: "economy" },
   { name: "African Business", url: "https://african.business/feed", home: "https://african.business", default_desk: "economy" },
   { name: "ESI Africa", url: "https://www.esi-africa.com/feed/", home: "https://www.esi-africa.com", default_desk: "climate" },
+  { name: "AllAfrica", url: "https://allafrica.com/tools/headlines/rdf/business/headlines.rdf", home: "https://allafrica.com", default_desk: "economy" },
 ];
+
+/** AllAfrica's per-country feed names, where they differ from our slugs without hyphens. */
+const ALLAFRICA_SLUG: Record<string, string> = {
+  "dr-congo": "congo_kinshasa",
+  congo: "congo_brazzaville",
+  "cabo-verde": "capeverde",
+  "cote-divoire": "cotedivoire",
+};
+
+export function allAfricaFeedUrl(country: CountryProfile) {
+  const slug = ALLAFRICA_SLUG[country.slug] ?? country.slug.replace(/-/g, "");
+  return `https://allafrica.com/tools/headlines/rdf/${slug}/headlines.rdf`;
+}
 
 const REVALIDATE = 60 * 15;
 
@@ -191,6 +205,31 @@ export async function loadWire(): Promise<WireItem[]> {
     items.push(item);
   }
   return items;
+}
+
+/**
+ * Country headlines: the main wire's items for the country, topped up from AllAfrica's country feed
+ * when the business publishers carried little about it this week.
+ */
+export async function loadCountryWire(country: CountryProfile, wire: WireItem[], limit = 12): Promise<WireItem[]> {
+  const own = wireFor(wire, { iso: country.iso }, limit);
+  if (own.length >= 6) return own;
+  const xml = await fetchText(allAfricaFeedUrl(country), {
+    revalidate: REVALIDATE * 4,
+    timeoutMs: 10000,
+    retries: 0,
+    accept: "application/rss+xml, application/rdf+xml, application/xml, text/xml",
+  });
+  const horizon = Date.now() - 1000 * 60 * 60 * 24 * 14;
+  const extra = xml
+    ? parseFeed(xml, { name: "AllAfrica", url: allAfricaFeedUrl(country), home: "https://allafrica.com", home_country: country.iso })
+        .filter((item) => new Date(item.publishedAt).getTime() > horizon)
+        .map((item) => (item.countries.some((c) => c.iso === country.iso) ? item : { ...item, countries: [country, ...item.countries].slice(0, 4) }))
+    : [];
+  const seen = new Set(own.map((item) => item.url));
+  return [...own, ...extra.filter((item) => !seen.has(item.url))]
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    .slice(0, limit);
 }
 
 export function wireFor(items: WireItem[], filter: { desk?: WireDesk; iso?: string }, limit = 12) {

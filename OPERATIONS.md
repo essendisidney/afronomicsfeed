@@ -24,9 +24,8 @@ daily African FX since launch, and a searchable, country-tagged index of African
 
 | Name | Needed for |
 | --- | --- |
-| `SUPABASE_URL` | newsletter sign-ups and the archive |
-| `SUPABASE_SERVICE_ROLE_KEY` | same (server only, never exposed) |
-| `CRON_SECRET` | protects the archive cron; Vercel sends it automatically |
+| `SUPABASE_SERVICE_ROLE_KEY` | optional: needed only to record Paystack payments in the database. Sign-ups and the archive already work without it, through validated database functions and the public key |
+| `CRON_SECRET` | optional: restricts the archive job to Vercel's scheduler |
 | `PAYSTACK_SECRET_KEY` | turns on Pro/Team/trial checkout on /pricing |
 | `PAYSTACK_PLAN_PRO`, `PAYSTACK_PLAN_TEAM` | optional Paystack plan codes; makes Pro/Team recurring subscriptions |
 | `PAYSTACK_CURRENCY` | `USD` (default, needs USD enabled on Paystack) or `KES` (Pro KES 3,900, Team KES 19,500) |

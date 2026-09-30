@@ -21,11 +21,6 @@ function Set-VercelEnv($name, $value) {
 
 Write-Host "`nAfronomics production settings`n" -ForegroundColor Cyan
 
-# Database (public URL, not a secret)
-Set-VercelEnv "SUPABASE_URL" "https://ugjpcybhqwvzidcbqpik.supabase.co"
-
-Write-Host "`nSupabase service_role key: Supabase dashboard > afronomicsfeed > Project Settings > API Keys"
-Set-VercelEnv "SUPABASE_SERVICE_ROLE_KEY" (Read-Secret "Paste the service_role key (hidden)")
 
 Write-Host "`nPaystack secret key: Paystack dashboard > Settings > API Keys & Webhooks (sk_live_... or sk_test_...)"
 Set-VercelEnv "PAYSTACK_SECRET_KEY" (Read-Secret "Paste the Paystack secret key (hidden)")
@@ -39,6 +34,10 @@ Write-Host "`nCurrency for Pro/Team one-off charges. Use USD only if Paystack ha
 $currency = Read-Host "Currency [USD]"
 if ([string]::IsNullOrWhiteSpace($currency)) { $currency = "USD" }
 Set-VercelEnv "PAYSTACK_CURRENCY" $currency.ToUpper()
+
+Write-Host "`nOptional: Supabase service_role key, so Paystack payments are also saved to your database."
+Write-Host "Supabase dashboard > afronomicsfeed > Project Settings > API Keys. Leave blank to skip."
+Set-VercelEnv "SUPABASE_SERVICE_ROLE_KEY" (Read-Secret "service_role key (hidden, optional)")
 
 # Protects the daily archive job; Vercel sends it automatically with each cron call.
 $bytes = New-Object byte[] 32

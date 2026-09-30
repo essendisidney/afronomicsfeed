@@ -1,4 +1,4 @@
-import { upsertRows } from "@/lib/store";
+import { rpc } from "@/lib/store";
 
 export const runtime = "nodejs";
 
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, reason: "Please enter a valid email address." }, { status: 400 });
   }
 
-  const result = await upsertRows("subscribers", [{ email, role, source }], "email");
+  const result = await rpc("af_subscribe", { p_email: email, p_role: role, p_source: source });
   if (!result.ok) {
     // Still visible in the deployment's function logs so no sign-up is lost.
     console.log(`[subscribe] ${JSON.stringify({ email, role, source, at: new Date().toISOString(), reason: result.reason })}`);

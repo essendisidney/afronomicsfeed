@@ -1,0 +1,7 @@
+-- Narrow, validated write paths callable with the publishable key (applied to project ugjpcybhqwvzidcbqpik).
+-- Tables keep RLS on with no public policies, so nobody can read or change rows through the API;
+-- these functions only append validated rows and ignore duplicates.
+-- See the live definitions with: select pg_get_functiondef('public.af_subscribe'::regproc);
+-- af_subscribe(p_email, p_role, p_source)  -> subscribers
+-- af_archive_fx(p_rows jsonb)               -> fx_daily   (≤250 rows, 3-letter codes, rate > 0, date within ±3 days)
+-- af_archive_wire(p_rows jsonb)             -> wire_archive (≤600 rows, http(s) url, published within 30 days)

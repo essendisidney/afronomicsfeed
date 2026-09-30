@@ -5,9 +5,13 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 export const dynamic = "force-dynamic";
 
+/**
+ * With CRON_SECRET set, only Vercel's scheduler (which sends it) can run the job. Without it the job
+ * is open: that is safe because it only re-reads public feeds and appends validated, de-duplicated rows.
+ */
 function authorized(request: Request) {
   const secret = process.env.CRON_SECRET;
-  if (!secret) return process.env.NODE_ENV !== "production";
+  if (!secret) return true;
   return request.headers.get("authorization") === `Bearer ${secret}`;
 }
 

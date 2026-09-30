@@ -1,8 +1,9 @@
 """
 Egypt Treasury bill auction history from the Central Bank of Egypt.
 
-The CBE's "EGP T-Bills Historical Data" page offers the full auction record as an Excel download
-(a form post with an anti-forgery token). One row per auction per tenor.
+The CBE's "EGP T-Bills Historical Data" page offers the full auction record since 2002 as an Excel download
+(a form post with an anti-forgery token), one sheet per tenor. Exact tenors (266, 357 days...) are mapped to
+the nearest standard tenor and kept in `days`. One row per auction per tenor.
 
     python scripts/egypt_tbills.py
 """
@@ -12,6 +13,7 @@ from __future__ import annotations
 import io
 import re
 import sys
+import time
 import warnings
 from datetime import date, datetime
 
@@ -26,7 +28,7 @@ API = "https://www.cbe.org.eg/api/statistics/GetHistoricalData"
 
 
 def fetch_workbook(start: str, end: str) -> bytes:
-    """One Excel file for a date range (dd/mm/yyyy). The CBE form mis-handles very long ranges, so callers go year by year."""
+    """One Excel file for a date range (dd/mm/yyyy), one sheet per tenor."""
     s = requests.Session()
     s.headers.update(UA)
     html = s.get(PAGE, timeout=(15, 60), verify=False).text
@@ -49,7 +51,15 @@ def nominal(days: int) -> int:
 def parse(content: bytes) -> list[dict]:
     import openpyxl
 
-    ws = openpyxl.load_workbook(io.BytesIO(content), read_only=True, data_only=True).worksheets[0]
+    wb = openpyxl.load_workbook(io.BytesIO(content), read_only=True, data_only=True)
+    rows = []
+    # One sheet per tenor ("91 days", "182 days", "266 days", ...).
+    for ws in wb.worksheets:
+        rows += parse_sheet(ws)
+    return rows
+
+
+def parse_sheet(ws) -> list[dict]:
     header = None
     rows = []
     for raw in ws.iter_rows(values_only=True):
@@ -84,17 +94,19 @@ def parse(content: bytes) -> list[dict]:
 
 
 def main() -> int:
-    rows = []
-    for year in range(2000, date.today().year + 1):
+    content = None
+    for attempt in range(3):
         try:
-            got = parse(fetch_workbook(f"01/01/{year}", f"31/12/{year}"))
+            content = fetch_workbook("01/01/2000", date.today().strftime("%d/%m/%Y"))
+            break
         except Exception as error:
-            print(f"{year}: {error}")
-            continue
-        print(f"{year}: {len(got)} rows")
-        rows += got
+            print(f"attempt {attempt + 1}: {error}")
+            time.sleep(10)
+    if content is None:
+        raise SystemExit("CBE workbook unavailable")
+    rows = parse(content)
     if not rows:
-        raise SystemExit("No rows parsed from the CBE workbooks")
+        raise SystemExit("No rows parsed from the CBE workbook")
     write(
         "egypt",
         dataset="Egypt Treasury bill auctions",

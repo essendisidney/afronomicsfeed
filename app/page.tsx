@@ -12,6 +12,7 @@ import { loadAfricaProjects, projectsSource, sumAmounts } from "@/lib/data/proje
 import { continentalMedian, coveredTotal, loadIndicators, ranked } from "@/lib/data/series";
 import { loadDataSignals } from "@/lib/data/signals";
 import { loadWire, publishersLive } from "@/lib/data/wire";
+import { latestByTenor, loadTbills, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
 import { site } from "@/lib/site";
 
@@ -30,6 +31,7 @@ export default async function HomePage() {
   ]);
   const file = (slug: string) => files.find((item) => item.def.slug === slug);
   const articles = getLatestArticles(4);
+  const tbills = latestByTenor(loadTbills().rows);
 
   const gdp = file("gdp");
   const fdi = file("fdi");
@@ -129,6 +131,25 @@ export default async function HomePage() {
               <p className="mt-4 text-sm text-muted">The rate feed did not respond this hour.</p>
             )}
           </div>
+          {tbills.size > 0 ? (
+            <div>
+              <SectionTitle kicker="Afronomics dataset" title="Kenya T-bill auctions" href="/markets/kenya-tbills" hrefLabel="History →" />
+              <div className="mt-3 grid grid-cols-3 gap-px bg-rule">
+                {tenors.map((tenor) => {
+                  const item = tbills.get(tenor);
+                  const delta = item?.previous ? Math.round((item.latest.weighted_avg_rate - item.previous.weighted_avg_rate) * 100) : null;
+                  return (
+                    <Link key={tenor} href="/markets/kenya-tbills" className="bg-paper-2 px-3 py-3 hover:bg-paper-3">
+                      <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{tenorLabel[tenor]}</p>
+                      <p className="mt-1 font-serif text-xl text-ink">{item ? `${item.latest.weighted_avg_rate.toFixed(2)}%` : "—"}</p>
+                      <p className="text-[11px] text-muted">{delta == null ? "" : `${delta > 0 ? "+" : delta < 0 ? "−" : "±"}${Math.abs(delta)} bps`}</p>
+                    </Link>
+                  );
+                })}
+              </div>
+              <SourceLine name="Central Bank of Kenya" href="https://www.centralbank.go.ke/bills-bonds/treasury-bills/" detail="latest auction, weighted average of accepted bids" />
+            </div>
+          ) : null}
           <div>
             <SectionTitle kicker="Signals" title="What moved on the latest print" href="/signals" />
             <ul className="mt-2 divide-y divide-rule">

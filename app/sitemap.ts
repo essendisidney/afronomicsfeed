@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/", "hourly", 1),
     page("/news", "hourly", 0.9),
     page("/markets", "hourly", 0.9),
+    page("/markets/kenya-tbills", "daily", 0.9),
     page("/economy", "daily", 0.8),
     page("/capital", "daily", 0.8),
     page("/climate", "daily", 0.8),

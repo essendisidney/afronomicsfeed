@@ -132,6 +132,11 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
             {label}
           </a>
         ))}
+        {country.iso === "KE" ? (
+          <Link href="/markets/kenya-tbills" className="text-gold hover:text-forest">
+            T-bill auctions dataset →
+          </Link>
+        ) : null}
       </nav>
 
       <section id="data" className="mt-10 space-y-10">

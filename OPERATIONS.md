@@ -20,6 +20,14 @@ Pages regenerate on their own (`revalidate`), so the site stays current with no 
 (`fx_daily`, `wire_archive`). Public APIs only give "latest"; the archive becomes history nobody else holds —
 daily African FX since launch, and a searchable, country-tagged index of African business news.
 
+## Kenya Treasury bill auctions (Afronomics dataset)
+
+`scripts/kenya_tbills.py` reads every CBK Treasury bill result notice (PDF) and writes
+`data/kenya/tbill_auctions.json`, one row per auction per tenor, each linked to its notice. The GitHub Action
+`.github/workflows/kenya-tbills.yml` runs it every Thursday and Friday and commits new results, which redeploys
+the site. Run by hand with `python scripts/kenya_tbills.py` (add `--full` to re-read everything).
+Page: `/markets/kenya-tbills`; CSV: `/api/data/kenya-tbills`.
+
 ## Environment variables (Vercel → Settings → Environment Variables)
 
 | Name | Needed for |

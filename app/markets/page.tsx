@@ -11,6 +11,7 @@ import { currencyName, formatFx, loadFxQuote, pairHref } from "@/lib/data/fx";
 import { formatChange } from "@/lib/data/indicators";
 import { loadIndicators, ranked, readingFor } from "@/lib/data/series";
 import { loadWire, wireFor } from "@/lib/data/wire";
+import { latestByTenor, loadTbills, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
 import { site } from "@/lib/site";
 
 export const revalidate = 900;
@@ -30,6 +31,8 @@ export default async function MarketsPage() {
   const currencies = [...new Set(countries.map((country) => country.currency))];
   const users = (code: string) => countries.filter((country) => country.currency === code);
   const headlines = wireFor(wire, { desk: "markets" }, 14);
+  const tbills = loadTbills();
+  const tbillLatest = latestByTenor(tbills.rows);
 
   return (
     <PageShell
@@ -39,6 +42,32 @@ export default async function MarketsPage() {
       lede={<p>Hourly mid-market reference for all African currencies, with the annual official average and how far each moved on the year.</p>}
     >
       {fx ? <CurrencyConverter quote={fx} /> : null}
+
+      {tbillLatest.size > 0 ? (
+        <section className="mb-12">
+          <SectionTitle
+            kicker="Afronomics dataset"
+            title="Kenya Treasury bill auctions"
+            href="/markets/kenya-tbills"
+            hrefLabel="Full history →"
+            note={`Every CBK auction in one table — ${tbills.rows.length.toLocaleString("en-US")} results, free CSV.`}
+          />
+          <div className="mt-4 grid gap-px bg-rule sm:grid-cols-3">
+            {tenors.map((tenor) => {
+              const item = tbillLatest.get(tenor);
+              return (
+                <Link key={tenor} href="/markets/kenya-tbills" className="bg-paper-2 px-4 py-4 hover:bg-paper-3">
+                  <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">
+                    {tenorLabel[tenor]}
+                    {item ? ` · ${item.latest.value_date}` : ""}
+                  </p>
+                  <p className="mt-1 font-serif text-3xl text-ink">{item ? `${item.latest.weighted_avg_rate.toFixed(3)}%` : "—"}</p>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
 
       <section>
         <SectionTitle kicker="FX" title="US dollar reference rates" note="Units of local currency per US$1. Annual change uses the official period-average rate." />

@@ -45,7 +45,7 @@ MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", 
 
 
 def list_notices(session: requests.Session) -> list[dict]:
-    data = session.get(API, headers=UA, timeout=90, verify=False).json()
+    data = session.get(API, headers=UA, timeout=(15, 90), verify=False).json()
     items = data["data"]["auctionInformation"]["items"]
     results = next(i for i in items if str(i.get("category", "")).lower().startswith("auction results"))
     files = []
@@ -162,7 +162,7 @@ def ocr_text(pdf: bytes) -> str:
 def fetch_and_parse(notice: dict, session: requests.Session):
     for attempt in range(3):
         try:
-            pdf = session.get(notice["url"], headers=UA, timeout=90, verify=False).content
+            pdf = session.get(notice["url"], headers=UA, timeout=(15, 60), verify=False).content
             if not pdf.startswith(b"%PDF"):
                 return notice, [], "not a pdf", False
             with pdfplumber.open(io.BytesIO(pdf)) as doc:

@@ -15,7 +15,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,12 +28,17 @@ jobs:
       # Each market is independent: one publisher being down must not stop the others.
       - run: python scripts/nigeria_tbills.py
         continue-on-error: true
+        timeout-minutes: 5
       - run: python scripts/ghana_tbills.py
         continue-on-error: true
-      - run: python scripts/uganda_tbills.py
-        continue-on-error: true
+        timeout-minutes: 10
       - run: python scripts/tanzania_tbills.py
         continue-on-error: true
+        timeout-minutes: 8
+      # Last: the Bank of Uganda's site can be slow to answer from GitHub's network.
+      - run: python scripts/uganda_tbills.py
+        continue-on-error: true
+        timeout-minutes: 10
       - name: Commit if the dataset changed
         run: |
           if git diff --quiet -- data && [ -z "$(git ls-files --others --exclude-standard data)" ]; then

@@ -319,6 +319,10 @@ export function formatChange(def: Pick<IndicatorDef, "format">, from: number, to
     const delta = to - from;
     return `${delta >= 0 ? "+" : "−"}${twoDp.format(Math.abs(delta))} pts`;
   }
+  if (def.format === "months") {
+    const delta = to - from;
+    return `${delta >= 0 ? "+" : "−"}${twoDp.format(Math.abs(delta))} mo`;
+  }
   if (from === 0) return "—";
   const pct = ((to - from) / Math.abs(from)) * 100;
   return `${pct >= 0 ? "+" : "−"}${twoDp.format(Math.abs(pct))}%`;

@@ -54,7 +54,7 @@ export default async function MarketsPage() {
           />
           <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em]">
             <Link href="/markets/tbills" className="text-forest hover:text-gold">
-              Compare Kenya, Nigeria and Ghana on the Africa T-bill monitor →
+              Compare five markets on the Africa T-bill monitor →
             </Link>
           </p>
           <div className="mt-4 grid gap-px bg-rule sm:grid-cols-3">

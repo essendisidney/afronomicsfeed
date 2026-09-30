@@ -1,6 +1,6 @@
 # Weekly: read new Central Bank of Kenya Treasury bill result notices and commit the updated dataset.
 # The commit triggers a Vercel deploy, so the site updates itself. No secrets are needed.
-name: African auctions (Kenya, Nigeria, Ghana)
+name: African auctions (Kenya, Nigeria, Ghana, Uganda, Tanzania)
 
 on:
   schedule:
@@ -21,13 +21,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pdfplumber requests
+      - run: sudo apt-get install -y -qq tesseract-ocr > /dev/null
+      - run: pip install pdfplumber requests pytesseract
       - run: python scripts/kenya_tbills.py
       - run: python scripts/kenya_bonds.py
       # Each market is independent: one publisher being down must not stop the others.
       - run: python scripts/nigeria_tbills.py
         continue-on-error: true
       - run: python scripts/ghana_tbills.py
+        continue-on-error: true
+      - run: python scripts/uganda_tbills.py
+        continue-on-error: true
+      - run: python scripts/tanzania_tbills.py
         continue-on-error: true
       - name: Commit if the dataset changed
         run: |

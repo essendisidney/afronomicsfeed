@@ -26,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/markets/tbills", "daily", 0.9),
     page("/markets/tbills/nigeria", "daily", 0.8),
     page("/markets/tbills/ghana", "daily", 0.8),
+    page("/markets/tbills/uganda", "daily", 0.8),
+    page("/markets/tbills/tanzania", "daily", 0.8),
     page("/economy", "daily", 0.8),
     page("/capital", "daily", 0.8),
     page("/climate", "daily", 0.8),

@@ -22,7 +22,7 @@ export type BillRow = {
 };
 
 export type BillMarket = {
-  slug: "kenya" | "nigeria" | "ghana";
+  slug: "kenya" | "nigeria" | "ghana" | "uganda" | "tanzania";
   country: string;
   iso: string;
   currency: string;
@@ -67,6 +67,28 @@ export const billMarkets: BillMarket[] = [
     rateNote: "weighted average interest-rate equivalent",
     href: "/markets/tbills/ghana",
   },
+  {
+    slug: "uganda",
+    country: "Uganda",
+    iso: "UG",
+    currency: "UGX",
+    publisher: "Bank of Uganda",
+    sourcePage: "https://www.bou.or.ug/bouwebsite/FinancialMarkets/tbillsauctionresults.html",
+    rateLabel: "Money-market yield",
+    rateNote: "money-market yield at the cut-off price",
+    href: "/markets/tbills/uganda",
+  },
+  {
+    slug: "tanzania",
+    country: "Tanzania",
+    iso: "TZ",
+    currency: "TZS",
+    publisher: "Bank of Tanzania",
+    sourcePage: "https://www.bot.go.tz/TBills?lang=en",
+    rateLabel: "Weighted average yield",
+    rateNote: "weighted average yield of successful bids",
+    href: "/markets/tbills/tanzania",
+  },
 ];
 
 export function getBillMarket(slug: string) {
@@ -76,6 +98,8 @@ export function getBillMarket(slug: string) {
 const FILES = {
   nigeria: path.join(process.cwd(), "data", "nigeria", "tbill_auctions.json"),
   ghana: path.join(process.cwd(), "data", "ghana", "tbill_auctions.json"),
+  uganda: path.join(process.cwd(), "data", "uganda", "tbill_auctions.json"),
+  tanzania: path.join(process.cwd(), "data", "tanzania", "tbill_auctions.json"),
 };
 
 function readJson(file: string): { updated_at?: string; rows?: Record<string, unknown>[] } | null {
@@ -101,8 +125,9 @@ export const loadBillMarket = cache((slug: BillMarket["slug"]): { rows: BillRow[
       })),
     };
   }
-  const raw = readJson(slug === "nigeria" ? FILES.nigeria : FILES.ghana);
+  const raw = readJson(FILES[slug]);
   if (!raw?.rows) return { rows: [], updatedAt: null };
+  const cur = { nigeria: "ngn", ghana: "ghs", uganda: "ugx", tanzania: "tzs" }[slug];
   const rows: BillRow[] = raw.rows.flatMap((r) => {
     const tenor = Number(r.tenor) as BillTenor;
     const date = String(r.value_date ?? "");
@@ -113,9 +138,9 @@ export const loadBillMarket = cache((slug: BillMarket["slug"]): { rows: BillRow[
         tenor,
         date,
         rate,
-        offered: slug === "nigeria" ? n(r.offered_ngn_m) : null,
-        received: slug === "nigeria" ? n(r.received_ngn_m) : n(r.received_ghs_m),
-        accepted: slug === "nigeria" ? n(r.accepted_ngn_m) : n(r.accepted_ghs_m),
+        offered: n(r[`offered_${cur}_m`]),
+        received: n(r[`received_${cur}_m`]),
+        accepted: n(r[`accepted_${cur}_m`]),
         source: String(r.source ?? ""),
       },
     ];

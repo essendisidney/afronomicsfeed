@@ -11,14 +11,14 @@ import { site } from "@/lib/site";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Africa Treasury bill monitor — Kenya, Nigeria and Ghana auction rates side by side",
+  title: "Africa Treasury bill monitor — Kenya, Nigeria, Ghana, Uganda and Tanzania auction rates side by side",
   description:
     "Latest 91-, 182- and 364-day Treasury bill auction rates across African markets, compiled from each central bank’s own results, with full histories and free CSVs.",
   alternates: { canonical: `${site.url}/markets/tbills` },
 };
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
-const colors = ["var(--series-1)", "var(--series-2)", "var(--series-3)"];
+const colors = ["var(--series-1)", "var(--series-2)", "var(--series-3)", "var(--series-4)", "var(--series-5)"];
 
 export default function BillMonitorPage() {
   const markets = billMarkets.map((market) => {
@@ -54,7 +54,7 @@ export default function BillMonitorPage() {
       lede={
         <p>
           The latest government bill auctions across African markets, side by side, each compiled from the central bank’s own results. More markets
-          are being added: Uganda and Tanzania next. Ghana history runs from 2018, Nigeria from 2002, Kenya from 2011.
+          are being added. Histories run from 2002 (Nigeria), 2011 (Kenya), 2012 (Tanzania), 2017 (Uganda) and 2018 (Ghana).
         </p>
       }
     >
@@ -119,7 +119,7 @@ export default function BillMonitorPage() {
         </section>
       ) : null}
 
-      <section className="mt-14 grid gap-px bg-rule sm:grid-cols-3">
+      <section className="mt-14 grid gap-px bg-rule sm:grid-cols-3 lg:grid-cols-5">
         {markets.map(({ market, rows }) => (
           <Link key={market.slug} href={market.href} className="bg-paper-2 px-5 py-5 hover:bg-paper-3">
             <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">{market.publisher}</p>

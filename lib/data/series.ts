@@ -66,11 +66,14 @@ export function indicatorPageUrl(def: IndicatorDef, iso?: string) {
 /** Reads one group of countries; if the publisher rejects the request (its firewall blocks some code
  *  combinations), the group is split in half and retried, down to single countries. */
 async function loadGroup(code: string, isoList: string[]): Promise<unknown[][]> {
-  const body = await fetchJson<unknown[]>(apiUrl(code, isoList), { revalidate: REVALIDATE, retries: 1 });
+  const started = Date.now();
+  const body = await fetchJson<unknown[]>(apiUrl(code, isoList), { revalidate: REVALIDATE, retries: 1, timeoutMs: 12000 });
   if (Array.isArray(body) && Array.isArray(body[1])) return [body];
   const meta = Array.isArray(body) ? (body[0] as { total?: number } | undefined) : undefined;
   if (meta && meta.total === 0) return []; // valid reply, no rows
   if (isoList.length === 1) return [];
+  // A slow failure means the publisher is down or unreachable, not a firewall rule: don't fan out.
+  if (Date.now() - started > 8000) return [];
   const mid = Math.ceil(isoList.length / 2);
   const [left, right] = await Promise.all([loadGroup(code, isoList.slice(0, mid)), loadGroup(code, isoList.slice(mid))]);
   return [...left, ...right];

@@ -46,6 +46,33 @@ def list_notices() -> list[dict]:
     return out
 
 
+def pick(nums: list[float]):
+    """Notice layouts changed over the years; the yields sit at the end of each tenor line.
+    2020s: applied face, applied cost, allotted face, allotted cost, lowest, highest, average, previous average.
+    Older notices drop columns. Try the layouts in turn and keep the first whose figures agree with each other:
+    lowest <= average <= highest, and allotted cost <= allotted face."""
+    for n_yields, has_prev in ((4, True), (3, False)):
+        if len(nums) < n_yields + 2:
+            continue
+        ys = nums[-n_yields:]
+        low, high, avg = ys[0], ys[1], ys[2]
+        if not (0 < low <= avg + 0.01 and avg <= high + 0.01 and 0 < avg < 80):
+            continue
+        amounts = nums[:-n_yields]
+        if len(amounts) >= 4:
+            applied_face, allot_face, allot_cost = amounts[0], amounts[2], amounts[3]
+        elif len(amounts) == 3:
+            applied_face, allot_face, allot_cost = amounts
+        elif len(amounts) == 2:
+            applied_face, allot_face, allot_cost = amounts[0], amounts[1], None
+        else:
+            continue
+        if allot_face <= 0 or (allot_cost is not None and allot_cost > allot_face * 1.001):
+            continue
+        return (applied_face, allot_face, allot_cost), (low, high, avg)
+    return None
+
+
 def parse(text: str, listed: str) -> list[dict]:
     flat = re.sub(r"\s+", " ", text)
     held = re.search(r"HELD ON (\d{1,2})(?:ST|ND|RD|TH)? ([A-Z]+),? (\d{4})", flat, flags=re.I)
@@ -59,12 +86,11 @@ def parse(text: str, listed: str) -> list[dict]:
         if not m:
             continue
         nums = [float(x.replace(",", "")) for x in re.findall(r"-?\d[\d,]*\.\d+|-?\d[\d,]*", m.group(2))]
-        if len(nums) < 7:
+        picked = pick(nums)
+        if not picked:
             continue
-        applied_face, applied_cost, allot_face, allot_cost = nums[:4]
-        avg = nums[6]
-        if allot_face <= 0 or not (0 < avg < 80):
-            continue
+        amounts, (low, high, avg) = picked
+        applied_face, allot_face, allot_cost = amounts
         rows.append({
             "tenor": int(m.group(1)),
             "auction_date": day,
@@ -74,8 +100,8 @@ def parse(text: str, listed: str) -> list[dict]:
             "received_mwk_m": applied_face,
             "accepted_mwk_m": allot_face,
             "accepted_cost_mwk_m": allot_cost,
-            "lowest_yield": nums[4],
-            "highest_yield": nums[5],
+            "lowest_yield": low,
+            "highest_yield": high,
             "weighted_avg_rate": avg,
         })
     return rows

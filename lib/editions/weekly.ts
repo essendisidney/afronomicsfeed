@@ -64,7 +64,8 @@ async function fxMoves(): Promise<WeeklyEdition["fx"]> {
 
 /** Up to `limit` stories from the last seven days, spread across desks so no single beat fills the list. */
 function pickStories(items: WireItem[], now: number, limit = 10) {
-  const recent = items.filter((item) => now - Date.parse(item.publishedAt) < 7 * DAY);
+  const promo = /\b(programme|program|MBA|webinar|masterclass|sponsored|partner content|advertorial|course|scholarship|award nominations?|podcast|quiz|horoscope)\b/i;
+  const recent = items.filter((item) => now - Date.parse(item.publishedAt) < 7 * DAY && !promo.test(item.title));
   const desks: WireDesk[] = ["markets", "economy", "capital", "trade", "technology", "climate", "policy"];
   const out: WireItem[] = [];
   const used = new Set<string>();

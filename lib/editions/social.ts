@@ -19,7 +19,7 @@ export function linkedinPost(edition: WeeklyEdition) {
     .join("\n");
   const parts = [
     `Africa’s week in numbers — ${longDate.format(new Date(edition.weekOf))}`,
-    lines[0] ?? "",
+    lines.filter((line) => !line.startsWith("Kenya’s")).slice(0, 2).join("\n\n"),
     bills ? `Kenya government auctions\n${bills}` : "",
     fx ? `Biggest currency moves this week\n${fx}` : "",
     stories ? `Stories that moved the week\n${stories}` : "",

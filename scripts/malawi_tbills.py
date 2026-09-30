@@ -78,7 +78,13 @@ def parse(text: str, listed: str) -> list[dict]:
     held = re.search(r"HELD ON (\d{1,2})(?:ST|ND|RD|TH)? ([A-Z]+),? (\d{4})", flat, flags=re.I)
     day = listed
     if held and held.group(2).lower() in MONTHS:
-        day = f"{held.group(3)}-{MONTHS[held.group(2).lower()]:02d}-{int(held.group(1)):02d}"
+        stated = f"{held.group(3)}-{MONTHS[held.group(2).lower()]:02d}-{int(held.group(1)):02d}"
+        # Trust the notice's own date unless it is far from the date the RBM lists it under (typos in old notices).
+        try:
+            if abs((datetime.fromisoformat(stated) - datetime.fromisoformat(listed)).days) <= 14:
+                day = stated
+        except ValueError:
+            pass
     kind = "reopening" if re.search(r"REOPENING|RE-OPENING", flat, flags=re.I) else "primary"
     rows = []
     for line in text.splitlines():

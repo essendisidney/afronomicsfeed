@@ -1,12 +1,14 @@
-# Weekly: read new Central Bank of Kenya Treasury bill result notices and commit the updated dataset.
+# Every weekday, three times: read new central-bank auction results for each market and commit the datasets.
 # The commit triggers a Vercel deploy, so the site updates itself. No secrets are needed.
-name: African auctions (Kenya, Nigeria, Ghana, Tanzania)
+# Auction days differ (Egypt Sun-Mon, Malawi Tue, Nigeria/Tanzania/Mozambique Wed, Kenya/Zambia Thu, Ghana/South Africa Fri),
+# so running every weekday keeps each market within hours of its central bank's release.
+name: African auctions
 
 on:
   schedule:
-    - cron: "30 13 * * 4" # Thursday 16:30 Nairobi, after the CBK posts T-bill results
-    - cron: "30 13 * * 3" # Wednesday 16:30 Nairobi, bond results usually land mid-week
-    - cron: "30 7 * * 5"  # Friday 10:30 Nairobi, catches late postings
+    - cron: "17 7 * * 1-5"  # 10:17 Nairobi
+    - cron: "17 12 * * 1-5" # 15:17 Nairobi
+    - cron: "47 15 * * 1-5" # 18:47 Nairobi, after late-afternoon postings
   workflow_dispatch:
 
 permissions:
@@ -21,7 +23,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pdfplumber requests
+      - run: pip install pdfplumber requests openpyxl
       - run: python scripts/kenya_tbills.py
       - run: python scripts/kenya_bonds.py
       # Each market is independent: one publisher being down must not stop the others.
@@ -34,6 +36,21 @@ jobs:
       - run: python scripts/tanzania_tbills.py
         continue-on-error: true
         timeout-minutes: 8
+      - run: python scripts/egypt_tbills.py
+        continue-on-error: true
+        timeout-minutes: 6
+      - run: python scripts/southafrica_tbills.py
+        continue-on-error: true
+        timeout-minutes: 6
+      - run: python scripts/mozambique_tbills.py
+        continue-on-error: true
+        timeout-minutes: 8
+      - run: python scripts/zambia_tbills.py
+        continue-on-error: true
+        timeout-minutes: 10
+      - run: python scripts/malawi_tbills.py
+        continue-on-error: true
+        timeout-minutes: 10
       # Uganda is not run here: the Bank of Uganda's site does not answer GitHub's network.
       # scripts/uganda_tbills.py runs from a machine in the region instead.
       - name: Commit if the dataset changed

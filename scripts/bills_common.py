@@ -45,6 +45,11 @@ def write(country: str, *, dataset: str, publisher: str, source_page: str, curre
     if sources is not None:
         body["sources"] = sources
     p = out_path(country)
+    if p.exists():
+        old = json.loads(p.read_text(encoding="utf-8"))
+        if old.get("rows") == ordered and old.get("sources") == body.get("sources"):
+            print(f"{country}: unchanged ({len(ordered)} rows)")
+            return
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(body, ensure_ascii=False, indent=1), encoding="utf-8")
     first = ordered[-1]["value_date"] if ordered else "-"

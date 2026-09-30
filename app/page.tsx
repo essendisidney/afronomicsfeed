@@ -160,6 +160,11 @@ export default async function HomePage() {
               </div>
               <SourceLine name="Central Bank of Kenya" href="https://www.centralbank.go.ke/bills-bonds/treasury-bills/" detail="latest auction, weighted average of accepted bids" />
               <p className="mt-2 flex flex-wrap gap-x-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em]">
+                {tbills.get(91) ? (
+                  <Link href={`/markets/kenya-tbills/${tbills.get(91)!.latest.value_date}`} className="text-forest hover:text-gold">
+                    Latest auction report →
+                  </Link>
+                ) : null}
                 <Link href="/markets/kenya-bonds" className="text-forest hover:text-gold">Bond yield curve →</Link>
                 <Link href="/widgets" className="text-forest hover:text-gold">Put these rates on your site →</Link>
               </p>

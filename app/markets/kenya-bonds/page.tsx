@@ -120,7 +120,11 @@ export default function KenyaBondsPage() {
                 <tbody>
                   {recent.map((row) => (
                     <tr key={`${row.value_date}-${row.issue}-${row.kind}`}>
-                      <td className="font-mono text-xs">{row.value_date}</td>
+                      <td className="font-mono text-xs">
+                        <Link href={`/markets/kenya-bonds/${row.value_date}`} className="hover:text-forest">
+                          {row.value_date}
+                        </Link>
+                      </td>
                       <td>
                         <a href={row.source} target="_blank" rel="noopener noreferrer" className="font-mono text-xs hover:text-forest">
                           {row.issue}

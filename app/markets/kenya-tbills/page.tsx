@@ -142,7 +142,7 @@ export default function KenyaTbillsPage() {
           ) : null}
 
           <section className="mt-14">
-            <SectionTitle kicker="Table" title="The last 52 auctions" note="Rates are the weighted average of accepted bids. Click a date for the CBK notice." />
+            <SectionTitle kicker="Table" title="The last 52 auctions" note="Rates are the weighted average of accepted bids. Click a date for the full auction report and its CBK notice." />
             <div className="overflow-x-auto">
               <table className="data-table">
                 <thead>
@@ -163,9 +163,9 @@ export default function KenyaTbillsPage() {
                   {weeks.map((week) => (
                     <tr key={week.date}>
                       <td>
-                        <a href={week.source} target="_blank" rel="noopener noreferrer" className="font-mono text-xs hover:text-forest">
+                        <Link href={`/markets/kenya-tbills/${week.date}`} className="font-mono text-xs hover:text-forest">
                           {week.date}
-                        </a>
+                        </Link>
                       </td>
                       {tenors.map((tenor) => {
                         const row = week.rows.find((item) => item.tenor === tenor);

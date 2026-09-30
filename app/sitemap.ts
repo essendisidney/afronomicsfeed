@@ -6,6 +6,7 @@ import { indicatorDefs } from "@/lib/data/indicators";
 import { articleHref } from "@/lib/format";
 import { site } from "@/lib/site";
 import { institutions, topics } from "@/lib/taxonomy";
+import { allTbillWeeks, bondDates } from "@/lib/data/auction-stories";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -60,6 +61,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(`${article.date}T00:00:00+03:00`),
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    ...allTbillWeeks().map((week) => ({
+      url: `${site.url}/markets/kenya-tbills/${week.date}`,
+      lastModified: new Date(`${week.date}T12:00:00+03:00`),
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
+    })),
+    ...bondDates().map((date) => ({
+      url: `${site.url}/markets/kenya-bonds/${date}`,
+      lastModified: new Date(`${date}T12:00:00+03:00`),
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
     })),
     ...institutions.map((item) => page(`/institutions/${item.slug}`, "monthly", 0.3)),
     ...topics.map((item) => page(`/topics/${item.slug}`, "monthly", 0.3)),

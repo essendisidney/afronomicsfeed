@@ -54,7 +54,7 @@ export default function BillMonitorPage() {
       lede={
         <p>
           The latest government bill auctions across African markets, side by side, each compiled from the central bank’s own results. More markets
-          are being added. Histories run from 2002 (Nigeria), 2011 (Kenya), 2012 (Tanzania), 2017 (Uganda) and 2018 (Ghana).
+          are being added. Histories run from 2002 (Nigeria), 2011 (Kenya), 2012 (Tanzania), 2017 (Uganda, where the Bank of Uganda’s archive has gaps) and 2018 (Ghana).
         </p>
       }
     >

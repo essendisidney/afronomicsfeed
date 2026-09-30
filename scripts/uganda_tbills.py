@@ -100,8 +100,8 @@ def parse_notice(text: str) -> list[dict]:
     auction_date = parse_date(held.group(1)) if held else None
     value_date = parse_date(settled.group(1)) if settled else auction_date
     disc = field(lines, r"^ANN\.?\s*DISC(?:OUNT)?\s*RATE[^:\d]*:?")
-    mmy = field(lines, r"^MON(?:EY)?\.?\s*MKT\.?\s*YIELD[^:\d]*:?")
-    eff = field(lines, r"^EFFECTIVE\s*YIELD[^:\d]*:?")
+    mmy = field(lines, r"^MON(?:EY)?\.?\s*(?:MKT|MARKET)\.?\s*YIELD[^:\d]*:?")
+    eff = field(lines, r"^(?:EFFECTIVE\s*YIELD|YIELD\s*TO\s*MATURITY)[^:\d]*:?")
     price = field(lines, r"^(?:CUT[- ]?OFF PRICE|WEIGHTED AVERAGE PRICE)\s*:?")
     offered = field(lines, r"^OFFERED\s*:?")
     tendered = field(lines, r"^TENDERED\s*:?")
@@ -139,7 +139,9 @@ def checks_pass(row: dict) -> bool:
     if e is not None and not (m <= e + 0.01):
         return False
     t, a, b = row["received_ugx_m"], row["accepted_ugx_m"], row["bid_to_cover"]
-    if t and a and b and abs(t / a - b) > 0.02:
+    # BoU has defined bid-to-cover both as tendered / accepted and as tendered / offered.
+    o = row["offered_ugx_m"]
+    if t and b and not ((a and abs(t / a - b) <= 0.02) or (o and abs(t / o - b) <= 0.02)):
         return False
     if row["price_per_100"] is not None and not (50 < row["price_per_100"] <= 100):
         return False

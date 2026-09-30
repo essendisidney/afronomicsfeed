@@ -3,7 +3,8 @@ Mozambique Treasury bill (Bilhetes do Tesouro) auction history from Banco de Mo�
 
 The bank publishes the full series of BT auctions as one spreadsheet on its money-market page
 ("Série Leilões Bilhetes de Tesouro"). The file link is read from the page each run, since its
-media path changes when the file is replaced.
+media path changes when the file is replaced. Only "BT Tipo A" rows (the Treasury's financing bills) are
+kept; the other bill types in the file are left out so each auction date and tenor carries one rate.
 
     python scripts/mozambique_tbills.py
 """
@@ -56,6 +57,9 @@ def main() -> int:
                     break
             continue
         kinds[str(instrument)] += 1
+        # "BT Tipo A" are the Treasury's financing bills; other types are kept out so each date/tenor has one rate.
+        if "tipo a" not in str(instrument).lower():
+            continue
         rate = num(rate)
         tenor = num(tenor)
         if rate is None or not tenor or rate <= 0:

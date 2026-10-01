@@ -3,12 +3,54 @@
  "publisher": "Reserve Bank of Malawi",
  "source_page": "https://www.rbm.mw/FinancialMarkets/TreasuryBills/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-09-30T23:04:43+00:00",
+ "updated_at": "2026-10-01T14:30:06+00:00",
  "units": {
   "amounts": "MWK millions",
   "rates": "average yield of allotted bids, percent per annum"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "auction_date": "2026-09-29",
+   "value_date": "2026-09-29",
+   "kind": "primary",
+   "offered_mwk_m": null,
+   "received_mwk_m": 7236.94,
+   "accepted_mwk_m": 7236.94,
+   "accepted_cost_mwk_m": 6241.1,
+   "lowest_yield": 16.0,
+   "highest_yield": 16.0,
+   "weighted_avg_rate": 16.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63778"
+  },
+  {
+   "tenor": 182,
+   "auction_date": "2026-09-29",
+   "value_date": "2026-09-29",
+   "kind": "primary",
+   "offered_mwk_m": null,
+   "received_mwk_m": 21.45,
+   "accepted_mwk_m": 21.45,
+   "accepted_cost_mwk_m": 20.0,
+   "lowest_yield": 14.5,
+   "highest_yield": 14.5,
+   "weighted_avg_rate": 14.5,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63778"
+  },
+  {
+   "tenor": 91,
+   "auction_date": "2026-09-29",
+   "value_date": "2026-09-29",
+   "kind": "primary",
+   "offered_mwk_m": null,
+   "received_mwk_m": 0.46,
+   "accepted_mwk_m": 0.46,
+   "accepted_cost_mwk_m": 0.45,
+   "lowest_yield": 12.0,
+   "highest_yield": 12.0,
+   "weighted_avg_rate": 12.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63778"
+  },
   {
    "tenor": 364,
    "auction_date": "2026-09-24",
@@ -25780,6 +25822,18 @@
    "reason": "no table"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=3768": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.rbm.mw/Home/GetContentFile/?ContentID=63785": {
+   "status": "unparsed",
+   "reason": "no table"
+  },
+  "https://www.rbm.mw/Home/GetContentFile/?ContentID=63778": {
    "status": "parsed",
    "tenors": [
     91,

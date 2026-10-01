@@ -3,12 +3,60 @@
  "publisher": "Central Bank of Kenya",
  "source_page": "https://www.centralbank.go.ke/bills-bonds/treasury-bills/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-09-30T08:26:06+00:00",
+ "updated_at": "2026-10-01T14:27:07+00:00",
  "units": {
   "amounts": "KES millions",
   "rates": "percent per annum"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "issue": "2631",
+   "maturity": "2027-10-04",
+   "offered_kes_m": 10000.0,
+   "received_kes_m": 10586.04,
+   "accepted_kes_m": 10420.91,
+   "competitive_kes_m": 4868.14,
+   "noncompetitive_kes_m": 5552.77,
+   "weighted_avg_rate": 9.0397,
+   "market_weighted_avg_rate": 9.0414,
+   "price_per_100": 91.7306,
+   "value_date": "2026-10-05",
+   "subscription_pct": 105.86,
+   "source": "https://www.centralbank.go.ke/uploads/91_day_historical_treasury_bill_results/2069542746_RESULTS%202702-091%202676-182%202631-364%20DATED%2005-10-2026.pdf"
+  },
+  {
+   "tenor": 182,
+   "issue": "2676",
+   "maturity": "2027-04-05",
+   "offered_kes_m": 10000.0,
+   "received_kes_m": 19147.41,
+   "accepted_kes_m": 17900.87,
+   "competitive_kes_m": 14172.08,
+   "noncompetitive_kes_m": 3728.79,
+   "weighted_avg_rate": 8.8856,
+   "market_weighted_avg_rate": 8.8887,
+   "price_per_100": 95.7573,
+   "value_date": "2026-10-05",
+   "subscription_pct": 191.47,
+   "source": "https://www.centralbank.go.ke/uploads/91_day_historical_treasury_bill_results/2069542746_RESULTS%202702-091%202676-182%202631-364%20DATED%2005-10-2026.pdf"
+  },
+  {
+   "tenor": 91,
+   "issue": "2702",
+   "maturity": "2027-01-04",
+   "offered_kes_m": 8000.0,
+   "received_kes_m": 17983.23,
+   "accepted_kes_m": 12875.06,
+   "competitive_kes_m": 8343.29,
+   "noncompetitive_kes_m": 4531.77,
+   "weighted_avg_rate": 8.7694,
+   "market_weighted_avg_rate": 8.7737,
+   "price_per_100": 97.8604,
+   "value_date": "2026-10-05",
+   "subscription_pct": 224.79,
+   "source": "https://www.centralbank.go.ke/uploads/91_day_historical_treasury_bill_results/2069542746_RESULTS%202702-091%202676-182%202631-364%20DATED%2005-10-2026.pdf"
+  },
   {
    "tenor": 364,
    "issue": "2630",
@@ -44313,6 +44361,14 @@
   "https://www.centralbank.go.ke//images/TreasuryBillsResults/Results%201860-364.pdf": {
    "status": "parsed",
    "tenors": [
+    364
+   ]
+  },
+  "https://www.centralbank.go.ke/uploads/91_day_historical_treasury_bill_results/2069542746_RESULTS%202702-091%202676-182%202631-364%20DATED%2005-10-2026.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
     364
    ]
   }

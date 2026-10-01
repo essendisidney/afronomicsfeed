@@ -52,6 +52,7 @@ export const footerGroups = [
     title: "Data",
     links: [
       { href: "/markets/tbills", label: "T-bill monitor" },
+      { href: "/markets/bill-index", label: "Sovereign Bill Index" },
       { href: "/markets/borrowing-costs", label: "Borrowing costs" },
       { href: "/rates/kenya", label: "Kenya rates compared" },
       { href: "/countries", label: "54 country files" },

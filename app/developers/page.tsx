@@ -23,6 +23,10 @@ const endpoints = [
     what: "One market’s auction history. Optional: tenor=91|182|364, from and to (YYYY-MM-DD), limit (default 500, up to 5,000). Newest first.",
   },
   {
+    path: "/api/v1/index",
+    what: "The Afronomics African Sovereign Bill Index: latest weekly reading, changes, each market’s contribution and the full series. tenor=91 for the three-month version.",
+  },
+  {
     path: "/api/v1/measures",
     what: "Real yields on one-year bills, bids-to-offer demand over the last 90 days, and each market’s expected next result.",
   },
@@ -65,7 +69,7 @@ export default function DevelopersPage() {
         </p>
       }
     >
-      <SectionTitle kicker="Endpoints" title="Three calls cover everything" />
+      <SectionTitle kicker="Endpoints" title="Four calls cover everything" />
       <div className="overflow-x-auto">
         <table className="data-table mt-2">
           <thead>

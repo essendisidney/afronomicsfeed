@@ -23,7 +23,7 @@ export function linkedinPost(edition: WeeklyEdition) {
     bills ? `Kenya government auctions\n${bills}` : "",
     fx ? `Biggest currency moves this week\n${fx}` : "",
     stories ? `Stories that moved the week\n${stories}` : "",
-    `Every figure is linked to its source. Full edition and free data: ${site.url}/weekly?utm_source=linkedin&utm_medium=social&utm_campaign=weekly`,
+    `Every figure is linked to its source. Full edition and free data: ${site.url}/weekly?utm_source=linkedin&utm_medium=social&utm_campaign=weekly\nThe index, every Monday: ${site.url}/markets/bill-index`,
     "#Africa #Kenya #Markets #Economy #Finance #Afronomics",
   ];
   return parts.filter(Boolean).join("\n\n").slice(0, 2900);

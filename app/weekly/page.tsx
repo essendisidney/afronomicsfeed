@@ -59,6 +59,17 @@ export default async function WeeklyPage() {
         </div>
       }
     >
+      {edition.index ? (
+        <Link href="/markets/bill-index" className="mb-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-rule bg-surface px-5 py-4 hover:border-gold">
+          <span>
+            <span className="block text-[13px] font-medium text-muted">Afronomics African Sovereign Bill Index, week of {shortDate.format(new Date(edition.index.date))}</span>
+            <span className="block font-serif text-3xl text-ink">{edition.index.value.toFixed(2)}%</span>
+          </span>
+          <span className="text-sm text-ink-soft">
+            {bpsText(edition.index.bpsWeek)} on the week · {bpsText(edition.index.bpsYear)} on the year · {edition.index.markets} markets
+          </span>
+        </Link>
+      ) : null}
       <div className="grid gap-12 lg:grid-cols-12">
         <section className="lg:col-span-7">
           <SectionTitle kicker="Rates" title="Kenya government auctions" href="/markets/kenya-tbills" hrefLabel="Full history →" />

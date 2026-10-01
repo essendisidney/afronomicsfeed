@@ -5,6 +5,7 @@ import { latestByTenor, loadTbills, tenorLabel, tenors, type Tenor } from "@/lib
 import { loadAfricaProjects, type Project } from "@/lib/data/projects";
 import { loadDataSignals, type DataSignal } from "@/lib/data/signals";
 import { loadWire, type WireDesk, type WireItem } from "@/lib/data/wire";
+import { billIndexLatest } from "@/lib/data/bill-index";
 
 /**
  * The weekly edition, assembled from the datasets on the site. Every line is generated from a published
@@ -23,6 +24,7 @@ export type WeeklyEdition = {
   stories: WireItem[];
   boards: Project[];
   signals: DataSignal[];
+  index: { value: number; date: string; bpsWeek: number | null; bpsYear: number | null; markets: number } | null;
 };
 
 const DAY = 86400000;
@@ -120,9 +122,11 @@ export async function buildWeeklyEdition(now: number): Promise<WeeklyEdition> {
     .sort((a, b) => (a.approvalDate ?? "").localeCompare(b.approvalDate ?? "") || b.amountUsd - a.amountUsd)
     .slice(0, 8);
 
+  const idx = billIndexLatest(364);
   return {
     weekOf,
     generatedAt: new Date(now).toISOString(),
+    index: idx ? { value: idx.latest.value, date: idx.latest.date, bpsWeek: idx.bpsWeek, bpsYear: idx.bpsYear, markets: idx.latest.markets } : null,
     bills,
     bonds,
     fx,
@@ -140,6 +144,12 @@ export const fxText = formatFx;
 /** The week in a handful of sentences, for the page standfirst, the email preheader and social posts. */
 export function headlines(edition: WeeklyEdition): string[] {
   const lines: string[] = [];
+  if (edition.index) {
+    const w = edition.index.bpsWeek;
+    lines.push(
+      `The Afronomics African Sovereign Bill Index stands at ${edition.index.value.toFixed(2)}%${w == null ? "" : `, ${w === 0 ? "unchanged" : `${w > 0 ? "up" : "down"} ${Math.abs(w)} bps`} on the week`}${edition.index.bpsYear == null ? "" : ` and ${edition.index.bpsYear > 0 ? "up" : "down"} ${Math.abs(edition.index.bpsYear)} bps on a year ago`}.`,
+    );
+  }
   const bill = edition.bills.find((b) => b.tenor === 91) ?? edition.bills[0];
   if (bill) {
     const move = bill.changeBps == null || bill.changeBps === 0 ? "unchanged" : `${bill.changeBps > 0 ? "up" : "down"} ${Math.abs(bill.changeBps)} bps`;

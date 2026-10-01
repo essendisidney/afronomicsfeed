@@ -53,18 +53,36 @@ def text_of(url: str) -> str:
 
 
 def bank_rates() -> list[dict]:
-    t = text_of(CBK)
+    """The CBK page is a wpDataTables table served through admin-ajax (table_id 17): ask for every row at once;
+    fall back to the ten rows rendered in the page when that fails."""
     rows = []
-    # rows read: "August 2026 6.91 3.54 14.34 12.5" (month, year, deposit, savings, lending, overdraft)
-    for m in re.finditer(r"\b([A-Z][a-z]{2,8})\s+(20\d\d)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\b", t):
-        mon = MONTHS.get(m.group(1)[:3].lower())
-        if not mon:
-            continue
-        vals = [num(m.group(i)) for i in range(3, 7)]
-        if any(v is None or not (0 <= v < 60) for v in vals):
-            continue
-        rows.append({"month": f"{m.group(2)}-{mon:02d}", "deposit": vals[0], "savings": vals[1], "lending": vals[2], "overdraft": vals[3]})
-    uniq = {r["month"]: r for r in rows}
+    try:
+        r = requests.post(
+            "https://www.centralbank.go.ke/wp-admin/admin-ajax.php?action=get_wdtable&table_id=17",
+            data={"draw": 1, "start": 0, "length": 2000, "order[0][column]": 0, "order[0][dir]": "desc"},
+            headers={**UA, "Referer": CBK, "X-Requested-With": "XMLHttpRequest"},
+            timeout=(15, 60),
+            verify=False,
+        )
+        for rec in r.json().get("data", []):
+            cells = [re.sub(r"<[^>]+>", "", str(c)).strip() for c in rec]
+            year = next((c for c in cells if re.fullmatch(r"20\d\d", c)), None)
+            mon = next((MONTHS.get(c[:3].lower()) for c in cells if c[:3].lower() in MONTHS), None)
+            nums = [num(c) for c in cells if re.fullmatch(r"\d+(?:\.\d+)?", c) and not re.fullmatch(r"20\d\d", c)]
+            if year and mon and len(nums) >= 4 and all(v is not None and 0 <= v < 60 for v in nums[:4]):
+                rows.append({"month": f"{year}-{mon:02d}", "deposit": nums[0], "savings": nums[1], "lending": nums[2], "overdraft": nums[3]})
+    except Exception as error:
+        print(f"wpdatatables: {str(error)[:80]}")
+    if not rows:
+        t = text_of(CBK)
+        for m in re.finditer(r"\b(20\d\d)\s+([A-Z][a-z]{2,8})\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\b", t):
+            mon = MONTHS.get(m.group(2)[:3].lower())
+            vals = [num(m.group(i)) for i in range(3, 7)]
+            if mon and all(v is not None and 0 <= v < 60 for v in vals):
+                rows.append({"month": f"{m.group(1)}-{mon:02d}", "deposit": vals[0], "savings": vals[1], "lending": vals[2], "overdraft": vals[3]})
+    uniq = {}
+    for r in rows:  # the CBK lists a revised row first for a month it restated; keep the first seen
+        uniq.setdefault(r["month"], r)
     return sorted(uniq.values(), key=lambda r: r["month"], reverse=True)
 
 

@@ -3,12 +3,68 @@
  "publisher": "Bank of Zambia",
  "source_page": "https://www.boz.zm/markets-securities/treasury-bills",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-09-30T22:50:42+00:00",
+ "updated_at": "2026-10-01T18:26:30+00:00",
  "units": {
   "amounts": "ZMW millions",
   "rates": "cut-off yield rate at the auction, percent per annum"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "auction_date": "2026-10-01",
+   "value_date": "2026-10-01",
+   "tender": "20/2026",
+   "isin": null,
+   "discount_rate": null,
+   "price_per_100": 90.9317,
+   "weighted_avg_rate": 10.0,
+   "offered_zmw_m": 730.0,
+   "received_zmw_m": 1986.98,
+   "accepted_zmw_m": 1281.99,
+   "source": "https://www.boz.zm/sites/default/files/2026-10/Treasury-Bills-Results-Tender-No-20-2026-01-10-2026.pdf"
+  },
+  {
+   "tenor": 273,
+   "auction_date": "2026-10-01",
+   "value_date": "2026-10-01",
+   "tender": "20/2026",
+   "isin": "ZM3000014297",
+   "discount_rate": 8.8698,
+   "price_per_100": 93.3659,
+   "weighted_avg_rate": 9.5,
+   "offered_zmw_m": 530.0,
+   "received_zmw_m": 556.7,
+   "accepted_zmw_m": 556.05,
+   "source": "https://www.boz.zm/sites/default/files/2026-10/Treasury-Bills-Results-Tender-No-20-2026-01-10-2026.pdf"
+  },
+  {
+   "tenor": 182,
+   "auction_date": "2026-10-01",
+   "value_date": "2026-10-01",
+   "tender": "20/2026",
+   "isin": "ZM3000014289",
+   "discount_rate": 8.705,
+   "price_per_100": 95.6594,
+   "weighted_avg_rate": 9.1,
+   "offered_zmw_m": 500.0,
+   "received_zmw_m": 573.06,
+   "accepted_zmw_m": 571.45,
+   "source": "https://www.boz.zm/sites/default/files/2026-10/Treasury-Bills-Results-Tender-No-20-2026-01-10-2026.pdf"
+  },
+  {
+   "tenor": 91,
+   "auction_date": "2026-10-01",
+   "value_date": "2026-10-01",
+   "tender": "20/2026",
+   "isin": "ZM3000014271",
+   "discount_rate": 8.3236,
+   "price_per_100": 97.9248,
+   "weighted_avg_rate": 8.5,
+   "offered_zmw_m": 440.0,
+   "received_zmw_m": 464.84,
+   "accepted_zmw_m": 452.88,
+   "source": "https://www.boz.zm/sites/default/files/2026-10/Treasury-Bills-Results-Tender-No-20-2026-01-10-2026.pdf"
+  },
   {
    "tenor": 364,
    "auction_date": "2026-09-17",
@@ -16204,6 +16260,39 @@
      "accepted": 145.71,
      "price": 86.4253,
      "rate": 21.0
+    }
+   }
+  },
+  "https://www.boz.zm/sites/default/files/2026-10/Treasury-Bills-Results-Tender-No-20-2026-01-10-2026.pdf": {
+   "status": "parsed",
+   "tenors": {
+    "91": {
+     "offered": 440.0,
+     "received": 464.84,
+     "accepted": 452.88,
+     "price": 97.9248,
+     "rate": 8.5
+    },
+    "182": {
+     "offered": 500.0,
+     "received": 573.06,
+     "accepted": 571.45,
+     "price": 95.6594,
+     "rate": 9.1
+    },
+    "273": {
+     "offered": 530.0,
+     "received": 556.7,
+     "accepted": 556.05,
+     "price": 93.3659,
+     "rate": 9.5
+    },
+    "364": {
+     "offered": 730.0,
+     "received": 1986.98,
+     "accepted": 1281.99,
+     "price": 90.9317,
+     "rate": 10.0
     }
    }
   },

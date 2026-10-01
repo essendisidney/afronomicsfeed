@@ -151,14 +151,15 @@ export default async function BillMarketPage({ params }: Props) {
                 <tbody>
                   {weeks.map((week) => (
                     <tr key={week.date}>
-                      <td>
+                      <td className="whitespace-nowrap">
+                        <Link href={`/markets/tbills/${market.slug}/${week.date}`} className="text-xs font-medium hover:text-forest">
+                          {week.date}
+                        </Link>
                         {week.source && week.source !== market.sourcePage ? (
-                          <a href={week.source} target="_blank" rel="noopener noreferrer" className="font-mono text-xs hover:text-forest">
-                            {week.date}
+                          <a href={week.source} target="_blank" rel="noopener noreferrer" className="ml-2 text-[11px] text-muted hover:text-forest">
+                            notice
                           </a>
-                        ) : (
-                          <span className="font-mono text-xs">{week.date}</span>
-                        )}
+                        ) : null}
                       </td>
                       {billTenors.map((tenor) => {
                         const row = week.rows.find((item) => item.tenor === tenor);

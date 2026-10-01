@@ -1,5 +1,7 @@
 import { getAllArticles } from "@/lib/content";
 import { allTbillWeeks, bondDates, bondStory, tbillStory } from "@/lib/data/auction-stories";
+import { marketDates, marketStory } from "@/lib/data/market-stories";
+import { billMarkets } from "@/lib/data/sovereign-bills";
 import { articleHref } from "@/lib/format";
 import { site } from "@/lib/site";
 
@@ -20,6 +22,16 @@ export async function GET() {
         const story = tbillStory(week.date);
         return story ? [{ title: story.headline, url: `${site.url}/markets/kenya-tbills/${week.date}`, date: week.date, html: story.paragraphs.map((p) => `<p>${escapeXml(p)}</p>`).join("") }] : [];
       }),
+    ...billMarkets
+      .filter((m) => m.slug !== "kenya")
+      .flatMap((m) =>
+        marketDates(m.slug)
+          .slice(0, 2)
+          .flatMap((week) => {
+            const story = marketStory(m.slug, week.date);
+            return story ? [{ title: story.headline, url: `${site.url}/markets/tbills/${m.slug}/${week.date}`, date: week.date, html: story.paragraphs.map((p) => `<p>${escapeXml(p)}</p>`).join("") }] : [];
+          }),
+      ),
     ...bondDates()
       .slice(0, 8)
       .flatMap((date) => {

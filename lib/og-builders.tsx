@@ -1,4 +1,5 @@
 import { bondStory, tbillStory } from "@/lib/data/auction-stories";
+import { marketStory } from "@/lib/data/market-stories";
 import { auctionCurve, loadBonds } from "@/lib/data/kenya-bonds";
 import { tenorLabel } from "@/lib/data/kenya-tbills";
 import { billMarkets, billTenors, getBillMarket, latestBills, loadBillMarket } from "@/lib/data/sovereign-bills";
@@ -96,5 +97,27 @@ export function bondAuctionCard(date: string) {
     }),
     line: { values: auctionCurve().map((p) => p.rate), caption: "Current auction yield curve · Central Bank of Kenya" },
     source: "Central Bank of Kenya",
+  });
+}
+
+export function marketAuctionCard(slug: string, date: string) {
+  const story = marketStory(slug, date);
+  if (!story) return billMarketCard(slug);
+  const { market, week, lead, prevOf } = story;
+  const { rows } = loadBillMarket(market.slug);
+  const line = rows
+    .filter((r) => r.tenor === lead.tenor && r.date <= date)
+    .slice(0, 52)
+    .reverse()
+    .map((r) => r.rate);
+  return renderCard({
+    kicker: `${market.country} T-bill auction · ${shortDate.format(new Date(date))}`,
+    title: story.headline.replace(/^[^:]+: /, `${market.country}’s `).replace(/^(\S+)’s (\d+)-day at/, "$1’s $2-day bill at"),
+    stats: week.rows.map((row) => {
+      const prev = prevOf(row.tenor);
+      return { label: `${row.tenor}-day`, value: pct(row.rate, 2), ...bpsNote(prev?.rate, row.rate) };
+    }),
+    line: { values: line, caption: `${lead.tenor}-day rate, previous ${line.length} auctions · ${market.publisher}` },
+    source: market.publisher,
   });
 }

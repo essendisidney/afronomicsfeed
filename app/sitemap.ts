@@ -4,6 +4,8 @@ import { countries } from "@/lib/data/countries";
 import { pairSlug } from "@/lib/data/fx";
 import { indicatorDefs } from "@/lib/data/indicators";
 import { articleHref } from "@/lib/format";
+import { marketDates } from "@/lib/data/market-stories";
+import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 import { institutions, topics } from "@/lib/taxonomy";
 import { allTbillWeeks, bondDates } from "@/lib/data/auction-stories";
@@ -83,6 +85,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.5,
     })),
+    ...billMarkets
+      .filter((m) => m.slug !== "kenya")
+      .flatMap((m) =>
+        marketDates(m.slug).map((week) => ({
+          url: `${site.url}/markets/tbills/${m.slug}/${week.date}`,
+          lastModified: new Date(`${week.date}T12:00:00+03:00`),
+          changeFrequency: "yearly" as const,
+          priority: 0.5,
+        })),
+      ),
     ...bondDates().map((date) => ({
       url: `${site.url}/markets/kenya-bonds/${date}`,
       lastModified: new Date(`${date}T12:00:00+03:00`),

@@ -42,9 +42,12 @@ async function overnightFx(): Promise<MorningNote["fx"]> {
   const at = (day: string) => new Map(rows.filter((r) => r.day === day).map((r) => [r.code, Number(r.rate)]));
   const now = at(last);
   const prev = at(prevDay);
+  // The currencies that are traded enough for an overnight reference move to mean something; thinly quoted
+  // currencies (SDG, SSP, and the like) swing on the reference feed without any market moving.
+  const watch = ["KES", "NGN", "ZAR", "GHS", "EGP", "ETB", "TZS", "UGX", "RWF", "MAD", "XOF", "XAF", "ZMW", "MWK", "MZN", "BWP", "MUR", "NAD", "TND", "DZD", "AOA", "CDF"];
   const moves: MorningFx[] = [];
   for (const { code } of quote.codes) {
-    if (["USD", "EUR", "GBP", "CNY"].includes(code)) continue;
+    if (!watch.includes(code)) continue;
     const a = prev.get(code);
     const b = now.get(code);
     if (!a || !b) continue;

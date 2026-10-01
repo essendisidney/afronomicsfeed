@@ -1,0 +1,2284 @@
+{
+ "dataset": "Kenya savings and lending rates",
+ "compiled_by": "Afronomics (afronomicsfeed.com)",
+ "updated_at": "2026-10-01T10:20:22+00:00",
+ "bank_rates": {
+  "publisher": "Central Bank of Kenya",
+  "source": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
+  "unit": "percent per annum, weighted average across commercial banks",
+  "rows": [
+   {
+    "month": "2026-08",
+    "deposit": 6.91,
+    "savings": 3.54,
+    "lending": 14.34,
+    "overdraft": 12.5
+   },
+   {
+    "month": "2026-07",
+    "deposit": 6.93,
+    "savings": 3.53,
+    "lending": 14.39,
+    "overdraft": 12.97
+   },
+   {
+    "month": "2026-06",
+    "deposit": 6.84,
+    "savings": 3.32,
+    "lending": 14.38,
+    "overdraft": 12.98
+   },
+   {
+    "month": "2026-05",
+    "deposit": 6.8,
+    "savings": 3.23,
+    "lending": 14.5,
+    "overdraft": 12.93
+   },
+   {
+    "month": "2026-04",
+    "deposit": 6.88,
+    "savings": 3.31,
+    "lending": 14.69,
+    "overdraft": 13.29
+   },
+   {
+    "month": "2026-03",
+    "deposit": 6.86,
+    "savings": 3.22,
+    "lending": 14.7,
+    "overdraft": 13.04
+   },
+   {
+    "month": "2026-02",
+    "deposit": 6.82,
+    "savings": 2.41,
+    "lending": 14.78,
+    "overdraft": 13.31
+   },
+   {
+    "month": "2026-01",
+    "deposit": 7.03,
+    "savings": 3.18,
+    "lending": 14.81,
+    "overdraft": 13.56
+   },
+   {
+    "month": "2025-12",
+    "deposit": 7.13,
+    "savings": 3.22,
+    "lending": 14.82,
+    "overdraft": 13.38
+   },
+   {
+    "month": "2025-11",
+    "deposit": 7.28,
+    "savings": 3.67,
+    "lending": 14.88,
+    "overdraft": 13.36
+   },
+   {
+    "month": "2025-10",
+    "deposit": 7.5,
+    "savings": 3.76,
+    "lending": 15.0,
+    "overdraft": 13.23
+   },
+   {
+    "month": "2025-09",
+    "deposit": 7.63,
+    "savings": 3.77,
+    "lending": 15.07,
+    "overdraft": 13.72
+   },
+   {
+    "month": "2025-08",
+    "deposit": 7.74,
+    "savings": 3.61,
+    "lending": 15.17,
+    "overdraft": 13.89
+   },
+   {
+    "month": "2025-07",
+    "deposit": 8.07,
+    "savings": 3.76,
+    "lending": 15.24,
+    "overdraft": 13.61
+   },
+   {
+    "month": "2025-06",
+    "deposit": 8.37,
+    "savings": 3.76,
+    "lending": 15.28,
+    "overdraft": 13.49
+   },
+   {
+    "month": "2025-05",
+    "deposit": 8.7,
+    "savings": 3.31,
+    "lending": 15.44,
+    "overdraft": 13.73
+   },
+   {
+    "month": "2025-04",
+    "deposit": 8.87,
+    "savings": 3.66,
+    "lending": 15.65,
+    "overdraft": 14.083
+   },
+   {
+    "month": "2025-03",
+    "deposit": 9.33,
+    "savings": 3.09,
+    "lending": 15.77,
+    "overdraft": 14.33
+   },
+   {
+    "month": "2025-02",
+    "deposit": 9.76,
+    "savings": 4.02,
+    "lending": 16.41,
+    "overdraft": 15.1
+   },
+   {
+    "month": "2025-01",
+    "deposit": 10.05,
+    "savings": 4.08,
+    "lending": 16.64,
+    "overdraft": 15.38
+   },
+   {
+    "month": "2024-12",
+    "deposit": 10.45,
+    "savings": 4.25,
+    "lending": 16.89,
+    "overdraft": 15.75
+   },
+   {
+    "month": "2024-11",
+    "deposit": 10.41,
+    "savings": 3.54,
+    "lending": 17.22,
+    "overdraft": 16.53
+   },
+   {
+    "month": "2024-10",
+    "deposit": 11.01,
+    "savings": 4.48,
+    "lending": 17.15,
+    "overdraft": 16.6
+   },
+   {
+    "month": "2024-09",
+    "deposit": 11.24,
+    "savings": 3.57,
+    "lending": 16.91,
+    "overdraft": 16.83
+   },
+   {
+    "month": "2024-08",
+    "deposit": 11.14,
+    "savings": 4.62,
+    "lending": 16.84,
+    "overdraft": 16.39
+   },
+   {
+    "month": "2024-07",
+    "deposit": 11.28,
+    "savings": 4.56,
+    "lending": 16.84,
+    "overdraft": 16.43
+   },
+   {
+    "month": "2024-06",
+    "deposit": 11.48,
+    "savings": 5.11,
+    "lending": 16.85,
+    "overdraft": 16.78
+   },
+   {
+    "month": "2024-05",
+    "deposit": 11.13,
+    "savings": 4.45,
+    "lending": 16.6,
+    "overdraft": 16.52
+   },
+   {
+    "month": "2024-04",
+    "deposit": 10.77,
+    "savings": 4.14,
+    "lending": 16.45,
+    "overdraft": 16.37
+   },
+   {
+    "month": "2024-03",
+    "deposit": 10.52,
+    "savings": 3.9,
+    "lending": 16.28,
+    "overdraft": 15.97
+   },
+   {
+    "month": "2024-02",
+    "deposit": 10.32,
+    "savings": 3.33,
+    "lending": 15.88,
+    "overdraft": 15.55
+   },
+   {
+    "month": "2024-01",
+    "deposit": 10.18,
+    "savings": 3.69,
+    "lending": 15.2,
+    "overdraft": 15.11
+   },
+   {
+    "month": "2023-12",
+    "deposit": 10.1,
+    "savings": 4.24,
+    "lending": 14.63,
+    "overdraft": 14.65
+   },
+   {
+    "month": "2023-11",
+    "deposit": 9.48,
+    "savings": 4.01,
+    "lending": 14.43,
+    "overdraft": 14.29
+   },
+   {
+    "month": "2023-10",
+    "deposit": 9.11,
+    "savings": 3.98,
+    "lending": 14.16,
+    "overdraft": 14.09
+   },
+   {
+    "month": "2023-08",
+    "deposit": 8.39,
+    "savings": 4.05,
+    "lending": 13.83,
+    "overdraft": 13.24
+   },
+   {
+    "month": "2023-07",
+    "deposit": 8.1,
+    "savings": 3.97,
+    "lending": 13.5,
+    "overdraft": 12.84
+   },
+   {
+    "month": "2023-06",
+    "deposit": 7.8,
+    "savings": 3.92,
+    "lending": 13.31,
+    "overdraft": 12.83
+   },
+   {
+    "month": "2023-05",
+    "deposit": 7.7,
+    "savings": 3.55,
+    "lending": 13.21,
+    "overdraft": 12.64
+   },
+   {
+    "month": "2023-04",
+    "deposit": 7.69,
+    "savings": 3.59,
+    "lending": 13.1,
+    "overdraft": 12.71
+   },
+   {
+    "month": "2023-03",
+    "deposit": 7.6,
+    "savings": 3.55,
+    "lending": 13.09,
+    "overdraft": 12.69
+   },
+   {
+    "month": "2023-02",
+    "deposit": 7.54,
+    "savings": 3.58,
+    "lending": 13.06,
+    "overdraft": 12.62
+   },
+   {
+    "month": "2023-01",
+    "deposit": 7.47,
+    "savings": 3.6,
+    "lending": 12.77,
+    "overdraft": 12.34
+   },
+   {
+    "month": "2022-12",
+    "deposit": 7.17,
+    "savings": 3.56,
+    "lending": 12.67,
+    "overdraft": 12.22
+   },
+   {
+    "month": "2022-11",
+    "deposit": 7.11,
+    "savings": 3.5,
+    "lending": 12.64,
+    "overdraft": 12.16
+   },
+   {
+    "month": "2022-10",
+    "deposit": 7.01,
+    "savings": 3.46,
+    "lending": 12.39,
+    "overdraft": 11.96
+   },
+   {
+    "month": "2022-09",
+    "deposit": 6.82,
+    "savings": 3.44,
+    "lending": 12.41,
+    "overdraft": 11.99
+   },
+   {
+    "month": "2022-08",
+    "deposit": 6.93,
+    "savings": 3.47,
+    "lending": 12.43,
+    "overdraft": 12.1
+   },
+   {
+    "month": "2022-07",
+    "deposit": 6.74,
+    "savings": 2.94,
+    "lending": 12.35,
+    "overdraft": 12.02
+   },
+   {
+    "month": "2022-06",
+    "deposit": 6.62,
+    "savings": 2.5,
+    "lending": 12.27,
+    "overdraft": 11.86
+   },
+   {
+    "month": "2022-05",
+    "deposit": 6.59,
+    "savings": 2.52,
+    "lending": 12.22,
+    "overdraft": 11.76
+   },
+   {
+    "month": "2022-04",
+    "deposit": 6.58,
+    "savings": 2.56,
+    "lending": 12.2,
+    "overdraft": 11.69
+   },
+   {
+    "month": "2022-03",
+    "deposit": 6.5,
+    "savings": 2.48,
+    "lending": 12.15,
+    "overdraft": 11.5
+   },
+   {
+    "month": "2022-02",
+    "deposit": 6.61,
+    "savings": 2.56,
+    "lending": 12.17,
+    "overdraft": 11.63
+   },
+   {
+    "month": "2022-01",
+    "deposit": 6.53,
+    "savings": 2.55,
+    "lending": 12.12,
+    "overdraft": 11.57
+   },
+   {
+    "month": "2021-12",
+    "deposit": 6.5,
+    "savings": 2.55,
+    "lending": 12.16,
+    "overdraft": 11.45
+   },
+   {
+    "month": "2021-11",
+    "deposit": 6.43,
+    "savings": 2.6,
+    "lending": 12.15,
+    "overdraft": 11.41
+   },
+   {
+    "month": "2021-10",
+    "deposit": 6.39,
+    "savings": 2.58,
+    "lending": 12.12,
+    "overdraft": 11.33
+   },
+   {
+    "month": "2021-09",
+    "deposit": 6.34,
+    "savings": 2.57,
+    "lending": 12.1,
+    "overdraft": 11.34
+   },
+   {
+    "month": "2021-08",
+    "deposit": 6.3,
+    "savings": 2.64,
+    "lending": 12.12,
+    "overdraft": 11.38
+   },
+   {
+    "month": "2021-07",
+    "deposit": 6.34,
+    "savings": 2.51,
+    "lending": 12.09,
+    "overdraft": 11.44
+   },
+   {
+    "month": "2021-06",
+    "deposit": 6.37,
+    "savings": 2.55,
+    "lending": 12.02,
+    "overdraft": 11.18
+   },
+   {
+    "month": "2021-05",
+    "deposit": 6.3,
+    "savings": 2.55,
+    "lending": 12.06,
+    "overdraft": 11.57
+   },
+   {
+    "month": "2021-04",
+    "deposit": 6.3,
+    "savings": 2.66,
+    "lending": 12.08,
+    "overdraft": 11.66
+   },
+   {
+    "month": "2021-03",
+    "deposit": 6.46,
+    "savings": 3.48,
+    "lending": 12.05,
+    "overdraft": 11.61
+   },
+   {
+    "month": "2021-02",
+    "deposit": 6.47,
+    "savings": 3.37,
+    "lending": 12.02,
+    "overdraft": 11.52
+   },
+   {
+    "month": "2021-01",
+    "deposit": 6.31,
+    "savings": 2.73,
+    "lending": 12.0,
+    "overdraft": 11.43
+   },
+   {
+    "month": "2020-12",
+    "deposit": 6.3,
+    "savings": 2.7,
+    "lending": 12.02,
+    "overdraft": 11.51
+   },
+   {
+    "month": "2020-11",
+    "deposit": 6.31,
+    "savings": 3.42,
+    "lending": 11.99,
+    "overdraft": 11.39
+   },
+   {
+    "month": "2020-10",
+    "deposit": 6.26,
+    "savings": 3.38,
+    "lending": 11.98,
+    "overdraft": 11.44
+   },
+   {
+    "month": "2020-09",
+    "deposit": 6.41,
+    "savings": 3.78,
+    "lending": 11.75,
+    "overdraft": 11.15
+   },
+   {
+    "month": "2020-08",
+    "deposit": 6.64,
+    "savings": 4.11,
+    "lending": 11.94,
+    "overdraft": 11.18
+   },
+   {
+    "month": "2020-07",
+    "deposit": 6.78,
+    "savings": 4.11,
+    "lending": 11.94,
+    "overdraft": 11.18
+   },
+   {
+    "month": "2020-06",
+    "deposit": 6.86,
+    "savings": 4.15,
+    "lending": 11.89,
+    "overdraft": 11.24
+   },
+   {
+    "month": "2020-05",
+    "deposit": 6.96,
+    "savings": 4.18,
+    "lending": 11.95,
+    "overdraft": 11.61
+   },
+   {
+    "month": "2020-04",
+    "deposit": 7.01,
+    "savings": 4.21,
+    "lending": 11.92,
+    "overdraft": 11.55
+   },
+   {
+    "month": "2020-03",
+    "deposit": 7.07,
+    "savings": 4.15,
+    "lending": 12.09,
+    "overdraft": 11.79
+   },
+   {
+    "month": "2020-02",
+    "deposit": 7.06,
+    "savings": 4.2,
+    "lending": 12.19,
+    "overdraft": 11.82
+   },
+   {
+    "month": "2020-01",
+    "deposit": 7.07,
+    "savings": 4.25,
+    "lending": 12.29,
+    "overdraft": 11.97
+   },
+   {
+    "month": "2019-12",
+    "deposit": 7.11,
+    "savings": 4.02,
+    "lending": 12.24,
+    "overdraft": 11.67
+   },
+   {
+    "month": "2019-11",
+    "deposit": 6.56,
+    "savings": 4.47,
+    "lending": 12.38,
+    "overdraft": 11.63
+   },
+   {
+    "month": "2019-10",
+    "deposit": 6.96,
+    "savings": 4.44,
+    "lending": 12.43,
+    "overdraft": 11.88
+   },
+   {
+    "month": "2019-09",
+    "deposit": 6.98,
+    "savings": 4.58,
+    "lending": 12.47,
+    "overdraft": 11.99
+   },
+   {
+    "month": "2019-08",
+    "deposit": 6.91,
+    "savings": 4.54,
+    "lending": 12.46,
+    "overdraft": 11.97
+   },
+   {
+    "month": "2019-07",
+    "deposit": 6.97,
+    "savings": 4.77,
+    "lending": 12.39,
+    "overdraft": 11.89
+   },
+   {
+    "month": "2019-06",
+    "deposit": 7.19,
+    "savings": 4.77,
+    "lending": 12.47,
+    "overdraft": 12.12
+   },
+   {
+    "month": "2019-05",
+    "deposit": 7.2,
+    "savings": 4.71,
+    "lending": 12.47,
+    "overdraft": 12.13
+   },
+   {
+    "month": "2019-04",
+    "deposit": 7.17,
+    "savings": 4.75,
+    "lending": 12.5,
+    "overdraft": 12.15
+   },
+   {
+    "month": "2019-03",
+    "deposit": 7.22,
+    "savings": 5.05,
+    "lending": 12.51,
+    "overdraft": 12.13
+   },
+   {
+    "month": "2019-02",
+    "deposit": 7.28,
+    "savings": 5.16,
+    "lending": 12.47,
+    "overdraft": 12.13
+   },
+   {
+    "month": "2019-01",
+    "deposit": 7.34,
+    "savings": 5.14,
+    "lending": 12.5,
+    "overdraft": 12.15
+   },
+   {
+    "month": "2018-12",
+    "deposit": 7.41,
+    "savings": 5.13,
+    "lending": 12.51,
+    "overdraft": 12.17
+   },
+   {
+    "month": "2018-11",
+    "deposit": 7.41,
+    "savings": 5.38,
+    "lending": 12.55,
+    "overdraft": 12.11
+   },
+   {
+    "month": "2018-10",
+    "deposit": 7.63,
+    "savings": 5.7,
+    "lending": 12.61,
+    "overdraft": 12.42
+   },
+   {
+    "month": "2018-09",
+    "deposit": 7.76,
+    "savings": 6.33,
+    "lending": 12.66,
+    "overdraft": 12.52
+   },
+   {
+    "month": "2018-08",
+    "deposit": 7.78,
+    "savings": 6.52,
+    "lending": 12.78,
+    "overdraft": 12.9
+   },
+   {
+    "month": "2018-07",
+    "deposit": 8.01,
+    "savings": 6.53,
+    "lending": 13.1,
+    "overdraft": 13.16
+   },
+   {
+    "month": "2018-06",
+    "deposit": 8.04,
+    "savings": 6.6,
+    "lending": 13.22,
+    "overdraft": 13.23
+   },
+   {
+    "month": "2018-05",
+    "deposit": 8.08,
+    "savings": 6.64,
+    "lending": 13.25,
+    "overdraft": 13.3
+   },
+   {
+    "month": "2018-04",
+    "deposit": 8.17,
+    "savings": 6.72,
+    "lending": 13.24,
+    "overdraft": 13.29
+   },
+   {
+    "month": "2018-03",
+    "deposit": 8.16,
+    "savings": 6.85,
+    "lending": 13.49,
+    "overdraft": 13.4
+   },
+   {
+    "month": "2018-02",
+    "deposit": 8.25,
+    "savings": 7.01,
+    "lending": 13.68,
+    "overdraft": 13.75
+   },
+   {
+    "month": "2018-01",
+    "deposit": 8.26,
+    "savings": 6.97,
+    "lending": 13.65,
+    "overdraft": 13.61
+   },
+   {
+    "month": "2017-12",
+    "deposit": 8.22,
+    "savings": 6.91,
+    "lending": 13.64,
+    "overdraft": 13.54
+   },
+   {
+    "month": "2017-11",
+    "deposit": 8.07,
+    "savings": 6.93,
+    "lending": 13.68,
+    "overdraft": 13.6
+   },
+   {
+    "month": "2017-10",
+    "deposit": 8.01,
+    "savings": 6.92,
+    "lending": 13.71,
+    "overdraft": 13.68
+   },
+   {
+    "month": "2017-09",
+    "deposit": 7.66,
+    "savings": 6.43,
+    "lending": 13.69,
+    "overdraft": 13.65
+   },
+   {
+    "month": "2017-08",
+    "deposit": 7.67,
+    "savings": 5.94,
+    "lending": 13.65,
+    "overdraft": 13.66
+   },
+   {
+    "month": "2017-07",
+    "deposit": 7.43,
+    "savings": 6.4,
+    "lending": 13.7,
+    "overdraft": 13.65
+   },
+   {
+    "month": "2017-06",
+    "deposit": 7.15,
+    "savings": 5.63,
+    "lending": 13.66,
+    "overdraft": 13.38
+   },
+   {
+    "month": "2017-05",
+    "deposit": 7.07,
+    "savings": 5.85,
+    "lending": 13.71,
+    "overdraft": 13.44
+   },
+   {
+    "month": "2017-04",
+    "deposit": 6.97,
+    "savings": 5.67,
+    "lending": 13.61,
+    "overdraft": 13.3
+   },
+   {
+    "month": "2017-03",
+    "deposit": 7.12,
+    "savings": 5.89,
+    "lending": 13.61,
+    "overdraft": 13.29
+   },
+   {
+    "month": "2017-02",
+    "deposit": 7.65,
+    "savings": 6.81,
+    "lending": 13.69,
+    "overdraft": 13.32
+   },
+   {
+    "month": "2017-01",
+    "deposit": 7.2,
+    "savings": 6.09,
+    "lending": 13.66,
+    "overdraft": 13.3
+   },
+   {
+    "month": "2016-12",
+    "deposit": 7.33,
+    "savings": 6.37,
+    "lending": 13.66,
+    "overdraft": 13.49
+   },
+   {
+    "month": "2016-11",
+    "deposit": 7.65,
+    "savings": 6.52,
+    "lending": 13.67,
+    "overdraft": 13.49
+   },
+   {
+    "month": "2016-10",
+    "deposit": 7.82,
+    "savings": 6.08,
+    "lending": 13.73,
+    "overdraft": 13.48
+   },
+   {
+    "month": "2016-09",
+    "deposit": 6.94,
+    "savings": 3.78,
+    "lending": 13.86,
+    "overdraft": 13.74
+   },
+   {
+    "month": "2016-08",
+    "deposit": 6.42,
+    "savings": 1.68,
+    "lending": 17.66,
+    "overdraft": 17.96
+   },
+   {
+    "month": "2016-07",
+    "deposit": 6.64,
+    "savings": 1.67,
+    "lending": 18.1,
+    "overdraft": 17.84
+   },
+   {
+    "month": "2016-06",
+    "deposit": 6.78,
+    "savings": 1.6,
+    "lending": 18.18,
+    "overdraft": 18.09
+   },
+   {
+    "month": "2016-05",
+    "deposit": 6.44,
+    "savings": 1.59,
+    "lending": 18.22,
+    "overdraft": 18.2
+   },
+   {
+    "month": "2016-04",
+    "deposit": 6.89,
+    "savings": 1.49,
+    "lending": 18.04,
+    "overdraft": 18.08
+   },
+   {
+    "month": "2016-03",
+    "deposit": 7.17,
+    "savings": 1.35,
+    "lending": 17.87,
+    "overdraft": 18.14
+   },
+   {
+    "month": "2016-02",
+    "deposit": 7.49,
+    "savings": 1.4,
+    "lending": 17.91,
+    "overdraft": 18.25
+   },
+   {
+    "month": "2016-01",
+    "deposit": 7.57,
+    "savings": 1.56,
+    "lending": 18.0,
+    "overdraft": 18.45
+   },
+   {
+    "month": "2015-12",
+    "deposit": 8.02,
+    "savings": 1.56,
+    "lending": 18.3,
+    "overdraft": 18.48
+   },
+   {
+    "month": "2015-11",
+    "deposit": 7.39,
+    "savings": 1.32,
+    "lending": 17.16,
+    "overdraft": 17.44
+   },
+   {
+    "month": "2015-10",
+    "deposit": 7.54,
+    "savings": 1.68,
+    "lending": 16.58,
+    "overdraft": 16.81
+   },
+   {
+    "month": "2015-09",
+    "deposit": 7.28,
+    "savings": 1.71,
+    "lending": 16.82,
+    "overdraft": 16.61
+   },
+   {
+    "month": "2015-08",
+    "deposit": 6.91,
+    "savings": 1.5,
+    "lending": 15.68,
+    "overdraft": 15.98
+   },
+   {
+    "month": "2015-07",
+    "deposit": 6.31,
+    "savings": 1.37,
+    "lending": 15.75,
+    "overdraft": 16.05
+   },
+   {
+    "month": "2015-06",
+    "deposit": 6.64,
+    "savings": 1.85,
+    "lending": 16.06,
+    "overdraft": 15.67
+   },
+   {
+    "month": "2015-05",
+    "deposit": 6.55,
+    "savings": 1.48,
+    "lending": 15.26,
+    "overdraft": 15.1
+   },
+   {
+    "month": "2015-04",
+    "deposit": 6.6,
+    "savings": 1.9,
+    "lending": 15.4,
+    "overdraft": 15.52
+   },
+   {
+    "month": "2015-03",
+    "deposit": 6.63,
+    "savings": 1.53,
+    "lending": 15.46,
+    "overdraft": 15.68
+   },
+   {
+    "month": "2015-02",
+    "deposit": 6.68,
+    "savings": 1.53,
+    "lending": 15.47,
+    "overdraft": 15.67
+   },
+   {
+    "month": "2015-01",
+    "deposit": 6.65,
+    "savings": 1.58,
+    "lending": 15.93,
+    "overdraft": 15.95
+   },
+   {
+    "month": "2014-12",
+    "deposit": 6.81,
+    "savings": 1.85,
+    "lending": 15.99,
+    "overdraft": 15.86
+   },
+   {
+    "month": "2014-11",
+    "deposit": 6.72,
+    "savings": 1.52,
+    "lending": 15.94,
+    "overdraft": 15.66
+   },
+   {
+    "month": "2014-10",
+    "deposit": 6.64,
+    "savings": 1.55,
+    "lending": 16.0,
+    "overdraft": 15.77
+   },
+   {
+    "month": "2014-09",
+    "deposit": 6.64,
+    "savings": 1.51,
+    "lending": 16.04,
+    "overdraft": 15.79
+   },
+   {
+    "month": "2014-08",
+    "deposit": 6.51,
+    "savings": 1.5,
+    "lending": 16.26,
+    "overdraft": 16.2
+   },
+   {
+    "month": "2014-07",
+    "deposit": 6.59,
+    "savings": 1.33,
+    "lending": 16.91,
+    "overdraft": 17.12
+   },
+   {
+    "month": "2014-06",
+    "deposit": 6.56,
+    "savings": 1.5,
+    "lending": 16.36,
+    "overdraft": 15.88
+   },
+   {
+    "month": "2014-05",
+    "deposit": 6.42,
+    "savings": 1.54,
+    "lending": 16.97,
+    "overdraft": 17.85
+   },
+   {
+    "month": "2014-04",
+    "deposit": 6.48,
+    "savings": 1.53,
+    "lending": 16.7,
+    "overdraft": 16.44
+   },
+   {
+    "month": "2014-03",
+    "deposit": 6.61,
+    "savings": 1.56,
+    "lending": 16.91,
+    "overdraft": 16.44
+   },
+   {
+    "month": "2014-02",
+    "deposit": 6.57,
+    "savings": 1.49,
+    "lending": 17.06,
+    "overdraft": 16.88
+   },
+   {
+    "month": "2014-01",
+    "deposit": 6.55,
+    "savings": 1.56,
+    "lending": 17.03,
+    "overdraft": 16.82
+   },
+   {
+    "month": "2013-12",
+    "deposit": 6.65,
+    "savings": 1.58,
+    "lending": 16.99,
+    "overdraft": 16.51
+   },
+   {
+    "month": "2013-11",
+    "deposit": 6.61,
+    "savings": 1.58,
+    "lending": 16.89,
+    "overdraft": 16.5
+   },
+   {
+    "month": "2013-10",
+    "deposit": 6.43,
+    "savings": 1.63,
+    "lending": 17.0,
+    "overdraft": 16.96
+   },
+   {
+    "month": "2013-09",
+    "deposit": 6.55,
+    "savings": 1.64,
+    "lending": 16.86,
+    "overdraft": 16.42
+   },
+   {
+    "month": "2013-08",
+    "deposit": 6.36,
+    "savings": 1.67,
+    "lending": 16.96,
+    "overdraft": 16.89
+   },
+   {
+    "month": "2013-07",
+    "deposit": 6.59,
+    "savings": 1.64,
+    "lending": 17.02,
+    "overdraft": 17.0
+   },
+   {
+    "month": "2013-06",
+    "deposit": 6.65,
+    "savings": 1.73,
+    "lending": 16.97,
+    "overdraft": 16.92
+   },
+   {
+    "month": "2013-05",
+    "deposit": 6.53,
+    "savings": 1.53,
+    "lending": 17.45,
+    "overdraft": 17.6
+   },
+   {
+    "month": "2013-04",
+    "deposit": 6.39,
+    "savings": 1.45,
+    "lending": 17.87,
+    "overdraft": 17.71
+   },
+   {
+    "month": "2013-03",
+    "deposit": 6.54,
+    "savings": 1.42,
+    "lending": 17.73,
+    "overdraft": 17.54
+   },
+   {
+    "month": "2013-02",
+    "deposit": 6.29,
+    "savings": 1.61,
+    "lending": 17.84,
+    "overdraft": 17.68
+   },
+   {
+    "month": "2013-01",
+    "deposit": 6.51,
+    "savings": 1.65,
+    "lending": 18.13,
+    "overdraft": 17.97
+   },
+   {
+    "month": "2012-12",
+    "deposit": 6.8,
+    "savings": 1.6,
+    "lending": 18.15,
+    "overdraft": 17.79
+   },
+   {
+    "month": "2012-11",
+    "deposit": 8.71,
+    "savings": 1.58,
+    "lending": 17.78,
+    "overdraft": 18.77
+   },
+   {
+    "month": "2012-10",
+    "deposit": 6.86,
+    "savings": 1.6,
+    "lending": 19.04,
+    "overdraft": 19.13
+   },
+   {
+    "month": "2012-09",
+    "deposit": 7.4,
+    "savings": 1.55,
+    "lending": 19.73,
+    "overdraft": 19.8
+   },
+   {
+    "month": "2012-08",
+    "deposit": 7.85,
+    "savings": 1.58,
+    "lending": 20.13,
+    "overdraft": 20.31
+   },
+   {
+    "month": "2012-07",
+    "deposit": 8.25,
+    "savings": 1.66,
+    "lending": 20.15,
+    "overdraft": 19.96
+   },
+   {
+    "month": "2012-06",
+    "deposit": 7.88,
+    "savings": 1.46,
+    "lending": 20.3,
+    "overdraft": 20.36
+   },
+   {
+    "month": "2012-05",
+    "deposit": 8.42,
+    "savings": 1.59,
+    "lending": 20.12,
+    "overdraft": 20.41
+   },
+   {
+    "month": "2012-04",
+    "deposit": 9.04,
+    "savings": 1.58,
+    "lending": 20.22,
+    "overdraft": 20.27
+   },
+   {
+    "month": "2012-03",
+    "deposit": 8.01,
+    "savings": 1.72,
+    "lending": 20.34,
+    "overdraft": 20.53
+   },
+   {
+    "month": "2012-02",
+    "deposit": 8.01,
+    "savings": 1.69,
+    "lending": 20.28,
+    "overdraft": 20.53
+   },
+   {
+    "month": "2012-01",
+    "deposit": 7.66,
+    "savings": 1.62,
+    "lending": 19.54,
+    "overdraft": 20.38
+   },
+   {
+    "month": "2011-12",
+    "deposit": 6.99,
+    "savings": 1.59,
+    "lending": 20.04,
+    "overdraft": 20.2
+   },
+   {
+    "month": "2011-11",
+    "deposit": 5.75,
+    "savings": 1.41,
+    "lending": 18.51,
+    "overdraft": 18.67
+   },
+   {
+    "month": "2011-10",
+    "deposit": 4.83,
+    "savings": 1.33,
+    "lending": 15.21,
+    "overdraft": 14.87
+   },
+   {
+    "month": "2011-09",
+    "deposit": 4.21,
+    "savings": 1.35,
+    "lending": 14.79,
+    "overdraft": 14.64
+   },
+   {
+    "month": "2011-08",
+    "deposit": 4.07,
+    "savings": 1.37,
+    "lending": 14.32,
+    "overdraft": 14.28
+   },
+   {
+    "month": "2011-07",
+    "deposit": 3.85,
+    "savings": 1.37,
+    "lending": 14.14,
+    "overdraft": 13.89
+   },
+   {
+    "month": "2011-06",
+    "deposit": 3.68,
+    "savings": 1.37,
+    "lending": 13.91,
+    "overdraft": 13.59
+   },
+   {
+    "month": "2011-05",
+    "deposit": 3.51,
+    "savings": 1.38,
+    "lending": 13.88,
+    "overdraft": 13.72
+   },
+   {
+    "month": "2011-04",
+    "deposit": 3.47,
+    "savings": 1.38,
+    "lending": 13.92,
+    "overdraft": 13.68
+   },
+   {
+    "month": "2011-03",
+    "deposit": 3.47,
+    "savings": 1.37,
+    "lending": 13.92,
+    "overdraft": 13.6
+   },
+   {
+    "month": "2011-02",
+    "deposit": 3.41,
+    "savings": 1.41,
+    "lending": 13.92,
+    "overdraft": 13.65
+   },
+   {
+    "month": "2011-01",
+    "deposit": 3.43,
+    "savings": 1.25,
+    "lending": 14.03,
+    "overdraft": 13.93
+   },
+   {
+    "month": "2010-12",
+    "deposit": 3.59,
+    "savings": 1.45,
+    "lending": 13.87,
+    "overdraft": 13.69
+   },
+   {
+    "month": "2010-11",
+    "deposit": 3.54,
+    "savings": 1.4,
+    "lending": 13.95,
+    "overdraft": 13.77
+   },
+   {
+    "month": "2010-10",
+    "deposit": 3.58,
+    "savings": 1.46,
+    "lending": 13.85,
+    "overdraft": 13.64
+   },
+   {
+    "month": "2010-09",
+    "deposit": 3.53,
+    "savings": 1.47,
+    "lending": 13.98,
+    "overdraft": 13.81
+   },
+   {
+    "month": "2010-08",
+    "deposit": 3.74,
+    "savings": 1.5,
+    "lending": 14.18,
+    "overdraft": 13.97
+   },
+   {
+    "month": "2010-07",
+    "deposit": 3.85,
+    "savings": 1.55,
+    "lending": 14.29,
+    "overdraft": 14.03
+   },
+   {
+    "month": "2010-06",
+    "deposit": 4.45,
+    "savings": 1.75,
+    "lending": 14.39,
+    "overdraft": 14.23
+   },
+   {
+    "month": "2010-05",
+    "deposit": 4.58,
+    "savings": 1.76,
+    "lending": 14.46,
+    "overdraft": 14.38
+   },
+   {
+    "month": "2010-04",
+    "deposit": 4.49,
+    "savings": 1.85,
+    "lending": 14.58,
+    "overdraft": 14.5
+   },
+   {
+    "month": "2010-03",
+    "deposit": 4.74,
+    "savings": 1.81,
+    "lending": 14.8,
+    "overdraft": 13.59
+   },
+   {
+    "month": "2010-02",
+    "deposit": 4.89,
+    "savings": 1.81,
+    "lending": 14.98,
+    "overdraft": 14.25
+   },
+   {
+    "month": "2010-01",
+    "deposit": 5.0,
+    "savings": 1.75,
+    "lending": 14.98,
+    "overdraft": 14.25
+   },
+   {
+    "month": "2009-12",
+    "deposit": 4.84,
+    "savings": 1.73,
+    "lending": 14.76,
+    "overdraft": 14.13
+   },
+   {
+    "month": "2009-11",
+    "deposit": 5.06,
+    "savings": 1.71,
+    "lending": 14.85,
+    "overdraft": 14.24
+   },
+   {
+    "month": "2009-10",
+    "deposit": 5.03,
+    "savings": 1.85,
+    "lending": 14.78,
+    "overdraft": 14.03
+   },
+   {
+    "month": "2009-09",
+    "deposit": 5.05,
+    "savings": 1.65,
+    "lending": 14.74,
+    "overdraft": 13.76
+   },
+   {
+    "month": "2009-08",
+    "deposit": 5.0,
+    "savings": 1.65,
+    "lending": 14.76,
+    "overdraft": 13.9
+   },
+   {
+    "month": "2009-07",
+    "deposit": 5.09,
+    "savings": 1.67,
+    "lending": 14.79,
+    "overdraft": 13.94
+   },
+   {
+    "month": "2009-06",
+    "deposit": 5.28,
+    "savings": 2.08,
+    "lending": 15.09,
+    "overdraft": 14.41
+   },
+   {
+    "month": "2009-05",
+    "deposit": 5.1,
+    "savings": 1.67,
+    "lending": 14.85,
+    "overdraft": 14.13
+   },
+   {
+    "month": "2009-04",
+    "deposit": 5.12,
+    "savings": 1.91,
+    "lending": 14.71,
+    "overdraft": 13.66
+   },
+   {
+    "month": "2009-03",
+    "deposit": 5.09,
+    "savings": 1.9,
+    "lending": 14.87,
+    "overdraft": 13.78
+   },
+   {
+    "month": "2009-02",
+    "deposit": 5.23,
+    "savings": 2.13,
+    "lending": 14.67,
+    "overdraft": 13.46
+   },
+   {
+    "month": "2009-01",
+    "deposit": 5.19,
+    "savings": 2.1,
+    "lending": 14.78,
+    "overdraft": 13.84
+   },
+   {
+    "month": "2008-12",
+    "deposit": 4.89,
+    "savings": 1.65,
+    "lending": 14.87,
+    "overdraft": 14.39
+   },
+   {
+    "month": "2008-11",
+    "deposit": 4.86,
+    "savings": 1.61,
+    "lending": 14.33,
+    "overdraft": 13.85
+   },
+   {
+    "month": "2008-10",
+    "deposit": 4.65,
+    "savings": 1.74,
+    "lending": 14.12,
+    "overdraft": 13.91
+   },
+   {
+    "month": "2008-09",
+    "deposit": 4.62,
+    "savings": 1.73,
+    "lending": 13.66,
+    "overdraft": 13.43
+   },
+   {
+    "month": "2008-08",
+    "deposit": 4.65,
+    "savings": 1.68,
+    "lending": 13.66,
+    "overdraft": 13.11
+   },
+   {
+    "month": "2008-07",
+    "deposit": 4.54,
+    "savings": 1.67,
+    "lending": 13.9,
+    "overdraft": 13.46
+   },
+   {
+    "month": "2008-06",
+    "deposit": 4.48,
+    "savings": 1.7,
+    "lending": 14.06,
+    "overdraft": 13.3
+   },
+   {
+    "month": "2008-05",
+    "deposit": 4.45,
+    "savings": 1.71,
+    "lending": 14.01,
+    "overdraft": 13.53
+   },
+   {
+    "month": "2008-04",
+    "deposit": 4.41,
+    "savings": 1.71,
+    "lending": 13.91,
+    "overdraft": 13.46
+   },
+   {
+    "month": "2008-03",
+    "deposit": 4.43,
+    "savings": 1.72,
+    "lending": 14.06,
+    "overdraft": 13.48
+   },
+   {
+    "month": "2008-02",
+    "deposit": 4.37,
+    "savings": 1.7,
+    "lending": 13.84,
+    "overdraft": 13.26
+   },
+   {
+    "month": "2008-01",
+    "deposit": 4.37,
+    "savings": 1.72,
+    "lending": 13.78,
+    "overdraft": 13.41
+   },
+   {
+    "month": "2007-12",
+    "deposit": 4.32,
+    "savings": 1.67,
+    "lending": 13.32,
+    "overdraft": 12.96
+   },
+   {
+    "month": "2007-11",
+    "deposit": 4.33,
+    "savings": 1.65,
+    "lending": 13.39,
+    "overdraft": 13.43
+   },
+   {
+    "month": "2007-10",
+    "deposit": 4.27,
+    "savings": 1.64,
+    "lending": 13.24,
+    "overdraft": 13.29
+   },
+   {
+    "month": "2007-09",
+    "deposit": 4.34,
+    "savings": 1.67,
+    "lending": 12.87,
+    "overdraft": 13.26
+   },
+   {
+    "month": "2007-08",
+    "deposit": 4.31,
+    "savings": 1.6,
+    "lending": 13.04,
+    "overdraft": 13.39
+   },
+   {
+    "month": "2007-07",
+    "deposit": 4.33,
+    "savings": 1.65,
+    "lending": 13.29,
+    "overdraft": 13.34
+   },
+   {
+    "month": "2007-06",
+    "deposit": 4.18,
+    "savings": 1.54,
+    "lending": 13.14,
+    "overdraft": 13.2
+   },
+   {
+    "month": "2007-05",
+    "deposit": 4.14,
+    "savings": 1.57,
+    "lending": 13.38,
+    "overdraft": 13.35
+   },
+   {
+    "month": "2007-04",
+    "deposit": 4.11,
+    "savings": 1.35,
+    "lending": 13.33,
+    "overdraft": 13.26
+   },
+   {
+    "month": "2007-03",
+    "deposit": 4.19,
+    "savings": 1.43,
+    "lending": 13.56,
+    "overdraft": 13.95
+   },
+   {
+    "month": "2007-02",
+    "deposit": 4.21,
+    "savings": 1.41,
+    "lending": 13.64,
+    "overdraft": 14.05
+   },
+   {
+    "month": "2007-01",
+    "deposit": 4.35,
+    "savings": 1.42,
+    "lending": 13.78,
+    "overdraft": 14.11
+   },
+   {
+    "month": "2006-12",
+    "deposit": 4.11,
+    "savings": 1.35,
+    "lending": 13.74,
+    "overdraft": 13.91
+   },
+   {
+    "month": "2006-11",
+    "deposit": 4.15,
+    "savings": 1.37,
+    "lending": 13.93,
+    "overdraft": 13.96
+   },
+   {
+    "month": "2006-10",
+    "deposit": 4.11,
+    "savings": 1.35,
+    "lending": 14.01,
+    "overdraft": 13.94
+   },
+   {
+    "month": "2006-09",
+    "deposit": 4.04,
+    "savings": 1.36,
+    "lending": 13.54,
+    "overdraft": 13.42
+   },
+   {
+    "month": "2006-08",
+    "deposit": 4.08,
+    "savings": 1.41,
+    "lending": 13.64,
+    "overdraft": 13.43
+   },
+   {
+    "month": "2006-07",
+    "deposit": 4.31,
+    "savings": 1.32,
+    "lending": 13.72,
+    "overdraft": 13.48
+   },
+   {
+    "month": "2006-06",
+    "deposit": 4.35,
+    "savings": 1.27,
+    "lending": 13.79,
+    "overdraft": 13.78
+   },
+   {
+    "month": "2006-05",
+    "deposit": 4.36,
+    "savings": 1.31,
+    "lending": 13.95,
+    "overdraft": 14.02
+   },
+   {
+    "month": "2006-04",
+    "deposit": 4.35,
+    "savings": 1.33,
+    "lending": 13.51,
+    "overdraft": 13.81
+   },
+   {
+    "month": "2006-03",
+    "deposit": 4.28,
+    "savings": 1.34,
+    "lending": 13.33,
+    "overdraft": 13.26
+   },
+   {
+    "month": "2006-02",
+    "deposit": 4.48,
+    "savings": 1.36,
+    "lending": 13.27,
+    "overdraft": 13.34
+   },
+   {
+    "month": "2006-01",
+    "deposit": 4.48,
+    "savings": 1.33,
+    "lending": 13.2,
+    "overdraft": 13.81
+   },
+   {
+    "month": "2005-12",
+    "deposit": 4.52,
+    "savings": 1.38,
+    "lending": 13.16,
+    "overdraft": 13.67
+   },
+   {
+    "month": "2005-11",
+    "deposit": 4.5,
+    "savings": 1.37,
+    "lending": 12.93,
+    "overdraft": 13.33
+   },
+   {
+    "month": "2005-10",
+    "deposit": 4.43,
+    "savings": 1.32,
+    "lending": 12.97,
+    "overdraft": 13.56
+   },
+   {
+    "month": "2005-09",
+    "deposit": 4.35,
+    "savings": 1.34,
+    "lending": 12.83,
+    "overdraft": 13.5
+   },
+   {
+    "month": "2005-08",
+    "deposit": 4.3,
+    "savings": 1.3,
+    "lending": 13.03,
+    "overdraft": 13.81
+   },
+   {
+    "month": "2005-07",
+    "deposit": 4.14,
+    "savings": 1.3,
+    "lending": 13.09,
+    "overdraft": 13.54
+   },
+   {
+    "month": "2005-06",
+    "deposit": 4.21,
+    "savings": 1.24,
+    "lending": 13.09,
+    "overdraft": 13.83
+   },
+   {
+    "month": "2005-05",
+    "deposit": 4.05,
+    "savings": 1.07,
+    "lending": 13.11,
+    "overdraft": 13.94
+   },
+   {
+    "month": "2005-04",
+    "deposit": 3.91,
+    "savings": 1.1,
+    "lending": 13.12,
+    "overdraft": 14.0
+   },
+   {
+    "month": "2005-03",
+    "deposit": 3.75,
+    "savings": 0.98,
+    "lending": 12.84,
+    "overdraft": 14.03
+   },
+   {
+    "month": "2005-02",
+    "deposit": 3.47,
+    "savings": 0.96,
+    "lending": 12.35,
+    "overdraft": 13.82
+   },
+   {
+    "month": "2005-01",
+    "deposit": 3.08,
+    "savings": 0.97,
+    "lending": 12.12,
+    "overdraft": 13.14
+   },
+   {
+    "month": "2004-12",
+    "deposit": 2.77,
+    "savings": 0.98,
+    "lending": 12.25,
+    "overdraft": 12.69
+   },
+   {
+    "month": "2004-11",
+    "deposit": 2.66,
+    "savings": 1.3,
+    "lending": 11.97,
+    "overdraft": 12.21
+   },
+   {
+    "month": "2004-10",
+    "deposit": 2.33,
+    "savings": 1.07,
+    "lending": 12.39,
+    "overdraft": 11.85
+   },
+   {
+    "month": "2004-09",
+    "deposit": 2.63,
+    "savings": 1.03,
+    "lending": 12.27,
+    "overdraft": 10.95
+   },
+   {
+    "month": "2004-08",
+    "deposit": 2.26,
+    "savings": 1.08,
+    "lending": 12.19,
+    "overdraft": 10.81
+   },
+   {
+    "month": "2004-07",
+    "deposit": 2.25,
+    "savings": 1.1,
+    "lending": 12.31,
+    "overdraft": 11.1
+   },
+   {
+    "month": "2004-06",
+    "deposit": 2.2,
+    "savings": 1.15,
+    "lending": 12.17,
+    "overdraft": 10.72
+   },
+   {
+    "month": "2004-05",
+    "deposit": 2.22,
+    "savings": 1.15,
+    "lending": 12.55,
+    "overdraft": 10.79
+   },
+   {
+    "month": "2004-04",
+    "deposit": 1.96,
+    "savings": 1.24,
+    "lending": 12.67,
+    "overdraft": 11.08
+   },
+   {
+    "month": "2004-03",
+    "deposit": 2.32,
+    "savings": 1.3,
+    "lending": 13.12,
+    "overdraft": 11.65
+   },
+   {
+    "month": "2004-02",
+    "deposit": 2.47,
+    "savings": 1.47,
+    "lending": 13.01,
+    "overdraft": 12.3
+   },
+   {
+    "month": "2004-01",
+    "deposit": 3.12,
+    "savings": 1.22,
+    "lending": 13.48,
+    "overdraft": 13.3
+   },
+   {
+    "month": "2003-12",
+    "deposit": 3.29,
+    "savings": 1.38,
+    "lending": 13.47,
+    "overdraft": 13.74
+   },
+   {
+    "month": "2003-11",
+    "deposit": 3.32,
+    "savings": 1.44,
+    "lending": 14.07,
+    "overdraft": 14.02
+   },
+   {
+    "month": "2003-10",
+    "deposit": 3.13,
+    "savings": 1.43,
+    "lending": 14.75,
+    "overdraft": 14.13
+   },
+   {
+    "month": "2003-09",
+    "deposit": 3.07,
+    "savings": 1.44,
+    "lending": 14.82,
+    "overdraft": 14.31
+   },
+   {
+    "month": "2003-08",
+    "deposit": 3.37,
+    "savings": 1.72,
+    "lending": 14.81,
+    "overdraft": 14.96
+   },
+   {
+    "month": "2003-07",
+    "deposit": 4.49,
+    "savings": 1.79,
+    "lending": 15.3,
+    "overdraft": 14.43
+   },
+   {
+    "month": "2003-06",
+    "deposit": 4.84,
+    "savings": 3.07,
+    "lending": 15.73,
+    "overdraft": 14.93
+   },
+   {
+    "month": "2003-05",
+    "deposit": 3.71,
+    "savings": 3.14,
+    "lending": 18.52,
+    "overdraft": 17.18
+   },
+   {
+    "month": "2003-04",
+    "deposit": 4.06,
+    "savings": 3.27,
+    "lending": 18.57,
+    "overdraft": 17.27
+   },
+   {
+    "month": "2003-03",
+    "deposit": 3.99,
+    "savings": 3.28,
+    "lending": 18.49,
+    "overdraft": 17.26
+   },
+   {
+    "month": "2003-02",
+    "deposit": 4.4,
+    "savings": 3.42,
+    "lending": 18.83,
+    "overdraft": 17.81
+   },
+   {
+    "month": "2003-01",
+    "deposit": 4.68,
+    "savings": 3.41,
+    "lending": 19.02,
+    "overdraft": 18.52
+   },
+   {
+    "month": "2002-12",
+    "deposit": 4.75,
+    "savings": 3.47,
+    "lending": 18.34,
+    "overdraft": 18.56
+   },
+   {
+    "month": "2002-11",
+    "deposit": 4.75,
+    "savings": 3.81,
+    "lending": 18.05,
+    "overdraft": 18.56
+   },
+   {
+    "month": "2002-10",
+    "deposit": 4.66,
+    "savings": 3.79,
+    "lending": 18.34,
+    "overdraft": 18.89
+   },
+   {
+    "month": "2002-09",
+    "deposit": 4.8,
+    "savings": 3.53,
+    "lending": 18.14,
+    "overdraft": 18.52
+   },
+   {
+    "month": "2002-08",
+    "deposit": 4.99,
+    "savings": 3.74,
+    "lending": 18.12,
+    "overdraft": 18.56
+   },
+   {
+    "month": "2002-07",
+    "deposit": 5.08,
+    "savings": 3.89,
+    "lending": 18.12,
+    "overdraft": 18.32
+   },
+   {
+    "month": "2002-06",
+    "deposit": 5.21,
+    "savings": 4.0,
+    "lending": 18.38,
+    "overdraft": 18.46
+   },
+   {
+    "month": "2002-05",
+    "deposit": 5.31,
+    "savings": 4.02,
+    "lending": 18.54,
+    "overdraft": 18.73
+   },
+   {
+    "month": "2002-04",
+    "deposit": 5.48,
+    "savings": 4.12,
+    "lending": 18.69,
+    "overdraft": 18.88
+   },
+   {
+    "month": "2002-03",
+    "deposit": 5.42,
+    "savings": 3.71,
+    "lending": 18.86,
+    "overdraft": 18.78
+   },
+   {
+    "month": "2002-02",
+    "deposit": 5.52,
+    "savings": 3.54,
+    "lending": 19.18,
+    "overdraft": 19.19
+   },
+   {
+    "month": "2002-01",
+    "deposit": 5.72,
+    "savings": 4.42,
+    "lending": 19.3,
+    "overdraft": 19.31
+   },
+   {
+    "month": "2001-12",
+    "deposit": 5.7,
+    "savings": 4.4,
+    "lending": 19.49,
+    "overdraft": 20.04
+   },
+   {
+    "month": "2001-11",
+    "deposit": 5.87,
+    "savings": 4.35,
+    "lending": 19.44,
+    "overdraft": 19.83
+   },
+   {
+    "month": "2001-10",
+    "deposit": 6.21,
+    "savings": 4.37,
+    "lending": 19.77,
+    "overdraft": 19.8
+   },
+   {
+    "month": "2001-09",
+    "deposit": 6.27,
+    "savings": 4.89,
+    "lending": 19.44,
+    "overdraft": 19.63
+   },
+   {
+    "month": "2001-08",
+    "deposit": 6.24,
+    "savings": 4.43,
+    "lending": 19.54,
+    "overdraft": 19.71
+   },
+   {
+    "month": "2001-07",
+    "deposit": 6.22,
+    "savings": 4.34,
+    "lending": 19.71,
+    "overdraft": 19.98
+   },
+   {
+    "month": "2001-06",
+    "deposit": 6.36,
+    "savings": 4.39,
+    "lending": 19.26,
+    "overdraft": 19.65
+   },
+   {
+    "month": "2001-05",
+    "deposit": 6.44,
+    "savings": 4.42,
+    "lending": 19.2,
+    "overdraft": 19.52
+   },
+   {
+    "month": "2001-04",
+    "deposit": 6.58,
+    "savings": 4.64,
+    "lending": 19.56,
+    "overdraft": 19.89
+   },
+   {
+    "month": "2001-03",
+    "deposit": 6.92,
+    "savings": 4.66,
+    "lending": 20.19,
+    "overdraft": 20.12
+   },
+   {
+    "month": "2001-02",
+    "deposit": 6.55,
+    "savings": 4.63,
+    "lending": 20.13,
+    "overdraft": 20.48
+   },
+   {
+    "month": "2001-01",
+    "deposit": 6.54,
+    "savings": 4.67,
+    "lending": 20.27,
+    "overdraft": 20.18
+   },
+   {
+    "month": "2000-12",
+    "deposit": 6.22,
+    "savings": 4.51,
+    "lending": 19.6,
+    "overdraft": 19.73
+   },
+   {
+    "month": "2000-11",
+    "deposit": 6.2,
+    "savings": 4.36,
+    "lending": 19.79,
+    "overdraft": 20.1
+   },
+   {
+    "month": "2000-10",
+    "deposit": 6.22,
+    "savings": 4.31,
+    "lending": 20.22,
+    "overdraft": 19.94
+   },
+   {
+    "month": "2000-09",
+    "deposit": 6.22,
+    "savings": 4.36,
+    "lending": 20.57,
+    "overdraft": 20.58
+   },
+   {
+    "month": "2000-08",
+    "deposit": 6.26,
+    "savings": 4.53,
+    "lending": 21.23,
+    "overdraft": 20.93
+   },
+   {
+    "month": "2000-07",
+    "deposit": 6.67,
+    "savings": 4.71,
+    "lending": 22.39,
+    "overdraft": 22.09
+   },
+   {
+    "month": "2000-06",
+    "deposit": 7.01,
+    "savings": 4.89,
+    "lending": 23.11,
+    "overdraft": 22.86
+   },
+   {
+    "month": "2000-05",
+    "deposit": 7.21,
+    "savings": 4.77,
+    "lending": 23.4,
+    "overdraft": 23.93
+   },
+   {
+    "month": "2000-04",
+    "deposit": 7.61,
+    "savings": 5.3,
+    "lending": 23.44,
+    "overdraft": 24.0
+   },
+   {
+    "month": "2000-03",
+    "deposit": 8.01,
+    "savings": 5.14,
+    "lending": 23.76,
+    "overdraft": 24.09
+   },
+   {
+    "month": "2000-02",
+    "deposit": 9.17,
+    "savings": 6.04,
+    "lending": 25.39,
+    "overdraft": 25.67
+   },
+   {
+    "month": "2000-01",
+    "deposit": 10.38,
+    "savings": 6.42,
+    "lending": 25.14,
+    "overdraft": 25.91
+   }
+  ]
+ },
+ "money_market_funds": {
+  "note": "Each yield is read from the fund manager's own website at the time shown; funds publishing yields only as images or PDFs are not yet included.",
+  "as_of": "2026-10-01T10:20:22+00:00",
+  "rows": [
+   {
+    "name": "Etica Money Market Fund (KES)",
+    "manager": "Etica Capital",
+    "source": "https://www.eticacap.com/",
+    "status": "ok",
+    "daily_yield": null,
+    "effective_annual_yield": 17.55
+   },
+   {
+    "name": "Zimele Fixed Income Fund (Savings Plan)",
+    "manager": "Zimele Asset Management",
+    "source": "https://www.zimele.co.ke/",
+    "status": "ok",
+    "daily_yield": 12.65,
+    "effective_annual_yield": 13.41
+   },
+   {
+    "name": "Madison Money Market Fund",
+    "manager": "Madison Investment Managers",
+    "source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
+    "status": "ok",
+    "daily_yield": 10.11,
+    "effective_annual_yield": 10.64
+   },
+   {
+    "name": "Kasha Money Market Fund",
+    "manager": "Orient Asset Managers",
+    "source": "https://www.orientasset.co.ke/",
+    "status": "ok",
+    "daily_yield": 9.9,
+    "effective_annual_yield": 10.41
+   }
+  ],
+  "unread": []
+ }
+}

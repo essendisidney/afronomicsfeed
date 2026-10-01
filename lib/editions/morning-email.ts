@@ -79,15 +79,14 @@ export function morningEmailHtml(note: MorningNote, unsubscribeUrl = `${site.url
   ${head}
   ${standfirst}
   ${section("Overnight, against the dollar", fxRows, "/markets", "All rates")}
-  ${section(note.auctions.length ? "Auction results in" : "", auctionRows + (due ? `<tr><td colspan="3">${due}</td></tr>` : ""), "/markets/tbills", "T-bill monitor")}
-  ${!note.auctions.length && due ? `<tr><td style="padding:12px 28px 0;">${due}</td></tr>` : ""}
+  ${note.auctions.length ? section("Auction results in", auctionRows + (due ? `<tr><td colspan="3">${due}</td></tr>` : ""), "/markets/tbills", "T-bill monitor") : due ? `<tr><td style="padding:12px 28px 0;">${due}</td></tr>` : ""}
   ${section("Headlines", stories, "/news", "The Wire")}
   <tr><td style="padding:18px 28px 6px;">
     <div style="${base}font-size:13px;font-weight:700;color:#5b3fd6;">364-day bills, latest</div>
     <table role="presentation" cellpadding="0" cellspacing="0"><tr>${board}</tr></table>
   </td></tr>
   <tr><td style="padding:22px 28px 26px;">
-    <a href="${link("/morning")}" style="display:inline-block;background:#121826;color:#f5f6f4;${base}font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;text-decoration:none;">Open the full Morning</a>
+    <a href="${link("/morning")}" style="display:inline-block;background:#121826;${base}color:#f5f6f4;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;text-decoration:none;">Open the full Morning</a>
   </td></tr>
   <tr><td style="background:#ebedea;padding:16px 28px;${base}${muted}">
     Every figure links to its source. Compiled by Afronomics from central-bank results, the daily FX reference and publisher feeds, at ${esc(morningShortDate.format(new Date(note.generatedAt)))} ${new Date(note.generatedAt).toISOString().slice(11, 16)} UTC.

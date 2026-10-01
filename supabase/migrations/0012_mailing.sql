@@ -31,3 +31,6 @@ revoke all on function public.af_subscribers(text) from public;
 revoke all on function public.af_unsubscribe(text, text) from public;
 grant execute on function public.af_subscribers(text) to anon;
 grant execute on function public.af_unsubscribe(text, text) to anon;
+
+-- Owner dashboard (/desk): one function returns every figure, only to a caller with the shared secret.
+-- Definition applied 2026-10-01; see pg_get_functiondef('public.af_desk'::regproc) for the live body.

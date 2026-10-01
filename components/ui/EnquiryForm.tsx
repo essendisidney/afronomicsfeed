@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 const options = [
   { value: "sponsorship", label: "Sponsorship / advertising" },
   { value: "licensing", label: "Data licensing / API" },
+  { value: "pack", label: "Investment Committee Pack" },
   { value: "research", label: "Commissioned research" },
   { value: "access", label: "Pro or Team access" },
   { value: "widgets", label: "Branded widgets" },

@@ -3,7 +3,7 @@ import { rpc } from "@/lib/store";
 export const runtime = "nodejs";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const interests = new Set(["sponsorship", "licensing", "research", "access", "widgets", "other"]);
+const interests = new Set(["sponsorship", "licensing", "pack", "research", "access", "widgets", "other"]);
 
 /** Commercial enquiries (sponsorship, data licensing, research, access). Stored in `leads` (migration 0008). */
 export async function POST(request: Request) {

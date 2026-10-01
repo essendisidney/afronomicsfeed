@@ -29,6 +29,7 @@ export const nav = [
 ] as const;
 
 export const utilityNav = [
+  { href: "/morning", label: "Morning" },
   { href: "/weekly", label: "Weekly" },
   { href: "/signals", label: "Signals" },
   { href: "/method", label: "Sources" },
@@ -65,6 +66,7 @@ export const footerGroups = [
     title: "Analysis",
     links: [
       { href: "/brief", label: "Briefs" },
+      { href: "/morning", label: "The Morning" },
       { href: "/weekly", label: "Weekly" },
       { href: "/explainers", label: "Explainers" },
       { href: "/archive", label: "Archive" },

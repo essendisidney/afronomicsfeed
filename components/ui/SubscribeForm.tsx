@@ -32,7 +32,7 @@ export function SubscribeForm({ tone = "paper" }: { tone?: "paper" | "night" }) 
       const body = (await response.json().catch(() => ({}))) as { ok?: boolean; reason?: string };
       if (response.ok && body.ok) {
         setState("done");
-        setMessage("You’re on the list. The next issue lands Monday.");
+        setMessage("You’re on the list. The next Morning lands at 7:00 on the next weekday.");
         setEmail("");
       } else {
         setState("error");
@@ -86,7 +86,7 @@ export function SubscribeForm({ tone = "paper" }: { tone?: "paper" | "night" }) 
         disabled={state === "pending"}
         className={`rounded-full px-6 py-3 text-[15px] font-semibold disabled:opacity-60 ${night ? "bg-accent text-night hover:bg-gold-soft" : "bg-ink text-paper hover:bg-forest"}`}
       >
-        {state === "pending" ? "Adding you" : "Get the weekly"}
+        {state === "pending" ? "Adding you" : "Get the Morning"}
       </button>
       {message ? (
         <p role="status" className={`text-sm ${state === "error" ? "text-gold-soft" : night ? "text-night-soft" : "text-forest"}`}>

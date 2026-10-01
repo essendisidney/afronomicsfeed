@@ -1,0 +1,45 @@
+# Weekdays 07:00 Nairobi: snapshot the Morning (for the LinkedIn agent) and send it to subscribers.
+# Sending needs AF_CRON_SECRET (same value as the Vercel env var). Without RESEND_API_KEY on Vercel the
+# send step reports "not set" and nothing goes out; the snapshot still lands.
+name: Morning note
+
+on:
+  schedule:
+    - cron: "0 4 * * 1-5" # 07:00 Nairobi
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  morning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Snapshot the note from the live site
+        run: |
+          set -euo pipefail
+          base="https://www.afronomicsfeed.com/api/edition/morning"
+          curl -fsS --retry 4 --retry-delay 20 -m 120 "$base" -o note.json
+          day=$(python3 -c "import json;print(json.load(open('note.json'))['day'])")
+          mkdir -p "editions/morning/$day" editions/morning/latest
+          mv note.json "editions/morning/$day/note.json"
+          curl -fsS --retry 4 --retry-delay 20 -m 120 "$base?format=linkedin" -o "editions/morning/$day/linkedin.txt"
+          cp "editions/morning/$day/note.json" "editions/morning/$day/linkedin.txt" editions/morning/latest/
+          echo "$day" > editions/morning/latest/DAY
+      - name: Send to subscribers
+        env:
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
+        run: |
+          if [ -z "$AF_CRON_SECRET" ]; then echo "AF_CRON_SECRET not set; skipping send"; exit 0; fi
+          curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" \
+            https://www.afronomicsfeed.com/api/send/morning | tee editions/morning/latest/send.json
+      - name: Commit
+        run: |
+          git config user.name "afronomics-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add editions
+          if git diff --cached --quiet; then echo "Unchanged."; exit 0; fi
+          git commit -m "Morning note $(cat editions/morning/latest/DAY)"
+          git push

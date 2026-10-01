@@ -5,24 +5,33 @@ import { SubscribeForm } from "@/components/ui/SubscribeForm";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "The Afronomics Weekly — free newsletter",
-  description: "Africa’s markets, economies and capital flows in one Monday email: the prints that moved, new DFI approvals, and what to watch.",
+  title: "The Afronomics Morning and Weekly — free newsletters",
+  description: "Africa’s markets before 7am every weekday, and the week in 54 economies every Monday. Free, every figure linked to its source.",
   alternates: { canonical: `${site.url}/subscribe` },
 };
 
-export default function SubscribePage() {
+export default async function SubscribePage({ searchParams }: { searchParams: Promise<{ unsubscribed?: string }> }) {
+  const { unsubscribed } = await searchParams;
   return (
     <PageShell
       crumbs={[{ href: "/", label: "Home" }, { label: "Newsletter" }]}
-      kicker="Free · every Monday"
-      title="The Afronomics Weekly"
-      lede={<p>Five minutes on 54 economies, sent Monday morning East Africa time.</p>}
+      kicker="Free · every weekday at 7:00 and every Monday"
+      title="The Afronomics Morning and Weekly"
+      lede={
+        <p>
+          The Morning: Africa’s markets before 7am, every weekday, East Africa time. The Weekly: five minutes on 54 economies, every Monday. One sign-up, both
+          notes.
+        </p>
+      }
     >
+      {unsubscribed ? (
+        <p className="mb-6 rounded-2xl border border-rule bg-surface px-5 py-4 text-sm text-ink">You’re unsubscribed. No more email from us unless you sign up again.</p>
+      ) : null}
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="border border-rule bg-paper-2 p-6">
+        <div className="rounded-2xl border border-rule bg-paper-2 p-6">
           <SubscribeForm />
           <p className="mt-4 text-xs leading-5 text-muted">
-            One email a week. Unsubscribe from any issue. We never sell or share your address — see the{" "}
+            One email each weekday morning and one on Monday. Unsubscribe from any issue. We never sell or share your address — see the{" "}
             <Link href="/legal/privacy" className="underline underline-offset-2">
               privacy notice
             </Link>
@@ -30,7 +39,19 @@ export default function SubscribePage() {
           </p>
         </div>
         <div className="article-body">
-          <h2>In every issue</h2>
+          <h2>The Morning, every weekday</h2>
+          <ul>
+            <li>
+              <strong>Overnight</strong> — every African currency against the dollar, and which moved.
+            </li>
+            <li>
+              <strong>Auctions</strong> — Treasury bill results that landed since yesterday, across ten markets, and what is due today.
+            </li>
+            <li>
+              <strong>Headlines</strong> — the handful that matter, from the publishers that broke them.
+            </li>
+          </ul>
+          <h2>The Weekly, every Monday</h2>
           <ul>
             <li>
               <strong>Currencies</strong> — the week’s moves against the dollar, and which central bank acted.

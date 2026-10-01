@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/markets/kenya-bonds", "daily", 0.9),
     page("/markets/tbills", "daily", 0.9),
     page("/markets/borrowing-costs", "daily", 0.9),
+    page("/morning", "hourly", 0.9),
     page("/developers", "monthly", 0.6),
     page("/markets/tbills/nigeria", "daily", 0.8),
     page("/markets/tbills/ghana", "daily", 0.8),

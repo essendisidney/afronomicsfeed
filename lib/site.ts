@@ -33,7 +33,7 @@ export const utilityNav = [
   { href: "/alerts", label: "Alerts" },
   { href: "/weekly", label: "Weekly" },
   { href: "/signals", label: "Signals" },
-  { href: "/method", label: "Sources" },
+  { href: "/reference", label: "Reference" },
 ] as const;
 
 export const footerGroups = [
@@ -63,6 +63,7 @@ export const footerGroups = [
       { href: "/widgets", label: "Free widgets" },
       { href: "/licensing", label: "Data licensing" },
       { href: "/method", label: "Sources & method" },
+      { href: "/reference", label: "The reference" },
     ],
   },
   {

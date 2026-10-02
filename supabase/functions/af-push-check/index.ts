@@ -38,6 +38,8 @@ Deno.serve(async () => {
     const last = seen.get(m.market);
     if (last !== h.date) {
       await db.from("af_push_state").upsert({ market: m.market, last_date: h.date, last_rate: h.rate, updated_at: new Date().toISOString() });
+      // Timeliness record: the first time this result was seen on the site (public at /reference).
+      await db.from("af_seen").upsert({ market: m.market, result_date: h.date, rate: h.rate, first_seen_at: new Date().toISOString(), kind: "live" }, { onConflict: "market,result_date", ignoreDuplicates: true });
       if (last && h.date > last) moved.push({ market: m.market, text: h.text });
     }
   }

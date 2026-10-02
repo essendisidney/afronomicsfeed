@@ -15,3 +15,6 @@ create table if not exists public.af_jobs (
   created_at timestamptz not null default now()
 );
 alter table public.af_jobs enable row level security;
+
+-- 2026-10-02: af_seen (timeliness record), af_timeliness(), af_corrections + af_corrections(), af_correction_add(p_secret, ...).
+-- Applied via MCP as migration timeliness_and_corrections; see pg_get_functiondef for bodies. af-push-check upserts af_seen.

@@ -33,6 +33,9 @@ export function CiteBlock({ title, path, publisher, csv }: { title: string; path
         <Link href="/developers" className="rounded-full border border-rule px-3 py-1.5 text-[13px] font-medium text-ink-soft hover:border-gold">
           Use the data API
         </Link>
+        <Link href="/reference" className="rounded-full border border-rule px-3 py-1.5 text-[13px] font-medium text-ink-soft hover:border-gold">
+          Definitions, timeliness and corrections
+        </Link>
       </div>
     </section>
   );

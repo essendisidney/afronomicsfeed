@@ -20,6 +20,12 @@ export default function MethodPage() {
       title="Where every number comes from"
       lede="Afronomics does not type numbers in by hand. Every figure is read from a named publisher, stamped with its year or time, and linked back to its source."
     >
+      <p>
+        For the Treasury bill datasets and the Sovereign Bill Index, the full citation record — definitions market by market, stable URLs, the
+        timeliness log and the corrections log — is on{" "}
+        <Link href="/reference">the reference page</Link>.
+      </p>
+
       <h2>The rule</h2>
       <p>
         A number appears on Afronomics only when a publisher has printed it. If the publisher has no value for a country, the cell is blank and

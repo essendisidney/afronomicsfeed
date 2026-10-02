@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AuctionNav, StoryBody } from "@/components/data/AuctionStory";
+import { BondMeaning } from "@/components/data/BondMeaning";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
@@ -56,6 +57,7 @@ export default async function BondAuctionPage({ params }: Props) {
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <StoryBody paragraphs={story.paragraphs} />
+      <BondMeaning rows={story.rows} />
 
       <section className="mt-12">
         <SectionTitle kicker="Results" title="By bond" />

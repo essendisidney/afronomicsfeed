@@ -45,6 +45,15 @@ export function morningEmailHtml(note: MorningNote, unsubscribeUrl = `${site.url
       </tr>`,
     )
     .join("");
+  const bondRows = note.bonds
+    .map(
+      (b) => `<tr>
+        <td style="${row}${base}"><a href="${link(`/markets/kenya-bonds/${b.date}`)}" style="color:#121826;text-decoration:none;font-weight:600;">Kenya ${esc(b.issue)}</a> ${b.years.toFixed(1)}y</td>
+        <td align="right" style="${row}${base}font-variant-numeric:tabular-nums;">${b.rate.toFixed(2)}%</td>
+        <td align="right" style="${row}${base}color:#636b7d;">${b.coupon == null ? "" : `coupon ${b.coupon.toFixed(2)}%`}</td>
+      </tr>`,
+    )
+    .join("");
   const due = note.due.length ? `<p style="${base}${muted}margin:10px 0 0;">Due: ${note.due.map((d) => `${esc(d.market.country)} (${d.expected === note.day ? "today" : "tomorrow"})`).join(", ")}.</p>` : "";
   const stories = note.stories
     .slice(0, 5)
@@ -80,6 +89,7 @@ export function morningEmailHtml(note: MorningNote, unsubscribeUrl = `${site.url
   ${standfirst}
   ${section("Overnight, against the dollar", fxRows, "/markets", "All rates")}
   ${note.auctions.length ? section("Auction results in", auctionRows + (due ? `<tr><td colspan="3">${due}</td></tr>` : ""), "/markets/tbills", "T-bill monitor") : due ? `<tr><td style="padding:12px 28px 0;">${due}</td></tr>` : ""}
+  ${section("Bond auctions settled", bondRows, "/markets/kenya-bonds", "Kenya bonds")}
   ${section("Headlines", stories, "/news", "The Wire")}
   <tr><td style="padding:18px 28px 6px;">
     <div style="${base}font-size:13px;font-weight:700;color:#5b3fd6;">364-day bills, latest</div>

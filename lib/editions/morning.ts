@@ -2,6 +2,7 @@ import { rpcRead } from "@/lib/store";
 import { auctionCalendar } from "@/lib/data/bill-measures";
 import { currencyName, loadFxQuote } from "@/lib/data/fx";
 import { billMarkets, loadBillMarket, type BillMarket } from "@/lib/data/sovereign-bills";
+import { loadBonds, yearsToMaturity } from "@/lib/data/kenya-bonds";
 import { loadWire, type WireDesk, type WireItem } from "@/lib/data/wire";
 
 /**
@@ -16,6 +17,7 @@ const NAIROBI = 3 * 3600000;
 export type MorningFx = { code: string; name: string; now: number; prev: number; changePct: number; prevDay: string };
 export type MorningAuction = { market: BillMarket; date: string; tenor: number; rate: number; bps: number | null; source: string };
 export type MorningDue = { market: BillMarket; expected: string };
+export type MorningBond = { date: string; issue: string; years: number; rate: number; coupon: number | null; accepted: number | null; bidToCover: number | null; source: string };
 
 export type MorningNote = {
   day: string; // YYYY-MM-DD, Nairobi
@@ -25,6 +27,7 @@ export type MorningNote = {
   due: MorningDue[]; // markets expected to report today or tomorrow
   stories: WireItem[];
   board: { market: BillMarket; rate: number; date: string }[]; // latest 364-day rate per market, for the strip
+  bonds: MorningBond[]; // Kenya bond auctions settled since the last note
 };
 
 export function nairobiDay(now: number) {
@@ -104,10 +107,14 @@ export async function buildMorningNote(now: number): Promise<MorningNote> {
     }
   }
 
+  const bonds: MorningBond[] = loadBonds()
+    .rows.filter((r) => r.value_date >= since && r.value_date <= day && r.kind !== "buyback")
+    .map((r) => ({ date: r.value_date, issue: r.issue, years: yearsToMaturity(r), rate: r.weighted_avg_rate, coupon: r.coupon, accepted: r.accepted_kes_m, bidToCover: r.bid_to_cover, source: r.source }));
+
   const tomorrow = new Date(now + DAY + NAIROBI).toISOString().slice(0, 10);
   const due = auctionCalendar(new Date(now)).filter((c) => c.expected === day || c.expected === tomorrow).map((c) => ({ market: c.market, expected: c.expected }));
 
-  return { day, generatedAt: new Date(now).toISOString(), fx, auctions, due, stories: pickStories(wire, now), board };
+  return { day, generatedAt: new Date(now).toISOString(), fx, auctions, due, stories: pickStories(wire, now), board, bonds };
 }
 
 const longDate = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
@@ -121,6 +128,10 @@ export function morningLines(note: MorningNote): string[] {
   if (lead) {
     const move = lead.bps == null ? "" : lead.bps === 0 ? ", unchanged" : `, ${lead.bps > 0 ? "up" : "down"} ${Math.abs(lead.bps)} bps`;
     lines.push(`${lead.market.country}’s ${lead.tenor}-day Treasury bill cleared at ${lead.rate.toFixed(2)}%${move}.`);
+  }
+  const bond = note.bonds[0];
+  if (bond) {
+    lines.push(`Kenya’s ${bond.issue} bond (${bond.years.toFixed(1)} years) cleared at ${bond.rate.toFixed(2)}%${bond.bidToCover ? `, ${bond.bidToCover.toFixed(2)}× covered` : ""}.`);
   }
   const fx = note.fx.moves[0];
   if (fx && Math.abs(fx.changePct) >= 0.15) {
@@ -153,11 +164,13 @@ export function morningText(note: MorningNote, utm = "utm_source=linkedin&utm_me
     .map((s) => `• ${s.title} (${s.publisher})`)
     .join("\n");
   const due = note.due.map((d) => `• ${d.market.country}: ${d.expected === note.day ? "today" : "tomorrow"}`).join("\n");
+  const bonds = note.bonds.map((b) => `• Kenya ${b.issue} (${b.years.toFixed(1)}y): ${b.rate.toFixed(2)}%${b.coupon != null ? `, coupon ${b.coupon.toFixed(2)}%` : ""}`).join("\n");
   return [
     morningTitle(note),
     morningLines(note).join(" "),
     fx ? `Overnight, against the dollar\n${fx}` : "",
     auctions ? `Auction results in\n${auctions}` : "",
+    bonds ? `Bond auctions settled\n${bonds}` : "",
     due ? `Due\n${due}` : "",
     stories ? `Headlines\n${stories}` : "",
     `Numbers, charts and sources: https://www.afronomicsfeed.com/morning?${utm}`,

@@ -120,6 +120,34 @@ export default async function MorningPage() {
               </tbody>
             </table>
           ) : null}
+          {note.bonds.length ? (
+            <table className="data-table mt-4">
+              <thead>
+                <tr>
+                  <th>Kenya bond</th>
+                  <th className="text-right">Years</th>
+                  <th className="text-right">Yield</th>
+                  <th className="text-right">Coupon</th>
+                  <th className="text-right">Cover</th>
+                </tr>
+              </thead>
+              <tbody>
+                {note.bonds.map((b) => (
+                  <tr key={`${b.date}-${b.issue}`}>
+                    <td>
+                      <Link href={`/markets/kenya-bonds/${b.date}`} className="font-medium hover:text-forest">
+                        {b.issue}
+                      </Link>
+                    </td>
+                    <td className="text-right text-sm">{b.years.toFixed(1)}</td>
+                    <td className="text-right text-sm">{b.rate.toFixed(2)}%</td>
+                    <td className="text-right text-sm">{b.coupon == null ? "—" : `${b.coupon.toFixed(2)}%`}</td>
+                    <td className="text-right text-sm">{b.bidToCover == null ? "—" : `${b.bidToCover.toFixed(2)}×`}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : null}
           {note.due.length ? (
             <p className="mt-4 text-sm text-ink-soft">
               Due: {note.due.map((d) => `${d.market.country} (${d.expected === note.day ? "today" : "tomorrow"})`).join(", ")}.{" "}

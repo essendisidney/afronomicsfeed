@@ -8,6 +8,7 @@ import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { paystackConfigured } from "@/lib/billing/paystack";
 import { chargeLabel } from "@/lib/billing/plans";
 import { site } from "@/lib/site";
+import { billMarkets } from "@/lib/data/sovereign-bills";
 
 export const metadata: Metadata = {
   title: "The Investment Committee Pack — African rates, Kenya’s curve and the month ahead, ready to table",
@@ -59,6 +60,23 @@ export default async function PackPage({ searchParams }: { searchParams: Promise
           </li>
         ))}
       </ol>
+
+      <section className="mt-14">
+        <SectionTitle kicker="Every market" title="The same pack for ten markets" />
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-ink-soft">
+          Kenya’s pack carries the yield curve, bonds and the shilling comparison. Every other market on the monitor has its own: that market’s bills, real
+          yield, demand, currency and next-auction date up front, then the ten-market view and the index. Open a sample and print to PDF.
+        </p>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {billMarkets.map((m) => (
+            <li key={m.slug}>
+              <a href={m.slug === "kenya" ? "/pack/sample" : `/pack/${m.slug}/sample`} target="_blank" rel="noopener" className="inline-block rounded-full border border-rule bg-surface px-4 py-1.5 text-[13px] font-medium text-ink hover:border-accent">
+                {m.country} pack
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="mt-14">
         <SectionTitle kicker="Terms" title="Priced for institutions, not individuals" />

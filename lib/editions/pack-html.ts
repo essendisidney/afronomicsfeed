@@ -7,13 +7,13 @@ import { site } from "@/lib/site";
  * public/samples is made the same way.
  */
 
-const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const pct = (v: number | null | undefined, d = 2) => (v == null ? "—" : `${v.toFixed(d)}%`);
-const signed = (v: number | null | undefined, d = 2, unit = "") => (v == null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : "±"}${Math.abs(v).toFixed(d)}${unit}`);
-const d = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
-const dm = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+export const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+export const pct = (v: number | null | undefined, d = 2) => (v == null ? "—" : `${v.toFixed(d)}%`);
+export const signed = (v: number | null | undefined, d = 2, unit = "") => (v == null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : "±"}${Math.abs(v).toFixed(d)}${unit}`);
+export const d = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+export const dm = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 
-function spark(points: { date: string; rate: number }[], w = 160, h = 36) {
+export function spark(points: { date: string; rate: number }[], w = 160, h = 36) {
   if (points.length < 2) return "";
   const min = Math.min(...points.map((p) => p.rate));
   const max = Math.max(...points.map((p) => p.rate));
@@ -39,6 +39,33 @@ function curveChart(curve: Pack["kenya"]["curve"], w = 700, h = 220) {
   const dots = curve.map((p) => `<circle cx="${x(p.years).toFixed(1)}" cy="${y(p.rate).toFixed(1)}" r="3" fill="${p.kind === "T-bill" ? "#5b3fd6" : "#26335a"}"><title>${esc(p.label)} ${p.rate.toFixed(3)}% (${esc(p.date)})</title></circle>`);
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="max-width:100%">${ticks.join("")}${xt.join("")}<path d="${path}" fill="none" stroke="#26335a" stroke-width="2"/>${dots.join("")}</svg>`;
 }
+
+export const packCss = `
+@page { size: A4; margin: 14mm 14mm 16mm; }
+body { font-family: Archivo, "Helvetica Neue", Arial, sans-serif; color: #121826; margin: 0; background: #fff; font-size: 11.5px; line-height: 1.45; }
+.page { max-width: 190mm; margin: 0 auto; padding: 10mm 0; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.cover { background: #0e1524; color: #f5f6f4; padding: 22mm 16mm; border-radius: 12px; min-height: 240mm; display: flex; flex-direction: column; justify-content: space-between; }
+.brand { font-weight: 800; letter-spacing: 2px; font-size: 16px; } .brand span { color: #a08cff; font-size: 10px; letter-spacing: 4px; margin-left: 8px; }
+h1 { font-size: 40px; line-height: 1.02; margin: 20px 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+h2 { font-size: 20px; margin: 0 0 4px; font-weight: 700; letter-spacing: -0.2px; }
+h3 { font-size: 13px; margin: 18px 0 6px; color: #5b3fd6; font-weight: 700; }
+.lede { font-size: 14px; color: #c3c8d4; max-width: 120mm; }
+.head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #121826; padding-bottom: 6px; margin-bottom: 10px; }
+.head .muted { font-size: 11px; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-size: 10px; color: #636b7d; font-weight: 600; padding: 4px 6px; border-bottom: 1px solid #d9dcd7; }
+td { padding: 5px 6px; border-bottom: 1px solid #e8eae6; vertical-align: top; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.muted { color: #636b7d; } .small { font-size: 10px; } .up { color: #0f7f57; } .down { color: #c2352b; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 8px 0 14px; }
+.kpi { border: 1px solid #d9dcd7; border-radius: 10px; padding: 10px 12px; } .kpi b { display: block; font-size: 22px; font-weight: 700; } .kpi span { font-size: 10px; color: #636b7d; }
+.note { font-size: 10px; color: #636b7d; margin-top: 6px; }
+.foot { position: running(footer); font-size: 9px; color: #636b7d; }
+.footer { display: flex; justify-content: space-between; font-size: 9px; color: #636b7d; border-top: 1px solid #d9dcd7; padding-top: 6px; margin-top: 18px; }
+@media screen { body { background: #ebedea; } .page { background: #fff; padding: 12mm; margin: 8mm auto; border-radius: 10px; box-shadow: 0 10px 40px -24px rgba(0,0,0,.4); } }
+`;
 
 export function packHtml(pack: Pack, opts: { client?: string; sample?: boolean } = {}) {
   const client = opts.client ?? "Sample";
@@ -75,32 +102,7 @@ export function packHtml(pack: Pack, opts: { client?: string; sample?: boolean }
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Afronomics Investment Committee Pack, ${esc(pack.month)}</title>
 <meta name="robots" content="noindex">
-<style>
-@page { size: A4; margin: 14mm 14mm 16mm; }
-body { font-family: Archivo, "Helvetica Neue", Arial, sans-serif; color: #121826; margin: 0; background: #fff; font-size: 11.5px; line-height: 1.45; }
-.page { max-width: 190mm; margin: 0 auto; padding: 10mm 0; page-break-after: always; }
-.page:last-child { page-break-after: auto; }
-.cover { background: #0e1524; color: #f5f6f4; padding: 22mm 16mm; border-radius: 12px; min-height: 240mm; display: flex; flex-direction: column; justify-content: space-between; }
-.brand { font-weight: 800; letter-spacing: 2px; font-size: 16px; } .brand span { color: #a08cff; font-size: 10px; letter-spacing: 4px; margin-left: 8px; }
-h1 { font-size: 40px; line-height: 1.02; margin: 20px 0 10px; font-weight: 700; letter-spacing: -0.5px; }
-h2 { font-size: 20px; margin: 0 0 4px; font-weight: 700; letter-spacing: -0.2px; }
-h3 { font-size: 13px; margin: 18px 0 6px; color: #5b3fd6; font-weight: 700; }
-.lede { font-size: 14px; color: #c3c8d4; max-width: 120mm; }
-.head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #121826; padding-bottom: 6px; margin-bottom: 10px; }
-.head .muted { font-size: 11px; }
-table { width: 100%; border-collapse: collapse; }
-th { text-align: left; font-size: 10px; color: #636b7d; font-weight: 600; padding: 4px 6px; border-bottom: 1px solid #d9dcd7; }
-td { padding: 5px 6px; border-bottom: 1px solid #e8eae6; vertical-align: top; }
-td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.muted { color: #636b7d; } .small { font-size: 10px; } .up { color: #0f7f57; } .down { color: #c2352b; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
-.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 8px 0 14px; }
-.kpi { border: 1px solid #d9dcd7; border-radius: 10px; padding: 10px 12px; } .kpi b { display: block; font-size: 22px; font-weight: 700; } .kpi span { font-size: 10px; color: #636b7d; }
-.note { font-size: 10px; color: #636b7d; margin-top: 6px; }
-.foot { position: running(footer); font-size: 9px; color: #636b7d; }
-.footer { display: flex; justify-content: space-between; font-size: 9px; color: #636b7d; border-top: 1px solid #d9dcd7; padding-top: 6px; margin-top: 18px; }
-@media screen { body { background: #ebedea; } .page { background: #fff; padding: 12mm; margin: 8mm auto; border-radius: 10px; box-shadow: 0 10px 40px -24px rgba(0,0,0,.4); } }
-</style></head><body>
+<style>${packCss}</style></head><body>
 
 <section class="page"><div class="cover">
   <div><div class="brand">AFRONOMICS <span>INVESTMENT COMMITTEE PACK</span></div>

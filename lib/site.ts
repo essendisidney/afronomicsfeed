@@ -79,6 +79,7 @@ export const footerGroups = [
     links: [
       { href: "/about", label: "About" },
       { href: "/pricing", label: "Pricing" },
+      { href: "/prices", label: "Price guide" },
       { href: "/pack", label: "Committee pack" },
       { href: "/advisory", label: "Research & advisory" },
       { href: "/advertise", label: "Advertise" },

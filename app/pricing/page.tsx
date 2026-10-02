@@ -115,7 +115,11 @@ export default async function PricingPage({
         <Link href="/licensing" className="underline underline-offset-2">
           data licence
         </Link>{" "}
-        have their own pages.
+        have their own pages; the{" "}
+        <Link href="/prices" className="underline underline-offset-2">
+          full price guide
+        </Link>{" "}
+        lists everything, including sponsorships, training, benchmarking and research.
       </p>
 
       <section className="mt-14">

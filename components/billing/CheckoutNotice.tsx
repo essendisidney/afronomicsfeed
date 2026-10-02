@@ -35,9 +35,9 @@ export async function CheckoutNotice({ query }: { query: { checkout?: string; re
       <p className="mb-8 rounded-2xl border border-up/40 bg-surface px-5 py-4 text-sm text-ink">
         <strong>Payment confirmed — thank you.</strong> {moneyLabel(payment.amount, payment.currency)}, reference{" "}
         <span className="font-mono">{payment.reference}</span>. A receipt is on its way to {payment.email}
-        {payment.plan?.startsWith("pack")
-          ? "; reply to it with the institution name for the cover and the addresses to receive the pack."
-          : ", and your access is set up from that address within one business day."}
+        {payment.plan === "pro" || payment.plan === "professional" || payment.plan === "trial"
+          ? ", and your access is set up from that address within one business day."
+          : "; it says what to reply with so the desk can set this up for you."}
       </p>
     );
   }

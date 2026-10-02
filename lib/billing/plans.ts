@@ -5,9 +5,9 @@
  * bank transfer, while USD needs Paystack to enable it. Set PAYSTACK_CURRENCY=USD to charge Pro and
  * Team in dollars once that is on.
  *
- * If a Paystack plan code is set for a tier (PAYSTACK_PLAN_PRO, PAYSTACK_PLAN_TEAM, PAYSTACK_PLAN_PACK,
- * PAYSTACK_PLAN_PACK_PLUS), checkout creates a recurring monthly subscription and Paystack uses the
- * plan's own amount and currency. Without a plan code it is a single month's charge.
+ * If a Paystack plan code is set for a tier (PAYSTACK_PLAN_PRO, _TEAM, _PACK, _PACK_PLUS, _WHATSAPP, _LICENCE,
+ * _WIDGET, _FUND), checkout creates a recurring monthly subscription and Paystack uses the plan's own amount
+ * and currency. Without a plan code it is a single charge for one period. Prices come from lib/billing/ratecard.ts.
  */
 const usd = (process.env.PAYSTACK_CURRENCY ?? "KES").toUpperCase() === "USD";
 
@@ -47,6 +47,13 @@ export const checkoutPlans = {
     currency: "KES",
     planEnv: "PAYSTACK_PLAN_PACK_PLUS",
   },
+  pack_single: { label: "Single committee pack", product: "This month’s Investment Committee Pack", amount: 100_000, currency: "KES", planEnv: null },
+  alerts_whatsapp: { label: "Auction alerts on WhatsApp (monthly)", product: "Auction alerts on WhatsApp", amount: 30_000, currency: "KES", planEnv: "PAYSTACK_PLAN_WHATSAPP" },
+  benchmarking: { label: "Treasury benchmarking (quarter)", product: "Treasury benchmarking, one quarter", amount: 4_000_000, currency: "KES", planEnv: null },
+  licence_startup: { label: "Startup data licence (monthly)", product: "Startup data licence", amount: 750_000, currency: "KES", planEnv: "PAYSTACK_PLAN_LICENCE" },
+  widget: { label: "Branded live-rates widget (monthly)", product: "Branded live-rates widget", amount: 4_000_000, currency: "KES", planEnv: "PAYSTACK_PLAN_WIDGET" },
+  fund_listing: { label: "Verified fund listing (monthly)", product: "Verified fund listing", amount: 2_000_000, currency: "KES", planEnv: "PAYSTACK_PLAN_FUND" },
+  job_listing: { label: "Jobs listing (30 days)", product: "Jobs listing, 30 days", amount: 1_000_000, currency: "KES", planEnv: null },
 } as const;
 
 export type CheckoutPlanId = keyof typeof checkoutPlans;

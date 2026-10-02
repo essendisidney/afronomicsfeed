@@ -7,6 +7,7 @@ import { indicatorDefs } from "@/lib/data/indicators";
 import { loadBonds } from "@/lib/data/kenya-bonds";
 import { loadTbills } from "@/lib/data/kenya-tbills";
 import { loadWire, publishersLive } from "@/lib/data/wire";
+import { aboutText, priceText, rateCard } from "@/lib/billing/ratecard";
 import { site } from "@/lib/site";
 import { rpcRead } from "@/lib/store";
 
@@ -19,32 +20,12 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/advertise` },
 };
 
-const packages = [
-  {
-    name: "The Weekly",
-    price: "$250",
-    unit: "per edition",
-    detail: "Presenting sponsor of the Monday edition on the site and in the newsletter: logo, one line and a link above the fold, marked as sponsored.",
-  },
-  {
-    name: "Rates desk",
-    price: "$400",
-    unit: "per month",
-    detail: "“Presented by” placement on the Kenya T-bill and Treasury bond pages — the most-cited Afronomics datasets — and on their free widgets wherever they are embedded.",
-  },
-  {
-    name: "Country file",
-    price: "$150",
-    unit: "per country per month",
-    detail: "Sole sponsor of one of the 54 country files: the page that people land on when they search a market. One sponsor per country.",
-  },
-  {
-    name: "Research partner",
-    price: "From $2,500",
-    unit: "per report",
-    detail: "A co-branded, sourced report on a market or sector, written by the desk and published on Afronomics with your name on it. Editorial control stays with us.",
-  },
-];
+const packages = rateCard.find((g) => g.id === "sponsors")!.items.map((i) => ({
+  name: i.name,
+  price: priceText(i),
+  unit: `${i.unit}${aboutText(i) ? ` · ${aboutText(i)}` : ""}`,
+  detail: `${i.what}${i.launch ? ` Launch: ${i.launch}.` : ""}`,
+}));
 
 export default async function AdvertisePage() {
   const [wire, traffic] = await Promise.all([loadWire(), rpcRead("af_traffic", { p_days: 30 }, 3600)]);
@@ -87,7 +68,7 @@ export default async function AdvertisePage() {
       <p className="mt-3 text-xs text-muted">Live figures from the site. Audience and newsletter numbers are shared with prospective sponsors on request.</p>
 
       <section className="mt-14">
-        <SectionTitle kicker="Founding-sponsor rates" title="Placements" note="Rates hold for twelve months for sponsors who sign during launch. Invoiced in USD or KES." />
+        <SectionTitle kicker="Founding-sponsor rates" title="Placements" note="Rates hold for twelve months for sponsors who sign during launch. Invoiced in KES or USD; the full price guide is at /prices." />
         <div className="mt-6 grid gap-px bg-rule md:grid-cols-2">
           {packages.map((item) => (
             <div key={item.name} className="bg-paper px-5 py-6">

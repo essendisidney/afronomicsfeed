@@ -7,6 +7,7 @@ import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { AlertButton } from "@/components/ui/AlertButton";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { PlainMeaning } from "@/components/data/PlainMeaning";
 import { fmtDate, marketDates, marketStory } from "@/lib/data/market-stories";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
@@ -61,6 +62,12 @@ export default async function MarketAuctionPage({ params }: Props) {
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <StoryBody paragraphs={story.paragraphs} />
+      <PlainMeaning
+        currency={market.currency}
+        iso={market.iso}
+        country={market.country}
+        rows={week.rows.map((r) => ({ tenor: r.tenor, rate: r.rate, prev: story.prevOf(r.tenor)?.rate ?? null }))}
+      />
 
       <section className="mt-12">
         <SectionTitle kicker="Results" title="By tenor" />

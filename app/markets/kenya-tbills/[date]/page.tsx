@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AuctionNav, StoryBody } from "@/components/data/AuctionStory";
+import { PlainMeaning } from "@/components/data/PlainMeaning";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
@@ -57,6 +58,13 @@ export default async function TbillAuctionPage({ params }: Props) {
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <StoryBody paragraphs={story.paragraphs} />
+      <PlainMeaning
+        currency="KES"
+        iso="KE"
+        country="Kenya"
+        rows={week.rows.map((row) => ({ tenor: row.tenor, rate: row.weighted_avg_rate, prev: older?.rows.find((item) => item.tenor === row.tenor)?.weighted_avg_rate ?? null }))}
+        compareHref="/rates/kenya"
+      />
 
       <section className="mt-12">
         <SectionTitle kicker="Results" title="By tenor" />

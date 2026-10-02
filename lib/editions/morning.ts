@@ -168,4 +168,29 @@ export function morningText(note: MorningNote, utm = "utm_source=linkedin&utm_me
     .slice(0, 2900);
 }
 
+/** The Morning for WhatsApp: short, *bold* section marks, no hashtags, one link. */
+export function morningWhatsApp(note: MorningNote, utm = "utm_source=whatsapp&utm_medium=share&utm_campaign=morning") {
+  const fx = note.fx.moves
+    .slice(0, 5)
+    .map((m) => `• ${m.name} ${m.now.toFixed(2)}/$ (${signed(m.changePct)}%)`)
+    .join("\n");
+  const auctions = note.auctions.map((a) => `• ${a.market.country} ${a.tenor}-day: ${a.rate.toFixed(2)}%${a.bps == null ? "" : ` (${signed(a.bps, 0)} bps)`}`).join("\n");
+  const due = note.due.map((d) => `• ${d.market.country}: ${d.expected === note.day ? "today" : "tomorrow"}`).join("\n");
+  const board = note.board
+    .slice(0, 10)
+    .map((b) => `${b.market.iso} ${b.rate.toFixed(2)}%`)
+    .join(" · ");
+  return [
+    `*${morningTitle(note)}*`,
+    morningLines(note).join(" "),
+    fx ? `*Overnight, against the dollar*\n${fx}` : "",
+    auctions ? `*Auction results in*\n${auctions}` : "",
+    due ? `*Due*\n${due}` : "",
+    board ? `*364-day bills, latest*\n${board}` : "",
+    `Numbers, charts and sources: https://www.afronomicsfeed.com/morning?${utm}`,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+}
+
 export { longDate as morningLongDate, shortDate as morningShortDate, signed as morningSigned };

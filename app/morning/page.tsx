@@ -7,6 +7,7 @@ import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { renderTime } from "@/lib/data/fetcher";
 import { pairHref } from "@/lib/data/fx";
 import { buildMorningNote, morningLines, morningLongDate, morningShortDate, morningSigned } from "@/lib/editions/morning";
+import { ShareRow } from "@/components/ui/ShareRow";
 import { site } from "@/lib/site";
 
 export const revalidate = 900;
@@ -46,6 +47,11 @@ export default async function MorningPage() {
           <Link href="/subscribe?list=morning" className="mt-4 inline-block rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
             Get the Morning
           </Link>
+          <p className="mt-4 text-[13px] leading-5">
+            <Link href="/morning/sw" className="underline underline-offset-2 hover:text-accent">Soma kwa Kiswahili</Link> ·{" "}
+            <a href="/lite" className="underline underline-offset-2 hover:text-accent">Low-data version</a> ·{" "}
+            <a href="/api/edition/morning?format=whatsapp" className="underline underline-offset-2 hover:text-accent">WhatsApp text</a>
+          </p>
         </div>
       }
     >
@@ -132,6 +138,8 @@ export default async function MorningPage() {
           </div>
         </section>
       </div>
+
+      <ShareRow text={lines[0] ? `Afronomics Morning: ${lines[0]}` : "The Afronomics Morning"} path="/morning" label="Forward" />
 
       <section className="mt-14">
         <SectionTitle kicker="Headlines" title="What matters this morning" href="/news" hrefLabel="The Wire" />

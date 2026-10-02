@@ -6,8 +6,6 @@ const legacy: Array<[string, string]> = [
   ["/today", "/news"],
   ["/terminal", "/data"],
   ["/observations", "/data"],
-  ["/ask", "/data"],
-  ["/ask/:path+", "/data"],
   ["/manifesto", "/about"],
   ["/login", "/pricing"],
   ["/signup", "/subscribe"],

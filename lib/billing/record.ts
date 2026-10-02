@@ -39,7 +39,10 @@ export async function recordPayment(p: PaymentRecord) {
     p_raw: p.raw,
   });
   if (!result.ok) return { ok: false as const, reason: result.reason };
-  return result.value === true ? { ok: true as const } : { ok: false as const, reason: "secret rejected" };
+  if (result.value !== true) return { ok: false as const, reason: "secret rejected" };
+  // A paid jobs listing goes live on its own.
+  if (p.plan === "job_listing" && p.email) await rpc("af_job_publish", { p_secret: secret(), p_email: p.email, p_id: null }).catch(() => null);
+  return { ok: true as const };
 }
 
 export async function recordSubscription(s: { code: string; email: string | null; planCode: string | null; status: string; next: string | null }) {

@@ -30,6 +30,7 @@ export const nav = [
 
 export const utilityNav = [
   { href: "/morning", label: "Morning" },
+  { href: "/alerts", label: "Alerts" },
   { href: "/weekly", label: "Weekly" },
   { href: "/signals", label: "Signals" },
   { href: "/method", label: "Sources" },
@@ -69,6 +70,9 @@ export const footerGroups = [
     links: [
       { href: "/brief", label: "Briefs" },
       { href: "/morning", label: "The Morning" },
+      { href: "/morning/sw", label: "Asubuhi (Kiswahili)" },
+      { href: "/alerts", label: "Alerts" },
+      { href: "/ask", label: "Ask the data" },
       { href: "/weekly", label: "Weekly" },
       { href: "/explainers", label: "Explainers" },
       { href: "/archive", label: "Archive" },
@@ -80,6 +84,7 @@ export const footerGroups = [
       { href: "/about", label: "About" },
       { href: "/pricing", label: "Pricing" },
       { href: "/prices", label: "Price guide" },
+      { href: "/jobs", label: "Jobs" },
       { href: "/pack", label: "Committee pack" },
       { href: "/advisory", label: "Research & advisory" },
       { href: "/advertise", label: "Advertise" },

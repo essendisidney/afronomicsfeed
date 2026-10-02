@@ -36,3 +36,5 @@ export async function unsubscribeToken(email: string) {
   const digest = await crypto.subtle.digest("SHA-256", data);
   return Array.from(new Uint8Array(digest).slice(0, 12), (b) => b.toString(16).padStart(2, "0")).join("");
 }
+
+// Mail: RESEND_API_KEY on Vercel; sender morning@afronomicsfeed.com (domain verified in Resend).

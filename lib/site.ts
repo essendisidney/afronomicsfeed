@@ -103,15 +103,15 @@ export const pricing = {
   },
   pro: {
     name: "Pro",
-    price: "$29",
+    price: "KES 1,500",
     period: "/mo",
-    detail: "Every brief and weekly analysis in full, plus country and indicator alerts by email as they launch.",
+    detail: "About $12. Every brief and weekly analysis in full, the Morning note, auction alerts the moment each market reports, and the full field set from the data API.",
   },
   professional: {
     name: "Team",
-    price: "$149",
+    price: "KES 6,000",
     period: "/mo",
-    detail: "Five Pro seats on one invoice, bulk exports, and priority requests for new datasets.",
+    detail: "About $49. Five Pro seats on one invoice, bulk exports, and priority requests for new datasets.",
   },
   enterprise: {
     name: "Enterprise",
@@ -121,7 +121,7 @@ export const pricing = {
   },
   trial: {
     name: "Kenya desk trial",
-    price: "KES 500",
-    detail: "Fourteen days of Pro, paid locally by M-Pesa or card through Paystack.",
+    price: "KES 200",
+    detail: "Fourteen days of Pro for the price of a lunch, paid by M-Pesa or card through Paystack.",
   },
 } as const;

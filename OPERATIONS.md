@@ -32,11 +32,13 @@ Page: `/markets/kenya-tbills`; CSV: `/api/data/kenya-tbills`.
 
 | Name | Needed for |
 | --- | --- |
-| `SUPABASE_SERVICE_ROLE_KEY` | optional: needed only to record Paystack payments in the database. Sign-ups and the archive already work without it, through validated database functions and the public key |
+| `AF_CRON_SECRET` | shared secret: the mail/desk/payment database functions, GitHub Actions and the /desk key |
 | `CRON_SECRET` | optional: restricts the archive job to Vercel's scheduler |
-| `PAYSTACK_SECRET_KEY` | turns on Pro/Team/trial checkout on /pricing |
-| `PAYSTACK_PLAN_PRO`, `PAYSTACK_PLAN_TEAM` | optional Paystack plan codes; makes Pro/Team recurring subscriptions |
-| `PAYSTACK_CURRENCY` | `USD` (default, needs USD enabled on Paystack) or `KES` (Pro KES 3,900, Team KES 19,500) |
+| `PAYSTACK_SECRET_KEY` | turns on checkout: Pro, Team and the trial on /pricing, the two pack tiers on /pack |
+| `PAYSTACK_PLAN_PRO`, `PAYSTACK_PLAN_TEAM`, `PAYSTACK_PLAN_PACK`, `PAYSTACK_PLAN_PACK_PLUS` | optional Paystack plan codes (PLN_…); with one set, that tier becomes a recurring monthly subscription at the plan's price |
+| `PAYSTACK_CURRENCY` | `KES` (default: Pro 1,500, Team 6,000, trial 200, pack 12,000 / 18,000) or `USD` (Pro $12, Team $49; needs USD enabled on Paystack) |
+| `PAYMENTS_NOTIFY_EMAIL` | where the "new payment" note goes (default the contact address) |
+| `RESEND_API_KEY` | sends the Morning, receipts and payment notes |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | public contact address (default desk@afronomicsfeed.com) |
 | `AFRONOMICS_PAYWALL` | set to `on` only once accounts exist |
 
@@ -45,8 +47,11 @@ Database migrations live in `supabase/migrations`; 0003–0005 add `subscribers`
 
 ## Payments
 
-Paystack webhook URL: `https://www.afronomicsfeed.com/api/paystack/webhook`. Verified charges land in `payments`,
-subscriptions in `paid_subscriptions`. There are no user accounts yet: grant access by email from those tables.
+Paystack webhook URL: `https://www.afronomicsfeed.com/api/paystack/webhook` (Settings → API Keys & Webhooks, live and
+test). Verified charges land in `payments` and subscriptions in `paid_subscriptions` through `af_record_payment` /
+`af_record_subscription` (secret-gated; no service-role key on Vercel). The return page verifies the reference with
+Paystack and records it too, so nothing is lost if the webhook is down. Each charge emails the buyer a receipt and the
+desk a note; /desk lists payments and totals. There are no user accounts yet: grant access by email from /desk.
 
 ## Adding coverage
 

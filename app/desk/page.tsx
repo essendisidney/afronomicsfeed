@@ -8,10 +8,17 @@ import { loadBonds } from "@/lib/data/kenya-bonds";
 import { loadKenyaRates } from "@/lib/data/kenya-rates";
 import { renderTime } from "@/lib/data/fetcher";
 import { rpc } from "@/lib/store";
+import { moneyLabel } from "@/lib/billing/plans";
 import { DeskKey } from "./DeskKey";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Desk", robots: { index: false, follow: false } };
+
+type Payments = {
+  recent: { reference: string; email: string | null; plan: string | null; amount: number; currency: string | null; status: string; channel: string | null; paid_at: string; access_sent_at: string | null }[];
+  totals: { currency: string | null; count: number; amount: number; month_amount: number }[];
+  subscriptions: { code: string; email: string | null; plan_code: string | null; status: string; next: string | null }[];
+};
 
 type Desk = {
   views_by_day: { day: string; views: number }[];
@@ -78,6 +85,8 @@ export default async function DeskPage() {
   const key = (await cookies()).get("af_desk")?.value ?? "";
   const result = key ? await rpc("af_desk", { p_secret: key }) : null;
   const desk = result?.ok && result.value ? (result.value as Desk) : null;
+  const pay = desk ? await rpc("af_payments", { p_secret: key }) : null;
+  const payments = pay?.ok && pay.value ? (pay.value as Payments) : null;
 
   if (!desk) {
     return (
@@ -114,6 +123,34 @@ export default async function DeskPage() {
         <Stat label="Data downloads, 7 days" value={downloads} />
         <Stat label="API calls, 7 days" value={apiCalls} />
         <Stat label="Leads" value={desk.leads_total} note={desk.feedback_found_rate == null ? "no feedback yet" : `${desk.feedback_found_rate}% found what they came for`} />
+      </section>
+
+      <section className="mt-10">
+        <SectionTitle kicker="Revenue" title="Payments" />
+        <div className="mt-3 flex flex-wrap gap-3 text-sm">
+          {payments?.totals.length ? (
+            payments.totals.map((t) => (
+              <span key={t.currency ?? "x"} className="rounded-full border border-rule bg-surface px-3 py-1">
+                <strong>{moneyLabel(t.month_amount, t.currency)}</strong> this month · {moneyLabel(t.amount, t.currency)} all time · {t.count} payment{t.count === 1 ? "" : "s"}
+              </span>
+            ))
+          ) : (
+            <span className="text-muted">No payments yet{process.env.PAYSTACK_SECRET_KEY ? "" : " — Paystack key not set"}.</span>
+          )}
+        </div>
+        {payments?.recent.length ? (
+          <ul className="mt-2 divide-y divide-rule">
+            {payments.recent.slice(0, 20).map((p) => (
+              <li key={p.reference} className="flex flex-wrap items-baseline gap-x-3 py-2 text-sm">
+                <span className="font-semibold text-ink">{moneyLabel(p.amount, p.currency)}</span>
+                <span className="text-ink-soft">{p.plan ?? "—"}</span>
+                <a href={`mailto:${p.email ?? ""}`} className="underline">{p.email ?? "no email"}</a>
+                <span className="text-[12px] text-muted">{p.channel ?? ""} · {ago(p.paid_at, now)} · {p.reference}</span>
+                {p.access_sent_at ? <span className="text-[12px] text-up">access sent</span> : <span className="text-[12px] text-down">grant access</span>}
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </section>
 
       <section className="mt-10">

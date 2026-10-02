@@ -26,12 +26,12 @@ const tiers = [
   },
   {
     name: "Startup",
-    price: "$99/mo",
+    price: "KES 7,500/mo · $59",
     detail: "Commercial use inside one product: the auction datasets for all ten markets, the measures and the FX archive, with an email or webhook on every new result.",
   },
   {
     name: "Institution",
-    price: "$499/mo",
+    price: "KES 39,000/mo · $299",
     detail: "All datasets and the Wire archive for internal models, dashboards and client reports, with full history and change notifications.",
   },
   {

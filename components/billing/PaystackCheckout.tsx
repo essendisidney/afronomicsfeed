@@ -10,17 +10,18 @@ export function PaystackCheckout({
 }: {
   plan: CheckoutPlanId;
   label: string;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "accent" | "ghost";
 }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
   const styles = {
-    primary: "bg-forest text-paper hover:bg-forest-mid",
-    secondary: "bg-gold text-forest-deep hover:bg-gold-soft",
-    ghost: "border border-ink/20 text-ink hover:border-gold",
+    primary: "bg-ink text-paper hover:bg-ink/90",
+    accent: "bg-accent text-night hover:bg-gold-soft",
+    ghost: "border border-ink/20 text-ink hover:border-accent",
   }[variant];
+  const field = variant === "accent" ? "border-night-line bg-night-2 text-night-ink placeholder:text-night-soft" : "border-rule bg-surface text-ink";
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -48,25 +49,23 @@ export function PaystackCheckout({
   return (
     <form onSubmit={submit} className="space-y-2">
       <label className="block">
-        <span className="font-medium text-[12px] text-muted">Email for the receipt</span>
+        <span className="sr-only">Email for the receipt</span>
         <input
           type="email"
           required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          className="mt-1 w-full border border-rule bg-paper px-3 py-2 text-sm"
+          placeholder="Email for the receipt"
+          className={`w-full rounded-full border px-4 py-2.5 text-sm outline-none focus:border-accent ${field}`}
           autoComplete="email"
         />
       </label>
-      <button
-        type="submit"
-        disabled={pending}
-        className={`w-full px-4 py-3 text-[12.5px] font-semibold disabled:opacity-60 ${styles}`}
-      >
-        {pending ? "Opening Paystack" : label}
+      <button type="submit" disabled={pending} className={`w-full rounded-full px-4 py-3 text-[13px] font-semibold transition disabled:opacity-60 ${styles}`}>
+        {pending ? "Opening Paystack…" : label}
       </button>
+      <p className={`text-center text-[11px] ${variant === "accent" ? "text-night-soft" : "text-muted"}`}>M-Pesa, card or bank transfer. Cancel any time.</p>
       {message ? (
-        <p role="status" className="text-center font-mono text-[11px] text-gold">
+        <p role="status" className="text-center text-[12px] text-down">
           {message}
         </p>
       ) : null}

@@ -1,5 +1,6 @@
+import { after } from "next/server";
 import { verifyPaystackSignature } from "@/lib/billing/paystack";
-import { upsertRows } from "@/lib/store";
+import { notifyPayment, recordPayment, recordSubscription } from "@/lib/billing/record";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,9 +23,9 @@ type PaystackEvent = {
 };
 
 /**
- * Paystack webhook. Point Paystack (Settings → API Keys & Webhooks) at
- * https://www.afronomicsfeed.com/api/paystack/webhook. Every verified event is recorded in
- * `payments` (charges) or `paid_subscriptions` (recurring plans) so access can be granted.
+ * Paystack webhook. Registered in Paystack (Settings → API Keys & Webhooks) as
+ * https://www.afronomicsfeed.com/api/paystack/webhook. Every event with a valid signature is recorded through
+ * af_record_payment / af_record_subscription; a charge also sends the receipt and a note to the desk.
  */
 export async function POST(request: Request) {
   if (!process.env.PAYSTACK_SECRET_KEY) {
@@ -42,41 +43,33 @@ export async function POST(request: Request) {
   const planCode = typeof data.plan === "object" && data.plan ? data.plan.plan_code ?? null : null;
 
   if (event.event === "charge.success" && data.reference) {
-    const result = await upsertRows(
-      "payments",
-      [
-        {
-          reference: data.reference,
-          email,
-          plan: metadata.plan ?? planCode,
-          amount: data.amount ?? 0,
-          currency: data.currency ?? null,
-          status: data.status ?? "success",
-          channel: data.channel ?? null,
-          paid_at: data.paid_at ?? new Date().toISOString(),
-          raw: event,
-        },
-      ],
-      "reference",
-    );
+    const payment = {
+      reference: data.reference,
+      email,
+      plan: metadata.plan ?? planCode,
+      amount: data.amount ?? 0,
+      currency: data.currency ?? null,
+      status: data.status ?? "success",
+      channel: data.channel ?? null,
+      paidAt: data.paid_at ?? new Date().toISOString(),
+      raw: event,
+    };
+    const result = await recordPayment(payment);
     if (!result.ok) console.log(`[paystack] payment not stored: ${result.reason} ${JSON.stringify({ reference: data.reference, email })}`);
+    after(async () => {
+      const sent = await notifyPayment(payment).catch((e) => [`error:${String(e)}`]);
+      console.log(`[paystack] ${data.reference} ${sent.join(" ")}`);
+    });
   }
 
   if ((event.event === "subscription.create" || event.event === "subscription.disable" || event.event === "subscription.not_renew") && data.subscription_code) {
-    const result = await upsertRows(
-      "paid_subscriptions",
-      [
-        {
-          subscription_code: data.subscription_code,
-          email,
-          plan_code: planCode,
-          status: event.event === "subscription.create" ? "active" : event.event === "subscription.disable" ? "disabled" : "non-renewing",
-          next_payment_date: data.next_payment_date ?? null,
-          updated_at: new Date().toISOString(),
-        },
-      ],
-      "subscription_code",
-    );
+    const result = await recordSubscription({
+      code: data.subscription_code,
+      email,
+      planCode,
+      status: event.event === "subscription.create" ? "active" : event.event === "subscription.disable" ? "disabled" : "non-renewing",
+      next: data.next_payment_date ?? null,
+    });
     if (!result.ok) console.log(`[paystack] subscription not stored: ${result.reason} ${JSON.stringify({ code: data.subscription_code, email })}`);
   }
 

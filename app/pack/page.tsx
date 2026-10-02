@@ -3,6 +3,10 @@ import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
+import { CheckoutNotice } from "@/components/billing/CheckoutNotice";
+import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
+import { paystackConfigured } from "@/lib/billing/paystack";
+import { chargeLabel } from "@/lib/billing/plans";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,7 +23,9 @@ const contents = [
   { n: "4", t: "Currencies and the month ahead", d: "Fourteen African currencies against the dollar over the month, and the expected date of each market’s next auction result." },
 ];
 
-export default function PackPage() {
+export default async function PackPage({ searchParams }: { searchParams: Promise<{ checkout?: string; reference?: string; trxref?: string }> }) {
+  const query = await searchParams;
+  const live = paystackConfigured();
   return (
     <PageShell
       crumbs={[{ href: "/", label: "Home" }, { href: "/licensing", label: "Licensing" }, { label: "Committee pack" }]}
@@ -42,6 +48,7 @@ export default function PackPage() {
         </div>
       }
     >
+      <CheckoutNotice query={query} />
       <SectionTitle kicker="Inside" title="Four pages, every figure sourced" />
       <ol className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-2">
         {contents.map((c) => (
@@ -58,13 +65,15 @@ export default function PackPage() {
         <div className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-3">
           <div className="bg-surface px-5 py-6">
             <p className="text-[13px] font-semibold text-gold">Committee</p>
-            <p className="mt-2 font-serif text-3xl text-ink">KES 18,000<span className="text-base text-muted"> /month</span></p>
-            <p className="mt-3 text-sm leading-6 text-ink-soft">The pack on the first of each month, your institution named on the cover, by email as PDF. Share freely inside the institution.</p>
+            <p className="mt-2 font-serif text-3xl text-ink">{chargeLabel("pack")}<span className="text-base text-muted"> /month</span></p>
+            <p className="mt-3 text-sm leading-6 text-ink-soft">About $95. The pack on the first of each month, your institution named on the cover, by email as PDF. Share freely inside the institution.</p>
+            {live ? <div className="mt-5"><PaystackCheckout plan="pack" label="Subscribe the committee" variant="primary" /></div> : null}
           </div>
           <div className="bg-surface px-5 py-6">
             <p className="text-[13px] font-semibold text-gold">Committee plus alerts</p>
-            <p className="mt-2 font-serif text-3xl text-ink">KES 25,000<span className="text-base text-muted"> /month</span></p>
-            <p className="mt-3 text-sm leading-6 text-ink-soft">The pack, plus an email the day each Kenya auction result lands and the Morning note for five named people.</p>
+            <p className="mt-2 font-serif text-3xl text-ink">{chargeLabel("pack_plus")}<span className="text-base text-muted"> /month</span></p>
+            <p className="mt-3 text-sm leading-6 text-ink-soft">About $140. The pack, plus an email the day each Kenya auction result lands and the Morning note for five named people.</p>
+            {live ? <div className="mt-5"><PaystackCheckout plan="pack_plus" label="Subscribe with alerts" variant="ghost" /></div> : null}
           </div>
           <div className="bg-surface px-5 py-6">
             <p className="text-[13px] font-semibold text-gold">Group</p>
@@ -73,11 +82,11 @@ export default function PackPage() {
               <Link href="/developers" className="underline underline-offset-2">data API</Link>.</p>
           </div>
         </div>
-        <p className="mt-3 text-xs text-muted">Annual billing takes two months off. Invoiced in KES or USD. First pack within two working days of signing.</p>
+        <p className="mt-3 text-xs text-muted">Annual billing takes two months off. Pay by M-Pesa, card or bank transfer, or ask for an invoice in KES or USD. First pack within two working days.</p>
       </section>
 
       <section className="mt-14 max-w-2xl" id="enquiry">
-        <SectionTitle kicker="Order" title="Tell us who to put on the cover" />
+        <SectionTitle kicker="Invoice instead" title="Prefer an invoice, or want the group version?" />
         <div className="mt-4">
           <EnquiryForm interest="pack" cta="Request the pack" />
         </div>

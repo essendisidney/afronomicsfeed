@@ -133,9 +133,9 @@ export default function DevelopersPage() {
           </div>
           <div className="bg-surface px-5 py-6">
             <p className="text-[13px] font-semibold text-gold">Licensed</p>
-            <p className="mt-2 font-serif text-3xl text-ink">From $99 a month</p>
+            <p className="mt-2 font-serif text-3xl text-ink">From KES 7,500 a month</p>
             <p className="mt-3 text-sm leading-6 text-ink-soft">
-              Use inside a commercial product or client work, redistribution, a webhook or email the moment each market reports, the full field set for every
+              About $59. Use inside a commercial product or client work, redistribution, a webhook or email the moment each market reports, the full field set for every
               auction, and a named contact. Details on the{" "}
               <Link href="/licensing" className="underline underline-offset-2">
                 licensing page

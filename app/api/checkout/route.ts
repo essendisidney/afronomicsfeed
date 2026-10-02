@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   const result = await startCheckout({
     plan: plan.id,
     email,
-    callbackUrl: `${origin}/pricing?checkout=returned`,
+    callbackUrl: `${origin}/${plan.id.startsWith("pack") ? "pack" : "pricing"}?checkout=returned`,
   });
 
   if (!result.ok) {

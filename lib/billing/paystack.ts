@@ -56,6 +56,8 @@ export type VerifiedPayment = {
   email: string;
   plan: string | null;
   paidAt: string | null;
+  channel: string | null;
+  raw: unknown;
 };
 
 /** Server-side check of a transaction reference. Never trust the browser redirect alone. */
@@ -67,6 +69,7 @@ export async function verifyTransaction(reference: string): Promise<VerifiedPaym
     amount: number;
     currency: string;
     paid_at?: string;
+    channel?: string;
     customer?: { email?: string };
     metadata?: { plan?: string } | string;
   }>(`/transaction/verify/${encodeURIComponent(reference)}`);
@@ -81,6 +84,8 @@ export async function verifyTransaction(reference: string): Promise<VerifiedPaym
     email: data.customer?.email ?? "",
     plan: metadata.plan ?? null,
     paidAt: data.paid_at ?? null,
+    channel: data.channel ?? null,
+    raw: data,
   };
 }
 

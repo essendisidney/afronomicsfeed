@@ -82,15 +82,15 @@ export default async function HomePage() {
           <div className="lg:col-span-6 lg:pt-4">
             <p className="text-[14px] font-medium text-accent">{site.tagline}</p>
             <h1 className="mt-4 font-serif text-[2.75rem] leading-[0.95] tracking-[-0.02em] sm:text-6xl lg:text-7xl">
-              One desk for Africa’s markets, economies and capital.
+              What money costs in Africa, from the source, for everyone.
             </h1>
             <p className="mt-6 max-w-xl text-[17px] leading-7 text-night-soft">{site.promise}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/markets/tbills" className="rounded-full bg-accent px-5 py-2.5 text-[15px] font-semibold text-night hover:bg-gold-soft">
                 Open the T-bill monitor
               </Link>
-              <Link href="/weekly" className="rounded-full border border-night-line px-5 py-2.5 text-[15px] font-medium text-night-ink hover:border-night-soft/50 hover:bg-night-2">
-                Read this week’s edition
+              <Link href="/rates/kenya" className="rounded-full border border-night-line px-5 py-2.5 text-[15px] font-medium text-night-ink hover:border-night-soft/50 hover:bg-night-2">
+                Where the shilling earns most
               </Link>
             </div>
             <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 sm:gap-8">

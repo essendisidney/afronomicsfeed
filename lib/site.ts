@@ -1,16 +1,17 @@
 export const site = {
   name: "Afronomics",
   legalName: "Afronomics Feed",
-  tagline: "Africa’s economic intelligence, sourced",
-  line: "Markets · Economy · Capital · Climate · Technology",
-  promise: "Every African market, economy and capital flow in one place — each number linked to the publisher that printed it.",
+  tagline: "The price of money in Africa",
+  line: "Rates · Currencies · Inflation · for everyone",
+  promise:
+    "What African governments pay to borrow, what a shilling earns, what a loan should cost and what the currency buys — from the source, the day it is published, free to see and explained for anyone, in ten markets and counting.",
   /** Canonical host. The apex domain redirects here (vercel.json). */
   url: "https://www.afronomicsfeed.com",
   houseCredit: "A Pesara company",
   houseUrl: "https://pesara.com",
   locale: "en",
   description:
-    "Live data, headlines and development-finance flows for all 54 African economies. Currencies, growth, inflation, debt, FDI, climate and technology — every figure sourced and downloadable.",
+    "The price of money in Africa: Treasury bill rates in ten markets, currencies, inflation and what they mean for a saver, a borrower and a treasury — from the central banks, the minute they publish, free to see, cited by institutions. Plus every African economy’s data and the headlines that move markets.",
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "desk@afronomicsfeed.com",
   linkedinUrl: "https://www.linkedin.com/company/afronomicsfeed/",
 } as const;

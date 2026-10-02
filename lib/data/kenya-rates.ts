@@ -130,3 +130,25 @@ export function rateOptions(): { options: RateOption[]; unread: { name: string; 
 export function bankRateHistory(months = 60) {
   return (loadKenyaRates().bank_rates?.rows ?? []).slice(0, months).reverse();
 }
+
+/** Benchmarks for the "Is my rate fair?" check, from the same sources as the comparison table. */
+export function fairBench() {
+  const { options } = rateOptions();
+  const bill91 = options.find((o) => o.name === "91-day Treasury bill");
+  const bill364 = options.find((o) => o.name === "364-day Treasury bill");
+  const funds = options.filter((o) => o.group === "Money market funds").sort((a, b) => b.net - a.net);
+  const bank = loadKenyaRates().bank_rates?.rows?.[0];
+  if (!bill91 || !bill364 || !bank) return null;
+  return {
+    asOf: bank.month,
+    bill91Net: bill91.net,
+    bill364Net: bill364.net,
+    bill364Gross: bill364.gross,
+    bestFundNet: funds[0]?.net ?? bill364.net,
+    bestFundName: funds[0]?.name ?? "364-day Treasury bill",
+    depositAvg: bank.deposit,
+    savingsAvg: bank.savings,
+    lendingAvg: bank.lending,
+    overdraftAvg: bank.overdraft,
+  };
+}

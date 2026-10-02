@@ -89,8 +89,8 @@ export default async function HomePage() {
               <Link href="/markets/tbills" className="rounded-full bg-accent px-5 py-2.5 text-[15px] font-semibold text-night hover:bg-gold-soft">
                 Open the T-bill monitor
               </Link>
-              <Link href="/rates/kenya" className="rounded-full border border-night-line px-5 py-2.5 text-[15px] font-medium text-night-ink hover:border-night-soft/50 hover:bg-night-2">
-                Where the shilling earns most
+              <Link href="/rates/kenya/check" className="rounded-full border border-night-line px-5 py-2.5 text-[15px] font-medium text-night-ink hover:border-night-soft/50 hover:bg-night-2">
+                Is my rate fair?
               </Link>
             </div>
             <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 sm:gap-8">

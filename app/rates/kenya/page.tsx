@@ -5,7 +5,8 @@ import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
-import { bankRateHistory, rateOptions } from "@/lib/data/kenya-rates";
+import { bankRateHistory, fairBench, rateOptions } from "@/lib/data/kenya-rates";
+import { FairRate } from "@/components/data/FairRate";
 import { site } from "@/lib/site";
 
 export const revalidate = 1800;
@@ -23,6 +24,7 @@ const when = (s: string) => (s.length === 7 ? monthFmt.format(new Date(`${s}-01`
 
 export default function KenyaRatesPage() {
   const { options, unread, updatedAt } = rateOptions();
+  const bench = fairBench();
   const best = options[0];
   const bill91 = options.find((o) => o.name === "91-day Treasury bill");
   const savings = options.find((o) => o.name.startsWith("Bank savings"));
@@ -55,6 +57,11 @@ export default function KenyaRatesPage() {
         ) : null
       }
     >
+      {bench ? (
+        <div className="mb-10">
+          <FairRate bench={bench} />
+        </div>
+      ) : null}
       <section>
         <SectionTitle kicker="Compared" title="Annual return, before and after tax" note="Sorted by what you keep. Bars show the published rate; the darker part is what remains after withholding tax." />
         <div className="mt-4 overflow-x-auto">

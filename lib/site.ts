@@ -57,6 +57,7 @@ export const footerGroups = [
       { href: "/markets/bill-index", label: "Sovereign Bill Index" },
       { href: "/markets/borrowing-costs", label: "Borrowing costs" },
       { href: "/rates/kenya", label: "Kenya rates compared" },
+      { href: "/rates/kenya/check", label: "Is my rate fair?" },
       { href: "/countries", label: "54 country files" },
       { href: "/data", label: "Data hub" },
       { href: "/developers", label: "Data API" },

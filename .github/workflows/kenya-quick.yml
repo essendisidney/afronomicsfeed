@@ -1,0 +1,34 @@
+# Kenya auction afternoons: the CBK posts Thursday results from early afternoon. Check every 20 minutes
+# 12:00–16:00 UTC (15:00–19:00 Nairobi) on Thursdays, bills only, so the result is live within minutes.
+name: Kenya quick check
+
+on:
+  schedule:
+    - cron: "*/20 12-16 * * 4"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  kenya:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pdfplumber requests
+      - run: python scripts/kenya_tbills.py
+      - run: python scripts/kenya_bonds.py
+        continue-on-error: true
+      - name: Commit if the dataset changed
+        run: |
+          if git diff --quiet -- data/kenya; then echo "No new Kenya result."; exit 0; fi
+          git config user.name "afronomics-bot"
+          git config user.email "afronomics-bot@users.noreply.github.com"
+          git add data/kenya
+          git commit -m "Kenya T-bill auctions: add latest CBK results"
+          git pull --rebase
+          git push

@@ -65,3 +65,4 @@ desk a note; /desk lists payments and totals. There are no user accounts yet: gr
 1. Monday: send the Afronomics Weekly from `/signals`, `/capital` pipeline changes and the week's Wire.
 2. Publish one analysis piece in `content/` (markdown with sources in frontmatter).
 3. Log any correction in `lib/corrections.ts`.
+

@@ -83,3 +83,5 @@ export function moneyLabel(amount: number, currency: string | null) {
   const text = new Intl.NumberFormat("en-US", { maximumFractionDigits: major % 1 ? 2 : 0 }).format(major);
   return currency === "USD" ? `$${text}` : `${currency ?? ""} ${text}`.trim();
 }
+
+// Keys: PAYSTACK_SECRET_KEY on Vercel (live in production, test in preview).

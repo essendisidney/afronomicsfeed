@@ -10,6 +10,7 @@ import { renderTime } from "@/lib/data/fetcher";
 import { rpc } from "@/lib/store";
 import { moneyLabel } from "@/lib/billing/plans";
 import { DeskKey } from "./DeskKey";
+import { AddCorrection, AddPress, GrantAccess } from "./DeskActions";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Desk", robots: { index: false, follow: false } };
@@ -146,11 +147,26 @@ export default async function DeskPage() {
                 <span className="text-ink-soft">{p.plan ?? "—"}</span>
                 <a href={`mailto:${p.email ?? ""}`} className="underline">{p.email ?? "no email"}</a>
                 <span className="text-[12px] text-muted">{p.channel ?? ""} · {ago(p.paid_at, now)} · {p.reference}</span>
-                {p.access_sent_at ? <span className="text-[12px] text-up">access sent</span> : <span className="text-[12px] text-down">grant access</span>}
+                {p.access_sent_at ? <span className="text-[12px] text-up">access sent</span> : <GrantAccess reference={p.reference} />}
               </li>
             ))}
           </ul>
         ) : null}
+      </section>
+
+      <section className="mt-10 grid gap-10 lg:grid-cols-2">
+        <div>
+          <SectionTitle kicker="Reference" title="Log a correction to a published figure" />
+          <div className="mt-4">
+            <AddCorrection />
+          </div>
+        </div>
+        <div>
+          <SectionTitle kicker="Press" title="Who gets the Monday ASBI release" />
+          <div className="mt-4">
+            <AddPress />
+          </div>
+        </div>
       </section>
 
       <section className="mt-10">

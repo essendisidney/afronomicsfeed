@@ -1,0 +1,35 @@
+# Monday 07:30 Nairobi: snapshot the weekly ASBI release and send it to the press list.
+name: Index release
+
+on:
+  schedule:
+    - cron: "30 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Snapshot the release
+        run: |
+          d=$(date -u +%Y-%m-%d)
+          mkdir -p editions/index
+          curl -fsS "https://www.afronomicsfeed.com/api/edition/index?format=text" -o "editions/index/$d.txt"
+          curl -fsS "https://www.afronomicsfeed.com/api/edition/index" -o "editions/index/$d.json"
+      - name: Send to the press list
+        run: |
+          curl -fsS -X POST -H "Authorization: Bearer ${{ secrets.AF_CRON_SECRET }}" https://www.afronomicsfeed.com/api/send/index
+      - name: Owner's weekly email
+        run: |
+          curl -fsS -X POST -H "Authorization: Bearer ${{ secrets.AF_CRON_SECRET }}" https://www.afronomicsfeed.com/api/send/desk || true
+      - name: Commit
+        run: |
+          git config user.name "afronomics-bot"
+          git config user.email "bot@afronomicsfeed.com"
+          git add editions/index
+          git diff --cached --quiet || git commit -m "ASBI release $(date -u +%Y-%m-%d)"
+          git push

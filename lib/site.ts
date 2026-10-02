@@ -76,6 +76,8 @@ export const footerGroups = [
       { href: "/morning/sw", label: "Asubuhi (Kiswahili)" },
       { href: "/alerts", label: "Alerts" },
       { href: "/ask", label: "Ask the data" },
+      { href: "/radio", label: "Radio bulletin" },
+      { href: "/markets/bill-index/release", label: "ASBI weekly release" },
       { href: "/weekly", label: "Weekly" },
       { href: "/explainers", label: "Explainers" },
       { href: "/archive", label: "Archive" },

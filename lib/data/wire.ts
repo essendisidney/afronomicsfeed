@@ -29,7 +29,6 @@ export const feeds: Feed[] = [
   { name: "Techpoint Africa", url: "https://techpoint.africa/feed/", home: "https://techpoint.africa", default_desk: "technology" },
   { name: "Disrupt Africa", url: "https://disruptafrica.com/feed/", home: "https://disruptafrica.com", default_desk: "technology" },
   { name: "WeeTracker", url: "https://weetracker.com/feed/", home: "https://weetracker.com", default_desk: "technology" },
-  { name: "The Kenyan Wall Street", url: "https://kenyanwallstreet.com/feed/", home: "https://kenyanwallstreet.com", home_country: "KE", default_desk: "markets" },
   { name: "Capital FM Business", url: "https://www.capitalfm.co.ke/business/feed/", home: "https://www.capitalfm.co.ke/business", home_country: "KE", default_desk: "economy" },
   { name: "Nairametrics", url: "https://nairametrics.com/feed/", home: "https://nairametrics.com", home_country: "NG", default_desk: "markets" },
   { name: "BusinessDay", url: "https://businessday.ng/feed/", home: "https://businessday.ng", home_country: "NG", default_desk: "economy" },

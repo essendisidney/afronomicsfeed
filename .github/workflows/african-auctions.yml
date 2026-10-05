@@ -69,4 +69,10 @@ jobs:
           git config user.email "afronomics-bot@users.noreply.github.com"
           git add data
           git commit -m "African auctions: add latest results"
-          git push
+          # main can move while the job runs (a merge, another job): replay this commit on top and retry
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 10))
+          done
+          exit 1

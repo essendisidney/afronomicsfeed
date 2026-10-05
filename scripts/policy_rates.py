@@ -44,14 +44,25 @@ BANKS = [
      r"Policy Rate (?P<rate>\d+(?:\.\d+)?) (?P<date>[A-Z][a-z]{2} \d{4})"),
     ("mozambique", "Banco de Moçambique", "https://www.bancomoc.mz/", "Taxa MIMO",
      r"(?P<date>\d{2}-\d{2}-\d{4}) TAXA MIMO [A-Z ]*?(?P<rate>\d+(?:,\d+)?) ?%"),
+    # The Reserve Bank's own home-page data feed (JSON), the same one its site draws its rates panel from.
+    ("southafrica", "South African Reserve Bank", "https://custom.resbank.co.za/SarbWebApi/WebIndicators/HomePageRates", "SARB Policy Rate",
+     r'"Name":"SARB Policy Rate"[^}]*?"Date":"(?P<date>\d{4}-\d{2}-\d{2})","Value":(?P<rate>\d+(?:\.\d+)?)'),
+    # The Bank of Zambia's own content feed (JSON:API), newest entry first.
+    ("zambia", "Bank of Zambia", "https://www.boz.zm/jsonapi/node/monetary_policy_rate?sort=-created&page[limit]=1", "Monetary Policy Rate",
+     r'"field_monetary_policy_rate":"(?P<rate>\d+(?:\.\d+)?)","field_monetary_policy_rate_dat":"(?P<date>\d{4}-\d{2}-\d{2})"'),
+    ("tanzania", "Bank of Tanzania", "https://www.bot.go.tz/?lang=en", "Central Bank Rate",
+     r"Central Bank Rate (?P<rate>\d+(?:\.\d+)?)% (?P<date>\d(?:st|nd|rd|th) Quarter \d{4})"),
 ]
+
+# Where a rate is read from a data feed, readers are sent to the bank's human-readable page instead.
+SOURCE_PAGE = {
+    "southafrica": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates",
+    "zambia": "https://www.boz.zm/",
+}
 
 # Read on the central bank's page but loaded by script, so not yet readable as text.
 MISSING = {
     "nigeria": "Central Bank of Nigeria",
-    "southafrica": "South African Reserve Bank",
-    "tanzania": "Bank of Tanzania",
-    "zambia": "Bank of Zambia",
     "uganda": "Bank of Uganda",
 }
 
@@ -65,7 +76,7 @@ def text_of(url: str) -> str:
 
 def read(bank) -> dict:
     slug, publisher, url, label, pattern = bank
-    base = {"market": slug, "publisher": publisher, "source": url, "label": label}
+    base = {"market": slug, "publisher": publisher, "source": SOURCE_PAGE.get(slug, url), "label": label}
     try:
         m = re.search(pattern, text_of(url))
     except Exception as error:

@@ -3,12 +3,31 @@
  "publisher": "Central Bank of Kenya",
  "source_page": "https://www.centralbank.go.ke/bills-bonds/treasury-bonds/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-09-30T18:31:56+00:00",
+ "updated_at": "2026-10-05T15:59:03+00:00",
  "units": {
   "amounts": "KES millions",
   "rates": "percent per annum"
  },
  "rows": [
+  {
+   "value_date": "2026-10-07",
+   "issue": "FXD1/2018/015",
+   "type": "Fixed coupon",
+   "tenor_years": 15,
+   "maturity": "2033-05-09",
+   "kind": "switch",
+   "offered_total_kes_m": 10000.0,
+   "received_kes_m": 9080.58,
+   "accepted_kes_m": 8963.83,
+   "competitive_kes_m": 7041.25,
+   "noncompetitive_kes_m": 1922.58,
+   "bid_to_cover": 1.01,
+   "market_weighted_avg_rate": 12.6126,
+   "weighted_avg_rate": 12.6112,
+   "price_per_100": 105.0721,
+   "coupon": 12.65,
+   "source": "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/1036982453_SWITCH%20RESULTS%20FXD1-2018-015%20DATED%2007-10-2026.pdf"
+  },
   {
    "value_date": "2026-10-05",
    "issue": "FXD3/2019/015",
@@ -9039,6 +9058,12 @@
    "issues": [
     "FXD3/2019/015",
     "FXD1/2019/020"
+   ]
+  },
+  "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/1036982453_SWITCH%20RESULTS%20FXD1-2018-015%20DATED%2007-10-2026.pdf": {
+   "status": "parsed",
+   "issues": [
+    "FXD1/2018/015"
    ]
   }
  }

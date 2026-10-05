@@ -36,6 +36,7 @@ const copy = {
     cbr: "Central Bank Rate",
     fiftyThousand: "Simple interest on KES 50,000 for a year at the bank average",
     loanCheck: "Check a loan offer in shillings",
+    mobile: "What a mobile loan really costs",
     banks: "What banks pay and charge",
     business: ["Business & trade", "What did my currency do overnight?"],
     kesMove: "Shillings per US dollar (overnight change; + means the shilling gained)",
@@ -67,6 +68,7 @@ const copy = {
     cbr: "Riba ya Benki Kuu (CBR)",
     fiftyThousand: "Riba ya kawaida kwa KES 50,000 kwa mwaka, kwa wastani wa benki",
     loanCheck: "Pima mkopo uliopewa kwa shilingi",
+    mobile: "Gharama halisi ya mkopo wa simu",
     banks: "Benki zinalipa na kutoza kiasi gani",
     business: ["Biashara", "Sarafu yangu ilifanya nini usiku?"],
     kesMove: "Shilingi kwa dola moja (mabadiliko ya usiku; + ni shilingi kuimarika)",
@@ -126,6 +128,7 @@ export async function buildMoneyDoors(lang: Lang = "en") {
         : [],
       links: [
         { href: "/rates/kenya/check", label: t.loanCheck },
+        { href: "/rates/kenya/mobile-loans", label: t.mobile },
         { href: "/rates/kenya", label: t.banks },
       ],
     },

@@ -54,6 +54,9 @@ jobs:
       - run: python scripts/kenya_rates.py
         continue-on-error: true
         timeout-minutes: 5
+      - run: python scripts/policy_rates.py
+        continue-on-error: true
+        timeout-minutes: 5
       # Uganda is not run here: the Bank of Uganda's site does not answer GitHub's network.
       # scripts/uganda_tbills.py runs from a machine in the region instead.
       - name: Commit if the dataset changed

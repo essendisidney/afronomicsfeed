@@ -24,6 +24,10 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const dark = useSyncExternalStore(subscribeTheme, themeSnapshot, () => false);
   const open = menuPath === pathname;
+  // The most specific section wins, so /markets/tbills lights T-bills, not Currencies (/markets) as well.
+  const activeHref = nav
+    .filter((item) => pathname === item.href || pathname.startsWith(`${item.href}/`))
+    .sort((x, y) => y.href.length - x.href.length)[0]?.href;
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -98,7 +102,7 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
       <nav className="hidden border-t border-night-line lg:block" aria-label="Sections">
         <div className="mx-auto flex max-w-7xl items-center gap-x-1 overflow-x-auto px-4 sm:px-6">
           {nav.map((item) => {
-            const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const active = item.href === activeHref;
             return (
               <Link
                 key={item.href}

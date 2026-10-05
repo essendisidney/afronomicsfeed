@@ -7,7 +7,8 @@ Kenya savings and lending rates, from primary publishers, for the "where your mo
   daily and effective annual yield as text. Funds whose sites publish only images or PDFs are not included
   until a text source is found. Add a fund by appending to FUNDS.
 
-Output: data/kenya/rates.json
+Output: data/kenya/rates.json, plus data/kenya/mmf_history.json: every fund yield read, one row per fund per
+Nairobi day, appended on each run so the history builds from the first read.
 
     python scripts/kenya_rates.py
 """
@@ -19,7 +20,7 @@ import re
 import sys
 import warnings
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import requests
 
@@ -29,6 +30,8 @@ from bills_common import ROOT, UA, num  # noqa: E402
 warnings.filterwarnings("ignore")
 CBK = "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/"
 OUT = ROOT / "data" / "kenya" / "rates.json"
+HISTORY = ROOT / "data" / "kenya" / "mmf_history.json"
+NAIROBI = timezone(timedelta(hours=3))
 MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
 
 # name, manager, page, pattern capturing (daily yield, effective annual yield) in percent
@@ -104,6 +107,24 @@ def fund(entry):
         return {"name": name, "manager": manager, "source": url, "status": f"error: {str(error)[:80]}"}
 
 
+def append_history(ok: list[dict], read_at: datetime) -> None:
+    """One row per fund per Nairobi day; a later read the same day replaces the earlier one."""
+    day = read_at.astimezone(NAIROBI).date().isoformat()
+    rows = json.loads(HISTORY.read_text(encoding="utf-8")).get("rows", []) if HISTORY.exists() else []
+    names = {f["name"] for f in ok}
+    rows = [r for r in rows if not (r["date"] == day and r["name"] in names)]
+    for f in ok:
+        rows.append({"date": day, "name": f["name"], "manager": f["manager"], "source": f["source"],
+                     "daily_yield": f.get("daily_yield"), "effective_annual_yield": f["effective_annual_yield"]})
+    rows.sort(key=lambda r: (r["date"], r["name"]), reverse=True)
+    HISTORY.write_text(json.dumps({
+        "dataset": "Kenya money market fund yields, daily",
+        "compiled_by": "Afronomics (afronomicsfeed.com)",
+        "note": "Each row is the yield the fund manager published on its own website when Afronomics read it that day (Nairobi time). Effective annual yield, before fees and withholding tax.",
+        "rows": rows,
+    }, ensure_ascii=False, indent=0), encoding="utf-8")
+
+
 def main() -> int:
     banks = bank_rates()
     with ThreadPoolExecutor(max_workers=4) as pool:
@@ -129,6 +150,8 @@ def main() -> int:
         },
     }
     OUT.write_text(json.dumps(body, ensure_ascii=False, indent=1), encoding="utf-8")
+    if ok:
+        append_history(ok, datetime.now(timezone.utc))
     return 0
 
 

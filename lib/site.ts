@@ -16,16 +16,16 @@ export const site = {
   linkedinUrl: "https://www.linkedin.com/company/afronomicsfeed/",
 } as const;
 
+/** The price of money first. Economy, Capital, Climate, Technology and Trade stay live, linked from the footer. */
 export const nav = [
-  { href: "/news", label: "Wire" },
-  { href: "/markets", label: "Markets" },
-  { href: "/economy", label: "Economy" },
-  { href: "/capital", label: "Capital" },
-  { href: "/climate", label: "Climate" },
-  { href: "/technology", label: "Technology" },
-  { href: "/trade", label: "Trade" },
+  { href: "/markets/tbills", label: "T-bills" },
+  { href: "/markets/kenya-bonds", label: "Bonds" },
+  { href: "/rates/kenya", label: "Savings & loans" },
+  { href: "/markets", label: "Currencies" },
+  { href: "/data/inflation", label: "Inflation" },
   { href: "/countries", label: "Countries" },
   { href: "/data", label: "Data" },
+  { href: "/news", label: "Wire" },
   { href: "/brief", label: "Analysis" },
 ] as const;
 
@@ -57,6 +57,7 @@ export const footerGroups = [
       { href: "/markets/bill-index", label: "Sovereign Bill Index" },
       { href: "/markets/borrowing-costs", label: "Borrowing costs" },
       { href: "/rates/kenya", label: "Kenya rates compared" },
+      { href: "/rates/kenya/money-market-funds", label: "Money market funds" },
       { href: "/rates/kenya/check", label: "Is my rate fair?" },
       { href: "/countries", label: "54 country files" },
       { href: "/data", label: "Data hub" },

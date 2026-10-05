@@ -152,3 +152,62 @@ export function fairBench() {
     overdraftAvg: bank.overdraft,
   };
 }
+
+type FundReading = { date: string; name: string; manager: string; source: string; daily_yield: number | null; effective_annual_yield: number };
+
+const HISTORY_FILE = path.join(process.cwd(), "data", "kenya", "mmf_history.json");
+
+/** Every fund yield read, one row per fund per Nairobi day (scripts/kenya_rates.py), oldest first. */
+export const loadFundHistory = cache((): FundReading[] =>
+  fs.existsSync(HISTORY_FILE)
+    ? (JSON.parse(fs.readFileSync(HISTORY_FILE, "utf8")).rows as FundReading[]).sort((a, b) => a.date.localeCompare(b.date))
+    : [],
+);
+
+export type FundRow = {
+  name: string;
+  manager: string;
+  source: string;
+  gross: number; // latest effective annual yield, % before fees and tax
+  net: number; // after 15% withholding tax
+  daily: number | null;
+  readOn: string; // last day the yield was read
+  firstRead: string;
+  /** First day of the current run of identical readings: the yield has not moved since then. */
+  unchangedSince: string;
+  points: { date: string; value: number }[];
+};
+
+/** The money market fund league table: latest yield per fund, ranked by what a saver keeps after tax. */
+export function fundLeague(): FundRow[] {
+  const byFund = new Map<string, FundReading[]>();
+  for (const r of loadFundHistory()) byFund.set(r.name, [...(byFund.get(r.name) ?? []), r]);
+  const rows: FundRow[] = [];
+  for (const [name, readings] of byFund) {
+    const last = readings[readings.length - 1];
+    let since = last.date;
+    for (let i = readings.length - 2; i >= 0 && readings[i].effective_annual_yield === last.effective_annual_yield; i--) since = readings[i].date;
+    rows.push({
+      name,
+      manager: last.manager,
+      source: last.source,
+      gross: last.effective_annual_yield,
+      net: last.effective_annual_yield * (1 - WHT_INTEREST),
+      daily: last.daily_yield,
+      readOn: last.date,
+      firstRead: readings[0].date,
+      unchangedSince: since,
+      points: readings.map((r) => ({ date: r.date, value: r.effective_annual_yield })),
+    });
+  }
+  return rows.sort((a, b) => b.net - a.net);
+}
+
+export function fundHistoryCsv() {
+  const lines = ["date,fund,manager,effective_annual_yield_pct,daily_yield_pct,source"];
+  const q = (s: string) => `"${s.replace(/"/g, '""')}"`;
+  for (const r of [...loadFundHistory()].reverse()) {
+    lines.push([r.date, q(r.name), q(r.manager), r.effective_annual_yield, r.daily_yield ?? "", r.source].join(","));
+  }
+  return lines.join("\n") + "\n";
+}

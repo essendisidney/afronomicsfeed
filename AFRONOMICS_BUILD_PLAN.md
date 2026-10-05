@@ -1,264 +1,77 @@
-# Afronomics Feed — Architecture & Build Plan
+# Afronomics — Plan
 
-**Product:** Africa’s economic intelligence layer  
-**Thesis:** NEWS → DATA → CONTEXT → SIGNALS → DECISIONS  
-**Positioning:** The economic intelligence graph for Africa — not “Bloomberg for Africa,” not a news site.
+**What it is:** the price of money in Africa, from the source, for everyone.
+**Goal:** when anyone in Africa asks what money costs (a reporter, a bank treasurer, a saver choosing between a
+SACCO and a money market fund), the answer they are given is "check Afronomics".
 
-Audited: 23 Sep 2026.
+Revised 5 Oct 2026. This replaces the September plan, whose 136 phases described shell pages that were removed
+in the rebuild.
 
 ---
 
-## 1. Existing architecture (what stays)
+## 1. What exists today
 
-| Layer | Today | Decision |
+| Layer | What it is | Where |
 | --- | --- | --- |
-| Stack | Next.js 16 App Router, React 19, TS, Tailwind v4 | **Keep.** |
-| Content | Filesystem Markdown + gray-matter (`content/briefs`, `weekly`, `explainers`) | **Keep** as the original Kenya journalism layer. Trust fields (labels, sources, as-of, desk memo) remain the editorial contract. |
-| Trust UI | Facts/Analysis/Opinion, citations, EXAMPLE DATA, corrections, method | **Keep and extend** to all new data widgets. |
-| Chrome | Header, search ⌘K, theme, market strip, footer | **Refactor** into a terminal masthead. Do not delete search, theme, or legal/corrections. |
-| Routes that must remain live | `/brief`, `/weekly`, `/explainers`, `/today`, `/method`, `/archive`, `/institutions`, `/topics`, `/trackers/*`, `/pricing`, `/subscribe`, `/advisory`, `/corrections`, `/legal/*` | **Keep.** Footer: “Kenya desk file.” |
-| Payments / auth / CMS | Stubs only | **Do not fake.** Schema + UI shells; live billing/auth when Supabase + checkout exist. |
-| Database | None | **Add** Postgres schema (Supabase). No Afronomics project exists yet (other org projects are unrelated). |
-| Git remote / Vercel | Local git, no `origin` at last check; Vercel CLI present | Wire separately. Domain: `afronomicsfeed.com`. |
-| Live market data | Explicitly none | **Never scrape.** All prints stay DEMO / Methodology Under Development until licensed pipelines. |
+| T-bill auctions, 10 markets | Every central-bank result, read from the banks' own notices. History from 2000 (South Africa), 2002 (Egypt, Nigeria), 2011 (Kenya); the shortest is Zambia from 2018 | `data/*/tbill_auctions.json`, `scripts/*_tbills.py`, `/markets/tbills` |
+| Kenya bonds | Every auction, yield curve, what KES 100,000 earns | `data/kenya/bond_auctions.json`, `/markets/kenya-bonds` |
+| Kenya savings and loans | Bills, bonds, money market funds and CBK bank averages after tax; "Is my rate fair?" | `data/kenya/rates.json`, `/rates/kenya`, `/rates/kenya/check` |
+| Money market fund history | Each fund's published yield, one row per fund per day, from 1 Oct 2026 | `data/kenya/mmf_history.json`, `/rates/kenya/money-market-funds`, `/api/data/kenya-mmf` |
+| Sovereign Bill Index | Weekly ten-market index and release | `/markets/bill-index`, `editions/index/` |
+| The Morning | Weekday note at 07:00 Nairobi, English and Kiswahili, email and WhatsApp text | `/morning`, `.github/workflows/morning-note.yml` |
+| Alerts | Browser push the moment a market publishes | `supabase/functions/af-push-check` |
+| Economy files | 54 countries, World Bank series, FX, DFI pipeline, the Wire (publisher RSS) | `/countries`, `/data`, `/capital`, `/news` |
+| Public API and CSVs | Free with attribution | `/developers`, `/api/v1/*`, `/api/data/*` |
+| Money | Paystack: Pro, Team, committee packs; jobs board | `/pricing`, `/pack`, `/jobs` |
 
-### Important assumptions
+How it runs day to day is in `OPERATIONS.md`.
 
-1. Kenya remains the **first populated file**, not the brand limit.
-2. USD Pro/Professional prices are the commercial north star; the KES 500 trial stays as a local on-ramp.
-3. Demo numbers exist only to prove layout and graph shape. They never ship without a `Demo Data` or `Methodology Under Development` mark.
-4. External articles are **summaries + outbound links**, never republished copy.
-5. AI answers may only cite stored documents/sources. Model output never writes verified observations.
+## 2. Where it stands (first week, 30 Sep – 5 Oct 2026)
 
----
+- About 170 human page views, almost all from Kenya; 1 newsletter subscriber; 1 payment.
+- The 135 "API calls" logged from Ireland were our own push-alert checker. It is no longer counted (`lib/bots.ts`).
+- Uganda's data stops at 3 Sep 2026: its script runs from a machine in the region, not the GitHub job.
+- Every money market fund yield read has been unchanged since the first read on 1 Oct. Check whether the
+  managers' pages are current before the fair-rate check leans on them; the league table now shows how long
+  each yield has been unchanged.
 
-## 2. Target information architecture
+The data and the automation are ahead of the audience. The next quarter is about being found and being cited.
 
-```
-NEWS → DATA → CONTEXT → SIGNALS → DECISIONS
-```
+## 3. Priorities, in order
 
-**Primary nav:** Markets · Economy · Capital · Climate · Technology · Trade · Companies · Countries · Data · Opinion  
+### 1. Be cited (distribution)
+- Publish every auction within minutes with a share image and one plain sentence; post to X, LinkedIn and a
+  WhatsApp Channel.
+- Newsroom programme: free use for Business Daily, Nation, The Star, Citizen, and Nigerian and Ghanaian desks in
+  exchange for "Source: Afronomics" and a link.
+- Push `/widgets` to SACCOs, fintechs and finance blogs: every embed is a backlink and a daily reminder.
+- **Measure:** citations per week, sites embedding a widget, Morning subscribers.
 
-**Utility:** Search · Brief · Terminal · PRO  
+### 2. Win the saver
+- Grow the money market fund table from 4 funds toward every CMA-licensed fund; the history is the moat.
+- "Is my rate fair?" for Nigeria and Ghana.
+- Kiswahili as a full edition, not a page.
+- **Measure:** fair-rate checks run, MMF page visits, returning visitors.
 
-**Programmatic SEO:**  
-`/countries/[slug]/[topic]`, `/markets/{currencies|exchanges|commodities}/[slug]`, `/capital/[type]/[country]`, `/indicators/[slug]/[country]`, `/climate/[slug]`, `/signals/[slug]`, `/economy/[slug]`, `/technology/[lens]/[country]`, `/trade/[corridor]/[country]`, `/trade/ports/[slug]`, `/projects/[country]`, `/ask/[slug]`, `/ask/corpus`, `/data/[slug]`, `/industries/[slug]/[country]`, `/agencies/[kind]/[country]`, `/cities/[slug]`, `/investors/[slug]`, `/people/[role]/[country]`, `/developers`, `/graph/[desk]`, `/graph/resolve`, `/account`, `/account/usage`, `/watchlists`, `/alerts`, `/exports`, `/method/registry`, `/packs`, `/sources`, `/compare`, `/ingestion`, `/feeds`, `/status`, `/searches`, `/licensing`, `/notifications`, `/changelog`, `/audit`, `/reports`, `/calendar`, `/partners`, `/coverage`, `/glossary`, `/onboarding`, `/webhooks`, `/regions`, `/regions/[slug]`, `/runbooks`, `/layers`, `/press`, `/golive`, `/social`, `/embeds`, `/security`, `/integrations`, `/sla`, `/brand`, `/roadmap`, `/accessibility`, `/sdk`, `/templates`, `/support`, `/newsletters`, `/careers`, `/contact`, `/faq`, `/legal/cookies`, `/trust`, `/credits`, `/manifesto`, `/imprint`, `/syndication`, `/notices`, `/languages`, `/units`, `/correspondents`, `/citations`, `/corridors`, `/identifiers`, `/series`, `/revisions`, `/classifications`, `/releases`, `/datelines`, `/borders`, `/customs`, `/modes`, `/observations`, `/frequencies`, `/vintages`, `/lineage`, `/gaps`, `/periods`, `/lags`, `/benchmarks`, `/baskets`, `/thresholds`, `/peers`, `/weights`, `/constituents`, `/horizons`, `/baselines`, `/spreads`, `/seasons`, `/adjustments`, `/footnotes`, `/scales`, `/precision`, `/rounding`, `/crosswalks`, `/aliases`, `/embargoes`, `/sessions`, `/holidays`, `/factors`, `/tenors`, `/grades`, `/flags`, `/windows`, `/cutoffs`, `/stamps`, `/breaks`, `/curves`, `/fixes`, `/lots`, `/quotes`, `/contracts`, `/samples`, `/indices`, `/manifests`, `/parcels`, `/draws`, `/settlements`, `/positions`, `/auctions`, `/ledgers`, `/agents`, `/clearances`, `/warehouses`, `/permits`, `/guarantees`, `/inspections`, `/waybills`, `/consignments`, `/certificates`, `/surveys`, `/duties`, `/quotas`, `/assays`, `/tallies`, `/seals`, `/stowage`, `/nominations`, `/berths`, `/laytime`, `/shortages`, `/endorsements`, `/demurrage`, `/handovers`, `/receipts`, `/waivers`, `/laycans`, `/protests`, `/discharges`, `/bonds`
+### 3. Cover the whole price of money
+- Policy rates and an MPC calendar for all ten markets; interbank rates.
+- Monthly CPI from national statistics offices (World Bank inflation is annual and lags).
+- Eurobond yields; bond auctions beyond Kenya.
+- Bring Uganda onto a schedule that runs.
 
----
+### 4. Charge institutions, keep the public free
+- Committee packs, API keys with higher limits, bulk licences for banks, pension funds, DFIs and treasuries.
+- Paystack is live; the work is packaging, a sample per buyer type and direct sales.
+- **Measure:** paying institutions, monthly recurring revenue.
 
-## 3. Data architecture
+### 5. Show who stands behind the numbers
+- A named editor and a methodology owner on `/about` and `/method`; keep `/corrections` visible.
 
-### 3.1 Knowledge graph
+## 4. Rules that do not change
 
-Entities: country, city, company, bank, startup, fund, investor, industry, commodity, currency, project, agency, indicator, corridor, port, policy, person.
-
-Stored as `entities` + `entity_relationships` (typed edges, source, as-of). Articles tag entities; ingestion upserts edges. That compounding graph is the moat.
-
-### 3.2 Provenance (non-negotiable)
-
-Every observation: `source_id`, `observation_date`, `retrieved_at`, `unit`, `currency`, `geography`, `status` ∈  
-`verified | primary_source | secondary_source | estimated | modelled | unverified | demo`.
-
-### 3.3 Ingestion pipeline (code exists as stubs; jobs later)
-
-```
-SOURCE → FETCH → VALIDATE → NORMALIZE → DEDUPE → RESOLVE → RAW → STRUCTURED → SIGNALS → PUBLISH
-```
-
-Folder: `lib/ingestion/{providers,normalizers,validators,deduplication,entity-resolution,jobs}`.
-
-Historical observations are **append-only**. Never silent overwrite.
-
-### 3.4 Schema
-
-See `supabase/migrations/0001_afronomics_core.sql`. Applied on the `afronomicsfeed` project. Reference catalogues are loaded. The prints agent reads World Bank Open Data and writes a row only when that response parses. Price tapes stay empty.
-
-Covers: profiles, subscriptions, articles, publishers, authors, countries, companies, people, industries, indicators + observations, currencies, market prices, exchanges, capital, investors, funds, climate, startups, trade, infrastructure, signals, graph, watchlists, alerts, documents/chunks/embeddings (pgvector), newsletters, api_keys, audit_logs.
-
-RLS on from day one. Service role never in the client.
-
----
-
-## 4. Implementation phases
-
-| Phase | Scope | Status |
-| --- | --- | --- |
-| 1 | Terminal chrome, nav, premium homepage, demo widgets labelled | **Shipped** |
-| 2 | Country intelligence pages (seed 6) | **54 terminals + 10 series files each** |
-| 3 | Articles + editorial (MD remains; `/admin` shell) | MD live; `/admin` shell |
-| 4 | Markets + indicators (demo, sourced fields) | **Currency, exchange, commodity files + indicator×country** |
-| 5 | Capital Tracker | **12 books × 54 country files + demo table** |
-| 6 | Climate Capital | **54 country climate files + Project Lens** |
-| 7 | Signals | **Signal files + 13 category hubs** |
-| 8 | Terminal | **Monitor wired to market, economy, tech, capital, climate, company and signal files** |
-| 9 | Ask Afronomics (RAG + pgvector) | **Question files + `/ask/corpus` empty slots; RAG still unconnected** |
-| 10 | Subscriptions | **Entitlement matrix + `/account`; checkout/Auth still stubs** |
-| 11 | API keys + usage | **`/developers` + `/api/meta` catalogue; keys not issued** |
-| 12 | Full graph + entity resolution jobs | **`/graph` + featured + WA/NA/CA desks through SL/MR/GM/TD + corridors (incl. Trans-Kalahari, Beira); resolve stub** |
-| 13 | Decisions (watches / alerts / opinion rubrics) | **`/watchlists` + `/alerts` shells; Opinion rubrics; no fake deliveries** |
-| 14 | Multi-desk graph + exports + Ask corpus | **NG/ZA/EG desks; `/exports` shells; `/ask/corpus` empty index** |
-| 15 | Featured desks complete + method/usage/packs | **GH/RW desks; `/method/registry`; `/account/usage`; `/packs` shells** |
-| 16 | Sources + compare + ingestion ops | **`/sources` registry; `/compare` empty matrix; `/ingestion` job board** |
-| 17 | Feeds + status + EAC corridor desks | **`/feeds` catalogue; `/status` board; UG/TZ graph desks** |
-| 18 | Searches + licensing + notifications + corridor desk | **`/searches`; `/licensing`; `/notifications`; ET + Northern Corridor desks** |
-| 19 | Changelog + audit + reports + Morocco | **`/changelog`; `/audit`; `/reports`; Morocco graph desk** |
-| 20 | Calendar + partners + Central Corridor + API | **`/calendar`; `/partners`; Central Corridor desk; `/api/graph` + `/api/status`** |
-| 21 | Coverage + glossary + WA/Lobito desks | **`/coverage`; `/glossary`; CI + Angola + Lobito Corridor desks** |
-| 22 | Onboarding + webhooks + SN/MZ + Maputo | **`/onboarding`; `/webhooks`; Senegal + Mozambique + Maputo Corridor desks** |
-| 23 | Regions + runbooks + Zambia / Lobito span | **`/regions`; `/runbooks`; Zambia desk; Lobito spans AO+ZM** |
-| 24 | Layers + press + Tunisia desk | **`/layers`; `/press`; Tunisia graph desk** |
-| 25 | Go-live gates + LinkedIn social desk | **`/golive` blockers; `/social` LinkedIn share + company URL hook** |
-| 26 | Embeds + Algeria desk + LI cross-post runbook | **`/embeds` catalogue; Algeria graph desk; LinkedIn cross-post SOP** |
-| 27 | Security trust + Botswana desk | **`/security` control catalogue; Botswana graph desk** |
-| 28 | Integrations + Cameroon desk | **`/integrations` delivery catalogue; Cameroon graph desk** |
-| 29 | SLA catalogue + Namibia desk | **`/sla` commitment shells; Namibia graph desk** |
-| 30 | Brand kit + Trans-Kalahari corridor | **`/brand` identity catalogue; Trans-Kalahari graph + trade file** |
-| 31 | Roadmap + a11y + Libya + Beira | **`/roadmap`; `/accessibility`; Libya + Zimbabwe desks; Beira Corridor** |
-| 32 | SDK catalogue + Mauritius desk | **`/sdk` client catalogue; Mauritius graph desk** |
-| 33 | Templates + support + Djibouti desk | **`/templates`; `/support`; Djibouti graph desk** |
-| 34 | Newsletters + Gabon desk | **`/newsletters` digest catalogue; Gabon graph desk** |
-| 35 | Careers + Malawi desk | **`/careers` role shapes; Malawi graph desk** |
-| 36 | Contact doors + Benin desk | **`/contact` door catalogue; Benin graph desk** |
-| 37 | FAQ + Togo desk | **`/faq` honest answers; Togo graph desk** |
-| 38 | Cookies posture + Mali desk | **`/legal/cookies`; Mali graph desk** |
-| 39 | Trust center + Niger desk | **`/trust` hub; Niger graph desk** |
-| 40 | Credits + BF/GN/LR desks | **`/credits`; Burkina Faso, Guinea, Liberia graph desks** |
-| 41 | Manifesto + SL/MR/GM/TD desks | **`/manifesto`; Sierra Leone, Mauritania, Gambia, Chad desks** |
-| 42 | Imprint + Madagascar / Congo desks | **`/imprint`; Madagascar + Congo graph desks** |
-| 43 | Syndication + BI/CF/GQ desks | **`/syndication`; Burundi, CAR and Equatorial Guinea graph desks** |
-| 44 | Notices + CD/ST/SS desks | **`/notices`; DR Congo, São Tomé and Príncipe, and South Sudan graph desks** |
-| 45 | Languages + SD/ER/SO desks | **`/languages`; Sudan, Eritrea and Somalia graph desks** |
-| 46 | Units + CV/GW/KM desks | **`/units`; Cabo Verde, Guinea-Bissau and Comoros graph desks** |
-| 47 | Correspondents + SZ/LS desks | **`/correspondents`; Eswatini and Lesotho graph desks** |
-| 48 | Citations + Seychelles desk | **`/citations`; Seychelles graph desk. Country desks cover the full set** |
-| 49 | Corridors + Abidjan–Lagos / Nacala | **`/corridors`; Abidjan–Lagos and Nacala graph desks. No stored volumes** |
-| 50 | Identifiers + LAPSSET / North-South | **`/identifiers`; LAPSSET and North-South corridor desks** |
-| 51 | Series + Douala–N'Djamena / Walvis–Ndola | **`/series`; Douala–N'Djamena and Walvis Bay–Ndola desks** |
-| 52 | Revisions + Djibouti–Addis / Dakar–Bamako | **`/revisions`; Djibouti–Addis and Dakar–Bamako desks** |
-| 53 | Classifications + Cotonou–Niamey / Lomé–Ouagadougou | **`/classifications`; Cotonou–Niamey and Lomé–Ouagadougou desks** |
-| 54 | Releases + Abidjan–Ouagadougou / Conakry–Bamako | **`/releases`; Abidjan–Ouagadougou and Conakry–Bamako desks** |
-| 55 | Datelines + Pointe-Noire / TAZARA | **`/datelines`; Pointe-Noire–Brazzaville and TAZARA desks** |
-| 56 | Borders + Douala–Bangui / Tema–Ouagadougou | **`/borders`; Douala–Bangui and Tema–Ouagadougou desks** |
-| 57 | Customs + Abidjan–Bamako / Lomé–Niamey | **`/customs`; Abidjan–Bamako and Lomé–Niamey desks** |
-| 58 | Modes + Nouakchott–Dakar / Lagos–Niamey | **`/modes`; Nouakchott–Dakar and Lagos–Niamey desks** |
-| 59 | Observations + Matadi–Kinshasa / Berbera–Addis | **`/observations`; Matadi–Kinshasa and Berbera–Addis desks** |
-| 60 | Frequencies + Cape Town–Johannesburg / Alexandria–Cairo | **`/frequencies`; Cape Town–Johannesburg and Alexandria–Cairo desks** |
-| 61 | Vintages + Port Said–Cairo / Banjul–Dakar | **`/vintages`; Port Said–Cairo and Banjul–Dakar desks** |
-| 62 | Lineage + Freetown–Monrovia / Luanda–Lobito | **`/lineage`; Freetown–Monrovia and Luanda–Lobito desks** |
-| 63 | Gaps + Port Sudan–Khartoum / Toamasina–Antananarivo | **`/gaps`; Port Sudan–Khartoum and Toamasina–Antananarivo desks** |
-| 64 | Periods + Mbabane–Maputo / Maseru–Johannesburg | **`/periods`; Mbabane–Maputo and Maseru–Johannesburg desks** |
-| 65 | Lags + Bissau–Dakar / Mogadishu–Berbera | **`/lags`; Bissau–Dakar and Mogadishu–Berbera desks** |
-| 66 | Benchmarks + Accra–Tema / Abuja–Lagos | **`/benchmarks`; Accra–Tema and Abuja–Lagos desks** |
-| 67 | Baskets + Douala–Yaoundé / Massawa–Asmara | **`/baskets`; Douala–Yaoundé and Massawa–Asmara desks** |
-| 68 | Thresholds + Tangier–Casablanca / Tunis–Sfax | **`/thresholds`; Tangier–Casablanca and Tunis–Sfax desks** |
-| 69 | Peers + Algiers–Oran / Tripoli–Benghazi | **`/peers`; Algiers–Oran and Tripoli–Benghazi desks** |
-| 70 | Weights + Libreville–Port-Gentil / Malabo–Bata | **`/weights`; Libreville–Port-Gentil and Malabo–Bata desks** |
-| 71 | Constituents + Nouakchott–Nouadhibou / Lusaka–Ndola | **`/constituents`; Nouakchott–Nouadhibou and Lusaka–Ndola desks** |
-| 72 | Horizons + Beira–Lilongwe / Harare–Bulawayo | **`/horizons`; Beira–Lilongwe and Harare–Bulawayo desks** |
-| 73 | Baselines + Accra–Kumasi / Brazzaville–Kinshasa | **`/baselines`; Accra–Kumasi and Brazzaville–Kinshasa desks** |
-| 74 | Spreads + Gaborone–Francistown / Windhoek–Walvis Bay | **`/spreads`; Gaborone–Francistown and Windhoek–Walvis Bay desks** |
-| 75 | Seasons + Mombasa–Nairobi / Dar es Salaam–Dodoma | **`/seasons`; Mombasa–Nairobi and Dar es Salaam–Dodoma desks** |
-| 76 | Adjustments + Kano–Lagos / Blantyre–Lilongwe | **`/adjustments`; Kano–Lagos and Blantyre–Lilongwe desks** |
-| 77 | Footnotes + Cairo–Aswan / Casablanca–Marrakech | **`/footnotes`; Cairo–Aswan and Casablanca–Marrakech desks** |
-| 78 | Scales + Durban–Johannesburg / Kampala–Kigali | **`/scales`; Durban–Johannesburg and Kampala–Kigali desks** |
-| 79 | Precision + Juba–Kampala / Ouagadougou–Niamey | **`/precision`; Juba–Kampala and Ouagadougou–Niamey desks** |
-| 80 | Rounding + Addis Ababa–Nairobi / Bamako–Ouagadougou | **`/rounding`; Addis Ababa–Nairobi and Bamako–Ouagadougou desks** |
-| 81 | Crosswalks + Niamey–Kano / Algiers–Constantine | **`/crosswalks`; Niamey–Kano and Algiers–Constantine desks** |
-| 82 | Aliases + Accra–Takoradi / Kigali–Bujumbura | **`/aliases`; Accra–Takoradi and Kigali–Bujumbura desks** |
-| 83 | Embargoes + Lusaka–Harare / Lagos–Port Harcourt | **`/embargoes`; Lusaka–Harare and Lagos–Port Harcourt desks** |
-| 84 | Sessions + Nairobi–Kisumu / Abidjan–San-Pédro | **`/sessions`; Nairobi–Kisumu and Abidjan–San-Pédro desks** |
-| 85 | Holidays + Beira–Tete / Monrovia–Buchanan | **`/holidays`; Beira–Tete and Monrovia–Buchanan desks** |
-| 86 | Factors + Casablanca–Rabat / Johannesburg–Pretoria | **`/factors`; Casablanca–Rabat and Johannesburg–Pretoria desks** |
-| 87 | Tenors + Dakar–Saint-Louis / Accra–Tamale | **`/tenors`; Dakar–Saint-Louis and Accra–Tamale desks** |
-| 88 | Grades + Luanda–Namibe / Kinshasa–Lubumbashi | **`/grades`; Luanda–Namibe and Kinshasa–Lubumbashi desks** |
-| 89 | Flags + Algiers–Annaba / Lagos–Calabar | **`/flags`; Algiers–Annaba and Lagos–Calabar desks** |
-| 90 | Windows + Kampala–Entebbe / Dar es Salaam–Mwanza | **`/windows`; Kampala–Entebbe and Dar es Salaam–Mwanza desks** |
-| 91 | Cutoffs + Cotonou–Porto-Novo / Lomé–Kara | **`/cutoffs`; Cotonou–Porto-Novo and Lomé–Kara desks** |
-| 92 | Stamps + Tunis–Sousse / Cairo–Luxor | **`/stamps`; Tunis–Sousse and Cairo–Luxor desks** |
-| 93 | Breaks + Conakry–Kankan / Libreville–Franceville | **`/breaks`; Conakry–Kankan and Libreville–Franceville desks** |
-| 94 | Curves + Nairobi–Nakuru / Addis Ababa–Dire Dawa | **`/curves`; Nairobi–Nakuru and Addis Ababa–Dire Dawa desks** |
-| 95 | Fixes + Abidjan–Bouaké / Lagos–Ibadan | **`/fixes`; Abidjan–Bouaké and Lagos–Ibadan desks** |
-| 96 | Lots + Johannesburg–Bloemfontein / Lusaka–Livingstone | **`/lots`; Johannesburg–Bloemfontein and Lusaka–Livingstone desks** |
-| 97 | Quotes + Marrakech–Agadir / Kampala–Jinja | **`/quotes`; Marrakech–Agadir and Kampala–Jinja desks** |
-| 98 | Contracts + Yaoundé–Garoua / Harare–Mutare | **`/contracts`; Yaoundé–Garoua and Harare–Mutare desks** |
-| 99 | Samples + Maputo–Nampula / Accra–Cape Coast | **`/samples`; Maputo–Nampula and Accra–Cape Coast desks** |
-| 100 | Indices + Windhoek–Rundu / Gaborone–Maun | **`/indices`; Windhoek–Rundu and Gaborone–Maun desks** |
-| 101 | Manifests + Tripoli–Misrata / Oran–Constantine | **`/manifests`; Tripoli–Misrata and Oran–Constantine desks** |
-| 102 | Parcels + Blantyre–Zomba / Asmara–Keren | **`/parcels`; Blantyre–Zomba and Asmara–Keren desks** |
-| 103 | Draws + Luanda–Malanje / Antananarivo–Fianarantsoa | **`/draws`; Luanda–Malanje and Antananarivo–Fianarantsoa desks** |
-| 104 | Settlements + Dakar–Kaolack / Bamako–Sikasso | **`/settlements`; Dakar–Kaolack and Bamako–Sikasso desks** |
-| 105 | Positions + Ouagadougou–Bobo-Dioulasso / Khartoum–Kassala | **`/positions`; Ouagadougou–Bobo-Dioulasso and Khartoum–Kassala desks** |
-| 106 | Auctions + N'Djamena–Moundou / Kigali–Musanze | **`/auctions`; N'Djamena–Moundou and Kigali–Musanze desks** |
-| 107 | Ledgers + Lilongwe–Mzuzu / Addis Ababa–Hawassa | **`/ledgers`; Lilongwe–Mzuzu and Addis Ababa–Hawassa desks** |
-| 108 | Desk agents | **`/agents` daily World Bank reader; empty cells stay empty** |
-| 109 | Clearances + Abuja–Kano / Dodoma–Mwanza | **`/clearances`; Abuja–Kano and Dodoma–Mwanza desks** |
-| 110 | Warehouses + Pretoria–Bloemfontein / Niamey–Zinder | **`/warehouses`; Pretoria–Bloemfontein and Niamey–Zinder desks** |
-| 111 | Permits + Bujumbura–Gitega / Bangui–Bambari | **`/permits`; Bujumbura–Gitega and Bangui–Bambari desks** |
-| 112 | Guarantees + Juba–Wau / Rabat–Fès | **`/guarantees`; Juba–Wau and Rabat–Fès desks** |
-| 113 | Inspections + Kisumu–Eldoret / Kumasi–Tamale | **`/inspections`; Kisumu–Eldoret and Kumasi–Tamale desks** |
-| 114 | Waybills + Ibadan–Ilorin / Kampala–Gulu | **`/waybills`; Ibadan–Ilorin and Kampala–Gulu desks** |
-| 115 | Consignments + Lusaka–Chipata / Harare–Gweru | **`/consignments`; Lusaka–Chipata and Harare–Gweru desks** |
-| 116 | Certificates + Ndola–Kitwe / Addis Ababa–Mekelle | **`/certificates`; Ndola–Kitwe and Addis Ababa–Mekelle desks** |
-| 117 | Surveys + Nakuru–Eldoret / Tamale–Bolgatanga | **`/surveys`; Nakuru–Eldoret and Tamale–Bolgatanga desks** |
-| 118 | Duties + Kano–Maiduguri / Jinja–Mbale | **`/duties`; Kano–Maiduguri and Jinja–Mbale desks** |
-| 119 | Quotas + Durban–Pietermaritzburg / Beira–Chimoio | **`/quotas`; Durban–Pietermaritzburg and Beira–Chimoio desks** |
-| 120 | Assays + Lubumbashi–Kolwezi / Antananarivo–Antsirabe | **`/assays`; Lubumbashi–Kolwezi and Antananarivo–Antsirabe desks** |
-| 121 | Tallies + Enugu–Onitsha / Meknes–Fès | **`/tallies`; Enugu–Onitsha and Meknes–Fès desks** |
-| 122 | Seals + Kaduna–Zaria / Huambo–Lubango | **`/seals`; Kaduna–Zaria and Huambo–Lubango desks** |
-| 123 | Stowage + Arusha–Moshi / Garoua–Maroua | **`/stowage`; Arusha–Moshi and Garoua–Maroua desks** |
-| 124 | Nominations + Jos–Bauchi / Polokwane–Mbombela | **`/nominations`; Jos–Bauchi and Polokwane–Mbombela desks** |
-| 125 | Berths + Sokoto–Katsina / Oujda–Taza | **`/berths`; Sokoto–Katsina and Oujda–Taza desks** |
-| 126 | Laytime + Sunyani–Techiman / Tabora–Kigoma | **`/laytime`; Sunyani–Techiman and Tabora–Kigoma desks** |
-| 127 | Shortages + Bloemfontein–Kimberley / Mzuzu–Karonga | **`/shortages`; Bloemfontein–Kimberley and Mzuzu–Karonga desks** |
-| 128 | Endorsements + Abeokuta–Ibadan / Sétif–Batna | **`/endorsements`; Abeokuta–Ibadan and Sétif–Batna desks** |
-| 129 | Demurrage + Makurdi–Lafia / Bahir Dar–Gondar | **`/demurrage`; Makurdi–Lafia and Bahir Dar–Gondar desks** |
-| 130 | Handovers + Mbeya–Iringa / Mbarara–Kabale | **`/handovers`; Mbeya–Iringa and Mbarara–Kabale desks** |
-| 131 | Receipts + Ségou–Mopti / Kairouan–Gafsa | **`/receipts`; Ségou–Mopti and Kairouan–Gafsa desks** |
-| 132 | Waivers + Masvingo–Chiredzi / Huye–Muhanga | **`/waivers`; Masvingo–Chiredzi and Huye–Muhanga desks** |
-| 133 | Laycans + Yola–Jalingo / Nyeri–Nanyuki | **`/laycans`; Yola–Jalingo and Nyeri–Nanyuki desks** |
-| 134 | Protests + Bamenda–Bafoussam / Kabwe–Kapiri | **`/protests`; Bamenda–Bafoussam and Kabwe–Kapiri desks** |
-| 135 | Discharges + Goma–Bukavu / Asyut–Sohag | **`/discharges`; Goma–Bukavu and Asyut–Sohag desks** |
-| 136 | Bonds + Thiès–Diourbel / Palapye–Serowe | **`/bonds`; Thiès–Diourbel and Palapye–Serowe desks** |
-
-The app stays runnable after every phase.
-
----
-
-Phase 1 is live in-app: chrome, homepage, all initial routes, 54 country terminals, SQL, ingestion stubs.
-
-## 5. What Phase 1 ships
-
-- Wordmark **AFRONOMICS** + line **Africa’s Economic Intelligence Layer**
-- Dense masthead + ticker (all **Demo Data**)
-- Homepage: lead + 4 supports, Pulse, Markets, Capital, Climate, Tech, Country Watch, Signals, Data of the Day, Brief
-- New primary routes (no dead buttons: each page states status and next data requirement)
-- Existing Kenya desk routes unchanged
-- SQL migration + ingestion stubs committed
-
----
-
-## 6. Monetisation (architected, not charged)
-
-| Tier | Price | Access |
-| --- | --- | --- |
-| Free | $0 | Headlines, basic country pages, Morning Brief teasers, limited search |
-| Pro | $29/mo | Deep analysis, capital/climate explorers, alerts, AI allowance (later) |
-| Professional | $149/mo | Downloads, API allowance, project lens, watchlists |
-| Enterprise | Custom | Feeds, licences, white-label |
-| Kenya desk trial | KES 500 / 14 days | Existing on-ramp |
-
-Editorial and sponsored surfaces stay visually separate. No sponsor inventory in this build.
-
----
-
-## 7. Analytics hooks (north star)
-
-Events to emit when analytics lands: `brief_open`, `country_view`, `signal_open`, `search`, `ask_query`, `watchlist_add`, `alert_subscribe`, `graph_open`, `pro_cta`, `export_csv`, `pack_open`, `usage_view`, `method_open`, `source_open`, `compare_open`, `ingestion_view`, `feed_open`, `status_view`, `search_save`, `licence_view`, `notification_pref`, `changelog_open`, `audit_view`, `report_open`, `calendar_open`, `partner_view`, `coverage_view`, `glossary_open`, `onboarding_open`, `webhook_view`, `region_open`, `runbook_open`, `layers_open`, `press_open`, `golive_open`, `social_open`, `embed_view`, `security_open`, `integration_view`, `sla_open`, `brand_open`, `roadmap_open`, `a11y_open`, `sdk_open`, `template_view`, `support_open`, `newsletter_view`, `careers_open`, `contact_open`, `faq_open`, `cookies_open`, `trust_open`, `credits_open`, `manifesto_open`, `imprint_open`, `syndication_open`, `notices_open`, `languages_open`, `units_open`, `correspondents_open`, `citations_open`, `corridors_open`, `identifiers_open`, `series_open`, `revisions_open`, `classifications_open`, `releases_open`, `datelines_open`, `borders_open`, `customs_open`, `modes_open`, `observations_open`, `frequencies_open`, `vintages_open`, `lineage_open`, `gaps_open`, `periods_open`, `lags_open`, `benchmarks_open`, `baskets_open`, `thresholds_open`, `peers_open`, `weights_open`, `constituents_open`, `horizons_open`, `baselines_open`, `spreads_open`, `seasons_open`, `adjustments_open`, `footnotes_open`, `scales_open`, `precision_open`, `rounding_open`, `crosswalks_open`, `aliases_open`, `embargoes_open`, `sessions_open`, `holidays_open`, `factors_open`, `tenors_open`, `grades_open`, `flags_open`, `windows_open`, `cutoffs_open`, `stamps_open`, `breaks_open`, `curves_open`, `fixes_open`, `lots_open`, `quotes_open`, `contracts_open`, `samples_open`, `indices_open`, `manifests_open`, `parcels_open`, `draws_open`, `settlements_open`, `positions_open`, `auctions_open`, `ledgers_open`, `agents_open`, `clearances_open`, `warehouses_open`, `permits_open`, `guarantees_open`, `inspections_open`, `waybills_open`, `consignments_open`, `certificates_open`, `surveys_open`, `duties_open`, `quotas_open`, `assays_open`, `tallies_open`, `seals_open`, `stowage_open`, `nominations_open`, `berths_open`, `laytime_open`, `shortages_open`, `endorsements_open`, `demurrage_open`, `handovers_open`, `receipts_open`, `waivers_open`, `laycans_open`, `protests_open`, `discharges_open`, `bonds_open`.  
-Phase 1: typed event names in `lib/analytics.ts` only — no fake dashboards.
-
----
-
-## 8. Quality bar
-
-`npm run build` must pass. No invented official prints. No copyrighted republication. No placeholder buttons that claim a write succeeded.
+- Every figure carries its source, a link and an as-of date. Nothing invented, no demo prints.
+- Headlines link out; no republished copy.
+- Information, not advice: no buy/sell/hold language.
+- Historical observations are appended, never silently overwritten.
+- The navigation leads with the price of money. Economy, Capital, Climate, Technology and Trade stay live
+  in the footer but are not where effort goes.

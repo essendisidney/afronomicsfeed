@@ -61,6 +61,7 @@ export function buildSearchIndex(): SearchHit[] {
   const toolHits = [
     { href: "/ask", title: "Ask the data", kicker: "Tool", summary: "A question about African rates, answered from the source." },
     { href: "/rates/kenya/check", title: "Is my rate fair?", kicker: "Tool", summary: "Check a Kenya savings or loan rate against the bill, the best fund and the bank averages." },
+    { href: "/rates/kenya/money-market-funds", title: "Kenya money market fund yields", kicker: "League table", summary: "Every fund read from its manager, ranked after tax, with daily history and CSV." },
     { href: "/rates/kenya", title: "Where the shilling earns most", kicker: "Comparison", summary: "Bills, bonds, money market funds and bank rates after tax." },
     { href: "/markets/bill-index", title: "African Sovereign Bill Index (ASBI)", kicker: "Index", summary: "Weekly average one-year rate across ten markets, since 2016." },
     { href: "/markets/bill-index/release", title: "ASBI weekly release", kicker: "Index", summary: "The Monday release in a fixed format for editors." },

@@ -4,6 +4,7 @@ import { billIndexLatest, indexShort } from "@/lib/data/bill-index";
 import { billMarkets, latestBills, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { buildMorningNote, morningLines, morningLongDate, morningSigned } from "@/lib/editions/morning";
 import { morningLinesSw } from "@/lib/editions/morning-sw";
+import { buildMoneyDoors } from "@/lib/editions/money-today";
 
 export const revalidate = 900;
 
@@ -21,6 +22,15 @@ export async function GET(request: Request) {
   const lines = sw ? morningLinesSw(note) : morningLines(note);
   const index = billIndexLatest();
   const due = auctionCalendar(new Date(now)).slice(0, 5);
+  const today = await buildMoneyDoors(sw ? "sw" : "en");
+  const doors = today.doors
+    .map(
+      (d) =>
+        `<h2 id="${d.id}">${esc(d.who)}: ${esc(d.question)}</h2>` +
+        (d.lines.length ? `<table>${d.lines.map((l) => `<tr><td>${esc(l.k)}</td><td><b>${esc(l.v)}</b></td></tr>`).join("")}</table>` : `<p><small>${esc(today.missing)}</small></p>`) +
+        `<p><small>${d.links.map((l) => `<a href="${l.href}">${esc(l.label)}</a>`).join(" · ")}</small></p>`,
+    )
+    .join("");
 
   const markets = billMarkets.map((m) => {
     const latest = latestBills(loadBillMarket(m.slug).rows);
@@ -40,6 +50,7 @@ export async function GET(request: Request) {
   const html = `<!doctype html><html lang="${sw ? "sw" : "en"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${t.title}</title>
 <style>body{font:15px/1.45 system-ui,sans-serif;margin:12px;color:#121826;background:#fff;max-width:640px}table{border-collapse:collapse;width:100%;margin:6px 0 14px}td,th{text-align:left;padding:3px 6px 3px 0;border-bottom:1px solid #ddd;font-size:14px}th{font-weight:600}h1{font-size:18px;margin:0 0 4px}h2{font-size:15px;margin:16px 0 4px;color:#5b3fd6}a{color:#121826}small{color:#636b7d}</style></head><body>
 <h1>${t.title}</h1><small>${esc(morningLongDate.format(new Date(note.day)))} · <a href="/lite?lang=${sw ? "en" : "sw"}">${t.other}</a> · <a href="/">${t.full}</a></small>
+<h2>${esc(today.title)}</h2><small>${esc(today.note)}</small>${doors}
 <h2>${t.morning}</h2>${lines.map((l) => `<p>${esc(l)}</p>`).join("") || "<p>–</p>"}
 ${index ? `<p><b>${indexShort}</b> ${index.latest.value.toFixed(2)}% (${index.bpsWeek == null ? "" : `${morningSigned(index.bpsWeek, 0)} bps w/w`}) <small><a href="/markets/bill-index">?</a></small></p>` : ""}
 <h2>${t.bills}</h2><table><tr><th>${t.market}</th><th>91d</th><th>182d</th><th>364d</th><th>${t.date}</th></tr>${markets.join("")}</table>

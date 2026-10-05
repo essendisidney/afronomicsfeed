@@ -1,0 +1,31 @@
+# Manual only: print what publishers' pages say, to write or fix a reader when the desk machine cannot reach
+# them. Read-only: it commits nothing.
+name: Probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      pattern:
+        description: "Regex to show context for"
+        default: "yield|rate"
+      urls:
+        description: "Space-separated URLs"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python scripts/probe.py "$PATTERN" $URLS
+        env:
+          PATTERN: ${{ inputs.pattern }}
+          URLS: ${{ inputs.urls }}

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const tracks: { title: string; note: string; lessons: string[] }[] = [
-  { title: "Saving", note: "Making what you put aside work harder", lessons: ["learn-compound-interest", "learn-money-market-funds", "learn-treasury-bills"] },
+  { title: "Saving", note: "Making what you put aside work harder", lessons: ["learn-compound-interest", "learn-money-market-funds", "learn-treasury-bills", "learn-buy-government-securities"] },
   { title: "Borrowing", note: "Knowing what a loan really costs", lessons: ["learn-loan-real-cost"] },
   { title: "How the economy reaches your pocket", note: "Rates, prices and your currency", lessons: ["learn-central-bank-rate", "learn-inflation-real-return", "learn-exchange-rates", "learn-africa-rates"] },
   { title: "For professionals", note: "Field guides for desks and treasuries", lessons: ["who-sets-what-kenya-money-markets", "sasra-ira-and-the-nonbank-perimeter"] },

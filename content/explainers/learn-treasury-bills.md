@@ -67,7 +67,7 @@ From the Central Bank’s own guidance:
 
 ## Across Africa
 
-Most African governments sell bills the same way: below face value, repaid in full at maturity, through an auction run by the central bank. Minimums, taxes and how individuals buy differ by country; check your central bank’s own guidance. On 5 October 2026 one-year bills ranged from **6.29%** in Tanzania to **25.67%** in Egypt: [why the gap is so wide](/explainers/learn-africa-rates).
+Most African governments sell bills the same way: below face value, repaid in full at maturity, through an auction run by the central bank. Minimums, taxes and how individuals buy differ by country: see [buying in Kenya, Nigeria, South Africa and Tanzania](/explainers/learn-buy-government-securities). On 5 October 2026 one-year bills ranged from **6.29%** in Tanzania to **25.67%** in Egypt: [why the gap is so wide](/explainers/learn-africa-rates).
 
 ## Where to follow the rates
 

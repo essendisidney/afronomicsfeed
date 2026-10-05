@@ -1,0 +1,98 @@
+{
+ "dataset": "African central-bank policy rates",
+ "compiled_by": "Afronomics (afronomicsfeed.com)",
+ "updated_at": "2026-10-05T21:41:24+00:00",
+ "note": "Each rate as printed on the central bank's own website at read_at; date_as_printed is the bank's own date for it where shown.",
+ "rows": [
+  {
+   "market": "egypt",
+   "publisher": "Central Bank of Egypt",
+   "source": "https://www.cbe.org.eg/en",
+   "label": "Overnight deposit rate",
+   "rate": 19.0,
+   "upper": 20.0,
+   "date_as_printed": null,
+   "read_at": "2026-10-05T21:41:24+00:00"
+  },
+  {
+   "market": "ghana",
+   "publisher": "Bank of Ghana",
+   "source": "https://www.bog.gov.gh/",
+   "label": "Monetary Policy Rate",
+   "rate": 14.0,
+   "upper": null,
+   "date_as_printed": null,
+   "read_at": "2026-10-05T21:41:24+00:00"
+  },
+  {
+   "market": "kenya",
+   "publisher": "Central Bank of Kenya",
+   "source": "https://www.centralbank.go.ke/",
+   "label": "Central Bank Rate",
+   "rate": 8.75,
+   "upper": null,
+   "date_as_printed": "11/08/2026",
+   "read_at": "2026-10-05T21:41:24+00:00"
+  },
+  {
+   "market": "malawi",
+   "publisher": "Reserve Bank of Malawi",
+   "source": "https://www.rbm.mw/",
+   "label": "Policy Rate",
+   "rate": 24.0,
+   "upper": null,
+   "date_as_printed": "Mar 2026",
+   "read_at": "2026-10-05T21:41:24+00:00"
+  },
+  {
+   "market": "mozambique",
+   "publisher": "Banco de Moçambique",
+   "source": "https://www.bancomoc.mz/",
+   "label": "Taxa MIMO",
+   "rate": 9.25,
+   "upper": null,
+   "date_as_printed": "30-09-2026",
+   "read_at": "2026-10-05T21:41:24+00:00"
+  },
+  {
+   "market": "southafrica",
+   "publisher": "South African Reserve Bank",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates",
+   "label": "SARB Policy Rate",
+   "rate": 7.25,
+   "upper": null,
+   "date_as_printed": "2026-10-05",
+   "read_at": "2026-10-05T21:41:24+00:00"
+  },
+  {
+   "market": "tanzania",
+   "publisher": "Bank of Tanzania",
+   "source": "https://www.bot.go.tz/?lang=en",
+   "label": "Central Bank Rate",
+   "rate": 6.25,
+   "upper": null,
+   "date_as_printed": "3rd Quarter 2026",
+   "read_at": "2026-10-05T21:41:24+00:00"
+  },
+  {
+   "market": "zambia",
+   "publisher": "Bank of Zambia",
+   "source": "https://www.boz.zm/",
+   "label": "Monetary Policy Rate",
+   "rate": 10.75,
+   "upper": null,
+   "date_as_printed": "2026-09-30",
+   "read_at": "2026-10-05T21:41:24+00:00"
+  }
+ ],
+ "unread": [
+  {
+   "market": "nigeria",
+   "status": "not yet readable as text"
+  },
+  {
+   "market": "uganda",
+   "status": "not yet readable as text"
+  }
+ ]
+}

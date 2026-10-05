@@ -4,6 +4,30 @@
 "note": "Each row is the yield the fund manager published on its own website when Afronomics read it that day (Nairobi time). Effective annual yield, before fees and withholding tax.",
 "rows": [
 {
+"date": "2026-10-06",
+"name": "Zimele Fixed Income Fund (Savings Plan)",
+"manager": "Zimele Asset Management",
+"source": "https://www.zimele.co.ke/",
+"daily_yield": 12.65,
+"effective_annual_yield": 13.41
+},
+{
+"date": "2026-10-06",
+"name": "Madison Money Market Fund",
+"manager": "Madison Investment Managers",
+"source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
+"daily_yield": 10.11,
+"effective_annual_yield": 10.64
+},
+{
+"date": "2026-10-06",
+"name": "Kasha Money Market Fund",
+"manager": "Orient Asset Managers",
+"source": "https://www.orientasset.co.ke/",
+"daily_yield": 10.22,
+"effective_annual_yield": 10.76
+},
+{
 "date": "2026-10-05",
 "name": "Zimele Fixed Income Fund (Savings Plan)",
 "manager": "Zimele Asset Management",

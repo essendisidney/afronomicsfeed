@@ -1,7 +1,7 @@
 {
  "dataset": "Kenya savings and lending rates",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-05T16:02:20+00:00",
+ "updated_at": "2026-10-05T21:41:20+00:00",
  "bank_rates": {
   "publisher": "Central Bank of Kenya",
   "source": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
@@ -2244,16 +2244,8 @@
  },
  "money_market_funds": {
   "note": "Each yield is read from the fund manager's own website at the time shown; funds publishing yields only as images or PDFs are not yet included.",
-  "as_of": "2026-10-05T16:02:20+00:00",
+  "as_of": "2026-10-05T21:41:20+00:00",
   "rows": [
-   {
-    "name": "Etica Money Market Fund (KES)",
-    "manager": "Etica Capital",
-    "source": "https://www.eticacap.com/",
-    "status": "ok",
-    "daily_yield": null,
-    "effective_annual_yield": 17.55
-   },
    {
     "name": "Zimele Fixed Income Fund (Savings Plan)",
     "manager": "Zimele Asset Management",
@@ -2263,22 +2255,27 @@
     "effective_annual_yield": 13.41
    },
    {
+    "name": "Kasha Money Market Fund",
+    "manager": "Orient Asset Managers",
+    "source": "https://www.orientasset.co.ke/",
+    "status": "ok",
+    "daily_yield": 10.22,
+    "effective_annual_yield": 10.76
+   },
+   {
     "name": "Madison Money Market Fund",
     "manager": "Madison Investment Managers",
     "source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
     "status": "ok",
     "daily_yield": 10.11,
     "effective_annual_yield": 10.64
-   },
-   {
-    "name": "Kasha Money Market Fund",
-    "manager": "Orient Asset Managers",
-    "source": "https://www.orientasset.co.ke/",
-    "status": "ok",
-    "daily_yield": 9.9,
-    "effective_annual_yield": 10.41
    }
   ],
-  "unread": []
+  "unread": [
+   {
+    "name": "Etica Money Market Fund (KES)",
+    "status": "conflicting figures on the page: Etica Money Market Fund (KES) Effective Annual Yield 10.18% / Etica Money Market Fund (KES) Effective Annual Yield 17.55%"
+   }
+  ]
  }
 }

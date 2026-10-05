@@ -9,7 +9,7 @@ export const runtime = "nodejs";
  */
 export async function POST(request: Request) {
   if (isAutomated(request.headers.get("user-agent"))) return new Response(null, { status: 204 });
-  const body = (await request.json().catch(() => null)) as { path?: string; referrer?: string } | null;
+  const body = (await request.json().catch(() => null)) as { path?: string; referrer?: string; returning?: boolean } | null;
   const path = (body?.path ?? "").split("?")[0].slice(0, 200);
   let referrer = "";
   try {
@@ -17,6 +17,6 @@ export async function POST(request: Request) {
     referrer = host && !host.endsWith("afronomicsfeed.com") ? host : "";
   } catch {}
   const country = request.headers.get("x-vercel-ip-country") ?? "";
-  await rpc("af_hit", { p_path: path, p_referrer: referrer, p_country: country });
+  await rpc("af_hit_v2", { p_path: path, p_referrer: referrer, p_country: country, p_returning: body?.returning === true });
   return new Response(null, { status: 204 });
 }

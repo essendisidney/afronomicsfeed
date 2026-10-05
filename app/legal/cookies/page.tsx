@@ -16,6 +16,10 @@ export default function CookiesPage() {
           <strong>Theme preference</strong> — your light or dark choice is kept in your browser’s local storage. It never leaves your device.
         </li>
         <li>
+          <strong>First visit</strong> — the date of your first visit is kept in your browser’s local storage, so our page count can tell a new
+          reader from a returning one. Only a yes or no (“has visited before”) is sent with the count; the date itself never leaves your device.
+        </li>
+        <li>
           <strong>Payments</strong> — when you pay, Paystack’s hosted checkout sets its own cookies under its own policy.
         </li>
         <li>

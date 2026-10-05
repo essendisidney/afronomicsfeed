@@ -11,6 +11,9 @@ on:
       urls:
         description: "Space-separated URLs"
         required: true
+      links:
+        description: "Also list links whose text or address matches (1 = yes)"
+        default: ""
 
 permissions:
   contents: read
@@ -24,8 +27,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install requests
+      - run: pip install requests pdfplumber
       - run: python scripts/probe.py "$PATTERN" $URLS
         env:
           PATTERN: ${{ inputs.pattern }}
           URLS: ${{ inputs.urls }}
+          PROBE_LINKS: ${{ inputs.links }}

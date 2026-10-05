@@ -142,7 +142,7 @@ export default function MoneyMarketFundsPage() {
           </p>
           {unread.length ? (
             <p className="mt-2 max-w-3xl text-xs leading-5 text-muted">
-              Not read on the last run: {unread.map((u) => u.name).join(", ")}.
+              Not in the table because the last read failed: {unread.map((u) => `${u.name} (${u.status.startsWith("conflicting") ? "the manager’s page shows two different yields" : "page not read"})`).join("; ")}.
             </p>
           ) : null}
           <p className="mt-2 max-w-3xl text-xs leading-5 text-muted">

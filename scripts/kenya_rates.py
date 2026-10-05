@@ -51,8 +51,10 @@ def text_of(url: str) -> str:
     html = requests.get(url, headers=UA, timeout=(15, 40), verify=False).text
     t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", html, flags=re.S)
     t = re.sub(r"<[^>]+>", " ", t)
-    t = t.replace("​", "").replace("&nbsp;", " ")
-    return re.sub(r"\s+", " ", t)
+    t = t.replace("\u200b", "").replace("&nbsp;", " ")
+    t = re.sub(r"\s+", " ", t)
+    # some sites split a figure across tags ("10 .22%"); join digits either side of the decimal point
+    return re.sub(r"(\d) ?\. ?(\d)", r"\1.\2", t)
 
 
 def bank_rates() -> list[dict]:
@@ -93,9 +95,15 @@ def fund(entry):
     name, manager, url, pattern = entry
     try:
         t = text_of(url)
-        m = re.search(pattern, t, flags=re.I)
-        if not m:
+        matches = list(re.finditer(pattern, t, flags=re.I))
+        if not matches:
             return {"name": name, "manager": manager, "source": url, "status": "pattern not found"}
+        # A page that shows the same fund twice with different figures (an old ticker left beside the current
+        # one) cannot tell us which is current: publish neither until it shows one.
+        figures = sorted({m.group(0) for m in matches})
+        if len(figures) > 1:
+            return {"name": name, "manager": manager, "source": url, "status": "conflicting figures on the page: " + " / ".join(figures)[:160]}
+        m = matches[0]
         daily = num(m.group(1))
         effective = num(m.group(2)) if m.group(2) else None
         if effective is None:  # Etica publishes only the effective annual yield

@@ -1,10 +1,12 @@
 import { after } from "next/server";
+import { isCrawlerOrOwnJob } from "@/lib/bots";
 import { rpc } from "@/lib/store";
 import { site } from "@/lib/site";
 
 /**
  * Public JSON API helpers. Responses are cached at the edge for five minutes; each served request is counted
- * (path, calling site, country; no IPs or keys) so we can see which datasets people build on.
+ * (path, calling site, country; no IPs or keys) so we can see which datasets people build on. Automated callers
+ * are served but not counted (lib/bots.ts).
  */
 export function apiJson(request: Request, path: string, data: unknown, status = 200) {
   const origin = request.headers.get("origin") ?? request.headers.get("referer") ?? "";
@@ -13,7 +15,9 @@ export function apiJson(request: Request, path: string, data: unknown, status = 
     caller = origin ? new URL(origin).hostname.replace(/^www\./, "") : "";
   } catch {}
   const country = request.headers.get("x-vercel-ip-country") ?? "";
-  after(() => rpc("af_hit", { p_path: `/api${path}`.slice(0, 200), p_referrer: caller || "api", p_country: country }).catch(() => undefined));
+  // Count people and the sites building on the data, not crawlers or Afronomics' own alert checker.
+  if (!isCrawlerOrOwnJob(request.headers.get("user-agent")))
+    after(() => rpc("af_hit", { p_path: `/api${path}`.slice(0, 200), p_referrer: caller || "api", p_country: country }).catch(() => undefined));
   return new Response(
     JSON.stringify(
       {

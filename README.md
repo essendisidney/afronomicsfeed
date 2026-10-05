@@ -76,9 +76,8 @@ Weekly notes live in `content/weekly/`. Explainers live in `content/explainers/`
 
 ## What this MVP does not do
 
-- Live M-Pesa or Stripe billing (checkout buttons are stubs)
+- User accounts (Paystack checkout is live; access is granted by email from /desk)
 - Live NSE quote redistribution or scraping (strip is static; tape links to [nse.co.ke](https://www.nse.co.ke/))
-- Real authentication (Sign in is a mock toggle)
 - Comments, tips, or UGC
 - A CMS admin (edit Markdown on disk)
 

@@ -48,11 +48,13 @@ export default async function HomePage() {
     const t = f ? coveredTotal(f) : null;
     return t ? { label: `${label} · ${t.year}`, value: fmt(t.sum), href, note: `${t.reporting} of 54 reporting` } : null;
   };
+  // A feed that fails this hour gives no median; show nothing rather than a 0.0% that reads as a real print.
+  const medianInflation = inflation ? continentalMedian(inflation) : null;
   const headline = [
     total(gdp, "Africa GDP", "/data/gdp", usd),
     pop ? total(pop, "Population", "/data/population", (n) => formatValue(pop.def, n)) : null,
-    inflation
-      ? { label: "Median inflation", value: formatValue(inflation.def, continentalMedian(inflation) ?? 0), href: "/data/inflation", note: "latest print per country" }
+    inflation && medianInflation != null
+      ? { label: "Median inflation", value: formatValue(inflation.def, medianInflation), href: "/data/inflation", note: "latest print per country" }
       : null,
     total(fdi, "FDI inflows", "/data/fdi", usd),
     total(remit, "Remittances", "/data/remittances", usd),
@@ -95,13 +97,16 @@ export default async function HomePage() {
             </div>
             <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 sm:gap-8">
               {[
-                { k: "economies covered", v: "54" },
-                { k: "publishers on the wire", v: String(publishersLive(wire) || "—") },
-                { k: "headlines in 10 days", v: String(wire.length || "—") },
-              ].map((item) => (
+                { k: "economies covered", v: 54 },
+                { k: "publishers on the wire", v: publishersLive(wire) },
+                { k: "headlines in 10 days", v: wire.length },
+              ]
+                // the wire counts are zero only when every feed failed this hour; hide them rather than show a dash
+                .filter((item) => item.v > 0)
+                .map((item) => (
                 <div key={item.k} className="flex flex-col-reverse">
                   <dt className="text-[13px] text-night-muted">{item.k}</dt>
-                  <dd className="af-board-figure text-3xl">{item.v}</dd>
+                  <dd className="af-board-figure text-3xl">{String(item.v)}</dd>
                 </div>
               ))}
             </dl>

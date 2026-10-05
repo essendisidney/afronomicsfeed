@@ -122,6 +122,11 @@ export default function KenyaRatesPage() {
             Funds not yet read from their managers’ sites: {unread.map((u) => u.name).join(", ")}. More are added as a text source for each is found.
           </p>
         ) : null}
+        <p className="mt-3 text-sm">
+          <Link href="/rates/kenya/money-market-funds" className="font-medium text-forest underline underline-offset-2">
+            Money market funds ranked, with daily yield history →
+          </Link>
+        </p>
       </section>
 
       {bill91 && savings ? (

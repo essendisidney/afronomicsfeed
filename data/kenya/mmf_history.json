@@ -1,0 +1,103 @@
+{
+"dataset": "Kenya money market fund yields, daily",
+"compiled_by": "Afronomics (afronomicsfeed.com)",
+"note": "Each row is the yield the fund manager published on its own website when Afronomics read it that day (Nairobi time). Effective annual yield, before fees and withholding tax.",
+"rows": [
+{
+"date": "2026-10-05",
+"name": "Zimele Fixed Income Fund (Savings Plan)",
+"manager": "Zimele Asset Management",
+"source": "https://www.zimele.co.ke/",
+"daily_yield": 12.65,
+"effective_annual_yield": 13.41
+},
+{
+"date": "2026-10-05",
+"name": "Madison Money Market Fund",
+"manager": "Madison Investment Managers",
+"source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
+"daily_yield": 10.11,
+"effective_annual_yield": 10.64
+},
+{
+"date": "2026-10-05",
+"name": "Kasha Money Market Fund",
+"manager": "Orient Asset Managers",
+"source": "https://www.orientasset.co.ke/",
+"daily_yield": 9.9,
+"effective_annual_yield": 10.41
+},
+{
+"date": "2026-10-05",
+"name": "Etica Money Market Fund (KES)",
+"manager": "Etica Capital",
+"source": "https://www.eticacap.com/",
+"daily_yield": null,
+"effective_annual_yield": 17.55
+},
+{
+"date": "2026-10-02",
+"name": "Zimele Fixed Income Fund (Savings Plan)",
+"manager": "Zimele Asset Management",
+"source": "https://www.zimele.co.ke/",
+"daily_yield": 12.65,
+"effective_annual_yield": 13.41
+},
+{
+"date": "2026-10-02",
+"name": "Madison Money Market Fund",
+"manager": "Madison Investment Managers",
+"source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
+"daily_yield": 10.11,
+"effective_annual_yield": 10.64
+},
+{
+"date": "2026-10-02",
+"name": "Kasha Money Market Fund",
+"manager": "Orient Asset Managers",
+"source": "https://www.orientasset.co.ke/",
+"daily_yield": 9.9,
+"effective_annual_yield": 10.41
+},
+{
+"date": "2026-10-02",
+"name": "Etica Money Market Fund (KES)",
+"manager": "Etica Capital",
+"source": "https://www.eticacap.com/",
+"daily_yield": null,
+"effective_annual_yield": 17.55
+},
+{
+"date": "2026-10-01",
+"name": "Zimele Fixed Income Fund (Savings Plan)",
+"manager": "Zimele Asset Management",
+"source": "https://www.zimele.co.ke/",
+"daily_yield": 12.65,
+"effective_annual_yield": 13.41
+},
+{
+"date": "2026-10-01",
+"name": "Madison Money Market Fund",
+"manager": "Madison Investment Managers",
+"source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
+"daily_yield": 10.11,
+"effective_annual_yield": 10.64
+},
+{
+"date": "2026-10-01",
+"name": "Kasha Money Market Fund",
+"manager": "Orient Asset Managers",
+"source": "https://www.orientasset.co.ke/",
+"daily_yield": 9.9,
+"effective_annual_yield": 10.41
+},
+{
+"date": "2026-10-01",
+"name": "Etica Money Market Fund (KES)",
+"manager": "Etica Capital",
+"source": "https://www.eticacap.com/",
+"daily_yield": null,
+"effective_annual_yield": 17.55
+}
+]
+}

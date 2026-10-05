@@ -56,6 +56,7 @@ export const footerGroups = [
       { href: "/markets/tbills", label: "T-bill monitor" },
       { href: "/markets/bill-index", label: "Sovereign Bill Index" },
       { href: "/markets/borrowing-costs", label: "Borrowing costs" },
+      { href: "/rates/policy", label: "Policy rates" },
       { href: "/rates/kenya", label: "Kenya rates compared" },
       { href: "/rates/kenya/money-market-funds", label: "Money market funds" },
       { href: "/rates/kenya/check", label: "Is my rate fair?" },

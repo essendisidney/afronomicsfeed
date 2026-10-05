@@ -31,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/morning", "hourly", 0.9),
     page("/rates/kenya", "daily", 0.9),
     page("/rates/kenya/money-market-funds", "daily", 0.9),
+    page("/rates/policy", "daily", 0.9),
     page("/pack", "monthly", 0.7),
     page("/developers", "monthly", 0.6),
     page("/markets/tbills/nigeria", "daily", 0.8),

@@ -1,6 +1,7 @@
 import { renderTime } from "@/lib/data/fetcher";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
+import { MoneyToday } from "@/components/home/MoneyToday";
 import { ProjectTable } from "@/components/data/ProjectTable";
 import { WireList } from "@/components/data/WireList";
 import { Kicker, RankBars, SectionTitle, SourceLine, usd } from "@/components/data/parts";
@@ -88,12 +89,24 @@ export default async function HomePage() {
             </h1>
             <p className="mt-6 max-w-xl text-[17px] leading-7 text-night-soft">{site.promise}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/markets/tbills" className="rounded-full bg-accent px-5 py-2.5 text-[15px] font-semibold text-night hover:bg-gold-soft">
-                Open the T-bill monitor
-              </Link>
-              <Link href="/rates/kenya/check" className="rounded-full border border-night-line px-5 py-2.5 text-[15px] font-medium text-night-ink hover:border-night-soft/50 hover:bg-night-2">
-                Is my rate fair?
-              </Link>
+              {[
+                { href: "#saving", label: "I’m saving" },
+                { href: "#borrowing", label: "I’m borrowing" },
+                { href: "#business", label: "I run a business" },
+                { href: "#institutions", label: "I’m an institution" },
+              ].map((door, i) => (
+                <a
+                  key={door.href}
+                  href={door.href}
+                  className={
+                    i === 0
+                      ? "rounded-full bg-accent px-5 py-2.5 text-[15px] font-semibold text-night hover:bg-gold-soft"
+                      : "rounded-full border border-night-line px-5 py-2.5 text-[15px] font-medium text-night-ink hover:border-night-soft/50 hover:bg-night-2"
+                  }
+                >
+                  {door.label}
+                </a>
+              ))}
             </div>
             <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 sm:gap-8">
               {[
@@ -173,6 +186,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <MoneyToday />
 
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       {headline.length > 0 ? (

@@ -34,7 +34,7 @@ export function nairobiDay(now: number) {
   return new Date(now + NAIROBI).toISOString().slice(0, 10);
 }
 
-async function overnightFx(): Promise<MorningNote["fx"]> {
+export async function overnightFx(): Promise<MorningNote["fx"]> {
   const [history, quote] = await Promise.all([rpcRead("af_fx_history", { p_days: 6 }, 1800), loadFxQuote()]);
   if (!history.ok || !Array.isArray(history.value) || !quote) return { moves: [], asOf: null };
   const rows = history.value as { day: string; code: string; rate: number | string }[];

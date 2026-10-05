@@ -25,6 +25,7 @@ export const nav = [
   { href: "/data/inflation", label: "Inflation" },
   { href: "/countries", label: "Countries" },
   { href: "/data", label: "Data" },
+  { href: "/learn", label: "Learn" },
   { href: "/news", label: "Wire" },
   { href: "/brief", label: "Analysis" },
 ] as const;

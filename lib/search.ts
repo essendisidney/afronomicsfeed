@@ -61,6 +61,7 @@ export function buildSearchIndex(): SearchHit[] {
   const toolHits = [
     { href: "/ask", title: "Ask the data", kicker: "Tool", summary: "A question about African rates, answered from the source." },
     { href: "/rates/kenya/check", title: "Is my rate fair?", kicker: "Tool", summary: "Check a Kenya savings or loan rate against the bill, the best fund and the bank averages." },
+    { href: "/learn", title: "Learn money, from the basics", kicker: "Learn", summary: "Plain lessons on saving, loans, rates, inflation and currencies; savings and loan calculators; glossary in English and Kiswahili." },
     { href: "/rates/kenya/mobile-loans", title: "What a mobile loan really costs", kicker: "Comparison", summary: "M-Shwari, Tala and more: KES 1,000 for a month, and as a yearly rate beside a bank loan." },
     { href: "/rates/policy", title: "Central-bank policy rates", kicker: "Dataset", summary: "Each central bank’s policy rate from its own site, beside the one-year bill and the gap." },
     { href: "/rates/kenya/money-market-funds", title: "Kenya money market fund yields", kicker: "League table", summary: "Every fund read from its manager, ranked after tax, with daily history and CSV." },

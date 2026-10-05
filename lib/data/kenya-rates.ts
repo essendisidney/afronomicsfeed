@@ -180,8 +180,11 @@ export type FundRow = {
 
 /** The money market fund league table: latest yield per fund, ranked by what a saver keeps after tax. */
 export function fundLeague(): FundRow[] {
+  // Only funds read cleanly on the latest run: a fund whose page stopped answering, or showed conflicting
+  // figures, drops out of the table (and is named under it) rather than standing on an old reading.
+  const current = new Set((loadKenyaRates().money_market_funds?.rows ?? []).map((f) => f.name));
   const byFund = new Map<string, FundReading[]>();
-  for (const r of loadFundHistory()) byFund.set(r.name, [...(byFund.get(r.name) ?? []), r]);
+  for (const r of loadFundHistory()) if (current.has(r.name)) byFund.set(r.name, [...(byFund.get(r.name) ?? []), r]);
   const rows: FundRow[] = [];
   for (const [name, readings] of byFund) {
     const last = readings[readings.length - 1];

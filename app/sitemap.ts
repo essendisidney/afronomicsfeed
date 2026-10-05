@@ -7,6 +7,7 @@ import { articleHref } from "@/lib/format";
 import { marketDates } from "@/lib/data/market-stories";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { learnLangs, loadLessons } from "@/lib/learn-i18n";
 import { institutions, topics } from "@/lib/taxonomy";
 import { allTbillWeeks, bondDates } from "@/lib/data/auction-stories";
 
@@ -33,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/rates/kenya/money-market-funds", "daily", 0.9),
     page("/rates/policy", "daily", 0.9),
     page("/learn", "weekly", 0.9),
+    ...learnLangs.flatMap((l) => [page(`/learn/${l}`, "weekly", 0.8), ...loadLessons(l).map((x) => page(`/learn/${l}/${x.slug}`, "monthly", 0.7))]),
     page("/rates/kenya/mobile-loans", "weekly", 0.9),
     page("/pack", "monthly", 0.7),
     page("/developers", "monthly", 0.6),

@@ -7,6 +7,7 @@ import { LoanCalculator } from "@/components/learn/LoanCalculator";
 import { SavingsCalculator } from "@/components/learn/SavingsCalculator";
 import { getArticle } from "@/lib/content";
 import { fairBench } from "@/lib/data/kenya-rates";
+import { langMeta, learnLangs } from "@/lib/learn-ui";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   title: "Learn money: saving, borrowing, rates and currencies, explained",
   description:
     "Short, plain-language lessons on Treasury bills, money market funds, the real cost of a loan, compound interest, inflation, exchange rates and the Central Bank Rate — each linked to today’s real figures, with savings and loan calculators and a glossary in English and Kiswahili.",
-  alternates: { canonical: `${site.url}/learn` },
+  alternates: { canonical: `${site.url}/learn`, languages: { fr: `${site.url}/learn/fr`, pt: `${site.url}/learn/pt`, ar: `${site.url}/learn/ar`, sw: `${site.url}/learn/sw` } },
 };
 
 const tracks: { title: string; note: string; lessons: string[] }[] = [
@@ -69,6 +70,15 @@ export default function LearnPage() {
         </p>
       }
     >
+      <nav aria-label="Other languages" className="mb-8 flex flex-wrap items-center gap-2 text-[14px]">
+        <span className="text-muted">Also in:</span>
+        {learnLangs.map((l) => (
+          <Link key={l} href={`/learn/${l}`} lang={l} className="rounded-full border border-rule px-3 py-1 hover:border-gold">
+            {langMeta[l].native}
+          </Link>
+        ))}
+      </nav>
+
       <section className="grid gap-6 lg:grid-cols-2">
         {tracks.map((track) => (
           <div key={track.title} className="rounded-2xl border border-rule bg-surface px-5 py-5">

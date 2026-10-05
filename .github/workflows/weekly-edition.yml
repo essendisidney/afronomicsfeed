@@ -35,4 +35,10 @@ jobs:
           git add editions
           if git diff --cached --quiet; then echo "Unchanged."; exit 0; fi
           git commit -m "Weekly edition snapshot $(cat editions/latest/WEEK)"
-          git push
+          # main can move while the job runs (a merge, another job): replay this commit on top and retry
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 10))
+          done
+          exit 1

@@ -1,0 +1,41 @@
+{
+ "dataset": "Kenya mobile loan charges, as each provider publishes them",
+ "compiled_by": "Afronomics (afronomicsfeed.com)",
+ "note": "Each charge is quoted from the provider's own web page on the date read. Re-checked when a provider changes its page; corrections are logged at /corrections.",
+ "rows": [
+  {
+   "product": "M-Shwari loan",
+   "provider": "NCBA Bank with Safaricom",
+   "source": "https://www.safaricom.co.ke/main-mpesa/m-pesa-services/credit-and-savings/m-shwari",
+   "read_on": "2026-10-05",
+   "as_published": "... charged at 9% Being Loan Fees of 7.5% and 1.5% Excise Duty. ... Enjoy a one month repayment period.",
+   "basis": "flat",
+   "pct": 9.0,
+   "days": 30,
+   "from": false
+  },
+  {
+   "product": "Tala loan",
+   "provider": "Tala Kenya",
+   "source": "https://tala.co.ke/",
+   "read_on": "2026-10-05",
+   "as_published": "Low interest starting at 0.3% per day.",
+   "basis": "per_day",
+   "pct": 0.3,
+   "days": 30,
+   "from": true
+  },
+  {
+   "product": "Fuliza M-PESA overdraft",
+   "provider": "Safaricom with NCBA and KCB",
+   "source": "https://www.safaricom.co.ke/main-mpesa/m-pesa-services/credit-and-savings/fuliza",
+   "read_on": "2026-10-05",
+   "as_published": "A customer will be charged a one off 1% access fee and a daily maintenance fee ... A customer will also be charged 20% Excise Duty on the daily maintenance fee. ... 501-1000 KSh 5 KSh 1 KSh 6",
+   "basis": "access_plus_daily",
+   "pct": 1.0,
+   "daily_kes_per_1000": 6.0,
+   "days": 30,
+   "from": false
+  }
+ ]
+}

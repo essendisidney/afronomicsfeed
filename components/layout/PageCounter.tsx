@@ -8,7 +8,13 @@ export function PageCounter() {
   const pathname = usePathname();
   useEffect(() => {
     if (!pathname) return;
-    const body = JSON.stringify({ path: pathname, referrer: document.referrer });
+    // One first-visit marker in this browser (no cookie, nothing personal): lets us count returning readers.
+    let returning = false;
+    try {
+      returning = localStorage.getItem("af_seen") !== null;
+      if (!returning) localStorage.setItem("af_seen", new Date().toISOString().slice(0, 10));
+    } catch {}
+    const body = JSON.stringify({ path: pathname, referrer: document.referrer, returning });
     try {
       if (!navigator.sendBeacon?.("/api/hit", new Blob([body], { type: "application/json" }))) {
         void fetch("/api/hit", { method: "POST", body, headers: { "Content-Type": "application/json" }, keepalive: true });

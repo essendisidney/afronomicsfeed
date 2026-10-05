@@ -59,6 +59,7 @@ export const footerGroups = [
       { href: "/rates/policy", label: "Policy rates" },
       { href: "/rates/kenya", label: "Kenya rates compared" },
       { href: "/rates/kenya/money-market-funds", label: "Money market funds" },
+      { href: "/rates/kenya/mobile-loans", label: "Mobile loan costs" },
       { href: "/rates/kenya/check", label: "Is my rate fair?" },
       { href: "/countries", label: "54 country files" },
       { href: "/data", label: "Data hub" },

@@ -50,6 +50,9 @@ const copy = {
     policyVsBill: "Policy rate vs bill, eight markets",
     api: "Data API and CSV downloads",
     pack: "Committee pack",
+    learnSave: "Learn: how savings grow",
+    learnLoan: "Learn: the real cost of a loan",
+    learnFx: "Learn: what the exchange rate means",
   },
   sw: {
     title: "Unahitaji nini leo?",
@@ -82,6 +85,9 @@ const copy = {
     policyVsBill: "Riba ya benki kuu dhidi ya hati, masoko manane",
     api: "API ya takwimu na CSV",
     pack: "Kifurushi cha kamati",
+    learnSave: "Jifunze: jinsi akiba inavyokua",
+    learnLoan: "Jifunze: gharama halisi ya mkopo",
+    learnFx: "Jifunze: maana ya kiwango cha ubadilishaji",
   },
 } as const;
 
@@ -113,6 +119,7 @@ export async function buildMoneyDoors(lang: Lang = "en") {
       links: [
         { href: "/rates/kenya/money-market-funds", label: t.fundsRanked },
         { href: "/rates/kenya/check", label: t.savingsFair },
+        { href: "/learn#savings-calculator", label: t.learnSave },
       ],
     },
     {
@@ -130,6 +137,7 @@ export async function buildMoneyDoors(lang: Lang = "en") {
         { href: "/rates/kenya/check", label: t.loanCheck },
         { href: "/rates/kenya/mobile-loans", label: t.mobile },
         { href: "/rates/kenya", label: t.banks },
+        { href: "/explainers/learn-loan-real-cost", label: t.learnLoan },
       ],
     },
     {
@@ -145,6 +153,7 @@ export async function buildMoneyDoors(lang: Lang = "en") {
       links: [
         { href: "/markets", label: t.converter },
         { href: "/rates/policy", label: t.policy },
+        { href: "/explainers/learn-exchange-rates", label: t.learnFx },
       ],
     },
     {

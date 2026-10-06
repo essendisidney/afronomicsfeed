@@ -1,0 +1,26 @@
+{
+ "dataset": "Kenya SACCO returns: industry averages and declared rates",
+ "compiled_by": "Afronomics (afronomicsfeed.com)",
+ "note": "Industry averages are the SACCO Societies Regulatory Authority's own figures. Each SACCO's declared rates are quoted from that SACCO's own website or notice, with the link; a SACCO is listed only when its own document states the rate for the year.",
+ "industry": {
+  "publisher": "SACCO Societies Regulatory Authority (SASRA)",
+  "report": "The SACCO Supervision Annual Report, 2025",
+  "source": "https://www.sasra.go.ke/sacco-supervision-reports/",
+  "pages": "35-36",
+  "regulated_saccos": 357,
+  "dt_saccos": 179,
+  "nwdt_saccos": 178,
+  "members_million": 7.87,
+  "total_assets_kes_bn": 1210.70,
+  "total_deposits_kes_bn": 832.74,
+  "years": [
+   {"year": 2023, "dividend_pct": 10.92, "deposit_interest_pct": 7.45},
+   {"year": 2024, "dividend_pct": 10.46, "deposit_interest_pct": 7.14},
+   {"year": 2025, "dividend_pct": 10.00, "deposit_interest_pct": 6.72}
+  ],
+  "dt_dividend_2025_pct": 10.21,
+  "nwdt_dividend_2025_pct": 9.76
+ },
+ "declared_year": 2025,
+ "saccos": []
+}

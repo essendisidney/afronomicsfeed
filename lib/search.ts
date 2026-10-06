@@ -65,6 +65,7 @@ export function buildSearchIndex(): SearchHit[] {
     { href: "/learn", title: "Learn money, from the basics", kicker: "Learn", summary: "Plain lessons on saving, loans, rates, inflation and currencies; savings and loan calculators; glossary in English and Kiswahili." },
     { href: "/rates/kenya/mobile-loans", title: "What a mobile loan really costs", kicker: "Comparison", summary: "M-Shwari, Tala and more: KES 1,000 for a month, and as a yearly rate beside a bank loan." },
     { href: "/rates/policy", title: "Central-bank policy rates", kicker: "Dataset", summary: "Each central bank’s policy rate from its own site, beside the one-year bill and the gap." },
+    { href: "/rates/remittances", title: "Cost of sending money home", kicker: "Comparison", summary: "What it costs to send $200 to 36 African countries from 27 sending countries, the cheapest service and banks vs mobile money. World Bank survey." },
     { href: "/rates/kenya/money-market-funds", title: "Kenya money market fund yields", kicker: "League table", summary: "Yields read from each manager, ranked after tax, with daily history; and all 59 licensed funds by size from the CMA." },
     { href: "/rates/kenya", title: "Where the shilling earns most", kicker: "Comparison", summary: "Bills, bonds, money market funds and bank rates after tax." },
     { href: "/markets/bill-index", title: "African Sovereign Bill Index (ASBI)", kicker: "Index", summary: "Weekly average one-year rate across ten markets, since 2016." },

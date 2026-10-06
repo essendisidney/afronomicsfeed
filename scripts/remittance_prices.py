@@ -74,64 +74,71 @@ def pick(header: list[str], *needles: str, avoid: tuple[str, ...] = ()) -> int |
     return None
 
 
-def read_rows(content: bytes):
-    import openpyxl
-
-    wb = openpyxl.load_workbook(io.BytesIO(content), read_only=True, data_only=True)
-    for ws in wb.worksheets:
-        rows = ws.iter_rows(values_only=True)
-        for n, row in zip(range(30), rows):
-            header = [norm(c) for c in row]
-            if pick(header, "destination") is not None and pick(header, "total cost") is not None:
-                print(f"  sheet {ws.title!r}, header row {n + 1}: {[h for h in header if h][:60]}")
-                yield header
-                yield from rows
-                return
-    print(f"  no sheet with destination and total cost columns: {[ws.title for ws in wb.worksheets]}")
-
-
-def build(content: bytes) -> dict | None:
-    it = read_rows(content)
-    header = next(it, None)
-    if header is None:
-        return None
-    col = {
+def columns(header: list[str]) -> dict:
+    either = lambda a, b: a if a is not None else b
+    return {
         "period": pick(header, "period"),
-        "src": pick(header, "source", "code") if pick(header, "source", "code") is not None else pick(header, "source", "iso"),
+        "src": either(pick(header, "source", "code"), pick(header, "source", "iso")),
         "src_name": pick(header, "source", "name"),
-        "dst": pick(header, "destination", "code") if pick(header, "destination", "code") is not None else pick(header, "destination", "iso"),
+        "dst": either(pick(header, "destination", "code"), pick(header, "destination", "iso")),
         "dst_name": pick(header, "destination", "name"),
         "firm": pick(header, "firm", avoid=("type",)),
         "firm_type": pick(header, "firm", "type"),
         # cost of sending the equivalent of $200 ("cc1"), as a % of the amount sent
-        "cost": pick(header, "cc1", "total cost", "%") if pick(header, "cc1", "total cost", "%") is not None else pick(header, "cc1", "total cost"),
+        "cost": either(pick(header, "cc1", "total cost", "%"), pick(header, "cc1", "total cost")),
     }
-    print(f"  columns: {col}")
-    if any(col[k] is None for k in ("period", "dst", "cost", "firm")):
-        print("  a needed column is missing; nothing written")
-        return None
+
+
+def read_quotes(content: bytes):
+    """Every quote into an African country, from every sheet that carries the dataset (the file splits the years
+    across sheets, each with its own header)."""
+    import openpyxl
+
+    wb = openpyxl.load_workbook(io.BytesIO(content), read_only=True, data_only=True)
+    found = False
+    for ws in wb.worksheets:
+        rows = ws.iter_rows(values_only=True)
+        col = None
+        for _, row in zip(range(30), rows):
+            header = [norm(c) for c in row]
+            if pick(header, "destination") is not None and pick(header, "total cost") is not None:
+                col = columns(header)
+                break
+        if col is None:
+            print(f"  sheet {ws.title!r}: no dataset header")
+            continue
+        if any(col[k] is None for k in ("period", "dst", "cost", "firm")):
+            print(f"  sheet {ws.title!r}: a needed column is missing {col}")
+            continue
+        found = True
+        n = 0
+        for row in rows:
+            if not row or col["dst"] >= len(row):
+                continue
+            dst = str(row[col["dst"]] or "").strip().upper()
+            if dst not in AFRICA:
+                continue
+            try:
+                cost = float(row[col["cost"]])
+            except (TypeError, ValueError):
+                continue
+            if not (0 <= cost < 100):
+                continue
+            get = lambda k: str(row[col[k]] or "").strip() if col[k] is not None and col[k] < len(row) else ""
+            n += 1
+            yield {
+                "period": get("period"), "src": get("src").upper(), "src_name": get("src_name"), "dst": dst,
+                "dst_name": get("dst_name") or dst, "firm": get("firm"), "firm_type": get("firm_type"), "cost": cost,
+            }
+        print(f"  sheet {ws.title!r}: {n} quotes into Africa")
+    if not found:
+        print("  no sheet with the dataset columns")
+
+
+def build(content: bytes) -> dict | None:
     by_period = defaultdict(list)
-    for row in it:
-        if not row or col["dst"] >= len(row):
-            continue
-        dst = str(row[col["dst"]] or "").strip().upper()
-        if dst not in AFRICA:
-            continue
-        try:
-            cost = float(row[col["cost"]])
-        except (TypeError, ValueError):
-            continue
-        if not (0 <= cost < 100):
-            continue
-        by_period[str(row[col["period"]]).strip()].append({
-            "src": str(row[col["src"]] or "").strip().upper() if col["src"] is not None else "",
-            "src_name": str(row[col["src_name"]] or "").strip() if col["src_name"] is not None else "",
-            "dst": dst,
-            "dst_name": str(row[col["dst_name"]] or "").strip() if col["dst_name"] is not None else dst,
-            "firm": str(row[col["firm"]] or "").strip(),
-            "firm_type": str(row[col["firm_type"]] or "").strip() if col["firm_type"] is not None else "",
-            "cost": cost,
-        })
+    for q in read_quotes(content):
+        by_period[q.pop("period")].append(q)
     if not by_period:
         print("  no African corridors found")
         return None

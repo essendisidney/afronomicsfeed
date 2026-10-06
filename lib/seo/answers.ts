@@ -1,4 +1,5 @@
 import type { QA } from "@/components/seo/Questions";
+import { loadCmaFunds } from "@/lib/data/cma-mmf";
 import { fairBench, fundLeague } from "@/lib/data/kenya-rates";
 import { latestByTenor, loadTbills } from "@/lib/data/kenya-tbills";
 import { mobileLoanBoard } from "@/lib/data/mobile-loans";
@@ -94,6 +95,8 @@ export function fundAnswers() {
   const funds = fundLeague();
   const bench = fairBench();
   const best = funds[0];
+  const cma = loadCmaFunds();
+  const bnKes = (n: number) => `KES ${(n / 1e9).toFixed(1)} billion`;
   const title = best
     ? `Kenya money market fund rates today: top yield ${p(best.gross)} (${when(best.readOn)})`
     : "Kenya money market fund yields today";
@@ -105,6 +108,18 @@ export function fundAnswers() {
       ? {
           q: "Which money market fund pays the most in Kenya?",
           a: `Of the ${funds.length} funds Afronomics reads daily, ${best.name} published the highest yield on ${when(best.readOn)}: ${p(best.gross)} a year, about ${p(best.net)} after the 15% withholding tax. Yields change daily and past yields are not a promise; this table covers only the funds listed.`,
+        }
+      : null,
+    cma && cma.rows.length >= 2
+      ? {
+          q: "How many money market funds are there in Kenya?",
+          a: `${cma.rows.length}, holding ${bnKes(cma.total_aum_kes)} at ${when(cma.as_of)}, according to the Capital Markets Authority's quarterly report (${cma.rows.filter((r) => r.currency === "USD").length} of them invest in dollars).`,
+        }
+      : null,
+    cma && cma.rows.length >= 2
+      ? {
+          q: "What is the biggest money market fund in Kenya?",
+          a: `${cma.rows[0].fund}, with ${bnKes(cma.rows[0].aum_kes)} (${cma.rows[0].share_pct.toFixed(1)}% of all money market fund assets) at ${when(cma.as_of)}, followed by ${cma.rows[1].fund} at ${bnKes(cma.rows[1].aum_kes)}, per the Capital Markets Authority. Size is not the same as return.`,
         }
       : null,
     {

@@ -4,6 +4,7 @@ import { LineChart } from "@/components/data/LineChart";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { Questions } from "@/components/seo/Questions";
+import { FundSizes } from "@/components/data/FundSizes";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { ShareResult } from "@/components/ui/ShareResult";
@@ -69,7 +70,7 @@ export default function MoneyMarketFundsPage() {
       {funds.length === 0 ? (
         <p className="text-sm text-muted">No fund yields have been read yet.</p>
       ) : (
-        <section>
+        <section id="league">
           <SectionTitle
             kicker="League table"
             title="What KES 100,000 earns in a year"
@@ -188,6 +189,7 @@ export default function MoneyMarketFundsPage() {
         publisher="fund managers’ published yields"
         csv="/api/data/kenya-mmf"
       />
+      <FundSizes readDaily={new Set(funds.map((f) => f.name))} />
       <Questions items={fundAnswers().items} />
       <NewsletterBand />
     </PageShell>

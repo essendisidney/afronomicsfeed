@@ -46,6 +46,21 @@ type Desk = {
   push_state: { market: string; last_date: string }[];
 };
 
+type Audience = {
+  returning_by_day: { day: string; views: number; returning: number }[];
+  returning_7d: number;
+  linkedin: { path: string; source: string; views: number; views_7d: number | null; last_day: string }[];
+};
+
+// Returning readers are counted from 5 Oct 2026, when the first-visit marker went live.
+const RETURNING_FROM = "2026-10-05";
+
+/** "utm:linkedin/story" -> "LinkedIn post (story)"; a bare host stays as it is. */
+const sourceLabel = (source: string) => {
+  const m = source.match(/^utm:linkedin\/?(.*)$/);
+  return m ? `LinkedIn post${m[1] ? ` (${m[1]})` : ""}` : source;
+};
+
 const DAY = 86400000;
 const ago = (iso: string | null, now: number) => {
   if (!iso) return "never";
@@ -64,18 +79,26 @@ function Stat({ label, value, note, tone }: { label: string; value: string | num
   );
 }
 
-function Bars({ rows, now }: { rows: { day: string; views: number }[]; now: number }) {
+function Bars({ rows, now }: { rows: { day: string; views: number; returning?: number }[]; now: number }) {
   const max = Math.max(1, ...rows.map((r) => r.views));
-  const days: { day: string; views: number }[] = [];
+  const days: { day: string; views: number; returning: number }[] = [];
   for (let i = 29; i >= 0; i -= 1) {
     const d = new Date(now - i * DAY).toISOString().slice(0, 10);
-    days.push({ day: d, views: rows.find((r) => r.day === d)?.views ?? 0 });
+    const row = rows.find((r) => r.day === d);
+    days.push({ day: d, views: row?.views ?? 0, returning: row?.returning ?? 0 });
   }
   return (
     <div className="flex h-28 items-end gap-[3px]">
       {days.map((d) => (
-        <div key={d.day} className="flex-1" title={`${dayFmt.format(new Date(d.day))}: ${d.views} views`}>
-          <div className="w-full rounded-t-sm bg-accent" style={{ height: `${Math.max(2, (d.views / max) * 100)}%` }} />
+        <div
+          key={d.day}
+          className="flex h-full flex-1 flex-col justify-end"
+          title={`${dayFmt.format(new Date(d.day))}: ${d.views} views${d.day >= RETURNING_FROM ? `, ${d.returning} from returning readers` : ""}`}
+        >
+          {/* Returning readers in forest at the foot of each bar, first visits above in accent. */}
+          <div className="flex w-full flex-col justify-end overflow-hidden rounded-t-sm bg-accent" style={{ height: `${Math.max(2, (d.views / max) * 100)}%` }}>
+            <div className="w-full bg-forest" style={{ height: `${d.views ? (d.returning / d.views) * 100 : 0}%` }} />
+          </div>
         </div>
       ))}
     </div>
@@ -88,6 +111,8 @@ export default async function DeskPage() {
   const desk = result?.ok && result.value ? (result.value as Desk) : null;
   const pay = desk ? await rpc("af_payments", { p_secret: key }) : null;
   const payments = pay?.ok && pay.value ? (pay.value as Payments) : null;
+  const aud = desk ? await rpc("af_desk_audience", { p_secret: key }) : null;
+  const audience = aud?.ok && aud.value ? (aud.value as Audience) : null;
 
   if (!desk) {
     return (
@@ -114,11 +139,15 @@ export default async function DeskPage() {
   const change = desk.views_prev_7d ? Math.round(((desk.views_7d - desk.views_prev_7d) / desk.views_prev_7d) * 100) : null;
   const apiCalls = desk.api_7d.reduce((n, r) => n + r.calls, 0);
   const downloads = desk.downloads_7d.reduce((n, r) => n + r.views, 0);
+  const returningShare = audience && desk.views_7d ? Math.round((audience.returning_7d / desk.views_7d) * 100) : null;
+  const linkedin7d = audience ? audience.linkedin.reduce((n, r) => n + (r.views_7d ?? 0), 0) : null;
 
   return (
     <PageShell crumbs={[{ href: "/", label: "Home" }, { label: "Desk" }]} kicker={`Private · ${new Date(now).toUTCString().replace(" GMT", " UTC")}`} title="The desk">
-      <section className="grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-3 lg:grid-cols-6">
+      <section className="grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule grid-cols-2 lg:grid-cols-4">
         <Stat label="Page views, 7 days" value={desk.views_7d} note={change == null ? "no prior week" : `${change > 0 ? "+" : ""}${change}% vs prior week`} tone={change == null ? undefined : change >= 0 ? "up" : "down"} />
+        <Stat label="Returning readers, 7 days" value={audience ? audience.returning_7d : "—"} note={returningShare == null ? "not available" : `${returningShare}% of views · counted from 5 Oct`} />
+        <Stat label="LinkedIn visits, 7 days" value={linkedin7d ?? "—"} note="from posts and linkedin.com" />
         <Stat label="Subscribers" value={desk.subscribers} note={`+${desk.subscribers_7d} this week${desk.unsubscribed_7d ? `, −${desk.unsubscribed_7d}` : ""}`} tone="up" />
         <Stat label="Alert sign-ups" value={desk.alert_subs} note={`+${desk.alert_subs_7d} this week`} />
         <Stat label="Data downloads, 7 days" value={downloads} />
@@ -172,8 +201,50 @@ export default async function DeskPage() {
       <section className="mt-10">
         <SectionTitle kicker="Traffic" title="Views, last 30 days" />
         <div className="mt-4">
-          <Bars rows={desk.views_by_day} now={now} />
+          <Bars rows={audience?.returning_by_day ?? desk.views_by_day} now={now} />
         </div>
+        <p className="mt-2 text-[12px] text-muted">
+          <span className="mr-1 inline-block h-2 w-2 rounded-sm bg-forest" />
+          returning readers (counted from 5 Oct) <span className="ml-3 mr-1 inline-block h-2 w-2 rounded-sm bg-accent" />
+          first visits
+        </p>
+      </section>
+
+      <section className="mt-10">
+        <SectionTitle kicker="90 days" title="Visits from LinkedIn" />
+        <table className="data-table mt-2">
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>From</th>
+              <th className="text-right">7 days</th>
+              <th className="text-right">90 days</th>
+              <th className="text-right">Last visit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {audience?.linkedin.map((r) => (
+              <tr key={`${r.path}-${r.source}`}>
+                <td className="text-xs">
+                  <Link href={r.path} className="hover:text-forest">
+                    {r.path}
+                  </Link>
+                </td>
+                <td className="text-xs text-muted">{sourceLabel(r.source)}</td>
+                <td className="text-right text-xs">{r.views_7d ?? 0}</td>
+                <td className="text-right text-xs">{r.views}</td>
+                <td className="text-right text-xs text-muted">{dayFmt.format(new Date(r.last_day))}</td>
+              </tr>
+            ))}
+            {!audience?.linkedin.length ? (
+              <tr>
+                <td colSpan={5} className="text-xs text-muted">
+                  No LinkedIn visits yet. Post links carry utm_source=linkedin, so each click is counted here.
+                </td>
+              </tr>
+            ) : null}
+          </tbody>
+        </table>
       </section>
 
       <section className="mt-10 grid gap-10 lg:grid-cols-3">

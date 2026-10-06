@@ -1,0 +1,49 @@
+{
+ "dataset": "FGN Savings Bond offers",
+ "publisher": "Debt Management Office, Nigeria",
+ "source_page": "https://www.dmo.gov.ng/fgn-bonds/savings-bond",
+ "compiled_by": "Afronomics (afronomicsfeed.com)",
+ "latest": {
+  "offer": "October 2026",
+  "source": "https://www.dmo.gov.ng/6092-fgn-savings-bond-offer-for-subscription-october-2026/file",
+  "read_at": "2026-10-05T22:41:52+00:00",
+  "bonds": [
+   {
+    "years": 2,
+    "due": "2028-10-14",
+    "rate": 13.071
+   },
+   {
+    "years": 3,
+    "due": "2029-10-14",
+    "rate": 14.071
+   }
+  ],
+  "opening": "2026-10-05",
+  "closing": "2026-10-09",
+  "settlement": "2026-10-14",
+  "coupon_dates": "January 14, April 14, July 14, October 14",
+  "unit_naira": 1000,
+  "minimum_naira": 5000,
+  "maximum_naira": 50000000
+ },
+ "history": [
+  {
+   "offer": "October 2026",
+   "source": "https://www.dmo.gov.ng/6092-fgn-savings-bond-offer-for-subscription-october-2026/file",
+   "opening": "2026-10-05",
+   "bonds": [
+    {
+     "years": 2,
+     "due": "2028-10-14",
+     "rate": 13.071
+    },
+    {
+     "years": 3,
+     "due": "2029-10-14",
+     "rate": 14.071
+    }
+   ]
+  }
+ ]
+}

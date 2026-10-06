@@ -3,7 +3,7 @@
  "publisher": "Central Bank of Nigeria",
  "source": "https://www.cbn.gov.ng/rates/mnymktind.html",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "read_at": "2026-10-06T11:24:51+00:00",
+ "read_at": "2026-10-06T11:33:34+00:00",
  "note": "Money Market Indicators as the CBN publishes them, % a year: monetary policy rate, Treasury bill rate, savings deposit rate, deposit rates by term, prime and maximum lending rates.",
  "rows": [
   {
@@ -11,1200 +11,1200 @@
    "mpr": 26.5,
    "tbill": 16.3,
    "savings": 7.46,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.34,
+   "deposit_12m": 10.3,
    "prime_lending": 17.86,
-   "max_lending": null
+   "max_lending": 29.2
   },
   {
    "month": "2026-07",
    "mpr": 26.5,
    "tbill": 16.3,
    "savings": 7.36,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.07,
+   "deposit_12m": 9.74,
    "prime_lending": 19.06,
-   "max_lending": null
+   "max_lending": 33.16
   },
   {
    "month": "2026-06",
    "mpr": 26.5,
    "tbill": 16.16,
    "savings": 7.32,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.05,
+   "deposit_12m": 10.32,
    "prime_lending": 19.06,
-   "max_lending": null
+   "max_lending": 33.16
   },
   {
    "month": "2026-05",
    "mpr": 26.5,
    "tbill": 15.95,
    "savings": 7.24,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.89,
+   "deposit_12m": 10.88,
    "prime_lending": 19.1,
-   "max_lending": null
+   "max_lending": 34.78
   },
   {
    "month": "2026-04",
    "mpr": 26.5,
    "tbill": 15.95,
    "savings": 7.34,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.17,
+   "deposit_12m": 10.44,
    "prime_lending": 18.87,
-   "max_lending": null
+   "max_lending": 35.17
   },
   {
    "month": "2026-03",
    "mpr": 26.5,
    "tbill": 15.95,
    "savings": 7.17,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.36,
+   "deposit_12m": 10.92,
    "prime_lending": 19.29,
-   "max_lending": null
+   "max_lending": 35.17
   },
   {
    "month": "2026-02",
    "mpr": 26.5,
    "tbill": 15.84,
    "savings": 7.36,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.77,
+   "deposit_12m": 12.38,
    "prime_lending": 19.29,
-   "max_lending": null
+   "max_lending": 35.17
   },
   {
    "month": "2026-01",
    "mpr": 27.0,
    "tbill": 15.48,
    "savings": 7.29,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 12.01,
+   "deposit_12m": 12.05,
    "prime_lending": 19.54,
-   "max_lending": null
+   "max_lending": 32.68
   },
   {
    "month": "2025-12",
    "mpr": 27.0,
    "tbill": 15.38,
    "savings": 7.42,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.82,
+   "deposit_12m": 11.34,
    "prime_lending": 18.02,
-   "max_lending": null
+   "max_lending": 29.32
   },
   {
    "month": "2025-11",
    "mpr": 27.0,
    "tbill": 15.3,
    "savings": 7.43,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.82,
+   "deposit_12m": 11.79,
    "prime_lending": 18.89,
-   "max_lending": null
+   "max_lending": 29.69
   },
   {
    "month": "2025-10",
    "mpr": 27.0,
    "tbill": 15.07,
    "savings": 7.43,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.32,
+   "deposit_12m": 11.78,
    "prime_lending": 18.89,
-   "max_lending": null
+   "max_lending": 29.56
   },
   {
    "month": "2025-09",
    "mpr": 27.0,
    "tbill": 15.17,
    "savings": 7.32,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 12.29,
+   "deposit_12m": 11.0,
    "prime_lending": 11.9,
-   "max_lending": null
+   "max_lending": 29.84
   },
   {
    "month": "2025-08",
    "mpr": 27.0,
    "tbill": 15.61,
    "savings": 7.38,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.06,
+   "deposit_12m": 10.36,
    "prime_lending": 18.88,
-   "max_lending": null
+   "max_lending": 29.13
   },
   {
    "month": "2025-07",
    "mpr": 27.5,
    "tbill": 15.12,
    "savings": 7.38,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.86,
+   "deposit_12m": 11.34,
    "prime_lending": 18.54,
-   "max_lending": null
+   "max_lending": 29.31
   },
   {
    "month": "2025-06",
    "mpr": 27.5,
    "tbill": 17.9,
    "savings": 7.52,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.77,
+   "deposit_12m": 11.55,
    "prime_lending": 18.19,
-   "max_lending": null
+   "max_lending": 29.51
   },
   {
    "month": "2025-05",
    "mpr": 27.5,
    "tbill": 19.07,
    "savings": 7.53,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.18,
+   "deposit_12m": 10.51,
    "prime_lending": 18.01,
-   "max_lending": null
+   "max_lending": 29.84
   },
   {
    "month": "2025-04",
    "mpr": 27.5,
    "tbill": 18.34,
    "savings": 7.5,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.4,
+   "deposit_12m": 11.31,
    "prime_lending": 18.32,
-   "max_lending": null
+   "max_lending": 30.11
   },
   {
    "month": "2025-03",
    "mpr": 27.5,
    "tbill": 17.41,
    "savings": 7.5,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.19,
+   "deposit_12m": 11.39,
    "prime_lending": 17.96,
-   "max_lending": null
+   "max_lending": 30.19
   },
   {
    "month": "2025-02",
    "mpr": 27.5,
    "tbill": 17.48,
    "savings": 7.51,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.54,
+   "deposit_12m": 9.73,
    "prime_lending": 18.35,
-   "max_lending": null
+   "max_lending": 30.5
   },
   {
    "month": "2025-01",
    "mpr": 27.5,
    "tbill": 18.0,
    "savings": 7.5,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.99,
+   "deposit_12m": 14.0,
    "prime_lending": 18.49,
-   "max_lending": null
+   "max_lending": 29.79
   },
   {
    "month": "2024-12",
    "mpr": 27.5,
    "tbill": 18.0,
    "savings": 7.51,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.59,
+   "deposit_12m": 13.33,
    "prime_lending": 18.56,
-   "max_lending": null
+   "max_lending": 29.71
   },
   {
    "month": "2024-11",
    "mpr": 27.5,
    "tbill": 18.0,
    "savings": 6.56,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.53,
+   "deposit_12m": 14.22,
    "prime_lending": 18.39,
-   "max_lending": null
+   "max_lending": 31.06
   },
   {
    "month": "2024-10",
    "mpr": 27.25,
    "tbill": 17.0,
    "savings": 7.56,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.65,
+   "deposit_12m": 13.57,
    "prime_lending": 17.36,
-   "max_lending": null
+   "max_lending": 30.28
   },
   {
    "month": "2024-09",
    "mpr": 27.25,
    "tbill": 16.91,
    "savings": 6.79,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 12.08,
+   "deposit_12m": 13.78,
    "prime_lending": 16.75,
-   "max_lending": null
+   "max_lending": 30.21
   },
   {
    "month": "2024-08",
    "mpr": 26.75,
    "tbill": 18.3,
    "savings": 6.75,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 14.4,
+   "deposit_12m": 16.24,
    "prime_lending": 17.01,
-   "max_lending": null
+   "max_lending": 29.93
   },
   {
    "month": "2024-07",
    "mpr": 26.75,
    "tbill": 16.99,
    "savings": 6.74,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 15.2,
+   "deposit_12m": 16.93,
    "prime_lending": 15.89,
-   "max_lending": null
+   "max_lending": 28.89
   },
   {
    "month": "2024-06",
    "mpr": 26.25,
    "tbill": 16.37,
    "savings": 6.67,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 12.05,
+   "deposit_12m": 13.08,
    "prime_lending": 15.85,
-   "max_lending": null
+   "max_lending": 29.11
   },
   {
    "month": "2024-05",
    "mpr": 26.25,
    "tbill": 16.44,
    "savings": 6.68,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.29,
+   "deposit_12m": 12.19,
    "prime_lending": 15.54,
-   "max_lending": null
+   "max_lending": 28.67
   },
   {
    "month": "2024-04",
    "mpr": 24.75,
    "tbill": 16.24,
    "savings": 6.29,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 11.65,
+   "deposit_12m": 11.23,
    "prime_lending": 15.54,
-   "max_lending": null
+   "max_lending": 29.49
   },
   {
    "month": "2024-03",
    "mpr": 24.75,
    "tbill": 16.53,
    "savings": 6.28,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.9,
+   "deposit_12m": 11.04,
    "prime_lending": 15.7,
-   "max_lending": null
+   "max_lending": 29.38
   },
   {
    "month": "2024-02",
    "mpr": 22.75,
    "tbill": 17.03,
    "savings": 5.86,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.89,
+   "deposit_12m": 10.75,
    "prime_lending": 15.06,
-   "max_lending": null
+   "max_lending": 26.55
   },
   {
    "month": "2024-01",
    "mpr": 18.75,
    "tbill": 4.33,
    "savings": 5.28,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.26,
+   "deposit_12m": 9.93,
    "prime_lending": 13.82,
-   "max_lending": null
+   "max_lending": 27.07
   },
   {
    "month": "2023-12",
    "mpr": 18.75,
    "tbill": 8.93,
    "savings": 5.28,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.56,
+   "deposit_12m": 9.75,
    "prime_lending": 14.17,
-   "max_lending": null
+   "max_lending": 26.62
   },
   {
    "month": "2023-11",
    "mpr": 18.75,
    "tbill": 7.73,
    "savings": 5.26,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.53,
+   "deposit_12m": 9.06,
    "prime_lending": 14.05,
-   "max_lending": null
+   "max_lending": 27.61
   },
   {
    "month": "2023-10",
    "mpr": 18.75,
    "tbill": 5.39,
    "savings": 5.26,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.57,
+   "deposit_12m": 8.79,
    "prime_lending": 14.39,
-   "max_lending": null
+   "max_lending": 28.97
   },
   {
    "month": "2023-09",
    "mpr": 18.75,
    "tbill": 5.29,
    "savings": 5.26,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.52,
+   "deposit_12m": 8.49,
    "prime_lending": 14.32,
-   "max_lending": null
+   "max_lending": 27.24
   },
   {
    "month": "2023-08",
    "mpr": 18.75,
    "tbill": 5.13,
    "savings": 5.26,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.55,
+   "deposit_12m": 8.13,
    "prime_lending": 13.99,
-   "max_lending": null
+   "max_lending": 27.59
   },
   {
    "month": "2023-07",
    "mpr": 18.75,
    "tbill": 4.45,
    "savings": 5.24,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.62,
+   "deposit_12m": 7.81,
    "prime_lending": 13.98,
-   "max_lending": null
+   "max_lending": 27.38
   },
   {
    "month": "2023-06",
    "mpr": 18.5,
    "tbill": 3.87,
    "savings": 5.18,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.68,
+   "deposit_12m": 7.83,
    "prime_lending": 13.85,
-   "max_lending": null
+   "max_lending": 28.94
   },
   {
    "month": "2023-05",
    "mpr": 18.5,
    "tbill": 2.98,
    "savings": 5.13,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.95,
+   "deposit_12m": 8.23,
    "prime_lending": 14.07,
-   "max_lending": null
+   "max_lending": 28.31
   },
   {
    "month": "2023-04",
    "mpr": 18.0,
    "tbill": 5.73,
    "savings": 4.59,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.92,
+   "deposit_12m": 8.18,
    "prime_lending": 14.05,
-   "max_lending": null
+   "max_lending": 28.59
   },
   {
    "month": "2023-03",
    "mpr": 18.0,
    "tbill": 3.81,
    "savings": 4.58,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.63,
+   "deposit_12m": 7.84,
    "prime_lending": 13.97,
-   "max_lending": null
+   "max_lending": 28.08
   },
   {
    "month": "2023-02",
    "mpr": 17.5,
    "tbill": 2.09,
    "savings": 4.3,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.78,
+   "deposit_12m": 8.84,
    "prime_lending": 13.62,
-   "max_lending": null
+   "max_lending": 28.75
   },
   {
    "month": "2023-01",
    "mpr": 17.5,
    "tbill": 1.39,
    "savings": 4.29,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.76,
+   "deposit_12m": 7.79,
    "prime_lending": 13.67,
-   "max_lending": null
+   "max_lending": 27.63
   },
   {
    "month": "2022-12",
    "mpr": 16.5,
    "tbill": 4.35,
    "savings": 4.13,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.79,
+   "deposit_12m": 8.22,
    "prime_lending": 13.85,
-   "max_lending": null
+   "max_lending": 29.13
   },
   {
    "month": "2022-11",
    "mpr": 16.5,
    "tbill": 6.5,
    "savings": 3.93,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.45,
+   "deposit_12m": 7.87,
    "prime_lending": 13.17,
-   "max_lending": null
+   "max_lending": 28.14
   },
   {
    "month": "2022-10",
    "mpr": 15.5,
    "tbill": 6.49,
    "savings": 3.77,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.01,
+   "deposit_12m": 7.07,
    "prime_lending": 12.23,
-   "max_lending": null
+   "max_lending": 28.06
   },
   {
    "month": "2022-09",
    "mpr": 15.5,
    "tbill": 5.68,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 6.99,
+   "deposit_12m": 6.53,
    "prime_lending": 12.23,
-   "max_lending": null
+   "max_lending": 28.06
   },
   {
    "month": "2022-08",
    "mpr": 14.0,
    "tbill": 3.83,
    "savings": 2.93,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 6.79,
+   "deposit_12m": 7.07,
    "prime_lending": 12.23,
-   "max_lending": null
+   "max_lending": 28.3
   },
   {
    "month": "2022-07",
    "mpr": 14.0,
    "tbill": 2.76,
    "savings": 1.42,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.96,
+   "deposit_12m": 5.76,
    "prime_lending": 12.1,
-   "max_lending": null
+   "max_lending": 27.61
   },
   {
    "month": "2022-06",
    "mpr": 13.0,
    "tbill": 2.41,
    "savings": 1.38,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.55,
+   "deposit_12m": 5.3,
    "prime_lending": 12.29,
-   "max_lending": null
+   "max_lending": 27.61
   },
   {
    "month": "2022-05",
    "mpr": 13.0,
    "tbill": 2.47,
    "savings": 1.37,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.7,
+   "deposit_12m": 5.73,
    "prime_lending": 11.96,
-   "max_lending": null
+   "max_lending": 27.37
   },
   {
    "month": "2022-04",
    "mpr": 11.5,
    "tbill": 1.74,
    "savings": 1.28,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.44,
+   "deposit_12m": 5.46,
    "prime_lending": 11.83,
-   "max_lending": null
+   "max_lending": 27.79
   },
   {
    "month": "2022-03",
    "mpr": 11.5,
    "tbill": 1.75,
    "savings": 1.28,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.41,
+   "deposit_12m": 5.82,
    "prime_lending": 11.84,
-   "max_lending": null
+   "max_lending": 26.61
   },
   {
    "month": "2022-02",
    "mpr": 11.5,
    "tbill": 2.3,
    "savings": 1.25,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.48,
+   "deposit_12m": 5.84,
    "prime_lending": 11.78,
-   "max_lending": null
+   "max_lending": 30.73
   },
   {
    "month": "2022-01",
    "mpr": 11.5,
    "tbill": 2.49,
    "savings": 1.25,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 5.0,
+   "deposit_12m": 5.86,
    "prime_lending": 11.68,
-   "max_lending": null
+   "max_lending": 27.65
   },
   {
    "month": "2021-12",
    "mpr": 11.5,
    "tbill": 2.49,
    "savings": 1.25,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.94,
+   "deposit_12m": 6.79,
    "prime_lending": 11.68,
-   "max_lending": null
+   "max_lending": 27.58
   },
   {
    "month": "2021-11",
    "mpr": 11.5,
    "tbill": 2.5,
    "savings": 1.83,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.96,
+   "deposit_12m": 7.34,
    "prime_lending": 11.8,
-   "max_lending": null
+   "max_lending": 27.26
   },
   {
    "month": "2021-10",
    "mpr": 11.5,
    "tbill": 2.5,
    "savings": 1.28,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 5.02,
+   "deposit_12m": 7.4,
    "prime_lending": 11.61,
-   "max_lending": null
+   "max_lending": 27.1
   },
   {
    "month": "2021-09",
    "mpr": 11.5,
    "tbill": 2.5,
    "savings": 1.28,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.65,
+   "deposit_12m": 6.72,
    "prime_lending": 11.73,
-   "max_lending": null
+   "max_lending": 27.1
   },
   {
    "month": "2021-08",
    "mpr": 11.5,
    "tbill": 2.5,
    "savings": 1.82,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.8,
+   "deposit_12m": 6.73,
    "prime_lending": 11.62,
-   "max_lending": null
+   "max_lending": 28.0
   },
   {
    "month": "2021-07",
    "mpr": 11.5,
    "tbill": 2.5,
    "savings": 1.82,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.78,
+   "deposit_12m": 6.3,
    "prime_lending": 11.57,
-   "max_lending": null
+   "max_lending": 27.99
   },
   {
    "month": "2021-06",
    "mpr": 11.5,
    "tbill": 2.5,
    "savings": 1.81,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.96,
+   "deposit_12m": 6.54,
    "prime_lending": 11.67,
-   "max_lending": null
+   "max_lending": 29.05
   },
   {
    "month": "2021-05",
    "mpr": 11.5,
    "tbill": 2.5,
    "savings": 1.83,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.0,
+   "deposit_12m": 6.14,
    "prime_lending": 11.29,
-   "max_lending": null
+   "max_lending": 28.39
   },
   {
    "month": "2021-04",
    "mpr": 11.5,
    "tbill": 2.0,
    "savings": 1.86,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 3.32,
+   "deposit_12m": 5.78,
    "prime_lending": 11.24,
-   "max_lending": null
+   "max_lending": 28.64
   },
   {
    "month": "2021-03",
    "mpr": 11.5,
    "tbill": 2.0,
    "savings": 1.86,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 3.05,
+   "deposit_12m": 4.94,
    "prime_lending": 11.13,
-   "max_lending": null
+   "max_lending": 28.74
   },
   {
    "month": "2021-02",
    "mpr": 11.5,
    "tbill": 1.49,
    "savings": 1.79,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 3.13,
+   "deposit_12m": 5.36,
    "prime_lending": 11.21,
-   "max_lending": null
+   "max_lending": 28.54
   },
   {
    "month": "2021-01",
    "mpr": 11.5,
    "tbill": 0.52,
    "savings": 1.86,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 2.88,
+   "deposit_12m": 5.01,
    "prime_lending": 11.25,
-   "max_lending": null
+   "max_lending": 28.3
   },
   {
    "month": "2020-12",
    "mpr": 11.5,
    "tbill": 0.03,
    "savings": 2.04,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 2.74,
+   "deposit_12m": 5.99,
    "prime_lending": 11.35,
-   "max_lending": null
+   "max_lending": 28.31
   },
   {
    "month": "2020-11",
    "mpr": 11.5,
    "tbill": 0.03,
    "savings": 1.84,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 2.9,
+   "deposit_12m": 4.89,
    "prime_lending": 11.6,
-   "max_lending": null
+   "max_lending": 28.85
   },
   {
    "month": "2020-10",
    "mpr": 11.5,
    "tbill": 0.86,
    "savings": 1.87,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 3.52,
+   "deposit_12m": 4.99,
    "prime_lending": 11.31,
-   "max_lending": null
+   "max_lending": 28.36
   },
   {
    "month": "2020-09",
    "mpr": 11.5,
    "tbill": 1.1,
    "savings": 2.41,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 3.7,
+   "deposit_12m": 5.37,
    "prime_lending": 11.55,
-   "max_lending": null
+   "max_lending": 28.45
   },
   {
    "month": "2020-08",
    "mpr": 12.5,
    "tbill": 1.17,
    "savings": 3.78,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.05,
+   "deposit_12m": 4.89,
    "prime_lending": 11.76,
-   "max_lending": null
+   "max_lending": 29.51
   },
   {
    "month": "2020-07",
    "mpr": 12.5,
    "tbill": 1.3,
    "savings": 3.78,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.31,
+   "deposit_12m": 5.89,
    "prime_lending": 12.1,
-   "max_lending": null
+   "max_lending": 28.42
   },
   {
    "month": "2020-06",
    "mpr": 12.5,
    "tbill": 1.94,
    "savings": 3.78,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 4.7,
+   "deposit_12m": 7.12,
    "prime_lending": 15.65,
-   "max_lending": null
+   "max_lending": 30.57
   },
   {
    "month": "2020-05",
    "mpr": 12.5,
    "tbill": 2.47,
    "savings": 3.83,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 5.67,
+   "deposit_12m": 7.63,
    "prime_lending": 14.73,
-   "max_lending": null
+   "max_lending": 30.69
   },
   {
    "month": "2020-04",
    "mpr": 13.5,
    "tbill": 1.91,
    "savings": 3.69,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 5.99,
+   "deposit_12m": 7.68,
    "prime_lending": 14.92,
-   "max_lending": null
+   "max_lending": 30.73
   },
   {
    "month": "2020-03",
    "mpr": 13.5,
    "tbill": 2.39,
    "savings": 3.89,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 6.15,
+   "deposit_12m": 8.61,
    "prime_lending": 14.71,
-   "max_lending": null
+   "max_lending": 30.48
   },
   {
    "month": "2020-02",
    "mpr": 13.5,
    "tbill": 3.0,
    "savings": 3.89,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 6.17,
+   "deposit_12m": 8.02,
    "prime_lending": 15.04,
-   "max_lending": null
+   "max_lending": 30.63
   },
   {
    "month": "2020-01",
    "mpr": 13.5,
    "tbill": 3.45,
    "savings": 3.89,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 5.85,
+   "deposit_12m": 8.01,
    "prime_lending": 14.97,
-   "max_lending": null
+   "max_lending": 30.77
   },
   {
    "month": "2019-12",
    "mpr": 13.5,
    "tbill": 4.47,
    "savings": 3.89,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 6.55,
+   "deposit_12m": 9.03,
    "prime_lending": 14.99,
-   "max_lending": null
+   "max_lending": 30.72
   },
   {
    "month": "2019-11",
    "mpr": 13.5,
    "tbill": 6.73,
    "savings": 3.31,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.59,
+   "deposit_12m": 9.73,
    "prime_lending": 14.91,
-   "max_lending": null
+   "max_lending": 29.4
   },
   {
    "month": "2019-10",
    "mpr": 13.5,
    "tbill": 10.03,
    "savings": 3.93,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.7,
+   "deposit_12m": 9.73,
    "prime_lending": 15.07,
-   "max_lending": null
+   "max_lending": 30.56
   },
   {
    "month": "2019-09",
    "mpr": 13.5,
    "tbill": 11.1,
    "savings": 3.2,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.96,
+   "deposit_12m": 9.97,
    "prime_lending": 15.15,
-   "max_lending": null
+   "max_lending": 31.43
   },
   {
    "month": "2019-08",
    "mpr": 13.5,
    "tbill": 10.89,
    "savings": 3.93,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.93,
+   "deposit_12m": 9.82,
    "prime_lending": 15.4,
-   "max_lending": null
+   "max_lending": 31.04
   },
   {
    "month": "2019-07",
    "mpr": 13.5,
    "tbill": 9.92,
    "savings": 3.93,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.85,
+   "deposit_12m": 10.18,
    "prime_lending": 15.46,
-   "max_lending": null
+   "max_lending": 31.07
   },
   {
    "month": "2019-06",
    "mpr": 13.5,
    "tbill": 9.93,
    "savings": 3.93,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.1,
+   "deposit_12m": 10.57,
    "prime_lending": 15.8,
-   "max_lending": null
+   "max_lending": 31.04
   },
   {
    "month": "2019-05",
    "mpr": 13.5,
    "tbill": 10.0,
    "savings": 3.9,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.12,
+   "deposit_12m": 10.42,
    "prime_lending": 15.33,
-   "max_lending": null
+   "max_lending": 31.07
   },
   {
    "month": "2019-04",
    "mpr": 13.5,
    "tbill": 10.24,
    "savings": 3.91,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.15,
+   "deposit_12m": 10.7,
    "prime_lending": 18.23,
-   "max_lending": null
+   "max_lending": 30.89
   },
   {
    "month": "2019-03",
    "mpr": 13.5,
    "tbill": 10.42,
    "savings": 3.97,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.48,
+   "deposit_12m": 10.23,
    "prime_lending": 14.92,
-   "max_lending": null
+   "max_lending": 30.83
   },
   {
    "month": "2019-02",
    "mpr": 14.0,
    "tbill": 10.91,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.68,
+   "deposit_12m": 10.74,
    "prime_lending": 16.08,
-   "max_lending": null
+   "max_lending": 30.56
   },
   {
    "month": "2019-01",
    "mpr": 14.0,
    "tbill": 10.98,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.69,
+   "deposit_12m": 10.66,
    "prime_lending": 16.01,
-   "max_lending": null
+   "max_lending": 30.48
   },
   {
    "month": "2018-12",
    "mpr": 14.0,
    "tbill": 0.0,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.5,
+   "deposit_12m": 10.33,
    "prime_lending": 16.17,
-   "max_lending": null
+   "max_lending": 30.52
   },
   {
    "month": "2018-11",
    "mpr": 14.0,
    "tbill": 10.91,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.41,
+   "deposit_12m": 10.43,
    "prime_lending": 16.64,
-   "max_lending": null
+   "max_lending": 30.8
   },
   {
    "month": "2018-10",
    "mpr": 14.0,
    "tbill": 10.94,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.47,
+   "deposit_12m": 10.46,
    "prime_lending": 16.53,
-   "max_lending": null
+   "max_lending": 30.67
   },
   {
    "month": "2018-09",
    "mpr": 14.0,
    "tbill": 11.0,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.44,
+   "deposit_12m": 10.08,
    "prime_lending": 16.59,
-   "max_lending": null
+   "max_lending": 30.77
   },
   {
    "month": "2018-08",
    "mpr": 14.0,
    "tbill": 10.64,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.51,
+   "deposit_12m": 9.95,
    "prime_lending": 16.65,
-   "max_lending": null
+   "max_lending": 30.93
   },
   {
    "month": "2018-07",
    "mpr": 14.0,
    "tbill": 10.0,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.45,
+   "deposit_12m": 10.26,
    "prime_lending": 16.83,
-   "max_lending": null
+   "max_lending": 31.09
   },
   {
    "month": "2018-06",
    "mpr": 14.0,
    "tbill": 10.11,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.38,
+   "deposit_12m": 10.05,
    "prime_lending": 16.78,
-   "max_lending": null
+   "max_lending": 31.17
   },
   {
    "month": "2018-05",
    "mpr": 14.0,
    "tbill": 10.0,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.97,
+   "deposit_12m": 9.96,
    "prime_lending": 17.08,
-   "max_lending": null
+   "max_lending": 31.29
   },
   {
    "month": "2018-04",
    "mpr": 14.0,
    "tbill": 11.43,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.89,
+   "deposit_12m": 10.03,
    "prime_lending": 17.24,
-   "max_lending": null
+   "max_lending": 31.56
   },
   {
    "month": "2018-03",
    "mpr": 14.0,
    "tbill": 11.84,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.72,
+   "deposit_12m": 10.21,
    "prime_lending": 17.35,
-   "max_lending": null
+   "max_lending": 31.55
   },
   {
    "month": "2018-02",
    "mpr": 14.0,
    "tbill": 11.88,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.05,
+   "deposit_12m": 10.67,
    "prime_lending": 17.53,
-   "max_lending": null
+   "max_lending": 31.4
   },
   {
    "month": "2018-01",
    "mpr": 14.0,
    "tbill": 12.27,
    "savings": 4.07,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.63,
+   "deposit_12m": 11.24,
    "prime_lending": 17.5,
-   "max_lending": null
+   "max_lending": 31.39
   },
   {
    "month": "2017-12",
    "mpr": 14.0,
    "tbill": 0.0,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.61,
+   "deposit_12m": 10.93,
    "prime_lending": 17.71,
-   "max_lending": null
+   "max_lending": 30.99
   },
   {
    "month": "2017-11",
    "mpr": 14.0,
    "tbill": 13.01,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.84,
+   "deposit_12m": 10.71,
    "prime_lending": 17.77,
-   "max_lending": null
+   "max_lending": 30.95
   },
   {
    "month": "2017-10",
    "mpr": 14.0,
    "tbill": 13.18,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.09,
+   "deposit_12m": 10.8,
    "prime_lending": 17.86,
-   "max_lending": null
+   "max_lending": 31.39
   },
   {
    "month": "2017-09",
    "mpr": 14.0,
    "tbill": 13.2,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.26,
+   "deposit_12m": 11.7,
    "prime_lending": 17.88,
-   "max_lending": null
+   "max_lending": 31.39
   },
   {
    "month": "2017-08",
    "mpr": 14.0,
    "tbill": 13.35,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 10.14,
+   "deposit_12m": 11.4,
    "prime_lending": 17.69,
-   "max_lending": null
+   "max_lending": 31.2
   },
   {
    "month": "2017-07",
    "mpr": 14.0,
    "tbill": 13.46,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.71,
+   "deposit_12m": 10.27,
    "prime_lending": 17.65,
-   "max_lending": null
+   "max_lending": 30.94
   },
   {
    "month": "2017-06",
    "mpr": 14.0,
    "tbill": 13.5,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.01,
+   "deposit_12m": 11.15,
    "prime_lending": 17.59,
-   "max_lending": null
+   "max_lending": 30.94
   },
   {
    "month": "2017-05",
    "mpr": 14.0,
    "tbill": 13.5,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.41,
+   "deposit_12m": 11.33,
    "prime_lending": 17.58,
-   "max_lending": null
+   "max_lending": 30.75
   },
   {
    "month": "2017-04",
    "mpr": 14.0,
    "tbill": 13.58,
    "savings": 4.24,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.46,
+   "deposit_12m": 10.38,
    "prime_lending": 17.44,
-   "max_lending": null
+   "max_lending": 30.31
   },
   {
    "month": "2017-03",
    "mpr": 14.0,
    "tbill": 13.6,
    "savings": 4.23,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.11,
+   "deposit_12m": 10.57,
    "prime_lending": 17.43,
-   "max_lending": null
+   "max_lending": 30.18
   },
   {
    "month": "2017-02",
    "mpr": 14.0,
    "tbill": 13.75,
    "savings": 4.22,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 9.13,
+   "deposit_12m": 10.37,
    "prime_lending": 17.13,
-   "max_lending": null
+   "max_lending": 29.26
   },
   {
    "month": "2017-01",
    "mpr": 14.0,
    "tbill": 13.95,
    "savings": 4.22,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.88,
+   "deposit_12m": 10.77,
    "prime_lending": 16.91,
-   "max_lending": null
+   "max_lending": 28.88
   },
   {
    "month": "2016-12",
    "mpr": 14.0,
    "tbill": 13.97,
    "savings": 4.18,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.8,
+   "deposit_12m": 10.76,
    "prime_lending": 17.09,
-   "max_lending": null
+   "max_lending": 28.55
   },
   {
    "month": "2016-11",
    "mpr": 14.0,
    "tbill": 13.99,
    "savings": 4.28,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.63,
+   "deposit_12m": 10.14,
    "prime_lending": 17.06,
-   "max_lending": null
+   "max_lending": 28.53
   },
   {
    "month": "2016-10",
    "mpr": 14.0,
    "tbill": 13.96,
    "savings": 4.08,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 8.25,
+   "deposit_12m": 6.25,
    "prime_lending": 17.1,
-   "max_lending": null
+   "max_lending": 27.69
   },
   {
    "month": "2016-09",
    "mpr": 14.0,
    "tbill": 14.0,
    "savings": 4.05,
-   "deposit_3m": null,
-   "deposit_12m": null,
+   "deposit_3m": 7.68,
+   "deposit_12m": 5.75,
    "prime_lending": 17.09,
-   "max_lending": null
+   "max_lending": 27.49
   }
  ]
 }

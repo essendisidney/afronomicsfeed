@@ -33,6 +33,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/rates/kenya", "daily", 0.9),
     page("/rates/kenya/money-market-funds", "daily", 0.9),
     page("/rates/remittances", "monthly", 0.8),
+    page("/rates/nigeria/check", "weekly", 0.8),
+    page("/rates/ghana/check", "weekly", 0.8),
     page("/rates/policy", "daily", 0.9),
     page("/learn", "weekly", 0.9),
     page("/rates/nigeria/savings-bond", "weekly", 0.9),

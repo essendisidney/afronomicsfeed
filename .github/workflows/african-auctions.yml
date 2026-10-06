@@ -58,6 +58,10 @@ jobs:
       - run: python scripts/policy_rates.py
         continue-on-error: true
         timeout-minutes: 5
+      # Kenya's next MPC date, from the CBK's own "next MPC meeting" notice, onto the decision calendar.
+      - run: python scripts/kenya_mpc.py
+        continue-on-error: true
+        timeout-minutes: 3
       # What banks pay and charge in Nigeria (CBN) and Ghana (Bank of Ghana), for their "Is my rate fair?" checks.
       - run: python scripts/west_africa_rates.py
         continue-on-error: true

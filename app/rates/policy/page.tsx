@@ -6,6 +6,8 @@ import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { EmailAlertBox } from "@/components/ui/RateAlertForm";
+import { renderTime } from "@/lib/data/fetcher";
+import { loadMpc, nextDecisions } from "@/lib/data/mpc-calendar";
 import { policyBoard } from "@/lib/data/policy-rates";
 import { policyAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
@@ -22,6 +24,12 @@ const pts = (n: number) => `${n > 0 ? "+" : n < 0 ? "−" : ""}${Math.abs(n).toF
 
 export default function PolicyRatesPage() {
   const { rows, missing, updatedAt } = policyBoard();
+  const today = new Date(renderTime()).toISOString().slice(0, 10);
+  const next = nextDecisions(today);
+  const mpc = loadMpc();
+  const nameOf = new Map<string, string>(rows.map((r) => [r.market, r.market_name]));
+  const upcoming = [...next.entries()].sort((a, b) => a[1].date.localeCompare(b[1].date));
+  const days = (d: string) => Math.round((Date.parse(d) - Date.parse(today)) / 86_400_000);
 
   return (
     <PageShell
@@ -50,6 +58,7 @@ export default function PolicyRatesPage() {
                   <th>Bank’s date</th>
                   <th className="text-right">One-year bill</th>
                   <th className="text-right">Gap</th>
+                  <th>Next decision</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,6 +88,15 @@ export default function PolicyRatesPage() {
                       )}
                     </td>
                     <td className="text-right font-medium">{r.gap == null ? "—" : pts(r.gap)}</td>
+                    <td className="whitespace-nowrap text-xs">
+                      {next.get(r.market) ? (
+                        <a href={next.get(r.market)!.source} target="_blank" rel="noopener noreferrer" className="hover:text-forest">
+                          {dateFmt.format(new Date(next.get(r.market)!.date))}
+                        </a>
+                      ) : (
+                        <span className="text-muted">not published</span>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -100,6 +118,42 @@ export default function PolicyRatesPage() {
           ) : null}
         </section>
       )}
+      {upcoming.length ? (
+        <section className="mt-12" id="calendar">
+          <SectionTitle
+            kicker="Calendar"
+            title="Coming up: rate decisions"
+            note="From each central bank's own calendar or its latest statement. Banks sometimes move a meeting; the linked page is the authority."
+          />
+          <ul className="mt-4 divide-y divide-rule border-y border-rule">
+            {upcoming.map(([market, n]) => {
+              const d = days(n.date);
+              return (
+                <li key={market} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3">
+                  <span className="text-sm">
+                    <span className="font-medium text-ink">{nameOf.get(market) ?? market}</span>
+                    {n.day.start && n.day.announce && n.day.start !== n.day.announce ? (
+                      <span className="text-muted"> · meets {dateFmt.format(new Date(n.day.start))}, decision {dateFmt.format(new Date(n.day.announce))}</span>
+                    ) : null}
+                  </span>
+                  <span className="text-sm">
+                    <a href={n.source} target="_blank" rel="noopener noreferrer" className="font-semibold text-ink hover:text-forest">
+                      {dateFmt.format(new Date(n.date))}
+                    </a>
+                    <span className="ml-2 text-xs text-muted">{d === 0 ? "today" : d === 1 ? "tomorrow" : `in ${d} days`}</span>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+          {mpc?.not_published ? (
+            <p className="mt-3 max-w-3xl text-xs leading-5 text-muted">
+              No date shown for {Object.keys(mpc.not_published).map((m) => nameOf.get(m) ?? m.charAt(0).toUpperCase() + m.slice(1)).join(", ")}: the bank does not
+              publish a calendar Afronomics can read yet. Get an email the day any policy rate changes:
+            </p>
+          ) : null}
+        </section>
+      ) : null}
       <EmailAlertBox kinds={["policy_change"]} />
       <CiteBlock title="African central-bank policy rates" path="/rates/policy" publisher="the central banks’ own websites" />
       <Questions items={policyAnswers().items} />

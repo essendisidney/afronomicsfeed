@@ -49,7 +49,7 @@ const copy = {
     highLow: "Highest / lowest one-year bill",
     policyVsBill: "Policy rate vs bill, eight markets",
     api: "Data API and CSV downloads",
-    pack: "Committee pack",
+    pack: "Packs, data and licences for institutions",
     learnSave: "Learn: how savings grow",
     learnLoan: "Learn: the real cost of a loan",
     learnFx: "Learn: what the exchange rate means",
@@ -84,7 +84,7 @@ const copy = {
     highLow: "Hati ya mwaka mmoja: juu kabisa / chini kabisa",
     policyVsBill: "Riba ya benki kuu dhidi ya hati, masoko manane",
     api: "API ya takwimu na CSV",
-    pack: "Kifurushi cha kamati",
+    pack: "Huduma kwa taasisi: vifurushi, takwimu na leseni",
     learnSave: "Jifunze: jinsi akiba inavyokua",
     learnLoan: "Jifunze: gharama halisi ya mkopo",
     learnFx: "Jifunze: maana ya kiwango cha ubadilishaji",
@@ -167,7 +167,7 @@ export async function buildMoneyDoors(lang: Lang = "en") {
       links: [
         { href: "/rates/policy", label: t.policyVsBill },
         { href: "/developers", label: t.api },
-        { href: "/pack", label: t.pack },
+        { href: "/for-institutions", label: t.pack },
       ],
     },
   ];

@@ -5,6 +5,7 @@ import { PageShell } from "@/components/data/PageShell";
 import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { EmailAlertBox } from "@/components/ui/RateAlertForm";
 import { renderTime } from "@/lib/data/fetcher";
 import { loadSavingsBond } from "@/lib/data/nigeria-savings-bond";
 import { savingsBondAnswers } from "@/lib/seo/answers";
@@ -145,6 +146,8 @@ export default function NigeriaSavingsBondPage() {
           ) : null}
         </>
       )}
+
+      <EmailAlertBox kinds={["ng_savings_bond"]} />
 
       <p className="mt-10 text-sm text-ink-soft">
         Buying government bills and bonds in other countries:{" "}

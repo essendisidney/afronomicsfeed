@@ -5,6 +5,7 @@ import { PageShell } from "@/components/data/PageShell";
 import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { EmailAlertBox } from "@/components/ui/RateAlertForm";
 import { policyBoard } from "@/lib/data/policy-rates";
 import { policyAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
@@ -99,6 +100,7 @@ export default function PolicyRatesPage() {
           ) : null}
         </section>
       )}
+      <EmailAlertBox kinds={["policy_change"]} />
       <CiteBlock title="African central-bank policy rates" path="/rates/policy" publisher="the central banks’ own websites" />
       <Questions items={policyAnswers().items} />
       <NewsletterBand />

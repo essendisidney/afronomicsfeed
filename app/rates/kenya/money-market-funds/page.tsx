@@ -6,8 +6,10 @@ import { PageShell } from "@/components/data/PageShell";
 import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { ShareResult } from "@/components/ui/ShareResult";
 import { fundLeague, loadFundHistory, rateOptions } from "@/lib/data/kenya-rates";
 import { fundAnswers } from "@/lib/seo/answers";
+import { mmfSentence } from "@/lib/share-card";
 import { site } from "@/lib/site";
 
 export const revalidate = 1800;
@@ -140,6 +142,7 @@ export default function MoneyMarketFundsPage() {
             depending on the fund. A yield far above the Treasury bill usually means the fund holds longer or riskier paper, or that the published
             figure is old. Check the fund’s own documents before you invest. This is information, not advice.
           </p>
+          {best && bill ? <ShareResult spec={{ kind: "mmf" }} text={`${mmfSentence(best, bill)}. Every fund, from the source:`} /> : null}
           {unread.length ? (
             <p className="mt-2 max-w-3xl text-xs leading-5 text-muted">
               Not in the table because the last read failed: {unread.map((u) => `${u.name} (${u.status.startsWith("conflicting") ? "the manager’s page shows two different yields" : "page not read"})`).join("; ")}.

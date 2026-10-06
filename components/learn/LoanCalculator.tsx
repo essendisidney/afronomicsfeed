@@ -1,65 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { ui, type LearnLang } from "@/lib/learn-ui";
+import { ShareResult } from "@/components/ui/ShareResult";
+import { flat, flatAsReducing, reducing } from "@/lib/learn-calc";
+import { calcUi, shareUi, type LearnLang } from "@/lib/learn-ui";
+import { whole } from "@/lib/share";
 
 const kes = (n: number) => n.toLocaleString("en-GB", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
 
-function reducing(amount: number, yearly: number, months: number) {
-  const i = yearly / 100 / 12;
-  const payment = i === 0 ? amount / months : (amount * i) / (1 - Math.pow(1 + i, -months));
-  return { payment, interest: payment * months - amount };
-}
-
-function flat(amount: number, yearly: number, months: number) {
-  const interest = (amount * yearly * months) / 1200;
-  return { payment: (amount + interest) / months, interest };
-}
-
-/** The reducing-balance yearly rate that costs the same as a flat rate (solved by bisection). */
-function flatAsReducing(amount: number, yearly: number, months: number) {
-  const target = flat(amount, yearly, months).payment;
-  let lo = 0;
-  let hi = 500;
-  for (let k = 0; k < 80; k++) {
-    const mid = (lo + hi) / 2;
-    if (reducing(amount, mid, months).payment < target) lo = mid;
-    else hi = mid;
-  }
-  return (lo + hi) / 2;
-}
-
-export type LoanLabels = {
-  amount: string;
-  loanRate: string;
-  months: string;
-  ifCharged: (r: string) => string;
-  monthly: string;
-  totalInterest: string;
-  totalRepaid: string;
-  reducing: string;
-  flat: string;
-  equivalent: (flatRate: string, eq: string) => string;
-  loanFoot: string;
-};
-
-const english: LoanLabels = {
-  amount: "Amount borrowed",
-  loanRate: "Rate a year (%)",
-  months: "Months to repay",
-  ifCharged: (r) => `If the ${r}% is charged`,
-  monthly: "Monthly payment",
-  totalInterest: "Total interest",
-  totalRepaid: "Total repaid",
-  reducing: "On a reducing balance",
-  flat: "Flat, on the full amount",
-  equivalent: (f, e) => `A flat ${f}% costs the same as about ${e}% on a reducing balance.`,
-  loanFoot: "Fees, insurance and excise duty are extra. Ask the lender for the total you will repay. Information, not advice.",
-};
-
 /** A loan's monthly payment and total interest, flat versus reducing balance. Pure arithmetic, in the browser. */
 export function LoanCalculator({ bankAverage, lang }: { bankAverage: number | null; lang?: LearnLang }) {
-  const labels: LoanLabels = lang ? ui[lang].calc : english;
+  const labels = calcUi(lang ?? "en");
   const [amount, setAmount] = useState(100000);
   const [rate, setRate] = useState(bankAverage ? Number(bankAverage.toFixed(2)) : 15);
   const [months, setMonths] = useState(12);
@@ -68,6 +19,10 @@ export function LoanCalculator({ bankAverage, lang }: { bankAverage: number | nu
   const r = reducing(amount, rate, m);
   const f = flat(amount, rate, m);
   const equivalent = amount > 0 && rate > 0 ? flatAsReducing(amount, rate, m) : 0;
+  const shareLang = lang ?? "en";
+  const t = shareUi[shareLang];
+  const spec = { kind: "loan", amount: Math.min(1e9, Math.round(amount)), rate: Math.round(rate * 100) / 100, months: m, lang: shareLang } as const;
+  const shareText = `${t.loanText(whole(spec.amount), String(spec.rate), String(spec.months), whole(reducing(spec.amount, spec.rate, m).interest), whole(flat(spec.amount, spec.rate, m).interest))} ${t.tryOwn}`;
 
   return (
     <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
@@ -116,6 +71,7 @@ export function LoanCalculator({ bankAverage, lang }: { bankAverage: number | nu
         {bankAverage ? ` For comparison, Kenyan banks’ average lending rate is ${bankAverage.toFixed(2)}% (reducing balance).` : ""}
       </p>
       <p className="mt-2 text-xs leading-5 text-muted">{labels.loanFoot}</p>
+      {amount > 0 ? <ShareResult spec={spec} text={shareText} lang={shareLang} /> : null}
     </div>
   );
 }

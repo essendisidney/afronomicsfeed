@@ -1,5 +1,6 @@
 # Every weekday, three times: read new central-bank auction results for each market and commit the datasets.
-# The commit triggers a Vercel deploy, so the site updates itself. No secrets are needed.
+# The commit triggers a Vercel deploy, so the site updates itself. The last step sends email rate alerts
+# (needs AF_CRON_SECRET; without it the step skips).
 # Auction days differ (Egypt Sun-Mon, Malawi Tue, Nigeria/Tanzania/Mozambique Wed, Kenya/Zambia Thu, Ghana/South Africa Fri),
 # so running every weekday keeps each market within hours of its central bank's release.
 name: African auctions
@@ -79,3 +80,21 @@ jobs:
             sleep $((attempt * 10))
           done
           exit 1
+      # Email rate alerts. Runs every time (it sends only what is new); after a data commit it first waits for the
+      # site to deploy that commit, because the sender reads the data the live deployment carries.
+      - name: Send email rate alerts
+        env:
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
+        run: |
+          if [ -z "$AF_CRON_SECRET" ]; then echo "AF_CRON_SECRET not set; skipping alerts"; exit 0; fi
+          url=https://www.afronomicsfeed.com/api/send/rate-alerts
+          head=$(git rev-parse HEAD)
+          if [ "$head" != "$GITHUB_SHA" ]; then
+            for attempt in $(seq 1 20); do
+              deployed=$(curl -fsS -m 60 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" "$url?dry=1" | python3 -c "import json,sys;print(json.load(sys.stdin).get('deployment') or '')" || true)
+              if [ -n "$deployed" ] && { [ "$deployed" = "$head" ] || { git fetch -q --depth=50 origin main && git merge-base --is-ancestor "$head" "$deployed"; } 2>/dev/null; }; then break; fi
+              echo "Waiting for the deploy of $head (live: ${deployed:-unknown})"
+              sleep 30
+            done
+          fi
+          curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" "$url"

@@ -41,6 +41,8 @@ export type Card = {
   line?: { values: number[]; caption?: string };
   bars?: CardBar[];
   barsCaption?: string;
+  /** A line under the picture, in the accent colour: where the reader can try it themselves. */
+  cta?: string;
   source: string;
 };
 
@@ -89,8 +91,8 @@ function barChart(bars: CardBar[], width: number, height: number) {
   );
 }
 
-export async function renderCard(card: Card) {
-  const chartH = card.stats?.length ? 170 : 250;
+export async function renderCard(card: Card, headers?: Record<string, string>) {
+  const chartH = card.stats?.length ? 170 : card.cta ? 180 : 250;
   return new ImageResponse(
     (
       <div
@@ -123,6 +125,7 @@ export async function renderCard(card: Card) {
         <div style={{ display: "flex", flexGrow: 1, alignItems: "flex-end", marginTop: 18 }}>
           {card.bars?.length ? barChart(card.bars, 1072, chartH + 40) : card.line ? lineChart(card.line.values, 1072, chartH) : null}
         </div>
+        {card.cta ? <div style={{ display: "flex", fontFamily: "Sans", fontWeight: 600, fontSize: 26, color: RED_SOFT, marginTop: 18 }}>{card.cta}</div> : null}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 18, borderTop: "1px solid rgba(255,255,255,0.14)", paddingTop: 16 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <div style={{ display: "flex", position: "relative", width: 30, height: 30 }}>
@@ -140,7 +143,7 @@ export async function renderCard(card: Card) {
         </div>
       </div>
     ),
-    { ...cardSize, fonts: await fonts() },
+    { ...cardSize, fonts: await fonts(), headers },
   );
 }
 

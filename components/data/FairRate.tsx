@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { ShareResult } from "@/components/ui/ShareResult";
+import { fairSentence, type ShareSpec } from "@/lib/share";
 
 /**
  * "Is my rate fair?" A saver or borrower types the rate they were offered and the amount; the verdict compares it
@@ -98,6 +100,12 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
     };
   }
   const v = verdict();
+  const shareSpec: Extract<ShareSpec, { kind: "fair" }> = {
+    kind: "fair",
+    mode,
+    mine: ok ? Math.min(mode === "save" ? 100 : 200, Math.round(r * 100) / 100) : 0,
+    place,
+  };
   const field = "rounded-xl border border-rule bg-surface px-3 py-2.5 text-[15px] text-ink outline-none focus:border-accent";
   const toneClass = v?.tone === "good" ? "border-up/40" : v?.tone === "fair" ? "border-rule" : "border-down/40";
 
@@ -140,6 +148,7 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
               <p key={l}>{l}</p>
             ))}
           </div>
+          <ShareResult spec={shareSpec} text={`${fairSentence(shareSpec, bench)} Is your rate fair? Check yours:`} />
         </div>
       ) : (
         <p className="mt-3 text-[13px] text-muted">Type the rate you were offered and the amount. Benchmarks: 364-day bill {bench.bill364Gross.toFixed(2)}%, best published fund {bench.bestFundNet.toFixed(2)}% after tax, bank deposit average {bench.depositAvg.toFixed(2)}%, bank lending average {bench.lendingAvg.toFixed(2)}% ({bench.asOf}).</p>

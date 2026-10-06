@@ -14,7 +14,10 @@ export function PageCounter() {
       returning = localStorage.getItem("af_seen") !== null;
       if (!returning) localStorage.setItem("af_seen", new Date().toISOString().slice(0, 10));
     } catch {}
-    const body = JSON.stringify({ path: pathname, referrer: document.referrer, returning });
+    // Campaign tags (utm_source/utm_campaign) on the landing link, so clicks from our own posts are counted by post.
+    const params = new URLSearchParams(window.location.search);
+    const campaign = params.get("utm_source") ? `${params.get("utm_source")}/${params.get("utm_campaign") ?? ""}` : "";
+    const body = JSON.stringify({ path: pathname, referrer: document.referrer, returning, campaign });
     try {
       if (!navigator.sendBeacon?.("/api/hit", new Blob([body], { type: "application/json" }))) {
         void fetch("/api/hit", { method: "POST", body, headers: { "Content-Type": "application/json" }, keepalive: true });

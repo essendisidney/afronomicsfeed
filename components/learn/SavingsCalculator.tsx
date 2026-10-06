@@ -1,35 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { ui, type LearnLang } from "@/lib/learn-ui";
+import { ShareResult } from "@/components/ui/ShareResult";
+import { savingsGrowth } from "@/lib/learn-calc";
+import { calcUi, shareUi, type LearnLang } from "@/lib/learn-ui";
 
 type Preset = { label: string; rate: number };
-
-export type SavingsLabels = { saveMonthly: string; years: string; rate: string; youWillHave: string; youPutIn: string; interest: string; savingsFoot: string };
-
-const english: SavingsLabels = {
-  saveMonthly: "Save each month",
-  years: "For how many years",
-  rate: "Rate a year, after tax (%)",
-  youWillHave: "You will have",
-  youPutIn: "You put in",
-  interest: "Interest earned",
-  savingsFoot: "Holds one rate for the whole period and adds interest monthly; real rates move. Information, not advice.",
-};
 
 const kes = (n: number) => Math.round(n).toLocaleString("en-GB");
 
 /** Regular monthly saving, interest added monthly at a steady yearly rate (after tax). Pure arithmetic, in the browser. */
 export function SavingsCalculator({ presets, lang }: { presets: Preset[]; lang?: LearnLang }) {
-  const labels: SavingsLabels = lang ? ui[lang].calc : english;
+  const labels = calcUi(lang ?? "en");
   const [monthly, setMonthly] = useState(1000);
   const [years, setYears] = useState(5);
   const [rate, setRate] = useState(presets[0]?.rate ?? 8);
 
-  const n = Math.max(0, Math.round(years * 12));
-  const i = rate / 100 / 12;
-  const total = i === 0 ? monthly * n : monthly * ((Math.pow(1 + i, n) - 1) / i);
-  const paidIn = monthly * n;
+  const { total, paidIn } = savingsGrowth(monthly, years, rate);
+  const shareLang = lang ?? "en";
+  const t = shareUi[shareLang];
+  const spec = { kind: "savings", monthly: Math.min(1e9, Math.round(monthly)), years: Math.round(years), rate: Math.round(rate * 100) / 100, lang: shareLang } as const;
+  const shareText = `${t.savingsText(kes(spec.monthly), String(spec.years), String(spec.rate), kes(savingsGrowth(spec.monthly, spec.years, spec.rate).total))} ${t.tryOwn}`;
 
   return (
     <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
@@ -69,6 +60,7 @@ export function SavingsCalculator({ presets, lang }: { presets: Preset[]; lang?:
         ))}
       </div>
       <p className="mt-3 text-xs leading-5 text-muted">{labels.savingsFoot}</p>
+      {monthly > 0 ? <ShareResult spec={spec} text={shareText} lang={shareLang} /> : null}
     </div>
   );
 }

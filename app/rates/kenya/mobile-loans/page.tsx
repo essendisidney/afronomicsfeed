@@ -5,9 +5,11 @@ import { PageShell } from "@/components/data/PageShell";
 import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { ShareResult } from "@/components/ui/ShareResult";
 import { fairBench } from "@/lib/data/kenya-rates";
 import { mobileLoanBoard } from "@/lib/data/mobile-loans";
 import { mobileLoanAnswers } from "@/lib/seo/answers";
+import { mobileSentence } from "@/lib/share-card";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -111,6 +113,7 @@ export default function MobileLoansPage() {
           fees and rollovers change what you pay; read the provider’s own terms. A bank loan needs time, a credit check and often security; a mobile
           loan is quicker but costs more. This is information, not advice.
         </p>
+        {cheapest && bench ? <ShareResult spec={{ kind: "mobile" }} text={`${mobileSentence(cheapest, bench.lendingAvg)}. Compare every provider:`} /> : null}
       </section>
 
       <section className="mt-12 max-w-3xl">

@@ -5,9 +5,8 @@ What banks pay and charge in Nigeria and Ghana, from each central bank's own pub
 - Nigeria: the Central Bank of Nigeria's Money Market Indicators (the JSON its own page loads,
   https://www.cbn.gov.ng/api/GetAllMoneyMarketIndicators): monetary policy rate, Treasury bill rate, savings
   deposit rate, deposit rates by term, prime and maximum lending rates.
-- Ghana: the Bank of Ghana's monthly interest rates table (wpDataTables table 21 on
-  https://www.bog.gov.gh/economic-data/interest-rates/): average savings deposits rate, 3-month time deposits
-  rate, average commercial banks' lending rate, 91-day bill.
+- Ghana: table 3a of the Bank of Ghana's monthly Summary of Economic and Financial Data (PDF): policy rate,
+  bills, savings and 3-month deposits, average lending rate. (Its interest-rates web table stops at April 2023.)
 
 Writes data/nigeria/bank_rates.json and data/ghana/bank_rates.json with the latest month that has figures,
 and the months before it. A series that cannot be read leaves its file as it was.
@@ -33,8 +32,6 @@ MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", 
 
 CBN_API = "https://www.cbn.gov.ng/api/GetAllMoneyMarketIndicators"
 CBN_PAGE = "https://www.cbn.gov.ng/rates/mnymktind.html"
-BOG_PAGE = "https://www.bog.gov.gh/economic-data/interest-rates/"
-BOG_AJAX = "https://www.bog.gov.gh/wp-admin/admin-ajax.php?action=get_wdtable&table_id=21"
 
 
 def num(v) -> float | None:
@@ -106,39 +103,69 @@ def nigeria() -> list[dict] | None:
     return out or None
 
 
+SUMMARY_PAGE = "https://www.bog.gov.gh/monetary-policy/summary-of-economic-and-financial-data/"
+# Rows of table 3a ("Interest Rates (Percent Per Annum)") in the Bank of Ghana's monthly Summary of Economic and
+# Financial Data, and our names for them.
+GH_ROWS = {
+    "Monetary Policy Rate": "mpr",
+    "91-Day Bill (interest equivalent)": "tbill91",
+    "364-Day Bill (interest equivalent)": "tbill364",
+    "Savings Deposits": "savings",
+    "3-months": "deposit_3m",
+    "Average Lending Rate": "lending",
+}
+
+
+def parse_ghana_summary(text: str) -> list[dict]:
+    """Table 3a: a header of months ('2025:08 2025:09 ... 2026:08') then one row per rate. The PDF carries a
+    watermark whose stray letters land on their own lines; a row whose values do not line up with the months
+    is skipped rather than guessed."""
+    start = text.find("3a. Interest Rates")
+    if start < 0:
+        return []
+    end = text.find("3b.", start)
+    block = text[start:end if end > 0 else None]
+    head = re.search(r"((?:20\d\d:\d\d\s+)+20\d\d:\d\d)", block)
+    if not head:
+        return []
+    months = [m.replace(":", "-") for m in head.group(1).split()]
+    out: dict[str, dict] = {m: {"month": m} for m in months}
+    for line in block[head.end():].splitlines():
+        line = line.strip()
+        for label, ours in GH_ROWS.items():
+            if line.startswith(label + " "):
+                vals = line[len(label):].split()
+                nums = [num(v) if re.fullmatch(r"\d+(?:\.\d+)?", v) else None for v in vals]
+                if len(nums) != len(months) or any(v is None for v in nums):
+                    print(f"  BoG summary: row {label!r} does not line up ({len(vals)} values, {len(months)} months); skipped")
+                    continue
+                for m, v in zip(months, nums):
+                    out[m][ours] = v
+    rows = [r for r in out.values() if r.get("savings") is not None or r.get("lending") is not None]
+    return sorted(rows, key=lambda r: r["month"], reverse=True)
+
+
 def ghana() -> list[dict] | None:
-    s = requests.Session()
-    page = s.get(BOG_PAGE, headers=UA, timeout=(15, 60), verify=False).text
-    nonce = re.search(r'id="wdtNonceFrontendServerSide_21"[^>]*value="([^"]+)"', page)
-    payload = {"draw": 1, "start": 0, "length": 1000, "order[0][column]": 0, "order[0][dir]": "desc"}
-    if nonce:
-        payload["wdtNonce"] = nonce.group(1)
-    r = s.post(BOG_AJAX, data=payload, headers={**UA, "Referer": BOG_PAGE, "X-Requested-With": "XMLHttpRequest"}, timeout=(15, 60), verify=False)
-    recs = r.json().get("data", [])
-    print(f"  BoG: {len(recs)} rows; first: {recs[0] if recs else '-'}")
-    # Each row: year, variable, Jan..Dec.
-    names = {
-        "savings": "average savings deposits rate",
-        "deposit_3m": "average time deposits rate: 3-month",
-        "lending": "average commercial banks lending rate",
-        "tbill91": "91-day treasury bill",
-    }
-    months: dict[str, dict] = {}
-    for rec in recs:
-        cells = [re.sub(r"<[^>]+>", "", str(c)).strip() for c in (rec.values() if isinstance(rec, dict) else rec)]
-        if len(cells) < 14 or not re.fullmatch(r"20\d\d", cells[0]):
-            continue
-        var = cells[1].lower()
-        ours = next((k for k, n in names.items() if n in var), None)
-        if not ours:
-            continue
-        for i, v in enumerate(cells[2:14], 1):
-            val = num(v)
-            if val:  # the table fills months not yet published with 0.00
-                months.setdefault(f"{cells[0]}-{i:02d}", {"month": f"{cells[0]}-{i:02d}"})[ours] = val
-    out = sorted((m for m in months.values() if m.get("savings") is not None or m.get("lending") is not None), key=lambda x: x["month"], reverse=True)
-    print(f"  BoG: {len(out)} months read; latest {out[0] if out else '-'}")
-    return out or None
+    """The newest monthly Summary of Economic and Financial Data linked from the Bank of Ghana's page."""
+    import io
+
+    import pdfplumber
+
+    page = requests.get(SUMMARY_PAGE, headers=UA, timeout=(15, 60), verify=False).text
+    links = re.findall(r'href="([^"]*Summary-of-Economic-and-Financial-Data-[^"]*\.pdf)"', page)
+    if not links:
+        print("  BoG: no summary PDF linked")
+        return None
+    url = links[0]
+    r = requests.get(url, headers=UA, timeout=(15, 90), verify=False)
+    if r.content[:5] != b"%PDF-":
+        print(f"  BoG: {url} is not a PDF")
+        return None
+    with pdfplumber.open(io.BytesIO(r.content)) as pdf:
+        text = "\n".join(pg.extract_text() or "" for pg in pdf.pages[:8])
+    rows = parse_ghana_summary(text)
+    print(f"  BoG summary {url}: {len(rows)} months; latest {rows[0] if rows else '-'}")
+    return rows or None
 
 
 def write(path, rows: list[dict], publisher: str, source: str, note: str) -> None:
@@ -159,8 +186,8 @@ def main() -> int:
     for name, fn, path, publisher, source, note in [
         ("nigeria", nigeria, ROOT / "data" / "nigeria" / "bank_rates.json", "Central Bank of Nigeria", CBN_PAGE,
          "Money Market Indicators as the CBN publishes them, % a year: monetary policy rate, Treasury bill rate, savings deposit rate, deposit rates by term, prime and maximum lending rates."),
-        ("ghana", ghana, ROOT / "data" / "ghana" / "bank_rates.json", "Bank of Ghana", BOG_PAGE,
-         "Monthly interest rates as the Bank of Ghana publishes them, % a year: average savings deposits rate, average 3-month time deposits rate, average commercial banks' lending rate, 91-day Treasury bill."),
+        ("ghana", ghana, ROOT / "data" / "ghana" / "bank_rates.json", "Bank of Ghana", SUMMARY_PAGE,
+         "Table 3a of the Bank of Ghana's monthly Summary of Economic and Financial Data, % a year: monetary policy rate, 91- and 364-day bills (interest equivalent), savings deposits, 3-month time deposits, average lending rate."),
     ]:
         try:
             rows = fn()

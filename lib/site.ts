@@ -64,6 +64,7 @@ export const footerGroups = [
       { href: "/rates/remittances", label: "Cost of sending money home" },
       { href: "/rates/kenya/check", label: "Is my rate fair? Kenya" },
       { href: "/rates/nigeria/check", label: "Is my rate fair? Nigeria" },
+      { href: "/rates/ghana/check", label: "Is my rate fair? Ghana" },
       { href: "/countries", label: "54 country files" },
       { href: "/data", label: "Data hub" },
       { href: "/developers", label: "Data API" },

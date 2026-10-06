@@ -3,12 +3,56 @@
  "publisher": "South African Reserve Bank",
  "source_page": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-09-30T22:46:19+00:00",
+ "updated_at": "2026-10-06T09:11:16+00:00",
  "units": {
   "amounts": "ZAR millions",
   "rates": "average rate at which bills are allotted in the weekly auction, percent per annum"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "auction_date": null,
+   "value_date": "2026-10-05",
+   "weighted_avg_rate": 7.54,
+   "offered_zar_m": null,
+   "received_zar_m": null,
+   "accepted_zar_m": null,
+   "series": "MMRD212A",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
+  {
+   "tenor": 273,
+   "auction_date": null,
+   "value_date": "2026-10-05",
+   "weighted_avg_rate": 7.55,
+   "offered_zar_m": null,
+   "received_zar_m": null,
+   "accepted_zar_m": null,
+   "series": "MMRD209A",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
+  {
+   "tenor": 182,
+   "auction_date": null,
+   "value_date": "2026-10-05",
+   "weighted_avg_rate": 7.49,
+   "offered_zar_m": null,
+   "received_zar_m": null,
+   "accepted_zar_m": null,
+   "series": "MMRD206A",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
+  {
+   "tenor": 91,
+   "auction_date": null,
+   "value_date": "2026-10-05",
+   "weighted_avg_rate": 7.05,
+   "offered_zar_m": null,
+   "received_zar_m": null,
+   "accepted_zar_m": null,
+   "series": "MMRD203A",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
   {
    "tenor": 364,
    "auction_date": null,

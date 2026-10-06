@@ -14,6 +14,9 @@ on:
       links:
         description: "Also list links whose text or address matches (1 = yes)"
         default: ""
+      full:
+        description: "Print a PDF's full text, page by page (1 = yes)"
+        default: ""
 
 permissions:
   contents: read
@@ -33,3 +36,4 @@ jobs:
           PATTERN: ${{ inputs.pattern }}
           URLS: ${{ inputs.urls }}
           PROBE_LINKS: ${{ inputs.links }}
+          PROBE_FULL: ${{ inputs.full }}

@@ -2,6 +2,7 @@
 Look at what a publisher's page says before writing a reader for it. Prints the text around each match.
 
     python scripts/probe.py "yield|rate" https://example.com/a https://example.com/b
+    PROBE_FULL=1 python scripts/probe.py x https://example.com/report.pdf   # print a PDF's full text, page by page
     PROBE_LINKS=1 python scripts/probe.py "bond|bill" https://example.com/   # also list matching links
 
 PDFs are read as text (pdfplumber).
@@ -46,6 +47,9 @@ def main() -> int:
             import pdfplumber
 
             with pdfplumber.open(io.BytesIO(r.content)) as pdf:
+                if os.environ.get("PROBE_FULL"):  # every page, line breaks kept, to write a table reader
+                    for n, page in enumerate(pdf.pages[:60], 1):
+                        print(f"--- page {n}\n{page.extract_text() or ''}")
                 t = re.sub(r"\s+", " ", " ".join((page.extract_text() or "") for page in pdf.pages[:12]))
         else:
             t = text_of(r.text)

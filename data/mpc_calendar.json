@@ -1,0 +1,188 @@
+{
+ "updated": "2026-10-06",
+ "note": "Decision dates from each central bank's own calendar or latest statement, quoted with the link. Banks change dates; the bank's own page is the authority.",
+ "not_published": {
+  "nigeria": "The CBN lists past decisions only; no forward calendar is published as text.",
+  "uganda": "The Bank of Uganda's pages load by script; no readable calendar was found.",
+  "egypt": "The Central Bank of Egypt's meetings schedule loads by script; not yet read.",
+  "zambia": "The Bank of Zambia's site loads by script; not yet read."
+ },
+ "banks": {
+  "southafrica": {
+   "source_url": "https://www.resbank.co.za/en/home/what-we-do/monetary-policy/MPC-announcement-webcasts",
+   "quote": "UPCOMING ANNOUNCEMENTS 19 November 2026 28 January 2027 18 March 2027 27 May 2027 22 July 2027 29 September 2027 25 November 2027",
+   "meetings": [
+    {
+     "start": null,
+     "end": null,
+     "announce": "2026-01-29"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2026-03-26"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2026-05-28"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2026-07-23"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2026-09-23"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2026-11-19"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2027-01-28"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2027-03-18"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2027-05-27"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2027-07-22"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2027-09-29"
+    },
+    {
+     "start": null,
+     "end": null,
+     "announce": "2027-11-25"
+    }
+   ]
+  },
+  "ghana": {
+   "source_url": "https://www.bog.gov.gh/wp-content/uploads/2025/12/MPC-Meeting-Dates-2026.pdf",
+   "quote": "BANK OF GHANA MONETARY POLICY COMMITTEE (MPC) 2026 CALENDAR ... 16th - 18th Wednesday, 18th November",
+   "meetings": [
+    {
+     "start": "2026-01-26",
+     "end": "2026-01-28",
+     "announce": "2026-01-28"
+    },
+    {
+     "start": "2026-03-16",
+     "end": "2026-03-18",
+     "announce": "2026-03-18"
+    },
+    {
+     "start": "2026-05-18",
+     "end": "2026-05-20",
+     "announce": "2026-05-20"
+    },
+    {
+     "start": "2026-07-20",
+     "end": "2026-07-22",
+     "announce": "2026-07-22"
+    },
+    {
+     "start": "2026-09-23",
+     "end": "2026-09-24",
+     "announce": "2026-09-24"
+    },
+    {
+     "start": "2026-11-16",
+     "end": "2026-11-18",
+     "announce": "2026-11-18"
+    }
+   ]
+  },
+  "tanzania": {
+   "source_url": "https://www.bot.go.tz/webdocs/Other/MPC_Calendar.pdf",
+   "quote": "MONETARY POLICY COMMITTEE MEETINGS CALENDAR FOR 2026/27 ... October 7, 2026 October 8, 2026 2nd Quarter; January 6, 2027 January 7, 2027 3rd Quarter; March 31, 2027 April 1, 2027 4th Quarter. Note: The dates indicated may change if deemed necessary.",
+   "meetings": [
+    {
+     "start": "2026-07-02",
+     "end": null,
+     "announce": "2026-07-03"
+    },
+    {
+     "start": "2026-10-07",
+     "end": null,
+     "announce": "2026-10-08"
+    },
+    {
+     "start": "2027-01-06",
+     "end": null,
+     "announce": "2027-01-07"
+    },
+    {
+     "start": "2027-03-31",
+     "end": null,
+     "announce": "2027-04-01"
+    }
+   ]
+  },
+  "kenya": {
+   "source_url": "https://www.centralbank.go.ke/2026/09/07/next-mpc-meeting-5/",
+   "quote": "The next Monetary Policy Committee (MPC) meeting will be held on Wednesday, October 7, 2026.",
+   "meetings": [
+    {
+     "start": "2026-08-11",
+     "end": null,
+     "announce": null
+    },
+    {
+     "start": "2026-10-07",
+     "end": null,
+     "announce": null
+    }
+   ]
+  },
+  "malawi": {
+   "source_url": "https://www.rbm.mw/MonetaryPolicy/GetContentFile/?ContentID=63658",
+   "quote": "Information Note: The next MPC meeting is scheduled for 28th and 29th October 2026. The decision will be announced on 29th October 2026.",
+   "meetings": [
+    {
+     "start": "2026-08-05",
+     "end": "2026-08-06",
+     "announce": "2026-08-06"
+    },
+    {
+     "start": "2026-10-28",
+     "end": "2026-10-29",
+     "announce": "2026-10-29"
+    }
+   ]
+  },
+  "mozambique": {
+   "source_url": "https://www.bancomoc.mz/media/ri0hxw5y/monetary-policy-communique-september-29_dee.pdf",
+   "quote": "The next MPC meeting is scheduled for November 25, 2026.",
+   "meetings": [
+    {
+     "start": "2026-09-30",
+     "end": null,
+     "announce": "2026-09-30"
+    },
+    {
+     "start": "2026-11-25",
+     "end": null,
+     "announce": null
+    }
+   ]
+  }
+ }
+}

@@ -7,16 +7,16 @@ import { cache } from "react";
  * (data/mpc_calendar.json, each entry with the bank's own wording and link).
  */
 
-export type Meeting = { start: string; end: string | null; announce: string | null };
+export type Meeting = { start: string | null; end: string | null; announce: string | null };
 type BankCal = { source_url: string; quote: string; meetings: Meeting[] };
-type File = { updated: string; banks: Record<string, BankCal> };
+type File = { updated: string; not_published?: Record<string, string>; banks: Record<string, BankCal> };
 
 const FILE = path.join(process.cwd(), "data", "mpc_calendar.json");
 
 export const loadMpc = cache((): File | null => (fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, "utf8")) : null));
 
 /** The day the decision is due: the announcement date if published, else the meeting's last day. */
-export const decisionDay = (m: Meeting) => m.announce ?? m.end ?? m.start;
+export const decisionDay = (m: Meeting) => (m.announce ?? m.end ?? m.start)!;
 
 /** Next decision per market from `today` (YYYY-MM-DD), with the bank's source. */
 export function nextDecisions(today: string) {

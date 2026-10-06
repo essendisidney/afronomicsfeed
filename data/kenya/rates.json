@@ -1,7 +1,7 @@
 {
  "dataset": "Kenya savings and lending rates",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-06T09:28:24+00:00",
+ "updated_at": "2026-10-06T09:38:05+00:00",
  "bank_rates": {
   "publisher": "Central Bank of Kenya",
   "source": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
@@ -2244,7 +2244,7 @@
  },
  "money_market_funds": {
   "note": "Each yield is read from the fund manager's own website at the time shown; funds publishing yields only as images or PDFs are not yet included.",
-  "as_of": "2026-10-06T09:28:24+00:00",
+  "as_of": "2026-10-06T09:38:05+00:00",
   "rows": [
    {
     "name": "Zimele Fixed Income Fund (Savings Plan)",
@@ -2269,16 +2269,20 @@
     "status": "ok",
     "daily_yield": 10.11,
     "effective_annual_yield": 10.64
+   },
+   {
+    "name": "CIC Money Market Fund",
+    "manager": "CIC Asset Management",
+    "source": "https://ke.cicinsurancegroup.com/individual-solutions/investment-solutions/?tab=money-market",
+    "status": "ok",
+    "daily_yield": 8.12,
+    "effective_annual_yield": 8.43
    }
   ],
   "unread": [
    {
     "name": "Etica Money Market Fund (KES)",
     "status": "conflicting figures on the page: Etica Money Market Fund (KES) Effective Annual Yield 10.04% / Etica Money Market Fund (KES) Effective Annual Yield 17.55%"
-   },
-   {
-    "name": "CIC Money Market Fund",
-    "status": "conflicting figures on the page: Current Daily Rate – 5.01% Current Effective Annual Rate – 5.13% / Current Daily Rate – 8.12% Current Effective Annual Rate – 8.43%"
    }
   ]
  }

@@ -28,6 +28,14 @@
 "effective_annual_yield": 10.76
 },
 {
+"date": "2026-10-06",
+"name": "CIC Money Market Fund",
+"manager": "CIC Asset Management",
+"source": "https://ke.cicinsurancegroup.com/individual-solutions/investment-solutions/?tab=money-market",
+"daily_yield": 8.12,
+"effective_annual_yield": 8.43
+},
+{
 "date": "2026-10-05",
 "name": "Zimele Fixed Income Fund (Savings Plan)",
 "manager": "Zimele Asset Management",

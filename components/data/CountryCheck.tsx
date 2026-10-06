@@ -15,7 +15,14 @@ export function CountryCheck({ bench, slug, intro }: { bench: CountryBench | nul
       lede={intro}
     >
       {!bench ? (
-        <p className="text-sm text-ink-soft">The central bank&rsquo;s averages are being read; the check opens when they arrive.</p>
+        <p className="max-w-2xl text-sm leading-6 text-ink-soft">
+          The check opens when the central bank&rsquo;s current averages for what banks pay and charge are available. Its latest published figures
+          are more than nine months old, too old to judge a rate offered today. Meanwhile, the government&rsquo;s own rate is on the{" "}
+          <Link href={`/markets/tbills/${slug}`} className="underline underline-offset-2">
+            Treasury bill page
+          </Link>
+          .
+        </p>
       ) : (
         <>
           <CountryFairRate bench={bench} />

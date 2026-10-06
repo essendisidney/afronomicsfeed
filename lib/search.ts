@@ -66,7 +66,6 @@ export function buildSearchIndex(): SearchHit[] {
     { href: "/rates/kenya/mobile-loans", title: "What a mobile loan really costs", kicker: "Comparison", summary: "M-Shwari, Tala and more: KES 1,000 for a month, and as a yearly rate beside a bank loan." },
     { href: "/rates/policy", title: "Central-bank policy rates", kicker: "Dataset", summary: "Each central bank’s policy rate from its own site, beside the one-year bill and the gap." },
     { href: "/rates/nigeria/check", title: "Is my rate fair? Nigeria", kicker: "Tool", summary: "Check a naira savings or loan rate against Treasury bills, the FGN Savings Bond and the CBN's savings, prime and maximum lending rates." },
-    { href: "/rates/ghana/check", title: "Is my rate fair? Ghana", kicker: "Tool", summary: "Check a cedi savings or loan rate against Treasury bills and the Bank of Ghana's savings, deposit and lending averages." },
     { href: "/rates/remittances", title: "Cost of sending money home", kicker: "Comparison", summary: "What it costs to send $200 to 36 African countries from 27 sending countries, the cheapest service and banks vs mobile money. World Bank survey." },
     { href: "/rates/kenya/money-market-funds", title: "Kenya money market fund yields", kicker: "League table", summary: "Yields read from each manager, ranked after tax, with daily history; and all 59 licensed funds by size from the CMA." },
     { href: "/rates/kenya", title: "Where the shilling earns most", kicker: "Comparison", summary: "Bills, bonds, money market funds and bank rates after tax." },

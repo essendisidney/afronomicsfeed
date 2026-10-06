@@ -68,10 +68,10 @@ CBN_FIELDS = {
     "mpr": ("monetarypolicyrate", "mpr"),
     "tbill": ("treasurybillrate", "tbillrate", "treasurybill"),
     "savings": ("savingsdepositrate", "savingsdeposit", "savings"),
-    "deposit_3m": ("3monthsdepositrate", "threemonthsdepositrate", "3monthdepositrate", "3monthsdeposit"),
-    "deposit_12m": ("12monthsdepositrate", "twelvemonthsdepositrate", "12monthdepositrate", "12monthsdeposit"),
+    "deposit_3m": ("threemonthsdeposit", "3monthsdepositrate", "threemonthsdepositrate", "3monthdepositrate", "3monthsdeposit"),
+    "deposit_12m": ("twelvemonthsdeposit", "12monthsdepositrate", "twelvemonthsdepositrate", "12monthdepositrate", "12monthsdeposit"),
     "prime_lending": ("primelendingrate", "primelending"),
-    "max_lending": ("maximumlendingrate", "maxlendingrate", "maximumlending"),
+    "max_lending": ("maxlending", "maximumlendingrate", "maxlendingrate", "maximumlending"),
 }
 
 
@@ -134,7 +134,7 @@ def ghana() -> list[dict] | None:
             continue
         for i, v in enumerate(cells[2:14], 1):
             val = num(v)
-            if val is not None:
+            if val:  # the table fills months not yet published with 0.00
                 months.setdefault(f"{cells[0]}-{i:02d}", {"month": f"{cells[0]}-{i:02d}"})[ours] = val
     out = sorted((m for m in months.values() if m.get("savings") is not None or m.get("lending") is not None), key=lambda x: x["month"], reverse=True)
     print(f"  BoG: {len(out)} months read; latest {out[0] if out else '-'}")

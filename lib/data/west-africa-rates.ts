@@ -43,6 +43,13 @@ export type CountryBench = {
 
 const monthName = (m: string) => new Intl.DateTimeFormat("en-GB", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${m}-01`));
 const dayName = (d: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(d));
+/** Bank averages older than this are not a fair yardstick for a rate offered today. */
+const MAX_AGE_MONTHS = 9;
+const fresh = (month: string) => {
+  const [y, m] = month.split("-").map(Number);
+  const now = new Date();
+  return (now.getUTCFullYear() - y) * 12 + (now.getUTCMonth() + 1 - m) <= MAX_AGE_MONTHS;
+};
 const n = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : null);
 
 function bills(slug: "nigeria" | "ghana", what: string): Bench[] {
@@ -61,7 +68,7 @@ function policy(slug: string): Bench | null {
 export function nigeriaBench(): CountryBench | null {
   const f = loadNg();
   const row = f?.rows.find((r) => n(r.savings) != null && n(r.prime_lending) != null);
-  if (!f || !row) return null;
+  if (!f || !row || !fresh(row.month)) return null;
   const save: Bench[] = [...bills("nigeria", "CBN stop rate")];
   const bond = loadSavingsBond()?.latest;
   for (const b of bond?.bonds ?? []) save.push({ label: `FGN Savings Bond, ${b.years} years`, rate: b.rate, note: `Debt Management Office, ${bond!.offer} offer` });
@@ -84,7 +91,7 @@ export function nigeriaBench(): CountryBench | null {
 export function ghanaBench(): CountryBench | null {
   const f = loadGh();
   const row = f?.rows.find((r) => n(r.savings) != null && n(r.lending) != null);
-  if (!f || !row) return null;
+  if (!f || !row || !fresh(row.month)) return null;
   const save: Bench[] = [...bills("ghana", "Bank of Ghana, interest-rate equivalent")];
   if (n(row.deposit_3m) != null) save.push({ label: "Bank 3-month time deposit, average", rate: n(row.deposit_3m)!, note: `Bank of Ghana, ${monthName(row.month)}` });
   return {

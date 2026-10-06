@@ -53,10 +53,6 @@ export default function FairRatePage() {
             Also for{" "}
             <Link href="/rates/nigeria/check" className="underline underline-offset-2">
               Nigeria
-            </Link>{" "}
-            and{" "}
-            <Link href="/rates/ghana/check" className="underline underline-offset-2">
-              Ghana
             </Link>
             .
           </p>

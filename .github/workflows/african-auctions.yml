@@ -58,6 +58,10 @@ jobs:
       - run: python scripts/policy_rates.py
         continue-on-error: true
         timeout-minutes: 5
+      # What banks pay and charge in Nigeria (CBN) and Ghana (Bank of Ghana), for their "Is my rate fair?" checks.
+      - run: python scripts/west_africa_rates.py
+        continue-on-error: true
+        timeout-minutes: 5
       - run: python scripts/nigeria_savings_bond.py
         continue-on-error: true
         timeout-minutes: 5

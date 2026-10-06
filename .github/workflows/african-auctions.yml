@@ -69,6 +69,10 @@ jobs:
       - run: python scripts/nigeria_savings_bond.py
         continue-on-error: true
         timeout-minutes: 5
+      # Nigeria's (DMO daily report) and Kenya's (CBK Weekly Bulletin, Table 6) Eurobond yields.
+      - run: python scripts/eurobonds.py
+        continue-on-error: true
+        timeout-minutes: 8
       # Every Kenyan money market fund's size, from the CMA's quarterly report: writes only when a new quarter appears.
       - run: python scripts/cma_mmf.py
         continue-on-error: true

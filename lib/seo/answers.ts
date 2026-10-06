@@ -1,5 +1,6 @@
 import type { QA } from "@/components/seo/Questions";
 import { loadCmaFunds } from "@/lib/data/cma-mmf";
+import { bondLabel, eurobondTable, loadEurobonds } from "@/lib/data/eurobonds";
 import { fairBench, fundLeague } from "@/lib/data/kenya-rates";
 import { latestByTenor, loadTbills } from "@/lib/data/kenya-tbills";
 import { mobileLoanBoard } from "@/lib/data/mobile-loans";
@@ -179,6 +180,36 @@ export function policyAnswers() {
       ? { q: "Which African central bank has the highest policy rate?", a: `Of the ${rows.length} central banks Afronomics reads, ${top.market_name} has the highest at ${p(top.rate)} and ${low.market_name} the lowest at ${p(low.rate)}.` }
       : null,
     { q: "What does a central bank's policy rate do?", a: "It is the rate the central bank sets for lending to banks. Banks' loan and deposit rates, and Treasury bill yields, tend to follow it." },
+  ].filter(has);
+  return { title, description, items };
+}
+
+export function eurobondAnswers() {
+  const countries = Object.values(loadEurobonds()?.countries ?? {});
+  const tables = countries.map((c) => ({ c, rows: eurobondTable(c) })).filter((t) => t.rows.length);
+  const span = (rows: ReturnType<typeof eurobondTable>) => {
+    const ys = rows.map((r) => r.yield);
+    return `${p(Math.min(...ys))} to ${p(Math.max(...ys))}`;
+  };
+  const title = tables.length
+    ? `Eurobond yields today: ${tables.map(({ c, rows }) => `${c.country} ${span(rows)}`).join(", ")}`
+    : "African Eurobond yields today";
+  const description = tables.length
+    ? `The yield on every ${tables.map(({ c }) => c.country).join(" and ")} Eurobond, read from ${tables.map(({ c }) => `the ${c.publisher}`).join(" and ")}: ${tables
+        .map(({ c, rows }) => `${c.country} ${span(rows)} (${when(c.latest.date)})`)
+        .join("; ")}. With the change on the day and over four weeks.`
+    : "What African governments pay to borrow in dollars: the yield on each Eurobond, from the government's own report.";
+  const items: QA[] = [
+    ...tables.map(({ c, rows }) => {
+      const short = rows[0];
+      const long = rows.at(-1)!;
+      return {
+        q: `What are ${c.country}'s Eurobond yields today?`,
+        a: `On ${when(c.latest.date)}, the ${c.publisher} put ${c.country}'s ${rows.length} Eurobonds at ${span(rows)}: ${p(short.yield, 3)} on the ${bondLabel(short)} and ${p(long.yield, 3)} on the ${bondLabel(long)}.`,
+      };
+    }),
+    { q: "What is a Eurobond?", a: "A bond a government sells to foreign investors in a foreign currency, usually US dollars. The government pays a fixed coupon and repays the dollars at the end." },
+    { q: "Why does a Eurobond yield matter?", a: "It is what lenders charge that government for dollars today. A higher yield means a new Eurobond would cost the government more, and banks and companies borrowing dollars in the same country are often priced off it." },
   ].filter(has);
   return { title, description, items };
 }

@@ -143,8 +143,9 @@ def parse_cbk(text: str) -> dict[str, dict[str, float]] | None:
     """Table 6: daily rows '1-Oct-26 <8 equity and bond-market figures> <one yield per Eurobond>'. The maturity years
     sit in a header broken across lines; the columns run from the nearest maturity to the furthest, so the years
     are put in order and must match the number of yields on every row."""
-    start = text.find("Table 6")
-    if start < 0 or "EuroBond Yields" not in text[start:start + 800]:
+    # The commentary on page 1 cites "(Table 6)" too; the table itself is the mention followed by its header.
+    start = next((m.start() for m in re.finditer(r"Table 6", text) if "EuroBond Yields" in text[m.start():m.start() + 800]), -1)
+    if start < 0:
         print("  CBK: Table 6 with Eurobond yields not found")
         return None
     block = text[start:]

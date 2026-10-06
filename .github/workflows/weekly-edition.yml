@@ -37,7 +37,12 @@ jobs:
           git commit -m "Weekly edition snapshot $(cat editions/latest/WEEK)"
           # main can move while the job runs (a merge, another job): replay this commit on top and retry
           for attempt in 1 2 3; do
-            git pull --rebase origin main && git push && exit 0
+            # Another run may have committed the same files meanwhile: this run read them last, so its copy of
+            # any file both changed wins; files only one run changed merge as usual.
+            if ! git pull --rebase origin main; then
+              for f in $(git diff --name-only --diff-filter=U); do git checkout --theirs -- "$f" && git add "$f"; done
+              GIT_EDITOR=true git rebase --continue || { git rebase --abort 2>/dev/null; false; }
+            fi && git push && exit 0
             git rebase --abort 2>/dev/null || true
             sleep $((attempt * 10))
           done

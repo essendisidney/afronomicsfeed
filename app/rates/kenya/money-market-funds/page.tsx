@@ -3,19 +3,19 @@ import Link from "next/link";
 import { LineChart } from "@/components/data/LineChart";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
+import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { fundLeague, loadFundHistory, rateOptions } from "@/lib/data/kenya-rates";
+import { fundAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
 
 export const revalidate = 1800;
 
-export const metadata: Metadata = {
-  title: "Kenya money market fund yields today — league table after tax",
-  description:
-    "Kenya money market funds ranked by what a saver keeps after 15% withholding tax, each yield read from the fund manager’s own website, against the 364-day Treasury bill and the bank savings average. Daily history, free CSV.",
-  alternates: { canonical: `${site.url}/rates/kenya/money-market-funds` },
-};
+export function generateMetadata(): Metadata {
+  const { title, description } = fundAnswers();
+  return { title, description, alternates: { canonical: `${site.url}/rates/kenya/money-market-funds` } };
+}
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 const when = (s: string) => dateFmt.format(new Date(s));
@@ -185,6 +185,7 @@ export default function MoneyMarketFundsPage() {
         publisher="fund managers’ published yields"
         csv="/api/data/kenya-mmf"
       />
+      <Questions items={fundAnswers().items} />
       <NewsletterBand />
     </PageShell>
   );

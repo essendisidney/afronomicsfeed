@@ -58,7 +58,7 @@ Lending to your government through a **Treasury bill** or **savings bond** is on
 
 ## Nigeria: FGN Savings Bond
 
-*From the Debt Management Office’s offer for October 2026:*
+*From the Debt Management Office’s offer for October 2026 (rates change every month; the [current offer](/rates/nigeria/savings-bond) updates automatically):*
 
 | October 2026 offer | Terms |
 | --- | --- |
@@ -70,7 +70,7 @@ Lending to your government through a **Treasury bill** or **savings bond** is on
 
 The offer states that the bond is listed on the Nigerian Exchange and qualifies as a government security within the meaning of the Company Income Tax Act and the Personal Income Tax Act “for Tax Exemption for Pension Funds, amongst other investors”. *EXAMPLE:* ₦5,000 in the 2-year bond at 13.071% pays about ₦163.39 each quarter (₦653.55 a year).
 
-A new offer is published **every month** on the [DMO’s Savings Bond page](https://www.dmo.gov.ng/fgn-bonds/savings-bond), with the rates and how to apply; read the current one before you buy.
+A new offer is published **every month**. **This month’s rates and dates, read automatically from each new DMO offer: [FGN Savings Bond, current offer](/rates/nigeria/savings-bond).** How to apply is in each offer document and on the [DMO’s Savings Bond page](https://www.dmo.gov.ng/fgn-bonds/savings-bond); read the current one before you buy.
 
 ## South Africa: RSA Retail Savings Bonds
 

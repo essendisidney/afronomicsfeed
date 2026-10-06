@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/rates/kenya/money-market-funds", "daily", 0.9),
     page("/rates/policy", "daily", 0.9),
     page("/learn", "weekly", 0.9),
+    page("/rates/nigeria/savings-bond", "weekly", 0.9),
     ...learnLangs.flatMap((l) => [page(`/learn/${l}`, "weekly", 0.8), ...loadLessons(l).map((x) => page(`/learn/${l}/${x.slug}`, "monthly", 0.7))]),
     page("/rates/kenya/mobile-loans", "weekly", 0.9),
     page("/pack", "monthly", 0.7),

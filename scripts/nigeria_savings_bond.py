@@ -28,6 +28,7 @@ from bills_common import ROOT, UA  # noqa: E402
 
 warnings.filterwarnings("ignore")
 PAGE = "https://www.dmo.gov.ng/fgn-bonds/savings-bond"
+HOME = "https://www.dmo.gov.ng/"
 OUT = ROOT / "data" / "nigeria" / "savings_bond.json"
 MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -70,28 +71,75 @@ def parse_offer(text: str) -> dict:
     }
 
 
-def latest_offer_link(html: str, base: str) -> tuple[str, str] | None:
-    best = None
+def offer_links(html: str, base: str) -> list[tuple[tuple[int, int], str, str]]:
+    """Every "Savings Bond Offer for Subscription <Month>, <Year>" link on a page: ((year, month), label, url)."""
+    found = []
     for href, label in re.findall(r'<a[^>]+href="([^"#]+)"[^>]*>(.*?)</a>', html, flags=re.S | re.I):
         text = re.sub(r"<[^>]+>|\s+", " ", label).strip()
-        m = re.search(r"Savings Bond Offer for Subscription ([A-Z][a-z]+),? (\d{4})", text, flags=re.I)
+        m = re.search(r"Savings Bond Offer for Subscription ([A-Z][a-z]+),? (\d{4})", text, flags=re.I) or re.search(
+            r"savings-bond-offer-for-subscription-([a-z]+)-(\d{4})", href, flags=re.I
+        )
         if not m or m.group(1).title() not in MONTHS:
             continue
-        key = (int(m.group(2)), MONTHS.index(m.group(1).title()))
-        if best is None or key > best[0]:
-            best = (key, f"{m.group(1).title()} {m.group(2)}", urljoin(base, href))
-    return (best[1], best[2]) if best else None
+        found.append(((int(m.group(2)), MONTHS.index(m.group(1).title())), f"{m.group(1).title()} {m.group(2)}", urljoin(base, href)))
+    return found
+
+
+def latest_offer_link(html: str, base: str) -> tuple[str, str] | None:
+    """The newest offer; among its links, the direct download (".../file") first."""
+    found = offer_links(html, base)
+    if not found:
+        return None
+    newest = max(k for k, _, _ in found)
+    links = [(label, url) for k, label, url in found if k == newest]
+    links.sort(key=lambda x: not x[1].rstrip("/").endswith("/file"))
+    return links[0]
+
+
+def fetch_pdf(url: str) -> bytes | None:
+    """The offer PDF: the link itself if it is a PDF; else its "/file" download; else a "/file" link on that page."""
+    tried = []
+    for candidate in [url, url.rstrip("/") + "/file"]:
+        if candidate in tried:
+            continue
+        tried.append(candidate)
+        r = requests.get(candidate, headers=UA, timeout=(15, 60), verify=False)
+        if r.content[:5] == b"%PDF-":
+            return r.content
+        if candidate == url:
+            for href in re.findall(r'href="([^"#]+/file)"', r.text):
+                link = urljoin(r.url, href)
+                if "savings-bond-offer" in link and link not in tried:
+                    tried.append(link)
+                    inner = requests.get(link, headers=UA, timeout=(15, 60), verify=False)
+                    if inner.content[:5] == b"%PDF-":
+                        return inner.content
+    return None
 
 
 def main() -> int:
     import pdfplumber
 
-    page = requests.get(PAGE, headers=UA, timeout=(15, 40), verify=False)
-    found = latest_offer_link(page.text, page.url)
-    if not found:
-        raise SystemExit("no offer link found on the DMO page")
-    month, url = found
-    pdf = requests.get(url, headers=UA, timeout=(15, 60), verify=False).content
+    # The Savings Bond page lists every offer; the DMO home page carries the newest one's direct download.
+    candidates = []
+    for source in (PAGE, HOME):
+        try:
+            page = requests.get(source, headers=UA, timeout=(15, 40), verify=False)
+            candidates += offer_links(page.text, page.url)
+        except Exception as error:
+            print(f"{source}: {str(error)[:80]}")
+    if not candidates:
+        raise SystemExit("no offer link found on the DMO pages")
+    newest = max(k for k, _, _ in candidates)
+    links = sorted({(label, url) for k, label, url in candidates if k == newest}, key=lambda x: not x[1].rstrip("/").endswith("/file"))
+    month = links[0][0]
+    pdf = None
+    for _, url in links:
+        pdf = fetch_pdf(url)
+        if pdf:
+            break
+    if not pdf:
+        raise SystemExit(f"{month}: no PDF found behind {[u for _, u in links]}; nothing written")
     with pdfplumber.open(io.BytesIO(pdf)) as doc:
         text = " ".join((p.extract_text() or "") for p in doc.pages[:6])
     offer = parse_offer(text)

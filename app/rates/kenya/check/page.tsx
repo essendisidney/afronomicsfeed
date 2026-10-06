@@ -49,6 +49,13 @@ export default function FairRatePage() {
         <div>
           <h3 className="font-serif text-xl text-ink">Share it</h3>
           <p className="mt-2">Forward this page to anyone being quoted a rate. It works on any phone, and the benchmarks update as each auction and monthly average is published.</p>
+          <p className="mt-2">
+            Also for{" "}
+            <Link href="/rates/nigeria/check" className="underline underline-offset-2">
+              Nigeria
+            </Link>
+            .
+          </p>
         </div>
       </section>
     </PageShell>

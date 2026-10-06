@@ -5,1527 +5,1850 @@
  "source_page": "https://remittanceprices.worldbank.org/data-download",
  "licence": "World Bank Terms of Use for Datasets (attribution)",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "read_at": "2026-10-06T11:02:21+00:00",
+ "read_at": "2026-10-06T11:06:04+00:00",
  "note": "Average total cost of sending the equivalent of USD 200 (fee plus exchange-rate margin) as a % of the amount sent, across the services the World Bank surveyed in the corridor that quarter.",
- "period": "2016_1Q",
- "previous_period": "2015_4Q",
+ "period": "2025_1Q",
+ "previous_period": "2024_4Q",
  "corridors": [
   {
-   "src": "FRA",
-   "src_name": "France",
+   "src": "BEL",
+   "src_name": "Belgium",
    "dst": "DZA",
    "dst_name": "Algeria",
-   "services": 6,
-   "avg_cost_pct": 9.19,
+   "services": 3,
+   "avg_cost_pct": 2.49,
    "cheapest": {
-    "firm": "La Poste",
-    "type": "Money Transfer Operator / Post office",
-    "cost_pct": 5.36
+    "firm": "Paysend",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.49
    },
-   "dearest_pct": 14.29,
+   "dearest_pct": 2.49,
    "by_type": {
-    "Bank": 14.29,
-    "Money Transfer Operator": 8.85,
-    "Money Transfer Operator / Post office": 7.15
+    "Money Transfer Operator": 2.49
    },
-   "prev_avg_cost_pct": 8.78
+   "prev_avg_cost_pct": 2.44
   },
   {
    "src": "ZAF",
    "src_name": "South Africa",
    "dst": "AGO",
    "dst_name": "Angola",
-   "services": 8,
-   "avg_cost_pct": 15.56,
+   "services": 15,
+   "avg_cost_pct": 16.4,
    "cheapest": {
-    "firm": "exchange4free.com",
+    "firm": "Hello-Paisa",
     "type": "Money Transfer Operator",
-    "cost_pct": 0.25
+    "cost_pct": 8.2
    },
-   "dearest_pct": 22.09,
+   "dearest_pct": 33.72,
    "by_type": {
-    "Bank": 19.36,
-    "Money Transfer Operator": 11.77
+    "Bank": 22.09,
+    "Bank / Money Transfer Operator": 13.01,
+    "Money Transfer Operator": 12.39
    },
-   "prev_avg_cost_pct": 16.37
+   "prev_avg_cost_pct": 17.57
   },
   {
    "src": "ZAF",
    "src_name": "South Africa",
    "dst": "BWA",
    "dst_name": "Botswana",
-   "services": 9,
-   "avg_cost_pct": 18.63,
+   "services": 30,
+   "avg_cost_pct": 14.86,
    "cheapest": {
-    "firm": "exchange4free.com",
+    "firm": "Hello-Paisa",
     "type": "Money Transfer Operator",
-    "cost_pct": 0.26
+    "cost_pct": 4.27
    },
-   "dearest_pct": 28.08,
+   "dearest_pct": 41.44,
    "by_type": {
-    "Bank": 24.8,
-    "Money Transfer Operator": 13.69
+    "Bank": 26.3,
+    "Bank / Money Transfer Operator": 12.24,
+    "Money Transfer Operator": 10.55
    },
-   "prev_avg_cost_pct": 21.15
+   "prev_avg_cost_pct": 14.72
+  },
+  {
+   "src": "PRT",
+   "src_name": "Portugal",
+   "dst": "CPV",
+   "dst_name": "Cabo Verde",
+   "services": 6,
+   "avg_cost_pct": 4.93,
+   "cheapest": {
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 3.3
+   },
+   "dearest_pct": 7.52,
+   "by_type": {
+    "Money Transfer Operator": 4.93
+   },
+   "prev_avg_cost_pct": 3.75
   },
   {
    "src": "USA",
    "src_name": "United States",
    "dst": "CPV",
    "dst_name": "Cabo Verde",
-   "services": 9,
-   "avg_cost_pct": 10.08,
+   "services": 13,
+   "avg_cost_pct": 9.57,
    "cheapest": {
-    "firm": "MoneyGram",
+    "firm": "Walmart2World",
     "type": "Money Transfer Operator",
-    "cost_pct": 4.23
+    "cost_pct": 4.1
    },
    "dearest_pct": 22.5,
    "by_type": {
-    "Bank": 21.25,
-    "Money Transfer Operator": 6.89
+    "Bank": 22.5,
+    "Money Transfer Operator": 7.22
    },
-   "prev_avg_cost_pct": 9.94
+   "prev_avg_cost_pct": 10.76
   },
   {
    "src": "FRA",
    "src_name": "France",
    "dst": "CMR",
    "dst_name": "Cameroon",
-   "services": 8,
-   "avg_cost_pct": 4.49,
+   "services": 22,
+   "avg_cost_pct": 4.85,
    "cheapest": {
-    "firm": "Azimo",
+    "firm": "Ace Money Transfer",
     "type": "Money Transfer Operator",
-    "cost_pct": 2.14
+    "cost_pct": 1.6
    },
-   "dearest_pct": 5.64,
+   "dearest_pct": 7.19,
    "by_type": {
-    "Money Transfer Operator": 4.37,
-    "Money Transfer Operator / Post office": 5.36
+    "Money Transfer Operator": 4.85
    },
-   "prev_avg_cost_pct": 4.49
+   "prev_avg_cost_pct": 3.8
+  },
+  {
+   "src": "FRA",
+   "src_name": "France",
+   "dst": "COM",
+   "dst_name": "Comoros",
+   "services": 16,
+   "avg_cost_pct": 4.83,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.85
+   },
+   "dearest_pct": 6.34,
+   "by_type": {
+    "Bank / Money Transfer Operator": 3.19,
+    "Money Transfer Operator": 4.94
+   },
+   "prev_avg_cost_pct": 4.93
   },
   {
    "src": "BEL",
    "src_name": "Belgium",
    "dst": "COD",
-   "dst_name": "Congo, Rep.",
-   "services": 9,
-   "avg_cost_pct": 8.58,
+   "dst_name": "Congo, Dem. Rep.",
+   "services": 19,
+   "avg_cost_pct": 5.63,
    "cheapest": {
-    "firm": "Small World FS-LCC",
+    "firm": "MoneyGram",
     "type": "Money Transfer Operator",
-    "cost_pct": 5.22
+    "cost_pct": 1.33
    },
-   "dearest_pct": 11.01,
+   "dearest_pct": 11.44,
    "by_type": {
-    "Money Transfer Operator": 8.1,
-    "Money Transfer Operator / Post office": 10.25
+    "Money Transfer Operator": 5.46,
+    "Money Transfer Operator / Post Office": 8.63
    },
-   "prev_avg_cost_pct": 7.78
+   "prev_avg_cost_pct": 5.84
   },
   {
    "src": "FRA",
    "src_name": "France",
    "dst": "CIV",
    "dst_name": "Côte d'Ivoire",
-   "services": 12,
-   "avg_cost_pct": 5.93,
+   "services": 24,
+   "avg_cost_pct": 4.18,
    "cheapest": {
-    "firm": "Flouss",
+    "firm": "TapTap Send",
     "type": "Money Transfer Operator",
-    "cost_pct": 2.14
+    "cost_pct": 1.61
    },
-   "dearest_pct": 14.29,
+   "dearest_pct": 6.06,
    "by_type": {
-    "Bank": 10.71,
-    "Money Transfer Operator": 4.84,
-    "Money Transfer Operator / Post office": 5.5
+    "Bank / Money Transfer Operator": 2.94,
+    "Mobile Operator": 2.16,
+    "Money Transfer Operator": 4.33
    },
-   "prev_avg_cost_pct": 5.99
+   "prev_avg_cost_pct": 4.1
+  },
+  {
+   "src": "JOR",
+   "src_name": "Jordan",
+   "dst": "EGY",
+   "dst_name": "Egypt, Arab Rep.",
+   "services": 13,
+   "avg_cost_pct": 2.31,
+   "cheapest": {
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 1.46
+   },
+   "dearest_pct": 4.29,
+   "by_type": {
+    "Bank": 4.29,
+    "Money Transfer Operator": 2.14
+   },
+   "prev_avg_cost_pct": 2.35
   },
   {
    "src": "KWT",
    "src_name": "Kuwait",
    "dst": "EGY",
    "dst_name": "Egypt, Arab Rep.",
-   "services": 6,
-   "avg_cost_pct": 2.58,
+   "services": 23,
+   "avg_cost_pct": 2.87,
    "cheapest": {
-    "firm": "Aman Exchange",
+    "firm": "Lulu Money",
     "type": "Money Transfer Operator",
-    "cost_pct": 1.54
+    "cost_pct": 2.7
    },
-   "dearest_pct": 6.51,
+   "dearest_pct": 3.19,
    "by_type": {
-    "Money Transfer Operator": 2.58
+    "Money Transfer Operator": 2.87
    },
-   "prev_avg_cost_pct": 2.7
+   "prev_avg_cost_pct": 2.77
   },
   {
    "src": "ARE",
    "src_name": "United Arab Emirates",
    "dst": "EGY",
    "dst_name": "Egypt, Arab Rep.",
-   "services": 10,
-   "avg_cost_pct": 3.98,
+   "services": 14,
+   "avg_cost_pct": 3.12,
    "cheapest": {
-    "firm": "UAE Exchange",
-    "type": "Money Transfer Operator",
-    "cost_pct": 2.61
+    "firm": "DirectRemit (NBD)",
+    "type": "Bank",
+    "cost_pct": 1.05
    },
-   "dearest_pct": 6.69,
+   "dearest_pct": 4.46,
    "by_type": {
-    "Money Transfer Operator": 3.98
+    "Bank": 1.05,
+    "Money Transfer Operator": 3.28
    },
-   "prev_avg_cost_pct": 4.36
+   "prev_avg_cost_pct": 3.86
+  },
+  {
+   "src": "BHR",
+   "src_name": "Bahrain",
+   "dst": "EGY",
+   "dst_name": "Egypt, Arab Rep.",
+   "services": 7,
+   "avg_cost_pct": 4.5,
+   "cheapest": {
+    "firm": "Bahrain Financing Company",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.6
+   },
+   "dearest_pct": 6.56,
+   "by_type": {
+    "Money Transfer Operator": 4.5
+   },
+   "prev_avg_cost_pct": 3.92
+  },
+  {
+   "src": "USA",
+   "src_name": "United States",
+   "dst": "EGY",
+   "dst_name": "Egypt, Arab Rep.",
+   "services": 18,
+   "avg_cost_pct": 4.62,
+   "cheapest": {
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 1.9
+   },
+   "dearest_pct": 10.78,
+   "by_type": {
+    "Money Transfer Operator": 4.62
+   },
+   "prev_avg_cost_pct": 5.59
+  },
+  {
+   "src": "SAU",
+   "src_name": "Saudi Arabia",
+   "dst": "EGY",
+   "dst_name": "Egypt, Arab Rep.",
+   "services": 12,
+   "avg_cost_pct": 5.45,
+   "cheapest": {
+    "firm": "STC Pay",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.79
+   },
+   "dearest_pct": 11.5,
+   "by_type": {
+    "Bank": 10.89,
+    "Money Transfer Operator": 3.64
+   },
+   "prev_avg_cost_pct": 5.13
   },
   {
    "src": "QAT",
    "src_name": "Qatar",
    "dst": "EGY",
    "dst_name": "Egypt, Arab Rep.",
-   "services": 15,
-   "avg_cost_pct": 5.52,
-   "cheapest": {
-    "firm": "Commercial Bank",
-    "type": "Bank",
-    "cost_pct": 2.34
-   },
-   "dearest_pct": 13.25,
-   "by_type": {
-    "Bank": 5.86,
-    "Money Transfer Operator": 5.29
-   },
-   "prev_avg_cost_pct": 6.53
-  },
-  {
-   "src": "SAU",
-   "src_name": "Saudi Arabia",
-   "dst": "EGY",
-   "dst_name": "Egypt, Arab Rep.",
-   "services": 8,
-   "avg_cost_pct": 5.72,
-   "cheapest": {
-    "firm": "MoneyGram",
-    "type": "Money Transfer Operator",
-    "cost_pct": 2.44
-   },
-   "dearest_pct": 8.75,
-   "by_type": {
-    "Bank": 4.75,
-    "Money Transfer Operator": 6.04
-   },
-   "prev_avg_cost_pct": 7.36
-  },
-  {
-   "src": "USA",
-   "src_name": "United States",
-   "dst": "EGY",
-   "dst_name": "Egypt, Arab Rep.",
-   "services": 7,
-   "avg_cost_pct": 5.8,
-   "cheapest": {
-    "firm": "Trans-Fast",
-    "type": "Money Transfer Operator",
-    "cost_pct": 2.75
-   },
-   "dearest_pct": 10.0,
-   "by_type": {
-    "Money Transfer Operator": 5.8
-   },
-   "prev_avg_cost_pct": 5.99
-  },
-  {
-   "src": "ITA",
-   "src_name": "Italy",
-   "dst": "EGY",
-   "dst_name": "Egypt, Arab Rep.",
-   "services": 16,
-   "avg_cost_pct": 7.46,
-   "cheapest": {
-    "firm": "Banca Intesa SanPaolo",
-    "type": "Bank",
-    "cost_pct": 1.79
-   },
-   "dearest_pct": 15.0,
-   "by_type": {
-    "Bank": 5.74,
-    "Money Transfer Operator": 8.07,
-    "Post office": 10.0
-   },
-   "prev_avg_cost_pct": 7.07
-  },
-  {
-   "src": "GBR",
-   "src_name": "United Kingdom",
-   "dst": "ERI",
-   "dst_name": "Eritrea",
    "services": 5,
-   "avg_cost_pct": 9.31,
+   "avg_cost_pct": 6.04,
    "cheapest": {
     "firm": "Western Union",
     "type": "Money Transfer Operator",
-    "cost_pct": 5.75
+    "cost_pct": 2.62
    },
-   "dearest_pct": 15.83,
+   "dearest_pct": 8.19,
    "by_type": {
-    "Money Transfer Operator": 9.31
+    "Bank": 7.97,
+    "Money Transfer Operator": 5.56
    },
-   "prev_avg_cost_pct": 9.22
-  },
-  {
-   "src": "SAU",
-   "src_name": "Saudi Arabia",
-   "dst": "ETH",
-   "dst_name": "Ethiopia",
-   "services": 4,
-   "avg_cost_pct": 5.03,
-   "cheapest": {
-    "firm": "Xpress Money",
-    "type": "Money Transfer Operator",
-    "cost_pct": 4.82
-   },
-   "dearest_pct": 5.49,
-   "by_type": {
-    "Money Transfer Operator": 5.03
-   },
-   "prev_avg_cost_pct": 5.14
-  },
-  {
-   "src": "USA",
-   "src_name": "United States",
-   "dst": "ETH",
-   "dst_name": "Ethiopia",
-   "services": 12,
-   "avg_cost_pct": 5.63,
-   "cheapest": {
-    "firm": "Ria",
-    "type": "Money Transfer Operator",
-    "cost_pct": 3.05
-   },
-   "dearest_pct": 7.99,
-   "by_type": {
-    "Money Transfer Operator": 5.63
-   },
-   "prev_avg_cost_pct": 6.14
-  },
-  {
-   "src": "GBR",
-   "src_name": "United Kingdom",
-   "dst": "ETH",
-   "dst_name": "Ethiopia",
-   "services": 9,
-   "avg_cost_pct": 8.01,
-   "cheapest": {
-    "firm": "Azimo",
-    "type": "Money Transfer Operator",
-    "cost_pct": 2.71
-   },
-   "dearest_pct": 19.22,
-   "by_type": {
-    "Money Transfer Operator": 8.01
-   },
-   "prev_avg_cost_pct": 8.06
+   "prev_avg_cost_pct": 6.11
   },
   {
    "src": "ITA",
    "src_name": "Italy",
-   "dst": "ETH",
-   "dst_name": "Ethiopia",
-   "services": 7,
-   "avg_cost_pct": 9.41,
+   "dst": "EGY",
+   "dst_name": "Egypt, Arab Rep.",
+   "services": 25,
+   "avg_cost_pct": 12.19,
    "cheapest": {
-    "firm": "Small World FS-LCC",
+    "firm": "Western Union",
     "type": "Money Transfer Operator",
-    "cost_pct": 6.45
+    "cost_pct": 1.57
    },
-   "dearest_pct": 11.44,
+   "dearest_pct": 36.24,
    "by_type": {
-    "Money Transfer Operator": 9.41
+    "Bank": 30.05,
+    "Bank / Money Transfer Operator": 14.52,
+    "Money Transfer Operator": 5.34,
+    "Money Transfer Operator / Post Office": 3.67,
+    "Post Office": 4.08
    },
-   "prev_avg_cost_pct": 8.52
-  },
-  {
-   "src": "GBR",
-   "src_name": "United Kingdom",
-   "dst": "GMB",
-   "dst_name": "Gambia, The",
-   "services": 10,
-   "avg_cost_pct": 7.6,
-   "cheapest": {
-    "firm": "YaYeh Instant Services",
-    "type": "Money Transfer Operator",
-    "cost_pct": 1.67
-   },
-   "dearest_pct": 21.3,
-   "by_type": {
-    "Money Transfer Operator": 7.6
-   },
-   "prev_avg_cost_pct": 6.13
+   "prev_avg_cost_pct": 10.54
   },
   {
    "src": "USA",
    "src_name": "United States",
-   "dst": "GHA",
-   "dst_name": "Ghana",
-   "services": 14,
-   "avg_cost_pct": 5.85,
+   "dst": "ERI",
+   "dst_name": "Eritrea",
+   "services": 8,
+   "avg_cost_pct": 6.08,
    "cheapest": {
-    "firm": "Transfast",
+    "firm": "Western Union",
     "type": "Money Transfer Operator",
-    "cost_pct": 1.29
+    "cost_pct": 4.5
    },
-   "dearest_pct": 8.88,
+   "dearest_pct": 7.32,
    "by_type": {
-    "Money Transfer Operator": 5.85
+    "Money Transfer Operator": 6.08
    },
    "prev_avg_cost_pct": 6.08
   },
   {
    "src": "GBR",
    "src_name": "United Kingdom",
-   "dst": "GHA",
-   "dst_name": "Ghana",
-   "services": 19,
-   "avg_cost_pct": 6.14,
+   "dst": "ERI",
+   "dst_name": "Eritrea",
+   "services": 14,
+   "avg_cost_pct": 7.27,
    "cheapest": {
-    "firm": "Lebara",
+    "firm": "TalkRemit",
     "type": "Money Transfer Operator",
-    "cost_pct": 2.07
+    "cost_pct": 3.86
    },
-   "dearest_pct": 10.48,
+   "dearest_pct": 17.22,
    "by_type": {
-    "Bank": 8.33,
-    "Money Transfer Operator": 6.02
+    "Money Transfer Operator": 7.27
    },
-   "prev_avg_cost_pct": 7.46
+   "prev_avg_cost_pct": 7.49
+  },
+  {
+   "src": "ZAF",
+   "src_name": "South Africa",
+   "dst": "SWZ",
+   "dst_name": "Eswatini",
+   "services": 9,
+   "avg_cost_pct": 11.46,
+   "cheapest": {
+    "firm": "Shoprite Money Transfer",
+    "type": "Money Transfer Operator",
+    "cost_pct": 1.82
+   },
+   "dearest_pct": 27.88,
+   "by_type": {
+    "Bank": 12.4,
+    "Bank / Money Transfer Operator": 14.46,
+    "Money Transfer Operator": 1.82
+   },
+   "prev_avg_cost_pct": 11.65
+  },
+  {
+   "src": "USA",
+   "src_name": "United States",
+   "dst": "ETH",
+   "dst_name": "Ethiopia",
+   "services": 19,
+   "avg_cost_pct": 5.61,
+   "cheapest": {
+    "firm": "Walmart2World",
+    "type": "Money Transfer Operator",
+    "cost_pct": 3.0
+   },
+   "dearest_pct": 8.5,
+   "by_type": {
+    "Money Transfer Operator": 5.61
+   },
+   "prev_avg_cost_pct": 6.35
+  },
+  {
+   "src": "SAU",
+   "src_name": "Saudi Arabia",
+   "dst": "ETH",
+   "dst_name": "Ethiopia",
+   "services": 4,
+   "avg_cost_pct": 7.25,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 3.75
+   },
+   "dearest_pct": 9.57,
+   "by_type": {
+    "Money Transfer Operator": 7.25
+   },
+   "prev_avg_cost_pct": 7.37
+  },
+  {
+   "src": "GBR",
+   "src_name": "United Kingdom",
+   "dst": "ETH",
+   "dst_name": "Ethiopia",
+   "services": 17,
+   "avg_cost_pct": 7.57,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 3.92
+   },
+   "dearest_pct": 14.93,
+   "by_type": {
+    "Money Transfer Operator": 7.57
+   },
+   "prev_avg_cost_pct": 8.04
+  },
+  {
+   "src": "ITA",
+   "src_name": "Italy",
+   "dst": "ETH",
+   "dst_name": "Ethiopia",
+   "services": 21,
+   "avg_cost_pct": 7.73,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 4.29
+   },
+   "dearest_pct": 14.23,
+   "by_type": {
+    "Money Transfer Operator": 7.56,
+    "Money Transfer Operator / Post Office": 11.13
+   },
+   "prev_avg_cost_pct": 7.62
+  },
+  {
+   "src": "GBR",
+   "src_name": "United Kingdom",
+   "dst": "GMB",
+   "dst_name": "Gambia, The",
+   "services": 23,
+   "avg_cost_pct": 12.27,
+   "cheapest": {
+    "firm": "YaYeh Instant Services",
+    "type": "Money Transfer Operator",
+    "cost_pct": 8.28
+   },
+   "dearest_pct": 24.8,
+   "by_type": {
+    "Money Transfer Operator": 12.27
+   },
+   "prev_avg_cost_pct": 12.09
   },
   {
    "src": "NLD",
    "src_name": "Netherlands",
    "dst": "GHA",
    "dst_name": "Ghana",
-   "services": 10,
-   "avg_cost_pct": 7.76,
+   "services": 26,
+   "avg_cost_pct": 4.8,
    "cheapest": {
-    "firm": "ABN AMRO Bank",
-    "type": "Bank",
-    "cost_pct": 3.93
+    "firm": "Unity Monetary Services BV",
+    "type": "Money Transfer Operator",
+    "cost_pct": 0.52
    },
-   "dearest_pct": 12.04,
+   "dearest_pct": 8.91,
    "by_type": {
-    "Bank": 4.11,
-    "Money Transfer Operator": 8.43,
-    "Money Transfer Operator / Post office": 10.32
+    "Money Transfer Operator": 4.8
    },
-   "prev_avg_cost_pct": 7.69
+   "prev_avg_cost_pct": 5.57
+  },
+  {
+   "src": "USA",
+   "src_name": "United States",
+   "dst": "GHA",
+   "dst_name": "Ghana",
+   "services": 28,
+   "avg_cost_pct": 5.0,
+   "cheapest": {
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 0.32
+   },
+   "dearest_pct": 9.11,
+   "by_type": {
+    "Money Transfer Operator": 5.0
+   },
+   "prev_avg_cost_pct": 5.04
   },
   {
    "src": "CAN",
    "src_name": "Canada",
    "dst": "GHA",
    "dst_name": "Ghana",
-   "services": 9,
-   "avg_cost_pct": 8.56,
+   "services": 22,
+   "avg_cost_pct": 6.64,
    "cheapest": {
-    "firm": "Sigue Money Transfers",
+    "firm": "WorldRemit",
     "type": "Money Transfer Operator",
-    "cost_pct": 2.63
+    "cost_pct": 1.73
    },
-   "dearest_pct": 17.03,
+   "dearest_pct": 27.78,
    "by_type": {
-    "Bank": 11.36,
-    "Money Transfer Operator": 7.17
+    "Bank": 13.06,
+    "Money Transfer Operator": 5.62
    },
-   "prev_avg_cost_pct": 9.13
+   "prev_avg_cost_pct": 6.66
+  },
+  {
+   "src": "GBR",
+   "src_name": "United Kingdom",
+   "dst": "GHA",
+   "dst_name": "Ghana",
+   "services": 38,
+   "avg_cost_pct": 6.86,
+   "cheapest": {
+    "firm": "Unity Link",
+    "type": "Money Transfer Operator",
+    "cost_pct": 0.71
+   },
+   "dearest_pct": 41.72,
+   "by_type": {
+    "Money Transfer Operator": 6.86
+   },
+   "prev_avg_cost_pct": 6.85
   },
   {
    "src": "DEU",
    "src_name": "Germany",
    "dst": "GHA",
    "dst_name": "Ghana",
-   "services": 12,
-   "avg_cost_pct": 10.66,
+   "services": 33,
+   "avg_cost_pct": 9.88,
    "cheapest": {
-    "firm": "Postbank",
-    "type": "Post office",
-    "cost_pct": 1.07
+    "firm": "Remitly",
+    "type": "Money Transfer Operator",
+    "cost_pct": 1.78
    },
-   "dearest_pct": 20.28,
+   "dearest_pct": 29.57,
    "by_type": {
-    "Bank / Money Transfer Operator": 20.28,
-    "Money Transfer Operator": 11.16,
-    "Post office": 3.57
+    "Bank / Money Transfer Operator": 9.93,
+    "Money Transfer Operator": 9.88
    },
-   "prev_avg_cost_pct": 8.23
+   "prev_avg_cost_pct": 9.92
   },
   {
    "src": "GBR",
    "src_name": "United Kingdom",
    "dst": "KEN",
    "dst_name": "Kenya",
-   "services": 16,
-   "avg_cost_pct": 6.18,
+   "services": 32,
+   "avg_cost_pct": 4.44,
    "cheapest": {
-    "firm": "Lebara",
+    "firm": "Skrill",
     "type": "Money Transfer Operator",
-    "cost_pct": 0.58
+    "cost_pct": 1.57
    },
-   "dearest_pct": 12.58,
+   "dearest_pct": 16.44,
    "by_type": {
-    "Money Transfer Operator": 6.18
+    "Money Transfer Operator": 4.44
    },
-   "prev_avg_cost_pct": 7.33
-  },
-  {
-   "src": "CAN",
-   "src_name": "Canada",
-   "dst": "KEN",
-   "dst_name": "Kenya",
-   "services": 10,
-   "avg_cost_pct": 9.75,
-   "cheapest": {
-    "firm": "Sigue Money Transfers",
-    "type": "Money Transfer Operator",
-    "cost_pct": 6.21
-   },
-   "dearest_pct": 17.03,
-   "by_type": {
-    "Bank": 12.03,
-    "Money Transfer Operator": 8.78
-   },
-   "prev_avg_cost_pct": 10.27
-  },
-  {
-   "src": "ZAF",
-   "src_name": "South Africa",
-   "dst": "KEN",
-   "dst_name": "Kenya",
-   "services": 6,
-   "avg_cost_pct": 12.38,
-   "cheapest": {
-    "firm": "exchange4free.com",
-    "type": "Money Transfer Operator",
-    "cost_pct": 0.28
-   },
-   "dearest_pct": 19.87,
-   "by_type": {
-    "Bank": 18.48,
-    "Money Transfer Operator": 9.34
-   },
-   "prev_avg_cost_pct": 13.97
+   "prev_avg_cost_pct": 4.65
   },
   {
    "src": "USA",
    "src_name": "United States",
    "dst": "KEN",
    "dst_name": "Kenya",
-   "services": 13,
-   "avg_cost_pct": 12.39,
+   "services": 31,
+   "avg_cost_pct": 5.2,
    "cheapest": {
-    "firm": "Ria",
+    "firm": "Walmart2World",
     "type": "Money Transfer Operator",
-    "cost_pct": 9.09
+    "cost_pct": 0.27
    },
-   "dearest_pct": 14.87,
+   "dearest_pct": 11.6,
    "by_type": {
-    "Money Transfer Operator": 12.39
+    "Money Transfer Operator": 5.2
    },
-   "prev_avg_cost_pct": 7.57
+   "prev_avg_cost_pct": 6.35
+  },
+  {
+   "src": "CAN",
+   "src_name": "Canada",
+   "dst": "KEN",
+   "dst_name": "Kenya",
+   "services": 27,
+   "avg_cost_pct": 7.28,
+   "cheapest": {
+    "firm": "Royal Bank of Canada",
+    "type": "Bank",
+    "cost_pct": 2.17
+   },
+   "dearest_pct": 27.78,
+   "by_type": {
+    "Bank": 13.32,
+    "Money Transfer Operator": 6.52
+   },
+   "prev_avg_cost_pct": 7.63
+  },
+  {
+   "src": "ZAF",
+   "src_name": "South Africa",
+   "dst": "KEN",
+   "dst_name": "Kenya",
+   "services": 36,
+   "avg_cost_pct": 10.45,
+   "cheapest": {
+    "firm": "Mama Money",
+    "type": "Money Transfer Operator",
+    "cost_pct": 4.38
+   },
+   "dearest_pct": 34.81,
+   "by_type": {
+    "Bank": 28.62,
+    "Bank / Money Transfer Operator": 14.46,
+    "Mobile Operator": 5.9,
+    "Money Transfer Operator": 9.33
+   },
+   "prev_avg_cost_pct": 10.4
+  },
+  {
+   "src": "RWA",
+   "src_name": "Rwanda",
+   "dst": "KEN",
+   "dst_name": "Kenya",
+   "services": 7,
+   "avg_cost_pct": 17.72,
+   "cheapest": {
+    "firm": "Ecobank Rapidcash",
+    "type": "Bank",
+    "cost_pct": 4.16
+   },
+   "dearest_pct": 46.17,
+   "by_type": {
+    "Bank": 25.25,
+    "Mobile Operator": 6.99,
+    "Money Transfer Operator": 8.02
+   },
+   "prev_avg_cost_pct": 15.57
   },
   {
    "src": "TZA",
    "src_name": "Tanzania",
    "dst": "KEN",
    "dst_name": "Kenya",
-   "services": 9,
-   "avg_cost_pct": 13.06,
+   "services": 10,
+   "avg_cost_pct": 58.17,
    "cheapest": {
-    "firm": "M-Pesa",
-    "type": "Mobile Operator",
-    "cost_pct": 4.1
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 8.22
    },
-   "dearest_pct": 28.45,
+   "dearest_pct": 89.67,
    "by_type": {
-    "Bank": 18.47,
-    "Mobile Operator": 4.1,
-    "Money Transfer Operator": 6.26,
-    "Post office": 8.56
+    "Bank": 79.07,
+    "Mobile Operator": 10.89,
+    "Money Transfer Operator": 8.68
    },
-   "prev_avg_cost_pct": 13.13
+   "prev_avg_cost_pct": 59.73
   },
   {
    "src": "ZAF",
    "src_name": "South Africa",
    "dst": "LSO",
    "dst_name": "Lesotho",
-   "services": 7,
-   "avg_cost_pct": 15.88,
+   "services": 11,
+   "avg_cost_pct": 11.11,
    "cheapest": {
-    "firm": "MoneyGram",
+    "firm": "Shoprite Money Transfer",
     "type": "Money Transfer Operator",
-    "cost_pct": 11.27
+    "cost_pct": 1.82
    },
-   "dearest_pct": 18.98,
+   "dearest_pct": 27.88,
    "by_type": {
-    "Bank": 17.48,
-    "Money Transfer Operator": 13.74
+    "Bank": 12.4,
+    "Bank / Money Transfer Operator": 14.46,
+    "Money Transfer Operator": 6.98
    },
-   "prev_avg_cost_pct": 16.25
+   "prev_avg_cost_pct": 11.27
   },
   {
    "src": "USA",
    "src_name": "United States",
    "dst": "LBR",
    "dst_name": "Liberia",
-   "services": 7,
-   "avg_cost_pct": 5.18,
+   "services": 18,
+   "avg_cost_pct": 5.76,
    "cheapest": {
-    "firm": "Ria",
+    "firm": "MoneyGram",
     "type": "Money Transfer Operator",
-    "cost_pct": 2.5
+    "cost_pct": 0.0
    },
-   "dearest_pct": 7.5,
+   "dearest_pct": 8.5,
    "by_type": {
-    "Money Transfer Operator": 5.18
+    "Money Transfer Operator": 5.76
    },
-   "prev_avg_cost_pct": 5.18
+   "prev_avg_cost_pct": 5.63
   },
   {
    "src": "FRA",
    "src_name": "France",
    "dst": "MDG",
    "dst_name": "Madagascar",
-   "services": 7,
-   "avg_cost_pct": 7.34,
+   "services": 15,
+   "avg_cost_pct": 5.17,
    "cheapest": {
-    "firm": "Flouss",
+    "firm": "Western Union",
     "type": "Money Transfer Operator",
-    "cost_pct": 2.14
+    "cost_pct": 1.94
    },
-   "dearest_pct": 9.73,
+   "dearest_pct": 12.65,
    "by_type": {
-    "Money Transfer Operator": 7.67,
-    "Money Transfer Operator / Post office": 5.36
+    "Money Transfer Operator": 5.17
    },
-   "prev_avg_cost_pct": 7.92
+   "prev_avg_cost_pct": 5.3
   },
   {
    "src": "ZAF",
    "src_name": "South Africa",
    "dst": "MWI",
    "dst_name": "Malawi",
-   "services": 9,
-   "avg_cost_pct": 23.35,
+   "services": 26,
+   "avg_cost_pct": 43.35,
    "cheapest": {
-    "firm": "Mukuru",
-    "type": "Money Transfer Operator",
-    "cost_pct": 13.43
+    "firm": "ABSA via Western Union",
+    "type": "Bank / Money Transfer Operator",
+    "cost_pct": 14.46
    },
-   "dearest_pct": 35.21,
+   "dearest_pct": 85.25,
    "by_type": {
-    "Bank": 25.02,
-    "Money Transfer Operator": 22.01
+    "Bank": 77.07,
+    "Bank / Money Transfer Operator": 40.45,
+    "Mobile Operator": 23.0,
+    "Money Transfer Operator": 32.98
    },
-   "prev_avg_cost_pct": 18.03
+   "prev_avg_cost_pct": 17.07
+  },
+  {
+   "src": "FRA",
+   "src_name": "France",
+   "dst": "MLI",
+   "dst_name": "Mali",
+   "services": 16,
+   "avg_cost_pct": 3.85,
+   "cheapest": {
+    "firm": "TapTap Send",
+    "type": "Money Transfer Operator",
+    "cost_pct": 1.61
+   },
+   "dearest_pct": 6.06,
+   "by_type": {
+    "Bank / Money Transfer Operator": 3.06,
+    "Mobile Operator": 2.05,
+    "Money Transfer Operator": 4.04
+   },
+   "prev_avg_cost_pct": 3.76
+  },
+  {
+   "src": "CIV",
+   "src_name": "Côte d'Ivoire",
+   "dst": "MLI",
+   "dst_name": "Mali",
+   "services": 9,
+   "avg_cost_pct": 5.33,
+   "cheapest": {
+    "firm": "Ecobank Rapidcash",
+    "type": "Bank",
+    "cost_pct": 1.35
+   },
+   "dearest_pct": 16.13,
+   "by_type": {
+    "Bank": 9.43,
+    "Mobile Operator": 1.5,
+    "Money Transfer Operator": 2.89
+   },
+   "prev_avg_cost_pct": 5.34
   },
   {
    "src": "SEN",
    "src_name": "Senegal",
    "dst": "MLI",
    "dst_name": "Mali",
-   "services": 3,
-   "avg_cost_pct": 4.8,
+   "services": 6,
+   "avg_cost_pct": 25.7,
    "cheapest": {
-    "firm": "MoneyGram",
-    "type": "Money Transfer Operator",
-    "cost_pct": 4.3
+    "firm": "Orange Money",
+    "type": "Mobile Operator",
+    "cost_pct": 1.5
    },
-   "dearest_pct": 5.59,
+   "dearest_pct": 37.63,
    "by_type": {
-    "Money Transfer Operator": 4.8
+    "Bank": 30.54,
+    "Mobile Operator": 1.5
    },
-   "prev_avg_cost_pct": 4.05
-  },
-  {
-   "src": "FRA",
-   "src_name": "France",
-   "dst": "MLI",
-   "dst_name": "Mali",
-   "services": 9,
-   "avg_cost_pct": 5.21,
-   "cheapest": {
-    "firm": "WorldRemit",
-    "type": "Money Transfer Operator",
-    "cost_pct": 4.28
-   },
-   "dearest_pct": 5.64,
-   "by_type": {
-    "Money Transfer Operator": 5.13,
-    "Money Transfer Operator / Post office": 5.5
-   },
-   "prev_avg_cost_pct": 5.21
-  },
-  {
-   "src": "ITA",
-   "src_name": "Italy",
-   "dst": "MAR",
-   "dst_name": "Morocco",
-   "services": 24,
-   "avg_cost_pct": 5.62,
-   "cheapest": {
-    "firm": "Banca Monte dei Paschi di Siena",
-    "type": "Bank",
-    "cost_pct": 0.0
-   },
-   "dearest_pct": 15.0,
-   "by_type": {
-    "Bank": 4.83,
-    "Bank / Money Transfer Operator": 6.66,
-    "Money Transfer Operator": 5.32,
-    "Post office": 10.72
-   },
-   "prev_avg_cost_pct": 5.9
-  },
-  {
-   "src": "FRA",
-   "src_name": "France",
-   "dst": "MAR",
-   "dst_name": "Morocco",
-   "services": 17,
-   "avg_cost_pct": 5.71,
-   "cheapest": {
-    "firm": "Xendpay",
-    "type": "Money Transfer Operator",
-    "cost_pct": 0.63
-   },
-   "dearest_pct": 8.98,
-   "by_type": {
-    "Bank": 3.38,
-    "Money Transfer Operator": 6.95,
-    "Money Transfer Operator / Post office": 7.17
-   },
-   "prev_avg_cost_pct": 5.34
-  },
-  {
-   "src": "ESP",
-   "src_name": "Spain",
-   "dst": "MAR",
-   "dst_name": "Morocco",
-   "services": 12,
-   "avg_cost_pct": 5.91,
-   "cheapest": {
-    "firm": "Money Exchange",
-    "type": "Money Transfer Operator",
-    "cost_pct": 4.53
-   },
-   "dearest_pct": 7.5,
-   "by_type": {
-    "Bank": 5.79,
-    "Money Transfer Operator": 5.93
-   },
-   "prev_avg_cost_pct": 5.65
-  },
-  {
-   "src": "NLD",
-   "src_name": "Netherlands",
-   "dst": "MAR",
-   "dst_name": "Morocco",
-   "services": 11,
-   "avg_cost_pct": 6.04,
-   "cheapest": {
-    "firm": "Western Union",
-    "type": "Money Transfer Operator",
-    "cost_pct": 1.33
-   },
-   "dearest_pct": 10.76,
-   "by_type": {
-    "Bank": 3.62,
-    "Money Transfer Operator": 6.49,
-    "Money Transfer Operator / Post office": 10.09
-   },
-   "prev_avg_cost_pct": 7.63
+   "prev_avg_cost_pct": 21.75
   },
   {
    "src": "BEL",
    "src_name": "Belgium",
    "dst": "MAR",
    "dst_name": "Morocco",
-   "services": 13,
-   "avg_cost_pct": 6.9,
+   "services": 31,
+   "avg_cost_pct": 4.57,
    "cheapest": {
-    "firm": "Attijariwafa Bank",
-    "type": "Bank",
-    "cost_pct": 3.2
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.15
    },
-   "dearest_pct": 10.2,
+   "dearest_pct": 8.59,
    "by_type": {
-    "Bank": 3.42,
-    "Money Transfer Operator": 7.16,
-    "Money Transfer Operator / Post office": 9.21
+    "Bank": 8.58,
+    "Money Transfer Operator": 4.26,
+    "Money Transfer Operator / Post Office": 5.3
    },
-   "prev_avg_cost_pct": 6.06
+   "prev_avg_cost_pct": 4.67
+  },
+  {
+   "src": "NLD",
+   "src_name": "Netherlands",
+   "dst": "MAR",
+   "dst_name": "Morocco",
+   "services": 25,
+   "avg_cost_pct": 5.1,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.77
+   },
+   "dearest_pct": 13.42,
+   "by_type": {
+    "Bank": 13.42,
+    "Money Transfer Operator": 4.75
+   },
+   "prev_avg_cost_pct": 5.22
   },
   {
    "src": "DEU",
    "src_name": "Germany",
    "dst": "MAR",
    "dst_name": "Morocco",
-   "services": 13,
-   "avg_cost_pct": 7.86,
+   "services": 30,
+   "avg_cost_pct": 5.17,
    "cheapest": {
-    "firm": "Postbank",
-    "type": "Post office",
-    "cost_pct": 1.07
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 3.49
    },
-   "dearest_pct": 18.07,
+   "dearest_pct": 12.36,
    "by_type": {
-    "Bank": 4.49,
-    "Bank / Money Transfer Operator": 18.07,
-    "Money Transfer Operator": 8.06,
-    "Post office": 3.57
+    "Bank": 5.52,
+    "Bank / Money Transfer Operator": 8.66,
+    "Money Transfer Operator": 4.95
    },
-   "prev_avg_cost_pct": 7.09
+   "prev_avg_cost_pct": 5.36
+  },
+  {
+   "src": "ESP",
+   "src_name": "Spain",
+   "dst": "MAR",
+   "dst_name": "Morocco",
+   "services": 24,
+   "avg_cost_pct": 5.54,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 3.57
+   },
+   "dearest_pct": 22.05,
+   "by_type": {
+    "Bank": 22.05,
+    "Money Transfer Operator": 4.82
+   },
+   "prev_avg_cost_pct": 5.39
+  },
+  {
+   "src": "FRA",
+   "src_name": "France",
+   "dst": "MAR",
+   "dst_name": "Morocco",
+   "services": 40,
+   "avg_cost_pct": 6.4,
+   "cheapest": {
+    "firm": "Attijariwafa Bank",
+    "type": "Bank",
+    "cost_pct": 1.55
+   },
+   "dearest_pct": 45.02,
+   "by_type": {
+    "Bank": 24.79,
+    "Bank / Money Transfer Operator": 4.04,
+    "Money Transfer Operator": 3.75
+   },
+   "prev_avg_cost_pct": 5.92
+  },
+  {
+   "src": "ITA",
+   "src_name": "Italy",
+   "dst": "MAR",
+   "dst_name": "Morocco",
+   "services": 37,
+   "avg_cost_pct": 8.5,
+   "cheapest": {
+    "firm": "Poste Italiane via Western Union",
+    "type": "Money Transfer Operator / Post Office",
+    "cost_pct": 1.03
+   },
+   "dearest_pct": 36.16,
+   "by_type": {
+    "Bank": 23.2,
+    "Bank / Money Transfer Operator": 6.75,
+    "Money Transfer Operator": 4.02,
+    "Money Transfer Operator / Post Office": 2.46,
+    "Post Office": 10.51
+   },
+   "prev_avg_cost_pct": 7.98
+  },
+  {
+   "src": "ISR",
+   "src_name": "Israel",
+   "dst": "MAR",
+   "dst_name": "Morocco",
+   "services": 3,
+   "avg_cost_pct": 14.02,
+   "cheapest": {
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 10.08
+   },
+   "dearest_pct": 17.07,
+   "by_type": {
+    "Bank": 14.91,
+    "Money Transfer Operator": 13.57
+   },
+   "prev_avg_cost_pct": 13.35
+  },
+  {
+   "src": "PRT",
+   "src_name": "Portugal",
+   "dst": "MOZ",
+   "dst_name": "Mozambique",
+   "services": 14,
+   "avg_cost_pct": 5.01,
+   "cheapest": {
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 1.35
+   },
+   "dearest_pct": 11.53,
+   "by_type": {
+    "Money Transfer Operator": 5.01
+   },
+   "prev_avg_cost_pct": 3.9
   },
   {
    "src": "ZAF",
    "src_name": "South Africa",
    "dst": "MOZ",
    "dst_name": "Mozambique",
-   "services": 8,
-   "avg_cost_pct": 19.87,
+   "services": 35,
+   "avg_cost_pct": 8.87,
    "cheapest": {
-    "firm": "First National Bank of South Africa",
+    "firm": "Mukuru",
     "type": "Money Transfer Operator",
-    "cost_pct": 12.24
+    "cost_pct": 3.93
    },
-   "dearest_pct": 25.93,
+   "dearest_pct": 31.97,
    "by_type": {
-    "Bank": 23.82,
-    "Money Transfer Operator": 15.93
+    "Bank": 20.57,
+    "Bank / Money Transfer Operator": 11.46,
+    "Money Transfer Operator": 6.6
    },
-   "prev_avg_cost_pct": 18.35
+   "prev_avg_cost_pct": 9.15
   },
   {
    "src": "CAN",
    "src_name": "Canada",
    "dst": "NGA",
    "dst_name": "Nigeria",
-   "services": 8,
-   "avg_cost_pct": 4.88,
-   "cheapest": {
-    "firm": "Trans-Fast",
-    "type": "Money Transfer Operator",
-    "cost_pct": 2.5
-   },
-   "dearest_pct": 10.6,
-   "by_type": {
-    "Money Transfer Operator": 4.88
-   },
-   "prev_avg_cost_pct": 6.82
-  },
-  {
-   "src": "USA",
-   "src_name": "United States",
-   "dst": "NGA",
-   "dst_name": "Nigeria",
-   "services": 8,
-   "avg_cost_pct": 5.12,
-   "cheapest": {
-    "firm": "Transfast",
-    "type": "Money Transfer Operator",
-    "cost_pct": 0.0
-   },
-   "dearest_pct": 8.61,
-   "by_type": {
-    "Money Transfer Operator": 5.12
-   },
-   "prev_avg_cost_pct": 6.17
-  },
-  {
-   "src": "GBR",
-   "src_name": "United Kingdom",
-   "dst": "NGA",
-   "dst_name": "Nigeria",
-   "services": 14,
-   "avg_cost_pct": 6.49,
-   "cheapest": {
-    "firm": "Azimo",
-    "type": "Money Transfer Operator",
-    "cost_pct": 0.0
-   },
-   "dearest_pct": 10.01,
-   "by_type": {
-    "Money Transfer Operator": 6.49
-   },
-   "prev_avg_cost_pct": 7.22
-  },
-  {
-   "src": "ITA",
-   "src_name": "Italy",
-   "dst": "NGA",
-   "dst_name": "Nigeria",
    "services": 13,
-   "avg_cost_pct": 7.1,
+   "avg_cost_pct": 3.29,
    "cheapest": {
-    "firm": "Banca Monte dei Paschi di Siena",
-    "type": "Bank",
-    "cost_pct": 0.0
+    "firm": "WorldRemit",
+    "type": "Money Transfer Operator",
+    "cost_pct": 0.94
    },
-   "dearest_pct": 15.0,
+   "dearest_pct": 4.53,
    "by_type": {
-    "Bank": 9.88,
-    "Bank / Money Transfer Operator": 8.97,
-    "Money Transfer Operator": 5.96
+    "Money Transfer Operator": 3.29
    },
-   "prev_avg_cost_pct": 6.41
+   "prev_avg_cost_pct": 3.48
   },
   {
    "src": "NLD",
    "src_name": "Netherlands",
    "dst": "NGA",
    "dst_name": "Nigeria",
-   "services": 8,
-   "avg_cost_pct": 7.16,
+   "services": 21,
+   "avg_cost_pct": 3.6,
    "cheapest": {
-    "firm": "ABN AMRO Bank",
-    "type": "Bank",
-    "cost_pct": 3.93
+    "firm": "Remitly",
+    "type": "Money Transfer Operator",
+    "cost_pct": 0.04
    },
-   "dearest_pct": 9.99,
+   "dearest_pct": 6.6,
    "by_type": {
-    "Bank": 4.11,
-    "Money Transfer Operator": 8.66,
-    "Money Transfer Operator / Post office": 5.71
+    "Money Transfer Operator": 3.6
    },
-   "prev_avg_cost_pct": 8.11
+   "prev_avg_cost_pct": 3.52
+  },
+  {
+   "src": "USA",
+   "src_name": "United States",
+   "dst": "NGA",
+   "dst_name": "Nigeria",
+   "services": 20,
+   "avg_cost_pct": 3.62,
+   "cheapest": {
+    "firm": "MoneyGram",
+    "type": "Money Transfer Operator",
+    "cost_pct": 0.77
+   },
+   "dearest_pct": 8.43,
+   "by_type": {
+    "Money Transfer Operator": 3.62
+   },
+   "prev_avg_cost_pct": 4.36
+  },
+  {
+   "src": "DEU",
+   "src_name": "Germany",
+   "dst": "NGA",
+   "dst_name": "Nigeria",
+   "services": 24,
+   "avg_cost_pct": 4.01,
+   "cheapest": {
+    "firm": "WorldRemit",
+    "type": "Money Transfer Operator",
+    "cost_pct": 0.21
+   },
+   "dearest_pct": 9.3,
+   "by_type": {
+    "Bank / Money Transfer Operator": 4.51,
+    "Money Transfer Operator": 3.98
+   },
+   "prev_avg_cost_pct": 6.1
+  },
+  {
+   "src": "ESP",
+   "src_name": "Spain",
+   "dst": "NGA",
+   "dst_name": "Nigeria",
+   "services": 15,
+   "avg_cost_pct": 4.32,
+   "cheapest": {
+    "firm": "Remitly",
+    "type": "Money Transfer Operator",
+    "cost_pct": 0.17
+   },
+   "dearest_pct": 15.07,
+   "by_type": {
+    "Money Transfer Operator": 4.32
+   },
+   "prev_avg_cost_pct": 2.09
+  },
+  {
+   "src": "GBR",
+   "src_name": "United Kingdom",
+   "dst": "NGA",
+   "dst_name": "Nigeria",
+   "services": 15,
+   "avg_cost_pct": 4.38,
+   "cheapest": {
+    "firm": "Sendwave",
+    "type": "Money Transfer Operator",
+    "cost_pct": 1.2
+   },
+   "dearest_pct": 6.0,
+   "by_type": {
+    "Money Transfer Operator": 4.38
+   },
+   "prev_avg_cost_pct": 3.1
+  },
+  {
+   "src": "CMR",
+   "src_name": "Cameroon",
+   "dst": "NGA",
+   "dst_name": "Nigeria",
+   "services": 2,
+   "avg_cost_pct": 4.82,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 4.52
+   },
+   "dearest_pct": 5.13,
+   "by_type": {
+    "Money Transfer Operator": 4.82
+   },
+   "prev_avg_cost_pct": 3.9
+  },
+  {
+   "src": "ITA",
+   "src_name": "Italy",
+   "dst": "NGA",
+   "dst_name": "Nigeria",
+   "services": 22,
+   "avg_cost_pct": 5.68,
+   "cheapest": {
+    "firm": "Remitly",
+    "type": "Money Transfer Operator",
+    "cost_pct": 0.01
+   },
+   "dearest_pct": 35.83,
+   "by_type": {
+    "Bank": 24.84,
+    "Bank / Money Transfer Operator": 5.57,
+    "Money Transfer Operator": 2.18,
+    "Money Transfer Operator / Post Office": 5.03
+   },
+   "prev_avg_cost_pct": 4.49
   },
   {
    "src": "GHA",
    "src_name": "Ghana",
    "dst": "NGA",
    "dst_name": "Nigeria",
-   "services": 3,
-   "avg_cost_pct": 7.21,
+   "services": 7,
+   "avg_cost_pct": 10.56,
    "cheapest": {
-    "firm": "United Bank for Africa (UBA)",
+    "firm": "EcoBank Rapid Transfer",
     "type": "Bank",
-    "cost_pct": 6.9
+    "cost_pct": 5.39
    },
-   "dearest_pct": 7.83,
+   "dearest_pct": 12.53,
    "by_type": {
-    "Bank": 7.21
+    "Bank": 10.56
    },
-   "prev_avg_cost_pct": 5.24
+   "prev_avg_cost_pct": 11.67
   },
   {
-   "src": "DEU",
-   "src_name": "Germany",
+   "src": "ZAF",
+   "src_name": "South Africa",
    "dst": "NGA",
    "dst_name": "Nigeria",
-   "services": 10,
-   "avg_cost_pct": 7.79,
+   "services": 20,
+   "avg_cost_pct": 13.13,
    "cheapest": {
-    "firm": "Azimo",
+    "firm": "Mama Money",
     "type": "Money Transfer Operator",
-    "cost_pct": 0.0
+    "cost_pct": 4.01
    },
-   "dearest_pct": 19.12,
+   "dearest_pct": 34.64,
    "by_type": {
-    "Bank / Money Transfer Operator": 19.12,
-    "Money Transfer Operator": 7.37,
-    "Post office": 3.57
+    "Bank": 21.62,
+    "Bank / Money Transfer Operator": 9.73,
+    "Money Transfer Operator": 11.1
    },
-   "prev_avg_cost_pct": 7.34
+   "prev_avg_cost_pct": 13.01
   },
   {
    "src": "CAN",
    "src_name": "Canada",
    "dst": "RWA",
    "dst_name": "Rwanda",
-   "services": 3,
-   "avg_cost_pct": 10.65,
+   "services": 17,
+   "avg_cost_pct": 6.16,
    "cheapest": {
-    "firm": "ScotiaBank",
-    "type": "Bank",
-    "cost_pct": 9.32
+    "firm": "WorldRemit",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.23
    },
-   "dearest_pct": 11.82,
+   "dearest_pct": 11.01,
    "by_type": {
-    "Bank": 9.32,
-    "Money Transfer Operator": 11.31
+    "Bank": 10.95,
+    "Money Transfer Operator": 5.87
    },
-   "prev_avg_cost_pct": 11.39
+   "prev_avg_cost_pct": 6.44
   },
   {
    "src": "KEN",
    "src_name": "Kenya",
    "dst": "RWA",
    "dst_name": "Rwanda",
-   "services": 10,
-   "avg_cost_pct": 10.99,
+   "services": 12,
+   "avg_cost_pct": 7.5,
    "cheapest": {
-    "firm": "MoneyGram",
+    "firm": "Dahabshiil",
     "type": "Money Transfer Operator",
-    "cost_pct": 3.64
+    "cost_pct": 2.78
    },
-   "dearest_pct": 16.95,
+   "dearest_pct": 35.39,
    "by_type": {
-    "Bank": 12.46,
-    "Money Transfer Operator": 7.57
+    "Bank": 9.32,
+    "Mobile Operator": 8.07,
+    "Money Transfer Operator": 5.45
    },
-   "prev_avg_cost_pct": 10.67
+   "prev_avg_cost_pct": 6.79
   },
   {
    "src": "GBR",
    "src_name": "United Kingdom",
    "dst": "RWA",
    "dst_name": "Rwanda",
-   "services": 9,
-   "avg_cost_pct": 14.41,
+   "services": 20,
+   "avg_cost_pct": 7.53,
    "cheapest": {
-    "firm": "WorldRemit",
+    "firm": "Remitly",
     "type": "Money Transfer Operator",
-    "cost_pct": 7.64
+    "cost_pct": 1.99
    },
-   "dearest_pct": 25.6,
+   "dearest_pct": 27.44,
    "by_type": {
-    "Money Transfer Operator": 14.41
+    "Money Transfer Operator": 7.53
    },
-   "prev_avg_cost_pct": 15.39
+   "prev_avg_cost_pct": 8.21
   },
   {
    "src": "TZA",
    "src_name": "Tanzania",
    "dst": "RWA",
    "dst_name": "Rwanda",
-   "services": 11,
-   "avg_cost_pct": 17.04,
+   "services": 6,
+   "avg_cost_pct": 44.27,
    "cheapest": {
-    "firm": "UBA Africash",
-    "type": "Bank",
-    "cost_pct": 4.95
+    "firm": "Tigo",
+    "type": "Mobile Operator",
+    "cost_pct": 6.01
    },
-   "dearest_pct": 28.95,
+   "dearest_pct": 95.37,
    "by_type": {
-    "Bank": 20.02,
-    "Money Transfer Operator": 6.26,
-    "Non-Bank FI": 26.17,
-    "Post office": 8.56
+    "Bank": 80.68,
+    "Mobile Operator": 6.01,
+    "Money Transfer Operator": 8.79
    },
-   "prev_avg_cost_pct": 17.22
+   "prev_avg_cost_pct": 45.51
   },
   {
    "src": "FRA",
    "src_name": "France",
    "dst": "SEN",
    "dst_name": "Senegal",
-   "services": 11,
-   "avg_cost_pct": 5.17,
+   "services": 25,
+   "avg_cost_pct": 3.13,
    "cheapest": {
-    "firm": "Flouss",
+    "firm": "Western Union",
     "type": "Money Transfer Operator",
-    "cost_pct": 2.14
+    "cost_pct": 1.28
    },
-   "dearest_pct": 7.14,
+   "dearest_pct": 6.05,
    "by_type": {
-    "Bank": 7.14,
-    "Money Transfer Operator": 4.84,
-    "Money Transfer Operator / Post office": 5.5
+    "Bank / Money Transfer Operator": 2.96,
+    "Money Transfer Operator": 3.13
    },
-   "prev_avg_cost_pct": 5.23
+   "prev_avg_cost_pct": 3.53
   },
   {
    "src": "ITA",
    "src_name": "Italy",
    "dst": "SEN",
    "dst_name": "Senegal",
-   "services": 15,
-   "avg_cost_pct": 5.38,
+   "services": 28,
+   "avg_cost_pct": 8.66,
    "cheapest": {
-    "firm": "Banca Monte dei Paschi di Siena",
-    "type": "Bank",
-    "cost_pct": 0.0
+    "firm": "Poste Italiane via Western Union",
+    "type": "Money Transfer Operator / Post Office",
+    "cost_pct": 0.86
    },
-   "dearest_pct": 15.0,
+   "dearest_pct": 35.89,
    "by_type": {
-    "Bank": 7.62,
-    "Bank / Money Transfer Operator": 5.36,
-    "Money Transfer Operator": 4.03,
-    "Post office": 8.57
+    "Bank": 28.17,
+    "Bank / Money Transfer Operator": 5.68,
+    "Money Transfer Operator": 2.96,
+    "Money Transfer Operator / Post Office": 3.04,
+    "Post Office": 8.57
    },
-   "prev_avg_cost_pct": 5.68
+   "prev_avg_cost_pct": 7.23
   },
   {
    "src": "GBR",
    "src_name": "United Kingdom",
    "dst": "SLE",
    "dst_name": "Sierra Leone",
-   "services": 9,
-   "avg_cost_pct": 10.42,
+   "services": 18,
+   "avg_cost_pct": 5.0,
    "cheapest": {
-    "firm": "Kanson Services",
+    "firm": "CashMinute",
     "type": "Money Transfer Operator",
-    "cost_pct": 4.52
+    "cost_pct": 2.88
    },
-   "dearest_pct": 25.3,
+   "dearest_pct": 18.59,
    "by_type": {
-    "Money Transfer Operator": 10.42
+    "Money Transfer Operator": 5.0
    },
-   "prev_avg_cost_pct": 5.07
-  },
-  {
-   "src": "USA",
-   "src_name": "United States",
-   "dst": "SOM",
-   "dst_name": "Somalia",
-   "services": 6,
-   "avg_cost_pct": 5.5,
-   "cheapest": {
-    "firm": "Tawakal Express",
-    "type": "Money Transfer Operator",
-    "cost_pct": 3.0
-   },
-   "dearest_pct": 6.0,
-   "by_type": {
-    "Money Transfer Operator": 5.5
-   },
-   "prev_avg_cost_pct": 5.83
-  },
-  {
-   "src": "GBR",
-   "src_name": "United Kingdom",
-   "dst": "SOM",
-   "dst_name": "Somalia",
-   "services": 7,
-   "avg_cost_pct": 7.89,
-   "cheapest": {
-    "firm": "WorldRemit",
-    "type": "Money Transfer Operator",
-    "cost_pct": 6.59
-   },
-   "dearest_pct": 10.18,
-   "by_type": {
-    "Money Transfer Operator": 7.89
-   },
-   "prev_avg_cost_pct": 6.98
+   "prev_avg_cost_pct": 5.68
   },
   {
    "src": "AUS",
    "src_name": "Australia",
    "dst": "SOM",
    "dst_name": "Somalia",
-   "services": 2,
-   "avg_cost_pct": 9.05,
+   "services": 10,
+   "avg_cost_pct": 3.99,
    "cheapest": {
-    "firm": "WorldRemit",
+    "firm": "Western Union",
     "type": "Money Transfer Operator",
-    "cost_pct": 6.67
+    "cost_pct": 2.65
    },
-   "dearest_pct": 11.44,
+   "dearest_pct": 6.25,
    "by_type": {
-    "Money Transfer Operator": 9.05
+    "Money Transfer Operator": 3.99
    },
-   "prev_avg_cost_pct": 10.82
+   "prev_avg_cost_pct": 4.76
+  },
+  {
+   "src": "USA",
+   "src_name": "United States",
+   "dst": "SOM",
+   "dst_name": "Somalia",
+   "services": 5,
+   "avg_cost_pct": 5.6,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 4.0
+   },
+   "dearest_pct": 6.0,
+   "by_type": {
+    "Money Transfer Operator": 5.6
+   },
+   "prev_avg_cost_pct": 5.85
   },
   {
    "src": "NLD",
    "src_name": "Netherlands",
    "dst": "SOM",
    "dst_name": "Somalia",
-   "services": 4,
-   "avg_cost_pct": 9.15,
+   "services": 9,
+   "avg_cost_pct": 6.05,
    "cheapest": {
     "firm": "WorldRemit",
     "type": "Money Transfer Operator",
-    "cost_pct": 6.77
+    "cost_pct": 4.42
    },
-   "dearest_pct": 10.54,
+   "dearest_pct": 6.87,
    "by_type": {
-    "Money Transfer Operator": 9.15
+    "Money Transfer Operator": 6.05
    },
-   "prev_avg_cost_pct": 8.96
+   "prev_avg_cost_pct": 6.05
+  },
+  {
+   "src": "GBR",
+   "src_name": "United Kingdom",
+   "dst": "SOM",
+   "dst_name": "Somalia",
+   "services": 17,
+   "avg_cost_pct": 6.81,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 3.92
+   },
+   "dearest_pct": 18.25,
+   "by_type": {
+    "Money Transfer Operator": 6.81
+   },
+   "prev_avg_cost_pct": 7.01
   },
   {
    "src": "SWE",
    "src_name": "Sweden",
    "dst": "SOM",
    "dst_name": "Somalia",
-   "services": 8,
-   "avg_cost_pct": 13.05,
+   "services": 10,
+   "avg_cost_pct": 7.73,
    "cheapest": {
     "firm": "WorldRemit",
     "type": "Money Transfer Operator",
-    "cost_pct": 5.94
+    "cost_pct": 5.72
    },
-   "dearest_pct": 15.64,
+   "dearest_pct": 15.72,
    "by_type": {
-    "Money Transfer Operator": 13.05
+    "Money Transfer Operator": 7.73
    },
-   "prev_avg_cost_pct": 8.55
-  },
-  {
-   "src": "GBR",
-   "src_name": "United Kingdom",
-   "dst": "ZAF",
-   "dst_name": "South Africa",
-   "services": 13,
-   "avg_cost_pct": 8.25,
-   "cheapest": {
-    "firm": "Tranzfers.com",
-    "type": "Money Transfer Operator",
-    "cost_pct": 1.49
-   },
-   "dearest_pct": 17.19,
-   "by_type": {
-    "Money Transfer Operator": 8.25
-   },
-   "prev_avg_cost_pct": 9.14
+   "prev_avg_cost_pct": 6.74
   },
   {
    "src": "USA",
    "src_name": "United States",
    "dst": "ZAF",
    "dst_name": "South Africa",
-   "services": 6,
-   "avg_cost_pct": 10.42,
+   "services": 18,
+   "avg_cost_pct": 6.84,
    "cheapest": {
-    "firm": "Xoom",
+    "firm": "WorldRemit",
     "type": "Money Transfer Operator",
-    "cost_pct": 2.35
+    "cost_pct": 1.92
    },
-   "dearest_pct": 37.01,
+   "dearest_pct": 11.21,
    "by_type": {
-    "Money Transfer Operator": 10.42
+    "Money Transfer Operator": 6.84
    },
-   "prev_avg_cost_pct": 7.33
+   "prev_avg_cost_pct": 8.02
   },
   {
-   "src": "QAT",
-   "src_name": "Qatar",
-   "dst": "SDN",
-   "dst_name": "Sudan",
-   "services": 6,
-   "avg_cost_pct": 7.42,
+   "src": "GBR",
+   "src_name": "United Kingdom",
+   "dst": "ZAF",
+   "dst_name": "South Africa",
+   "services": 25,
+   "avg_cost_pct": 7.04,
    "cheapest": {
-    "firm": "Al Fardan Exchange",
+    "firm": "Remitly",
     "type": "Money Transfer Operator",
-    "cost_pct": 4.26
+    "cost_pct": 2.09
    },
-   "dearest_pct": 12.81,
+   "dearest_pct": 16.73,
    "by_type": {
-    "Bank": 6.34,
-    "Money Transfer Operator": 7.63
+    "Money Transfer Operator": 7.04
    },
-   "prev_avg_cost_pct": 7.7
+   "prev_avg_cost_pct": 6.99
   },
   {
-   "src": "ZAF",
-   "src_name": "South Africa",
-   "dst": "SWZ",
-   "dst_name": "Swaziland",
-   "services": 7,
-   "avg_cost_pct": 15.88,
+   "src": "ARE",
+   "src_name": "United Arab Emirates",
+   "dst": "SSD",
+   "dst_name": "South Sudan",
+   "services": 3,
+   "avg_cost_pct": 3.32,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.51
+   },
+   "dearest_pct": 4.47,
+   "by_type": {
+    "Money Transfer Operator": 3.32
+   },
+   "prev_avg_cost_pct": 3.4
+  },
+  {
+   "src": "USA",
+   "src_name": "United States",
+   "dst": "SSD",
+   "dst_name": "South Sudan",
+   "services": 6,
+   "avg_cost_pct": 5.33,
    "cheapest": {
     "firm": "MoneyGram",
     "type": "Money Transfer Operator",
-    "cost_pct": 11.27
+    "cost_pct": 3.0
    },
-   "dearest_pct": 18.98,
+   "dearest_pct": 6.0,
    "by_type": {
-    "Bank": 17.48,
-    "Money Transfer Operator": 13.74
+    "Money Transfer Operator": 5.33
    },
-   "prev_avg_cost_pct": 16.25
+   "prev_avg_cost_pct": 5.33
+  },
+  {
+   "src": "GBR",
+   "src_name": "United Kingdom",
+   "dst": "SSD",
+   "dst_name": "South Sudan",
+   "services": 8,
+   "avg_cost_pct": 9.16,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 6.05
+   },
+   "dearest_pct": 16.05,
+   "by_type": {
+    "Money Transfer Operator": 9.16
+   },
+   "prev_avg_cost_pct": 9.23
+  },
+  {
+   "src": "KEN",
+   "src_name": "Kenya",
+   "dst": "SSD",
+   "dst_name": "South Sudan",
+   "services": 24,
+   "avg_cost_pct": 12.39,
+   "cheapest": {
+    "firm": "Dahabshiil",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.78
+   },
+   "dearest_pct": 35.35,
+   "by_type": {
+    "Bank": 14.13,
+    "Money Transfer Operator": 3.69
+   },
+   "prev_avg_cost_pct": 11.68
+  },
+  {
+   "src": "SAU",
+   "src_name": "Saudi Arabia",
+   "dst": "SDN",
+   "dst_name": "Sudan",
+   "services": 2,
+   "avg_cost_pct": 3.85,
+   "cheapest": {
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.92
+   },
+   "dearest_pct": 4.78,
+   "by_type": {
+    "Money Transfer Operator": 3.85
+   },
+   "prev_avg_cost_pct": 9.67
   },
   {
    "src": "GBR",
    "src_name": "United Kingdom",
    "dst": "TZA",
    "dst_name": "Tanzania",
-   "services": 5,
-   "avg_cost_pct": 10.09,
+   "services": 16,
+   "avg_cost_pct": 6.25,
    "cheapest": {
-    "firm": "Western Union",
+    "firm": "CashMinute",
     "type": "Money Transfer Operator",
-    "cost_pct": 5.82
+    "cost_pct": 1.92
    },
-   "dearest_pct": 18.3,
+   "dearest_pct": 17.13,
    "by_type": {
-    "Money Transfer Operator": 10.09
+    "Money Transfer Operator": 6.25
    },
-   "prev_avg_cost_pct": 9.2
+   "prev_avg_cost_pct": 4.49
   },
   {
    "src": "KEN",
    "src_name": "Kenya",
    "dst": "TZA",
    "dst_name": "Tanzania",
-   "services": 12,
-   "avg_cost_pct": 10.48,
+   "services": 26,
+   "avg_cost_pct": 11.8,
    "cheapest": {
-    "firm": "MoneyGram",
-    "type": "Money Transfer Operator",
-    "cost_pct": 3.64
+    "firm": "M-Pesa",
+    "type": "Mobile Operator",
+    "cost_pct": 1.98
    },
-   "dearest_pct": 16.95,
+   "dearest_pct": 35.35,
    "by_type": {
-    "Bank": 11.45,
-    "Money Transfer Operator": 7.57,
-    "Post office": 11.41
+    "Bank": 13.71,
+    "Mobile Operator": 1.98,
+    "Money Transfer Operator": 4.97
    },
-   "prev_avg_cost_pct": 10.19
+   "prev_avg_cost_pct": 11.04
   },
   {
    "src": "ZAF",
    "src_name": "South Africa",
    "dst": "TZA",
    "dst_name": "Tanzania",
-   "services": 4,
-   "avg_cost_pct": 16.95,
+   "services": 16,
+   "avg_cost_pct": 13.89,
    "cheapest": {
-    "firm": "Western Union",
+    "firm": "WorldRemit",
     "type": "Money Transfer Operator",
-    "cost_pct": 12.56
+    "cost_pct": 6.6
    },
-   "dearest_pct": 20.12,
+   "dearest_pct": 33.72,
    "by_type": {
-    "Bank": 17.56,
-    "Money Transfer Operator": 16.34
+    "Bank": 27.88,
+    "Bank / Money Transfer Operator": 14.63,
+    "Money Transfer Operator": 11.69
    },
-   "prev_avg_cost_pct": 15.95
+   "prev_avg_cost_pct": 14.01
   },
   {
    "src": "FRA",
    "src_name": "France",
    "dst": "TGO",
    "dst_name": "Togo",
-   "services": 8,
-   "avg_cost_pct": 5.33,
+   "services": 18,
+   "avg_cost_pct": 4.25,
    "cheapest": {
     "firm": "Western Union",
     "type": "Money Transfer Operator",
-    "cost_pct": 4.64
+    "cost_pct": 2.47
    },
-   "dearest_pct": 5.64,
+   "dearest_pct": 7.48,
    "by_type": {
-    "Money Transfer Operator": 5.27,
-    "Money Transfer Operator / Post office": 5.5
+    "Bank / Money Transfer Operator": 2.93,
+    "Money Transfer Operator": 4.33
    },
-   "prev_avg_cost_pct": 5.33
+   "prev_avg_cost_pct": 4.2
   },
   {
    "src": "DEU",
    "src_name": "Germany",
    "dst": "TGO",
    "dst_name": "Togo",
-   "services": 10,
-   "avg_cost_pct": 6.38,
+   "services": 14,
+   "avg_cost_pct": 5.0,
    "cheapest": {
-    "firm": "Postbank",
-    "type": "Post office",
-    "cost_pct": 1.07
+    "firm": "Western Union",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.58
    },
-   "dearest_pct": 14.21,
+   "dearest_pct": 8.31,
    "by_type": {
-    "Bank / Money Transfer Operator": 14.21,
-    "Money Transfer Operator": 6.06,
-    "Post office": 3.57
+    "Bank / Money Transfer Operator": 2.78,
+    "Money Transfer Operator": 5.17
    },
-   "prev_avg_cost_pct": 6.92
+   "prev_avg_cost_pct": 4.6
   },
   {
    "src": "FRA",
    "src_name": "France",
    "dst": "TUN",
    "dst_name": "Tunisia",
-   "services": 11,
-   "avg_cost_pct": 7.12,
+   "services": 22,
+   "avg_cost_pct": 4.12,
    "cheapest": {
-    "firm": "Xendpay",
+    "firm": "MoneyGram",
     "type": "Money Transfer Operator",
-    "cost_pct": 0.9
+    "cost_pct": 1.02
    },
-   "dearest_pct": 14.35,
+   "dearest_pct": 8.83,
    "by_type": {
-    "Bank": 4.66,
-    "Money Transfer Operator": 8.35,
-    "Money Transfer Operator / Post office": 7.11
+    "Bank": 2.69,
+    "Bank / Money Transfer Operator": 1.54,
+    "Money Transfer Operator": 4.4
    },
-   "prev_avg_cost_pct": 6.3
+   "prev_avg_cost_pct": 5.04
+  },
+  {
+   "src": "ITA",
+   "src_name": "Italy",
+   "dst": "TUN",
+   "dst_name": "Tunisia",
+   "services": 22,
+   "avg_cost_pct": 8.28,
+   "cheapest": {
+    "firm": "Poste Italiane via Western Union",
+    "type": "Money Transfer Operator / Post Office",
+    "cost_pct": 1.24
+   },
+   "dearest_pct": 35.88,
+   "by_type": {
+    "Bank": 24.3,
+    "Bank / Money Transfer Operator": 6.6,
+    "Money Transfer Operator": 5.74,
+    "Money Transfer Operator / Post Office": 2.25,
+    "Post Office": 10.37
+   },
+   "prev_avg_cost_pct": 6.76
   },
   {
    "src": "GBR",
    "src_name": "United Kingdom",
    "dst": "UGA",
    "dst_name": "Uganda",
-   "services": 10,
-   "avg_cost_pct": 7.79,
+   "services": 33,
+   "avg_cost_pct": 5.04,
    "cheapest": {
-    "firm": "Lebara",
+    "firm": "Sendwave",
     "type": "Money Transfer Operator",
-    "cost_pct": 2.33
+    "cost_pct": 1.52
    },
-   "dearest_pct": 11.82,
+   "dearest_pct": 16.39,
    "by_type": {
-    "Money Transfer Operator": 7.79
+    "Money Transfer Operator": 5.04
    },
-   "prev_avg_cost_pct": 8.78
+   "prev_avg_cost_pct": 5.55
   },
   {
    "src": "KEN",
    "src_name": "Kenya",
    "dst": "UGA",
    "dst_name": "Uganda",
-   "services": 12,
-   "avg_cost_pct": 10.48,
+   "services": 27,
+   "avg_cost_pct": 11.9,
    "cheapest": {
-    "firm": "MoneyGram",
+    "firm": "Dahabshiil",
     "type": "Money Transfer Operator",
-    "cost_pct": 3.64
+    "cost_pct": 2.78
    },
-   "dearest_pct": 16.95,
+   "dearest_pct": 35.35,
    "by_type": {
-    "Bank": 11.45,
-    "Money Transfer Operator": 7.57,
-    "Post office": 11.41
+    "Bank": 13.71,
+    "Mobile Operator": 6.51,
+    "Money Transfer Operator": 5.08
    },
-   "prev_avg_cost_pct": 10.21
+   "prev_avg_cost_pct": 11.07
   },
   {
    "src": "TZA",
    "src_name": "Tanzania",
    "dst": "UGA",
    "dst_name": "Uganda",
-   "services": 11,
-   "avg_cost_pct": 17.04,
-   "cheapest": {
-    "firm": "UBA Africash",
-    "type": "Bank",
-    "cost_pct": 4.95
-   },
-   "dearest_pct": 28.95,
-   "by_type": {
-    "Bank": 20.02,
-    "Money Transfer Operator": 6.26,
-    "Non-Bank FI": 26.17,
-    "Post office": 8.56
-   },
-   "prev_avg_cost_pct": 17.21
-  },
-  {
-   "src": "GBR",
-   "src_name": "United Kingdom",
-   "dst": "ZMB",
-   "dst_name": "Zambia",
-   "services": 5,
-   "avg_cost_pct": 9.04,
-   "cheapest": {
-    "firm": "Western Union",
-    "type": "Money Transfer Operator",
-    "cost_pct": 5.79
-   },
-   "dearest_pct": 11.69,
-   "by_type": {
-    "Money Transfer Operator": 9.04
-   },
-   "prev_avg_cost_pct": 20.44
-  },
-  {
-   "src": "ZAF",
-   "src_name": "South Africa",
-   "dst": "ZMB",
-   "dst_name": "Zambia",
    "services": 10,
-   "avg_cost_pct": 18.37,
-   "cheapest": {
-    "firm": "exchange4free.com",
-    "type": "Money Transfer Operator",
-    "cost_pct": 0.01
-   },
-   "dearest_pct": 24.86,
-   "by_type": {
-    "Bank": 22.02,
-    "Money Transfer Operator": 15.94
-   },
-   "prev_avg_cost_pct": 18.23
-  },
-  {
-   "src": "GBR",
-   "src_name": "United Kingdom",
-   "dst": "ZWE",
-   "dst_name": "Zimbabwe",
-   "services": 7,
-   "avg_cost_pct": 8.53,
-   "cheapest": {
-    "firm": "Western Union",
-    "type": "Money Transfer Operator",
-    "cost_pct": 6.48
-   },
-   "dearest_pct": 10.2,
-   "by_type": {
-    "Money Transfer Operator": 8.53
-   },
-   "prev_avg_cost_pct": 7.7
-  },
-  {
-   "src": "CAN",
-   "src_name": "Canada",
-   "dst": "ZWE",
-   "dst_name": "Zimbabwe",
-   "services": 7,
-   "avg_cost_pct": 10.28,
+   "avg_cost_pct": 63.62,
    "cheapest": {
     "firm": "MoneyGram",
     "type": "Money Transfer Operator",
-    "cost_pct": 7.02
+    "cost_pct": 7.5
    },
-   "dearest_pct": 17.03,
+   "dearest_pct": 90.7,
    "by_type": {
-    "Bank": 11.78,
-    "Money Transfer Operator": 9.15
+    "Bank": 77.54,
+    "Money Transfer Operator": 7.96
    },
-   "prev_avg_cost_pct": 9.93
+   "prev_avg_cost_pct": 66.31
+  },
+  {
+   "src": "GBR",
+   "src_name": "United Kingdom",
+   "dst": "ZMB",
+   "dst_name": "Zambia",
+   "services": 26,
+   "avg_cost_pct": 5.58,
+   "cheapest": {
+    "firm": "Remitly",
+    "type": "Money Transfer Operator",
+    "cost_pct": 2.1
+   },
+   "dearest_pct": 15.5,
+   "by_type": {
+    "Money Transfer Operator": 5.58
+   },
+   "prev_avg_cost_pct": 5.31
   },
   {
    "src": "ZAF",
    "src_name": "South Africa",
+   "dst": "ZMB",
+   "dst_name": "Zambia",
+   "services": 37,
+   "avg_cost_pct": 13.91,
+   "cheapest": {
+    "firm": "WorldRemit",
+    "type": "Money Transfer Operator",
+    "cost_pct": 5.2
+   },
+   "dearest_pct": 33.74,
+   "by_type": {
+    "Bank": 24.39,
+    "Bank / Money Transfer Operator": 12.38,
+    "Money Transfer Operator": 10.92
+   },
+   "prev_avg_cost_pct": 13.64
+  },
+  {
+   "src": "GBR",
+   "src_name": "United Kingdom",
    "dst": "ZWE",
    "dst_name": "Zimbabwe",
-   "services": 12,
-   "avg_cost_pct": 13.46,
+   "services": 26,
+   "avg_cost_pct": 5.87,
    "cheapest": {
-    "firm": "Mama Money",
+    "firm": "WorldRemit",
     "type": "Money Transfer Operator",
-    "cost_pct": 4.94
+    "cost_pct": 3.32
    },
-   "dearest_pct": 22.09,
+   "dearest_pct": 13.87,
    "by_type": {
-    "Bank": 19.36,
-    "Money Transfer Operator": 10.52
+    "Money Transfer Operator": 5.87
    },
-   "prev_avg_cost_pct": 13.62
+   "prev_avg_cost_pct": 6.12
   },
   {
    "src": "AUS",
    "src_name": "Australia",
    "dst": "ZWE",
    "dst_name": "Zimbabwe",
-   "services": 8,
-   "avg_cost_pct": 13.55,
+   "services": 21,
+   "avg_cost_pct": 6.4,
    "cheapest": {
-    "firm": "exchange4free.com",
-    "type": "Money Transfer Operator",
-    "cost_pct": 4.88
+    "firm": "Citibank",
+    "type": "Bank",
+    "cost_pct": 2.53
    },
-   "dearest_pct": 21.09,
+   "dearest_pct": 19.02,
    "by_type": {
-    "Bank": 17.82,
-    "Money Transfer Operator": 12.12
+    "Bank": 8.52,
+    "Money Transfer Operator": 6.04
    },
-   "prev_avg_cost_pct": 11.4
+   "prev_avg_cost_pct": 6.31
+  },
+  {
+   "src": "CAN",
+   "src_name": "Canada",
+   "dst": "ZWE",
+   "dst_name": "Zimbabwe",
+   "services": 19,
+   "avg_cost_pct": 7.47,
+   "cheapest": {
+    "firm": "Royal Bank of Canada",
+    "type": "Bank",
+    "cost_pct": 2.17
+   },
+   "dearest_pct": 27.78,
+   "by_type": {
+    "Bank": 11.78,
+    "Money Transfer Operator": 6.33
+   },
+   "prev_avg_cost_pct": 7.68
+  },
+  {
+   "src": "ZAF",
+   "src_name": "South Africa",
+   "dst": "ZWE",
+   "dst_name": "Zimbabwe",
+   "services": 40,
+   "avg_cost_pct": 11.91,
+   "cheapest": {
+    "firm": "Sasai Money Transfer",
+    "type": "Money Transfer Operator",
+    "cost_pct": 4.97
+   },
+   "dearest_pct": 33.76,
+   "by_type": {
+    "Bank": 23.63,
+    "Bank / Money Transfer Operator": 11.46,
+    "Mobile Operator": 5.64,
+    "Money Transfer Operator": 9.42
+   },
+   "prev_avg_cost_pct": 12.2
   }
  ]
 }

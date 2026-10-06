@@ -75,6 +75,7 @@ export function buildSearchIndex(): SearchHit[] {
     { href: "/radio", title: "Radio bulletin", kicker: "Edition", summary: "Sixty seconds on the price of money, English and Kiswahili, free for any station." },
     { href: "/lite", title: "Low-data version", kicker: "Tool", summary: "The whole Morning and every rate in under 3 KB." },
     { href: "/reference", title: "The reference", kicker: "Method", summary: "Definitions, stable URLs, the timeliness record and corrections." },
+    { href: "/for-institutions", title: "For institutions", kicker: "Product", summary: "Committee packs, API, licences and widgets for SACCOs, pension funds, treasuries, fintechs and DFIs. Free samples." },
     { href: "/pack", title: "Investment Committee Pack", kicker: "Product", summary: "The monthly pack for SACCOs, insurers and pension schemes, for ten markets." },
     { href: "/prices", title: "Price guide", kicker: "Pricing", summary: "Everything Afronomics sells, in shillings and dollars." },
     { href: "/jobs", title: "Jobs", kicker: "Jobs", summary: "Treasury, risk, research and analyst roles across African finance." },

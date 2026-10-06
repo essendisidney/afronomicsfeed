@@ -1,4 +1,4 @@
--- Email rate alerts: a reader asks to be told when a rate moves (Kenya T-bill above/below a level, every Kenya
+-- Applied 6 Oct 2026. Email rate alerts: a reader asks to be told when a rate moves (Kenya T-bill above/below a level, every Kenya
 -- auction, a new Nigeria savings bond offer, any central-bank policy rate change). Double opt-in: nothing is sent
 -- until the link in the confirmation email is opened. Every alert email carries a one-click unsubscribe link.
 --
@@ -57,10 +57,6 @@ begin
   if not exists (select 1 from public.af_secrets k where k.name = 'cron' and k.value = p_secret) then
     return null;
   end if;
-
-  -- Housekeeping: unconfirmed requests go after 7 days, stopped alerts 30 days after they were stopped.
-  delete from public.rate_alerts where confirmed_at is null and unsubscribed_at is null and created_at < now() - interval '7 days';
-  delete from public.rate_alerts where unsubscribed_at is not null and unsubscribed_at < now() - interval '30 days';
 
   select * into v_row from public.rate_alerts r
   where lower(r.email) = v_email and r.kind = p_kind
@@ -123,8 +119,8 @@ as $$
   select count(*)::int from stopped;
 $$;
 
--- Confirmed, live alerts for the sender. Released only to a caller holding the shared secret. Also does the
--- housekeeping promised in the privacy notice, since the sender runs several times every weekday.
+-- Confirmed, live alerts for the sender. Released only to a caller holding the shared secret.
+-- (Housekeeping is added in 0018.)
 create or replace function public.af_rate_alerts_live(p_secret text)
 returns table(id uuid, email text, kind text, tenor smallint, threshold numeric, token text, last_sent_key text)
 language plpgsql
@@ -135,8 +131,6 @@ begin
   if not exists (select 1 from public.af_secrets k where k.name = 'cron' and k.value = p_secret) then
     return;
   end if;
-  delete from public.rate_alerts r where r.confirmed_at is null and r.unsubscribed_at is null and r.created_at < now() - interval '7 days';
-  delete from public.rate_alerts r where r.unsubscribed_at is not null and r.unsubscribed_at < now() - interval '30 days';
   return query
     select r.id, r.email, r.kind, r.tenor, r.threshold, r.token, r.last_sent_key
     from public.rate_alerts r

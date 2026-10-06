@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
+import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { policyBoard } from "@/lib/data/policy-rates";
+import { policyAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
 
 export const revalidate = 1800;
 
-export const metadata: Metadata = {
-  title: "African central-bank policy rates today",
-  description:
-    "The policy rate of each African central bank as the bank itself publishes it, beside the same market’s latest one-year Treasury bill, with the gap between them. Kenya, Ghana, Egypt, Malawi, Mozambique and more.",
-  alternates: { canonical: `${site.url}/rates/policy` },
-};
+export function generateMetadata(): Metadata {
+  const { title, description } = policyAnswers();
+  return { title, description, alternates: { canonical: `${site.url}/rates/policy` } };
+}
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 const pts = (n: number) => `${n > 0 ? "+" : n < 0 ? "−" : ""}${Math.abs(n).toFixed(2)}`;
@@ -100,6 +100,7 @@ export default function PolicyRatesPage() {
         </section>
       )}
       <CiteBlock title="African central-bank policy rates" path="/rates/policy" publisher="the central banks’ own websites" />
+      <Questions items={policyAnswers().items} />
       <NewsletterBand />
     </PageShell>
   );

@@ -2,20 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
+import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { fairBench } from "@/lib/data/kenya-rates";
 import { mobileLoanBoard } from "@/lib/data/mobile-loans";
+import { mobileLoanAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "What a mobile loan really costs in Kenya — M-Shwari, Tala and more against a bank loan",
-  description:
-    "The charge on KES 1,000 for a month on Kenya’s mobile loans, quoted from each provider’s own page, and the same charge as a yearly rate beside the bank average. Information, not advice.",
-  alternates: { canonical: `${site.url}/rates/kenya/mobile-loans` },
-};
+export function generateMetadata(): Metadata {
+  const { title, description } = mobileLoanAnswers();
+  return { title, description, alternates: { canonical: `${site.url}/rates/kenya/mobile-loans` } };
+}
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 const kes = (n: number) => `KES ${n.toLocaleString("en-GB", { maximumFractionDigits: 0 })}`;
@@ -130,6 +130,7 @@ export default function MobileLoansPage() {
       </section>
 
       <CiteBlock title="What a mobile loan really costs in Kenya" path="/rates/kenya/mobile-loans" publisher="the providers’ published charges and the Central Bank of Kenya" />
+      <Questions items={mobileLoanAnswers().items} />
       <NewsletterBand />
     </PageShell>
   );

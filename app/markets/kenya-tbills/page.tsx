@@ -5,16 +5,16 @@ import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { AlertButton } from "@/components/ui/AlertButton";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { PageShell } from "@/components/data/PageShell";
+import { Questions } from "@/components/seo/Questions";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { auctionWeeks, latestByTenor, loadTbills, rateHistory, tenorColor, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
+import { tbillAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Kenya Treasury bill auction results — every CBK auction, rates and subscription",
-  description:
-    "Every Central Bank of Kenya Treasury bill auction in one table: 91-, 182- and 364-day weighted average rates, amounts offered, bids received, subscription and amounts accepted, with a free CSV.",
-  alternates: { canonical: `${site.url}/markets/kenya-tbills` },
-};
+export function generateMetadata(): Metadata {
+  const { title, description } = tbillAnswers();
+  return { title, description, alternates: { canonical: `${site.url}/markets/kenya-tbills` } };
+}
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 const kes = (m: number | null | undefined) => (m == null ? "—" : `KES ${(m / 1000).toFixed(1)}bn`);
@@ -212,6 +212,7 @@ export default function KenyaTbillsPage() {
       )}
 
       <CiteBlock title="Kenya Treasury bill auction results" path="/markets/kenya-tbills" publisher="the Central Bank of Kenya" csv="/api/data/kenya-tbills" />
+      <Questions items={tbillAnswers().items} />
       <NewsletterBand lede="Kenya’s auction results, plus 53 other economies, in one Monday email." />
     </PageShell>
   );

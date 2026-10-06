@@ -2,20 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
+import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { renderTime } from "@/lib/data/fetcher";
 import { loadSavingsBond } from "@/lib/data/nigeria-savings-bond";
+import { savingsBondAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "FGN Savings Bond: this month’s rates, dates and minimum",
-  description:
-    "Nigeria’s FGN Savings Bond offer, read from the Debt Management Office’s own monthly document: the rate for each tenor, when the offer opens and closes, the minimum and what it pays each quarter. Updated automatically.",
-  alternates: { canonical: `${site.url}/rates/nigeria/savings-bond` },
-};
+export function generateMetadata(): Metadata {
+  const { title, description } = savingsBondAnswers();
+  return { title, description, alternates: { canonical: `${site.url}/rates/nigeria/savings-bond` } };
+}
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const when = (s: string | null) => (s ? dateFmt.format(new Date(s)) : "not shown");
@@ -154,6 +154,7 @@ export default function NigeriaSavingsBondPage() {
         . Nigeria’s Treasury bill auctions: <Link href="/markets/tbills/nigeria" className="font-medium text-forest underline underline-offset-2">Nigeria T-bills</Link>.
       </p>
       <CiteBlock title="FGN Savings Bond offers" path="/rates/nigeria/savings-bond" publisher="the Debt Management Office’s monthly offer documents" />
+      <Questions items={savingsBondAnswers().items} />
       <NewsletterBand />
     </PageShell>
   );

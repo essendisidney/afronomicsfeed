@@ -15,7 +15,7 @@ Nairobi day, appended on each run so the history builds from the first read.
 
 from __future__ import annotations
 
-import html
+import html as htmllib
 import json
 import re
 import sys
@@ -56,7 +56,7 @@ def text_of(url: str) -> str:
     html = requests.get(url, headers=UA, timeout=(15, 40), verify=False).text
     t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", html, flags=re.S)
     t = re.sub(r"<[^>]+>", " ", t)
-    t = html.unescape(t).replace("\u200b", "").replace("\xa0", " ")
+    t = htmllib.unescape(t).replace("\u200b", "").replace("\xa0", " ")
     t = re.sub(r"\s+", " ", t)
     # some sites split a figure across tags ("10 .22%"); join digits either side of the decimal point
     return re.sub(r"(\d) ?\. ?(\d)", r"\1.\2", t)

@@ -1,7 +1,7 @@
 {
  "dataset": "Kenya savings and lending rates",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-06T09:21:55+00:00",
+ "updated_at": "2026-10-06T09:28:24+00:00",
  "bank_rates": {
   "publisher": "Central Bank of Kenya",
   "source": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
@@ -2244,28 +2244,41 @@
  },
  "money_market_funds": {
   "note": "Each yield is read from the fund manager's own website at the time shown; funds publishing yields only as images or PDFs are not yet included.",
-  "as_of": "2026-10-06T09:21:55+00:00",
-  "rows": [],
-  "unread": [
+  "as_of": "2026-10-06T09:28:24+00:00",
+  "rows": [
    {
-    "name": "Madison Money Market Fund",
-    "status": "error: 'str' object has no attribute 'unescape'"
-   },
-   {
-    "name": "Etica Money Market Fund (KES)",
-    "status": "error: 'str' object has no attribute 'unescape'"
+    "name": "Zimele Fixed Income Fund (Savings Plan)",
+    "manager": "Zimele Asset Management",
+    "source": "https://www.zimele.co.ke/",
+    "status": "ok",
+    "daily_yield": 12.65,
+    "effective_annual_yield": 13.41
    },
    {
     "name": "Kasha Money Market Fund",
-    "status": "error: 'str' object has no attribute 'unescape'"
+    "manager": "Orient Asset Managers",
+    "source": "https://www.orientasset.co.ke/",
+    "status": "ok",
+    "daily_yield": 10.22,
+    "effective_annual_yield": 10.76
+   },
+   {
+    "name": "Madison Money Market Fund",
+    "manager": "Madison Investment Managers",
+    "source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
+    "status": "ok",
+    "daily_yield": 10.11,
+    "effective_annual_yield": 10.64
+   }
+  ],
+  "unread": [
+   {
+    "name": "Etica Money Market Fund (KES)",
+    "status": "conflicting figures on the page: Etica Money Market Fund (KES) Effective Annual Yield 10.04% / Etica Money Market Fund (KES) Effective Annual Yield 17.55%"
    },
    {
     "name": "CIC Money Market Fund",
-    "status": "error: 'str' object has no attribute 'unescape'"
-   },
-   {
-    "name": "Zimele Fixed Income Fund (Savings Plan)",
-    "status": "error: 'str' object has no attribute 'unescape'"
+    "status": "conflicting figures on the page: Current Daily Rate – 5.01% Current Effective Annual Rate – 5.13% / Current Daily Rate – 8.12% Current Effective Annual Rate – 8.43%"
    }
   ]
  }

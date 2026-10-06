@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { Questions, type QA } from "@/components/seo/Questions";
 import { fairBench, fundLeague } from "@/lib/data/kenya-rates";
 import { loadSaccos, saccoLatest } from "@/lib/data/saccos";
+import { paystackConfigured } from "@/lib/billing/paystack";
+import { chargeLabel } from "@/lib/billing/plans";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -220,6 +223,23 @@ export default function SaccosPage() {
               </Link>
               , to be included.
             </p>
+            <div className="mt-6 grid gap-4 rounded-2xl border border-accent/40 bg-surface px-5 py-5 md:grid-cols-[1fr_18rem] md:items-center">
+              <div>
+                <p className="text-[12px] font-semibold text-accent">For SACCOs</p>
+                <p className="mt-1 font-serif text-2xl text-ink">Verified SACCO listing, {chargeLabel("sacco_listing")} a month</p>
+                <p className="mt-1 text-sm leading-6 text-ink-soft">
+                  Your declared dividend and deposit rates on this page, checked against your own notice, with your logo and a &ldquo;join&rdquo; link we count
+                  for you. Regulated SACCOs only; the rates shown are always the ones you declared, never adjusted.
+                </p>
+              </div>
+              {paystackConfigured() ? (
+                <PaystackCheckout plan="sacco_listing" label={`List your SACCO · ${chargeLabel("sacco_listing")}/mo`} variant="primary" />
+              ) : (
+                <Link href="/contact?interest=other#enquiry" className="block rounded-full bg-ink px-4 py-3 text-center text-[14px] font-semibold text-paper hover:bg-forest">
+                  List your SACCO
+                </Link>
+              )}
+            </div>
           </section>
 
           <section className="mt-14 grid gap-8 md:grid-cols-3">

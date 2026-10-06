@@ -53,6 +53,7 @@ export const checkoutPlans = {
   licence_startup: { label: "Startup data licence (monthly)", product: "Startup data licence", amount: 750_000, currency: "KES", planEnv: "PAYSTACK_PLAN_LICENCE" },
   widget: { label: "Branded live-rates widget (monthly)", product: "Branded live-rates widget", amount: 4_000_000, currency: "KES", planEnv: "PAYSTACK_PLAN_WIDGET" },
   fund_listing: { label: "Verified fund listing (monthly)", product: "Verified fund listing", amount: 2_000_000, currency: "KES", planEnv: "PAYSTACK_PLAN_FUND" },
+  sacco_listing: { label: "Verified SACCO listing (monthly)", product: "Verified SACCO listing", amount: 2_000_000, currency: "KES", planEnv: "PAYSTACK_PLAN_SACCO" },
   job_listing: { label: "Jobs listing (30 days)", product: "Jobs listing, 30 days", amount: 1_000_000, currency: "KES", planEnv: null },
 } as const;
 

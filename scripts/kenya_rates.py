@@ -15,6 +15,7 @@ Nairobi day, appended on each run so the history builds from the first read.
 
 from __future__ import annotations
 
+import html
 import json
 import re
 import sys
@@ -45,7 +46,7 @@ FUNDS = [
     # The money-market tab prints "Current Daily Rate - x% Current Effective Annual Rate - y%"; the fixed income
     # fund on the same page uses a colon, so it never matches this pattern.
     ("CIC Money Market Fund", "CIC Asset Management", "https://ke.cicinsurancegroup.com/individual-solutions/investment-solutions/?tab=money-market",
-     r"Current Daily Rate\s*-\s*([\d.]+)%\s*Current Effective Annual Rate\s*-\s*([\d.]+)%"),
+     r"Current Daily Rate\s*[-–—]\s*([\d.]+)%\s*Current Effective Annual Rate\s*[-–—]\s*([\d.]+)%"),
     ("Zimele Fixed Income Fund (Savings Plan)", "Zimele Asset Management", "https://www.zimele.co.ke/",
      r"Fixed Income Fund \(Savings Plan\)\s*[–-]\s*Daily Yield:\s*([\d.]+)%\s*p\.a\.\s*Gross Yield:\s*([\d.]+)%"),
 ]
@@ -55,7 +56,7 @@ def text_of(url: str) -> str:
     html = requests.get(url, headers=UA, timeout=(15, 40), verify=False).text
     t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", html, flags=re.S)
     t = re.sub(r"<[^>]+>", " ", t)
-    t = t.replace("\u200b", "").replace("&nbsp;", " ")
+    t = html.unescape(t).replace("\u200b", "").replace("\xa0", " ")
     t = re.sub(r"\s+", " ", t)
     # some sites split a figure across tags ("10 .22%"); join digits either side of the decimal point
     return re.sub(r"(\d) ?\. ?(\d)", r"\1.\2", t)

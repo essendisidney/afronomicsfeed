@@ -82,6 +82,8 @@ function nextStep(plan: string | null) {
       return "Reply with the site it goes on, the widget wanted (bills, bonds or FX) and a logo; the branded embed code comes back within two working days.";
     case "fund_listing":
       return "Reply with the fund’s name, latest published yield with its source, a logo and the link to invest; the listing goes live once the yield is verified.";
+    case "sacco_listing":
+      return "Reply with the SACCO's name, its SASRA licence category, the declared dividend and deposit rates with a link to the SACCO's own notice, a logo and a link for joining; the listing goes live once the rates are verified against the notice.";
     case "job_listing":
       return "Reply with the role, the institution, location, closing date and how to apply; the listing is up within one working day for 30 days.";
     default:

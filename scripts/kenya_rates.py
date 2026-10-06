@@ -43,10 +43,11 @@ FUNDS = [
      r"Etica Money Market Fund \(KES\)\s*Effective Annual Yield\s*([\d.]+)%()"),
     ("Kasha Money Market Fund", "Orient Asset Managers", "https://www.orientasset.co.ke/",
      r"Kasha MMF\s*Daily Yield\s*([\d.]+)%\s*Effective Annual Yield\s*([\d.]+)%"),
-    # The money-market tab prints "Current Daily Rate - x% Current Effective Annual Rate - y%"; the fixed income
-    # fund on the same page uses a colon, so it never matches this pattern.
+    # The page prints "Current Daily Rate - x% Current Effective Annual Rate - y%" for both the shilling and the
+    # dollar money market fund; the shilling block follows its "... in times of market volatility." description.
+    # The fixed income fund on the same page uses a colon, so it never matches.
     ("CIC Money Market Fund", "CIC Asset Management", "https://ke.cicinsurancegroup.com/individual-solutions/investment-solutions/?tab=money-market",
-     r"Current Daily Rate\s*[-–—]\s*([\d.]+)%\s*Current Effective Annual Rate\s*[-–—]\s*([\d.]+)%"),
+     r"market volatility\.\s*Investments Returns\s*Current Daily Rate\s*[-–—]\s*([\d.]+)%\s*Current Effective Annual Rate\s*[-–—]\s*([\d.]+)%"),
     ("Zimele Fixed Income Fund (Savings Plan)", "Zimele Asset Management", "https://www.zimele.co.ke/",
      r"Fixed Income Fund \(Savings Plan\)\s*[–-]\s*Daily Yield:\s*([\d.]+)%\s*p\.a\.\s*Gross Yield:\s*([\d.]+)%"),
 ]

@@ -14,6 +14,11 @@ export default function PrivacyPage() {
           <strong>Newsletter sign-ups</strong> — your email address and the sector you choose, to send the newsletter.
         </li>
         <li>
+          <strong>Email rate alerts</strong> — your email address, the alert you chose (for example a rate level) and what we last told you
+          about, so nothing is sent twice. Alert emails go out through our email provider. Nothing is sent until you confirm from the email we send; each alert email has a one-click stop
+          link. Unconfirmed requests are deleted after 7 days and stopped alerts within 30 days.
+        </li>
+        <li>
           <strong>Payments</strong> — if you subscribe, Paystack processes your payment. We receive your email, plan and payment status, never
           your full card details.
         </li>
@@ -33,7 +38,7 @@ export default function PrivacyPage() {
       <h2>Where it is kept</h2>
       <p>
         Data is stored with our hosting and database providers, which may process it outside Kenya under appropriate safeguards. Newsletter data
-        is kept until you unsubscribe; payment records as long as the law requires.
+        is kept until you unsubscribe, alert data as described above; payment records as long as the law requires.
       </p>
       <h2>Your rights</h2>
       <p>

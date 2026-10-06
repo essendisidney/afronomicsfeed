@@ -4,6 +4,7 @@ import { LineChart } from "@/components/data/LineChart";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { AlertButton } from "@/components/ui/AlertButton";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { EmailAlertBox } from "@/components/ui/RateAlertForm";
 import { PageShell } from "@/components/data/PageShell";
 import { Questions } from "@/components/seo/Questions";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
@@ -114,6 +115,7 @@ export default function KenyaTbillsPage() {
           <div className="mt-6">
             <AlertButton market="kenya" label="Alert me on Kenya results" />
           </div>
+          <EmailAlertBox kinds={["auction", "tbill_above", "tbill_below"]} />
 
           <section className="mt-14">
             <SectionTitle

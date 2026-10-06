@@ -21,6 +21,7 @@ const DAILY: Record<string, string> = {
   "Madison Money Market Fund": "Madison Money Market Fund",
   "Etica Money Market Fund": "Etica Money Market Fund (KES)",
   "Orient Kasha Money Market Fund": "Kasha Money Market Fund",
+  "CIC Money Market Fund": "CIC Money Market Fund",
 };
 
 export const dailyYieldName = (cmaFund: string) => DAILY[cmaFund] ?? null;

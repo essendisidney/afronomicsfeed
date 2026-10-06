@@ -1,0 +1,485 @@
+{
+ "dataset": "Kenya money market funds by size",
+ "publisher": "Capital Markets Authority, Kenya",
+ "report": "Collective Investment Schemes quarterly report, Q2 2026",
+ "as_of": "2026-06-30",
+ "source": "https://www.cmarcp.or.ke/images/Docs/cisreports/2026/CISReportQ2-2026.pdf",
+ "compiled_by": "Afronomics (afronomicsfeed.com)",
+ "read_at": "2026-10-06T09:05:38+00:00",
+ "note": "Assets under management in Kenyan shillings, as the CMA reports them (dollar funds are shown in shillings too). Sizes, not yields.",
+ "total_aum_kes": 459874570485,
+ "rows": [
+  {
+   "rank": 1,
+   "scheme": "Sanlam Unit Trust Scheme",
+   "fund": "SanlamAllianz Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 127830055523,
+   "share_pct": 27.8
+  },
+  {
+   "rank": 2,
+   "scheme": "CIC Unit Trust Scheme",
+   "fund": "CIC Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 71035357788,
+   "share_pct": 15.4
+  },
+  {
+   "rank": 3,
+   "scheme": "Old Mutual Unit Trust Scheme",
+   "fund": "Old Mutual Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 28776646120,
+   "share_pct": 6.3
+  },
+  {
+   "rank": 4,
+   "scheme": "Absa Unit Trust Funds",
+   "fund": "ABSA Shilling Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 25782630437,
+   "share_pct": 5.6
+  },
+  {
+   "rank": 5,
+   "scheme": "KCB Unit Trust Scheme",
+   "fund": "KCB Money Market Fund KES",
+   "currency": "KES",
+   "aum_kes": 22234953922,
+   "share_pct": 4.8
+  },
+  {
+   "rank": 6,
+   "scheme": "Coop Unit Trust Scheme",
+   "fund": "Co-op Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 21935665758,
+   "share_pct": 4.8
+  },
+  {
+   "rank": 7,
+   "scheme": "ICEA Unit Trust Scheme",
+   "fund": "ICEA Lion Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 20644175659,
+   "share_pct": 4.5
+  },
+  {
+   "rank": 8,
+   "scheme": "Ziidi Money Market Fund",
+   "fund": "Ziidi Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 19891341048,
+   "share_pct": 4.3
+  },
+  {
+   "rank": 9,
+   "scheme": "Britam Unit Trust Scheme",
+   "fund": "Britam Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 15982617416,
+   "share_pct": 3.5
+  },
+  {
+   "rank": 10,
+   "scheme": "Jubilee Unit Trust Scheme",
+   "fund": "Jubilee Money Market Fund KES",
+   "currency": "KES",
+   "aum_kes": 13550118375,
+   "share_pct": 2.9
+  },
+  {
+   "rank": 11,
+   "scheme": "Etica Unit Trust Fund",
+   "fund": "Etica Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 12857751690,
+   "share_pct": 2.8
+  },
+  {
+   "rank": 12,
+   "scheme": "Nabo Africa Funds",
+   "fund": "Nabo KES Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 7629749433,
+   "share_pct": 1.7
+  },
+  {
+   "rank": 13,
+   "scheme": "Madison Unit Trust Funds",
+   "fund": "Madison Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 6313599550,
+   "share_pct": 1.4
+  },
+  {
+   "rank": 14,
+   "scheme": "CPF Unit Trust Scheme",
+   "fund": "CPF Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 5837930843,
+   "share_pct": 1.3
+  },
+  {
+   "rank": 15,
+   "scheme": "Jubilee Unit Trust Scheme",
+   "fund": "Jubilee Money Market Fund USD",
+   "currency": "USD",
+   "aum_kes": 5725204981,
+   "share_pct": 1.2
+  },
+  {
+   "rank": 16,
+   "scheme": "GenAfrica Unit Trust",
+   "fund": "GenAfrica Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 5240651126,
+   "share_pct": 1.1
+  },
+  {
+   "rank": 17,
+   "scheme": "Dry Associates Unit Trust",
+   "fund": "Dry Associates Money Market Fund USD",
+   "currency": "USD",
+   "aum_kes": 4559035249,
+   "share_pct": 1.0
+  },
+  {
+   "rank": 18,
+   "scheme": "Dry Associates Unit Trust",
+   "fund": "Dry Associates Money Market Fund KES",
+   "currency": "KES",
+   "aum_kes": 4533842582,
+   "share_pct": 1.0
+  },
+  {
+   "rank": 19,
+   "scheme": "Lofty Corban Unit Trust",
+   "fund": "Lofty-Corban KES Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 4175084701,
+   "share_pct": 0.9
+  },
+  {
+   "rank": 20,
+   "scheme": "CIC Unit Trust Scheme",
+   "fund": "CIC Dollar Money Market Fund",
+   "currency": "USD",
+   "aum_kes": 4062880115,
+   "share_pct": 0.9
+  },
+  {
+   "rank": 21,
+   "scheme": "Apollo Unit Trust Scheme",
+   "fund": "Apollo Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 3934093732,
+   "share_pct": 0.9
+  },
+  {
+   "rank": 22,
+   "scheme": "Absa Unit Trust Funds",
+   "fund": "ABSA Dollar Money Market Fund",
+   "currency": "USD",
+   "aum_kes": 3187988459,
+   "share_pct": 0.7
+  },
+  {
+   "rank": 23,
+   "scheme": "Old Mutual Unit Trust",
+   "fund": "Old Mutual Dollar Money Market Fund",
+   "currency": "USD",
+   "aum_kes": 2464606674,
+   "share_pct": 0.5
+  },
+  {
+   "rank": 24,
+   "scheme": "Kuza Unit Trust Scheme",
+   "fund": "Kuza Money Market Fund KES",
+   "currency": "KES",
+   "aum_kes": 2433236987,
+   "share_pct": 0.5
+  },
+  {
+   "rank": 25,
+   "scheme": "Cytonn UnitTrust Fund",
+   "fund": "Cytonn Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 2323626443,
+   "share_pct": 0.5
+  },
+  {
+   "rank": 26,
+   "scheme": "Mali Money Market Fund",
+   "fund": "Mali Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 2188468147,
+   "share_pct": 0.5
+  },
+  {
+   "rank": 27,
+   "scheme": "NCBA Unit Trust Scheme",
+   "fund": "NCBA Money Market (KES) Fund",
+   "currency": "KES",
+   "aum_kes": 2162096626,
+   "share_pct": 0.5
+  },
+  {
+   "rank": 28,
+   "scheme": "Enwealth Unit Trust",
+   "fund": "Enwealth Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 2035914958,
+   "share_pct": 0.4
+  },
+  {
+   "rank": 29,
+   "scheme": "Stanbic Unit Trust Funds",
+   "fund": "Stanbic Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 1983382084,
+   "share_pct": 0.4
+  },
+  {
+   "rank": 30,
+   "scheme": "Arvocap Unit trust funds",
+   "fund": "Arvocap Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 1260520052,
+   "share_pct": 0.3
+  },
+  {
+   "rank": 31,
+   "scheme": "KCB Unit Trust Scheme",
+   "fund": "KCB Money Market Fund USD",
+   "currency": "USD",
+   "aum_kes": 1194678647,
+   "share_pct": 0.3
+  },
+  {
+   "rank": 32,
+   "scheme": "Mayfair Unit Trust Funds",
+   "fund": "Mayfair Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 604635779,
+   "share_pct": 0.13
+  },
+  {
+   "rank": 33,
+   "scheme": "Nabo Africa Funds",
+   "fund": "Nabo Africa Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 578658071,
+   "share_pct": 0.13
+  },
+  {
+   "rank": 34,
+   "scheme": "Genghis Unit Trust Funds",
+   "fund": "Genghis Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 555381890,
+   "share_pct": 0.12
+  },
+  {
+   "rank": 35,
+   "scheme": "NCBA Unit Trust Scheme",
+   "fund": "NCBA Money Market USD Fund",
+   "currency": "USD",
+   "aum_kes": 529253883,
+   "share_pct": 0.12
+  },
+  {
+   "rank": 36,
+   "scheme": "Gulfcap Unit Trust Funds",
+   "fund": "GulfCap Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 495120600,
+   "share_pct": 0.11
+  },
+  {
+   "rank": 37,
+   "scheme": "Orient Unit Trust Scheme",
+   "fund": "Orient Kasha Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 435257439,
+   "share_pct": 0.09
+  },
+  {
+   "rank": 38,
+   "scheme": "Etica Unit Trust Fund",
+   "fund": "Etica Money Market Fund USD",
+   "currency": "USD",
+   "aum_kes": 424107992,
+   "share_pct": 0.09
+  },
+  {
+   "rank": 39,
+   "scheme": "Kuza Unit Trust Scheme",
+   "fund": "Kuza Money Market Fund USD",
+   "currency": "USD",
+   "aum_kes": 353248421,
+   "share_pct": 0.08
+  },
+  {
+   "rank": 40,
+   "scheme": "African Alliance Unit Trust",
+   "fund": "AA Kenya Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 331234771,
+   "share_pct": 0.07
+  },
+  {
+   "rank": 41,
+   "scheme": "Faulu Unit Trust Scheme",
+   "fund": "Faulu Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 317177528,
+   "share_pct": 0.07
+  },
+  {
+   "rank": 42,
+   "scheme": "Taifa Unit Trust Scheme",
+   "fund": "Taifa Money Market Fund KES",
+   "currency": "KES",
+   "aum_kes": 278535602,
+   "share_pct": 0.06
+  },
+  {
+   "rank": 43,
+   "scheme": "Britam Unit Trust Scheme",
+   "fund": "Britam USD Money Market Fund",
+   "currency": "USD",
+   "aum_kes": 227150998,
+   "share_pct": 0.05
+  },
+  {
+   "rank": 44,
+   "scheme": "Lofty Corban Unit Trust",
+   "fund": "Lofty-Corban USD Money Market Fund",
+   "currency": "USD",
+   "aum_kes": 220574777,
+   "share_pct": 0.05
+  },
+  {
+   "rank": 45,
+   "scheme": "Ziidi Shariah Market Fund",
+   "fund": "Ziidi Shariah Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 160363064,
+   "share_pct": 0.03
+  },
+  {
+   "rank": 46,
+   "scheme": "Enwealth Unit Trust",
+   "fund": "Enwealth Dollar Money Market Fund",
+   "currency": "USD",
+   "aum_kes": 154559025,
+   "share_pct": 0.034
+  },
+  {
+   "rank": 47,
+   "scheme": "Capital A Unit Trust Scheme",
+   "fund": "Capital A Rejesha Money Market Fund (KES)",
+   "currency": "KES",
+   "aum_kes": 117201163,
+   "share_pct": 0.025
+  },
+  {
+   "rank": 48,
+   "scheme": "Equity Investment Bank",
+   "fund": "EIB Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 89361548,
+   "share_pct": 0.019
+  },
+  {
+   "rank": 49,
+   "scheme": "Cytonn UnitTrust Fund",
+   "fund": "Cytonn Money Market Fund USD",
+   "currency": "USD",
+   "aum_kes": 41928955,
+   "share_pct": 0.009
+  },
+  {
+   "rank": 50,
+   "scheme": "Capital A Unit Trust Scheme",
+   "fund": "Capital A Rejesha Money Market Fund (USD)",
+   "currency": "USD",
+   "aum_kes": 41348389,
+   "share_pct": 0.009
+  },
+  {
+   "rank": 51,
+   "scheme": "Taifa Unit Trust Scheme",
+   "fund": "Taifa Money Market Fund USD",
+   "currency": "USD",
+   "aum_kes": 36273653,
+   "share_pct": 0.008
+  },
+  {
+   "rank": 52,
+   "scheme": "CPF Unit Trust Scheme",
+   "fund": "CPF USD Money Market Fund",
+   "currency": "USD",
+   "aum_kes": 32808272,
+   "share_pct": 0.007
+  },
+  {
+   "rank": 53,
+   "scheme": "Ziidi Biashara Money Market Fund",
+   "fund": "Ziidi Biashara Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 26601498,
+   "share_pct": 0.006
+  },
+  {
+   "rank": 54,
+   "scheme": "Orient Unit Trust Scheme",
+   "fund": "Orient Dollar Money Market Fund",
+   "currency": "USD",
+   "aum_kes": 20098207,
+   "share_pct": 0.004
+  },
+  {
+   "rank": 55,
+   "scheme": "Amana Unit Trust Funds",
+   "fund": "Amana Shilling Fund",
+   "currency": "KES",
+   "aum_kes": 18640366,
+   "share_pct": 0.004
+  },
+  {
+   "rank": 56,
+   "scheme": "Genghis Unit Trust Funds",
+   "fund": "GenCap Hela Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 11052423,
+   "share_pct": 0.002
+  },
+  {
+   "rank": 57,
+   "scheme": "XENO Unit Trust Funds",
+   "fund": "XENO Kenya Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 5293620,
+   "share_pct": 0.001
+  },
+  {
+   "rank": 58,
+   "scheme": "Globetec Unit Trust Scheme",
+   "fund": "Globetec Unit Trust Scheme",
+   "currency": "KES",
+   "aum_kes": 705714,
+   "share_pct": 1e-05
+  },
+  {
+   "rank": 59,
+   "scheme": "Jaza Unit Trust Fund",
+   "fund": "Jaza Money Market Fund",
+   "currency": "KES",
+   "aum_kes": 91713,
+   "share_pct": 1e-06
+  }
+ ]
+}

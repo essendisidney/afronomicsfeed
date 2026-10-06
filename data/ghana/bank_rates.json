@@ -1,0 +1,850 @@
+{
+ "dataset": "Bank interest rates, monthly",
+ "publisher": "Bank of Ghana",
+ "source": "https://www.bog.gov.gh/economic-data/interest-rates/",
+ "compiled_by": "Afronomics (afronomicsfeed.com)",
+ "read_at": "2026-10-06T11:24:57+00:00",
+ "note": "Monthly interest rates as the Bank of Ghana publishes them, % a year: average savings deposits rate, average 3-month time deposits rate, average commercial banks' lending rate, 91-day Treasury bill.",
+ "rows": [
+  {
+   "month": "2023-12",
+   "deposit_3m": 0.0,
+   "lending": 0.0,
+   "savings": 0.0,
+   "tbill91": 0.0
+  },
+  {
+   "month": "2023-11",
+   "deposit_3m": 0.0,
+   "lending": 0.0,
+   "savings": 0.0,
+   "tbill91": 0.0
+  },
+  {
+   "month": "2023-10",
+   "deposit_3m": 0.0,
+   "lending": 0.0,
+   "savings": 0.0,
+   "tbill91": 0.0
+  },
+  {
+   "month": "2023-09",
+   "deposit_3m": 0.0,
+   "lending": 0.0,
+   "savings": 0.0,
+   "tbill91": 0.0
+  },
+  {
+   "month": "2023-08",
+   "deposit_3m": 0.0,
+   "lending": 0.0,
+   "savings": 0.0,
+   "tbill91": 0.0
+  },
+  {
+   "month": "2023-07",
+   "deposit_3m": 0.0,
+   "lending": 0.0,
+   "savings": 0.0,
+   "tbill91": 0.0
+  },
+  {
+   "month": "2023-06",
+   "deposit_3m": 0.0,
+   "lending": 0.0,
+   "savings": 0.0,
+   "tbill91": 0.0
+  },
+  {
+   "month": "2023-05",
+   "deposit_3m": 0.0,
+   "lending": 0.0,
+   "savings": 0.0,
+   "tbill91": 0.0
+  },
+  {
+   "month": "2023-04",
+   "deposit_3m": 11.5,
+   "lending": 31.66,
+   "savings": 6.25,
+   "tbill91": 18.75
+  },
+  {
+   "month": "2023-03",
+   "deposit_3m": 12.5,
+   "lending": 35.87,
+   "savings": 6.25,
+   "tbill91": 19.39
+  },
+  {
+   "month": "2023-02",
+   "deposit_3m": 14.0,
+   "lending": 36.64,
+   "savings": 7.63,
+   "tbill91": 32.75
+  },
+  {
+   "month": "2023-01",
+   "deposit_3m": 14.0,
+   "lending": 35.85,
+   "savings": 7.63,
+   "tbill91": 32.71
+  },
+  {
+   "month": "2022-12",
+   "deposit_3m": 14.0,
+   "lending": 35.58,
+   "savings": 7.63,
+   "tbill91": 32.59
+  },
+  {
+   "month": "2022-11",
+   "deposit_3m": 14.0,
+   "lending": 33.87,
+   "savings": 7.63,
+   "tbill91": 31.86
+  },
+  {
+   "month": "2022-10",
+   "deposit_3m": 13.13,
+   "lending": 31.4,
+   "savings": 7.63,
+   "tbill91": 29.23
+  },
+  {
+   "month": "2022-09",
+   "deposit_3m": 11.5,
+   "lending": 29.81,
+   "savings": 7.63,
+   "tbill91": 27.61
+  },
+  {
+   "month": "2022-08",
+   "deposit_3m": 11.5,
+   "lending": 27.96,
+   "savings": 7.63,
+   "tbill91": 25.89
+  },
+  {
+   "month": "2022-07",
+   "deposit_3m": 11.5,
+   "lending": 26.46,
+   "savings": 7.63,
+   "tbill91": 24.55
+  },
+  {
+   "month": "2022-06",
+   "deposit_3m": 11.5,
+   "lending": 24.27,
+   "savings": 7.63,
+   "tbill91": 22.77
+  },
+  {
+   "month": "2022-05",
+   "deposit_3m": 11.5,
+   "lending": 22.53,
+   "savings": 7.63,
+   "tbill91": 18.19
+  },
+  {
+   "month": "2022-04",
+   "deposit_3m": 11.5,
+   "lending": 21.61,
+   "savings": 7.63,
+   "tbill91": 15.59
+  },
+  {
+   "month": "2022-03",
+   "deposit_3m": 11.5,
+   "lending": 20.57,
+   "savings": 7.63,
+   "tbill91": 13.05
+  },
+  {
+   "month": "2022-02",
+   "deposit_3m": 11.5,
+   "lending": 20.52,
+   "savings": 7.63,
+   "tbill91": 12.42
+  },
+  {
+   "month": "2022-01",
+   "deposit_3m": 11.5,
+   "lending": 20.16,
+   "savings": 7.63,
+   "tbill91": 12.17
+  },
+  {
+   "month": "2021-12",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.04,
+   "tbill91": 12.11
+  },
+  {
+   "month": "2021-11",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.17,
+   "tbill91": 12.1
+  },
+  {
+   "month": "2021-10",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.34,
+   "tbill91": 12.09
+  },
+  {
+   "month": "2021-09",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.23,
+   "tbill91": 12.09
+  },
+  {
+   "month": "2021-08",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.51,
+   "tbill91": 12.11
+  },
+  {
+   "month": "2021-07",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.67,
+   "tbill91": 12.18
+  },
+  {
+   "month": "2021-06",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.61,
+   "tbill91": 12.26
+  },
+  {
+   "month": "2021-05",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.85,
+   "tbill91": 12.38
+  },
+  {
+   "month": "2021-04",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.93,
+   "tbill91": 12.41
+  },
+  {
+   "month": "2021-03",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.96,
+   "tbill91": 12.61
+  },
+  {
+   "month": "2021-02",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 21.02,
+   "tbill91": 13.11
+  },
+  {
+   "month": "2021-01",
+   "savings": 7.63,
+   "deposit_3m": 11.5,
+   "lending": 20.97,
+   "tbill91": 13.61
+  },
+  {
+   "month": "2020-12",
+   "deposit_3m": 11.5,
+   "savings": 7.63,
+   "lending": 21.1,
+   "tbill91": 13.61
+  },
+  {
+   "month": "2020-11",
+   "deposit_3m": 11.5,
+   "savings": 7.63,
+   "lending": 20.95,
+   "tbill91": 13.58
+  },
+  {
+   "month": "2020-10",
+   "deposit_3m": 11.5,
+   "savings": 7.63,
+   "lending": 21.26,
+   "tbill91": 13.57
+  },
+  {
+   "month": "2020-09",
+   "deposit_3m": 11.5,
+   "savings": 7.63,
+   "lending": 21.3,
+   "tbill91": 13.55
+  },
+  {
+   "month": "2020-08",
+   "deposit_3m": 11.5,
+   "savings": 7.63,
+   "lending": 21.37,
+   "tbill91": 13.54
+  },
+  {
+   "month": "2020-07",
+   "deposit_3m": 11.5,
+   "savings": 7.63,
+   "lending": 21.29,
+   "tbill91": 13.48
+  },
+  {
+   "month": "2020-06",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 21.95,
+   "tbill91": 13.5
+  },
+  {
+   "month": "2020-05",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 22.11,
+   "tbill91": 13.48
+  },
+  {
+   "month": "2020-04",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 22.38,
+   "tbill91": 13.57
+  },
+  {
+   "month": "2020-03",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.4,
+   "tbill91": 14.2
+  },
+  {
+   "month": "2020-02",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.37,
+   "tbill91": 14.19
+  },
+  {
+   "month": "2020-01",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.06,
+   "tbill91": 14.17
+  },
+  {
+   "month": "2019-12",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.59,
+   "tbill91": 14.69
+  },
+  {
+   "month": "2019-11",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.53,
+   "tbill91": 14.69
+  },
+  {
+   "month": "2019-10",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.65,
+   "tbill91": 14.69
+  },
+  {
+   "month": "2019-09",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.68,
+   "tbill91": 14.69
+  },
+  {
+   "month": "2019-08",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.96,
+   "tbill91": 14.72
+  },
+  {
+   "month": "2019-07",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 24.1,
+   "tbill91": 14.73
+  },
+  {
+   "month": "2019-06",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.11,
+   "tbill91": 14.78
+  },
+  {
+   "month": "2019-05",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.08,
+   "tbill91": 14.85
+  },
+  {
+   "month": "2019-04",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.09,
+   "tbill91": 14.7
+  },
+  {
+   "month": "2019-03",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.26,
+   "tbill91": 14.71
+  },
+  {
+   "month": "2019-02",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.5,
+   "tbill91": 14.71
+  },
+  {
+   "month": "2019-01",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.73,
+   "tbill91": 14.65
+  },
+  {
+   "month": "2018-12",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.96,
+   "tbill91": 14.04
+  },
+  {
+   "month": "2018-11",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.76,
+   "tbill91": 13.84
+  },
+  {
+   "month": "2018-10",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.9,
+   "tbill91": 13.15
+  },
+  {
+   "month": "2018-09",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 24.04,
+   "tbill91": 12.94
+  },
+  {
+   "month": "2018-08",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.7,
+   "tbill91": 12.88
+  },
+  {
+   "month": "2018-07",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 23.94,
+   "tbill91": 12.89
+  },
+  {
+   "month": "2018-06",
+   "deposit_3m": 12.75,
+   "savings": 7.55,
+   "lending": 24.14,
+   "tbill91": 12.87
+  },
+  {
+   "month": "2018-05",
+   "deposit_3m": 12.75,
+   "savings": 7.55,
+   "lending": 24.74,
+   "tbill91": 12.92
+  },
+  {
+   "month": "2018-04",
+   "deposit_3m": 11.5,
+   "savings": 7.55,
+   "lending": 25.02,
+   "tbill91": 12.91
+  },
+  {
+   "month": "2018-03",
+   "deposit_3m": 13.0,
+   "savings": 7.55,
+   "lending": 25.47,
+   "tbill91": 12.93
+  },
+  {
+   "month": "2018-02",
+   "deposit_3m": 13.0,
+   "savings": 7.55,
+   "lending": 25.38,
+   "tbill91": 12.91
+  },
+  {
+   "month": "2018-01",
+   "deposit_3m": 13.0,
+   "savings": 7.55,
+   "lending": 25.64,
+   "tbill91": 12.91
+  },
+  {
+   "month": "2017-12",
+   "deposit_3m": 13.0,
+   "savings": 7.55,
+   "lending": 26.22,
+   "tbill91": 12.9
+  },
+  {
+   "month": "2017-11",
+   "deposit_3m": 13.0,
+   "savings": 7.55,
+   "lending": 26.42,
+   "tbill91": 12.85
+  },
+  {
+   "month": "2017-10",
+   "deposit_3m": 13.0,
+   "savings": 7.55,
+   "lending": 26.71,
+   "tbill91": 12.81
+  },
+  {
+   "month": "2017-09",
+   "deposit_3m": 13.0,
+   "savings": 7.55,
+   "lending": 26.73,
+   "tbill91": 12.77
+  },
+  {
+   "month": "2017-08",
+   "deposit_3m": 14.5,
+   "savings": 7.55,
+   "lending": 27.17,
+   "tbill91": 12.31
+  },
+  {
+   "month": "2017-07",
+   "deposit_3m": 14.5,
+   "savings": 7.75,
+   "lending": 27.22,
+   "tbill91": 11.96
+  },
+  {
+   "month": "2017-06",
+   "deposit_3m": 14.5,
+   "savings": 7.55,
+   "lending": 27.28,
+   "tbill91": 11.73
+  },
+  {
+   "month": "2017-05",
+   "deposit_3m": 15.0,
+   "savings": 7.55,
+   "lending": 27.29,
+   "tbill91": 13.23
+  },
+  {
+   "month": "2017-04",
+   "deposit_3m": 15.25,
+   "savings": 7.55,
+   "lending": 27.52,
+   "tbill91": 15.82
+  },
+  {
+   "month": "2017-03",
+   "deposit_3m": 15.0,
+   "savings": 6.05,
+   "lending": 27.72,
+   "tbill91": 16.2
+  },
+  {
+   "month": "2017-02",
+   "deposit_3m": 15.0,
+   "savings": 6.05,
+   "lending": 27.57,
+   "tbill91": 15.28
+  },
+  {
+   "month": "2017-01",
+   "deposit_3m": 13.0,
+   "savings": 6.05,
+   "lending": 27.65,
+   "tbill91": 15.53
+  },
+  {
+   "month": "2016-12",
+   "deposit_3m": 13.0,
+   "lending": 28.09,
+   "savings": 6.05,
+   "tbill91": 16.56
+  },
+  {
+   "month": "2016-11",
+   "deposit_3m": 13.0,
+   "lending": 28.21,
+   "savings": 6.05,
+   "tbill91": 19.84
+  },
+  {
+   "month": "2016-10",
+   "deposit_3m": 13.0,
+   "lending": 27.96,
+   "savings": 6.5,
+   "tbill91": 21.54
+  },
+  {
+   "month": "2016-09",
+   "deposit_3m": 13.0,
+   "lending": 27.82,
+   "savings": 6.5,
+   "tbill91": 21.63
+  },
+  {
+   "month": "2016-08",
+   "deposit_3m": 13.0,
+   "lending": 28.15,
+   "savings": 6.5,
+   "tbill91": 21.61
+  },
+  {
+   "month": "2016-07",
+   "deposit_3m": 13.0,
+   "lending": 28.51,
+   "savings": 6.5,
+   "tbill91": 21.55
+  },
+  {
+   "month": "2016-06",
+   "deposit_3m": 13.0,
+   "lending": 27.9,
+   "savings": 6.5,
+   "tbill91": 21.58
+  },
+  {
+   "month": "2016-05",
+   "deposit_3m": 13.0,
+   "lending": 28.22,
+   "savings": 6.5,
+   "tbill91": 21.56
+  },
+  {
+   "month": "2016-04",
+   "deposit_3m": 13.0,
+   "lending": 27.98,
+   "savings": 6.5,
+   "tbill91": 21.54
+  },
+  {
+   "month": "2016-03",
+   "deposit_3m": 13.0,
+   "lending": 27.97,
+   "savings": 6.13,
+   "tbill91": 21.41
+  },
+  {
+   "month": "2016-02",
+   "deposit_3m": 13.0,
+   "lending": 28.02,
+   "savings": 6.08,
+   "tbill91": 21.45
+  },
+  {
+   "month": "2016-01",
+   "deposit_3m": 13.5,
+   "lending": 28.81,
+   "savings": 6.08,
+   "tbill91": 21.51
+  },
+  {
+   "month": "2015-12",
+   "deposit_3m": 13.0,
+   "savings": 6.08,
+   "lending": 27.5,
+   "tbill91": 21.86
+  },
+  {
+   "month": "2015-11",
+   "deposit_3m": 13.67,
+   "savings": 6.25,
+   "lending": 29.22,
+   "tbill91": 23.08
+  },
+  {
+   "month": "2015-10",
+   "deposit_3m": 13.0,
+   "savings": 6.25,
+   "lending": 28.16,
+   "tbill91": 23.82
+  },
+  {
+   "month": "2015-09",
+   "deposit_3m": 13.0,
+   "savings": 5.0,
+   "lending": 28.98,
+   "tbill91": 23.78
+  },
+  {
+   "month": "2015-08",
+   "deposit_3m": 13.6,
+   "savings": 5.0,
+   "lending": 27.87,
+   "tbill91": 23.72
+  },
+  {
+   "month": "2015-07",
+   "deposit_3m": 13.6,
+   "savings": 5.0,
+   "lending": 27.87,
+   "tbill91": 23.71
+  },
+  {
+   "month": "2015-06",
+   "deposit_3m": 13.0,
+   "savings": 5.0,
+   "lending": 28.98,
+   "tbill91": 23.69
+  },
+  {
+   "month": "2015-05",
+   "deposit_3m": 13.0,
+   "savings": 5.0,
+   "lending": 28.98,
+   "tbill91": 23.61
+  },
+  {
+   "month": "2015-04",
+   "deposit_3m": 13.5,
+   "savings": 4.75,
+   "lending": 28.98,
+   "tbill91": 23.69
+  },
+  {
+   "month": "2015-03",
+   "deposit_3m": 13.0,
+   "savings": 4.75,
+   "lending": 28.98,
+   "tbill91": 24.02
+  },
+  {
+   "month": "2015-02",
+   "deposit_3m": 13.85,
+   "savings": 4.75,
+   "lending": 28.98,
+   "tbill91": 24.28
+  },
+  {
+   "month": "2015-01",
+   "deposit_3m": 13.85,
+   "savings": 5.0,
+   "lending": 28.98,
+   "tbill91": 24.27
+  },
+  {
+   "month": "2014-12",
+   "savings": 5.0,
+   "deposit_3m": 13.85,
+   "lending": 28.98,
+   "tbill91": 24.23
+  },
+  {
+   "month": "2014-11",
+   "savings": 5.0,
+   "deposit_3m": 13.0,
+   "lending": 26.43,
+   "tbill91": 24.18
+  },
+  {
+   "month": "2014-10",
+   "savings": 5.0,
+   "deposit_3m": 13.0,
+   "lending": 26.43,
+   "tbill91": 24.16
+  },
+  {
+   "month": "2014-09",
+   "savings": 5.0,
+   "deposit_3m": 13.0,
+   "lending": 27.45,
+   "tbill91": 23.83
+  },
+  {
+   "month": "2014-08",
+   "savings": 5.0,
+   "deposit_3m": 14.0,
+   "lending": 27.75,
+   "tbill91": 23.54
+  },
+  {
+   "month": "2014-07",
+   "savings": 6.75,
+   "deposit_3m": 13.0,
+   "lending": 27.75,
+   "tbill91": 23.14
+  },
+  {
+   "month": "2014-06",
+   "savings": 5.5,
+   "deposit_3m": 12.5,
+   "lending": 27.85,
+   "tbill91": 22.71
+  },
+  {
+   "month": "2014-05",
+   "savings": 5.5,
+   "deposit_3m": 12.5,
+   "lending": 27.85,
+   "tbill91": 22.7
+  },
+  {
+   "month": "2014-04",
+   "savings": 5.5,
+   "deposit_3m": 12.5,
+   "lending": 26.98,
+   "tbill91": 22.68
+  },
+  {
+   "month": "2014-03",
+   "savings": 5.5,
+   "deposit_3m": 12.5,
+   "lending": 25.56,
+   "tbill91": 21.65
+  },
+  {
+   "month": "2014-02",
+   "savings": 5.75,
+   "deposit_3m": 12.5,
+   "lending": 25.56,
+   "tbill91": 19.39
+  },
+  {
+   "month": "2014-01",
+   "savings": 5.75,
+   "deposit_3m": 12.5,
+   "lending": 25.56,
+   "tbill91": 18.56
+  }
+ ]
+}

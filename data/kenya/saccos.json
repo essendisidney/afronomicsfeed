@@ -11,16 +11,40 @@
   "dt_saccos": 179,
   "nwdt_saccos": 178,
   "members_million": 7.87,
-  "total_assets_kes_bn": 1210.70,
+  "total_assets_kes_bn": 1210.7,
   "total_deposits_kes_bn": 832.74,
   "years": [
-   {"year": 2023, "dividend_pct": 10.92, "deposit_interest_pct": 7.45},
-   {"year": 2024, "dividend_pct": 10.46, "deposit_interest_pct": 7.14},
-   {"year": 2025, "dividend_pct": 10.00, "deposit_interest_pct": 6.72}
+   {
+    "year": 2023,
+    "dividend_pct": 10.92,
+    "deposit_interest_pct": 7.45
+   },
+   {
+    "year": 2024,
+    "dividend_pct": 10.46,
+    "deposit_interest_pct": 7.14
+   },
+   {
+    "year": 2025,
+    "dividend_pct": 10.0,
+    "deposit_interest_pct": 6.72
+   }
   ],
   "dt_dividend_2025_pct": 10.21,
   "nwdt_dividend_2025_pct": 9.76
  },
  "declared_year": 2025,
- "saccos": []
+ "saccos": [
+  {
+   "name": "Stima DT Sacco",
+   "dividend_pct": 16,
+   "deposit_interest_pct": 11,
+   "year": "2025",
+   "year_note": "financial year December 2024 to November 2025",
+   "source_url": "https://www.stima-sacco.com/home/",
+   "quote": "In FY 2025, we paid a return of 16% on the value of shares invested in the Sacco. ... In FY 2025, we paid a return of 11% to members",
+   "read_on": "2026-10-06",
+   "tax_note": null
+  }
+ ]
 }

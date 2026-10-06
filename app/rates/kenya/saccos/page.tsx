@@ -105,7 +105,7 @@ export default function SaccosPage() {
                     { k: "SACCO dividend on share capital, average", v: latest.dividend_pct, s: `SASRA, ${latest.year}`, b: true },
                     { k: "SACCO interest on deposits, average", v: latest.deposit_interest_pct, s: `SASRA, ${latest.year}`, b: true },
                     ...(bench ? [{ k: "364-day Treasury bill", v: bench.bill364Gross, s: "Central Bank of Kenya, latest auction", b: false }] : []),
-                    ...(fund ? [{ k: `Money market fund: ${fund.name}`, v: fund.gross, s: `${fund.manager}, read ${fund.readOn}`, b: false }] : []),
+                    ...(fund ? [{ k: `Best published fund yield: ${fund.name}`, v: fund.gross, s: `${fund.manager}, read ${fund.readOn}`, b: false }] : []),
                     ...(bench ? [{ k: "Bank savings account, average", v: bench.savingsAvg, s: `Central Bank of Kenya, ${bench.asOf}`, b: false }] : []),
                   ].map((r) => (
                     <tr key={r.k} className={r.b ? "bg-paper-2" : ""}>
@@ -192,7 +192,10 @@ export default function SaccosPage() {
                   <tbody>
                     {declared.map((s) => (
                       <tr key={s.name}>
-                        <td className="text-sm font-medium">{s.name}</td>
+                        <td className="text-sm font-medium">
+                          {s.name}
+                          {s.year_note ? <span className="block text-[11px] font-normal text-muted">{s.year_note}</span> : null}
+                        </td>
                         <td className="text-right text-sm">{s.dividend_pct != null ? pct(s.dividend_pct) : "—"}</td>
                         <td className="text-right text-sm">{s.deposit_interest_pct != null ? pct(s.deposit_interest_pct) : "—"}</td>
                         <td className="text-xs">
@@ -209,8 +212,13 @@ export default function SaccosPage() {
               <p className="mt-3 text-sm text-muted">Being compiled from SACCOs&rsquo; own notices.</p>
             )}
             <p className="mt-3 max-w-3xl text-xs leading-5 text-muted">
-              Not every SACCO is listed, and a SACCO&rsquo;s past payout does not promise the next one. SACCOs: send your declared rates and the link to your
-              notice to be included.
+              Few SACCOs publish their declared rates as text on their own website; most announce them at the AGM, by SMS or through the press, which
+              Afronomics does not use as a source. A SACCO&rsquo;s past payout does not promise the next one. SACCOs: publish your declared rates on your
+              website, or{" "}
+              <Link href="/contact?interest=other#enquiry" className="underline underline-offset-2">
+                send the link to your notice
+              </Link>
+              , to be included.
             </p>
           </section>
 

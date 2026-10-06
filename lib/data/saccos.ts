@@ -15,6 +15,8 @@ export type SaccoRate = {
   source_url: string;
   quote: string;
   tax_note?: string | null;
+  year_note?: string | null;
+  read_on?: string;
 };
 
 type Industry = {

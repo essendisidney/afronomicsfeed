@@ -126,6 +126,10 @@ export default function KenyaRatesPage() {
           <Link href="/rates/kenya/money-market-funds" className="font-medium text-forest underline underline-offset-2">
             Money market funds ranked, with daily yield history →
           </Link>
+          <span className="mx-2 text-muted">·</span>
+          <Link href="/rates/kenya/saccos" className="font-medium text-forest underline underline-offset-2">
+            What SACCOs pay →
+          </Link>
         </p>
       </section>
 

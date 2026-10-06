@@ -53,6 +53,9 @@ def main() -> int:
                 t = re.sub(r"\s+", " ", " ".join((page.extract_text() or "") for page in pdf.pages[:12]))
         else:
             t = text_of(r.text)
+            if os.environ.get("PROBE_RAW"):  # search the raw HTML too: where a page loads its figures from
+                for m in list(pattern.finditer(r.text))[:25]:
+                    print(f"  raw: {r.text[max(0, m.start() - 160):m.end() + 160]!r}")
             if os.environ.get("PROBE_LINKS"):
                 for href, label in re.findall(r'<a[^>]+href="([^"#]+)"[^>]*>(.*?)</a>', r.text, flags=re.S | re.I)[:2000]:
                     text = re.sub(r"<[^>]+>|\s+", " ", label).strip()

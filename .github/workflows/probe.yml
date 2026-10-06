@@ -17,6 +17,9 @@ on:
       full:
         description: "Print a PDF's full text, page by page (1 = yes)"
         default: ""
+      raw:
+        description: "Also search the raw HTML (1 = yes)"
+        default: ""
 
 permissions:
   contents: read
@@ -37,3 +40,4 @@ jobs:
           URLS: ${{ inputs.urls }}
           PROBE_LINKS: ${{ inputs.links }}
           PROBE_FULL: ${{ inputs.full }}
+          PROBE_RAW: ${{ inputs.raw }}

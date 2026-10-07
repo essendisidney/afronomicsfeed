@@ -1,3 +1,4 @@
+import { ContributeBand } from "@/components/data/ContributeBand";
 import { renderTime } from "@/lib/data/fetcher";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
@@ -201,6 +202,8 @@ export default async function HomePage() {
           ))}
         </section>
       ) : null}
+
+      <ContributeBand />
 
       <section className="mt-12 grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">

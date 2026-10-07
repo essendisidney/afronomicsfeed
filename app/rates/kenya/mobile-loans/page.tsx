@@ -1,3 +1,4 @@
+import { ContributeBand } from "@/components/data/ContributeBand";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
@@ -134,6 +135,7 @@ export default function MobileLoansPage() {
 
       <CiteBlock title="What a mobile loan really costs in Kenya" path="/rates/kenya/mobile-loans" publisher="the providers’ published charges and the Central Bank of Kenya" />
       <Questions items={mobileLoanAnswers().items} />
+      <ContributeBand compact ask="What did your last mobile loan really cost you?" />
       <NewsletterBand />
     </PageShell>
   );

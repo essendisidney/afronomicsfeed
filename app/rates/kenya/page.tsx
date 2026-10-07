@@ -1,3 +1,4 @@
+import { ContributeBand } from "@/components/data/ContributeBand";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LineChart } from "@/components/data/LineChart";
@@ -174,6 +175,7 @@ export default function KenyaRatesPage() {
         .
       </p>
       <CiteBlock title="Where your shilling earns most: Kenya rates compared" path="/rates/kenya" publisher="the Central Bank of Kenya and fund managers’ published yields" />
+      <ContributeBand compact ask="What does your bank or SACCO actually pay you?" />
       <NewsletterBand />
     </PageShell>
   );

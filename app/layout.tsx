@@ -26,6 +26,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   applicationName: "Afronomics",
+  // Google Search Console ownership (the same token as the DNS TXT record).
+  verification: { google: "u1UlXBQerC72luTGgrMuAfDOQHpKue-tFd0gDtjAouc" },
   appleWebApp: { capable: true, title: "Afronomics", statusBarStyle: "black-translucent" },
   icons: { apple: "/icons/apple-touch-icon.png" },
   title: {

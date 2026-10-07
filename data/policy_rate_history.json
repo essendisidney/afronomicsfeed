@@ -81,6 +81,14 @@
    "upper": null,
    "date_as_printed": "August 2026",
    "source": "https://www.cbn.gov.ng/rates/mnymktind.html"
+  },
+  {
+   "first_seen": "2026-10-07",
+   "market": "southafrica",
+   "rate": 7.25,
+   "upper": null,
+   "date_as_printed": "2026-10-07",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
   }
  ]
 }

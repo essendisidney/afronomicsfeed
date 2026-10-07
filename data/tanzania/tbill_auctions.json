@@ -3,12 +3,56 @@
  "publisher": "Bank of Tanzania",
  "source_page": "https://www.bot.go.tz/TBills?lang=en",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-09-30T11:43:43+00:00",
+ "updated_at": "2026-10-07T14:29:31+00:00",
  "units": {
   "amounts": "TZS millions",
   "rates": "weighted average yield, percent per annum"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "auction_no": 1208,
+   "value_date": "2026-10-07",
+   "offered_tzs_m": 169000.0,
+   "received_tzs_m": 127500.0,
+   "accepted_tzs_m": 127500.0,
+   "weighted_avg_rate": 6.2839,
+   "price_per_100": 94.1029,
+   "source": "https://www.bot.go.tz/TBills?lang=en"
+  },
+  {
+   "tenor": 182,
+   "auction_no": 1208,
+   "value_date": "2026-10-07",
+   "offered_tzs_m": 99900.0,
+   "received_tzs_m": 130000.0,
+   "accepted_tzs_m": 99900.0,
+   "weighted_avg_rate": 5.6295,
+   "price_per_100": 97.2696,
+   "source": "https://www.bot.go.tz/TBills?lang=en"
+  },
+  {
+   "tenor": 91,
+   "auction_no": 1208,
+   "value_date": "2026-10-07",
+   "offered_tzs_m": 69900.0,
+   "received_tzs_m": 42000.0,
+   "accepted_tzs_m": 42000.0,
+   "weighted_avg_rate": 3.4908,
+   "price_per_100": 99.1372,
+   "source": "https://www.bot.go.tz/TBills?lang=en"
+  },
+  {
+   "tenor": 35,
+   "auction_no": 1208,
+   "value_date": "2026-10-07",
+   "offered_tzs_m": 49900.0,
+   "received_tzs_m": 10000.0,
+   "accepted_tzs_m": 10000.0,
+   "weighted_avg_rate": 3.3584,
+   "price_per_100": 99.679,
+   "source": "https://www.bot.go.tz/TBills?lang=en"
+  },
   {
    "tenor": 364,
    "auction_no": 1207,
@@ -13298,6 +13342,10 @@
   "1207": {
    "status": "parsed",
    "date": "2026-09-23"
+  },
+  "1208": {
+   "status": "parsed",
+   "date": "2026-10-07"
   }
  }
 }

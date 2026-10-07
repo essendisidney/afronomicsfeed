@@ -50,7 +50,11 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
-    return legacy.map(([source, destination]) => ({ source, destination, permanent: true }));
+    return [
+      // Short addresses for sharing by word of mouth and on WhatsApp.
+      { source: "/pay", destination: "/rates/what-readers-paid", permanent: false },
+      ...legacy.map(([source, destination]) => ({ source, destination, permanent: true })),
+    ];
   },
 };
 

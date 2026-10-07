@@ -1,3 +1,4 @@
+import { ContributeBand } from "@/components/data/ContributeBand";
 import Link from "next/link";
 import { CountryFairRate } from "@/components/data/CountryFairRate";
 import { PageShell } from "@/components/data/PageShell";
@@ -102,6 +103,7 @@ export function CountryCheck({ bench, slug, intro }: { bench: CountryBench | nul
           </section>
         </>
       )}
+      <ContributeBand compact ask="Tell us the rate you were offered, and see what others got." />
     </PageShell>
   );
 }

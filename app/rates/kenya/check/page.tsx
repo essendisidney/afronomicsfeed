@@ -1,3 +1,4 @@
+import { ContributeBand } from "@/components/data/ContributeBand";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FairRate } from "@/components/data/FairRate";
@@ -62,6 +63,7 @@ export default function FairRatePage() {
           </p>
         </div>
       </section>
+      <ContributeBand compact ask="Tell us the rate you were offered, and see what others got." />
     </PageShell>
   );
 }

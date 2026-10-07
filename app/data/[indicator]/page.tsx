@@ -1,3 +1,4 @@
+import { ContributeBand } from "@/components/data/ContributeBand";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -166,6 +167,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ indi
         </div>
         <IndicatorSource def={def} />
       </section>
+      {indicator === "inflation" ? <ContributeBand compact ask="Inflation is an average. What did you pay this month?" /> : null}
     </PageShell>
   );
 }

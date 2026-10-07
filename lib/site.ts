@@ -31,6 +31,7 @@ export const nav = [
 ] as const;
 
 export const utilityNav = [
+  { href: "/rates/what-readers-paid", label: "What did you pay?" },
   { href: "/morning", label: "Morning" },
   { href: "/alerts", label: "Alerts" },
   { href: "/weekly", label: "Weekly" },

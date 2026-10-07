@@ -64,6 +64,7 @@ export const footerGroups = [
       { href: "/rates/kenya/saccos", label: "SACCO rates" },
       { href: "/rates/kenya/mobile-loans", label: "Mobile loan costs" },
       { href: "/rates/remittances", label: "Cost of sending money home" },
+      { href: "/rates/what-readers-paid", label: "What readers paid" },
       { href: "/rates/kenya/check", label: "Is my rate fair? Kenya" },
       { href: "/rates/nigeria/check", label: "Is my rate fair? Nigeria" },
       { href: "/rates/ghana/check", label: "Is my rate fair? Ghana" },

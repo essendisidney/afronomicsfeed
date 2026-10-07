@@ -106,3 +106,19 @@ export function AddPress() {
     </form>
   );
 }
+
+export function HideReport({ id }: { id: number }) {
+  const { msg, run } = useAction();
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    void run("hide_report", e.currentTarget);
+  }
+  return (
+    <form onSubmit={submit} className="inline">
+      <input type="hidden" name="id" value={id} />
+      <button type="submit" className="text-[12px] font-semibold text-down underline underline-offset-2 hover:text-ink">
+        {msg ?? "hide"}
+      </button>
+    </form>
+  );
+}

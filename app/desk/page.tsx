@@ -10,7 +10,8 @@ import { renderTime } from "@/lib/data/fetcher";
 import { rpc } from "@/lib/store";
 import { moneyLabel } from "@/lib/billing/plans";
 import { DeskKey } from "./DeskKey";
-import { AddCorrection, AddPress, GrantAccess } from "./DeskActions";
+import { AddCorrection, AddPress, GrantAccess, HideReport } from "./DeskActions";
+import { country as reportCountry, item as reportItem } from "@/lib/reader-reports-core";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Desk", robots: { index: false, follow: false } };
@@ -45,6 +46,8 @@ type Desk = {
   wire_24h: number;
   push_state: { market: string; last_date: string }[];
 };
+
+type ReaderReport = { id: number; kind: string; country: string; item: string | null; amount: number | null; place: string | null; note: string | null; contact: string | null; status: string; created_at: string };
 
 type Audience = {
   returning_by_day: { day: string; views: number; returning: number }[];
@@ -113,6 +116,8 @@ export default async function DeskPage() {
   const payments = pay?.ok && pay.value ? (pay.value as Payments) : null;
   const aud = desk ? await rpc("af_desk_audience", { p_secret: key }) : null;
   const audience = aud?.ok && aud.value ? (aud.value as Audience) : null;
+  const rep = desk ? await rpc("af_reader_report_list", { p_secret: key, p_limit: 60 }) : null;
+  const reports = rep?.ok && Array.isArray(rep.value) ? (rep.value as ReaderReport[]) : [];
 
   if (!desk) {
     return (
@@ -350,6 +355,45 @@ export default async function DeskPage() {
             ))}
             {!desk.feedback.length ? <li className="py-3 text-sm text-muted">No feedback yet</li> : null}
           </ul>
+        </div>
+      </section>
+
+      <section className="mt-10 grid gap-10 lg:grid-cols-2">
+        <div>
+          <SectionTitle kicker="Readers" title="Stories for the editor" note="Never published as sent. Check before reporting anything." />
+          <ul className="mt-2 divide-y divide-rule">
+            {reports.filter((r) => r.kind === "story").slice(0, 20).map((r) => (
+              <li key={r.id} className={`py-3 text-sm ${r.status === "hidden" ? "opacity-50" : ""}`}>
+                <p className="text-[12px] text-muted">
+                  {reportCountry(r.country)?.name ?? r.country}
+                  {r.place ? ` · ${r.place}` : ""} · {ago(r.created_at, now)}
+                  {r.contact ? ` · ${r.contact}` : ""} · {r.status === "hidden" ? "done" : <HideReport id={r.id} />}
+                </p>
+                <p className="mt-1 whitespace-pre-line text-[13px] text-ink-soft">{r.note}</p>
+              </li>
+            ))}
+            {!reports.some((r) => r.kind === "story") ? <li className="py-3 text-sm text-muted">No stories yet</li> : null}
+          </ul>
+        </div>
+        <div>
+          <SectionTitle kicker="Readers" title="Latest prices and rates" note="Hide a figure that is plainly wrong; it leaves the published medians." />
+          <ul className="mt-2 divide-y divide-rule">
+            {reports.filter((r) => r.kind !== "story").slice(0, 30).map((r) => (
+              <li key={r.id} className={`flex flex-wrap items-baseline gap-x-2 py-2 text-sm ${r.status === "hidden" ? "line-through opacity-50" : ""}`}>
+                <span className="text-ink">{reportItem(r.item ?? "")?.label ?? r.item}</span>
+                <span className="font-semibold">{r.amount}{r.kind === "rate" ? "%" : ` ${reportCountry(r.country)?.currency ?? ""}`}</span>
+                <span className="text-[12px] text-muted">
+                  {reportCountry(r.country)?.name ?? r.country}
+                  {r.place ? ` · ${r.place}` : ""} · {ago(r.created_at, now)}
+                </span>
+                {r.status !== "hidden" ? <HideReport id={r.id} /> : null}
+              </li>
+            ))}
+            {!reports.some((r) => r.kind !== "story") ? <li className="py-3 text-sm text-muted">No reports yet</li> : null}
+          </ul>
+          <p className="mt-2 text-[12px] text-muted">
+            Published at <Link href="/rates/what-readers-paid" className="underline">/rates/what-readers-paid</Link>.
+          </p>
         </div>
       </section>
 

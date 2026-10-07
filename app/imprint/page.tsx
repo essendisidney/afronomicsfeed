@@ -14,7 +14,7 @@ export default function ImprintPage() {
       <p>
         <strong>{site.legalName}</strong> ({site.name}) is published from Nairobi, Kenya, by{" "}
         <a href={site.houseUrl} target="_blank" rel="noopener noreferrer">
-          Pesara
+          {site.houseName}
         </a>
         .
       </p>

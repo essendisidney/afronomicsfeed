@@ -70,7 +70,7 @@ export default function AboutPage() {
       <p>
         Afronomics is published from Nairobi by{" "}
         <a href={site.houseUrl} target="_blank" rel="noopener noreferrer">
-          Pesara
+          {site.houseName}
         </a>
         . Write to <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a> or follow us on{" "}
         <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer">

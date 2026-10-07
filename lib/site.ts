@@ -7,7 +7,8 @@ export const site = {
     "What African governments pay to borrow, what a shilling earns, what a loan should cost and what the currency buys — from the source, the day it is published, free to see and explained for anyone, in ten markets and counting.",
   /** Canonical host. The apex domain redirects here (vercel.json). */
   url: "https://www.afronomicsfeed.com",
-  houseCredit: "A Pesara company",
+  houseCredit: "A product of Pesara Limited",
+  houseName: "Pesara Limited",
   houseUrl: "https://pesara.com",
   locale: "en",
   description:

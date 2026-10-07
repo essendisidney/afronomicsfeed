@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { track } from "@/lib/track";
 
 const options = [
   { value: "sponsorship", label: "Sponsorship / advertising" },
@@ -31,6 +32,7 @@ export function EnquiryForm({ interest = "other", cta = "Send enquiry" }: { inte
       const body = (await response.json().catch(() => ({}))) as { ok?: boolean; reason?: string };
       if (response.ok && body.ok) {
         setState("done");
+        track("enquiry");
         setMessage("Received. The desk replies within one business day.");
       } else {
         setState("error");

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { track } from "@/lib/track";
 
 const roles = [
   { value: "investor", label: "Investor / fund" },
@@ -32,6 +33,7 @@ export function SubscribeForm({ tone = "paper" }: { tone?: "paper" | "night" }) 
       const body = (await response.json().catch(() => ({}))) as { ok?: boolean; reason?: string };
       if (response.ok && body.ok) {
         setState("done");
+        track("newsletter_signup");
         setMessage("You’re on the list. The next Morning lands at 7:00 on the next weekday.");
         setEmail("");
       } else {

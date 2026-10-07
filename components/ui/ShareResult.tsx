@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
+import { track } from "@/lib/track";
 import { shareUi, type ShareLang } from "@/lib/learn-ui";
 import { shareUrl, type ShareSpec } from "@/lib/share";
 
@@ -38,7 +39,14 @@ export function ShareResult({ spec, text, lang = "en" }: { spec: ShareSpec; text
   }
 
   return (
-    <div className="no-print mt-4 flex flex-wrap items-center gap-2" role="group" aria-label={t.heading}>
+    <div
+      className="no-print mt-4 flex flex-wrap items-center gap-2"
+      role="group"
+      aria-label={t.heading}
+      onClickCapture={(e) => {
+        if ((e.target as Element).closest("a,button")) track("share");
+      }}
+    >
       <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">{t.heading}</span>
       {native ? (
         <button type="button" onClick={nativeShare} className={`${pill} border-accent/50 text-accent`}>

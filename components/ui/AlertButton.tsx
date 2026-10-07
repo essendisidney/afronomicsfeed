@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { track } from "@/lib/track";
 
 // Public half of the VAPID pair; the private half lives only in the database the alert function reads.
 const VAPID_PUBLIC = "BLEooOPe7nfUZRQDPBciF603WZW_AV_JLt8BkCK1DZjKJ54Jhjny8yy1A_5PwZbZlfCAjVwzCf66WDbNnp-MOk8";
@@ -84,6 +85,7 @@ export function AlertButton({ market, label }: { market?: string; label?: string
           body: JSON.stringify({ endpoint: json.endpoint, keys: json.keys, markets: next === "all" ? null : next }),
         });
         if (!res.ok) throw new Error("save failed");
+        track("push_alert_on");
       }
       writePref(next);
       setPref(next);

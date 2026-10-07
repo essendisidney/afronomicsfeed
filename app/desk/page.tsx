@@ -10,6 +10,7 @@ import { renderTime } from "@/lib/data/fetcher";
 import { rpc } from "@/lib/store";
 import { moneyLabel } from "@/lib/billing/plans";
 import { DeskKey } from "./DeskKey";
+import { OwnerDevice } from "./OwnerDevice";
 import { AddCorrection, AddPress, GrantAccess, HideReport } from "./DeskActions";
 import { country as reportCountry, item as reportItem } from "@/lib/reader-reports-core";
 
@@ -48,6 +49,31 @@ type Desk = {
 };
 
 type ReaderReport = { id: number; kind: string; country: string; item: string | null; amount: number | null; place: string | null; note: string | null; contact: string | null; status: string; created_at: string };
+
+type People = {
+  people_by_day: { day: string; people: number; views: number }[];
+  people_7d: number;
+  people_prev_7d: number;
+  people_sources_7d: { source: string; people: number }[];
+  people_countries_7d: { country: string; people: number }[];
+  actions_7d: { name: string; count: number | null; prev: number | null }[];
+  actions_pages_7d: { name: string; path: string; count: number }[];
+};
+
+const ACTION_LABEL: Record<string, string> = {
+  newsletter_signup: "Newsletter sign-ups",
+  alert_signup: "Email rate alerts",
+  push_alert_on: "Phone alerts switched on",
+  reader_report: "Prices and rates reported",
+  reader_story: "Stories sent to the editor",
+  rate_check: "“Is my rate fair?” checks",
+  share: "Shares",
+  enquiry: "Enquiries",
+  checkout_start: "Checkouts started",
+};
+
+// People per day are counted from 7 Oct 2026, when the daily marker and owner exclusion went live.
+const PEOPLE_FROM = "2026-10-07";
 
 type Audience = {
   returning_by_day: { day: string; views: number; returning: number }[];
@@ -116,6 +142,8 @@ export default async function DeskPage() {
   const payments = pay?.ok && pay.value ? (pay.value as Payments) : null;
   const aud = desk ? await rpc("af_desk_audience", { p_secret: key }) : null;
   const audience = aud?.ok && aud.value ? (aud.value as Audience) : null;
+  const ppl = desk ? await rpc("af_desk_people", { p_secret: key }) : null;
+  const people = ppl?.ok && ppl.value ? (ppl.value as People) : null;
   const rep = desk ? await rpc("af_reader_report_list", { p_secret: key, p_limit: 60 }) : null;
   const reports = rep?.ok && Array.isArray(rep.value) ? (rep.value as ReaderReport[]) : [];
 
@@ -158,6 +186,80 @@ export default async function DeskPage() {
         <Stat label="Data downloads, 7 days" value={downloads} />
         <Stat label="API calls, 7 days" value={apiCalls} />
         <Stat label="Leads" value={desk.leads_total} note={desk.feedback_found_rate == null ? "no feedback yet" : `${desk.feedback_found_rate}% found what they came for`} />
+      </section>
+
+      <section className="mt-10">
+        <SectionTitle kicker={`Outside readers · counted from ${PEOPLE_FROM}`} title="People, not page views" note="One person = one browser on one day. Your own devices are left out." />
+        <OwnerDevice />
+        {people ? (
+          <div className="mt-3 grid gap-8 lg:grid-cols-3">
+            <div>
+              <p className="font-serif text-4xl text-ink">{people.people_7d}</p>
+              <p className="text-[12px] text-muted">
+                people in the last 7 days{people.people_prev_7d ? ` (prior week ${people.people_prev_7d})` : ""}
+              </p>
+              <table className="data-table mt-3">
+                <tbody>
+                  {people.people_by_day.filter((d) => d.day >= PEOPLE_FROM).slice(-10).reverse().map((d) => (
+                    <tr key={d.day}>
+                      <td className="text-sm">{d.day}</td>
+                      <td className="text-right text-sm font-semibold">{d.people}</td>
+                      <td className="text-right text-xs text-muted">{d.views} views</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">Where they came from, 7 days</p>
+              <table className="data-table mt-2">
+                <tbody>
+                  {people.people_sources_7d.map((s) => (
+                    <tr key={s.source}>
+                      <td className="text-sm">{sourceLabel(s.source)}</td>
+                      <td className="text-right text-sm font-semibold">{s.people}</td>
+                    </tr>
+                  ))}
+                  {people.people_countries_7d.map((c) => (
+                    <tr key={`c-${c.country}`}>
+                      <td className="text-sm text-muted">{c.country}</td>
+                      <td className="text-right text-sm">{c.people}</td>
+                    </tr>
+                  ))}
+                  {!people.people_sources_7d.length ? (
+                    <tr>
+                      <td className="text-sm text-muted">No outside readers counted yet</td>
+                    </tr>
+                  ) : null}
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">What they did, 7 days</p>
+              <table className="data-table mt-2">
+                <tbody>
+                  {Object.keys(ACTION_LABEL).map((name) => {
+                    const a = people.actions_7d.find((x) => x.name === name);
+                    return (
+                      <tr key={name}>
+                        <td className="text-sm">{ACTION_LABEL[name]}</td>
+                        <td className="text-right text-sm font-semibold">{a?.count ?? 0}</td>
+                        <td className="text-right text-xs text-muted">{a?.prev ? `prior ${a.prev}` : ""}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+              {people.actions_pages_7d.length ? (
+                <p className="mt-2 text-[12px] leading-5 text-muted">
+                  Top: {people.actions_pages_7d.slice(0, 5).map((a) => `${ACTION_LABEL[a.name] ?? a.name} on ${a.path} (${a.count})`).join(" · ")}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        ) : (
+          <p className="mt-2 text-sm text-muted">Not available.</p>
+        )}
       </section>
 
       <section className="mt-10">

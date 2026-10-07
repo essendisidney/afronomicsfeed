@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { track } from "@/lib/track";
 import { ShareResult } from "@/components/ui/ShareResult";
 import { fairSentence, type ShareSpec } from "@/lib/share";
 
@@ -100,6 +101,17 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
     };
   }
   const v = verdict();
+  // Count one rate check per visit, once a verdict is shown (after the reader has stopped typing for a moment).
+  const counted = useRef(false);
+  const shown = Boolean(v);
+  useEffect(() => {
+    if (!shown || counted.current) return;
+    const t = window.setTimeout(() => {
+      counted.current = true;
+      track("rate_check");
+    }, 1500);
+    return () => window.clearTimeout(t);
+  }, [shown, rate]);
   const shareSpec: Extract<ShareSpec, { kind: "fair" }> = {
     kind: "fair",
     mode,

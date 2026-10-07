@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import type { CheckoutPlanId } from "@/lib/billing/plans";
+import { track } from "@/lib/track";
 
 export function PaystackCheckout({
   plan,
@@ -35,6 +36,7 @@ export function PaystackCheckout({
       });
       const body = (await response.json()) as { authorizationUrl?: string; reason?: string };
       if (body.authorizationUrl?.startsWith("https://checkout.paystack.com/")) {
+        track("checkout_start");
         window.location.assign(body.authorizationUrl);
         return;
       }

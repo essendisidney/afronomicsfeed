@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import { track } from "@/lib/track";
 import { alertTenors, kindLabel, type AlertKind } from "@/lib/rate-alerts-core";
 
 type State = "idle" | "pending" | "done" | "error";
@@ -41,6 +42,7 @@ export function RateAlertForm({
       const body = (await response.json().catch(() => ({}))) as { ok?: boolean; reason?: string; message?: string };
       if (response.ok && body.ok) {
         setState("done");
+        track("alert_signup");
         setMessage(body.message ?? "Check your inbox to confirm the alert.");
         setEmail("");
       } else {

@@ -9,6 +9,9 @@ export function DeskKey({ wrong }: { wrong: boolean }) {
     <form
       onSubmit={(event) => {
         event.preventDefault();
+        try {
+          localStorage.setItem("af_owner", "1");
+        } catch {}
         document.cookie = `af_desk=${encodeURIComponent(value.trim())}; path=/desk; max-age=31536000; secure; samesite=strict`;
         window.location.reload();
       }}

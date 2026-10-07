@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { track } from "@/lib/track";
 import type { CountryBench } from "@/lib/data/west-africa-rates";
 
 /**
@@ -68,6 +69,17 @@ export function CountryFairRate({ bench }: { bench: CountryBench }) {
   }
 
   const v = verdict();
+  // Count one rate check per visit, once a verdict is shown (after the reader has stopped typing for a moment).
+  const counted = useRef(false);
+  const shown = Boolean(v);
+  useEffect(() => {
+    if (!shown || counted.current) return;
+    const t = window.setTimeout(() => {
+      counted.current = true;
+      track("rate_check");
+    }, 1500);
+    return () => window.clearTimeout(t);
+  }, [shown, rate]);
   const field = "rounded-xl border border-rule bg-surface px-3 py-2.5 text-[15px] text-ink outline-none focus:border-accent";
   const toneClass = v?.tone === "good" ? "border-up/40" : v?.tone === "fair" ? "border-rule" : "border-down/40";
   return (

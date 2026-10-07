@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { track } from "@/lib/track";
 import { bounds, COUNTRIES, country as findCountry, ITEMS, item as findItem } from "@/lib/reader-reports-core";
 
 /**
@@ -36,6 +37,7 @@ export function ReaderReportForm({ defaultCountry = "KE" }: { defaultCountry?: s
     setBusy(false);
     setState(body?.ok ? { ok: true, text: body.message ?? "Thank you." } : { ok: false, text: body?.reason ?? "That didn’t go through. Please try again." });
     if (body?.ok) {
+      track(mode === "story" ? "reader_story" : "reader_report");
       const keep = { country: countryCode, item: itemId };
       form.reset();
       setCountry(keep.country);

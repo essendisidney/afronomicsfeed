@@ -89,6 +89,30 @@
    "upper": null,
    "date_as_printed": "2026-10-07",
    "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
+  {
+   "first_seen": "2026-10-08",
+   "market": "kenya",
+   "rate": 8.75,
+   "upper": null,
+   "date_as_printed": "07/10/2026",
+   "source": "https://www.centralbank.go.ke/"
+  },
+  {
+   "first_seen": "2026-10-08",
+   "market": "southafrica",
+   "rate": 7.25,
+   "upper": null,
+   "date_as_printed": "2026-10-08",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
+  {
+   "first_seen": "2026-10-08",
+   "market": "tanzania",
+   "rate": 6.25,
+   "upper": null,
+   "date_as_printed": "4th Quarter 2026",
+   "source": "https://www.bot.go.tz/?lang=en"
   }
  ]
 }

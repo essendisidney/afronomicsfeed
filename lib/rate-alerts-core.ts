@@ -6,7 +6,7 @@
  * was already published when it was set). An alert is due only when the data has moved past that key.
  */
 
-export const alertKinds = ["auction", "tbill_above", "tbill_below", "ng_savings_bond", "policy_change"] as const;
+export const alertKinds = ["auction", "tbill_above", "tbill_below", "ng_savings_bond", "policy_change", "mmf_month"] as const;
 export type AlertKind = (typeof alertKinds)[number];
 export const alertTenors = [91, 182, 364] as const;
 export type AlertTenor = (typeof alertTenors)[number];
@@ -17,6 +17,7 @@ export const kindLabel: Record<AlertKind, string> = {
   tbill_below: "A Kenya T-bill rate falls below a level",
   ng_savings_bond: "A new Nigeria FGN Savings Bond offer",
   policy_change: "Any central bank changes its policy rate",
+  mmf_month: "Each month’s Kenya money market fund ranking",
 };
 
 export type AlertInput = { email: string; kind: AlertKind; tenor: AlertTenor | null; threshold: number | null };
@@ -50,6 +51,8 @@ export type AlertSnapshot = {
     /** Rate changes in the order they were first seen (the history file is append-only). */
     changes: { index: number; date: string; market: string; marketName: string; rate: number; previous: number; upper: number | null; source: string }[];
   };
+  /** Finished months of the Kenya money market fund ranking, newest first (optional: older snapshots lack it). */
+  mmf?: { months: { month: string; label: string; rows: { name: string; gross: number; net: number; monthly: boolean; stale?: boolean }[]; pending: string[] }[] };
 };
 
 export type LiveAlert = { id: string; email: string; kind: AlertKind; tenor: number | null; threshold: number | null; token: string; last_sent_key: string | null };
@@ -70,6 +73,9 @@ export function currentKey(kind: AlertKind, tenor: number | null, s: AlertSnapsh
       const last = s.policy.changes.at(-1);
       return last ? policyKey(last.index, last.date) : policyKey(-1, "none");
     }
+    case "mmf_month":
+      // Before the first finished month exists, a placeholder: the first ranking published is then new.
+      return s.mmf?.months[0]?.month ?? "0000-00";
   }
 }
 
@@ -189,7 +195,32 @@ export function dueCheck(alert: Pick<LiveAlert, "kind" | "tenor" | "threshold" |
         },
       };
     }
+    case "mmf_month": {
+      const latest = s.mmf?.months[0];
+      if (!latest || latest.month <= last || !latest.rows.length) return { action: "none" };
+      return { action: "send", key: latest.month, message: mmfMessage(latest, siteUrl) };
+    }
   }
+}
+
+function mmfMessage(m: NonNullable<AlertSnapshot["mmf"]>["months"][number], siteUrl: string): AlertMessage {
+  const top = m.rows.slice(0, 5);
+  return {
+    subject: `Kenya money market funds, ${m.label}: ${top[0].name} ranked first at ${fmt(top[0].net)}% after tax`,
+    lines: [
+      `The ${m.label} ranking of the Kenyan money market funds Afronomics reads, by average yield over the month after the 15% withholding tax:`,
+      "",
+      ...top.map(
+        (r, i) =>
+          `${i + 1}. ${r.name}: ${fmt(r.net)}% after tax (${fmt(r.gross)}% as published${r.monthly ? ", monthly fact sheet" : ""})${r.stale ? ". Note: its published yield has not changed for a week or more, so the page may not be current" : ""}`,
+      ),
+      ...(m.pending.length ? ["", `Not yet ranked (monthly figure not out yet): ${m.pending.join(", ")}.`] : []),
+      "",
+      "A fund’s past yield is not a promise of what it will pay.",
+    ],
+    link: `${siteUrl}/rates/kenya/best-money-market-fund/${m.month}`,
+    source: null,
+  };
 }
 
 /** Policy-rate changes from the append-only history file: a row whose rate or corridor differs from the market's previous row. */

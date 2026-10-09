@@ -175,6 +175,13 @@ export default function MoneyMarketFundsPage() {
       ) : null}
 
       <p className="mt-10 text-sm text-ink-soft">
+        Which fund paid most over the whole month:{" "}
+        <Link href="/rates/kenya/best-money-market-fund" className="font-medium text-forest underline underline-offset-2">
+          the monthly ranking
+        </Link>
+        , with a monthly email if you want it.
+      </p>
+      <p className="mt-3 text-sm text-ink-soft">
         Every way to hold shillings, bills and bonds included, is on{" "}
         <Link href="/rates/kenya" className="font-medium text-forest underline underline-offset-2">
           where your shilling earns most

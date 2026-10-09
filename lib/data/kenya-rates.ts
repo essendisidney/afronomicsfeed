@@ -35,7 +35,7 @@ export const loadKenyaRates = cache((): RatesFile => (fs.existsSync(FILE) ? JSON
 
 // Kenya withholding tax on interest: 15% for residents on bank deposits, fund distributions and bills;
 // bonds of ten years or more carry 10%; infrastructure bonds (IFB) are exempt.
-const WHT_INTEREST = 0.15;
+export const WHT_INTEREST = 0.15;
 const WHT_LONG_BOND = 0.1;
 
 export function rateOptions(): { options: RateOption[]; unread: { name: string; status: string }[]; updatedAt: string | null } {
@@ -153,7 +153,7 @@ export function fairBench() {
   };
 }
 
-type FundReading = { date: string; name: string; manager: string; source: string; daily_yield: number | null; effective_annual_yield: number; basis?: string };
+export type FundReading = { date: string; name: string; manager: string; source: string; daily_yield: number | null; effective_annual_yield: number; basis?: string; period_end?: string };
 
 const HISTORY_FILE = path.join(process.cwd(), "data", "kenya", "mmf_history.json");
 

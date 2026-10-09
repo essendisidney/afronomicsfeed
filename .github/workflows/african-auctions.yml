@@ -87,6 +87,11 @@ jobs:
           OMP_THREAD_LIMIT: "1"  # four notices are read at once: stop each Tesseract also spawning a thread per core
         continue-on-error: true
         timeout-minutes: 20
+      # Is every figure as fresh as its publisher's rhythm says? Late or unread ones show as warnings on this run,
+      # and data/health.json feeds /status and the desk.
+      - run: python scripts/data_health.py
+        continue-on-error: true
+        timeout-minutes: 2
       - name: Commit if the dataset changed
         run: |
           if git diff --quiet -- data && [ -z "$(git ls-files --others --exclude-standard data)" ]; then

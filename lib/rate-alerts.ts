@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { auctionWeeks, loadTbills } from "@/lib/data/kenya-tbills";
+import { loadHealth } from "@/lib/data/health";
+import { mmfMonths } from "@/lib/data/mmf-months";
 import { loadSavingsBond } from "@/lib/data/nigeria-savings-bond";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { kindLabel, policyChanges, type AlertInput, type AlertMessage, type AlertSnapshot, type AlertTenor } from "@/lib/rate-alerts-core";
@@ -29,10 +31,16 @@ export function alertSnapshot(): AlertSnapshot {
   }));
   const bond = loadSavingsBond()?.latest;
   const names = Object.fromEntries(billMarkets.map((m) => [m.slug, m.country]));
+  const stale = new Set((loadHealth()?.items ?? []).filter((x) => x.area === "Money market funds" && x.status === "late").map((x) => x.name));
   return {
     kenya: { sourcePage: tbills.sourcePage, auctions },
     ngBond: bond ? { offer: bond.offer, source: bond.source, opening: bond.opening, closing: bond.closing, bonds: bond.bonds } : null,
     policy: { changes: policyChanges(loadPolicyHistory(), names) },
+    mmf: {
+      months: mmfMonths()
+        .filter((m) => m.complete && m.rows.length)
+        .map((m) => ({ month: m.month, label: m.label, rows: m.rows.map((r) => ({ name: r.name, gross: r.gross, net: r.net, monthly: r.days == null, stale: stale.has(r.name) })), pending: m.pending })),
+    },
   };
 }
 
@@ -43,6 +51,7 @@ export function describeAlert(a: Pick<AlertInput, "kind" | "tenor" | "threshold"
   if (a.kind === "auction") return "each new Kenya T-bill auction result is published";
   if (a.kind === "ng_savings_bond") return "a new Nigeria FGN Savings Bond offer is published";
   if (a.kind === "policy_change") return "an African central bank changes its policy rate";
+  if (a.kind === "mmf_month") return "each month’s Kenya money market fund ranking is out";
   return kindLabel[a.kind];
 }
 

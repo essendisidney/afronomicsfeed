@@ -169,7 +169,7 @@ def append_history(ok: list[dict], read_at: datetime) -> None:
     for f in ok:
         rows.append({"date": day, "name": f["name"], "manager": f["manager"], "source": f["source"],
                      "daily_yield": f.get("daily_yield"), "effective_annual_yield": f["effective_annual_yield"]}
-                    | ({"basis": f["basis"]} if f.get("basis") else {}))
+                    | ({"basis": f["basis"], "period_end": f["period_end"]} if f.get("basis") else {}))
     rows.sort(key=lambda r: (r["date"], r["name"]), reverse=True)
     HISTORY.write_text(json.dumps({
         "dataset": "Kenya money market fund yields, daily",

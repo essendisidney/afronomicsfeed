@@ -1,7 +1,7 @@
 {
  "dataset": "African central-bank policy rates",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-08T20:54:46+00:00",
+ "updated_at": "2026-10-09T07:23:22+00:00",
  "note": "Each rate as printed on the central bank's own website at read_at; date_as_printed is the bank's own date for it where shown.",
  "rows": [
   {
@@ -12,7 +12,7 @@
    "rate": 19.0,
    "upper": 20.0,
    "date_as_printed": null,
-   "read_at": "2026-10-08T20:54:46+00:00"
+   "read_at": "2026-10-09T07:23:22+00:00"
   },
   {
    "market": "ghana",
@@ -22,7 +22,7 @@
    "rate": 14.0,
    "upper": null,
    "date_as_printed": null,
-   "read_at": "2026-10-08T20:54:46+00:00"
+   "read_at": "2026-10-09T07:23:22+00:00"
   },
   {
    "market": "kenya",
@@ -32,7 +32,7 @@
    "rate": 8.75,
    "upper": null,
    "date_as_printed": "07/10/2026",
-   "read_at": "2026-10-08T20:54:46+00:00"
+   "read_at": "2026-10-09T07:23:22+00:00"
   },
   {
    "market": "malawi",
@@ -42,7 +42,7 @@
    "rate": 24.0,
    "upper": null,
    "date_as_printed": "Mar 2026",
-   "read_at": "2026-10-08T20:54:46+00:00"
+   "read_at": "2026-10-09T07:23:22+00:00"
   },
   {
    "market": "mozambique",
@@ -52,7 +52,7 @@
    "rate": 9.25,
    "upper": null,
    "date_as_printed": "30-09-2026",
-   "read_at": "2026-10-08T20:54:46+00:00"
+   "read_at": "2026-10-09T07:23:22+00:00"
   },
   {
    "market": "nigeria",
@@ -62,7 +62,7 @@
    "rate": 26.5,
    "upper": null,
    "date_as_printed": "August 2026",
-   "read_at": "2026-10-08T20:54:46+00:00"
+   "read_at": "2026-10-09T07:23:22+00:00"
   },
   {
    "market": "southafrica",
@@ -72,7 +72,7 @@
    "rate": 7.25,
    "upper": null,
    "date_as_printed": "2026-10-08",
-   "read_at": "2026-10-08T20:54:46+00:00"
+   "read_at": "2026-10-09T07:23:22+00:00"
   },
   {
    "market": "tanzania",
@@ -82,7 +82,7 @@
    "rate": 6.25,
    "upper": null,
    "date_as_printed": "4th Quarter 2026",
-   "read_at": "2026-10-08T20:54:46+00:00"
+   "read_at": "2026-10-09T07:23:22+00:00"
   },
   {
    "market": "zambia",
@@ -92,7 +92,7 @@
    "rate": 10.75,
    "upper": null,
    "date_as_printed": "2026-09-30",
-   "read_at": "2026-10-08T20:54:46+00:00"
+   "read_at": "2026-10-09T07:23:22+00:00"
   }
  ],
  "unread": [

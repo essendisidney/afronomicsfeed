@@ -1,4 +1,6 @@
 import { fairBench, fundLeague, rateOptions } from "@/lib/data/kenya-rates";
+import { loadHealth } from "@/lib/data/health";
+import { mmfMonths } from "@/lib/data/mmf-months";
 import { mobileLoanBoard } from "@/lib/data/mobile-loans";
 import { flat, reducing, savingsGrowth } from "@/lib/learn-calc";
 import { calcUi, shareUi, ui, type ShareLang } from "@/lib/learn-ui";
@@ -18,6 +20,11 @@ const short = (s: string, n = 22) => (s.length > n ? `${s.slice(0, n - 1)}…` :
 /** Shared with the pages, so the message beside the share buttons says what the card says. */
 export function mmfSentence(best: { name: string; net: number }, bill: { net: number }) {
   return `${best.name} keeps ${best.net.toFixed(2)}% after tax, the best published Kenyan money market fund; the 364-day Treasury bill keeps ${bill.net.toFixed(2)}%`;
+}
+
+export function mmfMonthSentence(m: { label: string; complete: boolean; rows: { name: string; net: number }[] }) {
+  const [a, b] = m.rows;
+  return `${a.name} ${m.complete ? "ranked first" : "leads"} at ${a.net.toFixed(2)}% after tax${b ? `, ahead of ${b.name} at ${b.net.toFixed(2)}%` : ""}`;
 }
 
 export function mobileSentence(cheapest: { product: string; costPer1000: number; from: boolean }, lendingAvg: number) {
@@ -131,6 +138,29 @@ export function shareView(spec: ShareSpec): ShareView | null {
         barsCaption: "% a year, after 15% withholding tax · managers' own sites and the CBK",
         cta: `Every fund, from the source: ${host}${path}`,
         source: "Fund managers and the Central Bank of Kenya",
+      },
+    };
+  }
+
+  if (spec.kind === "mmf_month") {
+    const months = mmfMonths();
+    const m = spec.month ? months.find((x) => x.month === spec.month && x.complete) : months[0];
+    if (!m || !m.rows.length) return null;
+    const stale = new Set((loadHealth()?.items ?? []).filter((x) => x.area === "Money market funds" && x.status === "late").map((x) => x.name));
+    const top = m.rows.slice(0, 5);
+    const flagged = top.some((r) => stale.has(r.name));
+    const title = mmfMonthSentence(m);
+    const lead = `${short(m.rows[0].name, 36)} ${m.complete ? "ranked first" : "leads"} at ${pct(m.rows[0].net)} after tax`;
+    return {
+      title: `Best money market fund in Kenya, ${m.label}: ${title}`,
+      description: `Kenyan money market funds ranked by average yield over ${m.label} after the 15% withholding tax, each yield read from the manager's own website or fact sheet. Information, not advice.`,
+      card: {
+        kicker: `Best money market fund in Kenya · ${m.label}${m.complete ? "" : " so far"}`,
+        title: lead,
+        bars: top.map((r) => ({ label: `${short(r.name.replace(/\s+(Money Market|Fixed Income) Fund.*$/, ""), 20)}${stale.has(r.name) ? " *" : ""}`, value: r.net, display: pct(r.net) })),
+        barsCaption: `Average % a year over the month, after 15% withholding tax${flagged ? " · * yield unchanged on the manager's site for a week or more" : ""}`,
+        cta: `The full ranking: ${host}${path}`,
+        source: "Fund managers' own websites and fact sheets",
       },
     };
   }

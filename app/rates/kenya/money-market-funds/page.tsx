@@ -148,7 +148,12 @@ export default function MoneyMarketFundsPage() {
           {best && bill ? <ShareResult spec={{ kind: "mmf" }} text={`${mmfSentence(best, bill)}. Every fund, from the source:`} /> : null}
           {unread.length ? (
             <p className="mt-2 max-w-3xl text-xs leading-5 text-muted">
-              Not in the table because the last read failed: {unread.map((u) => `${u.name} (${u.status.startsWith("conflicting") ? "the manager’s page shows two different yields" : "page not read"})`).join("; ")}.
+              Not in the table: {unread
+                .map(
+                  (u) =>
+                    `${u.name} (${u.status.startsWith("conflicting") ? "the manager’s page shows two different yields" : u.status.startsWith("stale") ? u.status.split(": ")[1].replace("the manager's", "the manager’s") : "page not read"})`,
+                )
+                .join("; ")}.
             </p>
           ) : null}
           <p className="mt-2 max-w-3xl text-xs leading-5 text-muted">

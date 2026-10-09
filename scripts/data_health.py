@@ -96,6 +96,9 @@ def funds(today: date) -> list[dict]:
     mmf = rates.get("money_market_funds", {})
     for u in mmf.get("unread", []):
         status = u.get("status", "")
+        if status.startswith("stale"):  # read fine, but the manager has not updated the figure: left out until it does
+            out.append(item("Money market funds", u["name"], "late", status.split(": ", 1)[-1] + "; left out until it is updated", link="/rates/kenya/money-market-funds"))
+            continue
         why = "the manager's page shows two different yields" if status.startswith("conflicting") else status
         out.append(item("Money market funds", u["name"], "failed", f"not read on the last run: {why}", link="/rates/kenya/money-market-funds"))
     current = {r["name"] for r in mmf.get("rows", [])}

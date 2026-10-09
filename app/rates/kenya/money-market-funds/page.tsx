@@ -35,8 +35,9 @@ export default function MoneyMarketFundsPage() {
   const days = [...new Set(loadFundHistory().map((r) => r.date))].sort();
   const best = funds[0];
   const latestDay = days.at(-1);
+  // A monthly figure (basis set) is expected to stand for a month, so it is never flagged as stale.
   const stale = (f: (typeof funds)[number]) =>
-    latestDay ? (new Date(latestDay).getTime() - new Date(f.unchangedSince).getTime()) / 86_400_000 >= STALE_DAYS : false;
+    !f.basis && latestDay ? (new Date(latestDay).getTime() - new Date(f.unchangedSince).getTime()) / 86_400_000 >= STALE_DAYS : false;
   const chartRows = days.map((date) => ({
     date,
     values: Object.fromEntries(funds.map((f) => [f.name, f.points.find((p) => p.date === date)?.value ?? null])),
@@ -97,6 +98,7 @@ export default function MoneyMarketFundsPage() {
                         {f.name}
                       </a>
                       <span className="block text-[11px] text-muted">{f.manager}</span>
+                      {f.basis ? <span className="block text-[11px] text-muted">Yield: {f.basis}</span> : null}
                     </td>
                     <td className="text-right">{f.gross.toFixed(2)}%</td>
                     <td className="text-right font-semibold">{f.net.toFixed(2)}%</td>

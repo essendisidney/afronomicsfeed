@@ -14,6 +14,7 @@ import { site } from "@/lib/site";
 import type { Article, ArticleIndexItem } from "@/lib/types";
 import { ArticleJsonLd } from "./ArticleJsonLd";
 import { FollowUp } from "@/components/ui/FollowUp";
+import { StorySignup } from "@/components/ui/StorySignup";
 
 export function ArticleTemplate({
   article,
@@ -117,6 +118,7 @@ export function ArticleTemplate({
       )}
 
       {!article.gated ? <FollowUp heading="Get the next story, and the numbers behind it" /> : null}
+      {!article.gated ? <StorySignup /> : null}
 
       <div className="mt-14">
         <SourcesBlock sources={article.sources} />

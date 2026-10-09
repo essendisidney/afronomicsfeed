@@ -3,12 +3,21 @@
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
  "checked_on": "2026-10-09",
  "summary": {
-  "failed": 0,
+  "failed": 1,
   "late": 2,
   "gap": 1,
   "ok": 28
  },
  "items": [
+  {
+   "area": "Money market funds",
+   "name": "NCBA Money Market Fund (KES)",
+   "status": "failed",
+   "detail": "not read on the last run: pattern not found",
+   "latest": null,
+   "due_by": null,
+   "link": "/rates/kenya/money-market-funds"
+  },
   {
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
@@ -67,9 +76,9 @@
    "area": "Eurobond yields",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest prices 01 Oct",
-   "latest": "2026-10-01",
-   "due_by": "2026-10-10",
+   "detail": "latest prices 08 Oct",
+   "latest": "2026-10-08",
+   "due_by": "2026-10-17",
    "link": "/markets/eurobonds"
   },
   {
@@ -238,9 +247,9 @@
    "area": "T-bill auctions",
    "name": "Mozambique",
    "status": "ok",
-   "detail": "latest auction 01 Oct (auctions weekly)",
-   "latest": "2026-10-01",
-   "due_by": "2026-10-10",
+   "detail": "latest auction 07 Oct (auctions weekly)",
+   "latest": "2026-10-07",
+   "due_by": "2026-10-16",
    "link": "/markets/tbills/mozambique"
   },
   {

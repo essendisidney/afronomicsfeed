@@ -3,12 +3,57 @@
  "publisher": "Bank of Uganda",
  "source_page": "https://www.bou.or.ug/bouwebsite/FinancialMarkets/tbillsauctionresults.html",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-09T07:53:37+00:00",
+ "updated_at": "2026-10-09T08:08:37+00:00",
  "units": {
   "amounts": "UGX millions",
   "rates": "money-market yield, percent per annum (discount rate and effective yield also given)"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "auction_no": 1235,
+   "auction_date": "2026-09-30",
+   "value_date": "2026-10-01",
+   "offered_ugx_m": 300000.0,
+   "received_ugx_m": 447801.1,
+   "accepted_ugx_m": 310801.1,
+   "discount_rate": 10.317,
+   "weighted_avg_rate": 11.501,
+   "effective_yield": 11.502,
+   "price_per_100": 89.711,
+   "bid_to_cover": 1.441,
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_30_SEP_2026_032913612f.docx"
+  },
+  {
+   "tenor": 182,
+   "auction_no": 1235,
+   "auction_date": "2026-09-30",
+   "value_date": "2026-10-01",
+   "offered_ugx_m": 35000.0,
+   "received_ugx_m": 64679.2,
+   "accepted_ugx_m": 19929.2,
+   "discount_rate": 10.204,
+   "weighted_avg_rate": 10.751,
+   "effective_yield": 11.041,
+   "price_per_100": 94.912,
+   "bid_to_cover": 3.245,
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_30_SEP_2026_032913612f.docx"
+  },
+  {
+   "tenor": 91,
+   "auction_no": 1235,
+   "auction_date": "2026-09-30",
+   "value_date": "2026-10-01",
+   "offered_ugx_m": 15000.0,
+   "received_ugx_m": 61179.5,
+   "accepted_ugx_m": 26049.5,
+   "discount_rate": 9.47,
+   "weighted_avg_rate": 9.699,
+   "effective_yield": 10.058,
+   "price_per_100": 97.639,
+   "bid_to_cover": 2.349,
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_30_SEP_2026_032913612f.docx"
+  },
   {
    "tenor": 364,
    "auction_no": 1234,
@@ -8029,15 +8074,15 @@
   },
   "https://bou.or.ug/uploads/T_Bills_as_at_06_June_18_dab4caccc3.xlsx": {
    "status": "unparsed",
-   "reason": "not a pdf"
+   "reason": "office file, no table found"
   },
   "https://bou.or.ug/uploads/T_Bills_as_at_08_June_18_661dc2225e.xlsx": {
    "status": "unparsed",
-   "reason": "not a pdf"
+   "reason": "office file, no table found"
   },
   "https://bou.or.ug/uploads/T_Bills_as_at_11_June_18_ec2191d5b6.xlsx": {
    "status": "unparsed",
-   "reason": "not a pdf"
+   "reason": "office file, no table found"
   },
   "https://bou.or.ug/uploads/PRESS_RELEASE_RESULTS_TBILL_AUCTION_NO_1021_911723f9aa.pdf": {
    "status": "parsed",
@@ -8134,8 +8179,13 @@
    ]
   },
   "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_30_SEP_2026_032913612f.docx": {
-   "status": "unparsed",
-   "reason": "not a pdf (starts b'PK\\x03\\x04\\x14\\x00\\x06\\x00\\x08\\x00\\x00\\x00!\\x00\\x1e}\\x04\\x02\\x9e\\x01\\x00\\x00\\xc6\\x06')"
+   "status": "parsed",
+   "ocr": false,
+   "tenors": [
+    91,
+    182,
+    364
+   ]
   }
  }
 }

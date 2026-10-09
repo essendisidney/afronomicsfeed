@@ -172,6 +172,36 @@ def ocr_text(data: bytes) -> str:
     return "\n".join(pytesseract.image_to_string(image, config="--psm 6", timeout=120) for image in images)
 
 
+def office_text(data: bytes) -> str:
+    """Text of a Word or Excel file (some notices are uploaded as .docx/.xlsx under a .pdf name), one line per
+    paragraph and per table row with its cells joined, the layout parse_notice reads from PDF text."""
+    import zipfile
+    import xml.etree.ElementTree as ET
+
+    z = zipfile.ZipFile(io.BytesIO(data))
+    names = set(z.namelist())
+    if "word/document.xml" in names:
+        w = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+        body = ET.fromstring(z.read("word/document.xml")).find(f"{w}body")
+        text_of = lambda el: "".join(t.text or "" for t in el.iter(f"{w}t"))  # noqa: E731
+        lines = []
+        for el in body if body is not None else []:
+            if el.tag == f"{w}p":
+                lines.append(text_of(el))
+            elif el.tag == f"{w}tbl":
+                for tr in el.iter(f"{w}tr"):
+                    lines.append(" ".join(text_of(tc).strip() for tc in tr.iter(f"{w}tc")))
+        return "\n".join(lines)
+    if any(n.startswith("xl/") for n in names):
+        import openpyxl
+
+        book = openpyxl.load_workbook(io.BytesIO(data), data_only=True, read_only=True)
+        return "\n".join(
+            " ".join(str(c) for c in row if c is not None) for sheet in book.worksheets for row in sheet.iter_rows(values_only=True)
+        )
+    return ""
+
+
 def download(session: requests.Session, url: str, limit: float = 90) -> bytes:
     """The whole file within `limit` seconds: a server trickling bytes never trips the read timeout alone."""
     start, chunks = time.monotonic(), []
@@ -189,6 +219,14 @@ def fetch_and_parse(notice: dict, session: requests.Session):
             pdf = download(session, notice["url"])
             if pdf.startswith(IMAGE_MAGIC):
                 text = ""
+            elif pdf.startswith(b"PK"):  # Word or Excel under a .pdf name: read its text, no OCR needed
+                text = office_text(pdf)
+                # rates under 1% would be a spreadsheet storing 10% as 0.10: not trusted, logged instead
+                rows = [r for r in parse_notice(text) if checks_pass(r) and r["weighted_avg_rate"] >= 1]
+                if not rows:
+                    sample = " ".join(text.split())[:400]
+                    print(f"    office file text, unparsed: {sample!r}", flush=True)
+                return notice, rows, None if rows else "office file, no table found", False
             elif not pdf.startswith(b"%PDF"):
                 return notice, [], f"not a pdf (starts {pdf[:24]!r})", False
             else:
@@ -225,7 +263,7 @@ def main() -> int:
     # else (a notice can be uploaded as a picture, or the server can answer with an error page for a while).
     def retry(url: str, s: dict) -> bool:
         reason = s.get("reason", "")
-        return bool(pytesseract and "OCR" in reason) or (reason.startswith("not a pdf") and url.lower().endswith(".pdf"))
+        return bool(pytesseract and "OCR" in reason) or (reason.startswith(("not a pdf", "office file")) and url.lower().endswith(".pdf"))
 
     done = {u for u, s in existing.get("sources", {}).items() if s.get("status") == "parsed" or not retry(u, s)}
 

@@ -1,7 +1,8 @@
 """
 Ghana Treasury bill auction history, extracted from Bank of Ghana tender result notices.
 
-The Bank of Ghana files each weekly Government of Ghana tender as a PDF ("Auctresults-<tender>.pdf").
+The Bank of Ghana files each weekly Government of Ghana tender as a PDF ("Auctresults-<tender>.pdf", or lately
+"Auctresult<tender>.pdf").
 This script lists them through the site's public media index, reads every notice it has not seen,
 and writes one row per tender per tenor to data/ghana/tbill_auctions.json. Each row keeps its notice URL.
 
@@ -33,7 +34,8 @@ OUT = Path(__file__).resolve().parent.parent / "data" / "ghana" / "tbill_auction
 UA = {"User-Agent": "Mozilla/5.0 (compatible; AfronomicsBot/1.0; +https://www.afronomicsfeed.com/method)"}
 
 MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
-NAME = re.compile(r"/Auctresults-(\d{3,4})[^/]*\.pdf$", re.I)
+# "Auctresults-2026.pdf", and since Oct 2026 also "Auctresult2027.pdf" (singular, no hyphen).
+NAME = re.compile(r"/Auctresults?[-_ ]?(\d{3,4})[^/]*\.pdf$", re.I)
 
 
 def list_notices(session: requests.Session) -> list[dict]:
@@ -41,7 +43,7 @@ def list_notices(session: requests.Session) -> list[dict]:
     found: dict[int, dict] = {}
     page = 1
     while True:
-        r = session.get(MEDIA_API, params={"search": "Auctresults", "per_page": 100, "page": page, "_fields": "source_url,date"}, headers=UA, timeout=60)
+        r = session.get(MEDIA_API, params={"search": "Auctresult", "per_page": 100, "page": page, "_fields": "source_url,date"}, headers=UA, timeout=60)
         if r.status_code != 200:
             break
         items = r.json()

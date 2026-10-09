@@ -259,11 +259,17 @@ def main() -> int:
     existing = {"rows": [], "sources": {}}
     if OUT.exists() and not args.full:
         existing = json.loads(OUT.read_text(encoding="utf-8"))
-    # Re-try notices that failed only for lack of OCR, once OCR is available, and .pdf links that served something
-    # else (a notice can be uploaded as a picture, or the server can answer with an error page for a while).
+    # Re-try notices that failed only for lack of OCR, once OCR is available, and links that served something other
+    # than a PDF (a notice can be uploaded as a picture or a Word file, or the server can answer with an error page).
     def retry(url: str, s: dict) -> bool:
         reason = s.get("reason", "")
-        return bool(pytesseract and "OCR" in reason) or (reason.startswith(("not a pdf", "office file")) and url.lower().endswith(".pdf"))
+        # "not a pdf" was recorded before Word/Excel notices could be read: try each once more. An office file that
+        # still does not parse is retried only while its link claims to be a PDF (BoU may yet replace it).
+        return (
+            bool(pytesseract and "OCR" in reason)
+            or reason.startswith("not a pdf")
+            or (reason.startswith("office file") and url.lower().endswith(".pdf"))
+        )
 
     done = {u for u, s in existing.get("sources", {}).items() if s.get("status") == "parsed" or not retry(u, s)}
 

@@ -40,7 +40,7 @@ export function FollowUp({
             The Morning, every weekday at 7:00
           </p>
           <p className="mt-1 text-[13px] leading-5 text-ink-soft">
-            Rates, currencies and auction results before the day starts. Free.
+            Rates, currencies and auction results before the day starts. Free, with our guide to where your shilling earns most.
           </p>
           <div className="mt-3">
             <SubscribeForm />

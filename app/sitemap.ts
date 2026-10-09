@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/markets/bill-index", "weekly", 0.9),
     page("/morning", "hourly", 0.9),
     page("/rates/kenya", "daily", 0.9),
+    page("/guides/where-your-shilling-earns-most", "daily", 0.9),
     page("/rates/kenya/money-market-funds", "daily", 0.9),
     page("/rates/remittances", "monthly", 0.8),
     page("/rates/what-readers-paid", "daily", 0.8),

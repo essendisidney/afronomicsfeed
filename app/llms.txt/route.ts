@@ -48,7 +48,7 @@ export function GET() {
     "",
     `- [Is my rate fair? Kenya](${u("/rates/kenya/check")}): a savings or loan rate against the T-bill, money market funds and the bank averages.`,
     `- [Is my rate fair? Nigeria](${u("/rates/nigeria/check")}) and [Ghana](${u("/rates/ghana/check")}).`,
-    `- [Where the shilling earns most](${u("/rates/kenya")}): bills, bonds, funds and bank rates after tax.`,
+    `- [Where the shilling earns most](${u("/rates/kenya")}) and the one-page [guide](${u("/guides/where-your-shilling-earns-most")}): bills, bonds, funds, SACCOs and bank rates after tax, and what KES 100,000 earns.`,
     `- [SACCO dividend and interest rates](${u("/rates/kenya/saccos")}).`,
     `- [What readers paid](${u("/rates/what-readers-paid")}): medians of reader-reported prices; labelled as reader reports, not official statistics.`,
     `- [Learn money, from the basics](${u("/learn")}): plain lessons in English, Kiswahili, French, Portuguese and Arabic.`,

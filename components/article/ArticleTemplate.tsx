@@ -13,6 +13,7 @@ import { previewBody } from "@/lib/preview";
 import { site } from "@/lib/site";
 import type { Article, ArticleIndexItem } from "@/lib/types";
 import { ArticleJsonLd } from "./ArticleJsonLd";
+import { FollowUp } from "@/components/ui/FollowUp";
 
 export function ArticleTemplate({
   article,
@@ -114,6 +115,8 @@ export function ArticleTemplate({
           <MarkdownBody content={article.body} />
         </div>
       )}
+
+      {!article.gated ? <FollowUp heading="Get the next story, and the numbers behind it" /> : null}
 
       <div className="mt-14">
         <SourcesBlock sources={article.sources} />

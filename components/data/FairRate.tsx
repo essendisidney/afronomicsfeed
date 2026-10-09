@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { track } from "@/lib/track";
+import { FollowUp } from "@/components/ui/FollowUp";
 import { ShareResult } from "@/components/ui/ShareResult";
 import { fairSentence, type ShareSpec } from "@/lib/share";
 
@@ -153,7 +154,8 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
         </label>
       </div>
       {v ? (
-        <div className={`mt-4 rounded-xl border px-4 py-4 ${toneClass}`} aria-live="polite">
+        <>
+          <div className={`mt-4 rounded-xl border px-4 py-4 ${toneClass}`} aria-live="polite">
           <p className="font-serif text-2xl text-ink">{v.head}</p>
           <div className="mt-2 space-y-2 text-[15px] leading-7 text-ink-soft">
             {v.lines.map((l) => (
@@ -161,7 +163,9 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
             ))}
           </div>
           <ShareResult spec={shareSpec} text={`${fairSentence(shareSpec, bench)} Is your rate fair? Check yours:`} />
-        </div>
+          </div>
+          <FollowUp heading="Rates move every week. Keep up" />
+        </>
       ) : (
         <p className="mt-3 text-[13px] text-muted">Type the rate you were offered and the amount. Benchmarks: 364-day bill {bench.bill364Gross.toFixed(2)}%, best published fund {bench.bestFundNet.toFixed(2)}% after tax, bank deposit average {bench.depositAvg.toFixed(2)}%, bank lending average {bench.lendingAvg.toFixed(2)}% ({bench.asOf}).</p>
       )}

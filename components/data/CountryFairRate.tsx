@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { track } from "@/lib/track";
+import { FollowUp } from "@/components/ui/FollowUp";
 import type { CountryBench } from "@/lib/data/west-africa-rates";
 
 /**
@@ -106,14 +107,31 @@ export function CountryFairRate({ bench }: { bench: CountryBench }) {
         </label>
       </div>
       {v ? (
-        <div className={`mt-4 rounded-xl border px-4 py-4 ${toneClass}`} aria-live="polite">
+        <>
+          <div className={`mt-4 rounded-xl border px-4 py-4 ${toneClass}`} aria-live="polite">
           <p className="font-serif text-2xl text-ink">{v.head}</p>
           <div className="mt-2 space-y-2 text-[15px] leading-7 text-ink-soft">
             {v.lines.map((l) => (
               <p key={l}>{l}</p>
             ))}
           </div>
-        </div>
+          </div>
+          {bench.currency === "NGN" ? (
+            <FollowUp
+              heading="Rates move every month. Keep up"
+              alert="ng_savings_bond"
+              alertTitle="Each month: Nigeria’s new FGN Savings Bond rates"
+              alertNote="One short email when the DMO publishes the new offer, with the rates and dates."
+            />
+          ) : (
+            <FollowUp
+              heading="Rates move every month. Keep up"
+              alert="policy_change"
+              alertTitle="When a central bank changes its rate"
+              alertNote="One short email when the Bank of Ghana, the CBN or another central bank we follow moves its policy rate."
+            />
+          )}
+        </>
       ) : (
         <p className="mt-3 text-[13px] text-muted">
           Type the rate you were offered and the amount. Best published saving option: {best.label} {best.rate.toFixed(2)}%. Banks&rsquo; average savings rate{" "}

@@ -4,9 +4,9 @@
  "checked_on": "2026-10-09",
  "summary": {
   "failed": 0,
-  "late": 3,
+  "late": 2,
   "gap": 1,
-  "ok": 27
+  "ok": 28
  },
  "items": [
   {
@@ -26,15 +26,6 @@
    "latest": "2026-10-01",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
-  },
-  {
-   "area": "T-bill auctions",
-   "name": "Ghana",
-   "status": "late",
-   "detail": "latest auction 25 Sep; it usually auctions weekly",
-   "latest": "2026-09-25",
-   "due_by": "2026-10-06",
-   "link": "/markets/tbills/ghana"
   },
   {
    "area": "Policy rates",
@@ -85,9 +76,9 @@
    "area": "Eurobond yields",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "latest prices 07 Oct",
-   "latest": "2026-10-07",
-   "due_by": "2026-10-11",
+   "detail": "latest prices 08 Oct",
+   "latest": "2026-10-08",
+   "due_by": "2026-10-12",
    "link": "/markets/eurobonds"
   },
   {
@@ -215,6 +206,15 @@
    "latest": "2026-10-06",
    "due_by": "2026-10-17",
    "link": "/markets/tbills/egypt"
+  },
+  {
+   "area": "T-bill auctions",
+   "name": "Ghana",
+   "status": "ok",
+   "detail": "latest auction 02 Oct (auctions weekly)",
+   "latest": "2026-10-02",
+   "due_by": "2026-10-13",
+   "link": "/markets/tbills/ghana"
   },
   {
    "area": "T-bill auctions",

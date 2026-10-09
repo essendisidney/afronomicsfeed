@@ -3,12 +3,48 @@
  "publisher": "Bank of Ghana",
  "source_page": "https://www.bog.gov.gh/gog_auction_results/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-09-30T11:26:50+00:00",
+ "updated_at": "2026-10-09T09:31:16+00:00",
  "units": {
   "amounts": "GHS millions",
   "rates": "percent per annum (interest-rate equivalent; discount rate also given)"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "tender": 2027,
+   "auction_date": "2026-10-02",
+   "value_date": "2026-10-05",
+   "received_ghs_m": 474.85,
+   "accepted_ghs_m": 224.35,
+   "discount_rate": 8.9268,
+   "weighted_avg_rate": 9.8017,
+   "target_total_ghs_m": 2241.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/10/Auctresult2027.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2027,
+   "auction_date": "2026-10-02",
+   "value_date": "2026-10-05",
+   "received_ghs_m": 235.19,
+   "accepted_ghs_m": 153.69,
+   "discount_rate": 6.1257,
+   "weighted_avg_rate": 6.3193,
+   "target_total_ghs_m": 2241.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/10/Auctresult2027.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2027,
+   "auction_date": "2026-10-02",
+   "value_date": "2026-10-05",
+   "received_ghs_m": 2215.0,
+   "accepted_ghs_m": 1394.54,
+   "discount_rate": 4.5881,
+   "weighted_avg_rate": 4.6413,
+   "target_total_ghs_m": 2241.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/10/Auctresult2027.pdf"
+  },
   {
    "tenor": 364,
    "tender": 2026,
@@ -152,6 +188,186 @@
    "weighted_avg_rate": 4.805,
    "target_total_ghs_m": 6554.0,
    "source": "https://www.bog.gov.gh/wp-content/uploads/2026/09/Auctresults-2023.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2022,
+   "auction_date": "2026-08-28",
+   "value_date": "2026-08-31",
+   "received_ghs_m": 7499.47,
+   "accepted_ghs_m": 2746.64,
+   "discount_rate": 9.7292,
+   "weighted_avg_rate": 10.7778,
+   "target_total_ghs_m": 5147.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2022.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2022,
+   "auction_date": "2026-08-28",
+   "value_date": "2026-08-31",
+   "received_ghs_m": 1287.77,
+   "accepted_ghs_m": 935.22,
+   "discount_rate": 6.6313,
+   "weighted_avg_rate": 6.8587,
+   "target_total_ghs_m": 5147.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2022.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2022,
+   "auction_date": "2026-08-28",
+   "value_date": "2026-08-31",
+   "received_ghs_m": 3557.94,
+   "accepted_ghs_m": 2844.65,
+   "discount_rate": 4.8856,
+   "weighted_avg_rate": 4.946,
+   "target_total_ghs_m": 5147.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2022.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2021,
+   "auction_date": "2026-08-21",
+   "value_date": "2026-08-24",
+   "received_ghs_m": 9939.99,
+   "accepted_ghs_m": 2685.04,
+   "discount_rate": 10.3886,
+   "weighted_avg_rate": 11.593,
+   "target_total_ghs_m": 5428.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2021.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2021,
+   "auction_date": "2026-08-21",
+   "value_date": "2026-08-24",
+   "received_ghs_m": 1204.98,
+   "accepted_ghs_m": 766.21,
+   "discount_rate": 6.8379,
+   "weighted_avg_rate": 7.08,
+   "target_total_ghs_m": 5428.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2021.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2021,
+   "auction_date": "2026-08-21",
+   "value_date": "2026-08-24",
+   "received_ghs_m": 3124.58,
+   "accepted_ghs_m": 2403.59,
+   "discount_rate": 5.0158,
+   "weighted_avg_rate": 5.0795,
+   "target_total_ghs_m": 5428.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2021.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2020,
+   "auction_date": "2026-08-14",
+   "value_date": "2026-08-17",
+   "received_ghs_m": 4931.67,
+   "accepted_ghs_m": 289.7,
+   "discount_rate": 11.1111,
+   "weighted_avg_rate": 12.5,
+   "target_total_ghs_m": 5993.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2020.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2020,
+   "auction_date": "2026-08-14",
+   "value_date": "2026-08-17",
+   "received_ghs_m": 1281.56,
+   "accepted_ghs_m": 526.44,
+   "discount_rate": 7.0169,
+   "weighted_avg_rate": 7.272,
+   "target_total_ghs_m": 5993.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2020.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2020,
+   "auction_date": "2026-08-14",
+   "value_date": "2026-08-17",
+   "received_ghs_m": 5066.69,
+   "accepted_ghs_m": 4065.36,
+   "discount_rate": 5.3944,
+   "weighted_avg_rate": 5.4682,
+   "target_total_ghs_m": 5993.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2020.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2019,
+   "auction_date": "2026-08-07",
+   "value_date": "2026-08-10",
+   "received_ghs_m": 6024.32,
+   "accepted_ghs_m": 5864.32,
+   "discount_rate": 11.4938,
+   "weighted_avg_rate": 12.9864,
+   "target_total_ghs_m": 6217.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2019.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2019,
+   "auction_date": "2026-08-07",
+   "value_date": "2026-08-10",
+   "received_ghs_m": 1910.85,
+   "accepted_ghs_m": 1191.94,
+   "discount_rate": 7.2535,
+   "weighted_avg_rate": 7.5265,
+   "target_total_ghs_m": 6217.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2019.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2019,
+   "auction_date": "2026-08-07",
+   "value_date": "2026-08-10",
+   "received_ghs_m": 3701.66,
+   "accepted_ghs_m": 2362.26,
+   "discount_rate": 5.5508,
+   "weighted_avg_rate": 5.6289,
+   "target_total_ghs_m": 6217.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2019.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2018,
+   "auction_date": "2026-07-31",
+   "value_date": "2026-08-03",
+   "received_ghs_m": 7474.06,
+   "accepted_ghs_m": 7176.98,
+   "discount_rate": 11.4904,
+   "weighted_avg_rate": 12.9821,
+   "target_total_ghs_m": 5866.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/07/Auctresult2018.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2018,
+   "auction_date": "2026-07-31",
+   "value_date": "2026-08-03",
+   "received_ghs_m": 757.93,
+   "accepted_ghs_m": 501.38,
+   "discount_rate": 7.3597,
+   "weighted_avg_rate": 7.6409,
+   "target_total_ghs_m": 5866.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/07/Auctresult2018.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2018,
+   "auction_date": "2026-07-31",
+   "value_date": "2026-08-03",
+   "received_ghs_m": 2273.13,
+   "accepted_ghs_m": 972.94,
+   "discount_rate": 5.68,
+   "weighted_avg_rate": 5.7618,
+   "target_total_ghs_m": 5866.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/07/Auctresult2018.pdf"
   },
   {
    "tenor": 364,
@@ -443,6 +659,42 @@
   },
   {
    "tenor": 364,
+   "tender": 2009,
+   "auction_date": "2026-05-29",
+   "value_date": "2026-06-01",
+   "received_ghs_m": 797.98,
+   "accepted_ghs_m": 797.98,
+   "discount_rate": 9.4689,
+   "weighted_avg_rate": 10.4593,
+   "target_total_ghs_m": null,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2009.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2009,
+   "auction_date": "2026-05-29",
+   "value_date": "2026-06-01",
+   "received_ghs_m": 749.67,
+   "accepted_ghs_m": 705.65,
+   "discount_rate": 6.8038,
+   "weighted_avg_rate": 7.0434,
+   "target_total_ghs_m": null,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2009.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2009,
+   "auction_date": "2026-05-29",
+   "value_date": "2026-06-01",
+   "received_ghs_m": 3368.91,
+   "accepted_ghs_m": 3362.83,
+   "discount_rate": 4.9286,
+   "weighted_avg_rate": 4.9901,
+   "target_total_ghs_m": null,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2009.pdf"
+  },
+  {
+   "tenor": 364,
    "tender": 2008,
    "auction_date": "2026-05-22",
    "value_date": "2026-05-25",
@@ -479,6 +731,78 @@
   },
   {
    "tenor": 364,
+   "tender": 2007,
+   "auction_date": "2026-05-15",
+   "value_date": "2026-05-18",
+   "received_ghs_m": 1255.36,
+   "accepted_ghs_m": 1150.36,
+   "discount_rate": 9.4086,
+   "weighted_avg_rate": 10.3857,
+   "target_total_ghs_m": null,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2007.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2007,
+   "auction_date": "2026-05-15",
+   "value_date": "2026-05-18",
+   "received_ghs_m": 709.83,
+   "accepted_ghs_m": 671.72,
+   "discount_rate": 6.8017,
+   "weighted_avg_rate": 7.0411,
+   "target_total_ghs_m": null,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2007.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2007,
+   "auction_date": "2026-05-15",
+   "value_date": "2026-05-18",
+   "received_ghs_m": 3833.06,
+   "accepted_ghs_m": 3653.06,
+   "discount_rate": 4.8577,
+   "weighted_avg_rate": 4.9174,
+   "target_total_ghs_m": null,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2007.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2006,
+   "auction_date": "2026-05-08",
+   "value_date": "2026-05-11",
+   "received_ghs_m": 1462.76,
+   "accepted_ghs_m": 1.141,
+   "discount_rate": 9.1984,
+   "weighted_avg_rate": 10.1302,
+   "target_total_ghs_m": null,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2006.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2006,
+   "auction_date": "2026-05-08",
+   "value_date": "2026-05-11",
+   "received_ghs_m": 651.22,
+   "accepted_ghs_m": 571.64,
+   "discount_rate": 6.7991,
+   "weighted_avg_rate": 7.0384,
+   "target_total_ghs_m": null,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2006.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2006,
+   "auction_date": "2026-05-08",
+   "value_date": "2026-05-11",
+   "received_ghs_m": 5715.8,
+   "accepted_ghs_m": 4374.28,
+   "discount_rate": 4.8243,
+   "weighted_avg_rate": 4.8832,
+   "target_total_ghs_m": null,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2006.pdf"
+  },
+  {
+   "tenor": 364,
    "tender": 2005,
    "auction_date": "2026-04-30",
    "value_date": "2026-05-04",
@@ -512,6 +836,150 @@
    "weighted_avg_rate": 4.9233,
    "target_total_ghs_m": 5009.0,
    "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresults-2005.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2004,
+   "auction_date": "2026-04-24",
+   "value_date": "2026-04-27",
+   "received_ghs_m": 960.08,
+   "accepted_ghs_m": 522.48,
+   "discount_rate": 9.1932,
+   "weighted_avg_rate": 10.1239,
+   "target_total_ghs_m": 4475.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2004_.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2004,
+   "auction_date": "2026-04-24",
+   "value_date": "2026-04-27",
+   "received_ghs_m": 717.64,
+   "accepted_ghs_m": 664.37,
+   "discount_rate": 6.7287,
+   "weighted_avg_rate": 6.963,
+   "target_total_ghs_m": 4475.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2004_.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2004,
+   "auction_date": "2026-04-24",
+   "value_date": "2026-04-27",
+   "received_ghs_m": 2756.23,
+   "accepted_ghs_m": 2710.25,
+   "discount_rate": 4.8645,
+   "weighted_avg_rate": 4.9244,
+   "target_total_ghs_m": 4475.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2004_.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2003,
+   "auction_date": "2026-04-17",
+   "value_date": "2026-04-20",
+   "received_ghs_m": 1162.18,
+   "accepted_ghs_m": 790.95,
+   "discount_rate": 9.1969,
+   "weighted_avg_rate": 10.1283,
+   "target_total_ghs_m": 4890.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2003.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2003,
+   "auction_date": "2026-04-17",
+   "value_date": "2026-04-20",
+   "received_ghs_m": 771.16,
+   "accepted_ghs_m": 758.04,
+   "discount_rate": 6.6791,
+   "weighted_avg_rate": 6.9099,
+   "target_total_ghs_m": 4890.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2003.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2003,
+   "auction_date": "2026-04-17",
+   "value_date": "2026-04-20",
+   "received_ghs_m": 2555.21,
+   "accepted_ghs_m": 2541.31,
+   "discount_rate": 4.8875,
+   "weighted_avg_rate": 4.948,
+   "target_total_ghs_m": 4890.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2003.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2002,
+   "auction_date": "2026-04-10",
+   "value_date": "2026-04-13",
+   "received_ghs_m": 348.94,
+   "accepted_ghs_m": 162.59,
+   "discount_rate": 9.0734,
+   "weighted_avg_rate": 9.9788,
+   "target_total_ghs_m": 7570.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2002-1.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2002,
+   "auction_date": "2026-04-10",
+   "value_date": "2026-04-13",
+   "received_ghs_m": 521.96,
+   "accepted_ghs_m": 521.96,
+   "discount_rate": 6.5539,
+   "weighted_avg_rate": 6.776,
+   "target_total_ghs_m": 7570.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2002-1.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2002,
+   "auction_date": "2026-04-10",
+   "value_date": "2026-04-13",
+   "received_ghs_m": 4439.39,
+   "accepted_ghs_m": 4428.89,
+   "discount_rate": 4.8511,
+   "weighted_avg_rate": 4.9106,
+   "target_total_ghs_m": 7570.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2002-1.pdf"
+  },
+  {
+   "tenor": 364,
+   "tender": 2001,
+   "auction_date": "2026-04-02",
+   "value_date": "2026-04-06",
+   "received_ghs_m": 648.0,
+   "accepted_ghs_m": 533.0,
+   "discount_rate": 8.9603,
+   "weighted_avg_rate": 9.8422,
+   "target_total_ghs_m": 4673.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2001..pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2001,
+   "auction_date": "2026-04-02",
+   "value_date": "2026-04-06",
+   "received_ghs_m": 498.93,
+   "accepted_ghs_m": 416.93,
+   "discount_rate": 6.4926,
+   "weighted_avg_rate": 6.7104,
+   "target_total_ghs_m": 4673.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2001..pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2001,
+   "auction_date": "2026-04-02",
+   "value_date": "2026-04-06",
+   "received_ghs_m": 2021.63,
+   "accepted_ghs_m": 1998.63,
+   "discount_rate": 4.7597,
+   "weighted_avg_rate": 4.817,
+   "target_total_ghs_m": 4673.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2001..pdf"
   },
   {
    "tenor": 364,
@@ -16170,6 +16638,110 @@
    ]
   },
   "https://www.bog.gov.gh/wp-content/uploads/2026/09/Auctresults-2026.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2001..pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2002-1.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2003.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/04/Auctresult-2004_.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2006.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2007.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/05/Auctresult-2009.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/07/Auctresult2018.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2019.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2020.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2021.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/08/Auctresult2022.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/10/Auctresult2027.pdf": {
    "status": "parsed",
    "tenors": [
     91,

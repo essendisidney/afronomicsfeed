@@ -102,6 +102,34 @@ def etica() -> dict:
     return {**base, "source": "https://eticacap.com/", "status": "no fact sheet for the last three months"}
 
 
+NCBA = "https://ncbagroup.com/investment-banking/money-market-fund/"
+
+
+def ncba(max_age_days: int = 10) -> dict:
+    """NCBA prints a dated block per fund ("NCBA Money Market Fund (KES) August 18, 2026 Daily Yield x% Effective
+    Annual Rate y%"); a banner above it carries a different, unlabelled figure, so only the named KES block is
+    read. The page is not updated daily: a figure older than `max_age_days` is not published as current."""
+    base = {"name": "NCBA Money Market Fund (KES)", "manager": "NCBA Investment Bank", "source": NCBA}
+    try:
+        t = text_of(NCBA)
+    except Exception as error:
+        return {**base, "status": f"error: {str(error)[:80]}"}
+    m = re.search(r"NCBA Money Market Fund \(KES\)\s*([A-Z][a-z]+ \d{1,2},? \d{4})\s*Daily Yield\s*([\d.]+)%\s*Effective Annual Rate\s*([\d.]+)%", t)
+    if not m:
+        return {**base, "status": "pattern not found"}
+    try:
+        dated = datetime.strptime(m.group(1).replace(",", ""), "%B %d %Y").date()
+    except ValueError:
+        return {**base, "status": f"unreadable date: {m.group(1)}"}
+    age = (datetime.now(NAIROBI).date() - dated).days
+    if age > max_age_days:
+        return {**base, "status": f"stale: the manager's page was last updated {dated:%d %b %Y}"}
+    daily, effective = num(m.group(2)), num(m.group(3))
+    if effective is None or not (0 < effective < 40):
+        return {**base, "status": "implausible"}
+    return {**base, "status": "ok", "daily_yield": daily, "effective_annual_yield": effective}
+
+
 def bank_rates() -> list[dict]:
     """The CBK page is a wpDataTables table served through admin-ajax (table_id 17): ask for every row at once;
     fall back to the ten rows rendered in the page when that fails."""
@@ -184,6 +212,7 @@ def main() -> int:
     with ThreadPoolExecutor(max_workers=4) as pool:
         funds = list(pool.map(fund, FUNDS))
     funds.append(etica())
+    funds.append(ncba())
     ok = [f for f in funds if f["status"] == "ok"]
     print(f"bank months: {len(banks)} (latest {banks[0]['month'] if banks else '-'}); funds read: {len(ok)}/{len(funds)}")
     for f in funds:

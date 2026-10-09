@@ -26,7 +26,7 @@ export type RateOption = {
 type RatesFile = {
   updated_at?: string;
   bank_rates?: { source: string; rows: { month: string; deposit: number; savings: number; lending: number; overdraft: number }[] };
-  money_market_funds?: { as_of: string; rows: { name: string; manager: string; source: string; daily_yield: number | null; effective_annual_yield: number }[]; unread?: { name: string; status: string }[] };
+  money_market_funds?: { as_of: string; rows: { name: string; manager: string; source: string; daily_yield: number | null; effective_annual_yield: number; basis?: string; period_end?: string }[]; unread?: { name: string; status: string }[] };
 };
 
 const FILE = path.join(process.cwd(), "data", "kenya", "rates.json");
@@ -87,8 +87,8 @@ export function rateOptions(): { options: RateOption[]; unread: { name: string; 
       gross: f.effective_annual_yield,
       tax: WHT_INTEREST,
       net: f.effective_annual_yield * (1 - WHT_INTEREST),
-      asOf: (file.money_market_funds?.as_of ?? "").slice(0, 10),
-      basis: "effective annual yield published by the manager",
+      asOf: f.period_end ?? (file.money_market_funds?.as_of ?? "").slice(0, 10),
+      basis: f.basis ?? "effective annual yield published by the manager",
       lockIn: "none; usually 2 to 3 days to withdraw",
       source: f.source,
       publisher: f.manager,
@@ -153,7 +153,7 @@ export function fairBench() {
   };
 }
 
-type FundReading = { date: string; name: string; manager: string; source: string; daily_yield: number | null; effective_annual_yield: number };
+type FundReading = { date: string; name: string; manager: string; source: string; daily_yield: number | null; effective_annual_yield: number; basis?: string };
 
 const HISTORY_FILE = path.join(process.cwd(), "data", "kenya", "mmf_history.json");
 
@@ -171,6 +171,8 @@ export type FundRow = {
   gross: number; // latest effective annual yield, % before fees and tax
   net: number; // after 15% withholding tax
   daily: number | null;
+  /** How the yield is published when it is not the manager's current daily figure (e.g. a month's average from a fact sheet). */
+  basis: string | null;
   readOn: string; // last day the yield was read
   firstRead: string;
   /** First day of the current run of identical readings: the yield has not moved since then. */
@@ -197,6 +199,7 @@ export function fundLeague(): FundRow[] {
       gross: last.effective_annual_yield,
       net: last.effective_annual_yield * (1 - WHT_INTEREST),
       daily: last.daily_yield,
+      basis: last.basis ?? null,
       readOn: last.date,
       firstRead: readings[0].date,
       unchangedSince: since,

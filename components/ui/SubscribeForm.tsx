@@ -28,7 +28,7 @@ export function SubscribeForm({ tone = "paper", button = "Get it free" }: { tone
       if (response.ok && body.ok) {
         setState("done");
         track("newsletter_signup");
-        setMessage("You’re in. The next Morning lands at 7:00 on the next weekday.");
+        setMessage("You’re in. Your guide is on its way to your inbox, and the Morning lands at 7:00 on weekdays.");
         setEmail("");
       } else {
         setState("error");
@@ -76,7 +76,7 @@ export function SubscribeForm({ tone = "paper", button = "Get it free" }: { tone
             <>
               {" "}
               <Link href={GUIDE_HREF} className="font-semibold underline underline-offset-2">
-                Your free guide: where your shilling earns most →
+                Or open the guide now →
               </Link>
             </>
           ) : null}

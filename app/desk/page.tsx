@@ -6,6 +6,8 @@ import { SectionTitle } from "@/components/data/parts";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { loadBonds } from "@/lib/data/kenya-bonds";
 import { loadKenyaRates } from "@/lib/data/kenya-rates";
+import { loadHealth } from "@/lib/data/health";
+import { HealthList } from "@/components/data/HealthList";
 import { renderTime } from "@/lib/data/fetcher";
 import { rpc } from "@/lib/store";
 import { moneyLabel } from "@/lib/billing/plans";
@@ -169,6 +171,7 @@ export default async function DeskPage() {
   });
   const bonds = loadBonds().rows[0]?.value_date ?? null;
   const rates = loadKenyaRates();
+  const attention = (loadHealth()?.items ?? []).filter((x) => x.status === "late" || x.status === "failed");
   const change = desk.views_prev_7d ? Math.round(((desk.views_7d - desk.views_prev_7d) / desk.views_prev_7d) * 100) : null;
   const apiCalls = desk.api_7d.reduce((n, r) => n + r.calls, 0);
   const downloads = desk.downloads_7d.reduce((n, r) => n + r.views, 0);
@@ -187,6 +190,15 @@ export default async function DeskPage() {
         <Stat label="API calls, 7 days" value={apiCalls} />
         <Stat label="Leads" value={desk.leads_total} note={desk.feedback_found_rate == null ? "no feedback yet" : `${desk.feedback_found_rate}% found what they came for`} />
       </section>
+
+      {attention.length ? (
+        <section className="mt-10">
+          <SectionTitle kicker="Data health" title={`${attention.length} figure${attention.length === 1 ? "" : "s"} late or not read`} note="From the check after the last data run. The public version is at /status." />
+          <div className="mt-4">
+            <HealthList items={attention} />
+          </div>
+        </section>
+      ) : null}
 
       <section className="mt-10">
         <SectionTitle kicker={`Outside readers · counted from ${PEOPLE_FROM}`} title="People, not page views" note="One person = one browser on one day. Your own devices are left out." />

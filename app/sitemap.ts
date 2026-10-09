@@ -5,6 +5,7 @@ import { pairSlug } from "@/lib/data/fx";
 import { indicatorDefs } from "@/lib/data/indicators";
 import { articleHref } from "@/lib/format";
 import { marketDates } from "@/lib/data/market-stories";
+import { mmfMonths } from "@/lib/data/mmf-months";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 import { learnLangs, loadLessons } from "@/lib/learn-i18n";
@@ -34,12 +35,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/rates/kenya", "daily", 0.9),
     page("/guides/where-your-shilling-earns-most", "daily", 0.9),
     page("/rates/kenya/money-market-funds", "daily", 0.9),
+    page("/rates/kenya/best-money-market-fund", "daily", 0.9),
+    ...mmfMonths()
+      .filter((m) => m.complete)
+      .map((m) => page(`/rates/kenya/best-money-market-fund/${m.month}`, "monthly", 0.6)),
     page("/rates/remittances", "monthly", 0.8),
     page("/rates/what-readers-paid", "daily", 0.8),
     page("/rates/kenya/saccos", "monthly", 0.8),
     page("/rates/nigeria/check", "weekly", 0.8),
     page("/rates/ghana/check", "weekly", 0.8),
     page("/rates/policy", "daily", 0.9),
+    page("/status", "daily", 0.5),
     page("/learn", "weekly", 0.9),
     page("/rates/nigeria/savings-bond", "weekly", 0.9),
     ...learnLangs.flatMap((l) => [page(`/learn/${l}`, "weekly", 0.8), ...loadLessons(l).map((x) => page(`/learn/${l}/${x.slug}`, "monthly", 0.7))]),

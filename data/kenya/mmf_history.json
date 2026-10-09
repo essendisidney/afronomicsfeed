@@ -34,7 +34,8 @@
 "source": "https://eticacap.com/wp-content/uploads/2026/10/Etica-Unit-Trust-Funds-Fact-Sheet-September-30-2026.pdf",
 "daily_yield": null,
 "effective_annual_yield": 10.33,
-"basis": "average for September 2026, net of fees, from the monthly fact sheet"
+"basis": "average for September 2026, net of fees, from the monthly fact sheet",
+"period_end": "2026-09-30"
 },
 {
 "date": "2026-10-09",
@@ -165,14 +166,6 @@
 "effective_annual_yield": 10.41
 },
 {
-"date": "2026-10-05",
-"name": "Etica Money Market Fund (KES)",
-"manager": "Etica Capital",
-"source": "https://www.eticacap.com/",
-"daily_yield": null,
-"effective_annual_yield": 17.55
-},
-{
 "date": "2026-10-02",
 "name": "Zimele Fixed Income Fund (Savings Plan)",
 "manager": "Zimele Asset Management",
@@ -197,14 +190,6 @@
 "effective_annual_yield": 10.41
 },
 {
-"date": "2026-10-02",
-"name": "Etica Money Market Fund (KES)",
-"manager": "Etica Capital",
-"source": "https://www.eticacap.com/",
-"daily_yield": null,
-"effective_annual_yield": 17.55
-},
-{
 "date": "2026-10-01",
 "name": "Zimele Fixed Income Fund (Savings Plan)",
 "manager": "Zimele Asset Management",
@@ -227,14 +212,6 @@
 "source": "https://www.orientasset.co.ke/",
 "daily_yield": 9.9,
 "effective_annual_yield": 10.41
-},
-{
-"date": "2026-10-01",
-"name": "Etica Money Market Fund (KES)",
-"manager": "Etica Capital",
-"source": "https://www.eticacap.com/",
-"daily_yield": null,
-"effective_annual_yield": 17.55
 }
 ]
 }

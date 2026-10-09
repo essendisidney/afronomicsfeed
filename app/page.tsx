@@ -91,24 +91,39 @@ export default async function HomePage() {
             <p className="mt-6 max-w-xl text-[17px] leading-7 text-night-soft">{site.promise}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               {[
-                { href: "#saving", label: "I’m saving" },
-                { href: "#borrowing", label: "I’m borrowing" },
-                { href: "#business", label: "I run a business" },
-                { href: "#institutions", label: "I’m an institution" },
-              ].map((door, i) => (
-                <a
-                  key={door.href}
-                  href={door.href}
+                { href: "/rates/kenya/check", label: "Is my rate fair?" },
+                { href: "/rates/kenya", label: "Today’s rates" },
+                { href: "/rates/what-readers-paid", label: "What did others pay?" },
+              ].map((action, i) => (
+                <Link
+                  key={action.href}
+                  href={action.href}
                   className={
                     i === 0
                       ? "rounded-full bg-accent px-5 py-2.5 text-[15px] font-semibold text-night hover:bg-gold-soft"
                       : "rounded-full border border-night-line px-5 py-2.5 text-[15px] font-medium text-night-ink hover:border-night-soft/50 hover:bg-night-2"
                   }
                 >
-                  {door.label}
-                </a>
+                  {action.label}
+                </Link>
               ))}
             </div>
+            <p className="mt-4 text-[14px] text-night-muted">
+              Or start from where you are:{" "}
+              {[
+                { href: "#saving", label: "saving" },
+                { href: "#borrowing", label: "borrowing" },
+                { href: "#business", label: "running a business" },
+                { href: "#institutions", label: "an institution" },
+              ].map((door, i, all) => (
+                <span key={door.href}>
+                  <a href={door.href} className="text-night-ink underline underline-offset-4 hover:text-accent">
+                    {door.label}
+                  </a>
+                  {i < all.length - 1 ? " · " : ""}
+                </span>
+              ))}
+            </p>
             <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 sm:gap-8">
               {[
                 { k: "economies covered", v: 54 },

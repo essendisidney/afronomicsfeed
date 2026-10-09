@@ -7,8 +7,26 @@ One post each weekday at about 07:25 Nairobi, from the data on main the same mor
 | --- | --- | --- |
 | Mon | Africa's money this week | policy rates (data/policy_rates.json → /rates/policy); the Sovereign Bill Index, if the Monday release is out (/markets/bill-index); decisions due in the next 14 days (data/mpc_calendar.json → /rates/policy#calendar) |
 | Tue | A money lesson in plain words | one lesson from /learn (English) or a Kiswahili one (content/learn/sw → /learn/sw/<slug>); state one practical point and link the lesson |
-| Wed | Across Africa | Eurobond yields, Nigeria and Kenya (data/eurobonds.json → /markets/eurobonds); Nigeria or Ghana bank rates vs bills (data/nigeria|ghana/bank_rates.json → /rates/nigeria/check, /rates/ghana/check); cost of sending money home (data/remittances/corridors.json → /rates/remittances); one other country's latest bill auction (data/<country>/tbill_auctions.json → /markets/tbills/<country>) |
+| Wed | **Story day**: one new data story, published on the site, then posted | see "Wednesday story" below; "across Africa" topics (Eurobonds, Nigeria/Ghana rates vs bills, remittances, another country's bill auction) are good story material |
 | Fri | What it costs you | mobile loan costs (data/kenya/mobile_loans.json → /rates/kenya/mobile-loans); where the shilling earns most / money market funds (data/kenya/rates.json → /rates/kenya, /rates/kenya/money-market-funds); SACCO returns (data/kenya/saccos.json → /rates/kenya/saccos); what readers paid (reader report medians, only items with 3+ reports → /rates/what-readers-paid); always end Friday's post with an invitation to add yours at afronomicsfeed.com/pay |
+
+## Wednesday story
+
+Every Wednesday the routine writes one new brief in content/briefs/<slug>.md and publishes it before posting.
+
+- One surprising, checkable finding from the data on main (data/*.json): a gap, a record, a turn, a comparison
+  people have not seen. The title says the finding in plain words ("Kenya's one-year bill pays 0.27 points more for
+  four times the wait"), not the topic.
+- Same frontmatter as content/briefs/savers-lost-more-than-borrowers-gained.md: title, date, authors
+  ["Afronomics Desk"], category brief, labels [Facts, Analysis], topics, institutions, sources (each the publisher's
+  own document with its URL and date), asOf, summary, teaser (3 bullets with numbers), gated false, urgency, minutes,
+  fileFor, soWhat, unknowns. Body: 300–600 words with short headed sections, a small table where it helps, every
+  figure traceable to a source listed, the arithmetic shown, no forecasts or advice, ending with what to watch.
+- Do not repeat a story topic from the last 8 weeks of content/briefs/ unless the numbers have changed.
+- Publish: branch, PR, squash-merge; wait for the production deploy of that commit (Vercel deployments for the
+  commit sha reach READY), then post on LinkedIn with the story link
+  (https://www.afronomicsfeed.com/brief/<slug>?utm_source=linkedin&utm_medium=social&utm_campaign=story): 100–180 words,
+  the finding first, 3–5 numbers, "What to watch", the link, 3–5 hashtags including #Afronomics.
 
 ## Rules
 

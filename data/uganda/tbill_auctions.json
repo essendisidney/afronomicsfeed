@@ -3,7 +3,7 @@
  "publisher": "Bank of Uganda",
  "source_page": "https://www.bou.or.ug/bouwebsite/FinancialMarkets/tbillsauctionresults.html",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-09-30T12:16:49+00:00",
+ "updated_at": "2026-10-09T07:53:37+00:00",
  "units": {
   "amounts": "UGX millions",
   "rates": "money-market yield, percent per annum (discount rate and effective yield also given)"
@@ -434,6 +434,102 @@
    "bid_to_cover": 5.351,
    "source": "https://bou.or.ug/uploads/Press_Release_for_T_Bills_Auction_25_March_2026_a41027e3bf.pdf",
    "read_by": "ocr"
+  },
+  {
+   "tenor": 364,
+   "auction_no": 1224,
+   "auction_date": "2026-03-11",
+   "value_date": "2026-03-12",
+   "offered_ugx_m": 255000.0,
+   "received_ugx_m": 635105.2,
+   "accepted_ugx_m": 112130.2,
+   "discount_rate": 10.717,
+   "weighted_avg_rate": 12.0,
+   "effective_yield": 12.002,
+   "price_per_100": 89.312,
+   "bid_to_cover": 5.664,
+   "read_by": "ocr",
+   "source": "https://bou.or.ug/uploads/Press_Release_T_Bills_auction_11_Mar_2026_79d38ad496.pdf"
+  },
+  {
+   "tenor": 182,
+   "auction_no": 1224,
+   "auction_date": "2026-03-11",
+   "value_date": "2026-03-12",
+   "offered_ugx_m": 75000.0,
+   "received_ugx_m": 82715.7,
+   "accepted_ugx_m": 13960.7,
+   "discount_rate": 10.629,
+   "weighted_avg_rate": 11.224,
+   "effective_yield": 11.54,
+   "price_per_100": 94.7,
+   "bid_to_cover": 5.925,
+   "read_by": "ocr",
+   "source": "https://bou.or.ug/uploads/Press_Release_T_Bills_auction_11_Mar_2026_79d38ad496.pdf"
+  },
+  {
+   "tenor": 91,
+   "auction_no": 1224,
+   "auction_date": "2026-03-11",
+   "value_date": "2026-03-12",
+   "offered_ugx_m": 25000.0,
+   "received_ugx_m": 190077.6,
+   "accepted_ugx_m": 58122.6,
+   "discount_rate": 9.995,
+   "weighted_avg_rate": 10.251,
+   "effective_yield": 10.652,
+   "price_per_100": 97.508,
+   "bid_to_cover": 3.27,
+   "read_by": "ocr",
+   "source": "https://bou.or.ug/uploads/Press_Release_T_Bills_auction_11_Mar_2026_79d38ad496.pdf"
+  },
+  {
+   "tenor": 364,
+   "auction_no": 1223,
+   "auction_date": "2026-02-25",
+   "value_date": "2026-02-26",
+   "offered_ugx_m": 255000.0,
+   "received_ugx_m": 647113.0,
+   "accepted_ugx_m": 314388.0,
+   "discount_rate": 10.717,
+   "weighted_avg_rate": 12.0,
+   "effective_yield": 12.002,
+   "price_per_100": 89.312,
+   "bid_to_cover": 2.058,
+   "read_by": "ocr",
+   "source": "https://bou.or.ug/uploads/Press_Release_T_Bills_auction_25_Feb_2026_e30af1d8cc.pdf"
+  },
+  {
+   "tenor": 182,
+   "auction_no": 1223,
+   "auction_date": "2026-02-25",
+   "value_date": "2026-02-26",
+   "offered_ugx_m": 75000.0,
+   "received_ugx_m": 100210.2,
+   "accepted_ugx_m": 11455.2,
+   "discount_rate": 10.765,
+   "weighted_avg_rate": 11.376,
+   "effective_yield": 11.701,
+   "price_per_100": 94.632,
+   "bid_to_cover": 8.748,
+   "read_by": "ocr",
+   "source": "https://bou.or.ug/uploads/Press_Release_T_Bills_auction_25_Feb_2026_e30af1d8cc.pdf"
+  },
+  {
+   "tenor": 91,
+   "auction_no": 1223,
+   "auction_date": "2026-02-25",
+   "value_date": "2026-02-26",
+   "offered_ugx_m": 25000.0,
+   "received_ugx_m": 47436.6,
+   "accepted_ugx_m": 16181.6,
+   "discount_rate": 10.737,
+   "weighted_avg_rate": 11.033,
+   "effective_yield": 11.498,
+   "price_per_100": 97.323,
+   "bid_to_cover": 2.932,
+   "read_by": "ocr",
+   "source": "https://bou.or.ug/uploads/Press_Release_T_Bills_auction_25_Feb_2026_e30af1d8cc.pdf"
   },
   {
    "tenor": 364,
@@ -5081,6 +5177,51 @@
   },
   {
    "tenor": 364,
+   "auction_no": 1078,
+   "auction_date": "2020-07-15",
+   "value_date": "2020-07-16",
+   "offered_ugx_m": 195000.0,
+   "received_ugx_m": 300673.1,
+   "accepted_ugx_m": 260923.1,
+   "discount_rate": 10.717,
+   "weighted_avg_rate": 12.0,
+   "effective_yield": 12.002,
+   "price_per_100": 89.312,
+   "bid_to_cover": 1.542,
+   "source": "https://bou.or.ug/uploads/Press_Release_T_Bill_Auction_15th_JUL_2020_8223aa017c.pdf"
+  },
+  {
+   "tenor": 182,
+   "auction_no": 1078,
+   "auction_date": "2020-07-15",
+   "value_date": "2020-07-16",
+   "offered_ugx_m": 35000.0,
+   "received_ugx_m": 92839.1,
+   "accepted_ugx_m": 35834.1,
+   "discount_rate": 9.524,
+   "weighted_avg_rate": 9.999,
+   "effective_yield": 10.25,
+   "price_per_100": 95.251,
+   "bid_to_cover": 2.653,
+   "source": "https://bou.or.ug/uploads/Press_Release_T_Bill_Auction_15th_JUL_2020_8223aa017c.pdf"
+  },
+  {
+   "tenor": 91,
+   "auction_no": 1078,
+   "auction_date": "2020-07-15",
+   "value_date": "2020-07-16",
+   "offered_ugx_m": 15000.0,
+   "received_ugx_m": 12086.6,
+   "accepted_ugx_m": 11086.6,
+   "discount_rate": 8.495,
+   "weighted_avg_rate": 8.679,
+   "effective_yield": 8.966,
+   "price_per_100": 97.882,
+   "bid_to_cover": 0.806,
+   "source": "https://bou.or.ug/uploads/Press_Release_T_Bill_Auction_15th_JUL_2020_8223aa017c.pdf"
+  },
+  {
+   "tenor": 364,
    "auction_no": 1077,
    "auction_date": "2020-07-01",
    "value_date": "2020-07-02",
@@ -6622,7 +6763,7 @@
   },
   "https://bou.or.ug/uploads/Press_release_T_bill_06_MAY_2026_d00c70b816.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Press_Release_for_T_Bills_Auction_08_April_2026_2ae21f349b.pdf": {
    "status": "parsed",
@@ -6652,12 +6793,22 @@
    ]
   },
   "https://bou.or.ug/uploads/Press_Release_T_Bills_auction_11_Mar_2026_79d38ad496.pdf": {
-   "status": "unparsed",
-   "reason": "not a pdf"
+   "status": "parsed",
+   "ocr": true,
+   "tenors": [
+    91,
+    182,
+    364
+   ]
   },
   "https://bou.or.ug/uploads/Press_Release_T_Bills_auction_25_Feb_2026_e30af1d8cc.pdf": {
-   "status": "unparsed",
-   "reason": "not a pdf"
+   "status": "parsed",
+   "ocr": true,
+   "tenors": [
+    91,
+    182,
+    364
+   ]
   },
   "https://bou.or.ug/uploads/Press_release_Tbill_auction_11th_FEB_2026_11ca30c210.pdf": {
    "status": "parsed",
@@ -7628,7 +7779,7 @@
   },
   "https://bou.or.ug/uploads/Press_Release_Treasury_Bill_Auction_Results_Issue_Number_1075_9cd871a07f.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Press_Release_T_Bill_Auction_29_JUL_2020_fb1c56532e.pdf": {
    "status": "parsed",
@@ -7641,11 +7792,11 @@
   },
   "https://bou.or.ug/uploads/Treasury_Bill_Auction_Results_Issue_Number_1064_f9775cd2bc.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Treasury_Bill_Auction_Results_Issue_Number_1069_56a37b3d1d.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Press_Release_T_Bill_Auction_01_JUL_2020_6231bd5d1f.pdf": {
    "status": "parsed",
@@ -7676,27 +7827,32 @@
   },
   "https://bou.or.ug/uploads/Treasury_Bill_Auction_Results_Issue_Number_1066_6389114823.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Treasury_Bill_Auction_Results_Issue_Number_1068_9a3981dd94.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Press_Release_T_Bill_Auction_15th_JUL_2020_8223aa017c.pdf": {
-   "status": "unparsed",
-   "reason": "not a pdf"
+   "status": "parsed",
+   "ocr": false,
+   "tenors": [
+    91,
+    182,
+    364
+   ]
   },
   "https://bou.or.ug/uploads/Treasury_Bill_Auction_Results_Issue_Number_1065_05d2d19784.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Treasury_Bill_Auction_Results_Issue_Number_1067_225120ffc6.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Treasury_Bill_Auction_Results_Issue_Number_1062_3ce2c9d384.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1045_3918bb6b2d.pdf": {
    "status": "parsed",
@@ -7847,7 +8003,7 @@
   },
   "https://bou.or.ug/uploads/PRESS_RELEASE_TBILL_RESULTS_01_AUG_2018_6aad2c0cc7.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_1029_53d81b6602.pdf": {
    "status": "parsed",
@@ -7860,7 +8016,7 @@
   },
   "https://bou.or.ug/uploads/PRESS_RELEASE_TBILL_RESULTS_18_JUL_2018_5ea1fa4e2c.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/PRESS_RELEASE_RESULTS_TBILL_AUCTION_NO_1024_70416e2521.pdf": {
    "status": "parsed",
@@ -7903,7 +8059,7 @@
   },
   "https://bou.or.ug/uploads/Press_Release_Treasury_Bill_Issue_Number_1012_7bd54872f7.pdf": {
    "status": "unparsed",
-   "reason": "image notice, OCR unavailable"
+   "reason": "no table found"
   },
   "https://bou.or.ug/uploads/PRESS_RESULTS_FOR_TBILLS_of_17th_Jan_2018_913edaa865.pdf": {
    "status": "parsed",
@@ -7976,6 +8132,10 @@
     182,
     364
    ]
+  },
+  "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_30_SEP_2026_032913612f.docx": {
+   "status": "unparsed",
+   "reason": "not a pdf (starts b'PK\\x03\\x04\\x14\\x00\\x06\\x00\\x08\\x00\\x00\\x00!\\x00\\x1e}\\x04\\x02\\x9e\\x01\\x00\\x00\\xc6\\x06')"
   }
  }
 }

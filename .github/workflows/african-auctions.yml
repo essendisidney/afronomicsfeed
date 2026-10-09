@@ -82,9 +82,11 @@ jobs:
       - name: Uganda T-bills
         run: |
           sudo apt-get install -y -qq tesseract-ocr >/dev/null && pip install -q pytesseract
-          python scripts/uganda_tbills.py
+          python scripts/uganda_tbills.py --budget 600
+        env:
+          OMP_THREAD_LIMIT: "1"  # four notices are read at once: stop each Tesseract also spawning a thread per core
         continue-on-error: true
-        timeout-minutes: 15
+        timeout-minutes: 20
       - name: Commit if the dataset changed
         run: |
           if git diff --quiet -- data && [ -z "$(git ls-files --others --exclude-standard data)" ]; then

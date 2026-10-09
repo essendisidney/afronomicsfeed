@@ -157,14 +157,25 @@ def ocr_text(pdf: bytes) -> str:
     parts = []
     for i in range(min(2, len(doc))):
         image = doc[i].render(scale=300 / 72).to_pil().convert("L")
-        parts.append(pytesseract.image_to_string(image, config="--psm 6"))
+        parts.append(pytesseract.image_to_string(image, config="--psm 6", timeout=120))
     return "\n".join(parts)
+
+
+def download(session: requests.Session, url: str, limit: float = 90) -> bytes:
+    """The whole file within `limit` seconds: a server trickling bytes never trips the read timeout alone."""
+    start, chunks = time.monotonic(), []
+    with session.get(url, headers=UA, timeout=(15, 60), verify=False, stream=True) as r:
+        for chunk in r.iter_content(65536):
+            chunks.append(chunk)
+            if time.monotonic() - start > limit:
+                raise TimeoutError(f"download took over {limit:.0f}s")
+    return b"".join(chunks)
 
 
 def fetch_and_parse(notice: dict, session: requests.Session):
     for attempt in range(3):
         try:
-            pdf = session.get(notice["url"], headers=UA, timeout=(15, 60), verify=False).content
+            pdf = download(session, notice["url"])
             if not pdf.startswith(b"%PDF"):
                 return notice, [], "not a pdf", False
             with pdfplumber.open(io.BytesIO(pdf)) as doc:
@@ -190,6 +201,7 @@ def fetch_and_parse(notice: dict, session: requests.Session):
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--full", action="store_true")
+    parser.add_argument("--budget", default=600, help="seconds after which no new batch of notices is started")
     args = parser.parse_args()
 
     existing = {"rows": [], "sources": {}}
@@ -208,30 +220,44 @@ def main() -> int:
     rows = list(existing.get("rows", []))
     sources = dict(existing.get("sources", {}))
     failures = []
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        for notice, parsed, reason, used_ocr in pool.map(lambda n: fetch_and_parse(n, session), notices):
-            if not parsed:
-                failures.append((notice["title"], reason))
-                sources[notice["url"]] = {"status": "unparsed", "reason": reason or "no table found"}
-                continue
-            for row in parsed:
-                row["source"] = notice["url"]
-                rows.append(row)
-            sources[notice["url"]] = {"status": "parsed", "ocr": used_ocr, "tenors": [r["tenor"] for r in parsed]}
 
-    unique = {(r["auction_no"], r["tenor"]): r for r in rows}
-    ordered = sorted(unique.values(), key=lambda r: (r.get("value_date") or "", r["tenor"]), reverse=True)
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps({
-        "dataset": "Uganda Treasury bill auctions",
-        "publisher": "Bank of Uganda",
-        "source_page": SOURCE_PAGE,
-        "compiled_by": "Afronomics (afronomicsfeed.com)",
-        "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "units": {"amounts": "UGX millions", "rates": "money-market yield, percent per annum (discount rate and effective yield also given)"},
-        "rows": ordered,
-        "sources": sources,
-    }, ensure_ascii=False, indent=1), encoding="utf-8")
+    def save() -> list[dict]:
+        unique = {(r["auction_no"], r["tenor"]): r for r in rows}
+        ordered = sorted(unique.values(), key=lambda r: (r.get("value_date") or "", r["tenor"]), reverse=True)
+        OUT.parent.mkdir(parents=True, exist_ok=True)
+        OUT.write_text(json.dumps({
+            "dataset": "Uganda Treasury bill auctions",
+            "publisher": "Bank of Uganda",
+            "source_page": SOURCE_PAGE,
+            "compiled_by": "Afronomics (afronomicsfeed.com)",
+            "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "units": {"amounts": "UGX millions", "rates": "money-market yield, percent per annum (discount rate and effective yield also given)"},
+            "rows": ordered,
+            "sources": sources,
+        }, ensure_ascii=False, indent=1), encoding="utf-8")
+        return ordered
+
+    # Newest notices first, saved after every batch, and no new batch once the time budget is spent: a slow day
+    # keeps what it read and the next run carries on from there.
+    start = time.monotonic()
+    budget = float(args.budget)
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        for i in range(0, len(notices), 4):
+            if i and time.monotonic() - start > budget:
+                print(f"time budget spent; {len(notices) - i} notices left for the next run", flush=True)
+                break
+            for notice, parsed, reason, used_ocr in pool.map(lambda n: fetch_and_parse(n, session), notices[i : i + 4]):
+                print(f"  {notice['title'][:90]}: {'parsed ' + str(len(parsed)) + ' tenors' if parsed else reason}", flush=True)
+                if not parsed:
+                    failures.append((notice["title"], reason))
+                    sources[notice["url"]] = {"status": "unparsed", "reason": reason or "no table found"}
+                    continue
+                for row in parsed:
+                    row["source"] = notice["url"]
+                    rows.append(row)
+                sources[notice["url"]] = {"status": "parsed", "ocr": used_ocr, "tenors": [r["tenor"] for r in parsed]}
+            ordered = save()
+
     parsed_count = sum(1 for s in sources.values() if s.get("status") == "parsed")
     print(f"rows: {len(ordered)} | notices parsed: {parsed_count} | unparsed this run: {len(failures)}")
     for title, reason in failures[:40]:

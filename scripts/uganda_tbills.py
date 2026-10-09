@@ -17,6 +17,7 @@ import io
 import json
 import re
 import sys
+import threading
 import time
 import warnings
 from concurrent.futures import ThreadPoolExecutor
@@ -148,17 +149,27 @@ def checks_pass(row: dict) -> bool:
     return True
 
 
-def ocr_text(pdf: bytes) -> str:
+# PDFium is not thread-safe (parallel renders abort the process with "free(): invalid pointer"): PDF work holds
+# this lock; Tesseract, the slow part, runs outside it.
+PDF_LOCK = threading.Lock()
+IMAGE_MAGIC = (b"\x89PNG", b"\xff\xd8\xff")
+
+
+def ocr_text(data: bytes) -> str:
     if pytesseract is None:
         return ""
-    import pypdfium2 as pdfium  # installed with pdfplumber
+    if data.startswith(IMAGE_MAGIC):  # a notice uploaded as a picture rather than a PDF
+        from PIL import Image
 
-    doc = pdfium.PdfDocument(pdf)
-    parts = []
-    for i in range(min(2, len(doc))):
-        image = doc[i].render(scale=300 / 72).to_pil().convert("L")
-        parts.append(pytesseract.image_to_string(image, config="--psm 6", timeout=120))
-    return "\n".join(parts)
+        images = [Image.open(io.BytesIO(data)).convert("L")]
+    else:
+        import pypdfium2 as pdfium  # installed with pdfplumber
+
+        with PDF_LOCK:
+            doc = pdfium.PdfDocument(data)
+            images = [doc[i].render(scale=300 / 72).to_pil().convert("L") for i in range(min(2, len(doc)))]
+            doc.close()
+    return "\n".join(pytesseract.image_to_string(image, config="--psm 6", timeout=120) for image in images)
 
 
 def download(session: requests.Session, url: str, limit: float = 90) -> bytes:
@@ -176,10 +187,13 @@ def fetch_and_parse(notice: dict, session: requests.Session):
     for attempt in range(3):
         try:
             pdf = download(session, notice["url"])
-            if not pdf.startswith(b"%PDF"):
-                return notice, [], "not a pdf", False
-            with pdfplumber.open(io.BytesIO(pdf)) as doc:
-                text = "\n".join((page.extract_text() or "") for page in doc.pages[:2])
+            if pdf.startswith(IMAGE_MAGIC):
+                text = ""
+            elif not pdf.startswith(b"%PDF"):
+                return notice, [], f"not a pdf (starts {pdf[:24]!r})", False
+            else:
+                with PDF_LOCK, pdfplumber.open(io.BytesIO(pdf)) as doc:
+                    text = "\n".join((page.extract_text() or "") for page in doc.pages[:2])
             rows = parse_notice(text)
             used_ocr = False
             if not rows:
@@ -207,8 +221,13 @@ def main() -> int:
     existing = {"rows": [], "sources": {}}
     if OUT.exists() and not args.full:
         existing = json.loads(OUT.read_text(encoding="utf-8"))
-    # Re-try notices that failed only for lack of OCR, once OCR is available.
-    done = {u for u, s in existing.get("sources", {}).items() if s.get("status") == "parsed" or not (pytesseract and "OCR" in s.get("reason", ""))}
+    # Re-try notices that failed only for lack of OCR, once OCR is available, and .pdf links that served something
+    # else (a notice can be uploaded as a picture, or the server can answer with an error page for a while).
+    def retry(url: str, s: dict) -> bool:
+        reason = s.get("reason", "")
+        return bool(pytesseract and "OCR" in reason) or (reason.startswith("not a pdf") and url.lower().endswith(".pdf"))
+
+    done = {u for u, s in existing.get("sources", {}).items() if s.get("status") == "parsed" or not retry(u, s)}
 
     session = requests.Session()
     notices = [n for n in list_notices(session) if n["url"] not in done]

@@ -17,6 +17,8 @@ export type ShareSpec =
   | { kind: "savings"; monthly: number; years: number; rate: number; lang: ShareLang }
   | { kind: "loan"; amount: number; rate: number; months: number; lang: ShareLang }
   | { kind: "mmf" }
+  /** The monthly money market fund ranking; month (YYYY-MM) for a finished month, absent for the month in progress. */
+  | { kind: "mmf_month"; month: string | null }
   | { kind: "mobile" };
 
 export const shareSources = ["whatsapp", "linkedin", "x", "copy", "native"] as const;
@@ -63,6 +65,11 @@ export function parseShare(q: URLSearchParams): ShareSpec | null {
     return { kind, amount, rate, months, lang: shareLang };
   }
   if (kind === "mmf" || kind === "mobile") return { kind };
+  if (kind === "mmf_month") {
+    const month = q.get("month");
+    if (month != null && !/^20\d\d-(0[1-9]|1[0-2])$/.test(month)) return null;
+    return { kind, month };
+  }
   return null;
 }
 
@@ -83,6 +90,8 @@ export function shareQuery(spec: ShareSpec): URLSearchParams {
     q.set("rate", String(spec.rate));
     q.set("months", String(spec.months));
     if (spec.lang !== "en") q.set("lang", spec.lang);
+  } else if (spec.kind === "mmf_month" && spec.month) {
+    q.set("month", spec.month);
   }
   return q;
 }
@@ -98,6 +107,8 @@ export function sharePath(spec: ShareSpec): { path: string; hash: string } {
       return { path: spec.lang === "en" ? "/learn" : `/learn/${spec.lang}`, hash: "#loan-calculator" };
     case "mmf":
       return { path: "/rates/kenya/money-market-funds", hash: "" };
+    case "mmf_month":
+      return { path: `/rates/kenya/best-money-market-fund${spec.month ? `/${spec.month}` : ""}`, hash: "" };
     case "mobile":
       return { path: "/rates/kenya/mobile-loans", hash: "" };
   }

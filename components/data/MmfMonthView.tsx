@@ -4,8 +4,10 @@ import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { Questions, type QA } from "@/components/seo/Questions";
 import { RateAlertForm } from "@/components/ui/RateAlertForm";
+import { ShareResult } from "@/components/ui/ShareResult";
 import { loadHealth } from "@/lib/data/health";
 import type { MonthRanking } from "@/lib/data/mmf-months";
+import { mmfMonthSentence } from "@/lib/share-card";
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 const when = (s: string) => dateFmt.format(new Date(s));
@@ -136,6 +138,7 @@ export function MmfMonthView({ m, all }: { m: MonthRanking; all: MonthRanking[] 
               Not ranked yet: {m.pending.join(", ")}, which publish{m.pending.length === 1 ? "es" : ""} a monthly figure that is not out for {m.label} yet.
             </p>
           ) : null}
+          <ShareResult spec={{ kind: "mmf_month", month: m.complete ? m.month : null }} text={`Best money market fund in Kenya, ${m.label}: ${mmfMonthSentence(m)}. The full ranking:`} />
           <p className="mt-3 max-w-3xl text-xs leading-5 text-muted">
             A fund’s published yield is its recent return annualised, not a promise of what it will pay; fees may be taken before or after it depending on
             the fund. A yield far above the Treasury bill usually means the fund holds longer or riskier paper. Check the fund’s own documents before you

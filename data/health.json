@@ -3,8 +3,8 @@
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
  "checked_on": "2026-10-10",
  "summary": {
-  "failed": 1,
-  "late": 2,
+  "failed": 2,
+  "late": 1,
   "gap": 1,
   "ok": 28
  },
@@ -13,7 +13,7 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "failed",
-   "detail": "not read on the last run: error: HTTPSConnectionPool(host='www.madison.co.ke', port=443): Read timed out. (read t",
+   "detail": "not read on the last run: error: ReadTimeout: HTTPSConnectionPool(host='www.madison.co.ke', port=443): Read timed out. (read timeout=20)",
    "latest": null,
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
@@ -21,8 +21,8 @@
   {
    "area": "Money market funds",
    "name": "NCBA Money Market Fund (KES)",
-   "status": "late",
-   "detail": "the manager's page was last updated 18 Aug 2026; left out until it is updated",
+   "status": "failed",
+   "detail": "not read on the last run: pattern not found",
    "latest": null,
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"

@@ -1,7 +1,7 @@
 {
  "dataset": "Kenya savings and lending rates",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-10T10:07:34+00:00",
+ "updated_at": "2026-10-10T17:58:42+00:00",
  "bank_rates": {
   "publisher": "Central Bank of Kenya",
   "source": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
@@ -2244,7 +2244,7 @@
  },
  "money_market_funds": {
   "note": "Each yield is read from the fund manager's own website at the time shown; funds publishing yields only as images or PDFs are not yet included.",
-  "as_of": "2026-10-10T10:07:34+00:00",
+  "as_of": "2026-10-10T17:58:42+00:00",
   "rows": [
    {
     "name": "Zimele Fixed Income Fund (Savings Plan)",
@@ -2284,11 +2284,11 @@
   "unread": [
    {
     "name": "Madison Money Market Fund",
-    "status": "error: HTTPSConnectionPool(host='www.madison.co.ke', port=443): Read timed out. (read t"
+    "status": "error: ReadTimeout: HTTPSConnectionPool(host='www.madison.co.ke', port=443): Read timed out. (read timeout=20)"
    },
    {
     "name": "NCBA Money Market Fund (KES)",
-    "status": "stale: the manager's page was last updated 18 Aug 2026"
+    "status": "pattern not found"
    }
   ]
  }

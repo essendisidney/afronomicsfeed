@@ -1,4 +1,4 @@
-# Every weekday, three times: read new central-bank auction results for each market and commit the datasets.
+# Every weekday three times, and once a day at weekends: read new central-bank auction results for each market and commit the datasets.
 # The commit triggers a Vercel deploy, so the site updates itself. The last step sends email rate alerts
 # (needs AF_CRON_SECRET; without it the step skips).
 # Auction days differ (Egypt Sun-Mon, Malawi Tue, Nigeria/Tanzania/Mozambique Wed, Kenya/Zambia Thu, Ghana/South Africa Fri),
@@ -10,6 +10,7 @@ on:
     - cron: "17 7 * * 1-5"  # 10:17 Nairobi
     - cron: "17 12 * * 1-5" # 15:17 Nairobi
     - cron: "47 15 * * 1-5" # 18:47 Nairobi, after late-afternoon postings
+    - cron: "17 9 * * 0,6"  # 12:17 Nairobi at weekends: Egypt's Sunday auctions, funds that publish daily
   workflow_dispatch:
 
 permissions:

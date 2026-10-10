@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-10-09",
+ "checked_on": "2026-10-10",
  "summary": {
   "failed": 1,
   "late": 2,
@@ -94,8 +94,8 @@
    "area": "Money market funds",
    "name": "CIC Money Market Fund",
    "status": "ok",
-   "detail": "8.43% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "8.43% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -112,8 +112,8 @@
    "area": "Money market funds",
    "name": "Kasha Money Market Fund",
    "status": "ok",
-   "detail": "10.76% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "10.76% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -121,8 +121,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "19.0% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "19.0% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -130,8 +130,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "14.0% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -139,8 +139,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "8.75% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -148,8 +148,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "24.0% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -157,8 +157,8 @@
    "area": "Policy rates",
    "name": "Mozambique",
    "status": "ok",
-   "detail": "9.25% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "9.25% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -166,8 +166,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "26.5% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "26.5% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -175,8 +175,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "7.25% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -184,8 +184,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "6.25% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -193,8 +193,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 09 Oct",
-   "latest": "2026-10-09",
+   "detail": "10.75% read 10 Oct",
+   "latest": "2026-10-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -220,9 +220,9 @@
    "area": "T-bill auctions",
    "name": "Ghana",
    "status": "ok",
-   "detail": "latest auction 02 Oct (auctions weekly)",
-   "latest": "2026-10-02",
-   "due_by": "2026-10-13",
+   "detail": "latest auction 09 Oct (auctions weekly)",
+   "latest": "2026-10-09",
+   "due_by": "2026-10-20",
    "link": "/markets/tbills/ghana"
   },
   {

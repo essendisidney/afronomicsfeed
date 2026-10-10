@@ -55,7 +55,8 @@ def text_of(url: str) -> str:
     # Some managers' sites are slow to answer: one retry with a longer wait before calling it a failed read.
     try:
         html = requests.get(url, headers=UA, timeout=(15, 40), verify=False).text
-    except requests.exceptions.Timeout:
+    # A body that arrives too slowly surfaces as a ConnectionError wrapping urllib3's ReadTimeoutError, not as Timeout.
+    except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
         html = requests.get(url, headers=UA, timeout=(20, 90), verify=False).text
     t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", html, flags=re.S)
     t = re.sub(r"<[^>]+>", " ", t)

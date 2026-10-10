@@ -52,7 +52,11 @@ FUNDS = [
 
 
 def text_of(url: str) -> str:
-    html = requests.get(url, headers=UA, timeout=(15, 40), verify=False).text
+    # Some managers' sites are slow to answer: one retry with a longer wait before calling it a failed read.
+    try:
+        html = requests.get(url, headers=UA, timeout=(15, 40), verify=False).text
+    except requests.exceptions.Timeout:
+        html = requests.get(url, headers=UA, timeout=(20, 90), verify=False).text
     t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", html, flags=re.S)
     t = re.sub(r"<[^>]+>", " ", t)
     t = htmllib.unescape(t).replace("\u200b", "").replace("\xa0", " ")

@@ -190,7 +190,7 @@ def fund(entry):
             return {"name": name, "manager": manager, "source": url, "status": "implausible"}
         return {"name": name, "manager": manager, "source": url, "status": "ok", "daily_yield": daily, "effective_annual_yield": effective}
     except Exception as error:
-        return {"name": name, "manager": manager, "source": url, "status": f"error: {str(error)[:80]}"}
+        return {"name": name, "manager": manager, "source": url, "status": f"error: {type(error).__name__}: {str(error)[-160:]}"}
 
 
 def append_history(ok: list[dict], read_at: datetime) -> None:

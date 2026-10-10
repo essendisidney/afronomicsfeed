@@ -1,20 +1,23 @@
-# Every weekday three times, and once a day at weekends: read new central-bank auction results for each market and commit the datasets.
-# The commit triggers a Vercel deploy, so the site updates itself. The last step sends email rate alerts
-# (needs AF_CRON_SECRET; without it the step skips).
-# Auction days differ (Egypt Sun-Mon, Malawi Tue, Nigeria/Tanzania/Mozambique Wed, Kenya/Zambia Thu, Ghana/South Africa Fri),
-# so running every weekday keeps each market within hours of its central bank's release.
+# Every two hours on weekdays (07:17 to 21:17 Nairobi) and every four hours at weekends: read new central-bank
+# auction results for each market and commit the datasets. GitHub starts scheduled runs late or drops them when it
+# is busy (in Oct 2026 the morning run never ran and the others started hours late), so runs are frequent: a run
+# with nothing new commits nothing. The commit triggers a Vercel deploy, so the site updates itself. The last step
+# sends email rate alerts (needs AF_CRON_SECRET; without it the step skips) and sends only what is new.
+# Auction days differ (Egypt Sun-Mon, Malawi Tue, Nigeria/Tanzania/Mozambique Wed, Kenya/Zambia Thu, Ghana/South Africa Fri).
 name: African auctions
 
 on:
   schedule:
-    - cron: "17 7 * * 1-5"  # 10:17 Nairobi
-    - cron: "17 12 * * 1-5" # 15:17 Nairobi
-    - cron: "47 15 * * 1-5" # 18:47 Nairobi, after late-afternoon postings
-    - cron: "17 9 * * 0,6"  # 12:17 Nairobi at weekends: Egypt's Sunday auctions, funds that publish daily
+    - cron: "17 4-18/2 * * 1-5" # every two hours, 07:17 to 21:17 Nairobi, weekdays
+    - cron: "17 5-17/4 * * 0,6" # 08:17, 12:17, 16:17, 20:17 Nairobi at weekends
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: african-auctions
+  cancel-in-progress: false
 
 jobs:
   update:

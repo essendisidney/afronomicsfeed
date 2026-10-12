@@ -7,6 +7,8 @@ import { billMarkets, loadBillMarket, type BillMarket } from "@/lib/data/soverei
 import { bondMarkets, bondSnapshot, loadBondMarket, type BondMarket } from "@/lib/data/sovereign-bonds";
 import { BondMarketCard } from "@/components/data/BondMarketCard";
 import { site } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { frontierDebtDatasetJsonLd } from "@/lib/seo/schema";
 
 export const revalidate = 3600;
 
@@ -86,6 +88,7 @@ export default function FrontierLocalDebtPage() {
         </p>
       }
     >
+      <JsonLd data={frontierDebtDatasetJsonLd()} />
       {snaps.length ? (
         <section className="mb-12">
           <SectionTitle

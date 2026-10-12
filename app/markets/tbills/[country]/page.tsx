@@ -10,6 +10,8 @@ import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { tenorColor, tenorLabel } from "@/lib/data/kenya-tbills";
 import { billHistory, billMarkets, billTenors, billWeeks, getBillMarket, latestBills, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { tbillDatasetJsonLd } from "@/lib/seo/schema";
 
 export const revalidate = 3600;
 
@@ -50,18 +52,7 @@ export default async function BillMarketPage({ params }: Props) {
     return `${d > 0 ? "+" : d < 0 ? "−" : "±"}${Math.abs(d)} bps`;
   };
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    name: `${market.country} Treasury bill auction results`,
-    description: `Every ${market.publisher} Treasury bill auction: rates, bids and amounts accepted, by tenor.`,
-    url: `${site.url}/markets/tbills/${market.slug}`,
-    temporalCoverage: first && rows[0] ? `${first}/${rows[0].date}` : undefined,
-    spatialCoverage: market.country,
-    creator: { "@type": "Organization", name: site.name, url: site.url },
-    isBasedOn: market.sourcePage,
-    distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: `${site.url}/api/data/tbills/${market.slug}` }],
-  };
+  const jsonLd = tbillDatasetJsonLd(market);
 
   return (
     <PageShell
@@ -88,7 +79,7 @@ export default async function BillMarketPage({ params }: Props) {
         ) : null
       }
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {rows.length ? <JsonLd data={jsonLd} /> : null}
       {rows.length === 0 ? (
         <p className="text-sm text-muted">This dataset is being compiled and will appear here shortly.</p>
       ) : (

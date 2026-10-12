@@ -13,29 +13,41 @@ import { site } from "@/lib/site";
 import { learnLangs, loadLessons } from "@/lib/learn-i18n";
 import { institutions, topics } from "@/lib/taxonomy";
 import { allTbillWeeks, bondDates } from "@/lib/data/auction-stories";
+import { bondMarkets } from "@/lib/data/sovereign-bonds";
+import { allBillsUpdated, allBondsUpdated, billUpdated, bondUpdated, fileUpdated, newest } from "@/lib/seo/freshness";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const page = (path: string, changeFrequency: "hourly" | "daily" | "weekly" | "monthly", priority: number) => ({
+  // Data pages carry the date their data file was last updated; everything else the build time.
+  const page = (path: string, changeFrequency: "hourly" | "daily" | "weekly" | "monthly" | "yearly", priority: number, lastModified?: Date | null) => ({
     url: `${site.url}${path}`,
-    lastModified: now,
+    lastModified: lastModified ?? now,
     changeFrequency,
     priority,
   });
+
+  const bills = allBillsUpdated();
+  const bonds = allBondsUpdated();
+  const debt = newest(bills, bonds);
 
   const hubs = [
     page("/", "hourly", 1),
     page("/news", "hourly", 0.9),
     page("/markets", "hourly", 0.9),
-    page("/markets/kenya-tbills", "daily", 0.9),
-    page("/markets/kenya-bonds", "daily", 0.9),
-    page("/markets/tbills", "daily", 0.9),
-    page("/markets/kenya-tbills/auction", "daily", 0.9),
-    page("/markets/borrowing-costs", "daily", 0.9),
+    page("/markets/kenya-tbills", "daily", 0.9, billUpdated("kenya")),
+    page("/markets/kenya-bonds", "daily", 0.9, bondUpdated("kenya")),
+    page("/markets/tbills", "daily", 0.9, bills),
+    page("/markets/kenya-tbills/auction", "daily", 0.9, billUpdated("kenya")),
+    page("/markets/borrowing-costs", "daily", 0.9, bills),
     page("/markets/eurobonds", "daily", 0.9),
-    page("/markets/bill-index", "weekly", 0.9),
+    page("/markets/bill-index", "weekly", 0.9, bills),
+    page("/markets/bill-index/release", "weekly", 0.7, bills),
+    page("/markets/bonds", "daily", 0.9, bonds),
+    ...bondMarkets.map((m) => page(`/markets/bonds/${m.slug}`, "daily", 0.8, bondUpdated(m.slug))),
+    page("/markets/auction-week", "daily", 0.8, debt),
     page("/morning", "hourly", 0.9),
-    page("/rates/kenya", "daily", 0.9),
+    page("/morning/sw", "daily", 0.6),
+    page("/rates/kenya", "daily", 0.9, fileUpdated("kenya/rates.json")),
     page("/guides/where-your-shilling-earns-most", "daily", 0.9),
     page("/rates/kenya/money-market-funds", "daily", 0.9),
     page("/rates/kenya/best-money-market-fund", "daily", 0.9),
@@ -52,9 +64,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/rates/kenya/saccos", "monthly", 0.8),
     page("/chama", "daily", 0.9),
     page("/tenders", "daily", 0.9),
+    page("/rates/kenya/check", "weekly", 0.8),
     page("/rates/nigeria/check", "weekly", 0.8),
     page("/rates/ghana/check", "weekly", 0.8),
-    page("/rates/policy", "daily", 0.9),
+    page("/rates/policy", "daily", 0.9, fileUpdated("policy_rates.json")),
     page("/status", "daily", 0.5),
     page("/learn", "weekly", 0.9),
     page("/rates/nigeria/savings-bond", "weekly", 0.9),
@@ -64,18 +77,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...[...(loadLenders()?.lenders ?? []), ...(loadLenders()?.removed ?? [])].map((l) => page(lenderHref(l.name), "monthly", 0.6)),
     page("/for-institutions", "monthly", 0.7),
     page("/pack", "monthly", 0.7),
-    page("/developers", "monthly", 0.6),
-    page("/data-api", "monthly", 0.7),
-    page("/data/frontier-local-debt", "weekly", 0.8),
-    page("/markets/tbills/nigeria", "daily", 0.8),
-    page("/markets/tbills/ghana", "daily", 0.8),
-    page("/markets/tbills/uganda", "daily", 0.8),
-    page("/markets/tbills/tanzania", "daily", 0.8),
-    page("/markets/tbills/egypt", "daily", 0.8),
-    page("/markets/tbills/southafrica", "daily", 0.8),
-    page("/markets/tbills/zambia", "daily", 0.8),
-    page("/markets/tbills/malawi", "daily", 0.8),
-    page("/markets/tbills/mozambique", "daily", 0.8),
+    page("/developers", "monthly", 0.6, debt),
+    page("/data-api", "monthly", 0.7, bills),
+    page("/data/frontier-local-debt", "weekly", 0.8, debt),
+    page("/data/frontier-local-debt/monitor", "daily", 0.8, debt),
+    page("/markets/tbills/nigeria", "daily", 0.8, billUpdated("nigeria")),
+    page("/markets/tbills/ghana", "daily", 0.8, billUpdated("ghana")),
+    page("/markets/tbills/uganda", "daily", 0.8, billUpdated("uganda")),
+    page("/markets/tbills/tanzania", "daily", 0.8, billUpdated("tanzania")),
+    page("/markets/tbills/egypt", "daily", 0.8, billUpdated("egypt")),
+    page("/markets/tbills/southafrica", "daily", 0.8, billUpdated("southafrica")),
+    page("/markets/tbills/zambia", "daily", 0.8, billUpdated("zambia")),
+    page("/markets/tbills/malawi", "daily", 0.8, billUpdated("malawi")),
+    page("/markets/tbills/mozambique", "daily", 0.8, billUpdated("mozambique")),
     page("/economy", "daily", 0.8),
     page("/capital", "daily", 0.8),
     page("/climate", "daily", 0.8),
@@ -84,6 +98,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/countries", "daily", 0.9),
     page("/data", "daily", 0.9),
     page("/signals", "daily", 0.7),
+    page("/alerts", "monthly", 0.5),
+    page("/ask", "weekly", 0.6),
+    page("/radio", "daily", 0.5),
+    page("/reference", "monthly", 0.6),
     page("/brief", "weekly", 0.7),
     page("/weekly", "daily", 0.8),
     page("/widgets", "monthly", 0.6),
@@ -96,10 +114,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/about", "monthly", 0.5),
     page("/method", "monthly", 0.6),
     page("/pricing", "monthly", 0.5),
+    page("/prices", "monthly", 0.4),
+    page("/jobs", "daily", 0.5),
+    page("/jobs/post", "monthly", 0.3),
     page("/subscribe", "monthly", 0.5),
     page("/advisory", "monthly", 0.4),
     page("/contact", "monthly", 0.3),
     page("/corrections", "monthly", 0.3),
+    page("/imprint", "yearly", 0.2),
+    page("/legal/terms", "yearly", 0.2),
+    page("/legal/privacy", "yearly", 0.2),
+    page("/legal/cookies", "yearly", 0.2),
+    page("/legal/disclaimer", "yearly", 0.2),
   ];
 
   const currencyCodes = [...new Set(countries.map((country) => country.currency))];

@@ -1,4 +1,5 @@
 import { eurobondAnswers, fundAnswers, mobileLoanAnswers, policyAnswers, savingsBondAnswers, tbillAnswers } from "@/lib/seo/answers";
+import { llmsDatasetLines } from "@/lib/seo/llms-datasets";
 import { remittanceAnswers } from "@/lib/seo/remittances";
 import { site } from "@/lib/site";
 
@@ -35,6 +36,7 @@ export function GET() {
     "- Information, not advice: Afronomics does not recommend any investment, lender or provider.",
     `- Free machine-readable data: ${u("/developers")} (JSON API at ${u("/api/v1/tbills")}, CSV downloads on each data page).`,
     "",
+    ...llmsDatasetLines(),
     "## Key figures today",
     "",
   ];

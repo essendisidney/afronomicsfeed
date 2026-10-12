@@ -65,7 +65,10 @@ export default function KenyaTbillsPage() {
           <Link href="/markets/kenya-bonds" className="underline underline-offset-2">
             bond auctions and the yield curve
           </Link>
-          .
+          .{" "}
+          <Link href="/markets/kenya-tbills/auction" className="font-semibold text-forest underline underline-offset-2">
+            Bidding this week? Likely rates and “did my bid win?”
+          </Link>
         </p>
       }
       aside={

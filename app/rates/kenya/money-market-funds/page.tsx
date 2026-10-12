@@ -8,6 +8,7 @@ import { FundSizes } from "@/components/data/FundSizes";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { ShareResult } from "@/components/ui/ShareResult";
+import { fundSlug } from "@/lib/data/fund-links";
 import { fundLeague, loadFundHistory, rateOptions } from "@/lib/data/kenya-rates";
 import { fundAnswers } from "@/lib/seo/answers";
 import { mmfSentence } from "@/lib/share-card";
@@ -99,6 +100,14 @@ export default function MoneyMarketFundsPage() {
                       </a>
                       <span className="block text-[11px] text-muted">{f.manager}</span>
                       {f.basis ? <span className="block text-[11px] text-muted">Yield: {f.basis}</span> : null}
+                      <a
+                        href={`/go/fund/${fundSlug(f.name)}`}
+                        target="_blank"
+                        rel="nofollow noopener"
+                        className="mt-1.5 inline-block whitespace-nowrap rounded-full bg-ink px-3 py-1 text-[12px] font-semibold text-paper hover:bg-forest"
+                      >
+                        Open an account
+                      </a>
                     </td>
                     <td className="text-right">{f.gross.toFixed(2)}%</td>
                     <td className="text-right font-semibold">{f.net.toFixed(2)}%</td>
@@ -144,6 +153,10 @@ export default function MoneyMarketFundsPage() {
             A fund’s published yield is its recent return annualised; it is not a promise of what it will pay, and fees are taken before or after it
             depending on the fund. A yield far above the Treasury bill usually means the fund holds longer or riskier paper, or that the published
             figure is old. Check the fund’s own documents before you invest. This is information, not advice.
+          </p>
+          <p className="mt-2 max-w-3xl text-xs leading-5 text-muted">
+            “Open an account” goes to the fund manager’s own page; we count the click, not who you are. A manager may in future pay Afronomics when you
+            open an account through it. That never changes the order, which is by yield after tax alone, and funds that pay nothing are listed the same way.
           </p>
           {best && bill ? <ShareResult spec={{ kind: "mmf" }} text={`${mmfSentence(best, bill)}. Every fund, from the source:`} /> : null}
           {unread.length ? (

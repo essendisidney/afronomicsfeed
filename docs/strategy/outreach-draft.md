@@ -19,10 +19,11 @@ Subject: African local-currency auction data, checked and same-day (30-day pilot
 > With GBI-EM Edge putting about 44.5% of its weight on Africa, I thought this might be useful to your
 > {fund name} team.
 >
-> Afronomics reads primary government debt auction results from African central banks and publishes them in one
-> format within hours of each release. That means offered, bid and accepted amounts, the rate, bid-to-cover and
-> the ISIN, each linked to the central bank's own notice. It covers bonds in Kenya, Zambia and Egypt, and bills in
-> ten markets (some back to 2000). The WAEMU markets and Nigeria bonds are next.
+> Afronomics reads primary government debt auction results from African central banks and treasuries and
+> publishes them in one format within hours: amounts offered, bid and accepted, the rate, bid-to-cover and the
+> ISIN, each linked to the issuer's own notice. Bond auctions now cover Nigeria, Egypt, Morocco, Kenya, Uganda,
+> Zambia and the eight WAEMU markets including Côte d'Ivoire (Nigeria back to 2013, Egypt to 2005), with bills in
+> ten markets.
 >
 > Would a free 30-day pilot be useful: an API key, full history and alerts? The markets you choose decide what
 > we build next.

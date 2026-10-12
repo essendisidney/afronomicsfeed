@@ -1,3 +1,4 @@
+import { nextAuction, outlook } from "@/lib/data/auction-intel";
 import { loadHealth } from "@/lib/data/health";
 import { fundLeague } from "@/lib/data/kenya-rates";
 import { policyBoard } from "@/lib/data/policy-rates";
@@ -35,6 +36,7 @@ const ALIASES: Record<string, BillMarket["slug"]> = {
 
 export const COMMANDS = [
   { command: "kenya", description: "Kenya T-bill rates (also /nigeria, /ghana, /uganda…)" },
+  { command: "auction", description: "Kenya's next T-bill auction: likely rates" },
   { command: "tbills", description: "Latest T-bill rates in all 10 markets" },
   { command: "policy", description: "Every African central-bank policy rate" },
   { command: "funds", description: "Kenya money market funds, after tax" },
@@ -47,6 +49,7 @@ function help(): string {
     "👋 <b>Afronomics</b>: the price of money in Africa, from the central banks.",
     "",
     "/kenya, /nigeria, /ghana, /uganda, /tanzania, /egypt, /southafrica, /zambia, /malawi, /mozambique: latest T-bill rates",
+    "/auction: Kenya's next T-bill auction, likely rates, did my bid win?",
     "/tbills: all 10 markets at once",
     "/policy: every central-bank policy rate",
     "/funds: Kenya money market funds, after tax",
@@ -78,6 +81,24 @@ function market(slug: BillMarket["slug"]): string {
     `${esc(m.rateLabel)}; change against the auction before. Source: ${esc(m.publisher)}.`,
     ...(billsLate().has(m.country) ? [`The ${esc(m.publisher)} has not published a newer result yet.`] : []),
     link(m.href, "Full results and history", `bot-${slug}`),
+    "",
+    FOOT,
+  ].join("\n");
+}
+
+function auction(): string {
+  const next = nextAuction();
+  const lines = outlook().map(
+    (v) => `${v.tenor}-day: last <b>${pct(v.last.weighted_avg_rate)}</b>, likely next ${pct(v.low)} – ${pct(v.high)} (held ${Math.round((v.trackRecord.inside / v.trackRecord.tested) * 100)}% of the time since 2011)`,
+  );
+  return [
+    "🔨 <b>Kenya's next T-bill auction</b>",
+    ...(next ? [`Bids close 2 p.m., ${day(next.bidsClose)}, for bills dated ${day(next.valueDate)}. Via DhowCSD or Treasury Mobile Direct.`] : []),
+    "",
+    ...lines,
+    "",
+    "A range from the last 26 weekly moves, not a prediction: the CBK sets the rate on the day.",
+    link("/markets/kenya-tbills/auction", "Did my bid win? What does the bill pay after tax?", "bot-auction"),
     "",
     FOOT,
   ].join("\n");
@@ -166,6 +187,7 @@ export function reply(text: string): { text: string; name: string } {
   const cmd = (m ? m[1] : raw).toLowerCase();
   const arg = m ? m[2] : "";
   if (cmd === "start" || cmd === "help") return { text: help(), name: "help" };
+  if (cmd === "auction" || cmd === "bid" || cmd === "mybid") return { text: auction(), name: "auction" };
   if (cmd === "tbills" || cmd === "bills" || cmd === "rates") return { text: allBills(), name: "tbills" };
   if (cmd === "policy" || cmd === "cbr" || cmd === "mpr") return { text: policy(), name: "policy" };
   if (cmd === "funds" || cmd === "mmf" || cmd === "mmfs") return { text: funds(), name: "funds" };

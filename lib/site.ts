@@ -58,6 +58,7 @@ export const footerGroups = [
     title: "Data",
     links: [
       { href: "/markets/tbills", label: "T-bill monitor" },
+      { href: "/markets/kenya-tbills/auction", label: "Kenya auction: likely rates, did my bid win?" },
       { href: "/markets/bill-index", label: "Sovereign Bill Index" },
       { href: "/markets/borrowing-costs", label: "Borrowing costs" },
       { href: "/markets/eurobonds", label: "Eurobond yields" },

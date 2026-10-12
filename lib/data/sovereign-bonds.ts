@@ -337,3 +337,34 @@ export function bondSnapshot(slug: BondMarket["slug"], months = 24, limit = 4): 
     .map(([month, rates]) => ({ month, rate: rates.reduce((n, v) => n + v, 0) / rates.length }));
   return { market, latestDate, latest, monthly, results: rows.length, since: rows[rows.length - 1].date };
 }
+
+/** CSV of a market's bond auctions, with a provenance header, in the same shape as the API rows. */
+export function bondsCsv(market: BondMarket, rows: BondRow[], updatedAt: string | null) {
+  const cur = market.currency.toLowerCase();
+  const header = [
+    market.dateKind === "settlement" ? "settlement_date" : "auction_date",
+    "isin",
+    "issue",
+    "tenor_years",
+    "maturity",
+    "type",
+    `offered_${cur}_m`,
+    `bids_${cur}_m`,
+    `accepted_${cur}_m`,
+    "bid_cover",
+    `rate_pct (${market.rateNote})`,
+    "min_rate_pct",
+    "max_rate_pct",
+    "coupon_pct",
+    "source",
+  ];
+  const q = (v: unknown) => (v == null ? "" : typeof v === "string" ? `"${v.replace(/"/g, '""')}"` : String(v));
+  return [
+    `# ${market.country} government bond auctions, one row per bond per auction`,
+    `# Source: ${market.publisher} (${market.sourcePage}). Compiled by Afronomics (afronomicsfeed.com). Updated ${updatedAt ?? "n/a"}. Amounts in ${market.currency} millions. Bid cover = bids / accepted. Information, not advice.`,
+    header.map((h) => `"${h}"`).join(","),
+    ...rows.map((r) =>
+      [r.date, r.isin, r.issue, r.tenor_years, r.maturity, r.type, r.offered_m, r.received_m, r.accepted_m, r.bid_cover, r.rate, r.min_rate, r.max_rate, r.coupon, r.source].map(q).join(","),
+    ),
+  ].join("\n");
+}

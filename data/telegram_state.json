@@ -2,11 +2,15 @@
  "note": "What scripts/telegram_post.py has already posted to the Telegram channel, by item.",
  "posted": {
   "bills:egypt": "2026-10-06",
+  "bills:ghana": "2026-10-12",
+  "bills:kenya": "2026-10-12",
   "bills:mozambique": "2026-10-07",
   "bills:nigeria": "2026-10-07",
   "bills:southafrica": "2026-10-05",
   "bills:tanzania": "2026-10-07",
   "bills:uganda": "2026-10-01",
-  "bills:zambia": "2026-10-01"
+  "bills:zambia": "2026-10-01",
+  "intro": "posted",
+  "story:sending-200-dollars-to-kenya-what-it-costs": "2026-10-12"
  }
 }

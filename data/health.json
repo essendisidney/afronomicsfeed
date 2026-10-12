@@ -4,20 +4,11 @@
  "checked_on": "2026-10-12",
  "summary": {
   "failed": 0,
-  "late": 4,
+  "late": 3,
   "gap": 1,
-  "ok": 27
+  "ok": 28
  },
  "items": [
-  {
-   "area": "Money market funds",
-   "name": "Madison Money Market Fund",
-   "status": "late",
-   "detail": "published yield unchanged at 10.64% since 01 Oct: the page may not be current",
-   "latest": "2026-10-01",
-   "due_by": null,
-   "link": "/rates/kenya/money-market-funds"
-  },
   {
    "area": "Money market funds",
    "name": "NCBA Money Market Fund (KES)",
@@ -122,6 +113,15 @@
    "name": "Kasha Money Market Fund",
    "status": "ok",
    "detail": "10.76% read 12 Oct",
+   "latest": "2026-10-12",
+   "due_by": null,
+   "link": "/rates/kenya/money-market-funds"
+  },
+  {
+   "area": "Money market funds",
+   "name": "Madison Money Market Fund",
+   "status": "ok",
+   "detail": "10.41% read 12 Oct",
    "latest": "2026-10-12",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"

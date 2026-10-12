@@ -1,7 +1,7 @@
 {
  "dataset": "Kenya savings and lending rates",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-12T13:23:12+00:00",
+ "updated_at": "2026-10-12T13:32:12+00:00",
  "bank_rates": {
   "publisher": "Central Bank of Kenya",
   "source": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
@@ -2244,7 +2244,7 @@
  },
  "money_market_funds": {
   "note": "Each yield is read from the fund manager's own website at the time shown; funds publishing yields only as images or PDFs are not yet included.",
-  "as_of": "2026-10-12T13:23:12+00:00",
+  "as_of": "2026-10-12T13:32:12+00:00",
   "rows": [
    {
     "name": "Zimele Fixed Income Fund (Savings Plan)",
@@ -2267,8 +2267,8 @@
     "manager": "Madison Investment Managers",
     "source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
     "status": "ok",
-    "daily_yield": 10.11,
-    "effective_annual_yield": 10.64
+    "daily_yield": 9.9,
+    "effective_annual_yield": 10.41
    },
    {
     "name": "Etica Money Market Fund (KES)",

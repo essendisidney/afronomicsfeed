@@ -69,6 +69,9 @@ def year_page(session: requests.Session, year: int | None) -> str:
         return html
     form = dict(re.findall(r'<input type="hidden" name="([^"]+)" id="[^"]*" value="([^"]*)"', html))
     form.update({"__EVENTTARGET": field.group(1), "__EVENTARGUMENT": "", field.group(1): str(year)})
+    text_box = re.search(r'name="([^"]*txtYears)"', html)
+    if text_box:
+        form[text_box.group(1)] = str(year)
     return session.post(PAGE, data=form, headers={**UA, "Referer": PAGE}, timeout=(15, 120), verify=False).text
 
 
@@ -118,7 +121,7 @@ def parse(text: str, source: str) -> list[dict]:
     return rows
 
 
-def pdf_rows(session: requests.Session, url: str) -> list[dict]:
+def pdf_rows(session: requests.Session, url: str, show: bool = False) -> list[dict]:
     import pdfplumber
 
     data = fetch_pdf(session, url)
@@ -126,7 +129,10 @@ def pdf_rows(session: requests.Session, url: str) -> list[dict]:
         return []
     with pdfplumber.open(io.BytesIO(data)) as pdf:
         text = "\n".join((p.extract_text() or "") for p in pdf.pages[:2])
-    return parse(text, url)
+    rows = parse(text, url)
+    if show and not rows:
+        print(f"--- no lines parsed; text of {url}:\n{text[:2500]}")
+    return rows
 
 
 def previous() -> tuple[list[dict], set[str]]:
@@ -151,16 +157,18 @@ def main() -> int:
             continue
         links += got
         if inspect:
-            break
+            print(f"year {year}: {len(got)} result PDFs listed")
+            if year is not None and year < this_year:
+                break
         time.sleep(1)
     links = sorted(set(links), reverse=True)
     rows, done = previous()
-    todo = links[:3] if inspect else [(d, u) for d, u in links if u not in done]
+    todo = links[:4] if inspect else [(d, u) for d, u in links if u not in done]
     print(f"{len(links)} auction result PDFs listed; reading {len(todo)}")
     new, empty = [], []
     for d, url in todo:
         try:
-            got = pdf_rows(s, url)
+            got = pdf_rows(s, url, show=inspect)
         except Exception as error:
             empty.append(f"{d} ({str(error)[:60]})")
             continue

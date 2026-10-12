@@ -58,11 +58,11 @@ export function describeAlert(a: Pick<AlertInput, "kind" | "tenor" | "threshold"
 export const confirmUrl = (token: string) => `${site.url}/api/rate-alerts/confirm?t=${token}`;
 export const stopUrl = (token: string, all = false) => `${site.url}/api/rate-alerts/unsubscribe?t=${token}${all ? "&all=1" : ""}`;
 
-const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+export const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const base = "font-family:Archivo,Helvetica,Arial,sans-serif;color:#121826;";
 const muted = "color:#636b7d;font-size:12px;line-height:18px;";
 
-function shell(label: string, body: string, footer: string) {
+export function shell(label: string, body: string, footer: string) {
   return `<!doctype html><html><body style="margin:0;padding:0;background:#f5f6f4;">
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#f5f6f4;"><tr><td align="center" style="padding:24px 12px;">
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:560px;background:#ffffff;border:1px solid #e0e3df;">
@@ -72,7 +72,7 @@ function shell(label: string, body: string, footer: string) {
 </table></td></tr></table></body></html>`;
 }
 
-const para = (lines: string[]) =>
+export const para = (lines: string[]) =>
   lines
     .join("\n")
     .split(/\n{2,}/)

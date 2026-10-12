@@ -155,3 +155,13 @@ jobs:
             done
           fi
           curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" "$url"
+      # Tender alerts: each confirmed alert gets at most one email a day, only when a new tender matches its
+      # keywords. After the rate-alert step, which has already waited for this run's data to deploy.
+      - name: Send tender alerts
+        if: ${{ !cancelled() }}  # even when the rate-alert step failed
+        env:
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
+        run: |
+          if [ -z "$AF_CRON_SECRET" ]; then echo "AF_CRON_SECRET not set; skipping"; exit 0; fi
+          curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" https://www.afronomicsfeed.com/api/send/tender-alerts
+        continue-on-error: true

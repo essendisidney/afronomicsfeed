@@ -43,19 +43,20 @@ def main() -> int:
     print(f"{len(issues)} distinct issue pages linked; first 5 and last 3:")
     for u in issues[:5] + issues[-3:]:
         print("   ", u)
-    for u in issues[:2]:
-        page = requests.get(u, headers=UA, timeout=(15, 120), verify=False).text
+    probes = [PAGE] + issues[1:2]
+    for u in probes:
+        page = html if u == PAGE else requests.get(u, headers=UA, timeout=(15, 120), verify=False).text
         print(f"=== {u} ({len(page)} bytes)")
-        for i, t in enumerate(re.findall(r"<table.*?</table>", page, re.S | re.I)[:6]):
-            rows = re.findall(r"<tr.*?</tr>", t, re.S | re.I)
-            print(f"  -- table {i}: {len(rows)} rows")
-            for r in rows[:30]:
-                print("    ", [text(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", r, re.S | re.I)][:12])
-        docs = [h for h in re.findall(r'href="([^"]+)"', page) if re.search(r"\.(pdf|xlsx?)$", h, re.I)]
-        print("  documents:", docs[:8])
-        body = text(page)
-        j = body.find("sultats")
-        print("  text:", body[j: j + 1500] if j >= 0 else body[:1500])
+        for term in ["pondéré", "pondere", "Montant retenu", "Montant global", "Taux marginal", "Rendement", "wp-json",
+                     "admin-ajax", "<iframe", ".pdf", "data-", "resultat", "ISIN", "Échéance", "OAT"]:
+            hits = [m.start() for m in re.finditer(re.escape(term), page, re.I)]
+            if hits:
+                k = hits[min(len(hits) - 1, 2)]
+                print(f"  [{term}] {len(hits)} hits; sample: {page[max(0, k - 300): k + 400]!r}")
+        # The largest script blocks, which may carry the data
+        scripts = sorted(re.findall(r"<script[^>]*>(.*?)</script>", page, re.S | re.I), key=len, reverse=True)[:2]
+        for sc in scripts:
+            print(f"  script of {len(sc)} chars: {sc[:600]!r}")
     return 0
 
 

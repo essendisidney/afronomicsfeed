@@ -21,7 +21,7 @@ export const site = {
 /** The price of money first. Economy, Capital, Climate, Technology and Trade stay live, linked from the footer. */
 export const nav = [
   { href: "/markets/tbills", label: "T-bills" },
-  { href: "/markets/kenya-bonds", label: "Bonds" },
+  { href: "/markets/bonds", label: "Bonds" },
   { href: "/rates/kenya", label: "Savings & loans" },
   { href: "/markets", label: "Currencies" },
   { href: "/data/inflation", label: "Inflation" },
@@ -59,6 +59,11 @@ export const footerGroups = [
     links: [
       { href: "/tenders", label: "Kenya government tenders open now" },
       { href: "/data/frontier-local-debt", label: "Frontier local debt data (institutions)" },
+      { href: "/data/frontier-local-debt/monitor", label: "African Local-Currency Debt Monitor" },
+      { href: "/markets/bonds", label: "Government bond auctions, by market" },
+      { href: "/markets/auction-week", label: "This week in African debt auctions" },
+      { href: "/east-africa", label: "East Africa rates today" },
+      { href: "/markets/kenya-bonds", label: "Kenya bonds and yield curve" },
       { href: "/markets/tbills", label: "T-bill monitor" },
       { href: "/markets/kenya-tbills/auction", label: "Kenya auction: likely rates, did my bid win?" },
       { href: "/markets/bill-index", label: "Sovereign Bill Index" },

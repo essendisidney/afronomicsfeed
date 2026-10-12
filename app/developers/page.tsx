@@ -1,3 +1,4 @@
+import { bondCoverageText } from "@/lib/data/sovereign-bonds";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
@@ -7,9 +8,9 @@ import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Afronomics data API — African Treasury bill auctions as JSON",
+  title: "Afronomics data API — African government bond and bill auctions as JSON",
   description:
-    "A free JSON API for Treasury bill auction results in ten African markets and the Afronomics borrowing-cost measures. No key needed; licences for commercial use and alerts.",
+    "A free JSON API for African government bond and Treasury bill auction results and the Afronomics borrowing-cost measures, every row linked to its source. No key needed; licences for commercial use and alerts.",
   alternates: { canonical: `${site.url}/developers` },
 };
 
@@ -24,7 +25,7 @@ const endpoints = [
   },
   {
     path: "/api/v1/bonds",
-    what: "Government bond auctions: each market with data (Kenya, Nigeria, Uganda, Zambia, Egypt, Morocco, WAEMU so far), where its history starts and its latest auction.",
+    what: `Government bond auctions: each market with data (${bondCoverageText()}), where its history starts, whether its dates are auction or settlement dates (date_kind), and its latest results.`,
   },
   {
     path: "/api/v1/bonds/{market}",
@@ -115,15 +116,15 @@ export default function DevelopersPage() {
       </p>
 
       <section className="mt-14 grid gap-8 lg:grid-cols-2">
-        <div>
+        <div className="min-w-0">
           <SectionTitle kicker="Python" title="From Python" />
-          <pre className="mt-4 overflow-x-auto rounded-2xl bg-night p-5 text-[13px] leading-6 text-night-ink">
+          <pre className="mt-4 max-w-full overflow-x-auto rounded-2xl bg-night p-5 text-[13px] leading-6 text-night-ink">
             <code>{python}</code>
           </pre>
         </div>
-        <div>
+        <div className="min-w-0">
           <SectionTitle kicker="Shell" title="From the command line" />
-          <pre className="mt-4 overflow-x-auto rounded-2xl bg-night p-5 text-[13px] leading-6 text-night-ink">
+          <pre className="mt-4 max-w-full overflow-x-auto rounded-2xl bg-night p-5 text-[13px] leading-6 text-night-ink">
             <code>{curl}</code>
           </pre>
           <p className="mt-4 text-sm leading-6 text-ink-soft">

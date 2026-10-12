@@ -95,7 +95,7 @@ export const bondMarkets: BondMarket[] = [
     currency: "XOF",
     publisher: "UMOA-Titres (for the eight WAEMU treasuries)",
     sourcePage: "https://www.umoatitres.org/fr/emissions/",
-    rateNote: "weighted average yield of accepted bids, percent per annum; Treasury bonds (OAT) only; the issuing country is in the issue field",
+    rateNote: "weighted average yield of accepted bids, percent per annum; Treasury bonds (OAT) of a stated tenor of a year or more; the issuing country is in the issue field",
   },
 ];
 
@@ -145,7 +145,7 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
       min_rate: null,
       max_rate: null,
       coupon: r.coupon,
-      source: r.source,
+      source: r.source.replace(/([^:/])\/{2,}/g, "$1/"), // the CBK's links carry a doubled slash ("go.ke//uploads")
     }));
     return { updatedAt: k.updatedAt, rows: rows.sort((a, b) => b.date.localeCompare(a.date)) };
   }
@@ -238,8 +238,10 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
     const out: BondRow[] = rows.flatMap((r) => {
       const rate = n(r.weighted_yield);
       const date = s(r.operation_date);
-      if (r.instrument !== "OAT" || rate === null || !date) return [];
       const months = n(r.months);
+      // Bonds of a stated tenor of a year or more only: short or untenored OAT lines are buybacks, exchanges or
+      // residual reopenings priced near par at money-market yields, not new issuance (they stay in the raw file).
+      if (r.instrument !== "OAT" || rate === null || !date || months === null || months < 12) return [];
       return [
         {
           date,
@@ -336,4 +338,51 @@ export function bondSnapshot(slug: BondMarket["slug"], months = 24, limit = 4): 
     .slice(-months)
     .map(([month, rates]) => ({ month, rate: rates.reduce((n, v) => n + v, 0) / rates.length }));
   return { market, latestDate, latest, monthly, results: rows.length, since: rows[rows.length - 1].date };
+}
+
+/** CSV of a market's bond auctions, with a provenance header, in the same shape as the API rows. */
+export function bondsCsv(market: BondMarket, rows: BondRow[], updatedAt: string | null) {
+  const cur = market.currency.toLowerCase();
+  const header = [
+    market.dateKind === "settlement" ? "settlement_date" : "auction_date",
+    "isin",
+    "issue",
+    "tenor_years",
+    "maturity",
+    "type",
+    `offered_${cur}_m`,
+    `bids_${cur}_m`,
+    `accepted_${cur}_m`,
+    "bid_cover",
+    `rate_pct (${market.rateNote})`,
+    "min_rate_pct",
+    "max_rate_pct",
+    "coupon_pct",
+    "source",
+  ];
+  const q = (v: unknown) => (v == null ? "" : typeof v === "string" ? `"${v.replace(/"/g, '""')}"` : String(v));
+  return [
+    `# ${market.country} government bond auctions, one row per bond per auction`,
+    `# Source: ${market.publisher} (${market.sourcePage}). Compiled by Afronomics (afronomicsfeed.com). Updated ${updatedAt ?? "n/a"}. Amounts in ${market.currency} millions. Bid cover = bids / accepted. Information, not advice.`,
+    header.map((h) => `"${h}"`).join(","),
+    ...rows.map((r) =>
+      [r.date, r.isin, r.issue, r.tenor_years, r.maturity, r.type, r.offered_m, r.received_m, r.accepted_m, r.bid_cover, r.rate, r.min_rate, r.max_rate, r.coupon, r.source].map(q).join(","),
+    ),
+  ].join("\n");
+}
+
+/** Markets whose bond data is published (has rows), in the order of bondMarkets. */
+export function publishedBondMarkets(): BondMarket[] {
+  return bondMarkets.filter((m) => loadBondMarket(m.slug).rows.length > 0);
+}
+
+/** "Kenya, Nigeria, … and the eight WAEMU markets": the published bond markets as prose, never a planned one. */
+export function bondCoverageText(): string {
+  const names = publishedBondMarkets().map((m) => (m.slug === "waemu" ? "the eight WAEMU markets" : m.country));
+  return names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}` : (names[0] ?? "none yet");
+}
+
+/** Total published bond auction results across markets. */
+export function bondResultCount(): number {
+  return publishedBondMarkets().reduce((n, m) => n + loadBondMarket(m.slug).rows.length, 0);
 }

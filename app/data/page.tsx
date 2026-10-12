@@ -4,6 +4,7 @@ import { PageShell } from "@/components/data/PageShell";
 import { SourceLine } from "@/components/data/parts";
 import { deskLabels, formatValue, indicatorsForDesk, type Desk } from "@/lib/data/indicators";
 import { continentalMedian, loadIndicators, ranked } from "@/lib/data/series";
+import { bondCoverageText, bondResultCount } from "@/lib/data/sovereign-bonds";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -31,6 +32,21 @@ export default async function DataHubPage() {
         </p>
       }
     >
+      <section className="mb-6 rounded-xl border-l-4 border-forest bg-forest/5 px-5 py-4">
+        <p className="text-[12px] font-semibold text-forest">For institutions</p>
+        <p className="mt-1 font-serif text-2xl text-ink">
+          <Link href="/data/frontier-local-debt" className="hover:text-forest">
+            African government bond auctions: {bondCoverageText()}
+          </Link>
+        </p>
+        <p className="mt-1 text-[14px] text-ink-soft">
+          {bondResultCount().toLocaleString("en-US")} auction results read from each issuer, with the source for every figure, as API and CSV.{" "}
+          <Link href="/data/frontier-local-debt#pilot" className="font-semibold text-forest underline underline-offset-2">
+            Request a 30-day free pilot
+          </Link>
+          .
+        </p>
+      </section>
       <section className="mb-12 border border-gold/40 bg-paper-2 px-5 py-5">
         <p className="text-[12px] font-semibold text-gold">Afronomics datasets</p>
         <p className="mt-2 font-serif text-2xl">

@@ -1,3 +1,4 @@
+import { institutionalLadder, institutionalPriceText } from "@/lib/billing/ratecard";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
@@ -7,6 +8,8 @@ import { billMarkets, loadBillMarket, type BillMarket } from "@/lib/data/soverei
 import { bondMarkets, bondSnapshot, loadBondMarket, type BondMarket } from "@/lib/data/sovereign-bonds";
 import { BondMarketCard } from "@/components/data/BondMarketCard";
 import { site } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { frontierDebtDatasetJsonLd } from "@/lib/seo/schema";
 
 export const revalidate = 3600;
 
@@ -86,6 +89,7 @@ export default function FrontierLocalDebtPage() {
         </p>
       }
     >
+      <JsonLd data={frontierDebtDatasetJsonLd()} />
       {snaps.length ? (
         <section className="mb-12">
           <SectionTitle
@@ -212,21 +216,13 @@ export default function FrontierLocalDebtPage() {
           <div className="mt-4 overflow-x-auto">
             <table className="data-table">
               <tbody>
-                <tr>
-                  <td className="font-medium text-ink">Analyst</td>
-                  <td>one user: the web tables and full-history downloads</td>
-                  <td className="text-right whitespace-nowrap">$250 a month</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-ink">Team and API</td>
-                  <td>an API key for your systems, alerts, usage reporting, a named contact</td>
-                  <td className="text-right whitespace-nowrap">$1,500 a month</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-ink">Enterprise</td>
-                  <td>redistribution, several teams, custom delivery and a service agreement</td>
-                  <td className="text-right whitespace-nowrap">from $5,000 a month</td>
-                </tr>
+                {institutionalLadder.map((tier) => (
+                  <tr key={tier.id}>
+                    <td className="font-medium text-ink">{tier.name}</td>
+                    <td>{tier.summary}</td>
+                    <td className="text-right whitespace-nowrap">{institutionalPriceText(tier)} a month</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

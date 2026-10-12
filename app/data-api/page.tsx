@@ -1,3 +1,4 @@
+import { bondCoverageText, bondResultCount, publishedBondMarkets } from "@/lib/data/sovereign-bonds";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
@@ -11,9 +12,9 @@ import { site } from "@/lib/site";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Afronomics Data — African T-bill, policy-rate and Eurobond data as an API",
+  title: "Afronomics Data — African government bond and bill auctions as an API",
   description:
-    "Every Treasury bill auction in ten African markets, policy rates and Eurobond yields, read from the central banks every day, as a keyed API with full history. From $300 a month for a team, $1,500 for the API, enterprise from $5,000.",
+    "African local-currency government bond and Treasury bill auction results, read from each issuer the day they publish, with the source for every figure: an API and CSV with full history. Analyst $250 a month, Team and API $1,500, Enterprise from $5,000.",
   alternates: { canonical: `${site.url}/data-api` },
 };
 
@@ -25,31 +26,33 @@ export default function DataApiPage() {
   const since = markets.flatMap((rows) => (rows.length ? [rows[rows.length - 1].date] : [])).sort()[0];
   const policies = policyBoard().rows.length;
   const startup = rateItem("licence_startup");
+  const bondMarketsLive = publishedBondMarkets();
+  const bondResults = bondResultCount();
 
   return (
     <PageShell
       crumbs={[{ href: "/", label: "Home" }, { href: "/for-institutions", label: "For institutions" }, { label: "Data API" }]}
       kicker="Afronomics Data"
-      title="African money markets, as one clean feed"
+      title="African government debt auctions, as one clean feed"
       lede={
         <p>
-          Every Treasury bill auction in {billMarkets.length} African markets, read from the central banks the day they publish, with the source document for every
-          figure. {results.toLocaleString("en-US")} auction results{since ? ` since ${since.slice(0, 4)}` : ""}, {policies} policy rates, Eurobond yields and the
-          Afronomics Sovereign Bill Index, through one API.
+          Local-currency government bond auctions in {bondCoverageText()}, and every Treasury bill auction in {billMarkets.length} markets, read from each
+          issuer the day it publishes, with the source document for every figure: {(bondResults + results).toLocaleString("en-US")} auction results, {policies}{" "}
+          policy rates, Eurobond yields and the Afronomics Sovereign Bill Index, through one API and CSV.
         </p>
       }
     >
       <p className="mb-6 rounded-xl border-l-4 border-forest bg-forest/5 px-4 py-3 text-[14px] text-ink-soft">
         Investing in the African markets of JPMorgan’s GBI-EM Edge?{" "}
         <Link href="/data/frontier-local-debt" className="font-semibold text-forest underline underline-offset-2">
-          See our coverage by market and request a 30-day pilot
+          See the latest auction in each market and request a 30-day free pilot
         </Link>
         .
       </p>
       <section className="grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-3">
         {[
-          { v: String(billMarkets.length), k: "T-bill markets, every auction" },
-          { v: results.toLocaleString("en-US"), k: `auction results${since ? ` since ${since.slice(0, 4)}` : ""}` },
+          { v: String(bondMarketsLive.length === 0 ? 0 : bondMarketsLive.length + (bondMarketsLive.some((m) => m.slug === "waemu") ? 7 : 0)), k: `bond markets (${bondResults.toLocaleString("en-US")} results)` },
+          { v: String(billMarkets.length), k: `T-bill markets (${results.toLocaleString("en-US")} results${since ? ` since ${since.slice(0, 4)}` : ""})` },
           { v: "Daily", k: "read from the source, checked for freshness after every run" },
         ].map((s) => (
           <div key={s.k} className="bg-surface px-4 py-4">
@@ -118,7 +121,7 @@ export default function DataApiPage() {
             {`curl -H "Authorization: Bearer afk_YOUR_KEY" \\
   "${site.url}/api/v1/tbills/nigeria?tenor=364&limit=10"`}
           </pre>
-          <p className="mt-3 text-[13px] text-ink-soft">Government bond auctions (Kenya, Nigeria, Uganda, Zambia, Egypt, Morocco and the eight WAEMU markets so far), by market and ISIN:</p>
+          <p className="mt-3 text-[13px] text-ink-soft">Government bond auctions ({bondCoverageText()}), by market and ISIN:</p>
           <pre className="mt-2 max-w-full overflow-x-auto whitespace-pre-wrap break-all rounded-xl bg-ink px-4 py-4 text-[12px] leading-5 text-paper">
             {`curl "${site.url}/api/v1/bonds/egypt?from=2026-01-01"`}
           </pre>
@@ -127,9 +130,9 @@ export default function DataApiPage() {
       </section>
 
       <section className="mt-12 max-w-2xl">
-        <SectionTitle kicker="Start" title="Ask for a 14-day trial key or an invoice" note="Tell us your firm and what you are building. Reply within one business day." />
+        <SectionTitle kicker="Start" title="Ask for a 30-day free pilot or an invoice" note="Tell us your firm and what you are building. Reply within one business day." />
         <div className="mt-4">
-          <EnquiryForm interest="licensing" cta="Request a trial key" />
+          <EnquiryForm interest="licensing" cta="Request a 30-day pilot" />
         </div>
       </section>
 

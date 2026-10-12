@@ -18,10 +18,11 @@ export async function GET(request: Request) {
         publisher: market.publisher,
         source_page: market.sourcePage,
         rate_measure: market.rateNote,
+        date_kind: market.dateKind ?? "auction",
         updated_at: updatedAt,
         history_from: rows.at(-1)?.date ?? null,
         results: rows.length,
-        latest_auction: { date: latestDate, results: rows.filter((r) => r.date === latestDate) },
+        latest_result: { date: latestDate, results: rows.filter((r) => r.date === latestDate) },
         history_url: `${site.url}/api/v1/bonds/${market.slug}`,
       },
     ];

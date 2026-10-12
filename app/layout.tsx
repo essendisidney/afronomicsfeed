@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { ThemeScript } from "@/components/layout/ThemeScript";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/schema";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -35,6 +37,12 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
+  creator: site.name,
+  publisher: site.name,
+  category: "finance",
+  // Let search and answer engines show full snippets and large previews of the data pages.
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
+  alternates: { types: { "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} RSS` }] } },
   openGraph: {
     title: site.name,
     description: site.description,
@@ -60,6 +68,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeScript />
       </head>
       <body className="flex min-h-full flex-col bg-paper font-sans text-ink">
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>

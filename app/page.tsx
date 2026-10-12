@@ -2,10 +2,12 @@ import { ContributeBand } from "@/components/data/ContributeBand";
 import { renderTime } from "@/lib/data/fetcher";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
+import { DebtHero } from "@/components/home/DebtHero";
+import { EveryoneIntro } from "@/components/home/EveryoneIntro";
 import { MoneyToday } from "@/components/home/MoneyToday";
 import { ProjectTable } from "@/components/data/ProjectTable";
 import { WireList } from "@/components/data/WireList";
-import { Kicker, RankBars, SectionTitle, SourceLine, usd } from "@/components/data/parts";
+import { RankBars, SectionTitle, SourceLine, usd } from "@/components/data/parts";
 import { getLatestArticles } from "@/lib/content";
 import { countries } from "@/lib/data/countries";
 import { formatFx, loadFxQuote, pairHref, tapeCodes } from "@/lib/data/fx";
@@ -16,10 +18,6 @@ import { loadDataSignals } from "@/lib/data/signals";
 import { loadWire, publishersLive } from "@/lib/data/wire";
 import { latestByTenor, loadTbills, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
-import { site } from "@/lib/site";
-import { billMarkets, latestBills, loadBillMarket } from "@/lib/data/sovereign-bills";
-
-const boardDate = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 
 export const revalidate = 900;
 
@@ -68,140 +66,20 @@ export default async function HomePage() {
   const hottest = inflation ? ranked(inflation, 1).slice(0, 8) : [];
   const thinnest = reserves ? [...ranked(reserves, 2)].reverse().slice(0, 8) : [];
 
-  const board = billMarkets.flatMap((market) => {
-    const item = latestBills(loadBillMarket(market.slug).rows).get(364);
-    if (!item) return [];
-    const bps = item.previous ? Math.round((item.latest.rate - item.previous.rate) * 100) : null;
-    return [{ market, rate: item.latest.rate, bps, date: item.latest.date }];
-  })
-    // the six markets that auctioned most recently
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 6);
-  const boardFx = fx ? (["KES", "NGN", "ZAR", "GHS", "EGP"] as const).flatMap((code) => (fx.rates[code] == null ? [] : [{ code, rate: fx.rates[code] }])) : [];
-
   return (
     <>
-      <section className="on-night bg-night text-night-ink">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-14 pt-10 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-16">
-          <div className="lg:col-span-6 lg:pt-4">
-            <p className="text-[14px] font-medium text-accent">{site.tagline}</p>
-            <h1 className="mt-4 font-serif text-[2.75rem] leading-[0.95] tracking-[-0.02em] sm:text-6xl lg:text-7xl">
-              What money costs in Africa, from the source, for everyone.
-            </h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-7 text-night-soft">{site.promise}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {[
-                { href: "/rates/kenya/check", label: "Is my rate fair?" },
-                { href: "/rates/kenya", label: "Today’s rates" },
-                { href: "/rates/what-readers-paid", label: "What did others pay?" },
-              ].map((action, i) => (
-                <Link
-                  key={action.href}
-                  href={action.href}
-                  className={
-                    i === 0
-                      ? "rounded-full bg-accent px-5 py-2.5 text-[15px] font-semibold text-night hover:bg-gold-soft"
-                      : "rounded-full border border-night-line px-5 py-2.5 text-[15px] font-medium text-night-ink hover:border-night-soft/50 hover:bg-night-2"
-                  }
-                >
-                  {action.label}
-                </Link>
-              ))}
-            </div>
-            <p className="mt-4 text-[14px] text-night-muted">
-              Or start from where you are:{" "}
-              {[
-                { href: "#saving", label: "saving" },
-                { href: "#borrowing", label: "borrowing" },
-                { href: "#business", label: "running a business" },
-                { href: "#institutions", label: "an institution" },
-              ].map((door, i, all) => (
-                <span key={door.href}>
-                  <a href={door.href} className="text-night-ink underline underline-offset-4 hover:text-accent">
-                    {door.label}
-                  </a>
-                  {i < all.length - 1 ? " · " : ""}
-                </span>
-              ))}
-            </p>
-            <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 sm:gap-8">
-              {[
-                { k: "economies covered", v: 54 },
-                { k: "publishers on the wire", v: publishersLive(wire) },
-                { k: "headlines in 10 days", v: wire.length },
-              ]
-                // the wire counts are zero only when every feed failed this hour; hide them rather than show a dash
-                .filter((item) => item.v > 0)
-                .map((item) => (
-                <div key={item.k} className="flex flex-col-reverse">
-                  <dt className="text-[13px] text-night-muted">{item.k}</dt>
-                  <dd className="af-board-figure text-3xl">{String(item.v)}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+      <DebtHero />
 
-          <div className="lg:col-span-6">
-            <div className="rounded-3xl border border-night-line bg-night-2 p-2 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]">
-              <div className="flex items-baseline justify-between px-4 pb-3 pt-3">
-                <h2 className="text-[15px] font-semibold">Latest 364-day bill auctions</h2>
-                <Link href="/markets/tbills" className="text-[13px] text-night-muted hover:text-night-ink">
-                  All ten markets
-                </Link>
-              </div>
-              <table className="w-full border-separate border-spacing-y-1 text-left">
-                <thead className="sr-only">
-                  <tr>
-                    <th>Market</th>
-                    <th>Rate</th>
-                    <th>Change since previous auction</th>
-                    <th>Auction</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {board.map((row, i) => (
-                    <tr key={row.market.slug} className="af-board-row" style={{ "--i": i } as React.CSSProperties}>
-                      <td className="rounded-l-2xl bg-night py-3 pl-4">
-                        <Link href={row.market.href} className="flex items-center gap-3 hover:text-accent">
-                          <span className="grid h-8 w-10 place-items-center rounded-lg bg-night-2 text-[12px] font-semibold tracking-wide text-night-soft">
-                            {row.market.iso}
-                          </span>
-                          <span className="text-[15px] font-medium">{row.market.country}</span>
-                        </Link>
-                      </td>
-                      <td className="af-board-figure bg-night py-3 text-right text-[26px] sm:text-3xl">{row.rate.toFixed(2)}%</td>
-                      <td
-                        className={`bg-night py-3 pl-4 text-right text-[13px] font-medium tabular-nums ${
-                          row.bps == null || row.bps === 0 ? "text-night-muted" : row.bps > 0 ? "text-[#ff8a7a]" : "text-[#5cd6a8]"
-                        }`}
-                      >
-                        {row.bps == null ? "" : row.bps === 0 ? "unch." : `${row.bps > 0 ? "+" : "−"}${Math.abs(row.bps)} bp`}
-                      </td>
-                      <td className="hidden rounded-r-2xl bg-night py-3 pl-4 pr-4 text-right text-[13px] text-night-muted sm:table-cell">
-                        {boardDate.format(new Date(row.date))}
-                      </td>
-                      <td className="rounded-r-2xl bg-night pr-3 sm:hidden" />
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {boardFx.length ? (
-                <div className="mt-1 grid grid-cols-5 gap-1">
-                  {boardFx.map((item) => (
-                    <Link key={item.code} href={pairHref(item.code)} className="rounded-2xl bg-night px-2 py-3 text-center hover:bg-night/60 sm:px-3">
-                      <span className="block text-[12px] text-night-muted">USD/{item.code}</span>
-                      <span className="af-board-figure mt-0.5 block text-lg sm:text-xl">{formatFx(item.rate)}</span>
-                    </Link>
-                  ))}
-                </div>
-              ) : null}
-              <p className="px-4 pb-2 pt-3 text-[12px] leading-5 text-night-muted">
-                Central-bank auction results, compiled by Afronomics. Dollar rates are the daily mid-market reference.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <EveryoneIntro
+        fx={fx}
+        stats={[
+          { k: "economies covered", v: 54 },
+          { k: "publishers on the wire", v: publishersLive(wire) },
+          { k: "headlines in 10 days", v: wire.length },
+        ]
+          // the wire counts are zero only when every feed failed this hour; hide them rather than show a dash
+          .filter((item) => item.v > 0)}
+      />
 
       <MoneyToday />
 

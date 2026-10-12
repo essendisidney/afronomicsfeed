@@ -1,3 +1,5 @@
+import { institutionalLadder, institutionalPriceText } from "@/lib/billing/ratecard";
+import { bondCoverageText, bondResultCount } from "@/lib/data/sovereign-bonds";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
@@ -12,7 +14,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Data licensing and API — African government auctions, FX and the Wire",
   description:
-    "License Afronomics datasets for your products and models: Treasury bill auctions in ten African markets, every Kenya bond auction, derived borrowing-cost measures, the African FX archive, the Wire headline archive and 22 series for 54 economies.",
+    "License Afronomics datasets for your products and models: African government bond auctions, Treasury bill auctions in ten African markets, derived borrowing-cost measures, the African FX archive, the Wire headline archive and 22 series for 54 economies.",
   alternates: { canonical: `${site.url}/licensing` },
 };
 
@@ -22,23 +24,18 @@ const tiers = [
   {
     name: "Open",
     price: "Free",
-    detail: "CSV downloads from every dataset page for research, teaching and journalism, with the attribution line kept.",
+    detail: "CSV downloads and the open JSON API for research, teaching and journalism, with the attribution line kept.",
   },
   {
     name: "Startup",
-    price: "KES 7,500/mo · $59",
-    detail: "Commercial use inside one product: the auction datasets for all ten markets, the measures and the FX archive, with an email or webhook on every new result.",
+    price: "KES 7,500/mo",
+    detail: "Commercial use inside one startup product: show the auction datasets, measures and FX archive to your own users with attribution, with an email or webhook on every new result. No resale of the raw data.",
   },
-  {
-    name: "Institution",
-    price: "KES 39,000/mo · $299",
-    detail: "All datasets and the Wire archive for internal models, dashboards and client reports, with full history and change notifications.",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    detail: "Redistribution rights, white-label widgets, new datasets built to your spec and a named contact on the desk.",
-  },
+  ...institutionalLadder.map((tier) => ({
+    name: tier.name,
+    price: `${institutionalPriceText(tier)}/mo`,
+    detail: `${tier.summary.charAt(0).toUpperCase()}${tier.summary.slice(1)}. ${tier.audience}`,
+  })),
 ];
 
 export default function LicensingPage() {
@@ -47,6 +44,12 @@ export default function LicensingPage() {
   const markets = billMarkets.map((m) => ({ m, rows: loadBillMarket(m.slug).rows })).filter((x) => x.rows.length);
   const results = markets.reduce((n, x) => n + x.rows.length, 0);
   const datasets = [
+    {
+      name: "African government bond auctions",
+      href: "/data/frontier-local-debt",
+      coverage: `${bondCoverageText()} · ${bondResultCount().toLocaleString("en-US")} results`,
+      detail: "Amounts offered, bid and accepted, the rate, bid-to-cover and the ISIN where published, each row linked to the issuer's own notice. API and CSV.",
+    },
     {
       name: "African Treasury bill auctions",
       href: "/markets/tbills",

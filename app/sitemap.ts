@@ -45,6 +45,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/send-money", "monthly", 0.9),
     ...[...new Set((loadRemittances()?.corridors ?? []).map((c) => destSlug(c.dst_name)))].map((slug) => page(`/send-money/${slug}`, "monthly", 0.8)),
     page("/rates/what-readers-paid", "daily", 0.8),
+    page("/pay-check", "daily", 0.9),
+    page("/rent-check", "daily", 0.9),
     page("/rates/kenya/saccos", "monthly", 0.8),
     page("/rates/nigeria/check", "weekly", 0.8),
     page("/rates/ghana/check", "weekly", 0.8),

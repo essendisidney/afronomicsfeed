@@ -4,8 +4,8 @@ Kenya's open government tenders, from the Public Procurement Regulatory Authorit
 The Public Procurement Information Portal (tenders.go.ke) publishes every tender as Open Contracting Data
 Standard (OCDS) releases, one file per financial year (https://tenders.go.ke/api/ocds/index lists them). This
 reads the current year's file and writes data/kenya/tenders.json: every tender still open for bids (closing date
-today or later), soonest first, with the buyer, category, procurement method and when we first saw it, so the site
-and the alerts can tell what is new. Writes nothing if the file cannot be read or looks wrong.
+today or later), soonest first, with the buyer, category, procurement method and when we first saw it (a Nairobi timestamp,
+or "before" for tenders already open when we started reading), so the site and the alerts can tell what is new. Writes nothing if the file cannot be read or looks wrong.
 
     python scripts/kenya_tenders.py
 """
@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import time
 import warnings
 from datetime import datetime, timedelta, timezone
 
@@ -59,9 +60,26 @@ def parse_time(s: str | None) -> datetime | None:
         return None
 
 
+def get(url: str, timeout: int) -> requests.Response:
+    """GET with patience: the portal answers 429 (too many requests) to bursts, so wait and try again."""
+    for attempt in range(4):
+        r = requests.get(url, headers={**UA, "Accept": "application/json"}, timeout=(15, timeout), verify=False)
+        if r.status_code not in (429, 502, 503, 504):
+            return r
+        wait = int(r.headers.get("Retry-After", "0") or 0) or 20 * (attempt + 1)
+        print(f"{url}: {r.status_code}, retrying in {wait}s")
+        time.sleep(min(wait, 90))
+    return r
+
+
 def current_year() -> tuple[str, str] | None:
     """(file key like "2026-2027", financial year name) for the year today falls in."""
-    rows = requests.get(INDEX, headers=UA, timeout=(15, 60), verify=False).json()
+    r = get(INDEX, 60)
+    try:
+        rows = r.json()
+    except ValueError:
+        print(f"{INDEX}: not JSON (status {r.status_code}): {r.text[:120]!r}")
+        return None
     rows = rows.get("data", rows) if isinstance(rows, dict) else rows
     today = datetime.now(EAT).date().isoformat()
     for r in rows:
@@ -74,10 +92,10 @@ def current_year() -> tuple[str, str] | None:
 def main() -> int:
     found = current_year()
     if not found:
-        print("no financial year file covers today")
+        print("no financial year file found for today")
         return 1
     key, fy_name = found
-    r = requests.get(FILE.format(fy=key), headers=UA, timeout=(15, 180), verify=False)
+    r = get(FILE.format(fy=key), 180)
     try:
         package = r.json()
     except ValueError:
@@ -94,6 +112,7 @@ def main() -> int:
     seen.update(previous.get("seen_closed", {}))
     first_run = not previous
 
+    stamp = now.isoformat(timespec="minutes")  # when this run first saw a tender (Nairobi time)
     tenders, by_id = [], {}
     for rel in releases:
         t = rel.get("tender") or {}
@@ -116,7 +135,7 @@ def main() -> int:
             "closes": closes.astimezone(EAT).isoformat(timespec="minutes"),
             "value": value if isinstance(value, (int, float)) and value > 0 else None,
             # The first run marks everything as seen before, so "new" means new since we started reading.
-            "first_seen": seen.get(tid) or ("before" if first_run else now.date().isoformat()),
+            "first_seen": seen.get(tid) or ("before" if first_run else stamp),
         }
         by_id[tid] = item
         tenders.append(item)
@@ -145,8 +164,8 @@ def main() -> int:
         "tenders": tenders,
         "seen_closed": dict(sorted(closed.items())),
     }, ensure_ascii=False, indent=0), encoding="utf-8")
-    new = sum(1 for t in tenders if t["first_seen"] == now.date().isoformat())
-    print(f"wrote {len(tenders)} open tenders of {len(releases)} in the {fy_name} file (published {published}); {new} new today")
+    new = sum(1 for t in tenders if t["first_seen"] == stamp)
+    print(f"wrote {len(tenders)} open tenders of {len(releases)} in the {fy_name} file (published {published}); {new} new this run")
     return 0
 
 

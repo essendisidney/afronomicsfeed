@@ -1,6 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import { cache } from "react";
+import { lenderSlug } from "@/lib/data/lender-slug";
+
+export { LOAN_APPS, lenderHref, lenderSlug } from "@/lib/data/lender-slug";
 
 /** Kenya's licensed digital credit providers, read from the CBK's monthly directory by scripts/kenya_dcp.py. */
 export type Lender = { no: number; name: string; postal: string; phone: string; email: string; address: string; licensed: string | null };
@@ -22,4 +25,14 @@ export const loadLenders = cache((): LenderFile | null => (fs.existsSync(FILE) ?
 export function lenderDomain(email: string) {
   const d = email.split("@")[1]?.toLowerCase().trim() ?? "";
   return /^(gmail|yahoo|outlook|hotmail|icloud|proton|protonmail|live)\./.test(d) ? "" : d;
+}
+
+/** A lender on the latest directory, or one that has dropped off it since we started reading, by page address. */
+export function lenderBySlug(slug: string) {
+  const f = loadLenders();
+  if (!f) return null;
+  const listed = f.lenders.find((l) => lenderSlug(l.name) === slug);
+  if (listed) return { file: f, lender: listed, removed: null };
+  const gone = f.removed.find((r) => lenderSlug(r.name) === slug);
+  return gone ? { file: f, lender: null, removed: gone } : null;
 }

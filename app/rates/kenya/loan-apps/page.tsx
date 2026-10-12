@@ -8,7 +8,7 @@ import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { Questions } from "@/components/seo/Questions";
 import { ShareRow } from "@/components/ui/ShareRow";
-import { lenderDomain, loadLenders } from "@/lib/data/loan-apps";
+import { lenderDomain, lenderHref, loadLenders } from "@/lib/data/loan-apps";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -96,7 +96,11 @@ export default async function LoanAppsPage() {
                 <tbody>
                   {scored.map((c) => (
                     <tr key={c.lender}>
-                      <td className="font-medium text-ink">{c.lender}</td>
+                      <td className="font-medium text-ink">
+                        <Link href={lenderHref(c.lender)} className="hover:text-forest">
+                          {c.lender}
+                        </Link>
+                      </td>
                       <td className="text-right font-semibold">{kes(c.median!)}</td>
                       <td className="text-right">
                         {kes(c.low!)} – {kes(c.high!)}
@@ -115,7 +119,7 @@ export default async function LoanAppsPage() {
                 : "Collecting from today: add a loan you have taken below. The first lender appears once five borrowers have reported it."}
             </p>
           )}
-          <div className="mt-6">
+          <div id="report" className="mt-6 scroll-mt-24">
             <LoanReportForm lenders={lenders.map((l) => l.name)} />
           </div>
           <p className="mt-2 text-[12px] text-muted">
@@ -132,7 +136,9 @@ export default async function LoanAppsPage() {
             <ul className="mt-3 divide-y divide-rule text-sm">
               {recent.map((l) => (
                 <li key={l.no} className="flex justify-between gap-3 py-2">
-                  <span className="text-ink">{l.name}</span>
+                  <Link href={lenderHref(l.name)} className="text-ink hover:text-forest">
+                    {l.name}
+                  </Link>
                   <span className="whitespace-nowrap text-muted">{longDate(l.licensed)}</span>
                 </li>
               ))}
@@ -144,7 +150,9 @@ export default async function LoanAppsPage() {
               <ul className="mt-3 divide-y divide-rule text-sm">
                 {f.removed.map((r) => (
                   <li key={r.name} className="flex justify-between gap-3 py-2">
-                    <span className="text-ink">{r.name}</span>
+                    <Link href={lenderHref(r.name)} className="text-ink hover:text-forest">
+                      {r.name}
+                    </Link>
                     <span className="whitespace-nowrap text-muted">gone by {longDate(r.dropped_by)}</span>
                   </li>
                 ))}

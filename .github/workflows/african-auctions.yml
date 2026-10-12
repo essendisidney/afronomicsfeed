@@ -97,12 +97,13 @@ jobs:
         continue-on-error: true
         timeout-minutes: 2
       # New auction results, policy-rate changes and stories go to the Telegram channel. Before the commit, so the
-      # record of what was posted (data/telegram_state.json) is saved with the data. Does nothing until the
-      # TELEGRAM_BOT_TOKEN and TELEGRAM_CHANNEL secrets are set.
+      # record of what was posted (data/telegram_state.json) is saved with the data. The bot token and channel come
+      # from the TELEGRAM_* secrets if set, otherwise from the database (af_telegram_config, behind AF_CRON_SECRET).
       - run: python scripts/telegram_post.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL: ${{ secrets.TELEGRAM_CHANNEL }}
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
         continue-on-error: true
         timeout-minutes: 3
       - name: Commit if the dataset changed

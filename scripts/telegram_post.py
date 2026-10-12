@@ -3,12 +3,10 @@ Post what is new in our data to the Afronomics Telegram channel: each new T-bill
 track), each central-bank policy-rate change, and each new story from the story engine.
 
 Runs at the end of every data run (.github/workflows/african-auctions.yml), before the commit, so the record of
-what was posted (data/telegram_state.json) is committed with the data. Needs two repository secrets:
-
-    TELEGRAM_BOT_TOKEN   the token @BotFather gives the bot
-    TELEGRAM_CHANNEL     the channel, e.g. @afronomics (the bot must be an admin of it)
-
-Without them it does nothing. The first run only records what is already published and posts nothing, so the
+what was posted (data/telegram_state.json) is committed with the data. The bot token and channel come from the
+TELEGRAM_BOT_TOKEN and TELEGRAM_CHANNEL environment variables when set, otherwise from the database
+(af_telegram_config, migration 0025, gated by AF_CRON_SECRET like the other desk functions). Without either it
+does nothing. The token never appears in the output: the run logs are public. The first run only records what is already published and posts nothing, so the
 channel is not flooded with history. A market the data health check marks late or failed is not posted.
 
     python scripts/telegram_post.py            # post what is new
@@ -135,24 +133,67 @@ def story_posts(state: dict) -> list[tuple[str, str, str]]:
     return out
 
 
-def send(token: str, channel: str, text: str) -> None:
-    r = requests.post(f"https://api.telegram.org/bot{token}/sendMessage", timeout=30, data={
-        "chat_id": channel, "text": text, "parse_mode": "HTML", "disable_web_page_preview": "false",
-    })
-    body = r.json() if r.headers.get("content-type", "").startswith("application/json") else {}
+SUPABASE = "https://ugjpcybhqwvzidcbqpik.supabase.co"
+PUBLISHABLE_KEY = "sb_publishable_pytbevd21MRA9Vgasf0TLw_kAugNejO"  # public, as in lib/store.ts
+
+
+def config() -> tuple[str, str]:
+    token, channel = os.environ.get("TELEGRAM_BOT_TOKEN", ""), os.environ.get("TELEGRAM_CHANNEL", "")
+    secret = os.environ.get("AF_CRON_SECRET", "")
+    if (token and channel) or not secret:
+        return token, channel
+    try:
+        r = requests.post(f"{SUPABASE}/rest/v1/rpc/af_telegram_config", json={"p_secret": secret}, timeout=30,
+                          headers={"apikey": PUBLISHABLE_KEY, "Authorization": f"Bearer {PUBLISHABLE_KEY}"})
+        cfg = r.json() if r.ok else None
+    except Exception as error:
+        print(f"::warning title=Telegram::could not read the settings: {type(error).__name__}")
+        cfg = None
+    return (cfg or {}).get("token") or "", (cfg or {}).get("channel") or ""
+
+
+def api(token: str, method: str, **data) -> dict:
+    """Call the Bot API. Errors are reported without the token, which is part of the URL."""
+    try:
+        r = requests.post(f"https://api.telegram.org/bot{token}/{method}", timeout=30, data=data)
+        body = r.json() if r.headers.get("content-type", "").startswith("application/json") else {}
+    except Exception as error:
+        raise RuntimeError(f"{method}: {type(error).__name__}: {str(error).replace(token, '<token>')[:160]}") from None
     if not body.get("ok"):
-        raise RuntimeError(f"Telegram refused the post: {r.status_code} {body.get('description', r.text[:200])}")
+        raise RuntimeError(f"{method}: Telegram said {r.status_code} {body.get('description', '')}")
+    return body["result"]
+
+
+def send(token: str, channel: str, text: str) -> None:
+    api(token, "sendMessage", chat_id=channel, text=text, parse_mode="HTML", disable_web_page_preview="false")
+
+
+def check_access(token: str, channel: str) -> bool:
+    """Is the token valid, and may the bot post in the channel? Prints names only."""
+    try:
+        me = api(token, "getMe")
+        member = api(token, "getChatMember", chat_id=channel, user_id=me["id"])
+    except RuntimeError as error:
+        print(f"::warning title=Telegram::{error}")
+        return False
+    can_post = member.get("status") == "creator" or (member.get("status") == "administrator" and member.get("can_post_messages", True))
+    print(f"bot @{me.get('username')} in {channel}: {member.get('status')}, can post: {can_post}")
+    if not can_post:
+        print(f"::warning title=Telegram::@{me.get('username')} is not allowed to post in {channel}: make it an admin with Post Messages")
+    return can_post
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
     args = ap.parse_args()
-    token, channel = os.environ.get("TELEGRAM_BOT_TOKEN", ""), os.environ.get("TELEGRAM_CHANNEL", "")
+    token, channel = ("", "") if args.dry else config()
     if not args.dry and not (token and channel):
-        print("TELEGRAM_BOT_TOKEN or TELEGRAM_CHANNEL not set; nothing posted")
+        print("no Telegram bot token or channel set; nothing posted")
         return 0
     first_run = not STATE.exists()
+    if first_run and not args.dry and not check_access(token, channel):
+        return 0  # record nothing until the bot can post, so the first real run still starts clean
     state = {} if first_run else json.loads(STATE.read_text(encoding="utf-8")).get("posted", {})
     before = dict(state)
     posts = bill_posts(state) + policy_posts(state) + story_posts(state)

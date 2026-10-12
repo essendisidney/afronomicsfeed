@@ -67,6 +67,9 @@ export function Footer() {
               LinkedIn
             </a>
           ) : null}
+          <a href={site.telegramUrl} className="text-xs text-night-muted hover:text-night-ink" target="_blank" rel="noopener noreferrer">
+            Telegram
+          </a>
         </div>
 
         <p className="mt-6 max-w-3xl text-xs leading-5 text-night-muted">{disclaimer}</p>

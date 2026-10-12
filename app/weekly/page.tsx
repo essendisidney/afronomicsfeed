@@ -104,7 +104,8 @@ export default async function WeeklyPage() {
             </div>
           ) : null}
           {edition.bonds.length ? (
-            <table className="data-table mt-6">
+            <div className="mt-6 overflow-x-auto">
+            <table className="data-table">
               <thead>
                 <tr>
                   <th>Treasury bond</th>
@@ -131,6 +132,7 @@ export default async function WeeklyPage() {
                 ))}
               </tbody>
             </table>
+            </div>
           ) : null}
           <SourceLine name="Central Bank of Kenya" href="https://www.centralbank.go.ke/bills-bonds/" detail="auction result notices; each row links to its notice" />
         </section>

@@ -53,7 +53,7 @@ const buyers: Buyer[] = [
     id: "investors",
     who: "DFIs, funds abroad and researchers",
     job: "Follow African sovereign funding costs across ten markets with full history, change notifications and someone to ask.",
-    products: ["licence_institution", "data_api", "enterprise", "frontier", "research", "bulk"],
+    products: ["licence_institution", "data_api", "enterprise", "research", "bulk"],
     start: { href: "/data-api", label: "See Afronomics Data" },
   },
 ];

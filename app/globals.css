@@ -372,3 +372,8 @@ body {
     transform: none;
   }
 }
+
+/* Safety net: nothing may make a phone scroll sideways. clip (not hidden) keeps sticky headers working. */
+body {
+  overflow-x: clip;
+}

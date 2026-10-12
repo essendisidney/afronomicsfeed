@@ -60,21 +60,22 @@ def parse_time(s: str | None) -> datetime | None:
         return None
 
 
-def get(url: str, timeout: int) -> requests.Response:
+def get(url: str, timeout: int, tries: int = 4) -> requests.Response:
     """GET with patience: the portal answers 429 (too many requests) to bursts, so wait and try again."""
-    for attempt in range(4):
+    for attempt in range(tries):
         r = requests.get(url, headers={**UA, "Accept": "application/json"}, timeout=(15, timeout), verify=False)
         if r.status_code not in (429, 502, 503, 504):
             return r
         wait = int(r.headers.get("Retry-After", "0") or 0) or 20 * (attempt + 1)
-        print(f"{url}: {r.status_code}, retrying in {wait}s")
-        time.sleep(min(wait, 90))
+        if attempt < tries - 1:
+            print(f"{url}: {r.status_code}, retrying in {wait}s")
+            time.sleep(min(wait, 90))
     return r
 
 
 def current_year() -> tuple[str, str] | None:
     """(file key like "2026-2027", financial year name) for the year today falls in."""
-    r = get(INDEX, 60)
+    r = get(INDEX, 60, tries=2)
     try:
         rows = r.json()
     except ValueError:
@@ -90,10 +91,17 @@ def current_year() -> tuple[str, str] | None:
 
 
 def main() -> int:
-    found = current_year()
+    try:
+        found = current_year()
+    except requests.RequestException as error:
+        print(f"{INDEX}: {str(error)[:120]}")
+        found = None
     if not found:
-        print("no financial year file found for today")
-        return 1
+        # Kenya's financial year runs July to June: name the file from today's date instead.
+        today = datetime.now(EAT).date()
+        y = today.year if today.month >= 7 else today.year - 1
+        found = (f"{y}-{y + 1}", f"{y}/{y + 1}")
+        print(f"index unavailable; trying the {found[1]} file directly")
     key, fy_name = found
     r = get(FILE.format(fy=key), 180)
     try:

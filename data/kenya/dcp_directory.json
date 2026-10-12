@@ -4,8 +4,9 @@
  "source": "https://www.centralbank.go.ke/wp-content/uploads/2026/09/Directory-of-Digital-Credit-Providers-September-2026.pdf",
  "source_posted": "2026-09-29",
  "updated": "2026-09-29",
- "read_at": "2026-10-12T15:19:30+00:00",
+ "read_at": "2026-10-12T15:34:34+00:00",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
+ "parser": 2,
  "note": "The CBK licenses companies, not apps: a loan app is licensed only if the company behind it is on this list.",
  "lenders": [
   {
@@ -101,18 +102,18 @@
   {
    "no": 11,
    "name": "Aleza Limited",
-   "postal": "P.O Box 2382– 40100, Kisumu E-mail address: alezalimited@gmail.com",
+   "postal": "P.O Box 2382– 40100, Kisumu",
    "phone": "+254716517065",
-   "email": "",
+   "email": "alezalimited@gmail.com",
    "address": "Pioneer Hse 2nd Floor, Oginga Odinga Street, Kisumu",
    "licensed": "2025-12-24"
   },
   {
    "no": 12,
    "name": "Amaze Credit Limited",
-   "postal": "P.O. Box 13234-00400, Nairobi E-mail address: amaze25c@gmail.com/info@amazecreditlimited.com Telephone No: +2542022613869 / +2542022613875 / +254721726845",
-   "phone": "",
-   "email": "",
+   "postal": "P.O. Box 13234-00400, Nairobi",
+   "phone": "+2542022613869 / +2542022613875 / +254721726845",
+   "email": "amaze25c@gmail.com/info@amazecreditlimited.com",
    "address": "Motorworld Centre, Jogoo road near city stadium.",
    "licensed": "2026-04-10"
   },
@@ -454,7 +455,7 @@
    "name": "Chime Capital Limited",
    "postal": "P.O. Box 7255, Eastleigh, Nairobi",
    "phone": "+254720990601",
-   "email": "",
+   "email": "accounts@chime.llc",
    "address": "Agip House, Harambee Avenue, Nairobi",
    "licensed": "2024-03-06"
   },
@@ -1103,8 +1104,8 @@
    "postal": "P.O. Box 45411-00100, Nairobi",
    "phone": "+254 (0) 713 970 529",
    "email": "tmatharu@me.com",
-   "address": "Physical Address. Gate 04, Dunga Close, Industrial Area, Nairobi, KenyaDate Licensed: July 9, 2026",
-   "licensed": null
+   "address": "Gate 04, Dunga Close, Industrial Area, Nairobi, Kenya",
+   "licensed": "2026-07-09"
   },
   {
    "no": 123,
@@ -1120,7 +1121,7 @@
    "name": "Kechita Capital Investment Limited",
    "postal": "P.O. Box 89-90100, Machakos",
    "phone": "+254797553815",
-   "email": "",
+   "email": "kechitacapital@gmail.com",
    "address": "2nd Floor, Hebron Complex, Machakos",
    "licensed": "2026-04-10"
   },
@@ -1298,8 +1299,8 @@
   {
    "no": 144,
    "name": "Lobelitec Credit Limited",
-   "postal": "P. O. Box 51191 - 00100, Nairobi Telephone No: 0112096086",
-   "phone": "",
+   "postal": "P. O. Box 51191 - 00100, Nairobi",
+   "phone": "0112096086",
    "email": "lobeliteccredit@gmail.com",
    "address": "Ngong Road Kindaruma Lane, Commodore Offices Plot 209",
    "licensed": "2024-03-06"
@@ -1307,8 +1308,8 @@
   {
    "no": 145,
    "name": "LockBx Limited",
-   "postal": "P.O. Box 25350-00603, Nairobi Telephone No: +254726210997",
-   "phone": "",
+   "postal": "P.O. Box 25350-00603, Nairobi",
+   "phone": "+254726210997",
    "email": "info@lockbx.co.ke",
    "address": "Sifa Towers, 6th Floor, 6A, Nairobi",
    "licensed": "2024-10-01"
@@ -1553,8 +1554,8 @@
    "postal": "P.O. Box 25351-00100, Nairobi",
    "phone": "+254709761101/0709761111",
    "email": "info@musoni.co.ke",
-   "address": "Cape Office Park, Ring Road Kilimani, Nairobi Licensed: September 2, 2025",
-   "licensed": null
+   "address": "Cape Office Park, Ring Road Kilimani, Nairobi",
+   "licensed": "2025-09-02"
   },
   {
    "no": 173,

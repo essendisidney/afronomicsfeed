@@ -74,14 +74,22 @@ def pick(rec: dict, *needles: str):
     return None
 
 
-def parse_sheet(ws, kind: str, page: str) -> list[dict]:
+def maturity_from_title(title: str) -> str | None:
+    """Each sheet holds one bond and is named after its maturity, e.g. "Maturity Date 29-04-2030"."""
+    m = re.search(r"(\d{1,2})[-/](\d{1,2})[-/](\d{4})", title or "")
+    return f"{m.group(3)}-{int(m.group(2)):02d}-{int(m.group(1)):02d}" if m else None
+
+
+def parse_sheet(ws, kind: str, page: str, headers: set | None = None) -> list[dict]:
     header = None
     rows = []
     for raw in ws.iter_rows(values_only=True):
         cells = list(raw)
         low = [str(c or "").strip().lower() for c in cells]
-        if any(c.startswith("tenor") for c in low) or ("issue date" in low and "isin" in low):
+        if "isin" in low and any(c.startswith("issue date") for c in low):
             header = low
+            if headers is not None:
+                headers.add(tuple(c for c in low if c))
             continue
         if header is None:
             continue
@@ -91,18 +99,20 @@ def parse_sheet(ws, kind: str, page: str) -> list[dict]:
         if not issue or rate is None or not (0 < rate < 80):
             continue
         m = lambda *n: (lambda x: x / 1e6 if x else None)(num(pick(rec, *n)))  # noqa: E731
-        days = num(pick(rec, "tenor"))
+        tenor_key = next((k for k in rec if k.startswith("tenor")), "")
+        tenor = num(rec.get(tenor_key))
+        years = tenor / 365 if tenor and "day" in tenor_key else tenor
+        coupon = next((num(v) for k, v in rec.items() if "coupon" in k and "frequency" not in k), None)
         accepted = m("accepted", "amount") or m("accepted", "nominal")
         received = m("submitted", "amount") or m("submitted", "nominal")
         rows.append({
             "kind": kind,
-            "isin": (pick(rec, "isin") or None),
-            "auction_date": as_date(pick(rec, "auction date")),
-            "value_date": issue,
-            "maturity": as_date(pick(rec, "maturity")),
-            "tenor_days": int(days) if days else None,
-            "tenor_years": round(days / 365, 1) if days else None,
-            "type": (str(pick(rec, "new") or pick(rec, "type") or "").strip() or None),
+            "isin": (str(pick(rec, "isin") or "").strip() or None),
+            "issue_date": issue,
+            "original_issue_date": as_date(pick(rec, "original issue")),
+            "maturity": maturity_from_title(ws.title) or as_date(pick(rec, "maturity")),
+            "tenor_years": round(years, 1) if years else None,
+            "type": {"n": "new", "r": "reopening"}.get(str(pick(rec, "new") or "").strip().lower()[:1]),
             "offered_egp_m": m("required"),
             "received_egp_m": received,
             "accepted_egp_m": accepted,
@@ -110,7 +120,9 @@ def parse_sheet(ws, kind: str, page: str) -> list[dict]:
             "min_yield": num(pick(rec, "min", "yield")),
             "max_yield": num(pick(rec, "max", "yield")),
             "weighted_avg_yield": rate,
-            "coupon": num(pick(rec, "coupon")),
+            "coupon": coupon,
+            "benchmark": (str(pick(rec, "benchmark") or "").strip() or None) if kind == "floating" else None,
+            "spread": num(pick(rec, "spread")) if kind == "floating" else None,
             "source": page,
         })
     return rows
@@ -134,40 +146,39 @@ def main() -> int:
         if content is None:
             continue
         wb = openpyxl.load_workbook(io.BytesIO(content), read_only=True, data_only=True)
-        if inspect:
-            for ws in wb.worksheets:
-                print(f"== {kind} / sheet {ws.title!r}")
-                for i, raw in enumerate(ws.iter_rows(values_only=True)):
-                    print("   ", [c for c in raw][:18])
-                    if i >= 6:
-                        break
         got = []
+        headers: set = set()
         for ws in wb.worksheets:
-            got += parse_sheet(ws, kind, page)
-        print(f"{kind}: {len(got)} auction rows")
+            got += parse_sheet(ws, kind, page, headers)
+        print(f"{kind}: {len(wb.worksheets)} sheets, {len(got)} auction rows")
+        if inspect:
+            for h in sorted(headers):
+                print(f"   header: {list(h)}")
+            for r in got[:2]:
+                print("   ", json.dumps(r, default=str))
         rows += got
     if inspect:
         print(f"inspect only: {len(rows)} rows parsed, nothing written")
         if rows:
-            print(json.dumps(rows[:3], indent=1, default=str))
+            print(json.dumps(rows[:1], indent=1, default=str))
         return 0
     if not rows:
         print("no bond rows read; nothing written")
         return 1
-    rows.sort(key=lambda r: (r["value_date"], r["kind"], r["isin"] or ""), reverse=True)
+    rows.sort(key=lambda r: (r["issue_date"], r["kind"], r["isin"] or ""), reverse=True)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({
         "dataset": "Egypt Treasury bond auctions",
         "publisher": "Central Bank of Egypt (on behalf of the Ministry of Finance)",
         "source_pages": KINDS,
         "currency": "EGP",
-        "rate_note": "weighted average yield of accepted bids, percent per annum; amounts in EGP millions",
-        "updated": rows[0]["value_date"],
+        "rate_note": "weighted average yield of accepted bids, percent per annum; amounts in EGP millions; one row per auction (new issue or reopening) of each bond",
+        "updated": rows[0]["issue_date"],
         "read_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "compiled_by": "Afronomics (afronomicsfeed.com)",
         "rows": rows,
     }, ensure_ascii=False, indent=0), encoding="utf-8")
-    print(f"wrote {len(rows)} Egypt bond auction rows; latest {rows[0]['value_date']}")
+    print(f"wrote {len(rows)} Egypt bond auction rows; latest {rows[0]['issue_date']}")
     return 0
 
 

@@ -28,7 +28,7 @@ export type BondRow = {
 };
 
 export type BondMarket = {
-  slug: "kenya" | "zambia" | "egypt" | "nigeria" | "waemu";
+  slug: "kenya" | "zambia" | "egypt" | "nigeria" | "uganda" | "waemu";
   country: string;
   currency: string;
   publisher: string;
@@ -68,6 +68,14 @@ export const bondMarkets: BondMarket[] = [
     publisher: "Debt Management Office, Nigeria",
     sourcePage: "https://www.dmo.gov.ng/fgn-bonds/auction",
     rateNote: "marginal (stop) rate, percent per annum; uniform-price auctions, so every successful bid pays it",
+  },
+  {
+    slug: "uganda",
+    country: "Uganda",
+    currency: "UGX",
+    publisher: "Bank of Uganda (for the Ministry of Finance)",
+    sourcePage: "https://www.bou.or.ug/bouwebsite/FinancialMarkets/tbondsauctionresults.html",
+    rateNote: "yield at the cut-off price, percent per annum",
   },
   {
     slug: "waemu",
@@ -150,6 +158,33 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
           rate,
           min_rate: n(r.bid_low),
           max_rate: n(r.bid_high),
+          coupon: n(r.coupon),
+          source: s(r.source) ?? "",
+        },
+      ];
+    });
+    return { updatedAt: updated, rows: out.sort((a, b) => b.date.localeCompare(a.date)) };
+  }
+  if (slug === "uganda") {
+    const out: BondRow[] = rows.flatMap((r) => {
+      const rate = n(r.yield);
+      const date = s(r.auction_date);
+      if (rate === null || !date) return [];
+      return [
+        {
+          date,
+          isin: s(r.isin),
+          issue: null,
+          tenor_years: n(r.tenor_years),
+          maturity: s(r.maturity),
+          type: null,
+          offered_m: n(r.offered_ugx_m),
+          received_m: n(r.tendered_ugx_m),
+          accepted_m: n(r.accepted_ugx_m),
+          bid_cover: n(r.bid_cover),
+          rate,
+          min_rate: null,
+          max_rate: null,
           coupon: n(r.coupon),
           source: s(r.source) ?? "",
         },

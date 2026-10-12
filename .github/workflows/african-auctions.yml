@@ -106,12 +106,13 @@ jobs:
       - run: python scripts/kenya_tenders.py
         continue-on-error: true
         timeout-minutes: 8
-      # Uganda: the Bank of Uganda's content API now answers GitHub's network. Recent notices are images, read
+      # Uganda (bills, then bonds): the Bank of Uganda's content API now answers GitHub's network. Recent notices are images, read
       # with Tesseract OCR and kept only when every figure passes the notice's own cross-checks.
       - name: Uganda T-bills
         run: |
           sudo apt-get install -y -qq tesseract-ocr >/dev/null && pip install -q pytesseract
           python scripts/uganda_tbills.py --budget 600
+          python scripts/uganda_bonds.py || echo "Uganda bonds: no update"
         env:
           OMP_THREAD_LIMIT: "1"  # four notices are read at once: stop each Tesseract also spawning a thread per core
         continue-on-error: true

@@ -59,6 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/for-institutions", "monthly", 0.7),
     page("/pack", "monthly", 0.7),
     page("/developers", "monthly", 0.6),
+    page("/data-api", "monthly", 0.7),
     page("/markets/tbills/nigeria", "daily", 0.8),
     page("/markets/tbills/ghana", "daily", 0.8),
     page("/markets/tbills/uganda", "daily", 0.8),

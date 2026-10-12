@@ -96,6 +96,15 @@ jobs:
       - run: python scripts/data_health.py
         continue-on-error: true
         timeout-minutes: 2
+      # New auction results, policy-rate changes and stories go to the Telegram channel. Before the commit, so the
+      # record of what was posted (data/telegram_state.json) is saved with the data. Does nothing until the
+      # TELEGRAM_BOT_TOKEN and TELEGRAM_CHANNEL secrets are set.
+      - run: python scripts/telegram_post.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL: ${{ secrets.TELEGRAM_CHANNEL }}
+        continue-on-error: true
+        timeout-minutes: 3
       - name: Commit if the dataset changed
         run: |
           if git diff --quiet -- data && [ -z "$(git ls-files --others --exclude-standard data)" ]; then

@@ -34,6 +34,8 @@ export type BondMarket = {
   publisher: string;
   sourcePage: string;
   rateNote: string;
+  /** What each row's date is: the auction itself, or the day the bonds settle (were issued). */
+  dateKind?: "auction" | "settlement";
 };
 
 export const bondMarkets: BondMarket[] = [
@@ -44,6 +46,7 @@ export const bondMarkets: BondMarket[] = [
     publisher: "Central Bank of Kenya",
     sourcePage: "https://www.centralbank.go.ke/bills-bonds/treasury-bonds/",
     rateNote: "weighted average rate of accepted bids, percent per annum",
+    dateKind: "settlement",
   },
   {
     slug: "zambia",
@@ -60,6 +63,7 @@ export const bondMarkets: BondMarket[] = [
     publisher: "Central Bank of Egypt (for the Ministry of Finance)",
     sourcePage: "https://www.cbe.org.eg/en/auctions/egp-t-bonds-fixed-coupon/historical-data",
     rateNote: "weighted average yield of accepted bids, percent per annum; fixed-coupon, zero-coupon and floating-rate bonds",
+    dateKind: "settlement",
   },
   {
     slug: "nigeria",
@@ -302,3 +306,34 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
   });
   return { updatedAt: updated, rows: out.sort((a, b) => b.date.localeCompare(a.date)) };
 });
+
+export type BondSnapshot = {
+  market: BondMarket;
+  latestDate: string;
+  latest: BondRow[];
+  monthly: { month: string; rate: number }[];
+  results: number;
+  since: string;
+};
+
+/** A market's newest auction (bonds sorted by tenor, at most `limit`) and its monthly average auction rate. */
+export function bondSnapshot(slug: BondMarket["slug"], months = 24, limit = 4): BondSnapshot | null {
+  const market = getBondMarket(slug);
+  const { rows } = loadBondMarket(slug);
+  if (!market || !rows.length) return null;
+  const latestDate = rows[0].date;
+  const latest = rows
+    .filter((r) => r.date === latestDate)
+    .sort((a, b) => (a.tenor_years ?? 0) - (b.tenor_years ?? 0))
+    .slice(0, limit);
+  const byMonth = new Map<string, number[]>();
+  for (const r of rows) {
+    const m = r.date.slice(0, 7);
+    byMonth.set(m, [...(byMonth.get(m) ?? []), r.rate]);
+  }
+  const monthly = [...byMonth.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .slice(-months)
+    .map(([month, rates]) => ({ month, rate: rates.reduce((n, v) => n + v, 0) / rates.length }));
+  return { market, latestDate, latest, monthly, results: rows.length, since: rows[rows.length - 1].date };
+}

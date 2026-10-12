@@ -4,7 +4,8 @@ import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { billMarkets, loadBillMarket, type BillMarket } from "@/lib/data/sovereign-bills";
-import { bondMarkets, loadBondMarket } from "@/lib/data/sovereign-bonds";
+import { bondMarkets, bondSnapshot, loadBondMarket, type BondMarket } from "@/lib/data/sovereign-bonds";
+import { BondMarketCard } from "@/components/data/BondMarketCard";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -67,6 +68,8 @@ export default function FrontierLocalDebtPage() {
       return { m, results: r.length, first: dates[0] ?? null, last: dates[dates.length - 1] ?? null, edge: EDGE[m.slug] ?? null };
     })
     .sort((a, b) => Number(Boolean(b.edge)) - Number(Boolean(a.edge)) || b.results - a.results);
+  const EDGE_ORDER: BondMarket["slug"][] = ["egypt", "morocco", "nigeria", "kenya", "uganda", "zambia", "waemu"];
+  const snaps = EDGE_ORDER.map((slug) => bondSnapshot(slug)).filter((x): x is NonNullable<typeof x> => Boolean(x));
   const total = rows.reduce((n, r) => n + r.results, 0) + bondTotal;
 
   return (
@@ -83,6 +86,21 @@ export default function FrontierLocalDebtPage() {
         </p>
       }
     >
+      {snaps.length ? (
+        <section className="mb-12">
+          <SectionTitle
+            kicker="Latest results"
+            title="The newest bond auction in each market"
+            note="Read from each issuer's own notice and linked to it. Rates as each publisher measures them: weighted average, cut-off or marginal (see the API notes). Information, not advice."
+          />
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {snaps.map((snap) => (
+              <BondMarketCard key={snap.market.slug} snap={snap} label={snap.market.slug === "waemu" ? "WAEMU (8 markets)" : undefined} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <section>
         <SectionTitle
           kicker="Coverage today"

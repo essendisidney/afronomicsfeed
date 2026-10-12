@@ -103,3 +103,13 @@ what we changed. Newest at the bottom. Read this first every week.
   only its latest ~5 PDFs, so deep history needs paging (not done yet).
 - **Tunisia:** the Treasury domain does not resolve and the central bank's site shows no auction results; only press
   reports found. Left as a gap, shown honestly on the product page.
+
+### D-012 · 12 Oct 2026 · Check against the prompt: building has run ahead of proof
+- **Observed:** since the go-ahead, the work has been Phase 4 (build): bond coverage went from 1 to 15 markets
+  (Kenya, Nigeria, Uganda, Zambia, Egypt, Morocco, 8 WAEMU). Phase 3 (prove that someone pays) has not started: 0 of
+  55 prospects contacted, 0 pilots, USD 0 collected. The prompt says build what is proven; coverage was built ahead of
+  proof, on the reasoning that a pilot offer with Kenya alone was too thin to test the wedge fairly.
+- **Changed:** coverage is now enough to run the D-004 test. No new markets until the outreach note has gone to
+  the first 10 prospects (founder action) and the first replies are in. Build work in the meantime is limited to
+  what makes the pilot convincing (the "Latest results" cards, the sample pack) and keeping readers healthy.
+- **Kill rule stands:** no pilot after 25 qualified contacts, or no payment after 3 used pilots.

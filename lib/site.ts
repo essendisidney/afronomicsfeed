@@ -68,6 +68,7 @@ export const footerGroups = [
       { href: "/rates/kenya/best-money-market-fund", label: "Best money market fund this month" },
       { href: "/rates/kenya/saccos", label: "SACCO rates" },
       { href: "/rates/kenya/mobile-loans", label: "Mobile loan costs" },
+      { href: "/rates/kenya/loan-apps", label: "Is this loan app licensed?" },
       { href: "/send-money", label: "Cheapest way to send money" },
       { href: "/rates/remittances", label: "Cost of sending money home" },
       { href: "/rates/what-readers-paid", label: "What readers paid" },

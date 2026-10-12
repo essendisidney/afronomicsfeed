@@ -81,6 +81,11 @@ jobs:
       - run: python scripts/cma_mmf.py
         continue-on-error: true
         timeout-minutes: 5
+      # Kenya's licensed loan apps (digital credit providers), from the CBK's monthly directory: writes only when a
+      # new directory appears, and records lenders that drop off the list.
+      - run: python scripts/kenya_dcp.py
+        continue-on-error: true
+        timeout-minutes: 5
       # Uganda: the Bank of Uganda's content API now answers GitHub's network. Recent notices are images, read
       # with Tesseract OCR and kept only when every figure passes the notice's own cross-checks.
       - name: Uganda T-bills

@@ -7,6 +7,7 @@ const typeName: Record<string, string> = {
   "Money Transfer Operator": "Transfer company",
   "Mobile Operator": "Mobile money",
   "Post Office": "Post office",
+  "Bank / Money Transfer Operator": "Bank with a transfer company",
 };
 
 /** One corridor's services, cheapest first, each with a "Send money" button where the provider has an online service. */
@@ -20,7 +21,6 @@ export function SendMoneyTable({ c }: { c: Corridor }) {
             <th>#</th>
             <th>Service</th>
             <th className="text-right">Cost of sending $200</th>
-            <th />
           </tr>
         </thead>
         <tbody>
@@ -39,14 +39,12 @@ export function SendMoneyTable({ c }: { c: Corridor }) {
                 <td className="text-right">
                   <span className="font-semibold">{usd(f.cost_pct)}</span>
                   <span className="block text-[11px] text-muted">{f.cost_pct.toFixed(2)}% of the amount</span>
-                </td>
-                <td className="text-right">
                   {p ? (
                     <a
                       href={`/go/${p.slug}?from=${c.src}&to=${c.dst}`}
                       rel="sponsored nofollow noopener"
                       target="_blank"
-                      className="inline-block whitespace-nowrap rounded-full bg-ink px-3.5 py-1.5 text-[13px] font-semibold text-paper hover:bg-forest"
+                      className="mt-2 inline-block whitespace-nowrap rounded-full bg-ink px-3 py-1.5 text-[12px] font-semibold text-paper hover:bg-forest"
                     >
                       Send with {p.name}
                     </a>

@@ -49,6 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/pay-check", "daily", 0.9),
     page("/rent-check", "daily", 0.9),
     page("/rates/kenya/saccos", "monthly", 0.8),
+    page("/chama", "daily", 0.9),
     page("/rates/nigeria/check", "weekly", 0.8),
     page("/rates/ghana/check", "weekly", 0.8),
     page("/rates/policy", "daily", 0.9),

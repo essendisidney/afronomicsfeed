@@ -1,7 +1,8 @@
 # Story engine
 
-Three money stories a week, each from a real change in our own data, each checked figure by figure, each published
-only after the owner approves it.
+Three money stories a week, each from a real change in our own data, each checked figure by figure. A story that
+passes every check goes live and is posted without waiting (the owner's instruction of 12 October 2026). One that fails
+any check is never published.
 
 ## Why
 
@@ -33,21 +34,19 @@ about their own money, in their own currency, with a number in the headline. The
 3. `python scripts/story_check.py content/briefs/<slug>.md <lead id>`: fix every problem it lists until it passes.
 4. Add `{date, lead, market, slug}` to `data/story_log.json`.
 5. `npx next build`, then a phone-width (390 px) screenshot of `/brief/<slug>`.
-6. Commit to a new branch (the session's designated branch if it has one, otherwise `story/<slug>`) and open a pull request titled `Story: <headline>`. **Do not merge it.**
-   The body holds the full story text, so the owner can read it on a phone, plus a LinkedIn post of under 1,200
+6. Commit to a new branch (the session's designated branch if it has one, otherwise `story/<slug>`) and open a pull
+   request titled `Story: <headline>`. The body holds the full story text and a LinkedIn post of under 1,200
    characters: the headline figure, two lines, the link `https://afronomicsfeed.com/brief/<slug>`, and
    "Information, not advice."
-7. Tell the owner in this session: the headline, the screenshot, and "Reply **publish** to put it live, or tell me
-   what to change."
-
-## When the owner replies
-
-- **publish:** squash-merge the pull request. Wait for the page to answer 200 at
-  `https://afronomicsfeed.com/brief/<slug>`, then post the LinkedIn text to the **company page only**: Zapier
-  LinkedInCLIAPI `create_company_update`, company_id `110352967`, `allow_reserved_characters` "false". Never the
-  personal profile.
-- **changes:** edit, run the check again, push to the same branch, and show the new version.
-- **skip:** close the pull request and leave the lead unpublished.
+7. **Publish automatically only if all of these hold:** `story_check.py` passed, `next build` passed, the screenshot
+   shows the page as written, and you have read the draft once more against the lead and found nothing wrong.
+   Then squash-merge, wait for `https://afronomicsfeed.com/brief/<slug>` to answer 200 and show the headline, and
+   post the LinkedIn text to the **company page only**: Zapier LinkedInCLIAPI `create_company_update`, company_id
+   `110352967`, `allow_reserved_characters` "false". Never the personal profile.
+8. If any check fails and cannot be fixed from the lead's own figures, do not publish. Leave the pull request open
+   and tell the owner what failed.
+9. Tell the owner in one short message: the headline, the link, the screenshot, and the LinkedIn post. They can ask
+   for a correction; a correction follows the same checks.
 
 ## Never
 

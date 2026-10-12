@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
+import { lenderHref } from "@/lib/data/lender-slug";
 import type { Lender } from "@/lib/data/loan-apps";
 
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "");
@@ -32,7 +34,9 @@ export function LenderSearch({ lenders, updated }: { lenders: (Lender & { domain
               <li key={l.no} className="py-3">
                 <p className="font-semibold text-ink">
                   <span className="mr-2 rounded-full bg-forest/10 px-2 py-0.5 text-[12px] font-semibold text-forest">Licensed</span>
-                  {l.name}
+                  <Link href={lenderHref(l.name)} className="hover:text-forest">
+                    {l.name}
+                  </Link>
                 </p>
                 <p className="mt-1 text-[13px] text-ink-soft">
                   {l.licensed ? `Licensed ${new Date(`${l.licensed}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}` : "Date not stated"}

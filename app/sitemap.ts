@@ -6,6 +6,7 @@ import { indicatorDefs } from "@/lib/data/indicators";
 import { articleHref } from "@/lib/format";
 import { marketDates } from "@/lib/data/market-stories";
 import { mmfMonths } from "@/lib/data/mmf-months";
+import { lenderHref, loadLenders } from "@/lib/data/loan-apps";
 import { loadRemittances, destSlug } from "@/lib/data/remittances";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
@@ -59,6 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...learnLangs.flatMap((l) => [page(`/learn/${l}`, "weekly", 0.8), ...loadLessons(l).map((x) => page(`/learn/${l}/${x.slug}`, "monthly", 0.7))]),
     page("/rates/kenya/mobile-loans", "weekly", 0.9),
     page("/rates/kenya/loan-apps", "weekly", 0.9),
+    ...[...(loadLenders()?.lenders ?? []), ...(loadLenders()?.removed ?? [])].map((l) => page(lenderHref(l.name), "monthly", 0.6)),
     page("/for-institutions", "monthly", 0.7),
     page("/pack", "monthly", 0.7),
     page("/developers", "monthly", 0.6),

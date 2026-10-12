@@ -1,4 +1,6 @@
 {
  "note": "Stories published from the story engine: which lead each was written from. scripts/story_finder.py skips these leads and weighs down a market written about in the last week.",
- "stories": []
+ "stories": [
+  {"date": "2026-10-12", "lead": "send_money:KEN:2025_1Q", "market": "kenya", "slug": "sending-200-dollars-to-kenya-what-it-costs"}
+ ]
 }

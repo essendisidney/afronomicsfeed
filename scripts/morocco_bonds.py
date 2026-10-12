@@ -68,7 +68,10 @@ def year_page(session: requests.Session, year: int | None) -> str:
     if not field:
         return html
     form = dict(re.findall(r'<input type="hidden" name="([^"]+)" id="[^"]*" value="([^"]*)"', html))
-    form.update({"__EVENTTARGET": field.group(1), "__EVENTARGUMENT": "", field.group(1): str(year)})
+    form.update({"__EVENTTARGET": "", "__EVENTARGUMENT": "", field.group(1): str(year)})
+    button = re.search(r'name="([^"]*BtnRevuesFilter)"', html)  # the filter's "OK" button submits the year
+    if button:
+        form[button.group(1)] = "OK"
     text_box = re.search(r'name="([^"]*txtYears)"', html)
     if text_box:
         form[text_box.group(1)] = str(year)

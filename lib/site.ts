@@ -15,6 +15,7 @@ export const site = {
     "The price of money in Africa: Treasury bill rates in ten markets, currencies, inflation and what they mean for a saver, a borrower and a treasury — from the central banks, the minute they publish, free to see, cited by institutions. Plus every African economy’s data and the headlines that move markets.",
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "desk@afronomicsfeed.com",
   linkedinUrl: "https://www.linkedin.com/company/afronomicsfeed/",
+  telegramUrl: "https://t.me/afronomic",
 } as const;
 
 /** The price of money first. Economy, Capital, Climate, Technology and Trade stay live, linked from the footer. */

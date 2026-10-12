@@ -1,3 +1,4 @@
+import { site } from "@/lib/site";
 import { RateAlertForm } from "@/components/ui/RateAlertForm";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
 import type { AlertKind } from "@/lib/rate-alerts-core";
@@ -47,6 +48,13 @@ export function FollowUp({
           </div>
         </div>
       </div>
+      <p className="mt-4 border-t border-rule pt-3 text-[13px] text-ink-soft">
+        On Telegram?{" "}
+        <a href={site.telegramUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-forest underline underline-offset-2">
+          Follow t.me/afronomic
+        </a>{" "}
+        for every T-bill result, rate change and new story as it lands.
+      </p>
     </aside>
   );
 }

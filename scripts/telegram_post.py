@@ -164,6 +164,26 @@ def api(token: str, method: str, **data) -> dict:
     return body["result"]
 
 
+INTRO = "\n".join([
+    "👋 <b>Welcome to Afronomics</b>",
+    "",
+    "The price of money in Africa, as the central banks publish it:",
+    "📊 every Treasury bill auction result in 10 markets (Kenya, Nigeria, Ghana, Uganda, Tanzania, Egypt, South Africa, Zambia, Malawi, Mozambique)",
+    "🏦 every central-bank policy-rate change",
+    "📰 our stories on what it means for your money",
+    "",
+    "Every figure names its source. Nothing here is a tip or a recommendation.",
+    f'<a href="{SITE}/?{UTM}&utm_campaign=intro">afronomicsfeed.com</a>',
+    "",
+    FOOT,
+])
+
+
+def intro_post(state: dict) -> list[tuple[str, str, str]]:
+    """The channel's first post, once."""
+    return [] if state.get("intro") else [("intro", "posted", INTRO)]
+
+
 def send(token: str, channel: str, text: str) -> None:
     api(token, "sendMessage", chat_id=channel, text=text, parse_mode="HTML", disable_web_page_preview="false")
 
@@ -196,7 +216,7 @@ def main() -> int:
         return 0  # record nothing until the bot can post, so the first real run still starts clean
     state = {} if first_run else json.loads(STATE.read_text(encoding="utf-8")).get("posted", {})
     before = dict(state)
-    posts = bill_posts(state) + policy_posts(state) + story_posts(state)
+    posts = intro_post(state) + bill_posts(state) + policy_posts(state) + story_posts(state)
     if first_run and not args.dry:
         # Start from what is already out: record it, post nothing.
         for key, value, _ in posts:

@@ -23,6 +23,14 @@ const endpoints = [
     what: "One market’s auction history. Optional: tenor=91|182|364, from and to (YYYY-MM-DD), limit (default 500, up to 5,000). Newest first.",
   },
   {
+    path: "/api/v1/bonds",
+    what: "Government bond auctions: each market with data (Kenya, Zambia, Egypt so far), where its history starts and its latest auction.",
+  },
+  {
+    path: "/api/v1/bonds/{market}",
+    what: "One market’s bond auction history: ISIN, tenor, amounts offered, bid and accepted, bid-to-cover, rate and coupon, with the source. Optional: isin, from and to (YYYY-MM-DD), limit. Newest first.",
+  },
+  {
     path: "/api/v1/index",
     what: "The Afronomics African Sovereign Bill Index: latest weekly reading, changes, each market’s contribution and the full series. tenor=91 for the three-month version.",
   },

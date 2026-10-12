@@ -91,7 +91,7 @@ def notice_amounts(text: str) -> dict[str, dict]:
             "bid_cost_zmw_m": f[2],
             "allocated_face_zmw_m": f[3],
             "allocated_cost_zmw_m": f[4],
-            "bid_cover": round(f[1] / f[0], 2) if f[0] else None,
+            "bid_cover": round(f[1] / f[3], 2) if f[3] else None,  # bids received / amount allocated, face value
             "dirty_price": float(m.group(8)),
         }
     return out

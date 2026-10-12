@@ -3,8 +3,8 @@ import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
-import { loadBonds } from "@/lib/data/kenya-bonds";
 import { billMarkets, loadBillMarket, type BillMarket } from "@/lib/data/sovereign-bills";
+import { bondMarkets, loadBondMarket } from "@/lib/data/sovereign-bonds";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -47,8 +47,14 @@ const longDate = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateStrin
 
 /** The first institutional product: African local-currency sovereign auction data, with a pilot request. */
 export default function FrontierLocalDebtPage() {
-  const bonds = loadBonds().rows;
-  const bondDates = bonds.map((b) => b.value_date).sort();
+  const bonds = Object.fromEntries(
+    bondMarkets.map((m) => {
+      const r = loadBondMarket(m.slug).rows;
+      return [m.slug, { results: r.length, first: r.at(-1)?.date ?? null, auctions: new Set(r.map((x) => x.date)).size }];
+    }),
+  ) as Record<string, { results: number; first: string | null; auctions: number }>;
+  const bondTotal = Object.values(bonds).reduce((n, b) => n + b.results, 0);
+  const bondCountries = bondMarkets.filter((m) => bonds[m.slug]?.results).map((m) => m.country);
   const rows = billMarkets
     .map((m) => {
       const r = loadBillMarket(m.slug).rows;
@@ -56,7 +62,7 @@ export default function FrontierLocalDebtPage() {
       return { m, results: r.length, first: dates[0] ?? null, last: dates[dates.length - 1] ?? null, edge: EDGE[m.slug] ?? null };
     })
     .sort((a, b) => Number(Boolean(b.edge)) - Number(Boolean(a.edge)) || b.results - a.results);
-  const total = rows.reduce((n, r) => n + r.results, 0) + bonds.length;
+  const total = rows.reduce((n, r) => n + r.results, 0) + bondTotal;
 
   return (
     <PageShell
@@ -76,7 +82,7 @@ export default function FrontierLocalDebtPage() {
         <SectionTitle
           kicker="Coverage today"
           title="What we hold, market by market"
-          note="Counted from our datasets on this page’s last build. Bond auctions are Kenya only today; Zambia, Egypt, the WAEMU markets (Côte d’Ivoire, Senegal) and Nigeria are next, in that order."
+          note={`Counted from our datasets on this page’s last build. Bond auctions today: ${bondCountries.join(", ")}. The WAEMU markets (Côte d’Ivoire, Senegal), Nigeria, South Africa and Uganda are next, in that order.`}
         />
         <div className="mt-4 overflow-x-auto">
           <table className="data-table">
@@ -104,9 +110,9 @@ export default function FrontierLocalDebtPage() {
                   <td className="text-right">{r.first ? monthYear(r.first) : "—"}</td>
                   <td className="text-right">{r.last ? longDate(r.last) : "—"}</td>
                   <td className="text-[13px]">
-                    {r.m.slug === "kenya" && bondDates.length ? (
+                    {bonds[r.m.slug]?.results && bonds[r.m.slug].first ? (
                       <span>
-                        {bonds.length} auctions since {monthYear(bondDates[0])}
+                        {bonds[r.m.slug].results.toLocaleString("en-US")} results since {monthYear(bonds[r.m.slug].first!)}
                       </span>
                     ) : r.edge ? (
                       <span className="text-accent">in build</span>
@@ -168,8 +174,8 @@ export default function FrontierLocalDebtPage() {
               <strong className="text-ink">Alerts:</strong> a notification when a market’s result is in (email today; webhooks for licensed keys on request).
             </li>
             <li>
-              <strong className="text-ink">Honest gaps:</strong> bond auctions outside Kenya, and Morocco, Tunisia, Côte d’Ivoire and Angola, are not covered
-              yet. We do not sell secondary-market prices: those come from dealers and exchanges. Pilot institutions shape the order.
+              <strong className="text-ink">Honest gaps:</strong> bond auctions are covered for {bondCountries.join(", ")} only so far; Nigeria, Uganda, Ghana,
+              Morocco, Tunisia, Côte d’Ivoire and Angola are not covered yet. We do not sell secondary-market prices: those come from dealers and exchanges. Pilot institutions shape the order.
             </li>
           </ul>
           <div className="mt-4 overflow-x-auto">

@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   const result = await startCheckout({
     plan: plan.id,
     email,
-    callbackUrl: `${origin}/${plan.id.startsWith("pack") ? "pack" : plan.id === "pro" || plan.id === "professional" || plan.id === "trial" ? "pricing" : plan.id === "job_listing" ? "jobs/post" : "prices"}?checkout=returned`,
+    callbackUrl: `${origin}/${plan.id.startsWith("pack") ? "pack" : plan.id === "pro" || plan.id === "professional" || plan.id === "trial" ? "pricing" : plan.id === "job_listing" ? "jobs/post" : plan.id.startsWith("tender_alerts") ? "tenders/pay" : "prices"}?checkout=returned`,
   });
 
   if (!result.ok) {

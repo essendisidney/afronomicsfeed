@@ -1,3 +1,4 @@
+import { paystackLive } from "@/lib/billing/paystack";
 import { loadTenders } from "@/lib/data/tenders";
 import { sendEmail } from "@/lib/mail";
 import { rpc } from "@/lib/store";
@@ -18,7 +19,7 @@ const today = (ms: number) => nairobi(ms).toISOString().slice(0, 10);
  * refresh; never from the browser. Each confirmed alert gets at most one email a day (from 06:00 Nairobi): its
  * first email lists every open matching tender; later ones only tenders first seen since the last email, and
  * nothing is sent on a day with no new match. After the free trial, an alert needs paid_until to keep going; while
- * no payment method is configured (af_secrets 'tender_pay') alerts stay free. ?dry=1 reports without sending.
+ * there is no way to pay (no live Paystack key and no af_secrets 'tender_pay') alerts stay free. ?dry=1 reports without sending.
  */
 export async function POST(request: Request) {
   const secret = process.env.AF_CRON_SECRET;
@@ -33,7 +34,9 @@ export async function POST(request: Request) {
   const list = await rpc("af_tender_alerts_live", { p_secret: secret });
   const value = list.ok ? (list.value as { pay: string | null; alerts: LiveTenderAlert[] } | null) : null;
   if (!value) return Response.json({ ...base, sent: 0, reason: `alerts: ${list.ok ? "no result" : list.reason}` }, { status: 502 });
-  const pay = value.pay?.trim() || null;
+  // Paystack with a live key is the way to pay; otherwise instructions set in af_secrets 'tender_pay'; with
+  // neither, alerts stay free.
+  const pay = paystackLive() ? "paystack" : value.pay?.trim() || null;
   const day = today(now);
   const stamp = new Date(now).toISOString();
   const isNew = (t: Tender, since: string) => t.first_seen !== "before" && Date.parse(t.first_seen) > Date.parse(since);

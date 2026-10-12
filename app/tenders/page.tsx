@@ -115,6 +115,13 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
         <p className="text-[17px] font-semibold text-ink">Get the tenders that fit your business, every morning</p>
         <p className="mt-1 mb-4 text-[14px] text-ink-soft">One email a day, only when a new tender matches. No more checking the portal.</p>
         <TenderAlertForm initialKeywords={words.join(", ")} />
+        <p className="mt-3 text-[12px] text-muted">
+          Already getting alerts?{" "}
+          <Link href="/tenders/pay" className="underline underline-offset-2">
+            Pay to keep them
+          </Link>{" "}
+          (KES {TENDER_PRICE_KES} a month or KES 5,000 a year, by M-Pesa, card or bank).
+        </p>
       </section>
 
       <section className="mt-10">

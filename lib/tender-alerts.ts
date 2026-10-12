@@ -22,9 +22,13 @@ const PAGE = `${site.url}/tenders`;
 const longDate = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const kw = (k: string[]) => k.map((x) => `“${x}”`).join(", ");
 
-const payLines = (pay: string, email: string) => [
-  `To keep your alerts: pay KES ${TENDER_PRICE_KES} for a month by ${pay}, then reply to this email with the M-Pesa confirmation code and the address the alerts go to (${email}). We switch the next month on the same day.`,
-];
+export const tenderPayUrl = (email: string) => `${site.url}/tenders/pay?e=${encodeURIComponent(email)}&utm_source=email&utm_medium=alert&utm_campaign=tender-pay`;
+
+/** pay: "paystack" (the pay page) or other instructions from af_secrets 'tender_pay' (paid by hand, confirmed by reply). */
+const payLines = (pay: string, email: string) =>
+  pay === "paystack"
+    ? [`To keep your alerts: KES ${TENDER_PRICE_KES} a month or KES 5,000 a year, by M-Pesa, card or bank: ${tenderPayUrl(email)}`]
+    : [`To keep your alerts: pay KES ${TENDER_PRICE_KES} for a month by ${pay}, then reply to this email with the M-Pesa confirmation code and the address the alerts go to (${email}). We switch the next month on the same day.`];
 
 export function tenderConfirmationEmail(keywords: string[], token: string) {
   const url = tenderConfirmUrl(token);

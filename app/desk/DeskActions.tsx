@@ -185,3 +185,80 @@ export function RevokeApiKey({ id }: { id: number }) {
     </form>
   );
 }
+
+const SEGMENTS = ["asset_manager", "bank", "dfi", "research", "pension", "insurer", "corporate", "government", "media", "other"];
+const PRODUCTS = ["frontier_debt", "data_api", "enterprise", "pack", "widget", "listing", "research", "tenders", "other"];
+const STAGES = ["prospect", "contacted", "qualified", "pilot", "proposal", "won", "lost"];
+
+/** Add a deal, or update one by its number (blank fields keep their value). "won" needs the signing date. */
+export function SaveDeal() {
+  const { msg, run } = useAction();
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    void run("deal_save", e.currentTarget);
+  }
+  const select = (name: string, options: string[], blank: string) => (
+    <select name={name} className={field} defaultValue="">
+      <option value="">{blank}</option>
+      {options.map((o) => (
+        <option key={o} value={o}>
+          {o.replace(/_/g, " ")}
+        </option>
+      ))}
+    </select>
+  );
+  return (
+    <form onSubmit={submit} className="grid gap-3 sm:grid-cols-3">
+      <label className="block">
+        <span className={label}>Deal no. (blank = new)</span>
+        <input name="id" inputMode="numeric" className={field} />
+      </label>
+      <label className="block sm:col-span-2">
+        <span className={label}>Organisation</span>
+        <input name="organisation" className={field} placeholder="e.g. a frontier debt fund" />
+      </label>
+      <label className="block">
+        <span className={label}>Segment</span>
+        {select("segment", SEGMENTS, "keep / other")}
+      </label>
+      <label className="block">
+        <span className={label}>Product</span>
+        {select("product", PRODUCTS, "keep / frontier debt")}
+      </label>
+      <label className="block">
+        <span className={label}>Stage</span>
+        {select("stage", STAGES, "keep / prospect")}
+      </label>
+      <label className="block">
+        <span className={label}>Expected USD a month if won</span>
+        <input name="value" inputMode="decimal" className={field} />
+      </label>
+      <label className="block">
+        <span className={label}>Next step date</span>
+        <input name="next_date" type="date" className={field} />
+      </label>
+      <label className="block">
+        <span className={label}>Signed on (needed for “won”)</span>
+        <input name="signed_at" type="date" className={field} />
+      </label>
+      <label className="block sm:col-span-2">
+        <span className={label}>Next step</span>
+        <input name="next_step" className={field} />
+      </label>
+      <label className="block">
+        <span className={label}>Source</span>
+        <input name="source" className={field} placeholder="pilot form, referral…" />
+      </label>
+      <label className="block sm:col-span-3">
+        <span className={label}>Notes</span>
+        <input name="notes" className={field} />
+      </label>
+      <div className="flex items-center gap-3 sm:col-span-3">
+        <button type="submit" className={btn}>
+          Save deal
+        </button>
+        {msg ? <span className="text-[12px] text-muted">{msg}</span> : null}
+      </div>
+    </form>
+  );
+}

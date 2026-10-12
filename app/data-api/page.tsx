@@ -39,6 +39,13 @@ export default function DataApiPage() {
         </p>
       }
     >
+      <p className="mb-6 rounded-xl border-l-4 border-forest bg-forest/5 px-4 py-3 text-[14px] text-ink-soft">
+        Investing in the African markets of JPMorgan’s GBI-EM Edge?{" "}
+        <Link href="/data/frontier-local-debt" className="font-semibold text-forest underline underline-offset-2">
+          See our coverage by market and request a 30-day pilot
+        </Link>
+        .
+      </p>
       <section className="grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-3">
         {[
           { v: String(billMarkets.length), k: "T-bill markets, every auction" },

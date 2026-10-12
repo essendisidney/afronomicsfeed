@@ -14,6 +14,8 @@ import { moneyLabel } from "@/lib/billing/plans";
 import { DeskKey } from "./DeskKey";
 import { OwnerDevice } from "./OwnerDevice";
 import { MoneyPanel, type Money, type Referral } from "./MoneyPanel";
+import { CommandCentre, type Deal, type PilotKey } from "./CommandCentre";
+import { loadFxQuote } from "@/lib/data/fx";
 import { AddCorrection, AddPress, GrantAccess, HideReport, IssueApiKey, RevokeApiKey } from "./DeskActions";
 import { country as reportCountry, item as reportItem } from "@/lib/reader-reports-core";
 
@@ -155,6 +157,12 @@ export default async function DeskPage() {
   const apiKeys = keyList?.ok && Array.isArray(keyList.value)
     ? (keyList.value as { id: number; prefix: string; label: string; plan: string; created_at: string; revoked_at: string | null; last_used_at: string | null; calls_30d: number }[])
     : [];
+  const dl = desk ? await rpc("af_deals_list", { p_secret: key }) : null;
+  const deals = dl?.ok && Array.isArray(dl.value) ? (dl.value as Deal[]) : [];
+  const fx = desk ? await loadFxQuote() : null;
+  // Units of each currency per US dollar; a fixed fallback for KES only if the live rate is unavailable.
+  const perUsd: Record<string, number> = { USD: 1, ...(fx?.rates ?? { KES: 129 }) };
+  const fxNote = fx ? `${fx.sourceName} rates of ${fx.updated.slice(5, 16)}` : "a fixed KES 129 to the dollar (live rate unavailable)";
   const rep = desk ? await rpc("af_reader_report_list", { p_secret: key, p_limit: 60 }) : null;
   const reports = rep?.ok && Array.isArray(rep.value) ? (rep.value as ReaderReport[]) : [];
 
@@ -199,6 +207,10 @@ export default async function DeskPage() {
         <Stat label="API calls, 7 days" value={apiCalls} />
         <Stat label="Leads" value={desk.leads_total} note={desk.feedback_found_rate == null ? "no feedback yet" : `${desk.feedback_found_rate}% found what they came for`} />
       </section>
+
+      <div className="mt-8">
+        <CommandCentre money={money} deals={deals} pilots={apiKeys as PilotKey[]} perUsd={perUsd} fxNote={fxNote} />
+      </div>
 
       <MoneyPanel money={money} referrals={referrals} />
 

@@ -58,6 +58,7 @@ export const footerGroups = [
     title: "Data",
     links: [
       { href: "/tenders", label: "Kenya government tenders open now" },
+      { href: "/data/frontier-local-debt", label: "Frontier local debt data (institutions)" },
       { href: "/markets/tbills", label: "T-bill monitor" },
       { href: "/markets/kenya-tbills/auction", label: "Kenya auction: likely rates, did my bid win?" },
       { href: "/markets/bill-index", label: "Sovereign Bill Index" },

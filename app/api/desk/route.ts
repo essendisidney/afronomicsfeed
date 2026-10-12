@@ -17,7 +17,20 @@ export async function POST(request: Request) {
   else if (b.action === "press") result = await rpc("af_press_add", { p_secret: key, p_email: s("email", 200), p_name: s("name", 120), p_outlet: s("outlet", 120) });
   else if (b.action === "hide_report") result = await rpc("af_reader_report_hide", { p_secret: key, p_id: Number(s("id", 20)) || 0 });
   else if (b.action === "api_key_create") result = await rpc("af_api_key_create", { p_secret: key, p_label: s("label", 120), p_plan: s("plan", 20) });
-  else if (b.action === "api_key_revoke") result = await rpc("af_api_key_revoke", { p_secret: key, p_id: Number(s("id", 20)) || 0 });
+  else if (b.action === "deal_save") {
+    const num = (k: string) => {
+      const v = Number(s(k, 20));
+      return Number.isFinite(v) && v > 0 ? v : null;
+    };
+    const date = (k: string) => (/^\d{4}-\d{2}-\d{2}$/.test(s(k, 10) ?? "") ? s(k, 10) : null);
+    const id = num("id");
+    if (!id && !s("organisation", 160)) return Response.json({ ok: false, reason: "A new deal needs the organisation." }, { status: 400 });
+    if (s("stage", 20) === "won" && !date("signed_at")) return Response.json({ ok: false, reason: "“Won” needs the date the agreement was signed." }, { status: 400 });
+    result = await rpc("af_deal_save", {
+      p_secret: key, p_id: id, p_organisation: s("organisation", 160), p_segment: s("segment", 20), p_product: s("product", 20), p_stage: s("stage", 20),
+      p_value_usd_month: num("value"), p_source: s("source", 200), p_next_step: s("next_step", 500), p_next_date: date("next_date"), p_notes: s("notes", 4000), p_signed_at: date("signed_at"),
+    });
+  } else if (b.action === "api_key_revoke") result = await rpc("af_api_key_revoke", { p_secret: key, p_id: Number(s("id", 20)) || 0 });
   else return Response.json({ ok: false, reason: "Unknown action." }, { status: 400 });
   if (!result.ok) return Response.json({ ok: false, reason: result.reason }, { status: 502 });
   if (result.value === false || result.value == null) return Response.json({ ok: false, reason: "Rejected (key or input)." }, { status: 403 });

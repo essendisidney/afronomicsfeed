@@ -74,3 +74,12 @@ what we changed. Newest at the bottom. Read this first every week.
   (bid-to-cover = bids / amount accepted in every market). Next: UMOA-Titres (8 WAEMU countries), then Nigeria.
 - **Outreach:** a draft note and follow-up plan are in `outreach-draft.md`, waiting for the founder's approval.
   Nothing has been sent.
+
+### D-009 · 12 Oct 2026 · WAEMU (8 markets, including Côte d'Ivoire) added through UMOA-Titres
+- **Did:** mapped UMOA-Titres' issue listing (1,711 issues, 3,854 security lines since 2017) and each issue's
+  results panel; built `umoa_bonds.py`, which pairs each result with its security line and drops any it cannot pair.
+- **Happened (VERIFIED, live inspect on 12 Oct):** the five newest issues (Senegal, Burkina Faso, Côte d'Ivoire,
+  Niger, Mali) read with tenor, coupon, bids, accepted amount, prices and weighted average yield.
+- **Changed:** scheduled (250 new issue pages a run, newest first, so the history fills in about 7 runs);
+  `/api/v1/bonds/waemu?issue=senegal`. Bond coverage now: Kenya, Zambia, Egypt and the 8 WAEMU markets. Next:
+  Nigeria (DMO), then South Africa and Uganda.

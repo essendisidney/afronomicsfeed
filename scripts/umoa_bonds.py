@@ -12,7 +12,7 @@ Issue pages already on file are not fetched again; each run reads at most --budg
 history fills over a few runs. Writes data/waemu/auctions.json; writes nothing if no results are read.
 
     python scripts/umoa_bonds.py                 # read new issues and write
-    python scripts/umoa_bonds.py --budget 300    # read up to 300 new issue pages (default 120)
+    python scripts/umoa_bonds.py --budget 300    # read up to 300 new issue pages (default 250)
     python scripts/umoa_bonds.py --inspect       # read the 5 newest issues and print them; write nothing
 """
 
@@ -178,6 +178,9 @@ def merge(lines: list[dict], results: list[dict], url: str) -> list[dict]:
         y = r["weighted_yield"]
         if y is None or not (0 < y < 30):
             continue
+        for k in ("weighted_price", "marginal_price"):  # per 10,000 XOF nominal; anything else is a misread
+            if r[k] is not None and not (5000 <= r[k] <= 12000):
+                r[k] = None
         rows.append({
             "country": line["country"],
             "instrument": r["instrument"],
@@ -203,7 +206,7 @@ def merge(lines: list[dict], results: list[dict], url: str) -> list[dict]:
 
 def main() -> int:
     inspect = "--inspect" in sys.argv
-    budget = int(sys.argv[sys.argv.index("--budget") + 1]) if "--budget" in sys.argv else 120
+    budget = int(sys.argv[sys.argv.index("--budget") + 1]) if "--budget" in sys.argv else 250
     html = get(PAGE)
     issues = listing(html)
     if inspect or not issues:

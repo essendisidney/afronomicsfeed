@@ -54,7 +54,8 @@ export default function FrontierLocalDebtPage() {
     }),
   ) as Record<string, { results: number; first: string | null; auctions: number }>;
   const bondTotal = Object.values(bonds).reduce((n, b) => n + b.results, 0);
-  const bondCountries = bondMarkets.filter((m) => bonds[m.slug]?.results).map((m) => m.country);
+  const bondCountries = bondMarkets.filter((m) => bonds[m.slug]?.results).map((m) => (m.slug === "waemu" ? "the eight WAEMU markets" : m.country));
+  const civ = loadBondMarket("waemu").rows.filter((r) => r.issue === "Côte d’Ivoire");
   const rows = billMarkets
     .map((m) => {
       const r = loadBillMarket(m.slug).rows;
@@ -82,7 +83,7 @@ export default function FrontierLocalDebtPage() {
         <SectionTitle
           kicker="Coverage today"
           title="What we hold, market by market"
-          note={`Counted from our datasets on this page’s last build. Bond auctions today: ${bondCountries.join(", ")}. The WAEMU markets (Côte d’Ivoire, Senegal), Nigeria, South Africa and Uganda are next, in that order.`}
+          note={`Counted from our datasets on this page’s last build. Bond auctions today: ${bondCountries.join(", ")}. Nigeria, South Africa and Uganda are next, in that order.`}
         />
         <div className="mt-4 overflow-x-auto">
           <table className="data-table">
@@ -130,9 +131,17 @@ export default function FrontierLocalDebtPage() {
                   </td>
                   <td>{u.weight}</td>
                   <td className="text-right text-muted" colSpan={3}>
-                    Not covered yet
+                    {u.country === "Côte d’Ivoire" ? "Bills not shown yet (bonds via UMOA-Titres)" : "Not covered yet"}
                   </td>
-                  <td className="text-[13px] text-accent">{u.country === "Côte d’Ivoire" ? "next (with Senegal)" : "planned"}</td>
+                  <td className="text-[13px]">
+                    {u.country === "Côte d’Ivoire" && civ.length ? (
+                      <span>
+                        {civ.length.toLocaleString("en-US")} results since {monthYear(civ[civ.length - 1].date)}
+                      </span>
+                    ) : (
+                      <span className="text-accent">{u.country === "Côte d’Ivoire" ? "next (with Senegal)" : "planned"}</span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -175,7 +184,7 @@ export default function FrontierLocalDebtPage() {
             </li>
             <li>
               <strong className="text-ink">Honest gaps:</strong> bond auctions are covered for {bondCountries.join(", ")} only so far; Nigeria, Uganda, Ghana,
-              Morocco, Tunisia, Côte d’Ivoire and Angola are not covered yet. We do not sell secondary-market prices: those come from dealers and exchanges. Pilot institutions shape the order.
+              Morocco, Tunisia and Angola are not covered yet. We do not sell secondary-market prices: those come from dealers and exchanges. Pilot institutions shape the order.
             </li>
           </ul>
           <div className="mt-4 overflow-x-auto">

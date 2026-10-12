@@ -1,0 +1,2543 @@
+{
+ "dataset": "Kenya's licensed digital credit providers",
+ "publisher": "Central Bank of Kenya, Directory of Digital Credit Providers",
+ "source": "https://www.centralbank.go.ke/wp-content/uploads/2026/09/Directory-of-Digital-Credit-Providers-September-2026.pdf",
+ "source_posted": "2026-09-29",
+ "updated": "2026-09-29",
+ "read_at": "2026-10-12T15:19:30+00:00",
+ "compiled_by": "Afronomics (afronomicsfeed.com)",
+ "note": "The CBK licenses companies, not apps: a loan app is licensed only if the company behind it is on this list.",
+ "lenders": [
+  {
+   "no": 1,
+   "name": "Abepot Credit Limited",
+   "postal": "P.O. Box 45019-30700, Iten",
+   "phone": "+254719710536",
+   "email": "abepacreditltd@gmail.com",
+   "address": "Galana Road, Wuyi Plaza, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 2,
+   "name": "Abito Limited",
+   "postal": "P.O. Box 67450 - 00100, Nairobi",
+   "phone": "+254753536473",
+   "email": "abitozfin@gmail.com",
+   "address": "Garden Estate Quinox Room A01, Alozi Estate Road, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 3,
+   "name": "Absolute Credit Kenya Ltd",
+   "postal": "P.O. Box 72528 – 00505, Nairobi",
+   "phone": "+254794887996",
+   "email": "absolutecreditlimited@gmail.com",
+   "address": "Ultramond Godown and Offices, Mombasa Road, Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 4,
+   "name": "Acquire Credit Limited",
+   "postal": "P.O. Box 39530 - 00623, Nairobi",
+   "phone": "+254718480100/+254708847828",
+   "email": "acquirecredit@gmail.com",
+   "address": "Lynn Marie Apartments Office Block, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 5,
+   "name": "Adjacent Possible Finance Limited",
+   "postal": "P.O Box 63589 – 00619, Nairobi",
+   "phone": "+254722399176",
+   "email": "info@apf.co.ke",
+   "address": "5th Floor, Jewel Complex, Roysambu",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 6,
+   "name": "Adroit Credit Limited",
+   "postal": "P.O. Box 35717-00100, Nairobi",
+   "phone": "+254735509000",
+   "email": "request@adroitcredit.co.ke",
+   "address": "Centenary House, Block A, 4th Floor Ring Road, Westlands",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 7,
+   "name": "African Capital Limited",
+   "postal": "P.O. Box 44563-00100, Nairobi",
+   "phone": "+254712519518",
+   "email": "admin@africancapital.net",
+   "address": "Ambank House, Utali Lane, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 8,
+   "name": "Afrimoney Credit Limited",
+   "postal": "P.O. Box 49400-00100, Nairobi",
+   "phone": "+254713336970",
+   "email": "afrimoneycreditltd25@gmail.com",
+   "address": "Laiboni Centre, Lenana Road, Kilimani",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 9,
+   "name": "Ajax Credit Kenya Limited",
+   "postal": "P.O. Box 67450 - 00100, Nairobi",
+   "phone": "+254784270031",
+   "email": "ajaxcreditkenyaltd@gmail.com",
+   "address": "Adams Arcade Building, Ground Floor, Ngong Road, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 10,
+   "name": "Alba Capital Limited",
+   "postal": "P.O. Box 102783 -00101, Nairobi",
+   "phone": "+254721274891/ +254780274891",
+   "email": "info@albacapital.co.ke",
+   "address": "IPS Building, Kimathi Street, 7th Floor, Suite 8",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 11,
+   "name": "Aleza Limited",
+   "postal": "P.O Box 2382– 40100, Kisumu E-mail address: alezalimited@gmail.com",
+   "phone": "+254716517065",
+   "email": "",
+   "address": "Pioneer Hse 2nd Floor, Oginga Odinga Street, Kisumu",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 12,
+   "name": "Amaze Credit Limited",
+   "postal": "P.O. Box 13234-00400, Nairobi E-mail address: amaze25c@gmail.com/info@amazecreditlimited.com Telephone No: +2542022613869 / +2542022613875 / +254721726845",
+   "phone": "",
+   "email": "",
+   "address": "Motorworld Centre, Jogoo road near city stadium.",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 13,
+   "name": "Ambush Capital Limited trading under FlashPesa",
+   "postal": "P.O. Box 52800 - 00100, Nairobi",
+   "phone": "+254769159474",
+   "email": "support@flashpesa.co.ke",
+   "address": "Unit 1302, 13th Floor, Applewood Adams, Ngong Road, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 14,
+   "name": "Anchorstone Capital Limited",
+   "postal": "P.O. Box 14220 - 00400, Nairobi",
+   "phone": "+254712349528",
+   "email": "anchorstonecapitallimited@gmail.com",
+   "address": "Emperor Plaza, Room 520, Koinange Street, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 15,
+   "name": "Anjoy Credit Limited",
+   "postal": "P.O. Box 40583 – 00100, Nairobi",
+   "phone": "+254769984360",
+   "email": "info@anjoycredit.com",
+   "address": "Transnational House 1st Floor, Mama Ngina Street, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 16,
+   "name": "ASA International Kenya Limited",
+   "postal": "P.O. Box 2420-0060, Nairobi",
+   "phone": "+254702092230",
+   "email": "info@asa-ke.com, kenya.asa-international.com",
+   "address": "House No. 247, Owashika Road, Off Isaac Gathanju Road Lavington",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 17,
+   "name": "Asante FS East Africa Limited",
+   "postal": "P.O. Box 13796 - 00800, Nairobi",
+   "phone": "+254111017500",
+   "email": "info@asantefinancegroup.com",
+   "address": "Delta Corner Towers, 3rd Floor, Waiyaki Way, Westlands, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 18,
+   "name": "Asap Credit Limited",
+   "postal": "P.O. Box 2358 – 00621, Nairobi",
+   "phone": "+254768222111",
+   "email": "asapcreditlimited@gmail.com",
+   "address": "Old Mutual Building, Kimathi Street",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 19,
+   "name": "Aspire Lending Ltd",
+   "postal": "P.O. Box 803 - 00232, Nairobi",
+   "phone": "+254208100244/+254799083373",
+   "email": "info@aspirelending.co.ke",
+   "address": "Rehema Place-Ngong Road, Opp. Prestige Plaza Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 20,
+   "name": "Autochek Limited",
+   "postal": "P.O. Box 66249-00800, Nairobi",
+   "phone": "+254 791 694 004",
+   "email": "autochekkenya@autochek.africa",
+   "address": "Nivina Towers, 1st Floor (East Wing), Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 21,
+   "name": "Auxiliary Credit Ltd",
+   "postal": "P.O Box 62179 – 00200, Nairobi",
+   "phone": "+254 746 990 000",
+   "email": "credit.auxiliary@gmail.com; info@auxiliary.credit",
+   "address": "Riverside Properties, 2nd Floor, Riverside Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 22,
+   "name": "Avenews Ke Ltd",
+   "postal": "P.O. Box 2553-00606, Nairobi",
+   "phone": "+254111133300",
+   "email": "jibiwa@avenews-gt.com",
+   "address": "The Westwood Building, 1st Floor, Ring Road, Parklands, Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 23,
+   "name": "Aventus Technology Limited",
+   "postal": "P.O. Box 30834 – 00100, Nairobi",
+   "phone": "+254709029000",
+   "email": "customer@lendplus.ke",
+   "address": "Rhapta Road, Rhapta Heights, Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 24,
+   "name": "AVL Capital Ltd",
+   "postal": "P.O. Box 35502- 00100, Nairobi",
+   "phone": "+254 717 780 171 / +254 20 230 4180",
+   "email": "info@avlcapital.com",
+   "address": "Lower Duplex Apartments, Suite 24, Upper Hill Road",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 25,
+   "name": "Azura Credit Limited",
+   "postal": "P.O. Box 51191 – 00100, Nairobi",
+   "phone": "+254705903265",
+   "email": "azurakenyacredit@gmail.com",
+   "address": "Top Plaza, Kilimani Street, Kindaruma Lane, Westlands, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 26,
+   "name": "Baecot Credit Ltd",
+   "postal": "P.O. Box 30031-00100, Nairobi",
+   "phone": "+254795648487",
+   "email": "baecotcreditltd@gmail.com",
+   "address": "Enterprise Road",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 27,
+   "name": "Baraka Credit Limited",
+   "postal": "P.O. Box 30031-00100",
+   "phone": "+254795648487",
+   "email": "baecotcreditltd@gmail.com",
+   "address": "Enterprise Road, Industrial Area, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 28,
+   "name": "Bashy African Credit Limited",
+   "postal": "P.O. Box 14468-00400, Nairobi",
+   "phone": "+254 721 902 361",
+   "email": "info@bashyafricancredit.co.ke",
+   "address": "Town House, 8th Floor, Suite 801, Kaunda Street, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 29,
+   "name": "BCF Kenya Limited",
+   "postal": "P.O. Box 180 – 00606, Nairobi",
+   "phone": "+254724223223",
+   "email": "info@bcfkenya.com",
+   "address": "L.R. No: 209/14/77 Wambugu Road Parklands",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 30,
+   "name": "Beavers Credit Limited",
+   "postal": "P.O. Box 580-00100, Nairobi",
+   "phone": "+254 775347055",
+   "email": "beaverscredit@gmail.com",
+   "address": "Utalii houses 1st floor north wing",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 31,
+   "name": "Becalob Credit Limited",
+   "postal": "P.O. Box 1066-00606, Nairobi",
+   "phone": "+254733792756",
+   "email": "juliusaopio@gmail.com",
+   "address": "8th floor, Pine Tree Plaza, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 32,
+   "name": "Betasoft Credit Limited",
+   "postal": "P.O. Box 2597-00200, Nairobi",
+   "phone": "+254722165421",
+   "email": "betasoftadnew@gmail.com",
+   "address": "Petbon Flats, Kamiti Road",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 33,
+   "name": "Bidii Credit Limited",
+   "postal": "P.O. Box 17678 – 00100, Nairobi",
+   "phone": "+254 720797088/+254 726349395",
+   "email": "info@bidiicreditkenya.co.ke /bidiicreditfinance@gmail.com",
+   "address": "Applewood Adams, 3rd Floor, Ngong Road",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 34,
+   "name": "Bimas Kenya Limited",
+   "postal": "P.O. Box 2299-6010, Embu",
+   "phone": "0111056010",
+   "email": "pgathondu@bimaskenya.com/ info@bimaskenya.com",
+   "address": "Bimas Plaza, Embu",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 35,
+   "name": "Bingwa Micro Capital Limited",
+   "postal": "P.O. Box 7829 Thika",
+   "phone": "+254713172914; +254712717844",
+   "email": "info@bingwacapital.com",
+   "address": "Kwame Nkurumah Street Building, Thika West District, Thika",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 36,
+   "name": "Blesmark Credit Limited",
+   "postal": "P.O. Box 34146-00100 Nairobi",
+   "phone": "+254701237549",
+   "email": "blesmarkcredit@gmail.com",
+   "address": "Kipchamba Street, Cherantho Plaza, Bomet",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 37,
+   "name": "Bluewave Cash Limited",
+   "postal": "P.O. Box 35240-00200, Nairobi",
+   "phone": "+254117306398",
+   "email": "bluewavecashlimited@gmail.com",
+   "address": "Eastlands Hotel, Kindaruma Road",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 38,
+   "name": "Boostline Capital Limited",
+   "postal": "P.O. Box 45326 – 00100, Nairobi",
+   "phone": "+254717384332",
+   "email": "capitalboosline@gmail.com",
+   "address": "Sangyug Centre, 2nd Floor - Ngara Road, Nairobi.",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 39,
+   "name": "Bossrich Credit Limited",
+   "postal": "P.O. Box 24330 - 00100, Nairobi",
+   "phone": "+254708950500",
+   "email": "bossrichcredit@gmail.com",
+   "address": "Vision Plaza, 3rd Floor Suite 8C, Mombasa Road, Nairobi.",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 40,
+   "name": "Boya Capital Limited",
+   "postal": "P.O. Box 24511 - 00502, Nairobi",
+   "phone": "+254729570269",
+   "email": "info@boya.capital",
+   "address": "Watermark, Business Park. Karen, Nairobi.",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 41,
+   "name": "BRAC Kenya Company Limited",
+   "postal": "P.O. Box 22316 – 00505, Nairobi",
+   "phone": "+254 (0) 743797670",
+   "email": "info.bkcl@brac.net",
+   "address": "Fawe House, Chania Avenue",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 42,
+   "name": "Brisk Credit Limited",
+   "postal": "P.O. Box 22637 – 00505, Nairobi",
+   "phone": "+254713329268/+254721702156/+254734702156",
+   "email": "managing.director@brisk-credit.co.ke",
+   "address": "Commodore Office Suites, Kindaruma Road, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 43,
+   "name": "Bytech Credit Limited",
+   "postal": "P.O. Box 3250 - 00200, Nairobi",
+   "phone": "+254781646440",
+   "email": "bytechcreditltd@gmail.com",
+   "address": "Kiserian, Magadi Road, Building Opposite Shell Petro Station.",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 44,
+   "name": "Cars and Cargo Capital Limited",
+   "postal": "P.O. Box 49595-00100, Nairobi",
+   "phone": "+254792428078",
+   "email": "info@carsandcargocapital.com",
+   "address": "Suite 6, 4th Floor, Yala Towers",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 45,
+   "name": "Cashmart Capital Limited",
+   "postal": "P.O. Box 21249-00100, Nairobi",
+   "phone": "+254721841670; +254724807400",
+   "email": "cashmartcapital@gmail.com/ talktous@cashmartcapital.co.ke",
+   "address": "Vision Tower, Muthithi Road, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 46,
+   "name": "Centenary Micro Enterprise Services Ltd",
+   "postal": "P.O. Box 1164-00502, Nairobi",
+   "phone": "+254797333888",
+   "email": "ceo@cemesltd.co.ke",
+   "address": "One Padmore Place, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 47,
+   "name": "Ceres Tech Limited",
+   "postal": "P.O. Box 50047 – 00100, GPO, Nairobi",
+   "phone": "+254702038679",
+   "email": "cerestechltdke@gmail.com",
+   "address": "Victoria Court, Abacus Lane, Ruaraka, Nairobi",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 48,
+   "name": "Chapeo Capital Limited",
+   "postal": "P.O. Box 14363 – 00800, Nairobi",
+   "phone": "+254207905106 /+254207905107",
+   "email": "info@chapeo.club",
+   "address": "Wallstreet Business Park, Godown No. 10. ICD Road-Off Mombasa Road",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 49,
+   "name": "Chelete Credit Limited",
+   "postal": "P.O. Box 29980 - 00100, Nairobi",
+   "phone": "+254115263074",
+   "email": "cheletecreditltd@gmail.com",
+   "address": "Tetezi Towers, Ground Floor, Off Ngong Road, George Padmore Road, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 50,
+   "name": "Chime Capital Limited",
+   "postal": "P.O. Box 7255, Eastleigh, Nairobi",
+   "phone": "+254720990601",
+   "email": "",
+   "address": "Agip House, Harambee Avenue, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 51,
+   "name": "CIM Credit Kenya Limited",
+   "postal": "P.O. Box 11938-00100, Nairobi",
+   "phone": "+254770330330",
+   "email": "tellmemore@aspira.co.ke",
+   "address": "The Cube, Riverside, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 52,
+   "name": "Coffers Credit Limited",
+   "postal": "P.O. Box 430 - 50406, Funyula",
+   "phone": "+ 254721349199",
+   "email": "cofferslimited@gmail.com",
+   "address": "Head Office: Ngong' Business Arcade, Ngong Road, Ngong Town.",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 53,
+   "name": "Colkos Enterprises Limited",
+   "postal": "P.O. Box 22813 – 00505, Ngong Road, Nairobi",
+   "phone": "+254722253228 / +254741129129",
+   "email": "info@colkos.com",
+   "address": "Amani Court, Near Adams Arcade, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 54,
+   "name": "Creditarea Capital Limited",
+   "postal": "P.O. Box 7640-00600, Nairobi",
+   "phone": "+254709462700 / 0721734688",
+   "email": "help@kashbean.co.ke",
+   "address": "Baba Dogo, Business Park, Eastlands, Off Outering Road, Spect Godown No.3, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 55,
+   "name": "Credix Digital Credit Provider Limited",
+   "postal": "P.O. Box 7432 – 01000, Nairobi",
+   "phone": "+254722264265",
+   "email": "credixdp@gmail.com",
+   "address": "Kenyatta Highway, Thika Bazaar, 2nd Floor, Thika",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 56,
+   "name": "Credora Digital Limited",
+   "postal": "P.O. Box 11891-00100, Nairobi",
+   "phone": "+254710241472",
+   "email": "credoralimited1@gmail.com",
+   "address": "Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 57,
+   "name": "Dahawi Credit Limited",
+   "postal": "P.O. Box 996, 00621 Village market, Nairobi",
+   "phone": "+254725407714",
+   "email": "dahawicreditltd@gmail.com",
+   "address": "Pioneer Building, Kenyatta Avenue",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 58,
+   "name": "Decimal Capital Limited",
+   "postal": "P.O. Box 5077-00100, Nairobi",
+   "phone": "+254721858774",
+   "email": "decimalcapital@gmail.com",
+   "address": "Nachu Plaza, 9th Floor, Kiambere Road, Upperhill, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 59,
+   "name": "Demulla Investments Limited",
+   "postal": "P.O. Box 213-50201 Cheptais",
+   "phone": "+254710941992",
+   "email": "demullainvestmentsltd@gmail.com",
+   "address": "Demulla building, Off Joyland- Rostaman Road, behind Joyland homes. L.R NO: Isukha/Shirere/ 7756",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 60,
+   "name": "Dexintec Kenya Limited",
+   "postal": "P. O. Box. 103818 – 00100, Nairobi",
+   "phone": "+254727620547",
+   "email": "info@ke.dexintec.com",
+   "address": "Cardinal Otunga Plaza, Koinange Road, Starehe District, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 61,
+   "name": "Dime Credit Limited",
+   "postal": "P.O. Box 8628-00100, Nairobi",
+   "phone": "+254722217215",
+   "email": "dimecredit@gmail.com",
+   "address": "Two Rivers Mall, 2nd Floor, South Tower, Limuru Road, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 62,
+   "name": "Diversity Micro Credit Limited",
+   "postal": "P.O. Box 7415 - 01000, Thika",
+   "phone": "+254730020000",
+   "email": "info@diversitymicrocredit.co.ke",
+   "address": "Upper Road, Thika",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 63,
+   "name": "Dotcash Credit Limited",
+   "postal": "P.O. Box 17285-00200, Nairobi",
+   "phone": "+254741922050",
+   "email": "dotcashcredit@gmail.com",
+   "address": "Adlife Plaza, Chania Avenue, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 64,
+   "name": "East Africa Futures Company Limited",
+   "postal": "P.O. Box 20498 – 00100, Nairobi",
+   "phone": "+254 703130699",
+   "email": "info@futures.co.ke",
+   "address": "Rattansi Education, Trust Building, Koinange Street, Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 65,
+   "name": "Easy Asset Management Limited",
+   "postal": "P.O. Box 28411 – 00100, Nairobi",
+   "phone": "+254748637357",
+   "email": "reports@iloan.co.ke",
+   "address": "Centenary House, Ring Road, Westlands, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 66,
+   "name": "Easyways Credit Limited",
+   "postal": "P.O. Box 10499 – 00100, Nairobi",
+   "phone": "+254734641449/+254786189755",
+   "email": "info@easywayscredit.co.ke",
+   "address": "Trio Complex Thika Road behind Garden City Mall",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 67,
+   "name": "ED Partners Africa Limited",
+   "postal": "P. O. Box1063 - 00100, Nairobi",
+   "phone": "+254 111 131 000",
+   "email": "customercare@edpartnersafrica.com",
+   "address": "Haven Court, Parkfield Place,4th Floor Waiyaki Way Opposite Safaricom House",
+   "licensed": "2024-06-27"
+  },
+  {
+   "no": 68,
+   "name": "Edenbridge Capital Ltd.",
+   "postal": "P.O. Box 10046 – 00100, Nairobi",
+   "phone": "+254701848484",
+   "email": "info@edenbridgecapital.co.ke",
+   "address": "IPS Building, Kimathi Street, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 69,
+   "name": "EDOMX Limited",
+   "postal": "P.O. Box 797-00606, Nairobi",
+   "phone": "+254701220220",
+   "email": "legal@edomx.com",
+   "address": "The Address, 16th Floor, Muthangari Drive, Westlands, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 70,
+   "name": "Elevate Credit Limited",
+   "postal": "P.O. Box 61600-00200, Nairobi",
+   "phone": "+254748933558",
+   "email": "pgachuhy@gmail.com",
+   "address": "Sameer Business Park Mombasa Road, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 71,
+   "name": "Ellegant Credit Limited",
+   "postal": "P.O. Box 57639-00200, Nairobi",
+   "phone": "+254746851679",
+   "email": "info@ellegantcredit.com",
+   "address": "Lonak Business Centre, 1st Floor, Suite B11, Kasarani, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 72,
+   "name": "Equal Reach Credit Limited",
+   "postal": "P.O. Box 105482-00101, Nairobi",
+   "phone": "0728333233",
+   "email": "aishice2004@yahoo.com",
+   "address": "Kilimani Circle Mall, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 73,
+   "name": "Eversure Credit Limited",
+   "postal": "P.O. Box 4342 -00100, Nairobi",
+   "phone": "0782480480",
+   "email": "khaliddmar79@yahoo.com",
+   "address": "Adlife Mall, Ring Road, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 74,
+   "name": "Extend Money Services Limited",
+   "postal": "P.O. Box 21735 – 00100, Nairobi",
+   "phone": "+254 709503 000",
+   "email": "info@extendmoney.co.ke",
+   "address": "4th Floor, Suite 6G, Vision Plaza, Mombasa Road, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 75,
+   "name": "Fabilo Credit Ltd",
+   "postal": "P.O. Box 42724 -00100, Nairobi",
+   "phone": "+ 254 743960066",
+   "email": "fabilocredit@gmail.com",
+   "address": "1st floor, Delta Corner Annex, Ring Road Westlands Lane, Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 76,
+   "name": "Factorhouse Limited",
+   "postal": "P. O. Box 70- 00618, Nairobi",
+   "phone": "+254726770992",
+   "email": "mwangi@factorhouseltd.com",
+   "address": "5th Floor, Liberty Plaza, Mombasa Road, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 77,
+   "name": "Fahari Point Capital Limited",
+   "postal": "P.O Box 9394-00100, Nairobi",
+   "phone": "0722262640",
+   "email": "Faharipointcapital@gmail.com, Info@faharipointcapital.com",
+   "address": "Viewpark Towers 14th Floor - Utalii Lane",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 78,
+   "name": "Fantom Capital Limited",
+   "postal": "P. O. Box 15455-00400, Nairobi",
+   "phone": "+254722362432",
+   "email": "kuriag.robert@gmail.com",
+   "address": "Energies Ruaraka, Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 79,
+   "name": "Fezotech Kenya Limited",
+   "postal": "P. O. Box 21188 – 00100, GPO, Nairobi",
+   "phone": "+254724032400",
+   "email": "fezotechkenya@gmail.com /fezotechk@gmail.com",
+   "address": "The Arch Place Building, Kilimani Road, Westlands District, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 80,
+   "name": "Finberry Capital Ltd",
+   "postal": "P. O. Box 74937-00200, Nairobi",
+   "phone": "+254798890004",
+   "email": "info@berry.ke",
+   "address": "ATC Centre, No 40 Riara Road.",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 81,
+   "name": "Finboom Credit Kenya Limited",
+   "postal": "P. O. Box 936-00900, Kiambu",
+   "phone": "+254793780210",
+   "email": "help@finboomcredit.co.ke",
+   "address": "Grainbelt go downs, Go down 2, Ruiru",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 82,
+   "name": "Fincorp Credit Limited",
+   "postal": "P.O. Box 12626-00400, Nairobi",
+   "phone": "0706 355 355/0111 055 600",
+   "email": "info@fincorpcredit.co.ke",
+   "address": "Gallant Mall, 8th Floor, Parklands Road",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 83,
+   "name": "Fincredit Limited",
+   "postal": "P.O. Box 101267 – 00101, Nairobi, Jamia Square",
+   "phone": "0709000390 - 0709000399",
+   "email": "reporting@fincredit.co.ke",
+   "address": "Two Rivers, North Tower 2nd Floor",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 84,
+   "name": "Finseil Limited",
+   "postal": "P.O. Box 29036 – 00100, Nairobi",
+   "phone": "+254740454705/+254709008100/+254709008101",
+   "email": "info@finseil.ltd",
+   "address": "6th Floor, Left Wing, International Life House, Mama Ngina Street",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 85,
+   "name": "Fluid Capital Limited",
+   "postal": "P.O. Box 2891-00600, Nairobi",
+   "phone": "+254711466446",
+   "email": "info@fluidcapital.ke",
+   "address": "The 680 Building",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 86,
+   "name": "Fortune Credit Limited",
+   "postal": "P.O. Box 4237-00506, Nairobi",
+   "phone": "+254722982474/0114943649",
+   "email": "info@fortunecredit.co.ke",
+   "address": "Enwealth Business Centre, Ngong Lane, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 87,
+   "name": "Fourth Generation Capital Limited",
+   "postal": "P.O. Box 287-00502, Karen, Nairobi",
+   "phone": "+254113862239",
+   "email": "compliance@4g-capital.com / legal@4g-capital.com",
+   "address": "Africa Reit Lane, Africa Reit House, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 88,
+   "name": "Frictionless Enterprises Limited",
+   "postal": "P.O. Box 77708 – 00508, Nairobi",
+   "phone": "+254711082222",
+   "email": "hello@m-power.io",
+   "address": "Powerhouse, Kyuna Road, Spring Valley, Nairobi, Kenya",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 89,
+   "name": "Futureinno Digital Tech Limited",
+   "postal": "P.O. Box 21591-00100, Nairobi",
+   "phone": "+254710170061",
+   "email": "futureinnodigital@gmail.com",
+   "address": "Reliable Towers, Mogotio Road, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 90,
+   "name": "Geoland Credit Limited",
+   "postal": "P.O. Box 2714 - 60200, Meru, Kenya",
+   "phone": "+25421656565/+254720578421/0781177177",
+   "email": "compliance@geolandgroup.co.ke/credit@geolandgroup.co.ke",
+   "address": "Kenyatta Highway, Ntara Place, Lower Ground floor, Meru",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 91,
+   "name": "Getcash Capital Limited",
+   "postal": "P.O. Box 15682 - 00503, Mbagathi, Nairobi",
+   "phone": "+254736276000",
+   "email": "info@getcashcapital.co.ke",
+   "address": "Devcon House, 2nd Floor, Lunga Lunga, Nairobi",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 92,
+   "name": "Giando Africa Limited (Trading as Flash Credit Africa)",
+   "postal": "P. O. Box 1816 – 00606, Sarit Centre, Nairobi",
+   "phone": "+254713948254/ 0706934558",
+   "email": "support@flashcreditafrica.com",
+   "address": "Epic Ridge Properties, New Kitisuru, Block A, Suite 8, Nairobi",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 93,
+   "name": "Girls First Kenya Limited",
+   "postal": "P.O. Box 74041-00200, Nairobi",
+   "phone": "+254205002132",
+   "email": "info@girlsfirstfinance.com",
+   "address": "132 Manyani E Rd, Nairobi, Kenya (Zuri Health HQ)",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 94,
+   "name": "Glad Agritech Kenya Limited",
+   "postal": "P.O. Box 357-00623, Parklands, Nairobi",
+   "phone": "+254745145777",
+   "email": "ravi@gladagritech.com",
+   "address": "L.R. No.15081/4, Eastern Bypass, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 95,
+   "name": "Goalbridge Capital Limited",
+   "postal": "P.O. Box 50063-00200, Nairobi",
+   "phone": "+254752012631",
+   "email": "goalbridgecapital@gmail.com",
+   "address": "5th Floor, Jubilee Exchange, Mama Ngina Street, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 96,
+   "name": "Granary Capital Limited",
+   "postal": "P.O. Box 15763-00509, Nairobi",
+   "phone": "+254715638770",
+   "email": "info@granarycapital.com",
+   "address": "Butere Road, Credit Bank Building",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 97,
+   "name": "Guava Capital Limited",
+   "postal": "P.O. Box 949 - 20117, Naivasha",
+   "phone": "+254714775291",
+   "email": "guavacapitalltd@gmail.com",
+   "address": "Total Office, Ruaraka Street, Thika Road",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 98,
+   "name": "Hakki Africa Limited",
+   "postal": "P.O. Box 59959 - 00100, Nairobi",
+   "phone": "+ 254711082132",
+   "email": "contact@hakki-africa.com",
+   "address": "Timshack House, Ngong Road, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 99,
+   "name": "Hanis Capital Limited",
+   "postal": "P.O. Box 25801 – 00100, Nairobi",
+   "phone": "+254 705406087",
+   "email": "hanniscapitallimited@gmail.com",
+   "address": "Sameer Park Building, Mombasa Road",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 100,
+   "name": "Hawkins Credit Limited, Nakuru",
+   "postal": "P.O. Box 12647-20100",
+   "phone": "0720340055",
+   "email": "oumahawkins@gmail.com",
+   "address": "Safety House, Nakuru",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 101,
+   "name": "Hela Capital Limited",
+   "postal": "P.O. Box 19619-00100, Nairobi",
+   "phone": "+254 (20) 776 6666",
+   "email": "md@helacapitals.com",
+   "address": "Thindigua, Kiambu Road, Feruzi Towers, 4th Floor, Wing A, Kiambu.",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 102,
+   "name": "Helium Credit Limited",
+   "postal": "P.O. Box 14816 – 00800, Nairobi",
+   "phone": "+254738150083/+254718584310",
+   "email": "heliumcredit@heliumhealth.com",
+   "address": "Riverside Drive, Keystone Park, Westlands",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 103,
+   "name": "Horpazi Credit Limited",
+   "postal": "P.O. Box 17056-00510, Makongeni",
+   "phone": "+254795648487",
+   "email": "horpazicreditltd@gmail.com",
+   "address": "Spaine Road, Embakasi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 104,
+   "name": "Iboda Credit Limited",
+   "postal": "P.O. Box 7769-00200 – City Square, Nairobi",
+   "phone": "+254722988581",
+   "email": "ibodacreditlimited@gmail.com",
+   "address": "Six Business Park, Embakasi, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 105,
+   "name": "Inkomoko Capital Kenya Limited",
+   "postal": "P.O. Box 76490-00603, Nairobi",
+   "phone": "+254794590228",
+   "email": "info-ke@inkomoko.com",
+   "address": "Bishop Magua Building, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 106,
+   "name": "Insight Credit Limited",
+   "postal": "P.O. Box 15463-00100, Nairobi",
+   "phone": "+254722235468/ +254724340475",
+   "email": "info@insightcredit.co.ke",
+   "address": "International House 13th Floor, Mama Ngina Street",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 107,
+   "name": "Inspire Credit Limited",
+   "postal": "P.O. Box 10499 – 00400, Nairobi",
+   "phone": "+254758555333 / +254748111555",
+   "email": "info@inspirecredit.co.ke",
+   "address": "Muthaiga Square, Thika Superhighway, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 108,
+   "name": "Inventure Mobile Limited (Trading as Tala)",
+   "postal": "P.O. Box 35523 – 00100, Nairobi",
+   "phone": "0800720597 (toll free)",
+   "email": "hellokenya@talamobile.com",
+   "address": "The Oval, 6th Floor, Wing A, Ring Road, Westlands, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 109,
+   "name": "Investbox Holdings Ltd",
+   "postal": "P.O. Box 48562-00100, Nairobi",
+   "phone": "+254722668570",
+   "email": "investboxholdingsltd@gmail.com",
+   "address": "Podium Heights Apartments, Plainsview Road – South B",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 110,
+   "name": "Ismuk Credit Limited",
+   "postal": "P.O. Box 60973 – 00200, Nairobi",
+   "phone": "+254768654598",
+   "email": "ismukventures@gmail.com",
+   "address": "Delta House 4th Floor, Room 421, University Way, Nairobi",
+   "licensed": "2024-06-27"
+  },
+  {
+   "no": 111,
+   "name": "Izwe Loans Kenya Ltd",
+   "postal": "P.O. Box 67266 – 00200, Nairobi",
+   "phone": "+254709530111",
+   "email": "info@izwekenya.com",
+   "address": "L.R. No: 209/18559, The Mirage Towers",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 112,
+   "name": "Jackfruit Associates Limited",
+   "postal": "P.O. Box 60635 – 00200, Nairobi",
+   "phone": "+2540110701174",
+   "email": "info@jackfruitfinance.com",
+   "address": "3rd Floor, Rhapta Heights Building, Rhapta Road, Nairobi.",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 113,
+   "name": "Jafari Credit Limited",
+   "postal": "P.O. Box 10518 - 00100, Nairobi, Kenya",
+   "phone": "+254 768 909 090 | + 254 708 509 573",
+   "email": "info@jafaricredit.co.ke",
+   "address": "2nd Floor Caxton House, Kenyatta Avenue",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 114,
+   "name": "Jambofin Credit Limited",
+   "postal": "P.O. Box 73 - 00200, Ruiru",
+   "phone": "+254701706060 or +254726252653",
+   "email": "ceo@jambofin.co.ke & info@jambofin.co.ke",
+   "address": "Thika Superhighway, Ruiru, 3rd Floor, Room JF",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 115,
+   "name": "Jawabu Biashara Limited",
+   "postal": "P.O. Box 14457-00100, Nairobi",
+   "phone": "+254701337676",
+   "email": "info@jawabubiz.co.ke",
+   "address": "Muthaiga Square, Thika Superhighway, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 116,
+   "name": "Jefigs Credit Limited",
+   "postal": "P.O. Box 9093-00300, Nairobi",
+   "phone": "+254 768318693",
+   "email": "info@jefigscredit.co.ke",
+   "address": "Solar house, 1st floor, Harambee Avenue",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 117,
+   "name": "Jijenge Credit Limited",
+   "postal": "P.O. Box 9578 – 00200, Nairobi Telephone+254711282727",
+   "phone": "",
+   "email": "info@jijengecredit.com",
+   "address": "6th Floor Suites 604/605, Town House, Kaunda Street, Nairobi",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 118,
+   "name": "Jiweze Credit Limited",
+   "postal": "P.O. Box 519 -00204, Athi River",
+   "phone": "+254 720 494562",
+   "email": "jiwezecreditltd@gmail.com",
+   "address": "Kenindia House, Loita Street, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 119,
+   "name": "Juhudi Kilimo Company Limited",
+   "postal": "P.O Box 25441-00100, Nairobi Telephone Number: +254 709 69 20 00/+254 709 69 20 30",
+   "phone": "",
+   "email": "info@juhudikilimo.com",
+   "address": "2nd Floor, The Priory, Argwings Khodek Road, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 120,
+   "name": "Jukiwa Credit Limited",
+   "postal": "P.O. Box 21481 -00100, Nairobi",
+   "phone": "+254722373935/+254743227881",
+   "email": "juliuswambugu27@gmail.com",
+   "address": "Tetu Apartments, Block C, Room 5, Ralph Bunch Road, Kilimani, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 121,
+   "name": "Jumo Kenya Limited",
+   "postal": "P.O. Box 10643 - 00100, Nairobi",
+   "phone": "+254787777771",
+   "email": "contact@jumo.world",
+   "address": "Ikigai Nairobi, Merchant Square, Riverside Drive, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 122,
+   "name": "Kaltris Limited",
+   "postal": "P.O. Box 45411-00100, Nairobi",
+   "phone": "+254 (0) 713 970 529",
+   "email": "tmatharu@me.com",
+   "address": "Physical Address. Gate 04, Dunga Close, Industrial Area, Nairobi, KenyaDate Licensed: July 9, 2026",
+   "licensed": null
+  },
+  {
+   "no": 123,
+   "name": "Karibu Credit Limited",
+   "postal": "P.O. Box 4465-00100, Nairobi",
+   "phone": "+254 722203232",
+   "email": "service@karibucredit.co.ke",
+   "address": "Tumaini House Nairobi 3, Moi Avenue, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 124,
+   "name": "Kechita Capital Investment Limited",
+   "postal": "P.O. Box 89-90100, Machakos",
+   "phone": "+254797553815",
+   "email": "",
+   "address": "2nd Floor, Hebron Complex, Machakos",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 125,
+   "name": "Keep Vision and Growth Credit Limited",
+   "postal": "P.O. Box 19492-00100, Nairobi",
+   "phone": "+254741404040",
+   "email": "info@kvgcredit.com",
+   "address": "Thika Road Shell Toll Petrol Station",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 126,
+   "name": "Kifedha Ltd",
+   "postal": "P.O. Box 105796 – 00100, Nairobi",
+   "phone": "0791573231",
+   "email": "info@kifedha.co.ke",
+   "address": "Chambai House, Murang'a Road, Ngara",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 127,
+   "name": "Kikwetu Credit Ltd",
+   "postal": "P.O. Box 18010 – 00100, Nairobi",
+   "phone": "0721 257143/0768 150438",
+   "email": "kikwetucreditlimited@gmail.com",
+   "address": "Alimex Plaza, Mombasa Road, Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 128,
+   "name": "K N Global Services Limited",
+   "postal": "P.O. Box 46333-00100, Nairobi",
+   "phone": "+254730000027",
+   "email": "knglobal50@gmail.com",
+   "address": "Kong'onyot Plaza, Kericho",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 129,
+   "name": "Kopo Kopo Inc. Kenya Limited",
+   "postal": "P.O. Box: 58725-00200, Nairobi",
+   "phone": "+254 709 376 000",
+   "email": "nzilani.mweu@kopokopo.com",
+   "address": "Hazina Trade Center, Moktar Daddah Street, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 130,
+   "name": "Kweli Smart Solutions Limited",
+   "postal": "P.O. Box 53431-00200, Nairobi",
+   "phone": "+254791578693",
+   "email": "sema@ksmart.tech",
+   "address": "2nd Floor, Eaton Place, UN Crescent Avenue, Nairobi",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 131,
+   "name": "Lasiri Capital Limited",
+   "postal": "P.O. Box 62658 - 00200, Nairobi",
+   "phone": "+254789668664",
+   "email": "info@lasiricapital.co.ke",
+   "address": "Azure Towers, Lantana Road, Westlands, Nairobi, Kenya",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 132,
+   "name": "Leaf Credit Limited",
+   "postal": "P.O Box 210 - 00200, Nairobi",
+   "phone": "+254114000333",
+   "email": "leafcreditltd@gmail.com",
+   "address": "Crescent Business Center, 3rd Floor",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 133,
+   "name": "Leja Ltd",
+   "postal": "P.O. Box 238370-0100, Nairobi",
+   "phone": "+254768212665",
+   "email": "info@leja.co.ke",
+   "address": "Keystone Park, 95 Riverside Drive 3 Floor, Block A, Riverside Dr, Nairobi, Kenya",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 134,
+   "name": "Lenana Innovative Solutions Limited",
+   "postal": "P.O. Box 899 - 00618, Ruaraka, Nairobi",
+   "phone": "+254110010394",
+   "email": "info@lenana.com",
+   "address": "Westcom Point Building, Mahiga Mairu Avenue, Westlands, Wing A, Third Floor",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 135,
+   "name": "Lendara Credit Limited",
+   "postal": "P.O. Box 15321-00100, Nairobi",
+   "phone": "+254726863836",
+   "email": "lendaracreditl@gmail.com",
+   "address": "Abacus House, Baba Dogo",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 136,
+   "name": "Lendbucks Ltd",
+   "postal": "P.O. Box 22264-00400, Nairobi",
+   "phone": "+254720598478",
+   "email": "wnguyo@lendbucks.co.ke",
+   "address": "Nairobi Block 139/410, Melhouse Marurui Road, Northern Bypass",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 137,
+   "name": "Letshego Kenya Ltd",
+   "postal": "P.O. Box 52926 – 00200, Nairobi",
+   "phone": "+254730687000",
+   "email": "kenya@letshego.com",
+   "address": "316 Upper Hill Chambers, 7th Floor, 2nd Ngong Avenue, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 138,
+   "name": "Liberty Afrika Technologies Ltd",
+   "postal": "P.O. Box 20000 – 00100, Nairobi",
+   "phone": "+254728907070",
+   "email": "info@libertyafrika.co.ke",
+   "address": "View Park Towers, 3rd Floor, Utalii Street, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 139,
+   "name": "Lin-Cap Credit Limited",
+   "postal": "P.O. Box 33694-00600, Nairobi",
+   "phone": "+254759636818",
+   "email": "info@lin-cap.com",
+   "address": "Kasarani, Mwiki, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 140,
+   "name": "Lipa Later Limited",
+   "postal": "P.O. Box 43537 – 00100, Nairobi",
+   "phone": "+254709684000",
+   "email": "info@lipalater.com",
+   "address": "Lipa Later HQ, Lavington, next to Mawara Gardens, Off Olenguruone Avenue, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 141,
+   "name": "Little Limited (trading as SpotIt)",
+   "postal": "P.O. Box 13628-00800, Nairobi",
+   "phone": "+254 709 044 000",
+   "email": "legal@little.africa",
+   "address": "Musa Gitau Road, Craft Silicon Campus, Off Waiyaki Way, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 142,
+   "name": "Little Pesa Limited",
+   "postal": "P.O. Box 39886 – 00623, Nairobi",
+   "phone": "+254746510778/+254710490126/+254746510781",
+   "email": "Info@littlepesa.com",
+   "address": "Reliable Towers, Mogotio Road, Westlands, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 143,
+   "name": "Loan Plus Digital Credit Provider Limited",
+   "postal": "P.O. Box 39940 – 00623, Nairobi",
+   "phone": "+25479981870",
+   "email": "loanplusDCP@hotmail.com",
+   "address": "1st Floor, 623 Wood Avenue, Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 144,
+   "name": "Lobelitec Credit Limited",
+   "postal": "P. O. Box 51191 - 00100, Nairobi Telephone No: 0112096086",
+   "phone": "",
+   "email": "lobeliteccredit@gmail.com",
+   "address": "Ngong Road Kindaruma Lane, Commodore Offices Plot 209",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 145,
+   "name": "LockBx Limited",
+   "postal": "P.O. Box 25350-00603, Nairobi Telephone No: +254726210997",
+   "phone": "",
+   "email": "info@lockbx.co.ke",
+   "address": "Sifa Towers, 6th Floor, 6A, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 146,
+   "name": "Longitude Capital Limited",
+   "postal": "P.O. Box 62268-00200, Nairobi,",
+   "phone": "+254 20 4401213",
+   "email": "info@longitudecapital.co.ke",
+   "address": "6th Floor Silkwood Office Suits, Ngong Road",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 147,
+   "name": "Lucason Capital Limited",
+   "postal": "P.O. Box 67506-00200, Nairobi.",
+   "phone": "0721701114 and 0719266409",
+   "email": "lucasoncapitallimited@gmail.com",
+   "address": "Lifestyle Terraces, Syokimau",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 148,
+   "name": "Maison Capital Limited",
+   "postal": "P.O. Box 22744-00100, Nairobi",
+   "phone": "+254707222033",
+   "email": "peterwndungu2@gmail.com",
+   "address": "5th floor, Aqua Office suites ,Ngara, along Murang'a Road Nairobi.",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 149,
+   "name": "Malicash Investment Limited",
+   "postal": "P.O. Box 1996-90100, Machakos Telephone-254708358800",
+   "phone": "",
+   "email": "compliance@malicash.co.ke",
+   "address": "Asante House, First Floor, Roo, 3, Machakos Town",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 150,
+   "name": "Maralal Ledger Limited",
+   "postal": "P.O. Box 104949-00101, Nairobi",
+   "phone": "+254724055813",
+   "email": "info@maralalledger.com",
+   "address": "Feruzi Towers, Fourth Floor, Wing B, Kiambu Road",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 151,
+   "name": "Marble Capital Solutions Limited",
+   "postal": "P.O. Box 818 – 00511, Ongata Rongai",
+   "phone": "+254729141295",
+   "email": "marblecapitalsolutions@gmail.com",
+   "address": "2nd Floor, Maasai Mall, Ongata Rongai",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 152,
+   "name": "Maxxton Enterprises Ltd",
+   "postal": "P.O. Box 51090-00200, Nairobi",
+   "phone": "+254733398614",
+   "email": "info@maxxtonltd.com",
+   "address": "Koinange Street, College House, Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 153,
+   "name": "Mayflower Capital limited",
+   "postal": "P.O. Box 162 - 00100, Nairobi",
+   "phone": "+254720710625",
+   "email": "mayflowercapitalltd@gmail.com",
+   "address": "Mwea Town, Equity Building Along Makutano - Meru Highway",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 154,
+   "name": "M CF 2 Kenya Limited",
+   "postal": "P.O. Box 6711 – 00100, GPO, Nairobi",
+   "phone": "+254707136044",
+   "email": "info@medicalcreditfund.org",
+   "address": "52 EL Molo Drive Lavington, Off Naushad Merali Drive, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 155,
+   "name": "Mednow Capital Limited",
+   "postal": "P.O. Box 15651-0509, Nairobi",
+   "phone": "+254718707539",
+   "email": "ngatia@mednowafrica.com",
+   "address": "Watermark Business Park, Karen, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 156,
+   "name": "Meridian Kapital DCP Ltd",
+   "postal": "P.O. Box 3038-00506, Nairobi",
+   "phone": "+254719172178",
+   "email": "info@Meridiankapital.com",
+   "address": "Anniversary Towers, University Way, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 157,
+   "name": "M FS Technologies Limited",
+   "postal": "P.O. Box 43250-00100, Nairobi",
+   "phone": "+254709184000",
+   "email": "info@mfs.co.ke",
+   "address": "Capital West, 5th Floor, Lantana Road (Off Rhapta Road), Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 158,
+   "name": "Milhan Access Capital Limited",
+   "postal": "P.O. Box 5148-00100, Nairobi",
+   "phone": "0790309958",
+   "email": "Info@milhanaccesscapital.com",
+   "address": "Azure Tower, Lantana Road Westlands",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 159,
+   "name": "Mimi Credit Limited",
+   "postal": "P.O. Box 16758 – 00620, Mobil Plaza, Nairobi",
+   "phone": "+254113762857",
+   "email": "accounts@mimi.credit",
+   "address": "Victoria Plaza, Parklands Road",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 160,
+   "name": "Mint Credit Limited",
+   "postal": "P.O Box 2417-00606, Sarit Centre, Nairobi",
+   "phone": "+254799555333",
+   "email": "info@mintcredit.co.ke",
+   "address": "Trance Towers 7th floor, South B, Tsavo Road, Nairobi",
+   "licensed": "2024-06-27"
+  },
+  {
+   "no": 161,
+   "name": "M Kash Solutions Limited",
+   "postal": "P.O. Box 3776-00100, Nairobi",
+   "phone": "+254724078884",
+   "email": "mkashltd@gmail.com",
+   "address": "Delta Corner, Waiyaki Way, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 162,
+   "name": "M KM Capital Limited",
+   "postal": "P.O Box 22715-00505, Nairobi",
+   "phone": "+254707039513",
+   "email": "info@mkmcapitalglobal.co.ke",
+   "address": "Western Heights, 4th Floor, Suite 10, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 163,
+   "name": "M -Kopa Loan Kenya Limited",
+   "postal": "P.O. Box 51866 – 00100, Nairobi",
+   "phone": "+254799 136 761",
+   "email": "compliance@m-kopa.com",
+   "address": "Riverside Paddocks, M-Kopa House, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 164,
+   "name": "Mkulimapay Credit Ltd",
+   "postal": "P.O. Box 28385 – 00100, Nairobi",
+   "phone": "0748820255",
+   "email": "mkulimacash@gmail.com",
+   "address": "Shell Tegemeo, next to Mountain View Mall, off Waiyaki Way",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 165,
+   "name": "Modesty Credit Ltd",
+   "postal": "P.O. Box 607 – 60200, Meru, Makutano Highway",
+   "phone": "+254794673254",
+   "email": "info@modestycredit.co.ke",
+   "address": "Meru-Makutano, Union Square, Meru",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 166,
+   "name": "Mogo Auto Limited",
+   "postal": "P.O. Box 9979-00100, Nairobi",
+   "phone": "+254768469112",
+   "email": "info@mogo.co.ke",
+   "address": "Pine Tree Plaza, Kaburu Drive- Off Ngong Road, Nairobi",
+   "licensed": "2024-06-27"
+  },
+  {
+   "no": 167,
+   "name": "Momentum Credit Limited",
+   "postal": "P.O. Box 29175-00100, Nairobi",
+   "phone": "+254709434900",
+   "email": "info@momentumcredit.co.ke & cx@momentumcredit.co.ke",
+   "address": "International House, 9th Floor, Mama Ngina Street, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 168,
+   "name": "Moneysta Capital Investment Ltd",
+   "postal": "P.O. Box 51340-00100, Nairobi",
+   "phone": "+254700594586",
+   "email": "info@moneysta.co.ke or compliance@moneysta.co.ke",
+   "address": "SMK Business Center, Enterprise Road, Industrial Area, 3rd Floor, Room 2, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 169,
+   "name": "Moneza Ltd",
+   "postal": "P.O. Box 45660-0000, Nairobi",
+   "phone": "+254721779662",
+   "email": "info@moneza.co.ke",
+   "address": "Avocado Towers, Muthithi Road, Westlands",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 170,
+   "name": "Moto Hope Capital Limited",
+   "postal": "P.O. Box 37217 -00100, Nairobi Telephone+254713827519",
+   "phone": "",
+   "email": "info@motohopecapital.com",
+   "address": "Blessed House 5th Floor, Thika Road, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 171,
+   "name": "Mular Credit Limited",
+   "postal": "P.O. Box 196-90200, Kitui",
+   "phone": "+254733664762/+254707978937",
+   "email": "info@mularcredit.co.ke",
+   "address": "Even Business Park, Wing A, Second Floor, Room 1, Airport North Road, Embakasi, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 172,
+   "name": "Musoni Capital Limited",
+   "postal": "P.O. Box 25351-00100, Nairobi",
+   "phone": "+254709761101/0709761111",
+   "email": "info@musoni.co.ke",
+   "address": "Cape Office Park, Ring Road Kilimani, Nairobi Licensed: September 2, 2025",
+   "licensed": null
+  },
+  {
+   "no": 173,
+   "name": "Mwananchi Credit Ltd",
+   "postal": "P.O. Box 103683 – 00101, Nairobi",
+   "phone": "+254709147000",
+   "email": "info@mwananchicredit.com/ legaldesk@mwananchicredit.com",
+   "address": "Eco Bank Towers, Muindi Mbingu Street, Central Business District, 10th Floor, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 174,
+   "name": "Mwanzo Credit Limited",
+   "postal": "P.O. Box 759-00241, Nairobi",
+   "phone": "+254729670100",
+   "email": "infomwanzocreditltd@gmail.com",
+   "address": "Newton House, 3rd Floor, Deliverance Road, Nairobi-Namanga.",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 175,
+   "name": "Mycredit Limited",
+   "postal": "P.O. Box 21798 – 00100, Nairobi",
+   "phone": "+254711349805",
+   "email": "info@mycredit.co.ke",
+   "address": "ABSA Towers, 11th Floor, Loita Street, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 176,
+   "name": "MyWagepay Limited",
+   "postal": "P.O. Box 43844-00200, Nairobi",
+   "phone": "+254709549019",
+   "email": "ceo@mywagepay.com",
+   "address": "Thika Road, Room 503C, Astrol Building (Opp Garden City), Nairobi",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 177,
+   "name": "Natal Tech Limited",
+   "postal": "P.O. Box 2145, Thika",
+   "phone": "+254 792 989 705",
+   "email": "nataltechltd@gmail.com",
+   "address": "Harmony Street, Kenol Sagana Highway",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 178,
+   "name": "Nawiri African Sprouts Ltd trading as Fast Credit",
+   "postal": "P.O. Box 34615-00100, Nairobi",
+   "phone": "+254721177402",
+   "email": "info@nas.co.ke",
+   "address": "Karuna Road, Westlands, Western Heights building, 5th Floor",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 179,
+   "name": "Newark Frontiers Limited",
+   "postal": "P.O. Box 34615-00100, Nairobi",
+   "phone": "+254 739911020",
+   "email": "info@newarkfrontiers.co.ke",
+   "address": "Karen-End, off Dagoretti Road, Dagoretti/ Mutuini/1356",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 180,
+   "name": "Ngao Credit Limited",
+   "postal": "P.O. Box 60776 – 00200, Nairobi",
+   "phone": "+254709650000",
+   "email": "info@ngaocredit.com",
+   "address": "4th Floor, Morning Side Office Park, Ngong Rd, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 181,
+   "name": "Nirvana Credit Limited",
+   "postal": "P.O. Box 28727-00100, Nairobi",
+   "phone": "+254725500501",
+   "email": "info@nirvanaafrica.co.ke",
+   "address": "CPA Centre, Thika Road, 4th Floor, Wing B",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 182,
+   "name": "N JB Limited",
+   "postal": "P.O. Box 50960 – 00200, Nairobi",
+   "phone": "+254729262762",
+   "email": "njblimited01@gmail.com",
+   "address": "Gataka Road, Gataka House, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 183,
+   "name": "Novatok Credit Limited",
+   "postal": "P.O. Box 50357-00100, Nairobi",
+   "phone": "+254797139432",
+   "email": "novakaylimited@gmail.com",
+   "address": "Limuru Rd Building",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 184,
+   "name": "Numida Technologies Kenya Limited",
+   "postal": "P.O. Box 22602 -00100, Nairobi",
+   "phone": "+ 254704454031",
+   "email": "Info@numidatech.com",
+   "address": "Floor 2 - The Mvuli Building, Mvuli Road, Westlands, Nairobi, Kenya",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 185,
+   "name": "O DI Credit Limited",
+   "postal": "P.O. Box 16758 – 00620, Nairobi",
+   "phone": "+254709183808/+254788180355",
+   "email": "info@hazini.com",
+   "address": "Kalson Towers, 7th Floor (left wing), Crescent Road, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 186,
+   "name": "Okolea International Limited",
+   "postal": "P.O Box 41316 - 00100, Nairobi",
+   "phone": "+254742532281",
+   "email": "info@okolea-international.com/ okoleaint16@gmail.com",
+   "address": "1st Floor, Venus Complex, Office No. 4111, Northern Bypass, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 187,
+   "name": "Onward Digital Credit Lending Limited",
+   "postal": "P.O. Box 1802 Sarit Centre, Nairobi",
+   "phone": "0110685061",
+   "email": "onwarddigital7@gmail.com",
+   "address": "Golden Mango Heights, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 188,
+   "name": "Onwards Swift Company Limited",
+   "postal": "P.O. Box 35-4200, Oyugis",
+   "phone": "0706444333",
+   "email": "info.onwardswiftltd@gmail.com",
+   "address": "IPS Building 4th floor, Kimathi Street",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 189,
+   "name": "Opal Quick Limited",
+   "postal": "P.O Box 671-60400, Chuka",
+   "phone": "+254722790234 / +254115990652",
+   "email": "support@opalquick.co.ke",
+   "address": "Twin Plaza Building, Opposite Magunas Supermarket, Meru Town",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 190,
+   "name": "Otas Credit Limited",
+   "postal": "P.O. Box 38940 - 00100, Nairobi",
+   "phone": "+254718726456",
+   "email": "otascredit@gmail.com",
+   "address": "Spring Valley, Westlands, Number 30, Peponi Road",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 191,
+   "name": "Pato Capital Limited",
+   "postal": "P.O. Box 51957 -00100, Nairobi",
+   "phone": "+254 108 238171",
+   "email": "info@patocapital.com",
+   "address": "Futuristic Centre, Westlands, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 192,
+   "name": "Payablu Credit Limited",
+   "postal": "P.O. Box 610-00518, Nairobi",
+   "phone": "+254792276761",
+   "email": "payablucreditlimited@gmail.com",
+   "address": "2nd floor, Ntashart plaza formerly Elysee Plaza, Kilimani, Near Adams Arcade, Kilimani Road, off Ngong Road",
+   "licensed": "2024-06-27"
+  },
+  {
+   "no": 193,
+   "name": "Pembeni Cash Ltd",
+   "postal": "P.O. Box 64769-00620, Nairobi",
+   "phone": "+254769269606",
+   "email": "karirid@yahoo.com/info@pembenicash.com",
+   "address": "The Trio Complex Building, 1st Floor East Wing, EABL Road, Kasarani, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 194,
+   "name": "Pesaglow Capital Limited",
+   "postal": "P.O. Box 73740 – 00200, Nairobi",
+   "phone": "+254717522512",
+   "email": "pesaglowcapital@gmail.com",
+   "address": "Kitengela, Derrick House, 2nd floor, D1, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 195,
+   "name": "Pesakay Credit Limited",
+   "postal": "P.O. Box 24146-00100, Nairobi",
+   "phone": "+254718664642",
+   "email": "pesakaycreditltd@gmail.com",
+   "address": "Ngong Rd, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 196,
+   "name": "Pesakuu Credit Limited",
+   "postal": "P.O. Box 30784 – 00100, Nairobi",
+   "phone": "+254112020926",
+   "email": "iziloan1@gmail.com",
+   "address": "The Address, 7th Floor, Westlands, off Waiyaki Way, Muthangari Drive, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 197,
+   "name": "Peshee Capital Limited",
+   "postal": "P.O. Box 13250 – 00100, Nairobi",
+   "phone": "+254 785 773763",
+   "email": "pesheecapital@gmail.com",
+   "address": "Sartaj Building, 4th Floor, west corner office, Machakos Town",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 198,
+   "name": "Pezesha Africa Limited",
+   "postal": "P.O. Box 22986 – 00505, Nairobi",
+   "phone": "+254755768547",
+   "email": "hello@pezesha.com",
+   "address": "7th Floor Rainbow Towers, Muthithi Road, Westlands, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 199,
+   "name": "Phoenix Capital Limited",
+   "postal": "P.O. Box 26801-00100, Nairobi",
+   "phone": "0747100102",
+   "email": "admin@phoenixcapital.co.ke",
+   "address": "The Arch Place, 8th Floor, Nyangumi Road, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 200,
+   "name": "Pi Capital Limited",
+   "postal": "P.O. Box 3332-00506 Nairobi",
+   "phone": "+254759808086/+254759808080",
+   "email": "info@bayes.co.ke",
+   "address": "5th Floor, Mitsumi Business Park, Muthithi Road, Westlands, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 201,
+   "name": "Platinum Credit Limited",
+   "postal": "P.O. Box 73304-00200, Nairobi",
+   "phone": "+25470664440/0706644442/0709 900 000",
+   "email": "Info@platinumcredit.co.ke",
+   "address": "Mezzanine Floor, International House, Mama Ngina Street, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 202,
+   "name": "Pocket Dealers Limited",
+   "postal": "P.O. Box 226 - 30300, Nairobi",
+   "phone": "+254748290187",
+   "email": "pocket-dealer@shekelmobility.com",
+   "address": "Muthangari Drive, Westlands, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 203,
+   "name": "Premier Credit Limited",
+   "postal": "P.O. Box 21256 - 00100, Nairobi",
+   "phone": "+254730812000/+254709176 000",
+   "email": "info@premiergroup.co.ke",
+   "address": "Nginyo Towers 5th Floor, Koinange Street, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 204,
+   "name": "Primebridge Capital Limited",
+   "postal": "P.O. Box 69605-00400, Nairobi",
+   "phone": "+254710600244",
+   "email": "ndtcp77@gmail.com",
+   "address": "3rd floor Stellato Mall, Muthithi Road",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 205,
+   "name": "Progressive Credit Limited",
+   "postal": "P.O. Box 64036-00640, Nairobi",
+   "phone": "0730669811",
+   "email": "info@progressivecr.com",
+   "address": "",
+   "licensed": "2024-06-27"
+  },
+  {
+   "no": 206,
+   "name": "Puphik Credit Limited",
+   "postal": "P.O. Box 1238 – 20200, Kericho",
+   "phone": "+254714262211",
+   "email": "info@puphikcredit.com; puphikcredit@gmail.com",
+   "address": "Kosal Plaza, 2nd Floor, Kipchamba Street, Bomet",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 207,
+   "name": "Quickflex ventures Ltd",
+   "postal": "P.O. Box 146- 10400, Nanyuki",
+   "phone": "+254781622848",
+   "email": "info@quickflexventures.co.ke",
+   "address": "Nanyuki",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 208,
+   "name": "Radi Credit Limited",
+   "postal": "P.O. Box 51191, GPO, Nairobi",
+   "phone": "+254114480972",
+   "email": "support@radicredit.com",
+   "address": "Plot No. Two Zero Nine, Commodore Offices, Ngong Road, Kindaruma Lane, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 209,
+   "name": "Rapidcash Ventures Limited",
+   "postal": "P.O. Box 6334-00100, Nairobi",
+   "phone": "0724553554/0754555333",
+   "email": "rapidcashlimited@gmail.com",
+   "address": "Morovian Mall, 3rd Floor, Ruiru",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 210,
+   "name": "Real People Kenya Limited",
+   "postal": "P.O. Box 27153- 00100, Nairobi",
+   "phone": "+254711085600",
+   "email": "info@realpeople.co.ke",
+   "address": "Lavington Court Apartments, Apartment A6, Off Waiyaki Way, Muthangari Drive, Nairobi.",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 211,
+   "name": "Reazilla DCP Limited",
+   "postal": "P.O. Box 2658-00100, Nairobi",
+   "phone": "+254115900545",
+   "email": "reazilladcpkenya@gmail.com",
+   "address": "Cabby Centre, Dagoretti, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 212,
+   "name": "Remy Capital Limited",
+   "postal": "P.O. Box 25222-00100, Nairobi",
+   "phone": "+254797101010",
+   "email": "info@remycapital.co.ke",
+   "address": "Caxton House, Standard Street, 1st Floor, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 213,
+   "name": "Rewot Ciro Limited",
+   "postal": "P.O. Box 15073 – 00400, Tom Mboya Street, Nairobi",
+   "phone": "+254715464554",
+   "email": "info@rewotciro.co.ke / rewotafrica@gmail.com",
+   "address": "Keekorok Building, Keekorok Road, Nairobi",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 214,
+   "name": "Ridgeways Credit Limited",
+   "postal": "P.O. Box 64780-00620, Nairobi",
+   "phone": "+254793035731",
+   "email": "ridgewayscredit@gmail.com",
+   "address": "Highview Plaza, Kiambu Road",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 215,
+   "name": "Risine Credit Limited",
+   "postal": "P.O. Box 25347 – 00603, GPO, Nairobi",
+   "phone": "+254793362676",
+   "email": "risinecredit@gmail.com",
+   "address": "Ikigai office Ninety JGO, James Gichuru Road, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 216,
+   "name": "Rooted Digital Credit Provider Limited",
+   "postal": "P. O. Box. 8320-00100, Nairobi/48878-00100 Nairobi",
+   "phone": "+254715614675",
+   "email": "zuhura330@gmail.com",
+   "address": "Redhill Road, Roselyn Square",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 217,
+   "name": "Rosatap Credit Limited",
+   "postal": "P. O. Box. 9050 – 00100, Nairobi",
+   "phone": "+254701629773",
+   "email": "rosatapcreditlimited@gmail.com",
+   "address": "Gateway Mall, Mombasa Road",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 218,
+   "name": "Rosky Credit Limited",
+   "postal": "P.O. Box 25104-00100, Nairobi",
+   "phone": "+254724512787",
+   "email": "philip@roskycredit.com",
+   "address": "Gateway Mall, Mombasa Road, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 219,
+   "name": "Rukisha Solutions Limited",
+   "postal": "P.O. Box 28938- 00200, Nairobi",
+   "phone": "+254 111 114 000",
+   "email": "rukishacpf@gmail.com",
+   "address": "CPF House, Haille Selassie Avenue",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 220,
+   "name": "Saidika Credit Limited",
+   "postal": "P.O. Box 9019 - 00300, Nairobi",
+   "phone": "+254725282195",
+   "email": "info@saidikacredit.co.ke",
+   "address": "7th Floor, Lyric House, Kimathi Street, Nairobi.",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 221,
+   "name": "Seanala Credit Limited",
+   "postal": "P.O. Box 16604-00100, Nairobi",
+   "phone": "+254726398979",
+   "email": "seanalacredit@gmail.com",
+   "address": "Ambassador Court, Suite E4, Milimani Road, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 222,
+   "name": "Select Management Services Limited",
+   "postal": "P.O. Box 27639 – 00506, Nairobi",
+   "phone": "+254202777500/1",
+   "email": "info.kenya@selectafrica.net",
+   "address": "Transnational Plaza, First Floor, Mama Ngina Street",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 223,
+   "name": "Senti Capital Limited",
+   "postal": "P.O. Box 1146-00606, Nairobi",
+   "phone": "0709332000/0712517910",
+   "email": "info@senti.co.ke",
+   "address": "Stellato Complex, 4th Floor, Muthithi Road, Westlands, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 224,
+   "name": "Sevi Innovation Limited",
+   "postal": "P.O. Box 41987 – 00100, Nairobi",
+   "phone": "+254111560376",
+   "email": "partner@sevi.io",
+   "address": "Kenafric Business Park, Tower A, 2nd Floor – Office Unit 1, Baba Dogo Road, Nairobi",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 225,
+   "name": "Signature Capital Limited",
+   "postal": "P.O. Box 51619-00100, Nairobi",
+   "phone": "+254710479083",
+   "email": "signaturecapitalltd@outlook.com",
+   "address": "Marsabit Plaza, Ngong Rd, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 226,
+   "name": "Simbageld Ltd",
+   "postal": "P.O. Box 23030-00100, Nairobi",
+   "phone": "0712 844 019 / 0742 724 031",
+   "email": "info@simbageld.com / applications@simbageld.com",
+   "address": "Parkside Hotel Building, Monrovia Street, Nairobi.",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 227,
+   "name": "Simplepay Capital Limited",
+   "postal": "P.O. Box 39324 – 00623, Nairobi",
+   "phone": "+254 798 198 531, +254 700 467 730, +254 787 467 730",
+   "email": "info@simplepay.capital",
+   "address": "Office 902, 9th floor, Website Tower, Lower Kabete Road, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 228,
+   "name": "Sipranda Capital Ltd",
+   "postal": "P.O. Box 420 – 00521, Nairobi",
+   "phone": "0709002700/ 0706221221",
+   "email": "info@siprandacapital.com",
+   "address": "Upper Hill, Kiambere Road, Cassia Court, Wing C",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 229,
+   "name": "Siti Mobility Technologies Limited",
+   "postal": "P.O. Box 34850 – 00100, Nairobi",
+   "phone": "+254720384396",
+   "email": "info@sitimobility.com",
+   "address": "10th Floor, East Wing, Riverside Square, Riverside Drive, Westlands, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 230,
+   "name": "Snowflex Capital Limited",
+   "postal": "P.O. Box 64339-00620, Nairobi",
+   "phone": "+254768494623",
+   "email": "capiflex45@gmail.com and info@snowflexcapital.com",
+   "address": "Watersys Plaza, Central Business District, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 231,
+   "name": "Sokohela Limited",
+   "postal": "P.O. Box 34-00502, Nairobi",
+   "phone": "+254728915511",
+   "email": "business@sokohela.com",
+   "address": "Rivonia House, 2nd Floor, Naivasha Road, Nairobi",
+   "licensed": "2022-09-19"
+  },
+  {
+   "no": 232,
+   "name": "Solvezy Technology Kenya Limited",
+   "postal": "P.O. Box 30284-00100, Nairobi",
+   "phone": "+254 111 120 700",
+   "email": "support@solv.co.ke",
+   "address": "Standard Chartered Building, Westlands Rd, Westlands, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 233,
+   "name": "Spectrum Credit Ltd",
+   "postal": "P.O. Box 25597 -00504, Nairobi",
+   "phone": "0722802157",
+   "email": "info@swiftcapitalltd.com",
+   "address": "Kindaruma Road, Commodore Office Suites",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 234,
+   "name": "Spread Capital Ltd",
+   "postal": "P.O. Box 9080 – 00100, Nairobi",
+   "phone": "0712336666/0705179599",
+   "email": "info@spreadcapital.co.ke or info.spreadcapital@gmail.com",
+   "address": "Yala Towers, Koinange/Biashara Street",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 235,
+   "name": "Standthrive Solutions Limited",
+   "postal": "P.O. Box 104247-00101, Nairobi",
+   "phone": "+254720801820; +254716743085",
+   "email": "info@standthrive.co.ke; ceo@standthrive.co.ke",
+   "address": "13th Floor, Corner House, Kimathi Street, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 236,
+   "name": "Statim Capital Limited",
+   "postal": "P.O. Box 6672-00100, Nairobi",
+   "phone": "+254707916335",
+   "email": "info@statimcapital.co.ke",
+   "address": "Suraj Plaza, Limuru Road, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 237,
+   "name": "Steadfast Credit Ltd",
+   "postal": "P.O. Box 15682-00503, Nairobi",
+   "phone": "+254 101180531",
+   "email": "info@steadfastcredit.co.ke",
+   "address": "3rd Floor, Kimson Plaza, off Eastern Bypass, Utawala Area, Nairobi County",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 238,
+   "name": "Stemtide Credit Limited",
+   "postal": "P.O. Box 3267-80100, Mombasa",
+   "phone": "+254727946381",
+   "email": "phylliswanjiku@stemtidecreditltd.ke",
+   "address": "Yusufali Trust Building, 2nd Floor, Room No.16, Mombasa",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 239,
+   "name": "Stepwise Credit Limited",
+   "postal": "P.O. Box 560-60300, Isiolo",
+   "phone": "0724979744",
+   "email": "ojamila74@gmail.com",
+   "address": "Nextgen mall, Mombasa Rd, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 240,
+   "name": "Stride Credit Limited",
+   "postal": "P. O. Box. 1604-60200, Meru",
+   "phone": "+254715982342",
+   "email": "stridecreditltd@gmail.com",
+   "address": "Twin Plaza, Ghana Street, Meru Town",
+   "licensed": "2024-06-27"
+  },
+  {
+   "no": 241,
+   "name": "Suffice Ltd",
+   "postal": "P. O. Box. 4684 – 00100, Nairobi",
+   "phone": "+254718882200",
+   "email": "info@suffice.co.ke",
+   "address": "Nextgen Mall, Mombasa Road, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 242,
+   "name": "Sumpay Limited",
+   "postal": "P. O. Box. 15502 – 00503, Nairobi",
+   "phone": "+254722713615",
+   "email": "sumpayltd@gmail.com",
+   "address": "Darosa Plaza, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 243,
+   "name": "Sure Cred Capital Limited",
+   "postal": "P.O. Box 1466 – 00618, Nairobi",
+   "phone": "+254708233824/0708588458",
+   "email": "surecredltd@gmail.com",
+   "address": "Aztec Business Park, Baba Dogo Road, Ruaraka, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 244,
+   "name": "Symos Credit Limited",
+   "postal": "P.O. Box 58343-00200, Nairobi",
+   "phone": "+254729972272",
+   "email": "creditsymos@gmail.com",
+   "address": "Giffan House, 2nd Floor Room No. B7, Kitengela, Kajiado",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 245,
+   "name": "Tanir Credit & Accounting Services Limited",
+   "postal": "P.O. Box 1255-00232, Ruiru",
+   "phone": "+254723585651",
+   "email": "tanirltd@gmail.com, info@tanirltd.co.ke",
+   "address": "Kahawa Sukari, Kenversity Sacco Building, 4th Floor Suite 4B",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 246,
+   "name": "Tazu Credit Limited",
+   "postal": "P.O. Box 856, 00606 Nairobi",
+   "phone": "+254790357592",
+   "email": "tazucredit@gmail.com",
+   "address": "Riverside Drive Building, Riverside Square, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 247,
+   "name": "Tenakata Enterprises Limited",
+   "postal": "P.O. Box 21605 – 00505, Nairobi",
+   "phone": "0722902424",
+   "email": "info@tenakata.com",
+   "address": "3rd Floor, Utumishi House, Mamlaka Road, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 248,
+   "name": "Tentacorp Holdings Limited",
+   "postal": "P.O. Box 12460-00100, Nairobi",
+   "phone": "+254706167167",
+   "email": "tentacorpholdings@gmail.com",
+   "address": "Eureka Condominiums, Joseph Kang’ethe Road, Off Ngong Road",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 249,
+   "name": "T GL Credit Limited",
+   "postal": "P.O. Box 23421-00100, Nairobi",
+   "phone": "+254727226644",
+   "email": "info@tglcredit.co.ke",
+   "address": "Utalii House, Ground floor",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 250,
+   "name": "Tinycost Credit Kenya Limited",
+   "postal": "P.O. Box 1202-00600, Nairobi",
+   "phone": "+254793786756",
+   "email": "help@tinycostcredit.co.ke",
+   "address": "Bhuva Godowns, Ruiru Bypass Kiambu, Industrial Lane, Ruiru",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 251,
+   "name": "Tip-Point Capital Limited",
+   "postal": "P.O. Box 1050 – 00520, Nairobi",
+   "phone": "+254700050010/+254711019700",
+   "email": "info@tippointcapital.com",
+   "address": "Sifa Towers, 2nd Floor 2C, Nairobi",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 252,
+   "name": "Tottengram Credit Ltd",
+   "postal": "P.O. Box 27774-00100, Nairobi",
+   "phone": "+254727789616",
+   "email": "info@tottengramcredit.co.ke",
+   "address": "Royal Offices, Mogotio Road, Off Chiromo Lane",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 253,
+   "name": "Town Credit Ltd",
+   "postal": "P.O. Box 60311-00200, Nairobi",
+   "phone": "+254720111824",
+   "email": "sawacreditltd@gmail.com",
+   "address": "Mopel House, Forest Road, Kiserian",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 254,
+   "name": "Transsnet Credit Limited",
+   "postal": "P.O. Box 1003818-00200, Nairobi",
+   "phone": "+ 254718035467",
+   "email": "transsnetpaymentltd@gmail.com",
+   "address": "3rd Floor, Pinetree Plaza, Kamburu Drive, Off Ngong Road, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 255,
+   "name": "Transventures Capital Limited",
+   "postal": "P.О. Вox 18444-20100, Nakuru",
+   "phone": "+254702141452",
+   "email": "transventurecapital@gmail.com",
+   "address": "Norwish Towers, 2nd Floor, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 256,
+   "name": "Treasure Store Limited",
+   "postal": "P.O. Box 69983 – 00400, Nairobi",
+   "phone": "+254724256039 / +254114405337",
+   "email": "nahashon.maina@sot.co.ke",
+   "address": "Nyaku House, Hurlingham 2nd Floor Room F2 - 10. Argwings Kodhek Groove",
+   "licensed": "2024-10-01"
+  },
+  {
+   "no": 257,
+   "name": "Trinmarc Ventures Limited",
+   "postal": "P.O. Box 9963-00100, Nairobi",
+   "phone": "+254721210230",
+   "email": "trinmarcventures@gmail.com",
+   "address": "Repren Plaza, Mombasa Road",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 258,
+   "name": "TrustGro SCA Limited",
+   "postal": "P.O. Box 5483-00100, Nairobi",
+   "phone": "+254111149714",
+   "email": "legal@trustgro.com",
+   "address": "Avocado Towers, Muthithi Road, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 259,
+   "name": "Tundar Capital Limited",
+   "postal": "P.O. Box 1921-00606, Nairobi",
+   "phone": "+254748734064",
+   "email": "info@tundarcapital.com",
+   "address": "Western Heights, Nairobi",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 260,
+   "name": "UbaPesa Limited",
+   "postal": "P. O. Box 22745 – 00100, Nairobi",
+   "phone": "+254709693000",
+   "email": "info@upabesa.com /ubapesa.ke@gmail.com",
+   "address": "Golf View Office Suites – Wambui Road, Muthaiga, Nairobi",
+   "licensed": "2024-03-06"
+  },
+  {
+   "no": 261,
+   "name": "Umoja Fanisi Limited",
+   "postal": "P.O. Box 44165 – 00100, Nairobi",
+   "phone": "+254796250881",
+   "email": "info@umojafanisilimited.com",
+   "address": "Umoja Fanisi House, Mbaazi Road, Off Kingara Road, Lavington, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 262,
+   "name": "Unidirect Ltd",
+   "postal": "P.O. Box 15598-00400, Nairobi",
+   "phone": "+254 70367258",
+   "email": "info@unilimited.co.ke",
+   "address": "4th Floor Windsor House University Way, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 263,
+   "name": "Unifi Credit Limited",
+   "postal": "P.O. Box 1570 – 00606, Nairobi",
+   "phone": "+254205014065",
+   "email": "admin@ke.unifi.credit",
+   "address": "The Citadel Building,1st floor, 50 Muthithi Road, Westlands, Nairobi, Kenya",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 264,
+   "name": "Vankizah Credit Limited",
+   "postal": "P.O. Box 384 - 10200, Muranga",
+   "phone": "+254725301428",
+   "email": "vankizah@gmail.com",
+   "address": "Ruiru, Kiambu County",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 265,
+   "name": "Vision Edge Credit Partners Limited",
+   "postal": "P.O. Box 11367-00400, Nairobi",
+   "phone": "0713669681",
+   "email": "fastgrowthcredit@gmail.com",
+   "address": "T-plaza 2nd floor Kenyatta highway Thika town",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 266,
+   "name": "Visionfund Kenya Limited",
+   "postal": "P.O. Box 1676-00200, Nairobi",
+   "phone": "+254722200402",
+   "email": "info@visionfundkenya.co.ke",
+   "address": "World Vision Centre, Karen Road Off Ngong Road Building, Nairobi",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 267,
+   "name": "Wabema Credit Ltd",
+   "postal": "P.O. Box 9963 – 00100, Nairobi",
+   "phone": "+2540207901111",
+   "email": "wabemacredit@gmail.com",
+   "address": "One Padmore, George Padmore Rd., Kilimani",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 268,
+   "name": "Wakanda Credit Limited",
+   "postal": "P.O Box 23851-00100, Nairobi",
+   "phone": "+254 701858999",
+   "email": "compliance@wakanda.top",
+   "address": "Milestone Building, Kiambu Road, Nairobi, Kenya",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 269,
+   "name": "Watu Credit Ltd",
+   "postal": "P.O. Box 46037-00100, Nairobi",
+   "phone": "0790000999",
+   "email": "info@watuafrica.com",
+   "address": "Hill Park Building, Lower Hill Road, Upper Hill - Nairobi",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 270,
+   "name": "WeLend Limited",
+   "postal": "P.O. Box 26500-00100, Nairobi",
+   "phone": "+254710816305",
+   "email": "welendlimited@gmail.com",
+   "address": "Kenyatta Road Estate Thika Road Plot 10, Thika Road, Toll Street, Ruiru District, Kiambu",
+   "licensed": "2026-07-09"
+  },
+  {
+   "no": 271,
+   "name": "Westlip Credit Limited",
+   "postal": "30564 - 00100, Nairobi",
+   "phone": "+254112694651",
+   "email": "westlipcreditltd@gmail.com",
+   "address": "Riverside Drive Merchant Square Building, Ninety-Eight Riverside Drive, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 272,
+   "name": "Wiresphere Limited",
+   "postal": "P.O. Box 217180-00100, Nairobi",
+   "phone": "+254726842803",
+   "email": "quickcreds@gmail.com",
+   "address": "Abacus House, Abacus Road, Ruaraka",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 273,
+   "name": "Xpress Capital Solutions Limited",
+   "postal": "P.O. Box 1150-00242, Nairobi",
+   "phone": "+254740132137",
+   "email": "xpresscapitalsolutionsltd@gmail.com",
+   "address": "Namanga Rd, Nairobi, Pat Plaza Building, 1st Floor suite F4",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 274,
+   "name": "Yehu Impact Limited",
+   "postal": "P.O Box 82120, Mombasa GPO",
+   "phone": "+254708343434",
+   "email": "info@yehu.org",
+   "address": "Avenue Building, Mahesh Doshi Road, Kisauni , Mombasa",
+   "licensed": "2026-04-10"
+  },
+  {
+   "no": 275,
+   "name": "Zaidavu Credit Limited",
+   "postal": "P.O. Box 35834-00100, Nairobi",
+   "phone": "+254108235649",
+   "email": "zaidavucreditltd@gmail.com",
+   "address": "Galana Road, Nairobi",
+   "licensed": "2026-09-28"
+  },
+  {
+   "no": 276,
+   "name": "Zaidi Pato Limited",
+   "postal": "P.O. Box 56557-00200, Nairobi",
+   "phone": "+254 797 491 753",
+   "email": "zaidipatolimited2@gmail.com",
+   "address": "EABL Road, Off Thika Road, Trio Complex Building, Kasarani, Nairobi",
+   "licensed": "2025-09-02"
+  },
+  {
+   "no": 277,
+   "name": "Zamaradi Capital & Credit Group Limited",
+   "postal": "P.O Box 19737-00100, Nairobi",
+   "phone": "+254114409692",
+   "email": "zamaradicreditltd@gmail.com",
+   "address": "Ushuru Sacco Centre, Wood Avenue, Kilimani, Nairobi, Kenya",
+   "licensed": "2025-06-05"
+  },
+  {
+   "no": 278,
+   "name": "Zanifu Limited",
+   "postal": "P.O. Box 66877- 00800, Nairobi",
+   "phone": "+254713023159",
+   "email": "legal@zanifu.com",
+   "address": "Kenrail Towers, 4th Floor, Mkungu Close, Nairobi",
+   "licensed": "2023-01-30"
+  },
+  {
+   "no": 279,
+   "name": "Zenka Digital Limited",
+   "postal": "P.O. Box 29107, 00100, Nairobi",
+   "phone": "+254112480254 /+254 20 7650878",
+   "email": "info@zenka.co.ke",
+   "address": "Mirage Tower, Tower 2, 12th Floor, Waiyaki Way, Westlands, Nairobi",
+   "licensed": "2023-03-27"
+  },
+  {
+   "no": 280,
+   "name": "Ziki Credit Limited",
+   "postal": "P.O. Box 23936- 00100, Nairobi",
+   "phone": "+254720090730",
+   "email": "zikicredit@gmail.com",
+   "address": "Development House, Moi Avenue, Nairobi",
+   "licensed": "2025-12-24"
+  },
+  {
+   "no": 281,
+   "name": "Zillions Credit Limited",
+   "postal": "P.O. Box 42564-00100, Nairobi",
+   "phone": "0725013031",
+   "email": "info@zashloan.com",
+   "address": "Omega Business Park, Go Down 2, Baba Dogo, Nairobi",
+   "licensed": "2024-03-06"
+  }
+ ],
+ "added_last": [],
+ "removed": []
+}

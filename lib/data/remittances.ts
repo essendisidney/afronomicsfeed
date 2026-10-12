@@ -19,6 +19,8 @@ export type Corridor = {
   cheapest: { firm: string; type: string; cost_pct: number };
   dearest_pct: number;
   by_type: Record<string, number>;
+  /** Every service surveyed, cheapest first (older files carry only `cheapest`). */
+  firms?: { firm: string; type: string; cost_pct: number }[];
 };
 
 type File = { publisher: string; source: string; source_page: string; period: string; previous_period: string | null; corridors: Corridor[] };
@@ -77,4 +79,20 @@ export function banksDearest() {
   const both = (loadRemittances()?.corridors ?? []).filter((c) => "Bank" in c.by_type && Object.keys(c.by_type).length > 1);
   const dearest = both.filter((c) => c.by_type.Bank >= Math.max(...Object.entries(c.by_type).filter(([t]) => t !== "Bank").map(([, v]) => v)));
   return { both: both.length, dearest: dearest.length };
+}
+
+/** "Kenya" -> "kenya", "DR Congo" -> "dr-congo", "Côte d'Ivoire" -> "cote-divoire". */
+export const destSlug = (worldBankName: string) =>
+  countryName(worldBankName)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/'/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+/** Corridors into one destination, the busiest sending countries first. */
+export function corridorsTo(slug: string) {
+  const list = (loadRemittances()?.corridors ?? []).filter((c) => destSlug(c.dst_name) === slug);
+  return list.sort((a, b) => b.services - a.services || a.src_name.localeCompare(b.src_name));
 }

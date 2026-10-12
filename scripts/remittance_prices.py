@@ -162,6 +162,13 @@ def build(content: bytes) -> dict | None:
         if len(quotes) < 2:
             continue
         cheapest = min(quotes, key=lambda q: q["cost"])
+        # Every service surveyed, cheapest first: a firm quoted for several products keeps its cheapest one.
+        best = {}
+        for q in quotes:
+            name = q["firm"] or "?"
+            if name not in best or q["cost"] < best[name]["cost"]:
+                best[name] = q
+        firms = [{"firm": q["firm"], "type": q["firm_type"], "cost_pct": round(q["cost"], 2)} for q in sorted(best.values(), key=lambda q: q["cost"])]
         types = defaultdict(list)
         for q in quotes:
             types[q["firm_type"] or "Other"].append(q["cost"])
@@ -172,6 +179,7 @@ def build(content: bytes) -> dict | None:
             "cheapest": {"firm": cheapest["firm"], "type": cheapest["firm_type"], "cost_pct": round(cheapest["cost"], 2)},
             "dearest_pct": round(max(q["cost"] for q in quotes), 2),
             "by_type": {t: round(mean(v), 2) for t, v in sorted(types.items())},
+            "firms": firms,
         })
     corridors.sort(key=lambda c: (c["dst_name"], c["avg_cost_pct"]))
 
@@ -201,7 +209,9 @@ def main() -> int:
         built = build(r.content)
         if not built:
             return 1
-        if OUT.exists() and json.loads(OUT.read_text(encoding="utf-8")).get("period") == built["period"]:
+        current = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
+        # Rewrite a published period only when it predates the per-service lists.
+        if current.get("period") == built["period"] and all("firms" in c for c in current.get("corridors", [])):
             print(f"  period {built['period']} already published")
             return 0
         OUT.parent.mkdir(parents=True, exist_ok=True)

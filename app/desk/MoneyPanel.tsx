@@ -74,7 +74,9 @@ function Funnel({ title, steps }: { title: string; steps: { label: string; a: nu
   );
 }
 
-export function MoneyPanel({ money }: { money: Money | null }) {
+export type Referral = { path: string; clicks_7d: number; clicks_30d: number };
+
+export function MoneyPanel({ money, referrals = [] }: { money: Money | null; referrals?: Referral[] }) {
   if (!money) return null;
   const [w7, w30] = [money.windows.find((w) => w.days === 7)!, money.windows.find((w) => w.days === 30)!];
   const month = money.revenue.map((r) => ({ currency: r.currency, amount: r.this_month }));
@@ -129,6 +131,18 @@ export function MoneyPanel({ money }: { money: Money | null }) {
         {w30.active_subscribers} active newsletter subscribers · {w30.unsubscribed} unsubscribed in 30 days · paid in 30 days: {sum(w30.paid)}. Buying pages: pricing,
         for institutions, pack, licensing, advertise, advisory, prices, developers, job posting.
       </p>
+      <h3 className="mt-8 text-sm font-semibold">Money-transfer referrals: clicks to providers</h3>
+      {referrals.length ? (
+        <ul className="mt-2 flex flex-wrap gap-2 text-sm">
+          {referrals.map((r) => (
+            <li key={r.path} className="rounded-full border border-rule bg-surface px-3 py-1">
+              {r.path.replace(/^\/go\//, "")}: <strong>{r.clicks_7d}</strong> in 7 days · {r.clicks_30d} in 30
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-2 text-sm text-muted">No clicks to a provider yet (from /send-money).</p>
+      )}
     </section>
   );
 }

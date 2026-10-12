@@ -18,6 +18,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "strategy" / "afronomics-financial-model.xlsx"
+MODEL_JSON = ROOT / "data" / "strategy" / "model.json"  # read by the desk's command centre (model vs reality)
+START = "2026-10"  # month 1 of the model
 MONTHS = 120
 MILESTONES = [10_000, 50_000, 100_000, 250_000, 500_000, 1_000_000]
 
@@ -247,6 +249,13 @@ def main() -> int:
         rows = simulate(s)
         results.append((s, rows, summarise(s, rows)))
     write_xlsx(results)
+    MODEL_JSON.parent.mkdir(parents=True, exist_ok=True)
+    MODEL_JSON.write_text(json.dumps({
+        "note": "Monthly revenue (USD) per scenario from scripts/financial_model.py. ASSUMPTIONS, not revenue. Month 1 = start.",
+        "start": START,
+        "scenarios": {s.name: [r["revenue"] for r in rows[:36]] for s, rows, _ in results},
+        "institutions": {s.name: [r["institutions"] for r in rows[:36]] for s, rows, _ in results},
+    }, indent=1), encoding="utf-8")
     print(json.dumps([r[2] for r in results], indent=1, default=str))
     print(f"wrote {OUT.relative_to(ROOT)}")
     return 0

@@ -14,7 +14,8 @@ import { moneyLabel } from "@/lib/billing/plans";
 import { DeskKey } from "./DeskKey";
 import { OwnerDevice } from "./OwnerDevice";
 import { MoneyPanel, type Money, type Referral } from "./MoneyPanel";
-import { CommandCentre, type Deal, type PilotKey } from "./CommandCentre";
+import { CommandCentre, toUsd, type Deal, type PilotKey } from "./CommandCentre";
+import { StrategyBoard } from "./StrategyBoard";
 import { loadFxQuote } from "@/lib/data/fx";
 import { AddCorrection, AddPress, GrantAccess, HideReport, IssueApiKey, RevokeApiKey } from "./DeskActions";
 import { country as reportCountry, item as reportItem } from "@/lib/reader-reports-core";
@@ -210,6 +211,14 @@ export default async function DeskPage() {
 
       <div className="mt-8">
         <CommandCentre money={money} deals={deals} pilots={apiKeys as PilotKey[]} perUsd={perUsd} fxNote={fxNote} />
+        <StrategyBoard
+          collectedThisMonthUsd={toUsd((money?.revenue ?? []).map((r) => ({ currency: r.currency, amount: r.this_month })), perUsd).total}
+          payingInstitutions={deals.filter((x) => x.stage === "won").length}
+          pilots={apiKeys.filter((k) => k.plan === "trial" && !k.revoked_at).length}
+          prospects={deals.filter((x) => x.stage === "prospect").length}
+          apiCalls7d={apiCalls}
+          now={now}
+        />
       </div>
 
       <MoneyPanel money={money} referrals={referrals} />

@@ -86,6 +86,10 @@ jobs:
       - run: python scripts/kenya_dcp.py
         continue-on-error: true
         timeout-minutes: 5
+      # Kenya's open government tenders, from the procurement regulator's OCDS open data on tenders.go.ke.
+      - run: python scripts/kenya_tenders.py
+        continue-on-error: true
+        timeout-minutes: 8
       # Uganda: the Bank of Uganda's content API now answers GitHub's network. Recent notices are images, read
       # with Tesseract OCR and kept only when every figure passes the notice's own cross-checks.
       - name: Uganda T-bills

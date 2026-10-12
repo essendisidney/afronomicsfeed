@@ -83,7 +83,7 @@ export default function FrontierLocalDebtPage() {
         <SectionTitle
           kicker="Coverage today"
           title="What we hold, market by market"
-          note={`Counted from our datasets on this page’s last build. Bond auctions today: ${bondCountries.join(", ")}. Nigeria, South Africa and Uganda are next, in that order.`}
+          note={`Counted from our datasets on this page’s last build. Bond auctions today: ${bondCountries.join(", ")}. South Africa and Uganda are next.`}
         />
         <div className="mt-4 overflow-x-auto">
           <table className="data-table">
@@ -183,7 +183,7 @@ export default function FrontierLocalDebtPage() {
               <strong className="text-ink">Alerts:</strong> a notification when a market’s result is in (email today; webhooks for licensed keys on request).
             </li>
             <li>
-              <strong className="text-ink">Honest gaps:</strong> bond auctions are covered for {bondCountries.join(", ")} only so far; Nigeria, Uganda, Ghana,
+              <strong className="text-ink">Honest gaps:</strong> bond auctions are covered for {bondCountries.join(", ")} only so far; South Africa, Uganda, Ghana,
               Morocco, Tunisia and Angola are not covered yet. We do not sell secondary-market prices: those come from dealers and exchanges. Pilot institutions shape the order.
             </li>
           </ul>

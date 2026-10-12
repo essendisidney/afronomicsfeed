@@ -30,6 +30,79 @@ export type RateItem = {
 
 export type RateGroup = { id: string; title: string; who: string; items: RateItem[] };
 
+/**
+ * The institutional data-product ladder: African local-currency government debt auction data
+ * (bond auctions for Nigeria, Egypt, Kenya, Uganda, Zambia, Morocco and the eight WAEMU markets; bills in ten markets).
+ * The one source of truth for these prices. Invoiced in US dollars, never sold through Paystack checkout.
+ */
+export type InstitutionalTierId = "analyst" | "team" | "enterprise";
+
+export type InstitutionalTier = {
+  id: InstitutionalTierId;
+  name: string;
+  /** Monthly price in whole US dollars (the floor, for Enterprise). */
+  monthlyUsd: number;
+  /** True when the price is a starting point rather than a fixed figure. */
+  from: boolean;
+  /** One line, as the ladder is stated on the product page. */
+  summary: string;
+  audience: string;
+  includes: readonly string[];
+};
+
+export const institutionalLadder: readonly InstitutionalTier[] = [
+  {
+    id: "analyst",
+    name: "Analyst",
+    monthlyUsd: 250,
+    from: false,
+    summary: "one user: the web tables and full-history downloads",
+    audience: "One analyst or economist who needs the auction record at their desk.",
+    includes: ["One user", "Web tables for every covered market", "Full-history downloads"],
+  },
+  {
+    id: "team",
+    name: "Team and API",
+    monthlyUsd: 1500,
+    from: false,
+    summary: "an API key for your systems, alerts, usage reporting, a named contact",
+    audience: "A desk or research team feeding the data into its own models and systems.",
+    includes: ["An API key for your systems", "Alerts when a market’s result is in", "Usage reporting", "A named contact"],
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    monthlyUsd: 5000,
+    from: true,
+    summary: "redistribution, several teams, custom delivery and a service agreement",
+    audience: "Institutions that redistribute the data or run it across several teams.",
+    includes: ["Redistribution rights", "Several teams", "Custom delivery", "A service agreement"],
+  },
+];
+
+export const institutionalPilot = {
+  days: 30,
+  label: "30-day free pilot",
+  href: "/data/frontier-local-debt#pilot",
+} as const;
+
+export const institutionalLinks = {
+  product: "/data/frontier-local-debt",
+  apiDocs: "/data-api",
+} as const;
+
+export const institutionalCurrencyNote = "Invoiced in US dollars.";
+
+export function institutionalTier(id: InstitutionalTierId): InstitutionalTier {
+  return institutionalLadder.find((tier) => tier.id === id)!;
+}
+
+/** "$1,500" or "from $5,000". */
+export function institutionalPriceText(tier: InstitutionalTier): string {
+  const amount = `$${tier.monthlyUsd.toLocaleString("en-US")}`;
+  return tier.from ? `from ${amount}` : amount;
+}
+
 export const rateCard: RateGroup[] = [
   {
     id: "readers",
@@ -37,8 +110,8 @@ export const rateCard: RateGroup[] = [
     who: "Analysts, treasurers, journalists, students and investors",
     items: [
       { id: "open", name: "Open", amount: 0, currency: "KES", unit: "", what: "Every number, headline, country file, the T-bill monitor, auction pages, the Sovereign Bill Index, CSV downloads and the Weekly. Free, with attribution.", href: "/subscribe" },
-      { id: "pro", name: "Pro", amount: 1500, currency: "KES", unit: "a month", what: "The Morning note by email every weekday, auction alerts the moment each market reports, every brief in full and the full field set from the data API. One seat. KES 15,000 a year.", checkout: "pro", href: "/pricing" },
-      { id: "team", name: "Team", amount: 6000, currency: "KES", unit: "a month", what: "Five Pro seats on one invoice, bulk exports and priority requests for new datasets. KES 60,000 a year.", checkout: "professional", href: "/pricing" },
+      { id: "pro", name: "Pro", amount: 1500, currency: "KES", unit: "a month", what: "The Morning note by email every weekday, auction alerts the moment each market reports, every brief in full, and the web tools and CSV downloads. One seat. KES 15,000 a year.", checkout: "pro", href: "/pricing" },
+      { id: "team", name: "Team", amount: 6000, currency: "KES", unit: "a month", what: "Five Pro seats on one invoice and priority requests for new datasets. KES 60,000 a year.", checkout: "professional", href: "/pricing" },
       { id: "trial", name: "Kenya desk trial", amount: 200, currency: "KES", unit: "for 14 days", what: "Fourteen days of Pro, paid by M-Pesa, so a desk can try it before the finance department is involved.", checkout: "trial", href: "/pricing" },
       { id: "whatsapp", name: "Auction alerts on WhatsApp", amount: 300, currency: "KES", unit: "a month", what: "The Kenya auction result on WhatsApp within minutes of the CBK posting it, with the 91-, 182- and 364-day rates and the change. Reply to the receipt with your number.", checkout: "alerts_whatsapp" },
       { id: "sms", name: "The Sunday rates SMS", amount: 100, currency: "KES", unit: "a month", what: "One text a week: the latest bill rates, the best money-market yield after tax and the shilling. Joining list open.", enquiry: "access", status: "soon" },
@@ -68,8 +141,8 @@ export const rateCard: RateGroup[] = [
       { id: "licence_startup", name: "Startup licence", amount: 7500, currency: "KES", unit: "a month", what: "Commercial use inside one product: all ten auction datasets, the measures and the FX archive, an email or webhook on every new result, and a named contact.", checkout: "licence_startup", href: "/licensing" },
       { id: "licence_institution", name: "Institution licence", amount: 39000, currency: "KES", unit: "a month", what: "All datasets and the Wire archive for internal models, dashboards and client reports, full history and change notifications.", enquiry: "licensing", href: "/licensing" },
       { id: "frontier", name: "Frontier desk", amount: 249, currency: "USD", unit: "a month per desk", what: "For funds in London, New York and Dubai holding African paper: the Monday note with the index, every auction and the FX, the full API and a quarterly call with the desk. Invoiced in dollars.", enquiry: "licensing" },
-      { id: "data_api", name: "Afronomics Data API", amount: 1500, currency: "USD", unit: "a month", what: "A keyed feed for production systems: every auction in ten markets with full history, policy rates, Eurobond yields and the bill index, uncached responses, usage reporting per key, change notifications and a named contact. Invoiced in dollars.", enquiry: "licensing", href: "/data-api" },
-      { id: "enterprise", name: "Enterprise and redistribution", amount: 5000, currency: "USD", unit: "a month, from", what: "Redistribution to your own clients, several teams and keys, custom datasets and delivery (SFTP, Excel, Google Sheets), and a service agreement. Priced by scope from $5,000 a month.", enquiry: "licensing", href: "/data-api" },
+      { id: "data_api", name: "Afronomics Data API", amount: institutionalTier("team").monthlyUsd, currency: "USD", unit: "a month", what: "A keyed feed for production systems: every auction in ten markets with full history, policy rates, Eurobond yields and the bill index, uncached responses, usage reporting per key, change notifications and a named contact. Invoiced in dollars.", enquiry: "licensing", href: "/data-api" },
+      { id: "enterprise", name: "Enterprise and redistribution", amount: institutionalTier("enterprise").monthlyUsd, currency: "USD", unit: "a month, from", what: "Redistribution to your own clients, several teams and keys, custom datasets and delivery (SFTP, Excel, Google Sheets), and a service agreement. Priced by scope from $5,000 a month.", enquiry: "licensing", href: "/data-api" },
       { id: "widget", name: "Branded live-rates widget", amount: 40000, currency: "KES", unit: "a month", what: "Our live T-bill, bond or FX widget on your site with your branding and no Afronomics link, updated the moment each result lands. The free widgets are the demo.", checkout: "widget", href: "/widgets" },
       { id: "bulk", name: "Bulk and AI training licence", amount: null, currency: "USD", unit: "", what: "Clean, dated, sourced African financial data for models and bulk redistribution, with the full change history. Priced by scope.", enquiry: "licensing" },
     ],
@@ -117,7 +190,7 @@ export const comparables = [
   { product: "Bloomberg Terminal", price: "about $2,000+ a month per seat", ours: "Pro, KES 1,500 (about $12)" },
   { product: "LSEG Workspace / Refinitiv Eikon", price: "typically $1,000+ a month per seat", ours: "Team, KES 6,000 for five seats" },
   { product: "Global data APIs (Trading Economics, CEIC)", price: "from about $50 to several thousand dollars a month", ours: "Open API free; Startup licence KES 7,500" },
-  { product: "Finance newsletters on Substack", price: "$10 to $30 a month", ours: "The Morning is free; Pro adds alerts and the API" },
+  { product: "Finance newsletters on Substack", price: "$10 to $30 a month", ours: "The Morning is free; Pro adds alerts and every brief in full" },
   { product: "A day of an analyst’s time each month on the committee pack", price: "KES 15,000 to 40,000 in salary, before mistakes", ours: "The pack, KES 12,000, sourced and on time" },
   { product: "Sponsored email line in a national business daily", price: "KES 100,000 to 300,000 a send", ours: "Morning sponsor line, KES 75,000 a month" },
 ];

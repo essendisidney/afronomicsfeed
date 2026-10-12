@@ -71,10 +71,11 @@ export default async function WeeklyPage() {
         </Link>
       ) : null}
       <div className="grid gap-12 lg:grid-cols-12">
-        <section className="lg:col-span-7">
+        <section className="min-w-0 lg:col-span-7">
           <SectionTitle kicker="Rates" title="Kenya government auctions" href="/markets/kenya-tbills" hrefLabel="Full history →" />
           {edition.bills.length ? (
-            <table className="data-table mt-2">
+            <div className="mt-2 overflow-x-auto">
+            <table className="data-table">
               <thead>
                 <tr>
                   <th>Treasury bill</th>
@@ -100,6 +101,7 @@ export default async function WeeklyPage() {
                 ))}
               </tbody>
             </table>
+            </div>
           ) : null}
           {edition.bonds.length ? (
             <table className="data-table mt-6">

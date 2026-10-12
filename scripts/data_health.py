@@ -179,9 +179,47 @@ def others(today: date) -> list[dict]:
     return out
 
 
+# Bond auction datasets: (file, name, date field(s) in order of preference, page). Dates past today + 7 days are
+# settlement dates of auctions just held and are kept; anything later is ignored as a misread.
+BOND_SETS = [
+    ("kenya/bond_auctions.json", "Kenya", ("value_date",), "/markets/bonds/kenya"),
+    ("nigeria/bond_auctions.json", "Nigeria", ("auction_date",), "/markets/bonds/nigeria"),
+    ("egypt/bond_auctions.json", "Egypt", ("issue_date",), "/markets/bonds/egypt"),
+    ("zambia/bond_auctions.json", "Zambia", ("auction_date",), "/markets/bonds/zambia"),
+    ("uganda/bond_auctions.json", "Uganda", ("auction_date",), "/markets/bonds/uganda"),
+    ("morocco/auctions.json", "Morocco", ("auction_date",), "/markets/bonds/morocco"),
+    ("waemu/auctions.json", "WAEMU (UMOA-Titres)", ("operation_date",), "/markets/bonds/waemu"),
+]
+
+
+def bonds(today: date) -> list[dict]:
+    out = []
+    for rel, name, fields, link in BOND_SETS:
+        raw = load(rel)
+        if not raw or not raw.get("rows"):
+            out.append(item("Bond auctions", name, "failed", "no bond auction results on file yet", link=link))
+            continue
+        dates = []
+        for r in raw["rows"]:
+            x = next((d(r.get(f)) for f in fields if r.get(f)), None)
+            if x and x <= today + timedelta(days=7):
+                dates.append(x)
+        if not dates:
+            out.append(item("Bond auctions", name, "failed", "no readable dates on file", link=link))
+            continue
+        latest = max(dates)
+        gap = rhythm(dates, 30)
+        due = latest + timedelta(days=gap + max(5, gap // 2))
+        every = "weekly" if gap <= 8 else "every two weeks" if gap <= 16 else "monthly" if gap <= 35 else f"every {gap} days"
+        status = "late" if today > due else "ok"
+        detail = f"latest result {latest:%d %b}" + ("; it usually auctions " if status == "late" else " (auctions ") + every + ("" if status == "late" else ")")
+        out.append(item("Bond auctions", name, status, detail, latest, due, link))
+    return out
+
+
 def main() -> int:
     today = datetime.now(NAIROBI).date()
-    items = bills(today) + funds(today) + policy(today) + others(today)
+    items = bills(today) + bonds(today) + funds(today) + policy(today) + others(today)
     order = {"failed": 0, "late": 1, "gap": 2, "ok": 3}
     items.sort(key=lambda x: (order[x["status"]], x["area"], x["name"]))
     summary = {s: sum(1 for x in items if x["status"] == s) for s in order}

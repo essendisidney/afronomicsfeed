@@ -145,7 +145,7 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
       min_rate: null,
       max_rate: null,
       coupon: r.coupon,
-      source: r.source,
+      source: r.source.replace(/([^:/])\/{2,}/g, "$1/"), // the CBK's links carry a doubled slash ("go.ke//uploads")
     }));
     return { updatedAt: k.updatedAt, rows: rows.sort((a, b) => b.date.localeCompare(a.date)) };
   }
@@ -367,4 +367,20 @@ export function bondsCsv(market: BondMarket, rows: BondRow[], updatedAt: string 
       [r.date, r.isin, r.issue, r.tenor_years, r.maturity, r.type, r.offered_m, r.received_m, r.accepted_m, r.bid_cover, r.rate, r.min_rate, r.max_rate, r.coupon, r.source].map(q).join(","),
     ),
   ].join("\n");
+}
+
+/** Markets whose bond data is published (has rows), in the order of bondMarkets. */
+export function publishedBondMarkets(): BondMarket[] {
+  return bondMarkets.filter((m) => loadBondMarket(m.slug).rows.length > 0);
+}
+
+/** "Kenya, Nigeria, … and the eight WAEMU markets": the published bond markets as prose, never a planned one. */
+export function bondCoverageText(): string {
+  const names = publishedBondMarkets().map((m) => (m.slug === "waemu" ? "the eight WAEMU markets" : m.country));
+  return names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}` : (names[0] ?? "none yet");
+}
+
+/** Total published bond auction results across markets. */
+export function bondResultCount(): number {
+  return publishedBondMarkets().reduce((n, m) => n + loadBondMarket(m.slug).rows.length, 0);
 }

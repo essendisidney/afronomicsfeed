@@ -5,7 +5,11 @@ import { renderWidget } from "@/lib/embeds";
 export async function GET(request: Request, { params }: { params: Promise<{ widget: string }> }) {
   const { widget } = await params;
   const html = await renderWidget(widget, new URL(request.url).searchParams, renderTime());
-  if (!html) return new Response("Widget unavailable", { status: 404, headers: { "Content-Type": "text/plain; charset=utf-8" } });
+  if (!html) {
+    // Shown inside someone else's page: a small, styled note instead of raw text, and short caching so it recovers.
+    const note = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Afronomics</title></head><body style="margin:0;font:14px/1.5 system-ui,sans-serif;color:#1f2a24;background:#f6f4ef"><p style="margin:12px">This Afronomics widget is updating. <a href="https://www.afronomicsfeed.com" target="_blank" rel="noopener" style="color:#1d5c3f">See the latest figures on afronomicsfeed.com</a>.</p></body></html>`;
+    return new Response(note, { status: 503, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=60" } });
+  }
   return new Response(html, {
     headers: {
       "Content-Type": "text/html; charset=utf-8",

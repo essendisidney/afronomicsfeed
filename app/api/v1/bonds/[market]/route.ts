@@ -21,6 +21,9 @@ export async function GET(request: Request, { params }: { params: Promise<{ mark
     return apiJson(request, `/v1/bonds/${market.slug}`, { error: "Dates must be YYYY-MM-DD." }, 400);
   }
   const { rows, updatedAt } = loadBondMarket(market.slug);
+  if (!rows.length) {
+    return apiJson(request, `/v1/bonds/${market.slug}`, { error: "This market's bond data is not published yet. See /api/v1/bonds for the markets with data." }, 404);
+  }
   const picked = rows.filter((r) => (!isin || r.isin === isin) && (!issue || fold(r.issue ?? "").startsWith(issue)) && (!from || r.date >= from) && (!to || r.date <= to)).slice(0, limit);
   return apiJson(request, `/v1/bonds/${market.slug}`, {
     market: market.slug,
@@ -29,6 +32,11 @@ export async function GET(request: Request, { params }: { params: Promise<{ mark
     amounts: `${market.currency} millions`,
     bid_cover: "bids received divided by the amount accepted",
     rate_measure: market.rateNote,
+    date_kind: market.dateKind ?? "auction",
+    date_note:
+      market.dateKind === "settlement"
+        ? "each row's date is the settlement (issue) date, a few days after the auction"
+        : "each row's date is the auction date",
     publisher: market.publisher,
     updated_at: updatedAt,
     count: picked.length,

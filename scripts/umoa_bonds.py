@@ -92,7 +92,7 @@ def listing(html: str) -> dict[str, list[dict]]:
     issues: dict[str, list[dict]] = {}
     for row in re.findall(r"<tr.*?</tr>", table.group(0) if table else "", re.S | re.I):
         cells = [text(c) for c in re.findall(r"<td[^>]*>(.*?)</td>", row, re.S | re.I)]
-        link = re.search(r'href="?(https://www\.umoatitres\.org/fr/emission/[^"\s>]+)', row)
+        link = re.search(r"""href=["']?(https://www\.umoatitres\.org/fr/emission/[^"'\s>]+)""", row)
         if len(cells) < 7 or not link:
             continue
         country = country_of(cells[0])
@@ -107,7 +107,7 @@ def listing(html: str) -> dict[str, list[dict]]:
             "value_date": iso(cells[4]),
             "maturity": iso(cells[5]),
             "months": int(cells[6]) if cells[6].isdigit() else None,
-            "postponed": "report" in plain(cells[-1]),
+            "postponed": any("reporte" in plain(c) for c in cells[8:]),  # status column: realisee / reportee
         })
     for lines in issues.values():
         lines.sort(key=lambda x: x["line"])

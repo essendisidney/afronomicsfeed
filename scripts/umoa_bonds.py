@@ -43,20 +43,21 @@ def main() -> int:
     print(f"{len(issues)} distinct issue pages linked; first 5 and last 3:")
     for u in issues[:5] + issues[-3:]:
         print("   ", u)
-    probes = [PAGE] + issues[1:2]
-    for u in probes:
-        page = html if u == PAGE else requests.get(u, headers=UA, timeout=(15, 120), verify=False).text
-        print(f"=== {u} ({len(page)} bytes)")
-        for term in ["pondéré", "pondere", "Montant retenu", "Montant global", "Taux marginal", "Rendement", "wp-json",
-                     "admin-ajax", "<iframe", ".pdf", "data-", "resultat", "ISIN", "Échéance", "OAT"]:
-            hits = [m.start() for m in re.finditer(re.escape(term), page, re.I)]
-            if hits:
-                k = hits[min(len(hits) - 1, 2)]
-                print(f"  [{term}] {len(hits)} hits; sample: {page[max(0, k - 300): k + 400]!r}")
-        # The largest script blocks, which may carry the data
-        scripts = sorted(re.findall(r"<script[^>]*>(.*?)</script>", page, re.S | re.I), key=len, reverse=True)[:2]
-        for sc in scripts:
-            print(f"  script of {len(sc)} chars: {sc[:600]!r}")
+    # The listing table: first rows, with each row's link
+    lst = re.search(r'<table[^>]*liste-emission.*?</table>', html, re.S | re.I)
+    if lst:
+        rows = re.findall(r"<tr.*?</tr>", lst.group(0), re.S | re.I)
+        print(f"listing table: {len(rows)} rows")
+        for r in rows[:4] + rows[-2:]:
+            cells = [text(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", r, re.S | re.I)]
+            link = re.search(r'href="?([^"\s>]+)', r)
+            print("   ", cells[:9], link.group(1) if link else None)
+    # One issue page: each accordion panel's title and the start of its text
+    u = issues[1]
+    page = requests.get(u, headers=UA, timeout=(15, 120), verify=False).text
+    print(f"=== {u}")
+    for title, body in re.findall(r'vc_tta-panel-title">.*?<span[^>]*>(.*?)</span>.*?vc_tta-panel-body">(.*?)(?=<div class="vc_tta-panel"|$)', page, re.S):
+        print(f"  [panel] {text(title)}: {text(body)[:1600]}")
     return 0
 
 

@@ -82,8 +82,8 @@ def fetch_pdf(session: requests.Session, url: str) -> bytes:
 
 def parse(text: str, source: str) -> list[dict]:
     flat = " ".join(text.split())
-    held = re.search(r"Date de l.adjudication\s*:\s*" + DATE, flat)
-    settle = re.search(r"Date de r[èe]glement\s*:\s*" + DATE, flat)
+    held = re.search(r"Date de l.adjudication\s*:?\s*" + DATE, flat)
+    settle = re.search(r"Date de r[èe]glement\s*:?\s*" + DATE, flat)
     if not held or not settle:
         return []
     settled = date.fromisoformat(iso(settle.group(1)))
@@ -96,6 +96,8 @@ def parse(text: str, source: str) -> list[dict]:
         if len(tokens) < 7:
             continue
         bid, bid_price, bid_rate, acc, price, rate, last = tokens[:7]
+        if bid == "-" and acc == "-":
+            continue  # no bids on this line
         maturity = iso(m.group(4))
         days = (date.fromisoformat(maturity) - settled).days
         if days <= 0:

@@ -55,7 +55,11 @@ export default function FrontierLocalDebtPage() {
   ) as Record<string, { results: number; first: string | null; auctions: number }>;
   const bondTotal = Object.values(bonds).reduce((n, b) => n + b.results, 0);
   const bondCountries = bondMarkets.filter((m) => bonds[m.slug]?.results).map((m) => (m.slug === "waemu" ? "the eight WAEMU markets" : m.country));
+  const covered: Record<string, { n: number; first: string | null }> = {};
   const civ = loadBondMarket("waemu").rows.filter((r) => r.issue === "Côte d’Ivoire");
+  const mor = loadBondMarket("morocco").rows;
+  covered["Côte d’Ivoire"] = { n: civ.length, first: civ.at(-1)?.date ?? null };
+  covered["Morocco"] = { n: mor.length, first: mor.at(-1)?.date ?? null };
   const rows = billMarkets
     .map((m) => {
       const r = loadBillMarket(m.slug).rows;
@@ -83,7 +87,7 @@ export default function FrontierLocalDebtPage() {
         <SectionTitle
           kicker="Coverage today"
           title="What we hold, market by market"
-          note={`Counted from our datasets on this page’s last build. Bond auctions today: ${bondCountries.join(", ")}. South Africa, Ghana, Morocco and Tunisia are next.`}
+          note={`Counted from our datasets on this page’s last build. Bond auctions today: ${bondCountries.join(", ")}. Tunisia, Ghana and South Africa are next.`}
         />
         <div className="mt-4 overflow-x-auto">
           <table className="data-table">
@@ -131,12 +135,12 @@ export default function FrontierLocalDebtPage() {
                   </td>
                   <td>{u.weight}</td>
                   <td className="text-right text-muted" colSpan={3}>
-                    {u.country === "Côte d’Ivoire" ? "Bills not shown yet (bonds via UMOA-Titres)" : "Not covered yet"}
+                    {covered[u.country]?.n ? "Bill results not shown yet" : "Not covered yet"}
                   </td>
                   <td className="text-[13px]">
-                    {u.country === "Côte d’Ivoire" && civ.length ? (
+                    {covered[u.country]?.n && covered[u.country].first ? (
                       <span>
-                        {civ.length.toLocaleString("en-US")} results since {monthYear(civ[civ.length - 1].date)}
+                        {covered[u.country].n.toLocaleString("en-US")} results since {monthYear(covered[u.country].first!)}
                       </span>
                     ) : (
                       <span className="text-accent">{u.country === "Côte d’Ivoire" ? "next (with Senegal)" : "planned"}</span>
@@ -183,8 +187,8 @@ export default function FrontierLocalDebtPage() {
               <strong className="text-ink">Alerts:</strong> a notification when a market’s result is in (email today; webhooks for licensed keys on request).
             </li>
             <li>
-              <strong className="text-ink">Honest gaps:</strong> bond auctions are covered for {bondCountries.join(", ")} only so far; South Africa, Ghana,
-              Morocco, Tunisia and Angola are not covered yet. We do not sell secondary-market prices: those come from dealers and exchanges. Pilot institutions shape the order.
+              <strong className="text-ink">Honest gaps:</strong> bond auctions are covered for {bondCountries.join(", ")} only so far; South Africa, Ghana, Tunisia and
+              Angola are not covered yet. We do not sell secondary-market prices: those come from dealers and exchanges. Pilot institutions shape the order.
             </li>
           </ul>
           <div className="mt-4 overflow-x-auto">

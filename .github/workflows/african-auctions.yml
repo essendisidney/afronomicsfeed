@@ -63,6 +63,10 @@ jobs:
       - run: python scripts/egypt_bonds.py
         continue-on-error: true
         timeout-minutes: 8
+      # Morocco: the Treasury's weekly auction result PDFs (finances.gov.ma); only new PDFs are downloaded.
+      - run: python scripts/morocco_bonds.py
+        continue-on-error: true
+        timeout-minutes: 8
       # Nigeria: the DMO's monthly FGN bond auction summaries (PDF, from 2013); only new summaries are downloaded.
       - run: python scripts/nigeria_bonds.py
         continue-on-error: true

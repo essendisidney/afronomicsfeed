@@ -204,7 +204,14 @@ def merge(lines: list[dict], results: list[dict], url: str) -> list[dict]:
 def main() -> int:
     inspect = "--inspect" in sys.argv
     budget = int(sys.argv[sys.argv.index("--budget") + 1]) if "--budget" in sys.argv else 120
-    issues = listing(get(PAGE))
+    html = get(PAGE)
+    issues = listing(html)
+    if inspect or not issues:
+        table = re.search(r"<table[^>]*liste-emission.*?</table>", html, re.S | re.I)
+        rows = re.findall(r"<tr.*?</tr>", table.group(0), re.S | re.I) if table else []
+        print(f"page {len(html)} bytes; listing table {'found' if table else 'NOT found'}; {len(rows)} rows")
+        for r in rows[1:3]:
+            print("   ", [text(c) for c in re.findall(r"<td[^>]*>(.*?)</td>", r, re.S | re.I)], re.findall(r'href="?([^"\s>]+)', r)[:2])
     print(f"{len(issues)} issues listed, {sum(len(v) for v in issues.values())} security lines")
     rows, done = previous()
     today = datetime.now(timezone.utc).date().isoformat()

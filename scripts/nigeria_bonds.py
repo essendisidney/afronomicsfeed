@@ -45,8 +45,11 @@ def summaries() -> list[tuple[str, str]]:
     while start <= 400:
         html = get(f"{PAGE}?start={start}" if start else PAGE).text
         new = 0
-        for href in re.findall(r'href="(https://www\.dmo\.gov\.ng/\d+-summary-of-[a-z0-9-]*?auction-results-for-([a-z]+)-(\d{4})[a-z0-9-]*)"', html):
-            url, month, year = href
+        for path, month, year in re.findall(
+            r"""href=["']((?:https://www\.dmo\.gov\.ng)?/\d+-summary-of-[a-z0-9-]*?auction-results-for-([a-z]+)-?(\d{4})[a-z0-9-]*)["']""", html, re.I
+        ):
+            url = path if path.startswith("http") else "https://www.dmo.gov.ng" + path
+            month = month.lower()
             if month in MONTHS and url not in found.values():
                 key = f"{year}-{MONTHS.index(month) + 1:02d}"
                 if key not in found:

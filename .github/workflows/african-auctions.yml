@@ -63,6 +63,11 @@ jobs:
       - run: python scripts/egypt_bonds.py
         continue-on-error: true
         timeout-minutes: 8
+      # The eight WAEMU markets (Cote d'Ivoire, Senegal and six more) from UMOA-Titres: bills and bonds. Each run
+      # reads up to 250 issue pages it has not read, newest first, so the history back to 2017 fills over a few runs.
+      - run: python scripts/umoa_bonds.py
+        continue-on-error: true
+        timeout-minutes: 12
       - run: python scripts/kenya_rates.py
         continue-on-error: true
         timeout-minutes: 5

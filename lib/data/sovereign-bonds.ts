@@ -28,7 +28,7 @@ export type BondRow = {
 };
 
 export type BondMarket = {
-  slug: "kenya" | "zambia" | "egypt";
+  slug: "kenya" | "zambia" | "egypt" | "waemu";
   country: string;
   currency: string;
   publisher: string;
@@ -61,7 +61,26 @@ export const bondMarkets: BondMarket[] = [
     sourcePage: "https://www.cbe.org.eg/en/auctions/egp-t-bonds-fixed-coupon/historical-data",
     rateNote: "weighted average yield of accepted bids, percent per annum; fixed-coupon, zero-coupon and floating-rate bonds",
   },
+  {
+    slug: "waemu",
+    country: "WAEMU (Benin, Burkina Faso, Côte d’Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo)",
+    currency: "XOF",
+    publisher: "UMOA-Titres (for the eight WAEMU treasuries)",
+    sourcePage: "https://www.umoatitres.org/fr/emissions/",
+    rateNote: "weighted average yield of accepted bids, percent per annum; Treasury bonds (OAT) only; the issuing country is in the issue field",
+  },
 ];
+
+const WAEMU_NAMES: Record<string, string> = {
+  benin: "Benin",
+  "burkina-faso": "Burkina Faso",
+  "cote-divoire": "Côte d’Ivoire",
+  "guinea-bissau": "Guinea-Bissau",
+  mali: "Mali",
+  niger: "Niger",
+  senegal: "Senegal",
+  togo: "Togo",
+};
 
 export const getBondMarket = (slug: string) => bondMarkets.find((m) => m.slug === slug) ?? null;
 
@@ -70,7 +89,7 @@ const n = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : nul
 const s = (v: unknown) => (typeof v === "string" && v ? v : null);
 
 function readFile(slug: string): { updated: string | null; rows: Raw[] } {
-  const file = path.join(process.cwd(), "data", slug, "bond_auctions.json");
+  const file = path.join(process.cwd(), "data", slug, slug === "waemu" ? "auctions.json" : "bond_auctions.json");
   if (!fs.existsSync(file)) return { updated: null, rows: [] };
   try {
     const raw = JSON.parse(fs.readFileSync(file, "utf8")) as { updated?: string; rows?: Raw[] };
@@ -103,6 +122,34 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
     return { updatedAt: k.updatedAt, rows: rows.sort((a, b) => b.date.localeCompare(a.date)) };
   }
   const { updated, rows } = readFile(slug);
+  if (slug === "waemu") {
+    const out: BondRow[] = rows.flatMap((r) => {
+      const rate = n(r.weighted_yield);
+      const date = s(r.operation_date);
+      if (r.instrument !== "OAT" || rate === null || !date) return [];
+      const months = n(r.months);
+      return [
+        {
+          date,
+          isin: null,
+          issue: WAEMU_NAMES[String(r.country)] ?? s(r.country),
+          tenor_years: months ? Math.round((months / 12) * 10) / 10 : null,
+          maturity: s(r.maturity),
+          type: null,
+          offered_m: null, // UMOA-Titres gives the amount sought for the whole issue, not per bond
+          received_m: n(r.bids_xof_m),
+          accepted_m: n(r.accepted_xof_m),
+          bid_cover: n(r.bid_cover),
+          rate,
+          min_rate: null,
+          max_rate: null,
+          coupon: n(r.coupon),
+          source: s(r.source) ?? "",
+        },
+      ];
+    });
+    return { updatedAt: updated, rows: out.sort((a, b) => b.date.localeCompare(a.date)) };
+  }
   const out: BondRow[] = rows.flatMap((r) => {
     const rate = slug === "zambia" ? n(r.yield) : n(r.weighted_avg_yield);
     const date = slug === "zambia" ? s(r.auction_date) : s(r.issue_date);

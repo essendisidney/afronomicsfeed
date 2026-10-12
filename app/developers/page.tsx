@@ -24,11 +24,11 @@ const endpoints = [
   },
   {
     path: "/api/v1/bonds",
-    what: "Government bond auctions: each market with data (Kenya, Zambia, Egypt so far), where its history starts and its latest auction.",
+    what: "Government bond auctions: each market with data (Kenya, Zambia, Egypt, WAEMU so far), where its history starts and its latest auction.",
   },
   {
     path: "/api/v1/bonds/{market}",
-    what: "One market’s bond auction history: ISIN, tenor, amounts offered, bid and accepted, bid-to-cover, rate and coupon, with the source. Optional: isin, from and to (YYYY-MM-DD), limit. Newest first.",
+    what: "One market’s bond auction history: ISIN, tenor, amounts offered, bid and accepted, bid-to-cover, rate and coupon, with the source. Optional: isin, issue (the WAEMU country, e.g. issue=senegal), from and to (YYYY-MM-DD), limit. Newest first.",
   },
   {
     path: "/api/v1/index",

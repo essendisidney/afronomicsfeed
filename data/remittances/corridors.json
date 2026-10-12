@@ -5,7 +5,7 @@
  "source_page": "https://remittanceprices.worldbank.org/data-download",
  "licence": "World Bank Terms of Use for Datasets (attribution)",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "read_at": "2026-10-06T11:06:04+00:00",
+ "read_at": "2026-10-12T11:58:00+00:00",
  "note": "Average total cost of sending the equivalent of USD 200 (fee plus exchange-rate margin) as a % of the amount sent, across the services the World Bank surveyed in the corridor that quarter.",
  "period": "2025_1Q",
  "previous_period": "2024_4Q",
@@ -26,6 +26,13 @@
    "by_type": {
     "Money Transfer Operator": 2.49
    },
+   "firms": [
+    {
+     "firm": "Paysend",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.49
+    }
+   ],
    "prev_avg_cost_pct": 2.44
   },
   {
@@ -46,6 +53,48 @@
     "Bank / Money Transfer Operator": 13.01,
     "Money Transfer Operator": 12.39
    },
+   "firms": [
+    {
+     "firm": "Hello-Paisa",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.2
+    },
+    {
+     "firm": "First National Bank of South Africa via MoneyGram",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 8.45
+    },
+    {
+     "firm": "First National Bank of South Africa",
+     "type": "Bank",
+     "cost_pct": 11.17
+    },
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.46
+    },
+    {
+     "firm": "Standard Bank via MoneyGram",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 16.13
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 16.55
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 22.04
+    },
+    {
+     "firm": "Standard Bank",
+     "type": "Bank",
+     "cost_pct": 28.7
+    }
+   ],
    "prev_avg_cost_pct": 17.57
   },
   {
@@ -66,6 +115,63 @@
     "Bank / Money Transfer Operator": 12.24,
     "Money Transfer Operator": 10.55
    },
+   "firms": [
+    {
+     "firm": "Hello-Paisa",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.27
+    },
+    {
+     "firm": "Sikhona Money Transfers",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.19
+    },
+    {
+     "firm": "Mukuru",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.92
+    },
+    {
+     "firm": "First National Bank of South Africa via MoneyGram",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 10.02
+    },
+    {
+     "firm": "First National Bank of South Africa",
+     "type": "Bank",
+     "cost_pct": 12.71
+    },
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.46
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 16.55
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 19.15
+    },
+    {
+     "firm": "Standard Bank",
+     "type": "Bank",
+     "cost_pct": 23.6
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 24.06
+    },
+    {
+     "firm": "Nedbank",
+     "type": "Bank",
+     "cost_pct": 41.44
+    }
+   ],
    "prev_avg_cost_pct": 14.72
   },
   {
@@ -84,6 +190,18 @@
    "by_type": {
     "Money Transfer Operator": 4.93
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.3
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.01
+    }
+   ],
    "prev_avg_cost_pct": 3.75
   },
   {
@@ -103,6 +221,28 @@
     "Bank": 22.5,
     "Money Transfer Operator": 7.22
    },
+   "firms": [
+    {
+     "firm": "Walmart2World",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.1
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.18
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.49
+    },
+    {
+     "firm": "Citibank",
+     "type": "Bank",
+     "cost_pct": 22.5
+    }
+   ],
    "prev_avg_cost_pct": 10.76
   },
   {
@@ -121,6 +261,48 @@
    "by_type": {
     "Money Transfer Operator": 4.85
    },
+   "firms": [
+    {
+     "firm": "Ace Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.6
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.38
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.1
+    },
+    {
+     "firm": "TapTap Send",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.1
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.01
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.7
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.5
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.19
+    }
+   ],
    "prev_avg_cost_pct": 3.8
   },
   {
@@ -140,6 +322,33 @@
     "Bank / Money Transfer Operator": 3.19,
     "Money Transfer Operator": 4.94
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.85
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.14
+    },
+    {
+     "firm": "La Banque Postale via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 3.19
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.33
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.54
+    }
+   ],
    "prev_avg_cost_pct": 4.93
   },
   {
@@ -159,6 +368,43 @@
     "Money Transfer Operator": 5.46,
     "Money Transfer Operator / Post Office": 8.63
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.33
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.22
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.36
+    },
+    {
+     "firm": "MoneyTrans",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.19
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.28
+    },
+    {
+     "firm": "La Poste via Ria",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 8.63
+    },
+    {
+     "firm": "Atena Money Transfert",
+     "type": "Money Transfer Operator",
+     "cost_pct": 10.08
+    }
+   ],
    "prev_avg_cost_pct": 5.84
   },
   {
@@ -179,6 +425,48 @@
     "Mobile Operator": 2.16,
     "Money Transfer Operator": 4.33
    },
+   "firms": [
+    {
+     "firm": "TapTap Send",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.61
+    },
+    {
+     "firm": "Orange Money",
+     "type": "Mobile Operator",
+     "cost_pct": 2.16
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.58
+    },
+    {
+     "firm": "La Banque Postale via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 2.94
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.01
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.42
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.46
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.06
+    }
+   ],
    "prev_avg_cost_pct": 4.1
   },
   {
@@ -198,6 +486,73 @@
     "Bank": 4.29,
     "Money Transfer Operator": 2.14
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.46
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.46
+    },
+    {
+     "firm": "Al Saudi Office for Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.47
+    },
+    {
+     "firm": "Musharbash Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.47
+    },
+    {
+     "firm": "Alaweneh Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.75
+    },
+    {
+     "firm": "Hamza Office for Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.75
+    },
+    {
+     "firm": "Abu Skeikha Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.05
+    },
+    {
+     "firm": "Al Aman Office for Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.2
+    },
+    {
+     "firm": "Al Hindi and Al Sadat Office for Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.9
+    },
+    {
+     "firm": "Al Salam Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.9
+    },
+    {
+     "firm": "Al Raya Office for Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.06
+    },
+    {
+     "firm": "All Alami Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.26
+    },
+    {
+     "firm": "Arab Bank",
+     "type": "Bank",
+     "cost_pct": 4.29
+    }
+   ],
    "prev_avg_cost_pct": 2.35
   },
   {
@@ -216,6 +571,38 @@
    "by_type": {
     "Money Transfer Operator": 2.87
    },
+   "firms": [
+    {
+     "firm": "Lulu Money",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.7
+    },
+    {
+     "firm": "Al Mulla Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.78
+    },
+    {
+     "firm": "Bahrain Exchange Company",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.81
+    },
+    {
+     "firm": "Aman Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.9
+    },
+    {
+     "firm": "Al Muzaini Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.16
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.16
+    }
+   ],
    "prev_avg_cost_pct": 2.77
   },
   {
@@ -235,6 +622,48 @@
     "Bank": 1.05,
     "Money Transfer Operator": 3.28
    },
+   "firms": [
+    {
+     "firm": "DirectRemit (NBD)",
+     "type": "Bank",
+     "cost_pct": 1.05
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.22
+    },
+    {
+     "firm": "Lari",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.55
+    },
+    {
+     "firm": "Al Fardan Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.94
+    },
+    {
+     "firm": "Wall St Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.02
+    },
+    {
+     "firm": "Al Ansari",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.53
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.69
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.4
+    }
+   ],
    "prev_avg_cost_pct": 3.86
   },
   {
@@ -253,6 +682,33 @@
    "by_type": {
     "Money Transfer Operator": 4.5
    },
+   "firms": [
+    {
+     "firm": "Bahrain Financing Company",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.6
+    },
+    {
+     "firm": "Ezremit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.65
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.23
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.46
+    },
+    {
+     "firm": "NEC Remit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.43
+    }
+   ],
    "prev_avg_cost_pct": 3.92
   },
   {
@@ -271,6 +727,33 @@
    "by_type": {
     "Money Transfer Operator": 4.62
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.9
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.28
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.54
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.92
+    },
+    {
+     "firm": "Xoom",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.2
+    }
+   ],
    "prev_avg_cost_pct": 5.59
   },
   {
@@ -290,6 +773,43 @@
     "Bank": 10.89,
     "Money Transfer Operator": 3.64
    },
+   "firms": [
+    {
+     "firm": "STC Pay",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.79
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.88
+    },
+    {
+     "firm": "Fawri",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.96
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.4
+    },
+    {
+     "firm": "TeleMoney",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.7
+    },
+    {
+     "firm": "Al-Rajhi Bank",
+     "type": "Bank",
+     "cost_pct": 10.2
+    },
+    {
+     "firm": "Bank Albilad",
+     "type": "Bank",
+     "cost_pct": 11.5
+    }
+   ],
    "prev_avg_cost_pct": 5.13
   },
   {
@@ -309,6 +829,23 @@
     "Bank": 7.97,
     "Money Transfer Operator": 5.56
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.62
+    },
+    {
+     "firm": "Al Dar Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.76
+    },
+    {
+     "firm": "QNB",
+     "type": "Bank",
+     "cost_pct": 7.97
+    }
+   ],
    "prev_avg_cost_pct": 6.11
   },
   {
@@ -331,6 +868,68 @@
     "Money Transfer Operator / Post Office": 3.67,
     "Post Office": 4.08
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.57
+    },
+    {
+     "firm": "Poste Italiane via Western Union",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 1.77
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.15
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.54
+    },
+    {
+     "firm": "Poste Italiane via Eurogiro",
+     "type": "Post Office",
+     "cost_pct": 4.08
+    },
+    {
+     "firm": "Poste Italiane via MoneyGram",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 5.58
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.08
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.51
+    },
+    {
+     "firm": "Banca Intesa SanPaolo via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.52
+    },
+    {
+     "firm": "Extrabanca",
+     "type": "Bank",
+     "cost_pct": 19.34
+    },
+    {
+     "firm": "Banca Intesa SanPaolo",
+     "type": "Bank",
+     "cost_pct": 33.57
+    },
+    {
+     "firm": "Banca Monte dei Paschi di Siena",
+     "type": "Bank",
+     "cost_pct": 36.03
+    }
+   ],
    "prev_avg_cost_pct": 10.54
   },
   {
@@ -349,6 +948,23 @@
    "by_type": {
     "Money Transfer Operator": 6.08
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.5
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.9
+    },
+    {
+     "firm": "Xoom",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.82
+    }
+   ],
    "prev_avg_cost_pct": 6.08
   },
   {
@@ -367,6 +983,38 @@
    "by_type": {
     "Money Transfer Operator": 7.27
    },
+   "firms": [
+    {
+     "firm": "TalkRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.86
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.89
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.67
+    },
+    {
+     "firm": "Xoom",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.34
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.69
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.47
+    }
+   ],
    "prev_avg_cost_pct": 7.49
   },
   {
@@ -387,6 +1035,38 @@
     "Bank / Money Transfer Operator": 14.46,
     "Money Transfer Operator": 1.82
    },
+   "firms": [
+    {
+     "firm": "Shoprite Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.82
+    },
+    {
+     "firm": "First National Bank of South Africa",
+     "type": "Bank",
+     "cost_pct": 2.19
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 3.28
+    },
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.46
+    },
+    {
+     "firm": "Nedbank",
+     "type": "Bank",
+     "cost_pct": 20.99
+    },
+    {
+     "firm": "Standard Bank",
+     "type": "Bank",
+     "cost_pct": 27.88
+    }
+   ],
    "prev_avg_cost_pct": 11.65
   },
   {
@@ -405,6 +1085,48 @@
    "by_type": {
     "Money Transfer Operator": 5.61
    },
+   "firms": [
+    {
+     "firm": "Walmart2World",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.0
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.0
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.1
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    },
+    {
+     "firm": "Amal Express",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.14
+    },
+    {
+     "firm": "Xoom",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.5
+    }
+   ],
    "prev_avg_cost_pct": 6.35
   },
   {
@@ -423,6 +1145,23 @@
    "by_type": {
     "Money Transfer Operator": 7.25
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.75
+    },
+    {
+     "firm": "STC Pay",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.31
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.57
+    }
+   ],
    "prev_avg_cost_pct": 7.37
   },
   {
@@ -441,6 +1180,38 @@
    "by_type": {
     "Money Transfer Operator": 7.57
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.92
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.44
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.41
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.83
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 10.72
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 14.93
+    }
+   ],
    "prev_avg_cost_pct": 8.04
   },
   {
@@ -460,6 +1231,43 @@
     "Money Transfer Operator": 7.56,
     "Money Transfer Operator / Post Office": 11.13
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.29
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.42
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.26
+    },
+    {
+     "firm": "Money Exchange Italia",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.94
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.98
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.76
+    },
+    {
+     "firm": "Poste Italiane via MoneyGram",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 11.13
+    }
+   ],
    "prev_avg_cost_pct": 7.62
   },
   {
@@ -478,6 +1286,48 @@
    "by_type": {
     "Money Transfer Operator": 12.27
    },
+   "firms": [
+    {
+     "firm": "YaYeh Instant Services",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.28
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.78
+    },
+    {
+     "firm": "CashMinute",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.93
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 10.04
+    },
+    {
+     "firm": "Ace Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 10.19
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 10.81
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 12.61
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 24.8
+    }
+   ],
    "prev_avg_cost_pct": 12.09
   },
   {
@@ -496,6 +1346,38 @@
    "by_type": {
     "Money Transfer Operator": 4.8
    },
+   "firms": [
+    {
+     "firm": "Unity Monetary Services BV",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.52
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.58
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.85
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.11
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.41
+    },
+    {
+     "firm": "Transfer Galaxy",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.62
+    }
+   ],
    "prev_avg_cost_pct": 5.57
   },
   {
@@ -514,6 +1396,38 @@
    "by_type": {
     "Money Transfer Operator": 5.0
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.32
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.9
+    },
+    {
+     "firm": "Walmart2World",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.22
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.67
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.71
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.74
+    }
+   ],
    "prev_avg_cost_pct": 5.04
   },
   {
@@ -533,6 +1447,38 @@
     "Bank": 13.06,
     "Money Transfer Operator": 5.62
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.73
+    },
+    {
+     "firm": "Royal Bank of Canada",
+     "type": "Bank",
+     "cost_pct": 2.17
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.93
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.99
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.83
+    },
+    {
+     "firm": "Toronto Dominion Bank",
+     "type": "Bank",
+     "cost_pct": 9.23
+    }
+   ],
    "prev_avg_cost_pct": 6.66
   },
   {
@@ -551,6 +1497,58 @@
    "by_type": {
     "Money Transfer Operator": 6.86
    },
+   "firms": [
+    {
+     "firm": "Unity Link",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.71
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.91
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.99
+    },
+    {
+     "firm": "TapTap Send",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.03
+    },
+    {
+     "firm": "Sendwave",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.28
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.57
+    },
+    {
+     "firm": "Ace Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.33
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.13
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.87
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 41.72
+    }
+   ],
    "prev_avg_cost_pct": 6.85
   },
   {
@@ -570,6 +1568,43 @@
     "Bank / Money Transfer Operator": 9.93,
     "Money Transfer Operator": 9.88
    },
+   "firms": [
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.78
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.59
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.71
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.58
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.45
+    },
+    {
+     "firm": "Postbank via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 9.93
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 29.57
+    }
+   ],
    "prev_avg_cost_pct": 9.92
   },
   {
@@ -588,6 +1623,58 @@
    "by_type": {
     "Money Transfer Operator": 4.44
    },
+   "firms": [
+    {
+     "firm": "Skrill",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.57
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.17
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.18
+    },
+    {
+     "firm": "Sendwave",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.57
+    },
+    {
+     "firm": "Ace Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.64
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.09
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.31
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.01
+    },
+    {
+     "firm": "CashMinute",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.87
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.36
+    }
+   ],
    "prev_avg_cost_pct": 4.65
   },
   {
@@ -606,6 +1693,53 @@
    "by_type": {
     "Money Transfer Operator": 5.2
    },
+   "firms": [
+    {
+     "firm": "Walmart2World",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.27
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.27
+    },
+    {
+     "firm": "Wave",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.74
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.79
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.99
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.05
+    },
+    {
+     "firm": "Xoom",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.01
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.61
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    }
+   ],
    "prev_avg_cost_pct": 6.35
   },
   {
@@ -625,6 +1759,48 @@
     "Bank": 13.32,
     "Money Transfer Operator": 6.52
    },
+   "firms": [
+    {
+     "firm": "Royal Bank of Canada",
+     "type": "Bank",
+     "cost_pct": 2.17
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.86
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.86
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.19
+    },
+    {
+     "firm": "Xoom",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.07
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.51
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.8
+    },
+    {
+     "firm": "Toronto Dominion Bank",
+     "type": "Bank",
+     "cost_pct": 10.01
+    }
+   ],
    "prev_avg_cost_pct": 7.63
   },
   {
@@ -646,6 +1822,58 @@
     "Mobile Operator": 5.9,
     "Money Transfer Operator": 9.33
    },
+   "firms": [
+    {
+     "firm": "Mama Money",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.38
+    },
+    {
+     "firm": "Sikhona Money Transfers",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.91
+    },
+    {
+     "firm": "EcoCash Remit",
+     "type": "Mobile Operator",
+     "cost_pct": 5.9
+    },
+    {
+     "firm": "Hello-Paisa",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.96
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.3
+    },
+    {
+     "firm": "Mukuru",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.36
+    },
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.46
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 16.55
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 20.56
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 22.43
+    }
+   ],
    "prev_avg_cost_pct": 10.4
   },
   {
@@ -666,6 +1894,33 @@
     "Mobile Operator": 6.99,
     "Money Transfer Operator": 8.02
    },
+   "firms": [
+    {
+     "firm": "Ecobank Rapidcash",
+     "type": "Bank",
+     "cost_pct": 4.16
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.38
+    },
+    {
+     "firm": "MTN Mobile Money",
+     "type": "Mobile Operator",
+     "cost_pct": 6.99
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.65
+    },
+    {
+     "firm": "BPR Bank Rwanda Plc",
+     "type": "Bank",
+     "cost_pct": 46.17
+    }
+   ],
    "prev_avg_cost_pct": 15.57
   },
   {
@@ -686,6 +1941,43 @@
     "Mobile Operator": 10.89,
     "Money Transfer Operator": 8.68
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.22
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.15
+    },
+    {
+     "firm": "M-Pesa",
+     "type": "Mobile Operator",
+     "cost_pct": 10.89
+    },
+    {
+     "firm": "KCB Bank",
+     "type": "Bank",
+     "cost_pct": 60.63
+    },
+    {
+     "firm": "Stanbic Bank",
+     "type": "Bank",
+     "cost_pct": 85.22
+    },
+    {
+     "firm": "National Bank of Commerce Ltd (NBC)",
+     "type": "Bank",
+     "cost_pct": 86.06
+    },
+    {
+     "firm": "Exim Bank",
+     "type": "Bank",
+     "cost_pct": 89.67
+    }
+   ],
    "prev_avg_cost_pct": 59.73
   },
   {
@@ -706,6 +1998,43 @@
     "Bank / Money Transfer Operator": 14.46,
     "Money Transfer Operator": 6.98
    },
+   "firms": [
+    {
+     "firm": "Shoprite Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.82
+    },
+    {
+     "firm": "First National Bank of South Africa",
+     "type": "Bank",
+     "cost_pct": 2.19
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 3.28
+    },
+    {
+     "firm": "Mukuru",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.13
+    },
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.46
+    },
+    {
+     "firm": "Nedbank",
+     "type": "Bank",
+     "cost_pct": 20.99
+    },
+    {
+     "firm": "Standard Bank",
+     "type": "Bank",
+     "cost_pct": 27.88
+    }
+   ],
    "prev_avg_cost_pct": 11.27
   },
   {
@@ -724,6 +2053,33 @@
    "by_type": {
     "Money Transfer Operator": 5.76
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.0
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.5
+    },
+    {
+     "firm": "Walmart2World",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    },
+    {
+     "firm": "Xoom",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.13
+    }
+   ],
    "prev_avg_cost_pct": 5.63
   },
   {
@@ -742,6 +2098,33 @@
    "by_type": {
     "Money Transfer Operator": 5.17
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.94
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.0
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.45
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.37
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.77
+    }
+   ],
    "prev_avg_cost_pct": 5.3
   },
   {
@@ -763,6 +2146,73 @@
     "Mobile Operator": 23.0,
     "Money Transfer Operator": 32.98
    },
+   "firms": [
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.46
+    },
+    {
+     "firm": "Mukuru",
+     "type": "Money Transfer Operator",
+     "cost_pct": 14.89
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 16.55
+    },
+    {
+     "firm": "Hello-Paisa",
+     "type": "Money Transfer Operator",
+     "cost_pct": 17.0
+    },
+    {
+     "firm": "EcoCash Remit",
+     "type": "Mobile Operator",
+     "cost_pct": 23.0
+    },
+    {
+     "firm": "Mama Money",
+     "type": "Money Transfer Operator",
+     "cost_pct": 25.61
+    },
+    {
+     "firm": "Sikhona Money Transfers",
+     "type": "Money Transfer Operator",
+     "cost_pct": 32.18
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 58.12
+    },
+    {
+     "firm": "First National Bank of South Africa via MoneyGram",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 66.45
+    },
+    {
+     "firm": "First National Bank of South Africa",
+     "type": "Bank",
+     "cost_pct": 69.12
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 75.82
+    },
+    {
+     "firm": "Standard Bank",
+     "type": "Bank",
+     "cost_pct": 76.28
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 78.97
+    }
+   ],
    "prev_avg_cost_pct": 17.07
   },
   {
@@ -783,6 +2233,43 @@
     "Mobile Operator": 2.05,
     "Money Transfer Operator": 4.04
    },
+   "firms": [
+    {
+     "firm": "TapTap Send",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.61
+    },
+    {
+     "firm": "Orange Money",
+     "type": "Mobile Operator",
+     "cost_pct": 2.05
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.52
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.0
+    },
+    {
+     "firm": "La Banque Postale via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 3.06
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.51
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.06
+    }
+   ],
    "prev_avg_cost_pct": 3.76
   },
   {
@@ -803,6 +2290,38 @@
     "Mobile Operator": 1.5,
     "Money Transfer Operator": 2.89
    },
+   "firms": [
+    {
+     "firm": "Ecobank Rapidcash",
+     "type": "Bank",
+     "cost_pct": 1.35
+    },
+    {
+     "firm": "Moov Africa",
+     "type": "Mobile Operator",
+     "cost_pct": 1.5
+    },
+    {
+     "firm": "Orange Money",
+     "type": "Mobile Operator",
+     "cost_pct": 1.5
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.54
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.23
+    },
+    {
+     "firm": "United Bank for Africa (UBA)",
+     "type": "Bank",
+     "cost_pct": 16.13
+    }
+   ],
    "prev_avg_cost_pct": 5.34
   },
   {
@@ -822,6 +2341,33 @@
     "Bank": 30.54,
     "Mobile Operator": 1.5
    },
+   "firms": [
+    {
+     "firm": "Orange Money",
+     "type": "Mobile Operator",
+     "cost_pct": 1.5
+    },
+    {
+     "firm": "United Bank for Africa (UBA)",
+     "type": "Bank",
+     "cost_pct": 26.88
+    },
+    {
+     "firm": "Bank of Africa Senegal",
+     "type": "Bank",
+     "cost_pct": 29.03
+    },
+    {
+     "firm": "Banque Islamique du Senegal",
+     "type": "Bank",
+     "cost_pct": 32.26
+    },
+    {
+     "firm": "SUNU BICIS",
+     "type": "Bank",
+     "cost_pct": 37.63
+    }
+   ],
    "prev_avg_cost_pct": 21.75
   },
   {
@@ -842,6 +2388,58 @@
     "Money Transfer Operator": 4.26,
     "Money Transfer Operator / Post Office": 5.3
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.15
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.53
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.15
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.08
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.81
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.89
+    },
+    {
+     "firm": "La Poste via Ria",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 5.3
+    },
+    {
+     "firm": "MoneyTrans",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.04
+    },
+    {
+     "firm": "Atena Money Transfert",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.22
+    },
+    {
+     "firm": "Attijariwafa Bank",
+     "type": "Bank",
+     "cost_pct": 8.57
+    }
+   ],
    "prev_avg_cost_pct": 4.67
   },
   {
@@ -861,6 +2459,48 @@
     "Bank": 13.42,
     "Money Transfer Operator": 4.75
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.77
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.97
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.32
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.4
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.82
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.74
+    },
+    {
+     "firm": "MoneyTrans",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.62
+    },
+    {
+     "firm": "ABN AMRO Bank",
+     "type": "Bank",
+     "cost_pct": 13.42
+    }
+   ],
    "prev_avg_cost_pct": 5.22
   },
   {
@@ -881,6 +2521,48 @@
     "Bank / Money Transfer Operator": 8.66,
     "Money Transfer Operator": 4.95
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.49
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.95
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.07
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.11
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.37
+    },
+    {
+     "firm": "Attijariwafa Bank",
+     "type": "Bank",
+     "cost_pct": 5.08
+    },
+    {
+     "firm": "Chaabi Bank",
+     "type": "Bank",
+     "cost_pct": 5.81
+    },
+    {
+     "firm": "Postbank via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 8.66
+    }
+   ],
    "prev_avg_cost_pct": 5.36
   },
   {
@@ -900,6 +2582,53 @@
     "Bank": 22.05,
     "Money Transfer Operator": 4.82
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.57
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.72
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.83
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.87
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.2
+    },
+    {
+     "firm": "Money Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.53
+    },
+    {
+     "firm": "Europhil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.56
+    },
+    {
+     "firm": "Exact Change",
+     "type": "Money Transfer Operator",
+     "cost_pct": 17.93
+    },
+    {
+     "firm": "La Caixa",
+     "type": "Bank",
+     "cost_pct": 22.05
+    }
+   ],
    "prev_avg_cost_pct": 5.39
   },
   {
@@ -920,6 +2649,83 @@
     "Bank / Money Transfer Operator": 4.04,
     "Money Transfer Operator": 3.75
    },
+   "firms": [
+    {
+     "firm": "Attijariwafa Bank",
+     "type": "Bank",
+     "cost_pct": 1.55
+    },
+    {
+     "firm": "TapTap Send",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.03
+    },
+    {
+     "firm": "La Banque Postale via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 2.28
+    },
+    {
+     "firm": "TransferGo",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.39
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.51
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.82
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.53
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.58
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.67
+    },
+    {
+     "firm": "Xoom",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.12
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.82
+    },
+    {
+     "firm": "Caisse D'Epargne I'lle de France via Wise",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 4.92
+    },
+    {
+     "firm": "Banque Populaire via Wise",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 4.92
+    },
+    {
+     "firm": "Banque Populaire",
+     "type": "Bank",
+     "cost_pct": 29.4
+    },
+    {
+     "firm": "Caisse D'Epargne I'lle de France",
+     "type": "Bank",
+     "cost_pct": 45.02
+    }
+   ],
    "prev_avg_cost_pct": 5.92
   },
   {
@@ -942,6 +2748,88 @@
     "Money Transfer Operator / Post Office": 2.46,
     "Post Office": 10.51
    },
+   "firms": [
+    {
+     "firm": "Poste Italiane via Western Union",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 1.03
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.02
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.33
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.48
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.86
+    },
+    {
+     "firm": "Attijariwafa Bank",
+     "type": "Bank",
+     "cost_pct": 3.42
+    },
+    {
+     "firm": "Poste Italiane via MoneyGram",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 3.89
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.22
+    },
+    {
+     "firm": "Banque Chaabi de Maroc",
+     "type": "Bank",
+     "cost_pct": 4.7
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.89
+    },
+    {
+     "firm": "Banca Intesa SanPaolo via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 6.75
+    },
+    {
+     "firm": "Poste Italiane via Eurogiro",
+     "type": "Post Office",
+     "cost_pct": 10.51
+    },
+    {
+     "firm": "Extrabanca",
+     "type": "Bank",
+     "cost_pct": 19.34
+    },
+    {
+     "firm": "Unicredit Banca",
+     "type": "Bank",
+     "cost_pct": 33.24
+    },
+    {
+     "firm": "Banca Intesa SanPaolo",
+     "type": "Bank",
+     "cost_pct": 33.57
+    },
+    {
+     "firm": "Banca Monte dei Paschi di Siena",
+     "type": "Bank",
+     "cost_pct": 36.16
+    }
+   ],
    "prev_avg_cost_pct": 7.98
   },
   {
@@ -961,6 +2849,23 @@
     "Bank": 14.91,
     "Money Transfer Operator": 13.57
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 10.08
+    },
+    {
+     "firm": "Israel Discount Bank",
+     "type": "Bank",
+     "cost_pct": 14.91
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 17.07
+    }
+   ],
    "prev_avg_cost_pct": 13.35
   },
   {
@@ -979,6 +2884,23 @@
    "by_type": {
     "Money Transfer Operator": 5.01
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.35
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.09
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.04
+    }
+   ],
    "prev_avg_cost_pct": 3.9
   },
   {
@@ -999,6 +2921,58 @@
     "Bank / Money Transfer Operator": 11.46,
     "Money Transfer Operator": 6.6
    },
+   "firms": [
+    {
+     "firm": "Mukuru",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.93
+    },
+    {
+     "firm": "Hello-Paisa",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.27
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.17
+    },
+    {
+     "firm": "Mama Money",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.47
+    },
+    {
+     "firm": "Sikhona Money Transfers",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.52
+    },
+    {
+     "firm": "First National Bank of South Africa via MoneyGram",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 8.46
+    },
+    {
+     "firm": "First National Bank of South Africa",
+     "type": "Bank",
+     "cost_pct": 11.01
+    },
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.46
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 16.55
+    },
+    {
+     "firm": "Standard Bank",
+     "type": "Bank",
+     "cost_pct": 23.23
+    }
+   ],
    "prev_avg_cost_pct": 9.15
   },
   {
@@ -1017,6 +2991,28 @@
    "by_type": {
     "Money Transfer Operator": 3.29
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.94
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.2
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.74
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.29
+    }
+   ],
    "prev_avg_cost_pct": 3.48
   },
   {
@@ -1035,6 +3031,38 @@
    "by_type": {
     "Money Transfer Operator": 3.6
    },
+   "firms": [
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.04
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.38
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.19
+    },
+    {
+     "firm": "MoneyTrans",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.61
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.03
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.31
+    }
+   ],
    "prev_avg_cost_pct": 3.52
   },
   {
@@ -1053,6 +3081,33 @@
    "by_type": {
     "Money Transfer Operator": 3.62
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.77
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.8
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.17
+    },
+    {
+     "firm": "Walmart2World",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.27
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.76
+    }
+   ],
    "prev_avg_cost_pct": 4.36
   },
   {
@@ -1072,6 +3127,38 @@
     "Bank / Money Transfer Operator": 4.51,
     "Money Transfer Operator": 3.98
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.21
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.98
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.58
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.42
+    },
+    {
+     "firm": "Postbank via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 4.51
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.54
+    }
+   ],
    "prev_avg_cost_pct": 6.1
   },
   {
@@ -1090,6 +3177,38 @@
    "by_type": {
     "Money Transfer Operator": 4.32
    },
+   "firms": [
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.17
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.33
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.33
+    },
+    {
+     "firm": "Money Exchange",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.85
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.11
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.93
+    }
+   ],
    "prev_avg_cost_pct": 2.09
   },
   {
@@ -1108,6 +3227,33 @@
    "by_type": {
     "Money Transfer Operator": 4.38
    },
+   "firms": [
+    {
+     "firm": "Sendwave",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.2
+    },
+    {
+     "firm": "CashMinute",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.23
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.79
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.4
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.33
+    }
+   ],
    "prev_avg_cost_pct": 3.1
   },
   {
@@ -1126,6 +3272,18 @@
    "by_type": {
     "Money Transfer Operator": 4.82
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.52
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.13
+    }
+   ],
    "prev_avg_cost_pct": 3.9
   },
   {
@@ -1147,6 +3305,58 @@
     "Money Transfer Operator": 2.18,
     "Money Transfer Operator / Post Office": 5.03
    },
+   "firms": [
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.01
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 0.15
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.52
+    },
+    {
+     "firm": "Poste Italiane via Western Union",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 1.79
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.83
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.92
+    },
+    {
+     "firm": "Banca Intesa SanPaolo via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 5.57
+    },
+    {
+     "firm": "Poste Italiane via MoneyGram",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 8.27
+    },
+    {
+     "firm": "Extrabanca",
+     "type": "Bank",
+     "cost_pct": 19.34
+    },
+    {
+     "firm": "Banca Monte dei Paschi di Siena",
+     "type": "Bank",
+     "cost_pct": 35.83
+    }
+   ],
    "prev_avg_cost_pct": 4.49
   },
   {
@@ -1165,6 +3375,23 @@
    "by_type": {
     "Bank": 10.56
    },
+   "firms": [
+    {
+     "firm": "EcoBank Rapid Transfer",
+     "type": "Bank",
+     "cost_pct": 5.39
+    },
+    {
+     "firm": "UBA Africash",
+     "type": "Bank",
+     "cost_pct": 12.53
+    },
+    {
+     "firm": "United Bank for Africa (UBA)",
+     "type": "Bank",
+     "cost_pct": 12.53
+    }
+   ],
    "prev_avg_cost_pct": 11.67
   },
   {
@@ -1185,6 +3412,53 @@
     "Bank / Money Transfer Operator": 9.73,
     "Money Transfer Operator": 11.1
    },
+   "firms": [
+    {
+     "firm": "Mama Money",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.01
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.19
+    },
+    {
+     "firm": "Hello-Paisa",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.42
+    },
+    {
+     "firm": "Sikhona Money Transfers",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.46
+    },
+    {
+     "firm": "First National Bank of South Africa via MoneyGram",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 9.73
+    },
+    {
+     "firm": "First National Bank of South Africa",
+     "type": "Bank",
+     "cost_pct": 12.41
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 17.08
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 18.98
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 34.64
+    }
+   ],
    "prev_avg_cost_pct": 13.01
   },
   {
@@ -1204,6 +3478,33 @@
     "Bank": 10.95,
     "Money Transfer Operator": 5.87
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.23
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.8
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.73
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.66
+    },
+    {
+     "firm": "ScotiaBank",
+     "type": "Bank",
+     "cost_pct": 10.95
+    }
+   ],
    "prev_avg_cost_pct": 6.44
   },
   {
@@ -1224,6 +3525,38 @@
     "Mobile Operator": 8.07,
     "Money Transfer Operator": 5.45
    },
+   "firms": [
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.78
+    },
+    {
+     "firm": "EcoBank Rapid Transfer",
+     "type": "Bank",
+     "cost_pct": 2.8
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.92
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.64
+    },
+    {
+     "firm": "M-Pesa",
+     "type": "Mobile Operator",
+     "cost_pct": 8.07
+    },
+    {
+     "firm": "Ecobank",
+     "type": "Bank",
+     "cost_pct": 35.39
+    }
+   ],
    "prev_avg_cost_pct": 6.79
   },
   {
@@ -1242,6 +3575,38 @@
    "by_type": {
     "Money Transfer Operator": 7.53
    },
+   "firms": [
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.99
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.26
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.13
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.77
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.95
+    },
+    {
+     "firm": "CashMinute",
+     "type": "Money Transfer Operator",
+     "cost_pct": 27.44
+    }
+   ],
    "prev_avg_cost_pct": 8.21
   },
   {
@@ -1262,6 +3627,33 @@
     "Mobile Operator": 6.01,
     "Money Transfer Operator": 8.79
    },
+   "firms": [
+    {
+     "firm": "Tigo",
+     "type": "Mobile Operator",
+     "cost_pct": 6.01
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.49
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.09
+    },
+    {
+     "firm": "NMB (National Microfinance Bank)",
+     "type": "Bank",
+     "cost_pct": 73.34
+    },
+    {
+     "firm": "Exim Bank",
+     "type": "Bank",
+     "cost_pct": 95.37
+    }
+   ],
    "prev_avg_cost_pct": 45.51
   },
   {
@@ -1281,6 +3673,48 @@
     "Bank / Money Transfer Operator": 2.96,
     "Money Transfer Operator": 3.13
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.28
+    },
+    {
+     "firm": "TapTap Send",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.61
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.65
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.18
+    },
+    {
+     "firm": "La Banque Postale via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 2.96
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.02
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.52
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.05
+    }
+   ],
    "prev_avg_cost_pct": 3.53
   },
   {
@@ -1303,6 +3737,73 @@
     "Money Transfer Operator / Post Office": 3.04,
     "Post Office": 8.57
    },
+   "firms": [
+    {
+     "firm": "Poste Italiane via Western Union",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 0.86
+    },
+    {
+     "firm": "TapTap Send",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.61
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.9
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.91
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.21
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.02
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.93
+    },
+    {
+     "firm": "Poste Italiane via MoneyGram",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 5.21
+    },
+    {
+     "firm": "Banca Intesa SanPaolo via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 5.68
+    },
+    {
+     "firm": "Poste Italiane via Eurogiro",
+     "type": "Post Office",
+     "cost_pct": 8.57
+    },
+    {
+     "firm": "Extrabanca",
+     "type": "Bank",
+     "cost_pct": 19.34
+    },
+    {
+     "firm": "Unicredit Banca",
+     "type": "Bank",
+     "cost_pct": 27.5
+    },
+    {
+     "firm": "Banca Monte dei Paschi di Siena",
+     "type": "Bank",
+     "cost_pct": 35.89
+    }
+   ],
    "prev_avg_cost_pct": 7.23
   },
   {
@@ -1321,6 +3822,38 @@
    "by_type": {
     "Money Transfer Operator": 5.0
    },
+   "firms": [
+    {
+     "firm": "CashMinute",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.88
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.32
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.72
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.53
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.53
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.74
+    }
+   ],
    "prev_avg_cost_pct": 5.68
   },
   {
@@ -1339,6 +3872,28 @@
    "by_type": {
     "Money Transfer Operator": 3.99
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.65
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.57
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.96
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.25
+    }
+   ],
    "prev_avg_cost_pct": 4.76
   },
   {
@@ -1357,6 +3912,33 @@
    "by_type": {
     "Money Transfer Operator": 5.6
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.0
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    },
+    {
+     "firm": "Kaah Express",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    },
+    {
+     "firm": "Tawakal Express",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    },
+    {
+     "firm": "Iftin Express",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    }
+   ],
    "prev_avg_cost_pct": 5.85
   },
   {
@@ -1375,6 +3957,18 @@
    "by_type": {
     "Money Transfer Operator": 6.05
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.42
+    },
+    {
+     "firm": "Transfer Galaxy",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.86
+    }
+   ],
    "prev_avg_cost_pct": 6.05
   },
   {
@@ -1393,6 +3987,38 @@
    "by_type": {
     "Money Transfer Operator": 6.81
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.92
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.95
+    },
+    {
+     "firm": "Transfer Galaxy",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.46
+    },
+    {
+     "firm": "Amal Express",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.16
+    },
+    {
+     "firm": "Iftin Express",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.18
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.7
+    }
+   ],
    "prev_avg_cost_pct": 7.01
   },
   {
@@ -1411,6 +4037,23 @@
    "by_type": {
     "Money Transfer Operator": 7.73
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.72
+    },
+    {
+     "firm": "Transfer Galaxy",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.38
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 15.72
+    }
+   ],
    "prev_avg_cost_pct": 6.74
   },
   {
@@ -1429,6 +4072,43 @@
    "by_type": {
     "Money Transfer Operator": 6.84
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.92
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.21
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.03
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.67
+    },
+    {
+     "firm": "Xoom",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.47
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.54
+    },
+    {
+     "firm": "Walmart2World",
+     "type": "Money Transfer Operator",
+     "cost_pct": 10.82
+    }
+   ],
    "prev_avg_cost_pct": 8.02
   },
   {
@@ -1447,6 +4127,48 @@
    "by_type": {
     "Money Transfer Operator": 7.04
    },
+   "firms": [
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.09
+    },
+    {
+     "firm": "Cassava Remit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.65
+    },
+    {
+     "firm": "ExpressLinks UK",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.34
+    },
+    {
+     "firm": "Mukuru",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.65
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.77
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.82
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.92
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 12.75
+    }
+   ],
    "prev_avg_cost_pct": 6.99
   },
   {
@@ -1465,6 +4187,18 @@
    "by_type": {
     "Money Transfer Operator": 3.32
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.51
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.97
+    }
+   ],
    "prev_avg_cost_pct": 3.4
   },
   {
@@ -1483,6 +4217,28 @@
    "by_type": {
     "Money Transfer Operator": 5.33
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.0
+    },
+    {
+     "firm": "PaySii",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.0
+    },
+    {
+     "firm": "Walmart2World",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.0
+    }
+   ],
    "prev_avg_cost_pct": 5.33
   },
   {
@@ -1501,6 +4257,23 @@
    "by_type": {
     "Money Transfer Operator": 9.16
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.05
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.11
+    },
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.71
+    }
+   ],
    "prev_avg_cost_pct": 9.23
   },
   {
@@ -1520,6 +4293,58 @@
     "Bank": 14.13,
     "Money Transfer Operator": 3.69
    },
+   "firms": [
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.78
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.92
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.9
+    },
+    {
+     "firm": "EcoBank Rapid Transfer",
+     "type": "Bank",
+     "cost_pct": 4.73
+    },
+    {
+     "firm": "GT Bank",
+     "type": "Bank",
+     "cost_pct": 11.77
+    },
+    {
+     "firm": "ABC Bank",
+     "type": "Bank",
+     "cost_pct": 11.85
+    },
+    {
+     "firm": "KCB Bank",
+     "type": "Bank",
+     "cost_pct": 13.61
+    },
+    {
+     "firm": "Development Bank of Kenya",
+     "type": "Bank",
+     "cost_pct": 19.35
+    },
+    {
+     "firm": "United Bank for Africa (UBA)",
+     "type": "Bank",
+     "cost_pct": 19.37
+    },
+    {
+     "firm": "Ecobank",
+     "type": "Bank",
+     "cost_pct": 35.35
+    }
+   ],
    "prev_avg_cost_pct": 11.68
   },
   {
@@ -1538,6 +4363,18 @@
    "by_type": {
     "Money Transfer Operator": 3.85
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.92
+    },
+    {
+     "firm": "STC Pay",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.78
+    }
+   ],
    "prev_avg_cost_pct": 9.67
   },
   {
@@ -1556,6 +4393,33 @@
    "by_type": {
     "Money Transfer Operator": 6.25
    },
+   "firms": [
+    {
+     "firm": "CashMinute",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.92
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.05
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.08
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.74
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.84
+    }
+   ],
    "prev_avg_cost_pct": 4.49
   },
   {
@@ -1576,6 +4440,63 @@
     "Mobile Operator": 1.98,
     "Money Transfer Operator": 4.97
    },
+   "firms": [
+    {
+     "firm": "M-Pesa",
+     "type": "Mobile Operator",
+     "cost_pct": 1.98
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.96
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.35
+    },
+    {
+     "firm": "EcoBank Rapid Transfer",
+     "type": "Bank",
+     "cost_pct": 4.73
+    },
+    {
+     "firm": "UBA Africash",
+     "type": "Bank",
+     "cost_pct": 5.41
+    },
+    {
+     "firm": "GT Bank",
+     "type": "Bank",
+     "cost_pct": 11.77
+    },
+    {
+     "firm": "ABC Bank",
+     "type": "Bank",
+     "cost_pct": 11.85
+    },
+    {
+     "firm": "KCB Bank",
+     "type": "Bank",
+     "cost_pct": 13.61
+    },
+    {
+     "firm": "Development Bank of Kenya",
+     "type": "Bank",
+     "cost_pct": 19.35
+    },
+    {
+     "firm": "United Bank for Africa (UBA)",
+     "type": "Bank",
+     "cost_pct": 19.37
+    },
+    {
+     "firm": "Ecobank",
+     "type": "Bank",
+     "cost_pct": 35.35
+    }
+   ],
    "prev_avg_cost_pct": 11.04
   },
   {
@@ -1596,6 +4517,43 @@
     "Bank / Money Transfer Operator": 14.63,
     "Money Transfer Operator": 11.69
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.6
+    },
+    {
+     "firm": "Mama Money",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.79
+    },
+    {
+     "firm": "Sikhona Money Transfers",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.8
+    },
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.63
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 16.47
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 21.8
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 22.04
+    }
+   ],
    "prev_avg_cost_pct": 14.01
   },
   {
@@ -1615,6 +4573,38 @@
     "Bank / Money Transfer Operator": 2.93,
     "Money Transfer Operator": 4.33
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.47
+    },
+    {
+     "firm": "La Banque Postale via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 2.93
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.0
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.69
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.52
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.05
+    }
+   ],
    "prev_avg_cost_pct": 4.2
   },
   {
@@ -1634,6 +4624,33 @@
     "Bank / Money Transfer Operator": 2.78,
     "Money Transfer Operator": 5.17
    },
+   "firms": [
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.58
+    },
+    {
+     "firm": "Postbank via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 2.78
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.04
+    },
+    {
+     "firm": "ATL Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.06
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.24
+    }
+   ],
    "prev_avg_cost_pct": 4.6
   },
   {
@@ -1654,6 +4671,43 @@
     "Bank / Money Transfer Operator": 1.54,
     "Money Transfer Operator": 4.4
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.02
+    },
+    {
+     "firm": "La Banque Postale via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 1.54
+    },
+    {
+     "firm": "Attijariwafa Bank",
+     "type": "Bank",
+     "cost_pct": 1.97
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.64
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.09
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.23
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.45
+    }
+   ],
    "prev_avg_cost_pct": 5.04
   },
   {
@@ -1676,6 +4730,68 @@
     "Money Transfer Operator / Post Office": 2.25,
     "Post Office": 10.37
    },
+   "firms": [
+    {
+     "firm": "Poste Italiane via Western Union",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 1.24
+    },
+    {
+     "firm": "Poste Italiane via MoneyGram",
+     "type": "Money Transfer Operator / Post Office",
+     "cost_pct": 3.26
+    },
+    {
+     "firm": "Attijariwafa Bank",
+     "type": "Bank",
+     "cost_pct": 3.45
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.45
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.48
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.58
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.28
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.58
+    },
+    {
+     "firm": "Banca Intesa SanPaolo via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 6.6
+    },
+    {
+     "firm": "Poste Italiane via Eurogiro",
+     "type": "Post Office",
+     "cost_pct": 10.37
+    },
+    {
+     "firm": "Banca Intesa SanPaolo",
+     "type": "Bank",
+     "cost_pct": 33.57
+    },
+    {
+     "firm": "Banca Monte dei Paschi di Siena",
+     "type": "Bank",
+     "cost_pct": 35.88
+    }
+   ],
    "prev_avg_cost_pct": 6.76
   },
   {
@@ -1694,6 +4810,53 @@
    "by_type": {
     "Money Transfer Operator": 5.04
    },
+   "firms": [
+    {
+     "firm": "Sendwave",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.52
+    },
+    {
+     "firm": "Wise",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.62
+    },
+    {
+     "firm": "Ace Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 1.86
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.1
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.27
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.4
+    },
+    {
+     "firm": "CashMinute",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.58
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.18
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.3
+    }
+   ],
    "prev_avg_cost_pct": 5.55
   },
   {
@@ -1714,6 +4877,68 @@
     "Mobile Operator": 6.51,
     "Money Transfer Operator": 5.08
    },
+   "firms": [
+    {
+     "firm": "Dahabshiil",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.78
+    },
+    {
+     "firm": "EcoBank Rapid Transfer",
+     "type": "Bank",
+     "cost_pct": 4.73
+    },
+    {
+     "firm": "UBA Africash",
+     "type": "Bank",
+     "cost_pct": 5.41
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.44
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.72
+    },
+    {
+     "firm": "M-Pesa",
+     "type": "Mobile Operator",
+     "cost_pct": 6.51
+    },
+    {
+     "firm": "GT Bank",
+     "type": "Bank",
+     "cost_pct": 11.77
+    },
+    {
+     "firm": "ABC Bank",
+     "type": "Bank",
+     "cost_pct": 11.85
+    },
+    {
+     "firm": "KCB Bank",
+     "type": "Bank",
+     "cost_pct": 13.61
+    },
+    {
+     "firm": "Development Bank of Kenya",
+     "type": "Bank",
+     "cost_pct": 19.35
+    },
+    {
+     "firm": "United Bank for Africa (UBA)",
+     "type": "Bank",
+     "cost_pct": 19.37
+    },
+    {
+     "firm": "Ecobank",
+     "type": "Bank",
+     "cost_pct": 35.35
+    }
+   ],
    "prev_avg_cost_pct": 11.07
   },
   {
@@ -1733,6 +4958,38 @@
     "Bank": 77.54,
     "Money Transfer Operator": 7.96
    },
+   "firms": [
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.5
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 8.43
+    },
+    {
+     "firm": "NMB (National Microfinance Bank)",
+     "type": "Bank",
+     "cost_pct": 70.11
+    },
+    {
+     "firm": "CRDB Bank",
+     "type": "Bank",
+     "cost_pct": 73.27
+    },
+    {
+     "firm": "Stanbic Bank",
+     "type": "Bank",
+     "cost_pct": 76.08
+    },
+    {
+     "firm": "National Bank of Commerce Ltd (NBC)",
+     "type": "Bank",
+     "cost_pct": 90.7
+    }
+   ],
    "prev_avg_cost_pct": 66.31
   },
   {
@@ -1751,6 +5008,38 @@
    "by_type": {
     "Money Transfer Operator": 5.58
    },
+   "firms": [
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.1
+    },
+    {
+     "firm": "Paysend",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.44
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.99
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.57
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.22
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.44
+    }
+   ],
    "prev_avg_cost_pct": 5.31
   },
   {
@@ -1771,6 +5060,73 @@
     "Bank / Money Transfer Operator": 12.38,
     "Money Transfer Operator": 10.92
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.2
+    },
+    {
+     "firm": "Sikhona Money Transfers",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.89
+    },
+    {
+     "firm": "Hello-Paisa",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.43
+    },
+    {
+     "firm": "Mukuru",
+     "type": "Money Transfer Operator",
+     "cost_pct": 10.06
+    },
+    {
+     "firm": "Mama Money",
+     "type": "Money Transfer Operator",
+     "cost_pct": 10.29
+    },
+    {
+     "firm": "First National Bank of South Africa via MoneyGram",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 10.3
+    },
+    {
+     "firm": "First National Bank of South Africa",
+     "type": "Bank",
+     "cost_pct": 13.01
+    },
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.46
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 16.55
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 20.26
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 21.35
+    },
+    {
+     "firm": "Standard Bank",
+     "type": "Bank",
+     "cost_pct": 22.46
+    },
+    {
+     "firm": "Nedbank",
+     "type": "Bank",
+     "cost_pct": 32.79
+    }
+   ],
    "prev_avg_cost_pct": 13.64
   },
   {
@@ -1789,6 +5145,43 @@
    "by_type": {
     "Money Transfer Operator": 5.87
    },
+   "firms": [
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.32
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.8
+    },
+    {
+     "firm": "Cassava Remit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.26
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.25
+    },
+    {
+     "firm": "Mukuru",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.94
+    },
+    {
+     "firm": "ExpressLinks UK",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.97
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.49
+    }
+   ],
    "prev_avg_cost_pct": 6.12
   },
   {
@@ -1808,6 +5201,48 @@
     "Bank": 8.52,
     "Money Transfer Operator": 6.04
    },
+   "firms": [
+    {
+     "firm": "Citibank",
+     "type": "Bank",
+     "cost_pct": 2.53
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.9
+    },
+    {
+     "firm": "Commonwealth Bank",
+     "type": "Bank",
+     "cost_pct": 4.02
+    },
+    {
+     "firm": "Remitly",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.96
+    },
+    {
+     "firm": "Rocket Remit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.11
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.35
+    },
+    {
+     "firm": "Ria",
+     "type": "Money Transfer Operator",
+     "cost_pct": 6.39
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.11
+    }
+   ],
    "prev_avg_cost_pct": 6.31
   },
   {
@@ -1827,6 +5262,38 @@
     "Bank": 11.78,
     "Money Transfer Operator": 6.33
    },
+   "firms": [
+    {
+     "firm": "Royal Bank of Canada",
+     "type": "Bank",
+     "cost_pct": 2.17
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 2.79
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 3.54
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.96
+    },
+    {
+     "firm": "Toronto Dominion Bank",
+     "type": "Bank",
+     "cost_pct": 6.12
+    },
+    {
+     "firm": "ScotiaBank",
+     "type": "Bank",
+     "cost_pct": 11.05
+    }
+   ],
    "prev_avg_cost_pct": 7.68
   },
   {
@@ -1848,6 +5315,78 @@
     "Mobile Operator": 5.64,
     "Money Transfer Operator": 9.42
    },
+   "firms": [
+    {
+     "firm": "Sasai Money Transfer",
+     "type": "Money Transfer Operator",
+     "cost_pct": 4.97
+    },
+    {
+     "firm": "WorldRemit",
+     "type": "Money Transfer Operator",
+     "cost_pct": 5.22
+    },
+    {
+     "firm": "EcoCash Remit",
+     "type": "Mobile Operator",
+     "cost_pct": 5.64
+    },
+    {
+     "firm": "Sikhona Money Transfers",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.04
+    },
+    {
+     "firm": "Mama Money",
+     "type": "Money Transfer Operator",
+     "cost_pct": 7.74
+    },
+    {
+     "firm": "First National Bank of South Africa via MoneyGram",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 8.45
+    },
+    {
+     "firm": "Mukuru",
+     "type": "Money Transfer Operator",
+     "cost_pct": 9.53
+    },
+    {
+     "firm": "First National Bank of South Africa",
+     "type": "Bank",
+     "cost_pct": 11.17
+    },
+    {
+     "firm": "ABSA via Western Union",
+     "type": "Bank / Money Transfer Operator",
+     "cost_pct": 14.46
+    },
+    {
+     "firm": "Western Union",
+     "type": "Money Transfer Operator",
+     "cost_pct": 16.55
+    },
+    {
+     "firm": "MoneyGram",
+     "type": "Money Transfer Operator",
+     "cost_pct": 17.78
+    },
+    {
+     "firm": "ABSA",
+     "type": "Bank",
+     "cost_pct": 22.08
+    },
+    {
+     "firm": "Standard Bank",
+     "type": "Bank",
+     "cost_pct": 28.7
+    },
+    {
+     "firm": "Nedbank",
+     "type": "Bank",
+     "cost_pct": 32.79
+    }
+   ],
    "prev_avg_cost_pct": 12.2
   }
  ]

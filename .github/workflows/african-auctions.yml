@@ -56,6 +56,13 @@ jobs:
       - run: python scripts/malawi_tbills.py
         continue-on-error: true
         timeout-minutes: 10
+      # Government bond auctions in the JPMorgan GBI-EM Edge markets (the index holds bonds, not bills).
+      - run: python scripts/zambia_bonds.py
+        continue-on-error: true
+        timeout-minutes: 10
+      - run: python scripts/egypt_bonds.py
+        continue-on-error: true
+        timeout-minutes: 8
       - run: python scripts/kenya_rates.py
         continue-on-error: true
         timeout-minutes: 5

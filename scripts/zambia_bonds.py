@@ -72,10 +72,43 @@ def pdf_text(url: str) -> str | None:
         return None
 
 
+LINE = re.compile(
+    r"(\d+)\s*Years?\s+(ZM\d{10})\s+"
+    + r"\s+".join([r"K\s?([\d,]+\.?\d*)\s*Mn"] * 5)
+    + r"\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)",
+    re.I,
+)
+
+
+def notice_amounts(text: str) -> dict[str, dict]:
+    """Per-ISIN amounts from a results notice: offered, bid and allocated (face and cost), in ZMW millions."""
+    out = {}
+    for m in LINE.finditer(text or ""):
+        f = [float(x.replace(",", "")) for x in m.groups()[2:7]]
+        out[m.group(2)] = {
+            "offered_zmw_m": f[0],
+            "bid_face_zmw_m": f[1],
+            "bid_cost_zmw_m": f[2],
+            "allocated_face_zmw_m": f[3],
+            "allocated_cost_zmw_m": f[4],
+            "bid_cover": round(f[1] / f[3], 2) if f[3] else None,  # bids received / amount allocated, face value
+            "dirty_price": float(m.group(8)),
+        }
+    return out
+
+
+def previous() -> dict[tuple, dict]:
+    try:
+        return {(r["tender"], r["isin"]): r for r in json.loads(OUT.read_text())["rows"]}
+    except Exception:
+        return {}
+
+
 def main() -> int:
     inspect = "--inspect" in sys.argv
     rows: list[dict] = []
-    first_pdf = None
+    old = previous()
+    notices: dict[str, dict] = {}
     for body in pages(limit=1 if inspect else None):
         included = {i["id"]: i for i in body.get("included", [])}
         for node in body.get("data", []):
@@ -89,7 +122,6 @@ def main() -> int:
             if f and f.get("id") in included:
                 uri = (included[f["id"]]["attributes"].get("uri") or {}).get("url")
                 pdf = f"https://www.boz.zm{uri}" if uri and uri.startswith("/") else uri
-            first_pdf = first_pdf or pdf
             for ref in (rel.get("field_auction_results") or {}).get("data") or []:
                 p = included.get(ref["id"])
                 m = re.search(r"(\d+)_year", p["type"]) if p else None
@@ -99,22 +131,28 @@ def main() -> int:
                 y = num(attr(at, "yield_rate"))
                 if y is None or not (0 < y < 60):
                     continue  # a suspended tenor ("Nil") or an unreadable figure
+                isin = attr(at, "isin")
+                amounts = {k: v for k, v in (old.get((a.get("title"), isin)) or {}).items() if k.endswith("_m") or k in ("bid_cover", "dirty_price")}
+                if not amounts and pdf:
+                    if pdf not in notices:  # one download per notice, and only for auctions not already on file
+                        notices[pdf] = notice_amounts(pdf_text(pdf) or "")
+                    amounts = notices[pdf].get(isin, {})
                 rows.append({
                     "tender": a.get("title"),
                     "auction_date": day,
                     "tenor_years": int(m.group(1)),
-                    "isin": attr(at, "isin"),
+                    "isin": isin,
                     "coupon": num(attr(at, "coupon_rate")),
                     "yield": y,
+                    **amounts,
                     "notice": pdf,
                     "source": PAGE,
                 })
     if inspect:
         print(f"{len(rows)} tenor results on the first page")
         print(json.dumps(rows[:8], indent=1))
-        if first_pdf:
-            print(f"--- text of {first_pdf}")
-            print(pdf_text(first_pdf) or "(not a readable PDF)")
+        with_amounts = sum(1 for r in rows if "offered_zmw_m" in r)
+        print(f"{with_amounts} of {len(rows)} results have amounts from the notice PDFs")
         print("inspect only: nothing written")
         return 0
     if not rows:
@@ -127,7 +165,7 @@ def main() -> int:
         "publisher": "Bank of Zambia",
         "source_page": PAGE,
         "currency": "ZMW",
-        "rate_note": "yield rate of the auction by tenor, percent per annum, as the Bank of Zambia publishes it; coupon in percent",
+        "rate_note": "cut-off yield of the auction by tenor, percent per annum, as the Bank of Zambia publishes it; coupon in percent; amounts in ZMW millions from the results notice (face value unless marked cost)",
         "updated": rows[0]["auction_date"],
         "read_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "compiled_by": "Afronomics (afronomicsfeed.com)",

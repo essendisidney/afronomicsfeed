@@ -29,7 +29,7 @@ const STAGES = ["prospect", "contacted", "qualified", "pilot", "proposal", "won"
 const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
 
 /** Payments are stored in the currency's subunit; perUsd is units of that currency per US dollar. */
-function toUsd(rows: { currency: string | null; amount: number }[], perUsd: Record<string, number>) {
+export function toUsd(rows: { currency: string | null; amount: number }[], perUsd: Record<string, number>) {
   let total = 0;
   const unconverted: string[] = [];
   for (const r of rows) {

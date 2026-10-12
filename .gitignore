@@ -46,3 +46,4 @@ scripts/prints.sql
 
 .vercel
 __pycache__/
+data/story_leads.json

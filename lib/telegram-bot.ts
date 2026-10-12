@@ -1,5 +1,6 @@
 import { nextAuction, outlook } from "@/lib/data/auction-intel";
 import { loadHealth } from "@/lib/data/health";
+import { lenderDomain, loadLenders } from "@/lib/data/loan-apps";
 import { fundLeague } from "@/lib/data/kenya-rates";
 import { policyBoard } from "@/lib/data/policy-rates";
 import { corridorsTo, countryName, loadRemittances, periodLabel } from "@/lib/data/remittances";
@@ -41,6 +42,7 @@ export const COMMANDS = [
   { command: "policy", description: "Every African central-bank policy rate" },
   { command: "funds", description: "Kenya money market funds, after tax" },
   { command: "send", description: "Cheapest way to send money, e.g. /send kenya" },
+  { command: "licensed", description: "Is this loan app licensed? e.g. /licensed zenka" },
   { command: "help", description: "What I can tell you" },
 ];
 
@@ -54,6 +56,7 @@ function help(): string {
     "/policy: every central-bank policy rate",
     "/funds: Kenya money market funds, after tax",
     "/send kenya: cheapest way to send $200 to a country",
+    "/licensed zenka: is a Kenyan loan app licensed by the CBK?",
     "",
     'New results as they land: <a href="https://t.me/afronomic">t.me/afronomic</a>',
     "",
@@ -180,6 +183,38 @@ function send(arg: string): string {
   ].join("\n");
 }
 
+function licensed(arg: string): string {
+  const f = loadLenders();
+  const q = arg.toLowerCase().replace(/[^a-z0-9]+/g, "");
+  if (q.length < 2) return "Which loan app or company? For example: /licensed zenka";
+  if (!f) return `The CBK's list is being read; try again later.\n\n${FOOT}`;
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "");
+  const hits = f.lenders.filter((l) => norm(l.name).includes(q) || norm(lenderDomain(l.email)).includes(q)).slice(0, 5);
+  const when = f.updated ? day(f.updated) : "the latest directory";
+  const page = link("/rates/kenya/loan-apps", "Search the full list", "bot-licensed");
+  if (!hits.length) {
+    return [
+      `⚠️ <b>“${esc(arg.trim())}” is not on the Central Bank of Kenya's list</b> of licensed digital lenders (directory of ${when}).`,
+      "",
+      "The list names companies, not apps: find the company behind the app (its terms, or the developer on the app store) and send that name.",
+      "A digital lender that is not on the list is not licensed by the CBK to lend.",
+      page,
+      "",
+      FOOT,
+    ].join("\n");
+  }
+  return [
+    `✅ <b>On the CBK's list of licensed digital lenders</b> (directory of ${when}):`,
+    "",
+    ...hits.map((l) => `<b>${esc(l.name)}</b>${l.licensed ? `, licensed ${day(l.licensed)}` : ""}${l.email ? ` · ${esc(l.email)}` : ""}`),
+    "",
+    "Licensed means supervised, not cheap: compare what a loan costs before you borrow.",
+    page,
+    "",
+    FOOT,
+  ].join("\n");
+}
+
 /** The reply to one message, and the name the request is counted under (no message content is kept). */
 export function reply(text: string): { text: string; name: string } {
   const raw = text.trim();
@@ -192,6 +227,7 @@ export function reply(text: string): { text: string; name: string } {
   if (cmd === "policy" || cmd === "cbr" || cmd === "mpr") return { text: policy(), name: "policy" };
   if (cmd === "funds" || cmd === "mmf" || cmd === "mmfs") return { text: funds(), name: "funds" };
   if (cmd === "send") return { text: send(arg), name: "send" };
+  if (cmd === "licensed" || cmd === "licence" || cmd === "license" || cmd === "loanapp") return { text: licensed(arg), name: "licensed" };
   const slug = ALIASES[cmd] ?? ALIASES[raw.toLowerCase()];
   if (slug) return { text: market(slug), name: slug };
   if (/^send\s+/i.test(raw)) return { text: send(raw.replace(/^send\s+(money\s+)?(to\s+)?/i, "")), name: "send" };

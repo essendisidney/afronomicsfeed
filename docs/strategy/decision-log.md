@@ -62,3 +62,15 @@ what we changed. Newest at the bottom. Read this first every week.
   those programmes.
 - **Risk flagged:** Kenya's CIS Regulations 2023 (LN 173/2023) restrict advertising of collective investment
   schemes to licensed persons. The fund "Open an account" buttons and any paid fund listing need a lawyer's view.
+
+### D-008 · 12 Oct 2026 · Bond coverage: Zambia and Egypt added (3 of 9 African Edge markets for bonds)
+- **Did:** built readers for the Bank of Zambia (JSON:API plus results PDFs) and the Central Bank of Egypt
+  (historical-data workbooks), checked on GitHub's network before scheduling.
+- **Happened:** Egypt gives 1,577 bond auctions back to 2005 (fixed, zero-coupon and floating-rate), with
+  required, submitted and accepted amounts, yield range and coupon. Zambia gives yields and ISINs per tenor; amounts
+  parse from the newer notice PDFs only (20 of the 43 newest results), older layouts left null rather than guessed.
+  (VERIFIED, inspect runs on 12 Oct.)
+- **Changed:** both readers on the two-hourly schedule; `/api/v1/bonds` serves Kenya, Zambia and Egypt in one shape
+  (bid-to-cover = bids / amount accepted in every market). Next: UMOA-Titres (8 WAEMU countries), then Nigeria.
+- **Outreach:** a draft note and follow-up plan are in `outreach-draft.md`, waiting for the founder's approval.
+  Nothing has been sent.

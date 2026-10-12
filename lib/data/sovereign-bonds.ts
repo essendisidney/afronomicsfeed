@@ -28,7 +28,7 @@ export type BondRow = {
 };
 
 export type BondMarket = {
-  slug: "kenya" | "zambia" | "egypt" | "nigeria" | "uganda" | "waemu";
+  slug: "kenya" | "zambia" | "egypt" | "nigeria" | "uganda" | "morocco" | "waemu";
   country: string;
   currency: string;
   publisher: string;
@@ -78,6 +78,14 @@ export const bondMarkets: BondMarket[] = [
     rateNote: "yield at the cut-off price, percent per annum",
   },
   {
+    slug: "morocco",
+    country: "Morocco",
+    currency: "MAD",
+    publisher: "Direction du Trésor et des Finances Extérieures (Ministry of Economy and Finance)",
+    sourcePage: "https://www.finances.gov.ma/fr/Pages/communiques.aspx",
+    rateNote: "weighted average rate (TMP) of accepted bids, percent per annum; lines of 2 years or more where the Treasury accepted bids",
+  },
+  {
     slug: "waemu",
     country: "WAEMU (Benin, Burkina Faso, Côte d’Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo)",
     currency: "XOF",
@@ -105,7 +113,7 @@ const n = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : nul
 const s = (v: unknown) => (typeof v === "string" && v ? v : null);
 
 function readFile(slug: string): { updated: string | null; rows: Raw[] } {
-  const file = path.join(process.cwd(), "data", slug, slug === "waemu" ? "auctions.json" : "bond_auctions.json");
+  const file = path.join(process.cwd(), "data", slug, slug === "waemu" || slug === "morocco" ? "auctions.json" : "bond_auctions.json");
   if (!fs.existsSync(file)) return { updated: null, rows: [] };
   try {
     const raw = JSON.parse(fs.readFileSync(file, "utf8")) as { updated?: string; rows?: Raw[] };
@@ -158,6 +166,36 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
           rate,
           min_rate: n(r.bid_low),
           max_rate: n(r.bid_high),
+          coupon: n(r.coupon),
+          source: s(r.source) ?? "",
+        },
+      ];
+    });
+    return { updatedAt: updated, rows: out.sort((a, b) => b.date.localeCompare(a.date)) };
+  }
+  if (slug === "morocco") {
+    const out: BondRow[] = rows.flatMap((r) => {
+      const rate = n(r.rate);
+      const date = s(r.auction_date);
+      const years = n(r.tenor_years);
+      if (rate === null || !date || years === null || years < 2 || !n(r.accepted_mad_m)) return [];
+      const bids = n(r.bids_mad_m);
+      const accepted = n(r.accepted_mad_m);
+      return [
+        {
+          date,
+          isin: s(r.isin),
+          issue: null,
+          tenor_years: years,
+          maturity: s(r.maturity),
+          type: null,
+          offered_m: null,
+          received_m: bids,
+          accepted_m: accepted,
+          bid_cover: bids && accepted ? Math.round((bids / accepted) * 100) / 100 : null,
+          rate,
+          min_rate: null,
+          max_rate: null,
           coupon: n(r.coupon),
           source: s(r.source) ?? "",
         },

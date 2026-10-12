@@ -93,3 +93,13 @@ what we changed. Newest at the bottom. Read this first every week.
 - **Changed:** bond coverage is now Kenya, Nigeria, Uganda, Zambia, Egypt and the 8 WAEMU markets: every African
   GBI-EM Edge market except Morocco, Tunisia, Ghana (0.3%) and Angola. South Africa is deferred: it is not in Edge,
   and the Reserve Bank's results search was failing on 12 Oct. Next: Morocco (8%) and Tunisia (5.3%).
+
+### D-011 · 12 Oct 2026 · Morocco (8% of GBI-EM Edge) added; Tunisia blocked for now
+- **Did:** Bank Al-Maghrib blocks GitHub's network (CloudFront 403); the Ministry of Economy and Finance's communiqués
+  page carries the Treasury's weekly "Résultat de l'adjudication" PDFs and answers. Built `morocco_bonds.py`: one line
+  per security with bids (amount, average price and rate) and accepted (amount, price, TMP, previous TMP).
+- **Happened (VERIFIED, live inspect on 12 Oct):** the four newest auctions parse after one fix (a missing colon);
+  lines the Treasury rejected keep their bids with nothing accepted. The year filter works but each year page lists
+  only its latest ~5 PDFs, so deep history needs paging (not done yet).
+- **Tunisia:** the Treasury domain does not resolve and the central bank's site shows no auction results; only press
+  reports found. Left as a gap, shown honestly on the product page.

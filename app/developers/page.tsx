@@ -24,7 +24,7 @@ const endpoints = [
   },
   {
     path: "/api/v1/bonds",
-    what: "Government bond auctions: each market with data (Kenya, Nigeria, Uganda, Zambia, Egypt, WAEMU so far), where its history starts and its latest auction.",
+    what: "Government bond auctions: each market with data (Kenya, Nigeria, Uganda, Zambia, Egypt, Morocco, WAEMU so far), where its history starts and its latest auction.",
   },
   {
     path: "/api/v1/bonds/{market}",

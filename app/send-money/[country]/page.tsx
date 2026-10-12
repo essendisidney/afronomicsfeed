@@ -107,6 +107,13 @@ export default async function SendMoneyCountryPage({ params }: Props) {
         </Link>
         .
       </p>
+      {country === "kenya" ? (
+        <p className="mt-8 text-sm">
+          <Link href="/diaspora" className="font-semibold text-forest underline underline-offset-2">
+            Living abroad? The Diaspora Desk: what money earns at home after tax, and how to invest from abroad →
+          </Link>
+        </p>
+      ) : null}
       <Questions items={items} />
       <NewsletterBand />
     </PageShell>

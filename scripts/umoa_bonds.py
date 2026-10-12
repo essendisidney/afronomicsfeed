@@ -39,18 +39,23 @@ def main() -> int:
         print(f"== table {i}: {len(rows)} rows")
         for r in rows[:6]:
             print("   ", [text(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", r, re.S | re.I)][:16])
-    links = re.findall(r'<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>', html, re.S | re.I)
-    res = [(h, text(t)) for h, t in links if re.search(r"sultat|\.pdf|xls", h + t, re.I)]
-    print(f"{len(res)} result or document links; first 25:")
-    for h, t in res[:25]:
-        print(f"   {t[:60]!r} -> {h}")
-    # Cards rather than tables: show one issue block in raw form
-    i = html.find("Résultats")
-    if i < 0:
-        i = html.find("R&eacute;sultats")
-    if i > 0:
-        print("--- raw around the first 'Résultats':")
-        print(html[max(0, i - 2500): i + 600])
+    issues = list(dict.fromkeys(re.findall(r'href="?(https://www\.umoatitres\.org/fr/emission/[^"\s>]+)', html)))
+    print(f"{len(issues)} distinct issue pages linked; first 5 and last 3:")
+    for u in issues[:5] + issues[-3:]:
+        print("   ", u)
+    for u in issues[:2]:
+        page = requests.get(u, headers=UA, timeout=(15, 120), verify=False).text
+        print(f"=== {u} ({len(page)} bytes)")
+        for i, t in enumerate(re.findall(r"<table.*?</table>", page, re.S | re.I)[:6]):
+            rows = re.findall(r"<tr.*?</tr>", t, re.S | re.I)
+            print(f"  -- table {i}: {len(rows)} rows")
+            for r in rows[:30]:
+                print("    ", [text(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", r, re.S | re.I)][:12])
+        docs = [h for h in re.findall(r'href="([^"]+)"', page) if re.search(r"\.(pdf|xlsx?)$", h, re.I)]
+        print("  documents:", docs[:8])
+        body = text(page)
+        j = body.find("sultats")
+        print("  text:", body[j: j + 1500] if j >= 0 else body[:1500])
     return 0
 
 

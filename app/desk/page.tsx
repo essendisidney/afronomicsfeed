@@ -14,7 +14,7 @@ import { moneyLabel } from "@/lib/billing/plans";
 import { DeskKey } from "./DeskKey";
 import { OwnerDevice } from "./OwnerDevice";
 import { MoneyPanel, type Money, type Referral } from "./MoneyPanel";
-import { AddCorrection, AddPress, GrantAccess, HideReport } from "./DeskActions";
+import { AddCorrection, AddPress, GrantAccess, HideReport, IssueApiKey, RevokeApiKey } from "./DeskActions";
 import { country as reportCountry, item as reportItem } from "@/lib/reader-reports-core";
 
 export const dynamic = "force-dynamic";
@@ -151,6 +151,10 @@ export default async function DeskPage() {
   const money = mon?.ok && mon.value ? (mon.value as Money) : null;
   const ref = desk ? await rpc("af_desk_referrals", { p_secret: key }) : null;
   const referrals = ref?.ok && Array.isArray(ref.value) ? (ref.value as Referral[]) : [];
+  const keyList = desk ? await rpc("af_api_keys_list", { p_secret: key }) : null;
+  const apiKeys = keyList?.ok && Array.isArray(keyList.value)
+    ? (keyList.value as { id: number; prefix: string; label: string; plan: string; created_at: string; revoked_at: string | null; last_used_at: string | null; calls_30d: number }[])
+    : [];
   const rep = desk ? await rpc("af_reader_report_list", { p_secret: key, p_limit: 60 }) : null;
   const reports = rep?.ok && Array.isArray(rep.value) ? (rep.value as ReaderReport[]) : [];
 
@@ -307,6 +311,30 @@ export default async function DeskPage() {
             ))}
           </ul>
         ) : null}
+      </section>
+
+      <section className="mt-10">
+        <SectionTitle kicker="Data v1" title="API keys for licensed customers" note="The open API needs no key. A key counts a customer's calls and serves them fresh; issue one when a licence is paid." />
+        <div className="mt-4">
+          <IssueApiKey />
+        </div>
+        {apiKeys.length ? (
+          <ul className="mt-4 divide-y divide-rule">
+            {apiKeys.map((k) => (
+              <li key={k.id} className="flex flex-wrap items-baseline gap-x-3 py-2 text-sm">
+                <code className="font-mono text-[12px]">{k.prefix}…</code>
+                <span className="font-semibold text-ink">{k.label}</span>
+                <span className="text-ink-soft">{k.plan}</span>
+                <span className="text-[12px] text-muted">
+                  {k.calls_30d.toLocaleString("en-US")} calls in 30 days · {k.last_used_at ? `last ${ago(k.last_used_at, now)}` : "not used yet"}
+                </span>
+                {k.revoked_at ? <span className="text-[12px] text-down">revoked</span> : <RevokeApiKey id={k.id} />}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-3 text-sm text-muted">No keys issued yet.</p>
+        )}
       </section>
 
       <section className="mt-10 grid gap-10 lg:grid-cols-2">

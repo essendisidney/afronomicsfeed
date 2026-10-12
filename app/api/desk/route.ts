@@ -16,6 +16,8 @@ export async function POST(request: Request) {
   else if (b.action === "correction") result = await rpc("af_correction_add", { p_secret: key, p_market: s("market", 40), p_page: s("page", 200), p_wrong: s("wrong", 1000), p_changed: s("changed", 1000), p_reason: s("reason", 1000), p_reported_by: s("reported_by", 120) });
   else if (b.action === "press") result = await rpc("af_press_add", { p_secret: key, p_email: s("email", 200), p_name: s("name", 120), p_outlet: s("outlet", 120) });
   else if (b.action === "hide_report") result = await rpc("af_reader_report_hide", { p_secret: key, p_id: Number(s("id", 20)) || 0 });
+  else if (b.action === "api_key_create") result = await rpc("af_api_key_create", { p_secret: key, p_label: s("label", 120), p_plan: s("plan", 20) });
+  else if (b.action === "api_key_revoke") result = await rpc("af_api_key_revoke", { p_secret: key, p_id: Number(s("id", 20)) || 0 });
   else return Response.json({ ok: false, reason: "Unknown action." }, { status: 400 });
   if (!result.ok) return Response.json({ ok: false, reason: result.reason }, { status: 502 });
   if (result.value === false || result.value == null) return Response.json({ ok: false, reason: "Rejected (key or input)." }, { status: 403 });

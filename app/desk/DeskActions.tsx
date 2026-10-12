@@ -122,3 +122,66 @@ export function HideReport({ id }: { id: number }) {
     </form>
   );
 }
+
+/** Issue a Data API key for a licensed customer. The key is shown once, here; only its hash is kept. */
+export function IssueApiKey() {
+  const [state, setState] = useState<{ msg?: string; key?: string } | null>(null);
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const payload = Object.fromEntries([...new FormData(form).entries()].map(([k, v]) => [k, String(v)]));
+    setState({ msg: "…" });
+    const r = await fetch("/api/desk", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "api_key_create", ...payload }) });
+    const body = (await r.json()) as { ok: boolean; reason?: string; value?: { key: string } };
+    setState(body.ok && body.value ? { key: body.value.key } : { msg: body.reason ?? "Failed." });
+    if (body.ok) form.reset();
+  }
+  return (
+    <form onSubmit={submit} className="grid gap-3 sm:grid-cols-3">
+      <label className="block sm:col-span-2">
+        <span className={label}>Customer</span>
+        <input required minLength={2} name="label" className={field} placeholder="Fund or company name, and the contact" />
+      </label>
+      <label className="block">
+        <span className={label}>Plan</span>
+        <select name="plan" className={field} defaultValue="data_api">
+          <option value="trial">Trial</option>
+          <option value="startup">Startup licence</option>
+          <option value="institution">Institution / Team</option>
+          <option value="data_api">Data API ($1,500)</option>
+          <option value="enterprise">Enterprise</option>
+        </select>
+      </label>
+      <div className="sm:col-span-3">
+        <button type="submit" className={btn}>
+          Issue key
+        </button>
+        {state?.key ? (
+          <p className="mt-3 rounded-xl border border-forest bg-forest/5 px-3 py-2 text-[13px] text-ink">
+            Copy it now; it is not shown again: <code className="select-all break-all font-mono">{state.key}</code>
+            <br />
+            The customer sends it as <code className="font-mono">Authorization: Bearer &lt;key&gt;</code>.
+          </p>
+        ) : state?.msg ? (
+          <span className="ml-3 text-[12px] text-muted">{state.msg}</span>
+        ) : null}
+      </div>
+    </form>
+  );
+}
+
+export function RevokeApiKey({ id }: { id: number }) {
+  const { msg, run } = useAction();
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (confirm("Revoke this key? The customer's calls will be refused.")) void run("api_key_revoke", e.currentTarget);
+  }
+  return (
+    <form onSubmit={submit} className="inline">
+      <input type="hidden" name="id" value={id} />
+      <button type="submit" className="text-[12px] font-semibold text-down underline underline-offset-2 hover:text-ink">
+        {msg ?? "revoke"}
+      </button>
+    </form>
+  );
+}

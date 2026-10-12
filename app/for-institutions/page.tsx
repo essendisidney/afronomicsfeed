@@ -46,15 +46,15 @@ const buyers: Buyer[] = [
     id: "builders",
     who: "Fintechs, apps and newsrooms",
     job: "Put live, sourced rates in your product or your story: savings apps, lending calculators, market pages and charts.",
-    products: ["api", "licence_startup", "widget"],
+    products: ["api", "licence_startup", "data_api", "widget"],
     start: { href: "/developers", label: "Call the API now, no key" },
   },
   {
     id: "investors",
     who: "DFIs, funds abroad and researchers",
     job: "Follow African sovereign funding costs across ten markets with full history, change notifications and someone to ask.",
-    products: ["licence_institution", "frontier", "research", "bulk"],
-    start: { href: "/licensing", label: "See the licences" },
+    products: ["licence_institution", "data_api", "enterprise", "frontier", "research", "bulk"],
+    start: { href: "/data-api", label: "See Afronomics Data" },
   },
 ];
 

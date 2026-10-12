@@ -65,7 +65,12 @@ export default function DevelopersPage() {
           <Link href="/markets/borrowing-costs" className="underline underline-offset-2">
             borrowing-cost measures
           </Link>
-          , open to any script or spreadsheet. No key and no sign-up: call it, keep the credit line, and link back.
+          , open to any script or spreadsheet. No key and no sign-up: call it, keep the credit line, and link back. Running it in
+          production?{" "}
+          <Link href="/data-api" className="font-semibold text-forest underline underline-offset-2">
+            Afronomics Data
+          </Link>{" "}
+          adds a key, uncached responses and usage reports.
         </p>
       }
     >
@@ -135,7 +140,7 @@ export default function DevelopersPage() {
             <p className="text-[13px] font-semibold text-gold">Licensed</p>
             <p className="mt-2 font-serif text-3xl text-ink">From KES 7,500 a month</p>
             <p className="mt-3 text-sm leading-6 text-ink-soft">
-              About $59. Use inside a commercial product or client work, redistribution, a webhook or email the moment each market reports, the full field set for every
+              About $60. Use inside a commercial product or client work, redistribution, a webhook or email the moment each market reports, the full field set for every
               auction, and a named contact. Details on the{" "}
               <Link href="/licensing" className="underline underline-offset-2">
                 licensing page

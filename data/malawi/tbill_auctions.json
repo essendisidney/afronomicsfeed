@@ -3,7 +3,7 @@
  "publisher": "Reserve Bank of Malawi",
  "source_page": "https://www.rbm.mw/FinancialMarkets/TreasuryBills/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-01T14:30:06+00:00",
+ "updated_at": "2026-10-12T13:22:56+00:00",
  "units": {
   "amounts": "MWK millions",
   "rates": "average yield of allotted bids, percent per annum"
@@ -20644,8 +20644,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63559": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63554": {
    "status": "parsed",
@@ -20660,8 +20659,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63546": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63539": {
    "status": "parsed",
@@ -20718,8 +20716,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63507": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63503": {
    "status": "parsed",
@@ -20751,8 +20748,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63479": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63478": {
    "status": "parsed",
@@ -20776,8 +20772,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63457": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63452": {
    "status": "parsed",
@@ -20817,12 +20812,10 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63387": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63366": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63363": {
    "status": "parsed",
@@ -20901,8 +20894,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63280": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63270": {
    "status": "parsed",
@@ -20971,16 +20963,14 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63218": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63199": {
    "status": "unparsed",
    "reason": "not a pdf"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63195": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=62191": {
    "status": "parsed",
@@ -20995,8 +20985,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=62181": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=62172": {
    "status": "parsed",
@@ -21005,8 +20994,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=62170": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=62166": {
    "status": "parsed",
@@ -21936,8 +21924,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=57290": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=57289": {
    "status": "parsed",
@@ -22101,8 +22088,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=56044": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=56040": {
    "status": "unparsed",
@@ -22527,8 +22513,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=54229": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=54222": {
    "status": "parsed",
@@ -23088,8 +23073,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=46149": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=46115": {
    "status": "parsed",
@@ -23643,8 +23627,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=32118": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=32108": {
    "status": "parsed",
@@ -25830,8 +25813,7 @@
    ]
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63785": {
-   "status": "unparsed",
-   "reason": "no table"
+   "status": "no sale"
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63778": {
    "status": "parsed",

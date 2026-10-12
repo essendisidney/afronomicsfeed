@@ -19,7 +19,7 @@ export function generateMetadata(): Metadata {
   return {
     title: "Kenya government tenders open now — search and daily alerts",
     description: f
-      ? `${f.tenders.length.toLocaleString("en-US")} Kenyan government tenders open for bids now, from ministries, counties, schools and hospitals. Search by what you supply and get new ones by email each morning. From the PPRA's open data.`
+      ? `${f.tenders.length.toLocaleString("en-US")} Kenyan government tenders open for bids now, from ministries, counties, schools and hospitals. Search by what you supply and get new matches by email. From the PPRA's open data.`
       : "Kenyan government tenders open for bids, from the Public Procurement Regulatory Authority's open data.",
     alternates: { canonical: `${site.url}/tenders` },
   };
@@ -67,7 +67,7 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
     },
     {
       q: "How do I get tender alerts in Kenya?",
-      a: `Enter what you supply (for example “ICT, cleaning, Nakuru”) and your email above. You get every open tender that matches straight away, then each new one every morning. Free for ${TRIAL_DAYS} days, then KES ${TENDER_PRICE_KES} a month by M-Pesa.`,
+      a: `Enter what you supply (for example “ICT, cleaning, Nakuru”) and your email above. You get every open tender that matches straight away, then each new match as soon as the regulator publishes it. Free for ${TRIAL_DAYS} days, then KES ${TENDER_PRICE_KES} a month by M-Pesa.`,
     },
     {
       q: "What is AGPO?",
@@ -83,15 +83,15 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
       lede={
         <p>
           {all.length ? `${all.length.toLocaleString("en-US")} tenders` : "Tenders"} from ministries, counties, schools, hospitals and state agencies are open for bids
-          {f?.published ? `, from the procurement regulator’s open data published ${longDate(f.published)}` : ""}. Search what you supply, or get each new match
-          by email every morning.
+          {f?.published ? `, from the procurement regulator’s open data published ${longDate(f.published)}` : ""}. Search what you supply, or get each new match by email. The regulator
+          publishes this open data about once a month: tenders advertised since then are on tenders.go.ke but not here yet.
         </p>
       }
     >
       {s.alerts ? (
         <p role="status" className="mb-6 rounded-xl border-l-4 border-forest bg-forest/5 px-4 py-3 text-[14px] text-ink">
           {s.alerts === "confirmed"
-            ? "Your tender alerts are on. Your first list of open matches arrives with our next update, within a few hours, and new ones every morning after that."
+            ? "Your tender alerts are on. Your first list of open matches arrives with our next update, within a few hours, and each new match after that, as soon as the regulator publishes it."
             : s.alerts === "stopped"
               ? "Your tender alerts are stopped. You won’t get any more emails."
               : "That link didn’t work. It may be old: sign up again below."}
@@ -112,8 +112,8 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
       </section>
 
       <section id="alerts" className="mt-8 scroll-mt-24 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
-        <p className="text-[17px] font-semibold text-ink">Get the tenders that fit your business, every morning</p>
-        <p className="mt-1 mb-4 text-[14px] text-ink-soft">One email a day, only when a new tender matches. No more checking the portal.</p>
+        <p className="text-[17px] font-semibold text-ink">Get the tenders that fit your business by email</p>
+        <p className="mt-1 mb-4 text-[14px] text-ink-soft">Every open match now, then an email whenever new matching tenders are published. Never more than one a day.</p>
         <TenderAlertForm initialKeywords={words.join(", ")} />
         <p className="mt-3 text-[12px] text-muted">
           Already getting alerts?{" "}
@@ -219,7 +219,7 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
           </ul>
         ) : (
           <p className="mt-3 rounded-xl border border-rule bg-surface px-4 py-3 text-sm text-ink-soft">
-            {all.length ? "No open tender matches that today. Get an email the morning one does:" : "The tender list is being read for the first time; check back within a few hours."}{" "}
+            {all.length ? "No open tender matches that today. Get an email when one is published:" : "The tender list is being read for the first time; check back within a few hours."}{" "}
             {all.length ? (
               <a href="#alerts" className="font-semibold text-forest underline underline-offset-2">
                 set an alert

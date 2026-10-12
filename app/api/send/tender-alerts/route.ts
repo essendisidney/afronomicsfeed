@@ -17,7 +17,8 @@ const today = (ms: number) => nairobi(ms).toISOString().slice(0, 10);
 /**
  * Sends tender alerts that are due. Called with the shared secret by the African auctions workflow after each data
  * refresh; never from the browser. Each confirmed alert gets at most one email a day (from 06:00 Nairobi): its
- * first email lists every open matching tender; later ones only tenders first seen since the last email, and
+ * first email lists every open matching tender; later ones only tenders first seen since the last email (the
+ * regulator publishes its open data about monthly, so most days have none), and
  * nothing is sent on a day with no new match. After the free trial, an alert needs paid_until to keep going; while
  * there is no way to pay (no live Paystack key and no af_secrets 'tender_pay') alerts stay free. ?dry=1 reports without sending.
  */

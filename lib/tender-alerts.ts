@@ -2,7 +2,7 @@ import { esc, para, shell } from "@/lib/rate-alerts";
 import { site } from "@/lib/site";
 import { CATEGORY_LABEL, PORTAL, TENDER_PRICE_KES, closesLabel, type Tender } from "@/lib/tenders-core";
 
-/** Tender alert emails: confirmation, the morning list of matching tenders, and the end-of-trial payment note. */
+/** Tender alert emails: confirmation, the list of matching tenders, and the end-of-trial payment note. */
 
 export type LiveTenderAlert = {
   id: string;
@@ -36,7 +36,7 @@ export function tenderConfirmationEmail(keywords: string[], token: string) {
   const lines = [
     `You (or someone using this address) asked Afronomics to email Kenyan government tenders matching ${kw(keywords)}.`,
     "",
-    "Once you confirm, you get every open tender that matches straight away, then each new one every morning. The first 14 days are free.",
+    "Once you confirm, you get every open tender that matches straight away, then each new one when the procurement regulator publishes it. The first 14 days are free.",
   ];
   const text = [...lines, "", `Confirm: ${url}`, "", "If you didn’t ask for this, ignore this email: nothing will be sent.", "", `Afronomics · ${site.url}`].join("\n");
   const html = shell(
@@ -59,7 +59,7 @@ function tenderLines(t: Tender) {
   };
 }
 
-/** The morning email. first: the reader's first list (every open match); trialNote: shown in the last days of the trial. */
+/** The alert email. first: the reader's first list (every open match); trialNote: shown in the last days of the trial. */
 export function tenderDigestEmail(o: { tenders: Tender[]; total: number; keywords: string[]; token: string; first: boolean; trialNote: string | null; pay: string | null; email: string }) {
   const stop = tenderStopUrl(o.token);
   const page = `${PAGE}?utm_source=email&utm_medium=alert&utm_campaign=tender-alert`;
@@ -71,8 +71,8 @@ export function tenderDigestEmail(o: { tenders: Tender[]; total: number; keyword
     : `${n} new tender${n === 1 ? "" : "s"}: ${o.tenders[0]?.title.slice(0, 60) ?? ""}`;
   const intro = o.first
     ? n
-      ? [`These open Kenyan government tenders match ${kw(o.keywords)}, closing soonest first. From tomorrow you get only new ones, each morning.`]
-      : [`No open tender matches ${kw(o.keywords)} today. We check every new tender the government publishes and email you each morning one matches.`]
+      ? [`These open Kenyan government tenders match ${kw(o.keywords)}, closing soonest first. After this you get only new ones, as the procurement regulator publishes them (at most one email a day).`]
+      : [`No open tender matches ${kw(o.keywords)} today. We check every tender the procurement regulator publishes and email you when one matches.`]
     : [`New since your last email, matching ${kw(o.keywords)}:`];
   const more = n > o.tenders.length ? [`…and ${n - o.tenders.length} more on ${PAGE}`] : [];
   const how = [`Get the tender documents and bid on the government portal, ${PORTAL}, by searching the tender’s title or reference.`];

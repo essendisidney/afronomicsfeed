@@ -28,7 +28,7 @@ export default async function TenderPayPage({ searchParams }: { searchParams: Pr
       title="Keep your tender alerts coming"
       lede={
         <p>
-          Every new Kenyan government tender that matches what you supply, in your inbox each morning. Pay with M-Pesa, card or bank through Paystack; use
+          Every new Kenyan government tender that matches what you supply, by email as the procurement regulator publishes it. Pay with M-Pesa, card or bank through Paystack; use
           the email your alerts go to and they continue on their own.
         </p>
       }

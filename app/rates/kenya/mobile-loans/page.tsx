@@ -134,6 +134,13 @@ export default function MobileLoansPage() {
       </section>
 
       <CiteBlock title="What a mobile loan really costs in Kenya" path="/rates/kenya/mobile-loans" publisher="the providers’ published charges and the Central Bank of Kenya" />
+      <p className="mt-10 text-sm text-ink-soft">
+        Borrowing through an app?{" "}
+        <Link href="/rates/kenya/loan-apps" className="font-semibold text-forest underline underline-offset-2">
+          Check it is licensed by the Central Bank of Kenya
+        </Link>{" "}
+        before you share your contacts.
+      </p>
       <Questions items={mobileLoanAnswers().items} />
       <ContributeBand compact ask="What did your last mobile loan really cost you?" />
       <NewsletterBand />

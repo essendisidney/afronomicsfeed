@@ -83,3 +83,13 @@ what we changed. Newest at the bottom. Read this first every week.
 - **Changed:** scheduled (250 new issue pages a run, newest first, so the history fills in about 7 runs);
   `/api/v1/bonds/waemu?issue=senegal`. Bond coverage now: Kenya, Zambia, Egypt and the 8 WAEMU markets. Next:
   Nigeria (DMO), then South Africa and Uganda.
+
+### D-010 · 12 Oct 2026 · Nigeria and Uganda bonds added; South Africa deferred
+- **Did:** Nigeria from the DMO's 144 monthly auction summaries (Feb 2013 to Sep 2026); Uganda from the Bank of
+  Uganda's 112 bond notices (text, or OCR for image-only notices), each row cross-checked against the notice's own
+  bid-to-cover.
+- **Happened (VERIFIED, live inspect on 12 Oct):** Nigeria Jul–Sep 2026 and Feb 2013 parse fully; Uganda's 7 Oct
+  2026 auction parses fully; image-only Uganda notices need the OCR the scheduled run installs.
+- **Changed:** bond coverage is now Kenya, Nigeria, Uganda, Zambia, Egypt and the 8 WAEMU markets: every African
+  GBI-EM Edge market except Morocco, Tunisia, Ghana (0.3%) and Angola. South Africa is deferred: it is not in Edge,
+  and the Reserve Bank's results search was failing on 12 Oct. Next: Morocco (8%) and Tunisia (5.3%).

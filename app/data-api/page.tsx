@@ -118,7 +118,7 @@ export default function DataApiPage() {
             {`curl -H "Authorization: Bearer afk_YOUR_KEY" \\
   "${site.url}/api/v1/tbills/nigeria?tenor=364&limit=10"`}
           </pre>
-          <p className="mt-3 text-[13px] text-ink-soft">Government bond auctions (Kenya, Nigeria, Zambia, Egypt and the eight WAEMU markets so far), by market and ISIN:</p>
+          <p className="mt-3 text-[13px] text-ink-soft">Government bond auctions (Kenya, Nigeria, Uganda, Zambia, Egypt and the eight WAEMU markets so far), by market and ISIN:</p>
           <pre className="mt-2 max-w-full overflow-x-auto whitespace-pre-wrap break-all rounded-xl bg-ink px-4 py-4 text-[12px] leading-5 text-paper">
             {`curl "${site.url}/api/v1/bonds/egypt?from=2026-01-01"`}
           </pre>

@@ -117,7 +117,9 @@ export function buildMonitor(today = new Date().toISOString().slice(0, 10)): Mon
     ];
   });
 
-  const newest = [...markets].sort((a, b) => b.latestDate.localeCompare(a.latestDate))[0];
+  // "As of" never shows a future day: settlement dates after today (Egypt's bonds settle a day after the auction)
+  // are skipped in favour of the newest result already in the past.
+  const newest = [...markets].filter((m) => m.latestDate <= today).sort((a, b) => b.latestDate.localeCompare(a.latestDate))[0];
 
   const bills: BillSummary[] = billMarkets.flatMap((market) => {
     const latest = latestBills(loadBillMarket(market.slug).rows);

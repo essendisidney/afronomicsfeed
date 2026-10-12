@@ -10,10 +10,13 @@ const { results, markets } = loadAuctionResults();
 const w = buildAuctionWeek(results, markets);
 if (!w) fails.push("live data: no week");
 else {
-  const inWindow = results.filter((r) => r.date >= w.window.start && r.date <= w.window.end);
+  // The week ends no later than today; results dated after it (settlement a day or two ahead) belong to it.
+  const newest = results.reduce((m, r) => (r.date > m ? r.date : m), results[0].date);
+  const inWindow = results.filter((r) => r.date >= w.window.start && r.date <= newest);
   if (inWindow.length !== w.resultCount) fails.push(`live: ${inWindow.length} rows in window, page counts ${w.resultCount}`);
-  if (!results.some((r) => r.date === w.window.end)) fails.push("live: window end is not a result date");
-  if (results.some((r) => r.date > w.window.end)) fails.push("live: a result is newer than the window end");
+  const today = new Date().toISOString().slice(0, 10);
+  if (w.window.end > today) fails.push("live: the week ends in the future");
+  if (newest <= today && w.window.end !== newest) fails.push("live: window end is not the newest result date");
   const sum = w.markets.reduce((n, m) => n + m.results.length, 0);
   if (sum !== w.resultCount) fails.push(`live: cards hold ${sum} results, headline says ${w.resultCount}`);
   for (const m of w.markets)

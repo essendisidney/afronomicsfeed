@@ -159,10 +159,14 @@ export function buildAuctionWeek(all: AuctionResult[], metaList: MarketMeta[]): 
   const metas = new Map(metaList.map((m) => [m.key, m]));
 
   // The window: the seven days ending on the newest result date anywhere, so the page always has a week to show.
-  const end = valid.reduce((max, r) => (r.date > max ? r.date : max), valid[0].date);
+  // It never ends after today: a settlement date a day or two ahead (Egypt) stays in this week's results without
+  // moving the week's end, or the title, into the future.
+  const newestDate = valid.reduce((max, r) => (r.date > max ? r.date : max), valid[0].date);
+  const today = new Date().toISOString().slice(0, 10);
+  const end = newestDate > today ? today : newestDate;
   const window = { start: addDays(end, -6), end };
   const previous = { start: addDays(end, -13), end: addDays(end, -7) };
-  const inWeek = (r: AuctionResult) => r.date >= window.start && r.date <= window.end;
+  const inWeek = (r: AuctionResult) => r.date >= window.start && r.date <= newestDate;
   const inPrev = (r: AuctionResult) => r.date >= previous.start && r.date <= previous.end;
 
   // History by series, newest first, for "previous sale of the same tenor".

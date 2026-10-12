@@ -8,12 +8,14 @@ export function PaystackCheckout({
   plan,
   label,
   variant = "primary",
+  defaultEmail = "",
 }: {
   plan: CheckoutPlanId;
   label: string;
   variant?: "primary" | "accent" | "ghost";
+  defaultEmail?: string;
 }) {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(defaultEmail);
   const [message, setMessage] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 

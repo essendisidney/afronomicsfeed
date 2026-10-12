@@ -7,6 +7,11 @@ export function paystackConfigured() {
   return Boolean(process.env.PAYSTACK_SECRET_KEY);
 }
 
+/** A live key takes real money; a test key (sk_test_…) only test payments, so nobody should be asked to pay yet. */
+export function paystackLive() {
+  return (process.env.PAYSTACK_SECRET_KEY ?? "").startsWith("sk_live_");
+}
+
 function secret() {
   return process.env.PAYSTACK_SECRET_KEY || null;
 }

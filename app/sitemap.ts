@@ -6,6 +6,7 @@ import { indicatorDefs } from "@/lib/data/indicators";
 import { articleHref } from "@/lib/format";
 import { marketDates } from "@/lib/data/market-stories";
 import { mmfMonths } from "@/lib/data/mmf-months";
+import { loadRemittances, destSlug } from "@/lib/data/remittances";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 import { learnLangs, loadLessons } from "@/lib/learn-i18n";
@@ -40,6 +41,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter((m) => m.complete)
       .map((m) => page(`/rates/kenya/best-money-market-fund/${m.month}`, "monthly", 0.6)),
     page("/rates/remittances", "monthly", 0.8),
+    page("/send-money", "monthly", 0.9),
+    ...[...new Set((loadRemittances()?.corridors ?? []).map((c) => destSlug(c.dst_name)))].map((slug) => page(`/send-money/${slug}`, "monthly", 0.8)),
     page("/rates/what-readers-paid", "daily", 0.8),
     page("/rates/kenya/saccos", "monthly", 0.8),
     page("/rates/nigeria/check", "weekly", 0.8),

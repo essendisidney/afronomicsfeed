@@ -13,7 +13,7 @@ import { rpc } from "@/lib/store";
 import { moneyLabel } from "@/lib/billing/plans";
 import { DeskKey } from "./DeskKey";
 import { OwnerDevice } from "./OwnerDevice";
-import { MoneyPanel, type Money } from "./MoneyPanel";
+import { MoneyPanel, type Money, type Referral } from "./MoneyPanel";
 import { AddCorrection, AddPress, GrantAccess, HideReport } from "./DeskActions";
 import { country as reportCountry, item as reportItem } from "@/lib/reader-reports-core";
 
@@ -149,6 +149,8 @@ export default async function DeskPage() {
   const people = ppl?.ok && ppl.value ? (ppl.value as People) : null;
   const mon = desk ? await rpc("af_desk_money", { p_secret: key }) : null;
   const money = mon?.ok && mon.value ? (mon.value as Money) : null;
+  const ref = desk ? await rpc("af_desk_referrals", { p_secret: key }) : null;
+  const referrals = ref?.ok && Array.isArray(ref.value) ? (ref.value as Referral[]) : [];
   const rep = desk ? await rpc("af_reader_report_list", { p_secret: key, p_limit: 60 }) : null;
   const reports = rep?.ok && Array.isArray(rep.value) ? (rep.value as ReaderReport[]) : [];
 
@@ -194,7 +196,7 @@ export default async function DeskPage() {
         <Stat label="Leads" value={desk.leads_total} note={desk.feedback_found_rate == null ? "no feedback yet" : `${desk.feedback_found_rate}% found what they came for`} />
       </section>
 
-      <MoneyPanel money={money} />
+      <MoneyPanel money={money} referrals={referrals} />
 
       {attention.length ? (
         <section className="mt-10">

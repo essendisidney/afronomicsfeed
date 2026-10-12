@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LenderSearch } from "@/components/data/LenderSearch";
+import { LoanReportForm } from "@/components/data/LoanReportForm";
+import type { LoanCell } from "@/app/api/loan-reports/route";
+import { rpc } from "@/lib/store";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { Questions } from "@/components/seo/Questions";
@@ -24,8 +27,18 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default function LoanAppsPage() {
+async function scorecard(): Promise<LoanCell[]> {
+  const r = await rpc("af_loan_report_summary", { p_secret: process.env.AF_CRON_SECRET ?? "" });
+  return r.ok && Array.isArray(r.value) ? (r.value as LoanCell[]) : [];
+}
+
+const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
+
+export default async function LoanAppsPage() {
   const f = loadLenders();
+  const cells = await scorecard();
+  const scored = cells.filter((c) => c.median != null).sort((a, b) => a.median! - b.median!);
+  const reports = cells.reduce((n, c) => n + c.n, 0);
   const updated = longDate(f?.updated) || "the latest directory";
   const lenders = (f?.lenders ?? []).map((l) => ({ ...l, domain: lenderDomain(l.email) }));
   const recent = [...lenders].filter((l) => l.licensed).sort((a, b) => b.licensed!.localeCompare(a.licensed!)).slice(0, 8);
@@ -60,6 +73,57 @@ export default function LoanAppsPage() {
       <div className="mt-4">
         <ShareRow text="Is your loan app licensed? Search every lender the Central Bank of Kenya has licensed:" path="/rates/kenya/loan-apps" />
       </div>
+
+      {f ? (
+        <section className="mt-12">
+          <SectionTitle
+            kicker="Scorecard · from borrowers"
+            title="What each licensed lender really costs"
+            note="Cost per KES 1,000 borrowed for 30 days, every fee included, from borrowers’ own reports over 12 months. Shown once five borrowers have reported a lender."
+          />
+          {scored.length ? (
+            <div className="mt-4 overflow-x-auto">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Lender</th>
+                    <th className="text-right">Middle cost</th>
+                    <th className="text-right">Middle half</th>
+                    <th className="text-right">Contacted friends or family</th>
+                    <th className="text-right">Reports</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {scored.map((c) => (
+                    <tr key={c.lender}>
+                      <td className="font-medium text-ink">{c.lender}</td>
+                      <td className="text-right font-semibold">{kes(c.median!)}</td>
+                      <td className="text-right">
+                        {kes(c.low!)} – {kes(c.high!)}
+                      </td>
+                      <td className="text-right">{c.shamed_pct != null ? `${c.shamed_pct}%` : "—"}</td>
+                      <td className="text-right">{c.n}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="mt-4 max-w-2xl rounded-xl border border-rule bg-surface px-4 py-3 text-sm text-ink-soft">
+              {reports
+                ? `${reports} loan${reports === 1 ? "" : "s"} reported so far; no lender has five yet, so nothing is published. Add yours below.`
+                : "Collecting from today: add a loan you have taken below. The first lender appears once five borrowers have reported it."}
+            </p>
+          )}
+          <div className="mt-6">
+            <LoanReportForm lenders={lenders.map((l) => l.name)} />
+          </div>
+          <p className="mt-2 text-[12px] text-muted">
+            For comparison, a bank or SACCO loan at 15% a year costs about KES 12 per KES 1,000 for 30 days. Figures are what borrowers report, checked only
+            for range; a lender can ask us to look again at any figure.
+          </p>
+        </section>
+      ) : null}
 
       {f ? (
         <section className="mt-12 grid gap-10 lg:grid-cols-2">

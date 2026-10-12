@@ -28,6 +28,7 @@ warnings.filterwarnings("ignore")
 OUT = ROOT / "data" / "kenya" / "dcp_directory.json"
 SEARCH = "https://www.centralbank.go.ke/wp-json/wp/v2/media?search=digital%20credit&_fields=source_url,date&per_page=20"
 PAGE = "https://www.centralbank.go.ke/"
+PARSER = 2  # bump when the reading changes, so the current directory is read again once
 MONTHS = {m: i for i, m in enumerate(["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"], 1)}
 
 
@@ -58,6 +59,9 @@ def parse(text: str) -> tuple[str | None, list[dict]]:
     m = re.search(r"UPDATED ON ([A-Z]+ \d{1,2}, \d{4})", text, re.I)
     if m:
         updated = parse_date(m.group(1).title())
+    # Labels sometimes sit mid-line ("…, Nairobi E-mail address: …", "…, KenyaDate Licensed: …"): put each on its own line.
+    label = r"(?:E-?mail(?: address)?|Telephone(?: No)?|Physical Address|Date Licensed|(?<!Date )Licensed)\s*[:.]"
+    text = re.sub(rf"(?<=\S)\s*(?={label})", "\n", text)
     lines = [l.strip() for l in text.splitlines()]
     entries, cur, field = [], None, None
     for line in lines:
@@ -72,11 +76,12 @@ def parse(text: str) -> tuple[str | None, list[dict]]:
             continue
         if not cur:
             continue
-        kv = re.match(r"^(Postal Address|Telephone|Tel|Email|E-mail|Physical Address|Date Licensed)\s*:\s*(.*)$", line, re.I)
+        kv = re.match(r"^(Postal Address|Telephone(?: No)?|Tel|E-?mail(?: address)?|Physical Address|Date Licensed|Licensed)\s*[:.]\s*(.*)$", line, re.I)
         if kv:
             key = kv.group(1).lower()
             val = kv.group(2).strip()
-            field = {"postal address": "postal", "telephone": "phone", "tel": "phone", "email": "email", "e-mail": "email", "physical address": "address", "date licensed": "licensed"}[key]
+            field = ("postal" if key.startswith("postal") else "phone" if key.startswith("tel") else "email" if "mail" in key
+                     else "address" if key.startswith("physical") else "licensed")
             cur[field] = parse_date(val) if field == "licensed" else val
         elif field in ("address", "postal") and cur[field]:
             cur[field] += " " + line  # an address that runs onto a second line
@@ -109,7 +114,7 @@ def main() -> int:
         return 1
 
     current = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
-    if current.get("source") == url:
+    if current.get("source") == url and current.get("parser") == PARSER:
         print(f"{len(entries)} lenders; directory unchanged ({url})")
         return 0
     names = {e["name"] for e in entries}
@@ -118,7 +123,8 @@ def main() -> int:
         if e["name"] not in names:
             removed.append({"name": e["name"], "last_listed": current.get("updated"), "dropped_by": updated})
     removed = [x for x in removed if x["name"] not in names]  # relicensed: no longer "removed"
-    added = sorted(names - {e["name"] for e in current.get("lenders", [])}) if current.get("lenders") else []
+    same_directory = current.get("source") == url
+    added = current.get("added_last", []) if same_directory else (sorted(names - {e["name"] for e in current.get("lenders", [])}) if current.get("lenders") else [])
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({
         "dataset": "Kenya's licensed digital credit providers",
@@ -128,6 +134,7 @@ def main() -> int:
         "updated": updated,
         "read_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "compiled_by": "Afronomics (afronomicsfeed.com)",
+        "parser": PARSER,
         "note": "The CBK licenses companies, not apps: a loan app is licensed only if the company behind it is on this list.",
         "lenders": entries,
         "added_last": added,

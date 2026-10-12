@@ -137,11 +137,19 @@ SUPABASE = "https://ugjpcybhqwvzidcbqpik.supabase.co"
 PUBLISHABLE_KEY = "sb_publishable_pytbevd21MRA9Vgasf0TLw_kAugNejO"  # public, as in lib/store.ts
 
 
+WEBHOOK = "https://www.afronomicsfeed.com/api/telegram"  # www: Telegram does not follow the apex redirect
+
+
 def config() -> tuple[str, str]:
     token, channel = os.environ.get("TELEGRAM_BOT_TOKEN", ""), os.environ.get("TELEGRAM_CHANNEL", "")
     secret = os.environ.get("AF_CRON_SECRET", "")
     if (token and channel) or not secret:
         return token, channel
+    cfg = db_config(secret)
+    return cfg.get("token") or "", cfg.get("channel") or ""
+
+
+def db_config(secret: str) -> dict:
     try:
         r = requests.post(f"{SUPABASE}/rest/v1/rpc/af_telegram_config", json={"p_secret": secret}, timeout=30,
                           headers={"apikey": PUBLISHABLE_KEY, "Authorization": f"Bearer {PUBLISHABLE_KEY}"})
@@ -149,7 +157,27 @@ def config() -> tuple[str, str]:
     except Exception as error:
         print(f"::warning title=Telegram::could not read the settings: {type(error).__name__}")
         cfg = None
-    return (cfg or {}).get("token") or "", (cfg or {}).get("channel") or ""
+    return cfg or {}
+
+
+def ensure_bot(token: str) -> None:
+    """Point Telegram at the site's webhook (app/api/telegram) and register the command menu, only when they differ."""
+    secret = db_config(os.environ.get("AF_CRON_SECRET", "")).get("webhook_secret")
+    if not secret:
+        return
+    try:
+        info = api(token, "getWebhookInfo")
+        if info.get("url") != WEBHOOK:
+            api(token, "setWebhook", url=WEBHOOK, secret_token=secret, allowed_updates='["message"]', drop_pending_updates="true")
+            print(f"webhook set to {WEBHOOK}")
+        elif info.get("last_error_message"):
+            print(f"::warning title=Telegram webhook::{info['last_error_message'][:160]}")
+        commands = requests.get(WEBHOOK, timeout=30).json().get("commands") or []
+        if commands and api(token, "getMyCommands") != commands:
+            api(token, "setMyCommands", commands=json.dumps(commands))
+            print(f"bot menu set: {len(commands)} commands")
+    except Exception as error:  # the bot's chat side must never stop the channel posts or the data run
+        print(f"::warning title=Telegram bot::{str(error).replace(token, '<token>')[:200]}")
 
 
 def api(token: str, method: str, **data) -> dict:
@@ -211,6 +239,8 @@ def main() -> int:
     if not args.dry and not (token and channel):
         print("no Telegram bot token or channel set; nothing posted")
         return 0
+    if not args.dry:
+        ensure_bot(token)
     first_run = not STATE.exists()
     if first_run and not args.dry and not check_access(token, channel):
         return 0  # record nothing until the bot can post, so the first real run still starts clean

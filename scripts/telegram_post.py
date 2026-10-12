@@ -1,6 +1,7 @@
 """
 Post what is new in our data to the Afronomics Telegram channel: each new T-bill auction result (every market we
-track), each central-bank policy-rate change, and each new story from the story engine.
+track), each central-bank policy-rate change, each new story from the story engine, and each tool launch queued in
+data/telegram_launches.json once its date arrives.
 
 Runs at the end of every data run (.github/workflows/african-auctions.yml), before the commit, so the record of
 what was posted (data/telegram_state.json) is committed with the data. The bot token and channel come from the
@@ -133,6 +134,29 @@ def story_posts(state: dict) -> list[tuple[str, str, str]]:
     return out
 
 
+def launch_posts(state: dict) -> list[tuple[str, str, str]]:
+    """Queued tool launches whose date (Nairobi time) has arrived, once each."""
+    from datetime import datetime, timedelta, timezone
+
+    today = (datetime.now(timezone.utc) + timedelta(hours=3)).date().isoformat()
+    out = []
+    for item in (load("telegram_launches.json") or {}).get("launches", []):
+        key = f"launch:{item['key']}"
+        if state.get(key) or item["date"] > today:
+            continue
+        msg = "\n".join([
+            f"🛠 <b>{html.escape(item['title'], quote=False)}</b>",
+            "",
+            html.escape(item["text"], quote=False),
+            "",
+            f'<a href="{link(item["path"], "launch-" + item["key"])}">Open it on Afronomics</a>',
+            "",
+            FOOT,
+        ])
+        out.append((key, item["date"], msg))
+    return out
+
+
 SUPABASE = "https://ugjpcybhqwvzidcbqpik.supabase.co"
 PUBLISHABLE_KEY = "sb_publishable_pytbevd21MRA9Vgasf0TLw_kAugNejO"  # public, as in lib/store.ts
 
@@ -246,7 +270,7 @@ def main() -> int:
         return 0  # record nothing until the bot can post, so the first real run still starts clean
     state = {} if first_run else json.loads(STATE.read_text(encoding="utf-8")).get("posted", {})
     before = dict(state)
-    posts = intro_post(state) + bill_posts(state) + policy_posts(state) + story_posts(state)
+    posts = intro_post(state) + bill_posts(state) + policy_posts(state) + story_posts(state) + launch_posts(state)
     if first_run and not args.dry:
         # Start from what is already out: record it, post nothing.
         for key, value, _ in posts:

@@ -95,7 +95,7 @@ export const bondMarkets: BondMarket[] = [
     currency: "XOF",
     publisher: "UMOA-Titres (for the eight WAEMU treasuries)",
     sourcePage: "https://www.umoatitres.org/fr/emissions/",
-    rateNote: "weighted average yield of accepted bids, percent per annum; Treasury bonds (OAT) only; the issuing country is in the issue field",
+    rateNote: "weighted average yield of accepted bids, percent per annum; Treasury bonds (OAT) of a stated tenor of a year or more; the issuing country is in the issue field",
   },
 ];
 
@@ -238,8 +238,10 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
     const out: BondRow[] = rows.flatMap((r) => {
       const rate = n(r.weighted_yield);
       const date = s(r.operation_date);
-      if (r.instrument !== "OAT" || rate === null || !date) return [];
       const months = n(r.months);
+      // Bonds of a stated tenor of a year or more only: short or untenored OAT lines are buybacks, exchanges or
+      // residual reopenings priced near par at money-market yields, not new issuance (they stay in the raw file).
+      if (r.instrument !== "OAT" || rate === null || !date || months === null || months < 12) return [];
       return [
         {
           date,

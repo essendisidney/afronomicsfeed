@@ -95,7 +95,7 @@ function nextStep(plan: string | null) {
       return "Reply with the SACCO's name, its SASRA licence category, the declared dividend and deposit rates with a link to the SACCO's own notice, a logo and a link for joining; the listing goes live once the rates are verified against the notice.";
     case "tender_alerts":
     case "tender_alerts_year":
-      return "Your tender alerts are paid up and keep arriving every morning. If you paid with a different email from the one the alerts go to, reply with that address and we move it across.";
+      return "Your tender alerts are paid up and keep coming as new matching tenders are published. If you paid with a different email from the one the alerts go to, reply with that address and we move it across.";
     case "job_listing":
       return "Reply with the role, the institution, location, closing date and how to apply; the listing is up within one working day for 30 days.";
     default:

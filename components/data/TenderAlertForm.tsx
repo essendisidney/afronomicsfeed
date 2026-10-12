@@ -6,7 +6,7 @@ import { TENDER_PRICE_KES, TRIAL_DAYS } from "@/lib/tenders-core";
 
 type State = "idle" | "pending" | "done" | "error";
 
-/** "Email me matching tenders": keywords and an email; double opt-in, then every open match and each new one daily. */
+/** "Email me matching tenders": keywords and an email; double opt-in, then every open match and each new one as it is published. */
 export function TenderAlertForm({ initialKeywords = "" }: { initialKeywords?: string }) {
   const [keywords, setKeywords] = useState(initialKeywords);
   const [email, setEmail] = useState("");
@@ -57,7 +57,7 @@ export function TenderAlertForm({ initialKeywords = "" }: { initialKeywords?: st
         </button>
       </div>
       <p className="text-[12px] text-muted">
-        Every open tender that matches straight away, then each new one every morning. Free for {TRIAL_DAYS} days, then KES {TENDER_PRICE_KES} a month by M-Pesa.
+        Every open tender that matches straight away, then each new one when the regulator publishes it. Free for {TRIAL_DAYS} days, then KES {TENDER_PRICE_KES} a month by M-Pesa.
         No card. Stop with one click.
       </p>
       {message ? (

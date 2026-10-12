@@ -12,21 +12,31 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "African local-currency government debt data for frontier-market investors",
   description:
-    "Every primary T-bill auction result from ten African central banks, checked and published within hours, with full history back to 2000 in some markets. For investors in the African markets of JPMorgan's GBI-EM Edge frontier index. API, CSV and alerts; 30-day pilots for institutions.",
+    "Primary auction results from African central banks, checked and published within hours, with history back to 2000 in some markets, for investors in the African markets of JPMorgan's GBI-EM Edge frontier local-currency bond index. Coverage by market, honest gaps, API and 30-day pilots.",
   alternates: { canonical: `${site.url}/data/frontier-local-debt` },
 };
 
-// JPMorgan GBI-EM Edge (frontier local-currency government bonds), African constituents as reported before its
-// launch at the end of September 2026. JPMorgan's own index documents are the authority; these are press reports.
+// JPMorgan GBI-EM Edge (frontier local-currency government bonds of more than 2.5 years, at least USD 250m each),
+// African constituents and weights as reported around its launch at the end of September 2026. JPMorgan's own index
+// documents are the authority; these are press reports.
 const EDGE: Partial<Record<BillMarket["slug"], string>> = {
-  egypt: "8% (the country cap)",
+  egypt: "8.0% (the country cap)",
   nigeria: "7.4%",
   kenya: "6.9%",
   uganda: "4.8%",
-  zambia: "included",
-  ghana: "included",
+  zambia: "0.5%",
+  ghana: "0.3%",
 };
+// African index markets we do not cover yet.
+const EDGE_UNCOVERED = [
+  { country: "Morocco", weight: "8.0% (the country cap)", publisher: "Ministry of Economy and Finance (Treasury auctions)" },
+  { country: "Tunisia", weight: "5.3%", publisher: "Central Bank of Tunisia / Treasury" },
+  { country: "Côte d’Ivoire", weight: "smaller constituent", publisher: "UMOA-Titres (WAEMU)" },
+  { country: "Angola", weight: "smaller constituent", publisher: "Banco Nacional de Angola" },
+];
 const EDGE_SOURCES = [
+  { label: "BusinessDay (Nigeria): Africa 44.5% of a $328bn index", href: "https://businessday.ng/companies/article/africa-takes-44-5-of-jpmorgans-new-328bn-frontier-bond-index/" },
+  { label: "Nairametrics: country weights", href: "https://nairametrics.com/2026/09/14/j-p-morgan-includes-nigeria-in-new-emerging-market-bond-index-with-7-4-weight/" },
   { label: "Reuters via Kitco, 14 Sep 2026", href: "https://www.kitco.com/news/off-the-wire/2026-09-14/jpmorgan-launch-frontier-market-local-currency-debt-index-month-end" },
   { label: "CNBC Africa", href: "https://www.cnbcafrica.com/2026/jpmorgan-to-launch-long-awaited-frontier-local-currency-debt-index" },
   { label: "Enterprise (Egypt), 16 Sep 2026", href: "https://enterpriseam.com/egypt/2026/09/16/jpmorgans-new-frontier-index-gives-egypt-its-biggest-possible-weighting/" },
@@ -55,9 +65,10 @@ export default function FrontierLocalDebtPage() {
       title="African local-currency government debt, auction by auction"
       lede={
         <p>
-          JPMorgan’s new frontier local-currency bond index, GBI-EM Edge, gives African markets about 44.5% of its weight, as reported at launch. Investors
-          tracking it need each African auction the day it happens. Afronomics reads every primary auction result from ten African central banks, checks it
-          and publishes it within hours of the release: {total.toLocaleString("en-US")} auction results so far.
+          JPMorgan’s new frontier local-currency bond index, GBI-EM Edge (about $328bn), gives African markets about 44.5% of its weight, as reported at
+          launch. It holds government bonds with more than 2.5 years to run, so the bond auctions matter most; the Treasury-bill auctions show the
+          short end of each curve and where liquidity is. Afronomics reads primary auction results from African central banks, checks them and publishes
+          them within hours of the release: {total.toLocaleString("en-US")} results so far.
         </p>
       }
     >
@@ -65,7 +76,7 @@ export default function FrontierLocalDebtPage() {
         <SectionTitle
           kicker="Coverage today"
           title="What we hold, market by market"
-          note="Counted from our datasets on this page’s last build. Bills are primary T-bill auctions; bond auctions are Kenya only for now."
+          note="Counted from our datasets on this page’s last build. Bond auctions are Kenya only today; Zambia, Egypt, the WAEMU markets (Côte d’Ivoire, Senegal) and Nigeria are next, in that order."
         />
         <div className="mt-4 overflow-x-auto">
           <table className="data-table">
@@ -105,16 +116,19 @@ export default function FrontierLocalDebtPage() {
                   </td>
                 </tr>
               ))}
-              <tr>
-                <td>
-                  <span className="font-medium text-ink">Senegal</span>
-                  <span className="block text-[11px] text-muted">UMOA-Titres (WAEMU)</span>
-                </td>
-                <td>reported as included</td>
-                <td className="text-right text-muted" colSpan={4}>
-                  Not covered yet
-                </td>
-              </tr>
+              {EDGE_UNCOVERED.map((u) => (
+                <tr key={u.country}>
+                  <td>
+                    <span className="font-medium text-ink">{u.country}</span>
+                    <span className="block text-[11px] text-muted">{u.publisher}</span>
+                  </td>
+                  <td>{u.weight}</td>
+                  <td className="text-right text-muted" colSpan={3}>
+                    Not covered yet
+                  </td>
+                  <td className="text-[13px] text-accent">{u.country === "Côte d’Ivoire" ? "next (with Senegal)" : "planned"}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -154,12 +168,33 @@ export default function FrontierLocalDebtPage() {
               <strong className="text-ink">Alerts:</strong> a notification when a market’s result is in (email today; webhooks for licensed keys on request).
             </li>
             <li>
-              <strong className="text-ink">Honest gaps:</strong> bond auctions outside Kenya and Senegal’s regional market are not covered yet. Pilot institutions
-              decide which come first.
+              <strong className="text-ink">Honest gaps:</strong> bond auctions outside Kenya, and Morocco, Tunisia, Côte d’Ivoire and Angola, are not covered
+              yet. We do not sell secondary-market prices: those come from dealers and exchanges. Pilot institutions shape the order.
             </li>
           </ul>
-          <p className="mt-4 text-sm text-ink-soft">
-            Licence: from $1,500 a month (Data API) and from $5,000 a month for redistribution and custom delivery.{" "}
+          <div className="mt-4 overflow-x-auto">
+            <table className="data-table">
+              <tbody>
+                <tr>
+                  <td className="font-medium text-ink">Analyst</td>
+                  <td>one user: the web tables and full-history downloads</td>
+                  <td className="text-right whitespace-nowrap">$250 a month</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-ink">Team and API</td>
+                  <td>an API key for your systems, alerts, usage reporting, a named contact</td>
+                  <td className="text-right whitespace-nowrap">$1,500 a month</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-ink">Enterprise</td>
+                  <td>redistribution, several teams, custom delivery and a service agreement</td>
+                  <td className="text-right whitespace-nowrap">from $5,000 a month</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-sm text-ink-soft">
+            Invoiced in US dollars.{" "}
             <Link href="/data-api" className="font-semibold text-forest underline underline-offset-2">
               Terms and API
             </Link>

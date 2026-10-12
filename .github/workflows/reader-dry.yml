@@ -1,0 +1,35 @@
+# Manual only: run one data reader in inspect or dry mode on GitHub's network (which reaches publishers this
+# desk machine cannot), to develop or check a reader. Read-only: it commits nothing.
+name: Reader dry run
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: "Reader script name in scripts/, without .py (e.g. egypt_bonds)"
+        required: true
+      args:
+        description: "Arguments, e.g. --inspect"
+        default: "--inspect"
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests pdfplumber openpyxl
+      - name: Run the reader
+        env:
+          SCRIPT: ${{ inputs.script }}
+          ARGS: ${{ inputs.args }}
+        run: |
+          if ! [[ "$SCRIPT" =~ ^[a-z0-9_]+$ ]] || [ ! -f "scripts/$SCRIPT.py" ]; then echo "unknown script"; exit 1; fi
+          if ! [[ "$ARGS" =~ ^[a-z0-9_\ -]*$ ]]; then echo "bad args"; exit 1; fi
+          python "scripts/$SCRIPT.py" $ARGS

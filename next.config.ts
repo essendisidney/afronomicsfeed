@@ -38,7 +38,18 @@ const legacy: Array<[string, string]> = [
 
 const nextConfig: NextConfig = {
   async headers() {
+    // Baseline security headers that institutional security reviews look for. Widgets under /embed/ are meant to
+    // be framed on other sites, so only they may be framed; everything else refuses framing by other sites.
+    // A full Content-Security-Policy comes later, in report-only mode first, so nothing breaks unseen.
+    const security = [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(self)" },
+      { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+    ];
     return [
+      { source: "/:path*", headers: security },
+      { source: "/((?!embed/).*)", headers: [{ key: "X-Frame-Options", value: "SAMEORIGIN" }] },
       {
         source: "/sw.js",
         headers: [

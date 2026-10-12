@@ -145,7 +145,7 @@ def launch_posts(state: dict) -> list[tuple[str, str, str]]:
         if state.get(key) or item["date"] > today:
             continue
         msg = "\n".join([
-            f"🛠 <b>{html.escape(item["title"], quote=False)}</b>",
+            f"🛠 <b>{html.escape(item['title'], quote=False)}</b>",
             "",
             html.escape(item["text"], quote=False),
             "",

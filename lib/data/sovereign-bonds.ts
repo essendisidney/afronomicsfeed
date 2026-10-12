@@ -28,7 +28,7 @@ export type BondRow = {
 };
 
 export type BondMarket = {
-  slug: "kenya" | "zambia" | "egypt" | "waemu";
+  slug: "kenya" | "zambia" | "egypt" | "nigeria" | "waemu";
   country: string;
   currency: string;
   publisher: string;
@@ -60,6 +60,14 @@ export const bondMarkets: BondMarket[] = [
     publisher: "Central Bank of Egypt (for the Ministry of Finance)",
     sourcePage: "https://www.cbe.org.eg/en/auctions/egp-t-bonds-fixed-coupon/historical-data",
     rateNote: "weighted average yield of accepted bids, percent per annum; fixed-coupon, zero-coupon and floating-rate bonds",
+  },
+  {
+    slug: "nigeria",
+    country: "Nigeria",
+    currency: "NGN",
+    publisher: "Debt Management Office, Nigeria",
+    sourcePage: "https://www.dmo.gov.ng/fgn-bonds/auction",
+    rateNote: "marginal (stop) rate, percent per annum; uniform-price auctions, so every successful bid pays it",
   },
   {
     slug: "waemu",
@@ -122,6 +130,33 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
     return { updatedAt: k.updatedAt, rows: rows.sort((a, b) => b.date.localeCompare(a.date)) };
   }
   const { updated, rows } = readFile(slug);
+  if (slug === "nigeria") {
+    const out: BondRow[] = rows.flatMap((r) => {
+      const rate = n(r.marginal_rate);
+      const date = s(r.auction_date);
+      if (rate === null || !date) return [];
+      return [
+        {
+          date,
+          isin: null,
+          issue: s(r.bond),
+          tenor_years: n(r.tenor_years),
+          maturity: s(r.maturity),
+          type: s(r.type),
+          offered_m: n(r.offered_ngn_m),
+          received_m: n(r.subscription_ngn_m),
+          accepted_m: n(r.allotted_market_ngn_m),
+          bid_cover: n(r.bid_cover),
+          rate,
+          min_rate: n(r.bid_low),
+          max_rate: n(r.bid_high),
+          coupon: n(r.coupon),
+          source: s(r.source) ?? "",
+        },
+      ];
+    });
+    return { updatedAt: updated, rows: out.sort((a, b) => b.date.localeCompare(a.date)) };
+  }
   if (slug === "waemu") {
     const out: BondRow[] = rows.flatMap((r) => {
       const rate = n(r.weighted_yield);

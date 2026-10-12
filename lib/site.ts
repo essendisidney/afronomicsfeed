@@ -71,6 +71,8 @@ export const footerGroups = [
       { href: "/send-money", label: "Cheapest way to send money" },
       { href: "/rates/remittances", label: "Cost of sending money home" },
       { href: "/rates/what-readers-paid", label: "What readers paid" },
+      { href: "/pay-check", label: "Is my salary fair?" },
+      { href: "/rent-check", label: "Is my rent fair?" },
       { href: "/rates/kenya/check", label: "Is my rate fair? Kenya" },
       { href: "/rates/nigeria/check", label: "Is my rate fair? Nigeria" },
       { href: "/rates/ghana/check", label: "Is my rate fair? Ghana" },

@@ -28,6 +28,7 @@ from bills_common import UA, load_existing, write  # noqa: E402
 warnings.filterwarnings("ignore")
 PAGE = "https://www.rbm.mw/FinancialMarkets/TreasuryBills/"
 BASE = "https://www.rbm.mw"
+NO_SALE = "no sale"
 MONTHS = {m: i for i, m in enumerate(["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"], 1)}
 
 
@@ -124,6 +125,8 @@ def fetch(notice: dict):
             with pdfplumber.open(io.BytesIO(content)) as pdf:
                 text = "\n".join((p.extract_text() or "") for p in pdf.pages[:2])
             rows = parse(text, notice["listed"])
+            if not rows and re.search(r"K\s?0\.00 million was raised", text, flags=re.I):
+                return notice, [], NO_SALE  # every bid rejected: there is no rate to read
             return notice, rows, None if rows else ("no text" if not text.strip() else "no table")
         except Exception as error:
             if attempt == 2:
@@ -139,16 +142,25 @@ def main() -> int:
     existing = {"rows": [], "sources": {}} if args.full else load_existing("malawi")
     sources = dict(existing.get("sources", {}))
     rows = list(existing.get("rows", []))
-    notices = [n for n in list_notices() if sources.get(n["url"], {}).get("status") != "parsed"]
+    # A notice already read, or one where nothing was sold, is final; anything else is read again.
+    notices = [n for n in list_notices() if sources.get(n["url"], {}).get("status") not in ("parsed", "no sale")]
     print(f"{len(notices)} notices to read")
     with ThreadPoolExecutor(max_workers=6) as pool:
         for notice, parsed, reason in pool.map(fetch, notices):
             for r in parsed:
                 r["source"] = notice["url"]
             rows += parsed
-            sources[notice["url"]] = {"status": "parsed", "tenors": [r["tenor"] for r in parsed]} if parsed else {"status": "unparsed", "reason": reason}
-    bad = [u for u, s in sources.items() if s["status"] != "parsed"]
-    print(f"parsed notices: {len(sources) - len(bad)}, unparsed: {len(bad)}")
+            if parsed:
+                sources[notice["url"]] = {"status": "parsed", "tenors": [r["tenor"] for r in parsed]}
+            elif reason == NO_SALE:
+                sources[notice["url"]] = {"status": "no sale"}
+            else:
+                sources[notice["url"]] = {"status": "unparsed", "reason": reason}
+    count = lambda st: sum(1 for x in sources.values() if x["status"] == st)
+    print(f"parsed notices: {count('parsed')}, nothing sold: {count('no sale')}, unparsed: {count('unparsed')}")
+    for u, x in sources.items():
+        if x["status"] == "unparsed":
+            print(f"  unparsed {u}: {x.get('reason')}")
     write(
         "malawi",
         dataset="Malawi Treasury bill auctions",

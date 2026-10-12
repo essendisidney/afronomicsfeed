@@ -1,14 +1,32 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-10-12",
+ "checked_on": "2026-10-13",
  "summary": {
   "failed": 0,
-  "late": 3,
+  "late": 5,
   "gap": 1,
-  "ok": 28
+  "ok": 26
  },
  "items": [
+  {
+   "area": "Money market funds",
+   "name": "CIC Money Market Fund",
+   "status": "late",
+   "detail": "published yield unchanged at 8.43% since 06 Oct: the page may not be current",
+   "latest": "2026-10-06",
+   "due_by": null,
+   "link": "/rates/kenya/money-market-funds"
+  },
+  {
+   "area": "Money market funds",
+   "name": "Kasha Money Market Fund",
+   "status": "late",
+   "detail": "published yield unchanged at 10.76% since 06 Oct: the page may not be current",
+   "latest": "2026-10-06",
+   "due_by": null,
+   "link": "/rates/kenya/money-market-funds"
+  },
   {
    "area": "Money market funds",
    "name": "NCBA Money Market Fund (KES)",
@@ -92,15 +110,6 @@
   },
   {
    "area": "Money market funds",
-   "name": "CIC Money Market Fund",
-   "status": "ok",
-   "detail": "8.43% read 12 Oct",
-   "latest": "2026-10-12",
-   "due_by": null,
-   "link": "/rates/kenya/money-market-funds"
-  },
-  {
-   "area": "Money market funds",
    "name": "Etica Money Market Fund (KES)",
    "status": "ok",
    "detail": "monthly fact sheet for September 2026",
@@ -110,19 +119,10 @@
   },
   {
    "area": "Money market funds",
-   "name": "Kasha Money Market Fund",
-   "status": "ok",
-   "detail": "10.76% read 12 Oct",
-   "latest": "2026-10-12",
-   "due_by": null,
-   "link": "/rates/kenya/money-market-funds"
-  },
-  {
-   "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.41% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "10.41% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },

@@ -117,7 +117,13 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
         <button type="submit" disabled={pending} className={buttonClass({ variant: "primary" })}>
           {pending ? "Sending…" : "Start my 30-day pilot"}
         </button>
-        <p className="text-[12px] text-muted">Free. No payment details. Trial keys go to work email addresses.</p>
+        <p className="text-[12px] text-muted">
+          Free. No payment details. Trial keys go to work email addresses. How we use your details:{" "}
+          <Link href="/legal/privacy" className="underline underline-offset-2">
+            privacy notice
+          </Link>
+          .
+        </p>
       </div>
       {error ? (
         <p role="alert" className="text-sm text-down sm:col-span-2">

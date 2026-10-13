@@ -78,7 +78,7 @@ export default async function LoanAppsPage() {
         <section className="mt-12">
           <SectionTitle
             kicker="Scorecard · from borrowers"
-            title="What each licensed lender really costs"
+            title="What borrowers say each licensed lender costs"
             note="Cost per KES 1,000 borrowed for 30 days, every fee included, from borrowers’ own reports over 12 months. Shown once five borrowers have reported a lender."
           />
           {scored.length ? (
@@ -124,7 +124,12 @@ export default async function LoanAppsPage() {
           </div>
           <p className="mt-2 text-[12px] text-muted">
             For comparison, a bank or SACCO loan at 15% a year costs about KES 12 per KES 1,000 for 30 days. Figures are what borrowers report, checked only
-            for range; a lender can ask us to look again at any figure.
+            for range and not verified with the lender; they describe borrowers’ experience, not a finding by Afronomics or the CBK. A named lender can
+            ask us to look again at any figure, or send a response to publish beside it, at{" "}
+            <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent("Lender response")}`} className="underline underline-offset-2">
+              {site.contactEmail}
+            </a>
+            .
           </p>
         </section>
       ) : null}
@@ -145,7 +150,7 @@ export default async function LoanAppsPage() {
             </ul>
           </div>
           <div>
-            <SectionTitle kicker="Watch" title="No longer on the list" note="Lenders that were in an earlier directory we read and are missing from the latest." />
+            <SectionTitle kicker="Watch" title="No longer on the list" note="Lenders that were in an earlier directory we read and are missing from the latest. A name can drop off because a licence lapsed or was revoked, a change of name, or a directory error; check with the CBK before drawing conclusions." />
             {f.removed.length ? (
               <ul className="mt-3 divide-y divide-rule text-sm">
                 {f.removed.map((r) => (

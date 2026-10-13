@@ -131,7 +131,7 @@ export default function AboutPage() {
           Sponsorship, always labelled &ldquo;Sponsored&rdquo; or &ldquo;Presented by&rdquo; and never inside the data (<Link href="/advertise">advertise</Link>), and paid
           job listings.
         </li>
-        <li>Referral fees that some money-transfer links may earn, disclosed beside those links and never affecting the order.</li>
+        <li>Referral fees that some money-transfer links may earn (and, in future, money market fund links), disclosed beside those links and never affecting the order.</li>
         <li>
           Commissioned research (<Link href="/advisory">research and advisory</Link>).
         </li>

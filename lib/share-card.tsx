@@ -152,7 +152,7 @@ export function shareView(spec: ShareSpec): ShareView | null {
     const title = mmfMonthSentence(m);
     const lead = `${short(m.rows[0].name, 36)} ${m.complete ? "ranked first" : "leads"} at ${pct(m.rows[0].net)} after tax`;
     return {
-      title: `Best money market fund in Kenya, ${m.label}: ${title}`,
+      title: `Best money market fund in Kenya by yield, ${m.label}: ${title}`,
       description: `Kenyan money market funds ranked by average yield over ${m.label} after the 15% withholding tax, each yield read from the manager's own website or fact sheet. Information, not advice.`,
       card: {
         kicker: `Best money market fund in Kenya · ${m.label}${m.complete ? "" : " so far"}`,

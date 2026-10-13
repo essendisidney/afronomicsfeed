@@ -13,8 +13,10 @@ export default function TermsPage() {
     <ProsePage crumbs={[{ href: "/", label: "Home" }, { label: "Terms" }]} kicker="Legal" title="Terms of use">
       <h2>Using the site</h2>
       <p>
-        You may read, share and cite Afronomics freely. You may download our CSV files and reuse the data with attribution — “Source: Afronomics,
-        compiled from [publisher]” — subject to the original publisher’s licence.
+        You may read, share and cite Afronomics freely, with the credit “Source: Afronomics” and a link. The free API and CSV downloads are for
+        research, journalism, teaching and non-commercial apps; any commercial use, including internal use at a fund, bank or firm, needs a pilot
+        key or a paid licence, and passing the data to others needs an Enterprise licence. The full terms are on the{" "}
+        <Link href="/licensing">licensing page</Link>. Figures remain subject to the original publisher’s terms.
       </p>
       <h2>What you may not do</h2>
       <p>
@@ -23,9 +25,10 @@ export default function TermsPage() {
       </p>
       <h2>Subscriptions</h2>
       <p>
-        Paid plans renew monthly until cancelled. Cancel any time by writing to{" "}
-        <a href={`mailto:${site.contactEmail}?subject=Cancel`}>{site.contactEmail}</a>; access runs to the end of the paid period. Team and
-        Enterprise plans are governed by their own agreement.
+        A payment buys the period shown at checkout. A plan renews only if checkout shows it as a renewing plan; you can stop a renewing plan at
+        any time from the Paystack email or by writing to{" "}
+        <a href={`mailto:${site.contactEmail}?subject=Cancel`}>{site.contactEmail}</a>, and access runs to the end of the paid period. Enterprise
+        plans, and any plan bought under a signed order form, are governed by that agreement.
       </p>
       <h2>No advice</h2>
       <p>

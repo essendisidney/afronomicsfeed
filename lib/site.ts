@@ -12,7 +12,7 @@ export const site = {
   houseUrl: "https://pesara.com",
   locale: "en",
   description:
-    "The price of money in Africa: Treasury bill rates in ten markets, currencies, inflation and what they mean for a saver, a borrower and a treasury — from the central banks, the day they publish, free to see. Plus every African economy’s data and the headlines that move markets.",
+    "The price of money in Africa: Treasury bill rates in ten markets, currencies, inflation and what they mean for a saver, a borrower and a treasury — from the central banks, the day they publish, free to see. Plus data on all 54 African economies and the headlines that move markets.",
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "desk@afronomicsfeed.com",
   linkedinUrl: "https://www.linkedin.com/company/afronomicsfeed/",
   telegramUrl: "https://t.me/afronomic",

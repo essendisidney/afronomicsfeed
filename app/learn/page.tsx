@@ -53,7 +53,7 @@ export default function LearnPage() {
     ? [
         { label: "Bank savings, after tax", rate: bench.savingsAvg * 0.85 },
         { label: "One-year bill, after tax", rate: bench.bill364Net },
-        { label: "Best fund, after tax", rate: bench.bestFundNet },
+        { label: "Best fund by yield, after tax", rate: bench.bestFundNet },
       ]
     : [];
 
@@ -73,7 +73,7 @@ export default function LearnPage() {
       <nav aria-label="Other languages" className="mb-8 flex flex-wrap items-center gap-2 text-[14px]">
         <span className="text-muted">Also in:</span>
         {learnLangs.map((l) => (
-          <Link key={l} href={`/learn/${l}`} lang={l} className="rounded-full border border-rule px-3 py-1 hover:border-gold">
+          <Link key={l} href={`/learn/${l}`} lang={l} className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1 hover:border-gold sm:min-h-8">
             {langMeta[l].native}
           </Link>
         ))}

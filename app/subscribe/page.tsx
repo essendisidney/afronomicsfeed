@@ -42,7 +42,7 @@ export default async function SubscribePage({ searchParams }: { searchParams: Pr
           <h2>The Morning, every weekday</h2>
           <ul>
             <li>
-              <strong>Overnight</strong> — every African currency against the dollar, and which moved.
+              <strong>Overnight</strong> — African currencies against the dollar, and which moved.
             </li>
             <li>
               <strong>Auctions</strong> — Treasury bill results that landed since yesterday, across ten markets, and what is due today.

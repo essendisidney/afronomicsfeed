@@ -8,9 +8,10 @@ export function MarkdownBody({ content }: { content: string }) {
       <Markdown
         remarkPlugins={[remarkGfm]}
         components={{
-          // tables scroll sideways on a phone instead of widening the page
+          // tables scroll sideways on a phone instead of widening the page; focusable (as in DataTable) so the
+          // scroll works from the keyboard too
           table: ({ children }) => (
-            <div className="my-6 overflow-x-auto">
+            <div role="region" aria-label="Table" tabIndex={0} className="my-6 overflow-x-auto">
               <table className="data-table">{children}</table>
             </div>
           ),

@@ -18,7 +18,7 @@ export function ShareResult({ spec, text, lang = "en" }: { spec: ShareSpec; text
   const t = shareUi[lang];
   const native = useSyncExternalStore(noop, canNativeShare, () => false);
   const [copied, setCopied] = useState(false);
-  const pill = "inline-flex items-center gap-1.5 rounded-full border border-rule bg-surface px-3 py-1.5 text-[13px] font-medium text-ink hover:border-accent";
+  const pill = "inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border border-rule bg-surface px-3 py-1.5 text-[13px] font-medium text-ink hover:border-accent sm:min-h-9";
 
   const wa = `https://wa.me/?text=${encodeURIComponent(`${text}\n${shareUrl(spec, "whatsapp")}`)}`;
   const li = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl(spec, "linkedin"))}`;

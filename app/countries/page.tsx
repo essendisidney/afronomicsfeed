@@ -12,7 +12,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "All 54 African economies",
-  description: "Every African country side by side: GDP, growth, inflation, GDP per capita, external debt and exchange rates, with a full file for each.",
+  description: "All 54 African countries side by side: GDP, growth, inflation, GDP per capita, external debt and exchange rates, with a full file for each.",
   alternates: { canonical: `${site.url}/countries` },
 };
 

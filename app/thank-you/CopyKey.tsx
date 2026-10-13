@@ -13,7 +13,7 @@ export function CopyKey({ value }: { value: string }) {
         onClick={() => {
           void navigator.clipboard?.writeText(value).then(() => setCopied(true), () => undefined);
         }}
-        className="rounded-full border border-ink/20 px-4 py-2 text-[13px] font-semibold hover:border-accent"
+        className="inline-flex min-h-11 items-center justify-center rounded-full border border-ink/20 px-4 py-2 text-[13px] font-semibold hover:border-accent"
       >
         {copied ? "Copied" : "Copy key"}
       </button>

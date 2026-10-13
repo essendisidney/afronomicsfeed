@@ -9,7 +9,7 @@ export function ShareRow({ text, path, label = "Share" }: { text: string; path: 
   const wa = `https://wa.me/?text=${encodeURIComponent(`${text}\n${url}?utm_source=whatsapp&utm_medium=share`)}`;
   const channel = process.env.WHATSAPP_CHANNEL_URL;
   const tg = process.env.TELEGRAM_CHANNEL_URL;
-  const pill = "inline-flex items-center gap-1.5 rounded-full border border-rule bg-surface px-3 py-1.5 text-[13px] font-medium text-ink hover:border-accent";
+  const pill = "inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border border-rule bg-surface px-3 py-1.5 text-[13px] font-medium text-ink hover:border-accent sm:min-h-9";
   return (
     <div className="mt-6 flex flex-wrap items-center gap-2" aria-label={label}>
       <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">{label}</span>

@@ -40,7 +40,7 @@ export function LoanCalculator({ bankAverage, lang }: { bankAverage: number | nu
           <input type="number" min={1} max={360} value={months} onChange={(e) => setMonths(Math.min(360, Math.max(1, Number(e.target.value))))} className="mt-1 w-full rounded-xl border border-rule bg-paper px-3 py-2 text-[15px] text-ink" />
         </label>
       </div>
-      <div className="mt-5 overflow-x-auto" aria-live="polite">
+      <div role="region" aria-label={t.loanTitle} tabIndex={0} className="mt-5 overflow-x-auto" aria-live="polite">
         <table className="data-table">
           <thead>
             <tr>

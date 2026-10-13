@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { buttonClass } from "@/components/ui/Button";
 import { track } from "@/lib/track";
 import { TENDER_PRICE_KES, TRIAL_DAYS } from "@/lib/tenders-core";
 
@@ -52,7 +53,7 @@ export function TenderAlertForm({ initialKeywords = "" }: { initialKeywords?: st
           <input required type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@business.co.ke" className={field} />
         </label>
         <input type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" value={website} onChange={(e) => setWebsite(e.target.value)} className="hidden" />
-        <button type="submit" disabled={state === "pending"} className="shrink-0 rounded-full bg-ink px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest disabled:opacity-60">
+        <button type="submit" disabled={state === "pending"} className={buttonClass({ className: "shrink-0" })}>
           {state === "pending" ? "Sending" : `Start ${TRIAL_DAYS} days free`}
         </button>
       </div>

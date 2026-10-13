@@ -1,0 +1,4 @@
+{
+  "$comment": "Intentional exceptions to the site QA (scripts/site-qa.mjs). Each entry silences findings whose check equals 'check', whose page matches 'page' (exact path, a prefix ending in '*', or '*' for all) and whose message or detail contains 'match' (case-insensitive). 'reason' is required: say why this use is correct. Entries that stop matching are listed in the report so they can be removed. See docs/qa.md.",
+  "entries": []
+}

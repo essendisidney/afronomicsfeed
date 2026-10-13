@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { buttonClass } from "@/components/ui/Button";
 
 type Cell = { lender: string; n: number; low: number | null; median: number | null; high: number | null; shamed_pct: number | null };
 type Result = { ok: true; replaced: boolean; yours: number; cell: Cell | null } | { ok: false; reason: string };
@@ -65,7 +66,7 @@ export function LoanReportForm({ lenders }: { lenders: string[] }) {
           </select>
         </label>
       </div>
-      <button type="submit" disabled={busy} className="mt-4 rounded-full bg-ink px-5 py-2 text-[14px] font-semibold text-paper hover:bg-forest disabled:opacity-60">
+      <button type="submit" disabled={busy} className={buttonClass({ className: "mt-4" })}>
         {busy ? "Sending…" : "Add my loan"}
       </button>
       <p className="mt-2 text-[12px] text-muted">Anonymous: no name, no number, and your address is never stored. We publish only the middle of at least five reports per lender.</p>

@@ -53,7 +53,7 @@ export function Wordmark({ compact = false, night = false, logoClassName }: { co
   return (
     <Link
       href="/"
-      className={`inline-flex min-w-0 shrink-0 items-center no-underline ${night ? "on-night text-night-ink" : "text-ink"}`}
+      className={`inline-flex min-h-11 min-w-0 shrink-0 items-center no-underline ${night ? "on-night text-night-ink" : "text-ink"}`}
       aria-label="Afronomics Feed, home"
     >
       <Logo className={logoClassName ?? (compact ? "h-8 w-auto sm:h-10" : "h-11 w-auto sm:h-12")} />

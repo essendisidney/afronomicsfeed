@@ -197,11 +197,11 @@ export default async function DiasporaPage() {
       <div className="mt-10">
         <ShareRow text="For Kenyans abroad: the cheapest way to send money home, and what it earns there after tax:" path="/diaspora" />
       </div>
-      <FollowUp heading="Get the shilling, the bill rate and the best fund every week" />
+      <FollowUp heading="Get the shilling, the bill rate and the top fund by yield every week" />
       <p className="mt-6 text-sm text-ink-soft">
         Sending to Nigeria, Ghana or elsewhere?{" "}
         <Link href="/send-money" className="underline underline-offset-2">
-          Every African country
+          Every country we cover
         </Link>
         . <em>Information, not advice.</em>
       </p>

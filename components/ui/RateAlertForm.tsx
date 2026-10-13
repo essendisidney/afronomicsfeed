@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import { buttonClass } from "@/components/ui/Button";
 import { track } from "@/lib/track";
 import { alertTenors, kindLabel, type AlertKind } from "@/lib/rate-alerts-core";
 
@@ -114,7 +115,7 @@ export function RateAlertForm({
         <button
           type="submit"
           disabled={state === "pending"}
-          className="shrink-0 rounded-full bg-ink px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest disabled:opacity-60"
+          className={buttonClass({ className: "shrink-0" })}
         >
           {state === "pending" ? "Sending" : "Email me"}
         </button>

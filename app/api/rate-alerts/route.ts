@@ -1,3 +1,4 @@
+import { redactEmails } from "@/lib/security";
 import { sendEmail } from "@/lib/mail";
 import { alertSnapshot, confirmationEmail } from "@/lib/rate-alerts";
 import { currentKey, parseAlertInput } from "@/lib/rate-alerts-core";
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
   });
   const value = result.ok ? (result.value as { status?: string; token?: string; resend?: boolean } | null) : null;
   if (!value?.status) {
-    console.log(`[rate-alerts] create failed: ${result.ok ? "no result (secret mismatch?)" : result.reason}`);
+    console.log(`[rate-alerts] create failed: ${result.ok ? "no result (secret mismatch?)" : redactEmails(result.reason)}`);
     return Response.json({ ok: false, reason: "That didn’t go through. Please try again." }, { status: 502 });
   }
   if (value.status === "limited") return Response.json({ ok: false, reason: "Too many alert requests for this address. Please try again later." }, { status: 429 });
@@ -54,7 +55,7 @@ export async function POST(request: Request) {
     const mail = confirmationEmail(alert, value.token);
     const sent = await sendEmail(alert.email, mail.subject, mail.html, mail.text);
     if (!sent.ok) {
-      console.log(`[rate-alerts] confirmation not sent: ${sent.reason}`);
+      console.log(`[rate-alerts] confirmation not sent: ${redactEmails(sent.reason)}`);
       return Response.json({ ok: false, reason: "We couldn’t send the confirmation email. Please try again later." }, { status: 502 });
     }
   }

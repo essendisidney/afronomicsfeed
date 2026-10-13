@@ -1,3 +1,4 @@
+import { safeEqual } from "@/lib/security";
 import { COMMANDS, reply } from "@/lib/telegram-bot";
 import { rpc } from "@/lib/store";
 
@@ -23,7 +24,7 @@ async function config(): Promise<Config | null> {
 
 export async function POST(request: Request) {
   const cfg = await config();
-  if (!cfg?.webhook_secret || request.headers.get("x-telegram-bot-api-secret-token") !== cfg.webhook_secret) {
+  if (!cfg?.webhook_secret || !safeEqual(request.headers.get("x-telegram-bot-api-secret-token"), cfg.webhook_secret)) {
     return new Response("forbidden", { status: 403 });
   }
   const update = (await request.json().catch(() => null)) as { message?: { chat?: { id?: number; type?: string }; text?: string } } | null;

@@ -1,3 +1,4 @@
+import { redactEmails } from "@/lib/security";
 import { sendEmail, unsubscribeToken } from "@/lib/mail";
 import { site } from "@/lib/site";
 import { rpc } from "@/lib/store";
@@ -37,14 +38,14 @@ export async function POST(request: Request) {
   const result = await rpc("af_subscribe_v2", { p_email: email, p_role: role, p_source: source });
   if (!result.ok) {
     // Logged without the address (no emails in logs): only the domain, so a failure can be seen and fixed.
-    console.log(`[subscribe] not stored ${JSON.stringify({ domain: email.split("@")[1], role, source, at: new Date().toISOString(), reason: result.reason })}`);
+    console.log(`[subscribe] not stored ${JSON.stringify({ domain: email.split("@")[1], role, source, at: new Date().toISOString(), reason: redactEmails(result.reason) })}`);
     return Response.json({ ok: true, stored: false });
   }
   if (result.value === "welcome") {
     const unsub = `${site.url}/api/unsubscribe?e=${encodeURIComponent(email)}&t=${await unsubscribeToken(email)}`;
     const mail = welcomeEmail(unsub);
     const sent = await sendEmail(email, mail.subject, mail.html, mail.text, unsub);
-    if (!sent.ok) console.log(`[subscribe] welcome not sent: ${sent.reason}`);
+    if (!sent.ok) console.log(`[subscribe] welcome not sent: ${redactEmails(sent.reason)}`);
   }
   return Response.json({ ok: true, stored: true });
 }

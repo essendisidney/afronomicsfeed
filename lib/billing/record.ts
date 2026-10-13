@@ -2,7 +2,7 @@ import { rpc } from "@/lib/store";
 import { sendEmail } from "@/lib/mail";
 import { site } from "@/lib/site";
 import { claimReceipt, isKeyPlan, issuePaidKey, markKeyEmail, type KeyOutcome } from "./paidkey";
-import { getCheckoutPlan, moneyLabel } from "./plans";
+import { getCheckoutPlan, moneyLabel, paidInFull, planPriceLabel } from "./plans";
 
 /**
  * Where a confirmed Paystack charge goes: the `payments` table through a secret-gated database function
@@ -42,8 +42,9 @@ export async function recordPayment(p: PaymentRecord) {
   });
   if (!result.ok) return { ok: false as const, reason: result.reason };
   if (result.value !== true) return { ok: false as const, reason: "secret rejected" };
-  // A paid jobs listing goes live on its own.
-  if (p.plan === "job_listing" && p.email) await rpc("af_job_publish", { p_secret: secret(), p_email: p.email, p_id: null }).catch(() => null);
+  // A paid jobs listing goes live on its own, but only for a successful charge of the full listing fee: the plan comes
+  // from metadata the payer controls, so a KES 1 charge tagged job_listing must not publish anything.
+  if (p.plan === "job_listing" && p.email && p.status === "success" && paidInFull(p.plan, p.amount, p.currency)) await rpc("af_job_publish", { p_secret: secret(), p_email: p.email, p_id: null }).catch(() => null);
   // Paid tender alerts switch on by themselves; each reference grants once however often Paystack reports it.
   if (p.plan?.startsWith("tender_alerts") && p.email && p.status === "success" && p.currency === "KES") {
     const months = p.plan === "tender_alerts_year" && p.amount >= 500_000 ? 12 : p.amount >= 50_000 ? 1 : 0;
@@ -223,8 +224,10 @@ export async function notifyPayment(p: PaymentRecord, key: KeyOutcome = { kind: 
 
   const owner = process.env.PAYMENTS_NOTIFY_EMAIL ?? site.contactEmail;
   const status = keyStatus(key, emailed);
-  const summary = `${money} · ${product} · ${p.email ?? "no email"} · ${p.channel ?? ""} · ref ${p.reference}${status ? ` · ${status}` : ""}`;
-  const action = deskAction(key, emailed);
+  // Metadata (the plan) is set by the payer: flag any charge below the plan's price before anyone grants access by hand.
+  const short = p.plan && getCheckoutPlan(p.plan) && !paidInFull(p.plan, p.amount, p.currency) ? ` · CHECK AMOUNT: plan price is ${planPriceLabel(p.plan)}` : "";
+  const summary = `${money} · ${product} · ${p.email ?? "no email"} · ${p.channel ?? ""} · ref ${p.reference}${status ? ` · ${status}` : ""}${short}`;
+  const action = short ? `Do not grant access until the amount is checked: ${money} was paid against a plan price of ${planPriceLabel(p.plan)}. ${deskAction(key, emailed)}` : deskAction(key, emailed);
   const r = await sendEmail(
     owner,
     `New payment: ${summary}`.slice(0, 250),

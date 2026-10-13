@@ -1,3 +1,4 @@
+import { bearerOk, redactEmails } from "@/lib/security";
 import { bondAlertEmail, newBondAuctions, type BondRecipient } from "@/lib/bond-alerts";
 import { loadLatency } from "@/lib/data/latency";
 import { bondMarkets, getBondMarket, loadBondMarket } from "@/lib/data/sovereign-bonds";
@@ -19,7 +20,7 @@ export const maxDuration = 300;
  */
 export async function POST(request: Request) {
   const secret = process.env.AF_CRON_SECRET;
-  if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) return new Response("forbidden", { status: 403 });
+  if (!secret || !bearerOk(request, secret)) return new Response("forbidden", { status: 403 });
   const dry = new URL(request.url).searchParams.get("dry") === "1";
   const now = Date.now();
   const latency = loadLatency();
@@ -56,7 +57,7 @@ export async function POST(request: Request) {
       if (dry) continue;
       const claim = await rpc("af_bond_alert_claim", { p_secret: secret, p_email: who.email, p_market: a.market, p_date: a.date });
       if (!claim.ok || claim.value !== true) {
-        if (!claim.ok) failures.push(claim.reason);
+        if (!claim.ok) failures.push(redactEmails(claim.reason));
         else already += 1;
         continue;
       }
@@ -64,7 +65,7 @@ export async function POST(request: Request) {
       const result = await sendEmail(who.email, mail.subject, mail.html, mail.text, mail.unsubscribe);
       if (result.ok) sent += 1;
       else {
-        failures.push(result.reason);
+        failures.push(redactEmails(result.reason));
         await rpc("af_bond_alert_release", { p_secret: secret, p_email: who.email, p_market: a.market, p_date: a.date });
         if (result.reason.includes("RESEND_API_KEY")) break outer;
       }

@@ -20,12 +20,18 @@ jobs:
           mkdir -p editions/index
           curl -fsS "https://www.afronomicsfeed.com/api/edition/index?format=text" -o "editions/index/$d.txt"
           curl -fsS "https://www.afronomicsfeed.com/api/edition/index" -o "editions/index/$d.json"
+      # The secret goes in through env, never spliced into the script text (masked either way, but a value with shell
+      # characters in it could otherwise break or change the command).
       - name: Send to the press list
+        env:
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
         run: |
-          curl -fsS -X POST -H "Authorization: Bearer ${{ secrets.AF_CRON_SECRET }}" https://www.afronomicsfeed.com/api/send/index
+          curl -fsS -X POST -H "Authorization: Bearer $AF_CRON_SECRET" https://www.afronomicsfeed.com/api/send/index
       - name: Owner's weekly email
+        env:
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
         run: |
-          curl -fsS -X POST -H "Authorization: Bearer ${{ secrets.AF_CRON_SECRET }}" https://www.afronomicsfeed.com/api/send/desk || true
+          curl -fsS -X POST -H "Authorization: Bearer $AF_CRON_SECRET" https://www.afronomicsfeed.com/api/send/desk || true
       - name: Commit
         run: |
           git config user.name "afronomics-bot"

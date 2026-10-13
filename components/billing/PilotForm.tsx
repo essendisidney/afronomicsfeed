@@ -17,7 +17,6 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<Extract<PilotResult, { ok: true }> | null>(null);
-  const [copied, setCopied] = useState(false);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,7 +56,7 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
     }
   }
 
-  if (result) return <PilotDone result={result} siteUrl={siteUrl} copied={copied} onCopy={() => setCopied(true)} />;
+  if (result) return <PilotDone result={result} siteUrl={siteUrl} />;
 
   const field = "mt-1 w-full border border-rule bg-paper px-3 py-3 sm:py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
   const label = "block text-[13px] font-medium leading-5 text-muted";
@@ -129,32 +128,27 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
   );
 }
 
-function PilotDone({ result, siteUrl, copied, onCopy }: { result: Extract<PilotResult, { ok: true }>; siteUrl: string; copied: boolean; onCopy: () => void }) {
+function PilotDone({ result, siteUrl }: { result: Extract<PilotResult, { ok: true }>; siteUrl: string }) {
   const box = "border border-forest/40 bg-paper-2 px-4 py-4 text-sm leading-6 text-ink";
   if (result.status === "issued") {
     return (
       <div className={box} role="status">
-        <p className="text-[15px] font-semibold">Your pilot key is ready. It works until {day(result.expiresAt)}.</p>
-        <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-stretch">
-          <code className="block min-w-0 flex-1 break-all bg-surface px-3 py-2 font-mono text-[13px]">{result.key}</code>
-          <button
-            type="button"
-            onClick={() => {
-              void navigator.clipboard?.writeText(result.key).then(onCopy, () => undefined);
-            }}
-            className="rounded-full border border-ink/20 px-4 py-2 text-[13px] font-semibold hover:border-accent"
-          >
-            {copied ? "Copied" : "Copy key"}
-          </button>
-        </div>
+        <p className="text-[15px] font-semibold">
+          {result.emailed === false
+            ? `Your pilot key (${result.prefix}…) is issued, but the email to ${result.email} did not go out.`
+            : `Your pilot key (${result.prefix}…) is on its way to ${result.email}.`}{" "}
+          It works until {day(result.expiresAt)}.
+        </p>
         <p className="mt-2 text-[13px] text-ink-soft">
-          Shown once here and sent to {result.email}. We keep only a fingerprint of it, so store it somewhere safe.
+          {result.emailed === false
+            ? "Write to the desk from that address and we send it within one working day."
+            : "For safety the key is sent only to the address on the form, never shown on screen. We keep only a fingerprint of it, so store the email somewhere safe."}
         </p>
         <p className="mt-3 font-semibold">Next steps</p>
         <ol className="mt-1 list-decimal space-y-1 pl-5 text-[13px] text-ink-soft">
           <li>
             Call the API with the key as a header:
-            <code className="mt-1 block overflow-x-auto whitespace-pre bg-surface px-3 py-2 font-mono text-[12px] text-ink">{`curl -H "Authorization: Bearer ${result.key.slice(0, 10)}…" \\\n  "${siteUrl}/api/v1/bonds/egypt?from=2026-01-01"`}</code>
+            <code className="mt-1 block overflow-x-auto whitespace-pre bg-surface px-3 py-2 font-mono text-[12px] text-ink">{`curl -H "Authorization: Bearer ${result.prefix}…" \\\n  "${siteUrl}/api/v1/bonds/egypt?from=2026-01-01"`}</code>
           </li>
           <li>
             Endpoints and terms are on the{" "}

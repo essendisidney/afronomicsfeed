@@ -211,7 +211,7 @@ export default function FrontierLocalDebtPage() {
               <strong className="text-ink">History in one format:</strong> the full record in the same columns for every market, by API or CSV (Excel on request).
             </li>
             <li>
-              <strong className="text-ink">Alerts:</strong> Treasury-bill results by browser push in ten markets and by email for Kenya. There are no bond-result alerts yet.
+              <strong className="text-ink">Alerts:</strong> Treasury-bill results by browser push in ten markets and by email for Kenya. Pilot and API key holders also get an email for each new bond auction result, by market, with the source link.
             </li>
             <li>
               <strong className="text-ink">Honest gaps:</strong> bond auctions are covered for {bondCountries.join(", ")} only so far; South Africa, Ghana, Tunisia and

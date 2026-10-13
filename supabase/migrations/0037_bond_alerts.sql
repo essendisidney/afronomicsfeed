@@ -1,4 +1,4 @@
--- NOT APPLIED. Bond-result email alerts for API key holders (master plan v2, build item 2; decision D-016).
+-- Applied 13 Oct 2026. Bond-result email alerts for API key holders (master plan v2, build item 2; decision D-016).
 --
 -- Every live API key with an email (pilot or paid: data_keys.email, from 0035; not revoked, not expired) gets one
 -- email per market per auction day when a reader adds new bond auction results: the market, the date, each line

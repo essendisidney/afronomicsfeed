@@ -138,3 +138,11 @@ what we changed. Newest at the bottom. Read this first every week.
 - **Re-pricing rule:** review quarterly; re-price a market when its 30-day average FX is more than 10% off the table
   rate, at once above 20%; increases with 30 days' notice, at most every 6 months.
 - **Test:** local-institution pilots requested from Kenya/Uganda/Nigeria within 60 days; if none, drop the sheet.
+
+### D-015 · 13 Oct 2026 · Institutional checkout charged in KES
+- **Decided by the founder:** Analyst and Team & API are charged in Kenyan shillings at the rate card's KES 129 to the
+  dollar (KES 32,250 and KES 193,500 a month), so M-Pesa, cards and Pesalink all work. PAYSTACK_CURRENCY stays KES
+  (verified 13 Oct: set to KES in Vercel for production and preview, the same as the code's default; the live test
+  payment settled in KES by M-Pesa). USD list prices stay on the page.
+- **Open:** confirm in the Paystack dashboard that M-Pesa accepts KES 193,500 in one payment; until Paystack plan
+  codes are set (none are set in Vercel as of 13 Oct), each purchase is one month and does not renew (the page says so).

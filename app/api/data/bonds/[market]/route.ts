@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * A market's bond auctions as CSV. Without a key: the latest 12 months, up to 100 rows (the `#` lines at the top say
- * so and link the next page). With a key (Authorization: Bearer afk_…): the full history. Optional from, to, limit.
+ * so and link the next page). With a key (Authorization: Bearer afk_…, or a browser download session from /downloads): the full history. Optional from, to, limit.
  */
 export async function GET(request: Request, { params }: { params: Promise<{ market: string }> }) {
   const { market: slug } = await params;
@@ -15,7 +15,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ mark
   if (!range) return csvError("Dates must be YYYY-MM-DD.", 400);
   const { rows, updatedAt } = loadBondMarket(market.slug);
   if (rows.length === 0) return csvError("Dataset not yet published", 404);
-  const access = await apiAccess(request, `/data/bonds/${market.slug}`);
+  const access = await apiAccess(request, `/data/bonds/${market.slug}`, { csv: true });
   const sliced = sliceRows(request, rows, (r) => r.date, range, access, CSV_KEYED);
   return apiCsv(bondsCsv(market, sliced.rows, updatedAt), `afronomics-${market.slug}-bond-auctions.csv`, access, sliced.free);
 }

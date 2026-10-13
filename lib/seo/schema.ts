@@ -30,8 +30,11 @@ export function organizationJsonLd() {
     email: site.contactEmail,
     sameAs: [site.linkedinUrl, site.telegramUrl],
     parentOrganization: { "@type": "Organization", name: site.houseName, url: site.houseUrl },
-    publishingPrinciples: u("/method"),
+    publishingPrinciples: u("/editorial-standards"),
     correctionsPolicy: u("/corrections"),
+    ethicsPolicy: u("/editorial-standards"),
+    ownershipFundingInfo: u("/about#funding"),
+    actionableFeedbackPolicy: u("/corrections"),
   };
 }
 
@@ -139,6 +142,55 @@ export function bondDatasetJsonLd(
         `/api/v1/bonds/${market.slug}${issuer ? `?issue=${encodeURIComponent(issuer.name)}` : ""}`,
         `${place} government bond auctions (JSON API; latest 12 months free, full history with a key)`,
       ),
+    ],
+  };
+}
+
+/**
+ * One dated bond auction (/markets/bonds/{market}/{date}, /markets/bonds/waemu/{issuer}/{date},
+ * /markets/kenya-bonds/{date}): the lines sold that day, as a Dataset that is part of the market's own Dataset.
+ */
+export function bondAuctionDatasetJsonLd(
+  market: BondMarket,
+  a: {
+    path: string;
+    date: string;
+    name: string;
+    description: string;
+    place: string;
+    sources: string[];
+    marketPath: string;
+    issuer?: string | null;
+  },
+) {
+  const apiQuery = `?from=${a.date}&to=${a.date}${a.issuer ? `&issue=${encodeURIComponent(a.issuer)}` : ""}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: a.name,
+    description: a.description,
+    url: u(a.path),
+    keywords: [`${a.place} government bonds`, `${a.place} bond auction results`, "local-currency debt", market.currency, "Africa"],
+    creator: organizationRef,
+    publisher: organizationRef,
+    isBasedOn: a.sources.length ? a.sources : market.sourcePage,
+    isPartOf: {
+      "@type": "Dataset",
+      name: `${a.issuer ? `${a.issuer} (WAEMU)` : market.country} government bond auction results`,
+      url: u(a.marketPath),
+    },
+    license: DATA_LICENSE_URL,
+    isAccessibleForFree: true,
+    temporalCoverage: a.date,
+    spatialCoverage: { "@type": "Place", name: a.issuer ?? market.country },
+    variableMeasured: bondVariables(market),
+    includedInDataCatalog: catalog,
+    distribution: [
+      csv(
+        market.slug === "kenya" ? "/api/data/kenya-bonds" : `/api/data/bonds/${market.slug}`,
+        `${a.place} government bond auctions (CSV; latest 12 months free, full history with a key)`,
+      ),
+      json(`/api/v1/bonds/${market.slug}${apiQuery}`, `${a.place} bond auction of ${a.date} (JSON API; latest 12 months free, full history with a key)`),
     ],
   };
 }

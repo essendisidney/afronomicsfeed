@@ -1,4 +1,5 @@
 import type { BondSnapshot } from "@/lib/data/sovereign-bonds";
+import { FullHistoryLink } from "./FullHistoryLink";
 
 const longDate = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 const monthLabel = (ym: string) => new Date(`${ym}-15T12:00:00Z`).toLocaleDateString("en-GB", { month: "short", year: "2-digit", timeZone: "UTC" });
@@ -90,13 +91,14 @@ export function BondMarketCard({ snap, label }: { snap: BondSnapshot; label?: st
             Source notice
           </a>
         ) : null}
-        <a href={`/api/data/bonds/${market.slug}`} title="Latest 12 months free; full history with a key" className="text-forest underline underline-offset-2">
+        <a href={`/api/data/bonds/${market.slug}`} title="Latest 12 months free" className="text-forest underline underline-offset-2">
           CSV
         </a>
+        <FullHistoryLink csv={`/api/data/bonds/${market.slug}`} />
         <a href={`/api/v1/bonds/${market.slug}`} title="Latest 12 months free; full history with a key" className="text-forest underline underline-offset-2">
           API
         </a>
-        <span className="text-muted">latest 12 months free; full history with a key</span>
+        <span className="text-muted">CSV and API: latest 12 months free</span>
         <span className="text-muted">{market.publisher}</span>
       </p>
     </article>

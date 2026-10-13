@@ -5,13 +5,13 @@ export const dynamic = "force-dynamic";
 
 /**
  * Kenya Treasury bill auctions as CSV, with CBK notice links. Without a key: the latest 12 months, up to 100 rows.
- * With a key (Authorization: Bearer afk_…): the full history. Optional from, to, limit.
+ * With a key (Authorization: Bearer afk_…, or a browser download session from /downloads): the full history. Optional from, to, limit.
  */
 export async function GET(request: Request) {
   const range = readRange(request);
   if (!range) return csvError("Dates must be YYYY-MM-DD.", 400);
   const file = loadTbills();
-  const access = await apiAccess(request, "/data/kenya-tbills");
+  const access = await apiAccess(request, "/data/kenya-tbills", { csv: true });
   const sliced = sliceRows(request, file.rows, (r) => r.value_date, range, access, CSV_KEYED);
   return apiCsv(tbillsCsv({ ...file, rows: sliced.rows }), "afronomics-kenya-tbill-auctions.csv", access, sliced.free);
 }

@@ -11,8 +11,10 @@ import { renderTime } from "@/lib/data/fetcher";
 import type { BondMarket, BondRow } from "@/lib/data/sovereign-bonds";
 import { site } from "@/lib/site";
 import { AuctionRateChart } from "./AuctionRateChart";
+import { bondAuctionPath } from "./auction";
 import { bondFacts, longDate, millions, shortName, tableOrder, tenorText, todayIso, type Issuer } from "./stats";
 import { ActionTile } from "@/components/ui/Card";
+import { FullHistoryLink } from "@/components/data/FullHistoryLink";
 
 const TABLE_LIMIT = 100;
 
@@ -82,12 +84,17 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
         </p>
       }
       aside={
-        <ActionTile href={n.csv} download kicker="Download" title="The table as CSV">
-          <span className="block">Latest 12 months free; full history with a key</span>
-          <span className="block">
-            {market.slug === "waemu" ? "All eight WAEMU issuers" : `${market.country}`} · source: {market.publisher}
-          </span>
-        </ActionTile>
+        <>
+          <ActionTile href={n.csv} download kicker="Download" title="The table as CSV">
+            <span className="block">Latest 12 months free; full history with a key</span>
+            <span className="block">
+              {market.slug === "waemu" ? "All eight WAEMU issuers" : `${market.country}`} · source: {market.publisher}
+            </span>
+          </ActionTile>
+          <p className="mt-2 px-1 text-[13px] font-medium">
+            <FullHistoryLink csv={n.csv} />
+          </p>
+        </>
       }
     >
       <JsonLd data={jsonLd} />
@@ -165,7 +172,7 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
         <SectionTitle
           kicker="Table"
           title={rows.length > TABLE_LIMIT ? `The latest ${TABLE_LIMIT} results` : `All ${rows.length} results`}
-          note={`Newest first. Amounts in ${ccy} millions; bid cover is bids received divided by the amount accepted.${
+          note={`Newest first; each date opens that auction's own page. Amounts in ${ccy} millions; bid cover is bids received divided by the amount accepted.${
             rows.length > TABLE_LIMIT ? ` The other ${(rows.length - TABLE_LIMIT).toLocaleString("en-US")} are in the CSV.` : ""
           }`}
         />
@@ -187,7 +194,16 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
             <tbody>
               {table.map((r, i) => (
                 <tr key={`${r.date}-${r.isin ?? r.issue ?? ""}-${r.tenor_years ?? ""}-${i}`}>
-                  <td className="whitespace-nowrap font-mono text-xs">{r.date}</td>
+                  <td className="whitespace-nowrap font-mono text-xs">
+                    {/* Each date opens that auction's own page (WAEMU: the issuer's auction that day). */}
+                    {bondAuctionPath(market.slug, r.date, r.issue) ? (
+                      <Link href={bondAuctionPath(market.slug, r.date, r.issue)!} className="text-forest underline underline-offset-2 hover:text-gold">
+                        {r.date}
+                      </Link>
+                    ) : (
+                      r.date
+                    )}
+                  </td>
                   <td className="text-xs">
                     {r.issue ? <span className="text-ink">{r.issue}</span> : null}
                     {r.isin ? <span className={`block font-mono text-[11px] ${r.issue ? "text-muted" : "text-ink"}`}>{r.isin}</span> : null}
@@ -219,9 +235,10 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
           <p className="mt-3 text-sm text-ink-soft">
             Showing {TABLE_LIMIT} of {rows.length.toLocaleString("en-US")}.{" "}
             <a href={n.csv} download className="font-medium text-forest underline underline-offset-2 hover:text-gold">
-              Download the full CSV
+              Download the CSV
             </a>{" "}
-            or query the{" "}
+            (latest 12 months free;{" "}
+            <FullHistoryLink csv={n.csv} className="font-medium text-forest underline underline-offset-2 hover:text-gold" />) or query the{" "}
             <a href={n.api} className="font-medium text-forest underline underline-offset-2 hover:text-gold">
               JSON API
             </a>
@@ -233,7 +250,7 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
       <section className="mt-14">
         <SectionTitle kicker="Downloads" title="Take the data with you" />
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <DownloadCard href={n.csv} download title="CSV" body={`Every ${shortName(market)} result we hold, one row per bond, free.`} cta={n.csv} />
+          <DownloadCard href={n.csv} download title="CSV" body={`${shortName(market)} results, one row per bond: the latest 12 months free, the full history with a key.`} cta={n.csv} />
           <DownloadCard href={n.api} title="JSON API" body="Filter by ISIN, issue and date range; up to 5,000 rows a call." cta={decodeURIComponent(n.api)} />
           <DownloadCard
             href="/data/frontier-local-debt#pilot"
@@ -243,6 +260,9 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
             strong
           />
         </div>
+        <p className="mt-3 text-[13px] font-medium">
+          <FullHistoryLink csv={n.csv} />
+        </p>
       </section>
 
       {/* Long citation URLs must wrap on phones. */}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { PageShell } from "@/components/data/PageShell";
 import { confirmReturnWithKey } from "@/lib/billing/confirm";
-import type { KeyOutcome } from "@/lib/billing/paidkey";
+import { isAnalystPlan, type KeyOutcome } from "@/lib/billing/paidkey";
 import { getCheckoutPlan, moneyLabel } from "@/lib/billing/plans";
 import { institutionalTier, rateCard } from "@/lib/billing/ratecard";
 import { nextStep } from "@/lib/billing/record";
@@ -28,12 +28,36 @@ function whatYouGet(plan: string | null): string[] {
 const longDate = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
 /**
- * The Team and API key, shown once: on the visit that issued it, or on the first visit after the webhook issued it
- * (within three days). Later visits say where the key went instead. Nothing for other plans.
+ * The Team and API key, or the Analyst download key, shown once: on the visit that issued it, or on the first visit
+ * after the webhook issued it (within three days). Later visits say where the key went instead. Nothing for other plans.
  */
-function KeyPanel({ keyOutcome, email }: { keyOutcome: KeyOutcome; email: string }) {
+function KeyPanel({ keyOutcome, email, plan }: { keyOutcome: KeyOutcome; email: string; plan: string | null }) {
   const box = "mb-8 border border-forest/40 bg-paper-2 px-4 py-4 text-sm leading-6 text-ink";
   const to = email || "the email you paid with";
+  const analyst = isAnalystPlan(plan);
+  const noun = analyst ? "download key" : "API key";
+  if (keyOutcome.kind === "issued" && keyOutcome.key && analyst) {
+    return (
+      <div className={box} role="status">
+        <p className="text-[15px] font-semibold">
+          Your download key is ready{keyOutcome.test ? " (test payment: this key lasts one day)" : ""}. It works until {longDate(keyOutcome.expiresAt)}.
+        </p>
+        <CopyKey value={keyOutcome.key} />
+        <p className="mt-2 text-[13px] text-ink-soft">
+          Shown once on this page and emailed to {to} with the receipt. We keep only a fingerprint of it, so store it somewhere safe now. If it leaks,
+          email the desk and we replace it.
+        </p>
+        <p className="mt-3 text-[13px] text-ink-soft">
+          To download: open{" "}
+          <Link href="/downloads" className="font-semibold text-forest underline underline-offset-2">
+            Full-history downloads
+          </Link>
+          , paste the key once, and every CSV link on the site gives the full history in that browser for 12 hours. Each renewal payment extends this key;
+          if the plan is not renewed it stops three days after the paid period ends.
+        </p>
+      </div>
+    );
+  }
   if (keyOutcome.kind === "issued" && keyOutcome.key) {
     return (
       <div className={box} role="status">
@@ -60,7 +84,9 @@ function KeyPanel({ keyOutcome, email }: { keyOutcome: KeyOutcome; email: string
   if (keyOutcome.kind === "issued") {
     return (
       <div className={box} role="status">
-        <p className="text-[15px] font-semibold">Your API key ({keyOutcome.prefix}…) is issued and works until {longDate(keyOutcome.expiresAt)}.</p>
+        <p className="text-[15px] font-semibold">
+          Your {noun} ({keyOutcome.prefix}…) is issued and works until {longDate(keyOutcome.expiresAt)}.
+        </p>
         <p className="mt-1 text-[13px] text-ink-soft">
           For safety it is shown only once, and it was sent to {to} with the receipt. If it has not arrived, email{" "}
           <a className="underline underline-offset-2" href={`mailto:${site.contactEmail}`}>
@@ -75,7 +101,7 @@ function KeyPanel({ keyOutcome, email }: { keyOutcome: KeyOutcome; email: string
     return (
       <div className={box} role="status">
         <p className="text-[15px] font-semibold">
-          Renewed: your API key ({keyOutcome.prefix}…) now works until {longDate(keyOutcome.expiresAt)}.
+          Renewed: your {noun} ({keyOutcome.prefix}…) now works until {longDate(keyOutcome.expiresAt)}.
         </p>
         <p className="mt-1 text-[13px] text-ink-soft">Same key, nothing to change in your systems. The receipt is on its way to {to}.</p>
       </div>
@@ -149,7 +175,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
     <PageShell crumbs={[{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }, { label: "Thank you" }]} kicker="Payment confirmed" title="Thank you. You’re in.">
       <div className="grid max-w-4xl gap-8 lg:grid-cols-[1fr_18rem]">
         <div>
-          <KeyPanel keyOutcome={key} email={shownEmail} />
+          <KeyPanel keyOutcome={key} email={shownEmail} plan={payment.plan} />
           <table className="data-table">
             <tbody>
               {rows.map(([k, v]) => (

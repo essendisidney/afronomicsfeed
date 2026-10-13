@@ -1,6 +1,6 @@
 # LinkedIn: week of 19–23 October 2026 (AfronomicsFeed company page)
 
-Drafts, not yet posted or scheduled. Each post is re-checked against the data on main on the morning it goes out; if a
+Approved by the founder on 13 Oct 2026 and scheduled: Mon–Wed and Fri through the daily LinkedIn routines, Thu (H) by its own one-off routine at 07:25 Nairobi. Each post is re-checked against the data on main on the morning it goes out; if a
 figure has changed, the post is updated before it is sent. Figures below were computed from main as of 13 Oct 2026
 (commit baaccc6); the comment under each draft names the file and value used.
 

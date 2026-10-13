@@ -9,14 +9,15 @@ const legal = [
   { href: "/imprint", label: "Imprint" },
 ] as const;
 
-function Column({ title, links }: { title: string; links: readonly { href: string; label: string }[] }) {
+function Column({ title, links, wide }: { title: string; links: readonly { href: string; label: string }[]; wide?: boolean }) {
   return (
-    <div>
+    <div className={wide ? "col-span-2 sm:col-span-1" : undefined}>
       <p className="text-[13px] font-semibold text-night-ink">{title}</p>
-      <ul className="mt-4 space-y-2">
+      {/* Each link is a 44px row on a phone (easy to hit) and tightens to the usual list from sm. */}
+      <ul className="mt-2 sm:mt-4 sm:space-y-2">
         {links.map((item) => (
           <li key={item.href}>
-            <Link href={item.href} className="text-sm text-night-soft hover:text-night-ink">
+            <Link href={item.href} className="flex min-h-11 items-center text-sm text-night-soft hover:text-night-ink sm:inline sm:min-h-0">
               {item.label}
             </Link>
           </li>
@@ -43,14 +44,14 @@ export function Footer() {
               {site.houseCredit}
             </a>
           </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-4">
+          <div className="grid grid-flow-dense grid-cols-2 gap-x-6 gap-y-8 lg:col-span-8 lg:grid-cols-4">
             {footerGroups.map((group) => (
-              <Column key={group.title} title={group.title} links={group.links} />
+              <Column key={group.title} title={group.title} links={group.links} wide={group.links.length > 14} />
             ))}
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-night-line pt-6">
+        <div className="mt-12 flex flex-wrap items-center gap-x-5 border-t border-night-line pt-4 sm:gap-y-2 sm:pt-6 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:items-center sm:[&>a]:min-h-0">
           {legal.map((item) => (
             <Link key={item.href} href={item.href} className="text-xs text-night-muted hover:text-night-ink">
               {item.label}

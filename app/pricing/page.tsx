@@ -6,6 +6,10 @@ import { InvoiceRequestForm } from "@/components/billing/InvoiceRequestForm";
 import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { PilotForm } from "@/components/billing/PilotForm";
 import { PageShell } from "@/components/data/PageShell";
+import { Badge } from "@/components/ui/Badge";
+import { buttonClass } from "@/components/ui/Button";
+import { cardClass } from "@/components/ui/Card";
+import { TableScroll } from "@/components/ui/DataTable";
 import { SectionTitle } from "@/components/data/parts";
 import { paystackConfigured } from "@/lib/billing/paystack";
 import { chargeLabel } from "@/lib/billing/plans";
@@ -148,8 +152,20 @@ const institutionalFaq: Array<{ q: string; a: React.ReactNode }> = [
 ];
 
 function cell(value: boolean | string) {
-  if (value === true) return <span className="text-up">✓</span>;
-  if (value === false) return <span className="text-muted">—</span>;
+  if (value === true)
+    return (
+      <>
+        <span aria-hidden className="text-up">✓</span>
+        <span className="sr-only">Included</span>
+      </>
+    );
+  if (value === false)
+    return (
+      <>
+        <span aria-hidden className="text-muted">—</span>
+        <span className="sr-only">Not included</span>
+      </>
+    );
   return <span className="text-xs text-ink-soft">{value}</span>;
 }
 
@@ -182,7 +198,11 @@ export default async function PricingPage({
               ["#institutional-faq", "Institutional FAQ"],
               ["#readers", "Reader plans"],
             ].map(([href, label]) => (
-              <a key={href} href={href} className="rounded-full border border-rule px-3 py-1 text-forest hover:border-gold hover:text-gold">
+              <a
+                key={href}
+                href={href}
+                className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1 text-forest hover:border-gold hover:text-gold sm:min-h-0"
+              >
                 {label}
               </a>
             ))}
@@ -192,7 +212,7 @@ export default async function PricingPage({
     >
       <CheckoutNotice query={query} />
 
-      <section id="institutions" className="scroll-mt-24">
+      <section id="institutions">
         <SectionTitle
           kicker="For institutions"
           title="African government debt auction data"
@@ -211,7 +231,7 @@ export default async function PricingPage({
               >
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="text-[13px] font-semibold text-gold">{tier.name}</h3>
-                  {api ? <span className="rounded-full bg-forest/10 px-2 py-0.5 text-[11px] font-semibold text-forest">Includes the API</span> : null}
+                  {api ? <Badge tone="accent">Includes the API</Badge> : null}
                 </div>
                 <p className="mt-3 font-serif text-4xl text-ink">
                   {institutionalPriceText(tier)}
@@ -233,7 +253,7 @@ export default async function PricingPage({
                   {tier.id === "enterprise" ? (
                     <p className="text-center text-[11px] text-muted">Priced by scope. The desk replies within one working day.</p>
                   ) : (
-                    <a href="#pilot" className="block text-center text-[13px] font-semibold text-forest underline underline-offset-2">
+                    <a href="#pilot" className="flex min-h-11 items-center justify-center text-center text-[13px] font-semibold text-forest underline underline-offset-2 sm:min-h-8">
                       or start a free {institutionalPilot.days}-day pilot
                     </a>
                   )}
@@ -249,7 +269,7 @@ export default async function PricingPage({
         </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div id="pilot" className="scroll-mt-24 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
+          <div id="pilot" className={cardClass("emphasis")}>
             <p className="text-[17px] font-semibold text-ink">Start a {institutionalPilot.label}</p>
             <p className="mt-1 mb-4 text-sm leading-6 text-ink-soft">
               For investment managers, banks, development finance institutions and research teams: an API key with the full history, free for{" "}
@@ -261,7 +281,7 @@ export default async function PricingPage({
             </p>
             <PilotForm siteUrl={site.url} />
           </div>
-          <div id="invoice" className="scroll-mt-24 rounded-2xl border border-rule bg-surface px-5 py-5">
+          <div id="invoice" className={cardClass()}>
             <p className="text-[17px] font-semibold text-ink">Request an invoice</p>
             <p className="mt-1 mb-4 text-sm leading-6 text-ink-soft">
               For Enterprise, or for any plan your finance team pays by bank transfer. {institutionalCurrencyNote}
@@ -271,24 +291,24 @@ export default async function PricingPage({
         </div>
       </section>
 
-      <section id="institutional-faq" className="mt-14 scroll-mt-24">
+      <section id="institutional-faq" className="mt-14">
         <SectionTitle kicker="Questions from institutions" title="Before you request a pilot" />
         <div className="mt-2 grid gap-x-10 md:grid-cols-2">
           {institutionalFaq.map(({ q, a }) => (
-            <details key={q} className="group border-b border-rule py-4">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-[15px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
+            <details key={q} className="group border-b border-rule py-2">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 py-2 text-[15px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
                 {q}
                 <span aria-hidden className="mt-0.5 shrink-0 text-muted transition-transform group-open:rotate-45">
                   +
                 </span>
               </summary>
-              <p className="mt-2 text-sm leading-6 text-ink-soft">{a}</p>
+              <p className="mb-2 mt-1 text-sm leading-6 text-ink-soft">{a}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <section id="readers" className="mt-16 scroll-mt-24">
+      <section id="readers" className="mt-16">
         <SectionTitle
           kicker="For readers"
           title="Reader plans"
@@ -308,7 +328,7 @@ export default async function PricingPage({
                 <p className={`mt-3 flex-1 text-sm leading-6 ${highlight ? "text-night-soft" : "text-ink-soft"}`}>{readerCopy[tier.name]?.detail ?? tier.detail}</p>
                 <div className="mt-6">
                   {tier.name === pricing.free.name ? (
-                    <Link href="/subscribe" className="block rounded-full border border-ink/20 px-4 py-3 text-center text-[13px] font-semibold text-ink hover:border-accent">
+                    <Link href="/subscribe" className={buttonClass({ variant: "secondary", block: true })}>
                       Get the Morning, free
                     </Link>
                   ) : tier.name === pricing.pro.name && live ? (
@@ -318,7 +338,7 @@ export default async function PricingPage({
                   ) : (
                     <Link
                       href={`/contact?interest=${tier.name === pricing.enterprise.name ? "licensing" : "access"}#enquiry`}
-                      className={`block rounded-full px-4 py-3 text-center text-[13px] font-semibold ${highlight ? "bg-accent text-night" : "border border-ink/20 text-ink hover:border-accent"}`}
+                      className={buttonClass({ variant: highlight ? "accent" : "secondary", block: true })}
                     >
                       {tier.name === pricing.enterprise.name ? "Talk to us" : "Request access"}
                     </Link>
@@ -358,13 +378,13 @@ export default async function PricingPage({
 
         <section className="mt-14">
           <SectionTitle kicker="Compare" title="What each plan includes" />
-          <div className="overflow-x-auto">
-            <table className="data-table mt-4">
+          <TableScroll label="What each plan includes" className="mt-4">
+            <table className="data-table min-w-[36rem]">
               <thead>
                 <tr>
-                  <th>Feature</th>
+                  <th scope="col">Feature</th>
                   {tiers.map((tier) => (
-                    <th key={tier.name} className="text-center">
+                    <th key={tier.name} scope="col" className="text-center">
                       {readerCopy[tier.name]?.label ?? tier.name}
                     </th>
                   ))}
@@ -373,7 +393,9 @@ export default async function PricingPage({
               <tbody>
                 {rows.map(([label, ...values]) => (
                   <tr key={label}>
-                    <td className="text-sm">{label}</td>
+                    <th scope="row" className="row-label text-sm">
+                      {label}
+                    </th>
                     {values.map((value, index) => (
                       <td key={index} className="text-center">
                         {cell(value)}
@@ -383,7 +405,7 @@ export default async function PricingPage({
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroll>
         </section>
 
         <section className="mt-14 grid gap-8 md:grid-cols-3">

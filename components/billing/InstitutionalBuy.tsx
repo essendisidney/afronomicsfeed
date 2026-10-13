@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { buttonClass } from "@/components/ui/Button";
 import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { paystackConfigured } from "@/lib/billing/paystack";
 import { getCheckoutPlan, institutionalCharge } from "@/lib/billing/plans";
@@ -13,9 +14,7 @@ export function InstitutionalBuy({ tier, name, variant = "primary" }: { tier: In
     return (
       <Link
         href={`/pricing?plan=${tier}#invoice`}
-        className={`block rounded-full px-4 py-3 text-center text-[13px] font-semibold ${
-          variant === "primary" ? "bg-ink text-paper hover:bg-forest" : "border border-ink/20 text-ink hover:border-accent"
-        }`}
+        className={buttonClass({ variant: variant === "primary" ? "primary" : "secondary", block: true })}
       >
         Request an invoice
       </Link>

@@ -9,6 +9,7 @@ import { dataCatalogJsonLd, frontierDebtDatasetJsonLd } from "@/lib/seo/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
+import { ActionTile } from "@/components/ui/Card";
 
 export const revalidate = 3600;
 
@@ -46,11 +47,9 @@ export default function BondAuctionsIndex() {
         </p>
       }
       aside={
-        <Link href="/data/frontier-local-debt#pilot" data-track="pricing_cta_click" className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
-          <p className="text-[13px] font-medium opacity-80">For desks and funds</p>
-          <p className="mt-1 font-serif text-2xl">Request a 30-day pilot</p>
-          <p className="text-[12px] opacity-80">Every market, delivered daily</p>
-        </Link>
+        <ActionTile href="/data/frontier-local-debt#pilot" data-track="pricing_cta_click" kicker="For desks and funds" title="Request a 30-day pilot">
+          Every market, delivered daily
+        </ActionTile>
       }
     >
       <JsonLd

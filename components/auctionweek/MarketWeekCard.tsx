@@ -110,7 +110,7 @@ export function MarketWeekCard({ market }: { market: MarketWeek }) {
     hasBill && hasBond ? [`bills, ${meta.rateNotes.bill}`, `bonds, ${meta.rateNotes.bond}`] : [hasBill ? meta.rateNotes.bill : meta.rateNotes.bond].filter(Boolean);
   const publishers = [...new Set([hasBill ? meta.publishers.bill : null, hasBond ? meta.publishers.bond : null].filter(Boolean))];
   return (
-    <article id={`m-${meta.key}`} className="flex min-w-0 scroll-mt-24 flex-col rounded-xl border border-rule bg-surface px-4 py-4 sm:px-5">
+    <article id={`m-${meta.key}`} className="flex min-w-0 flex-col rounded-xl border border-rule bg-surface px-4 py-4 sm:px-5">
       <header className="flex items-baseline justify-between gap-3">
         <h3 className="font-serif text-xl text-ink">
           {meta.bondSlug ? (

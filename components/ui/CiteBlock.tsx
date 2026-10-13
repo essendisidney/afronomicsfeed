@@ -25,17 +25,17 @@ export function CiteBlock({ title, path, publisher, csv }: { title: string; path
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <CopyCitation text={citation} />
         {csv ? (
-          <a href={csv} download className="rounded-full border border-rule px-3 py-1.5 text-[13px] font-medium text-ink-soft hover:border-gold">
+          <a href={csv} download className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1.5 text-[13px] sm:min-h-0 font-medium text-ink-soft hover:border-gold">
             Download CSV
           </a>
         ) : null}
-        <Link href="/widgets" className="rounded-full border border-rule px-3 py-1.5 text-[13px] font-medium text-ink-soft hover:border-gold">
+        <Link href="/widgets" className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1.5 text-[13px] sm:min-h-0 font-medium text-ink-soft hover:border-gold">
           Embed a live widget
         </Link>
-        <Link href="/developers" className="rounded-full border border-rule px-3 py-1.5 text-[13px] font-medium text-ink-soft hover:border-gold">
+        <Link href="/developers" className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1.5 text-[13px] sm:min-h-0 font-medium text-ink-soft hover:border-gold">
           Use the data API
         </Link>
-        <Link href="/reference" className="rounded-full border border-rule px-3 py-1.5 text-[13px] font-medium text-ink-soft hover:border-gold">
+        <Link href="/reference" className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1.5 text-[13px] sm:min-h-0 font-medium text-ink-soft hover:border-gold">
           Definitions, timeliness and corrections
         </Link>
       </div>

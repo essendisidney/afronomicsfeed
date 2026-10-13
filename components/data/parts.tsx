@@ -28,7 +28,10 @@ export function SectionTitle({
         {note ? <p className="mt-1 max-w-2xl text-xs leading-5 text-muted">{note}</p> : null}
       </div>
       {href ? (
-        <Link href={href} className="rounded-full border border-rule px-3 py-1 text-[13px] font-medium text-forest hover:border-gold hover:text-gold">
+        <Link
+          href={href}
+          className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1 text-[13px] font-medium text-forest hover:border-gold hover:text-gold sm:min-h-0"
+        >
           {hrefLabel}
         </Link>
       ) : null}

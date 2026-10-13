@@ -7,6 +7,9 @@ import { loadHealth } from "@/lib/data/health";
 import { hoursText, latencyDate, loadLatency } from "@/lib/data/latency";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
+import { TableScroll } from "@/components/ui/DataTable";
+import { Card } from "@/components/ui/Card";
+import { Stat } from "@/components/ui/Stat";
 
 export const revalidate = 1800;
 
@@ -37,13 +40,14 @@ export default function StatusPage() {
       }
       aside={
         health ? (
-          <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
-            <p className="text-[13px] font-medium text-muted">Figures checked</p>
-            <p className="mt-1 font-serif text-3xl text-ink">{health.items.length}</p>
-            <p className="mt-1 text-[12px] text-muted">
-              {health.summary.ok} up to date · {health.summary.late + health.summary.failed} late or not read · {health.summary.gap} not available
-            </p>
-          </div>
+          <Card>
+            <Stat
+              label="Figures checked"
+              value={health.items.length}
+              detail={`${health.summary.ok} up to date · ${health.summary.late + health.summary.failed} late or not read · ${health.summary.gap} not available`}
+              source={`Checked ${dateFmt.format(new Date(health.checked_on))}, after the latest data run`}
+            />
+          </Card>
         ) : null
       }
     >
@@ -55,7 +59,7 @@ export default function StatusPage() {
             <SectionTitle kicker="Needs attention" title={attention.length ? "Late, not read or not available" : "Nothing late"} />
             {attention.length ? (
               <div className="mt-4">
-                <HealthList items={attention} />
+                <HealthList items={attention} label="Figures late, not read or not available" />
               </div>
             ) : (
               <p className="mt-3 text-sm text-ink-soft">Every figure is as fresh as its publisher’s rhythm says it should be.</p>
@@ -64,12 +68,12 @@ export default function StatusPage() {
           <section className="mt-12">
             <SectionTitle kicker="Up to date" title="Everything else" />
             <div className="mt-4">
-              <HealthList items={fine} />
+              <HealthList items={fine} label="Figures up to date" />
             </div>
           </section>
         </>
       )}
-      <section id="latency" className="mt-12 scroll-mt-24">
+      <section id="latency" className="mt-12">
         <SectionTitle
           kicker="Publication delay"
           title="How long after the publisher do we carry each result?"
@@ -86,7 +90,7 @@ export default function StatusPage() {
           weekdays and every four at weekends, so the delay includes that wait.
         </p>
         {latency ? (
-          <div className="mt-4 overflow-x-auto">
+          <TableScroll label="Publication delay by market" className="mt-4">
             <table className="data-table">
               <thead>
                 <tr>
@@ -113,7 +117,7 @@ export default function StatusPage() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroll>
         ) : null}
       </section>
 

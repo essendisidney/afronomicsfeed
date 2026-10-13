@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LineChart } from "@/components/data/LineChart";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
+import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { Questions } from "@/components/seo/Questions";
 import { FundSizes } from "@/components/data/FundSizes";
 import { SectionTitle } from "@/components/data/parts";
@@ -218,6 +219,7 @@ export default function MoneyMarketFundsPage() {
       />
       <FundSizes readDaily={new Set(funds.map((f) => f.name))} />
       <Questions items={fundAnswers().items} />
+      <DebtDataLinks country="Kenya" title="What the funds hold: government paper" />
       <NewsletterBand />
     </PageShell>
   );

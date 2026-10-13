@@ -6,6 +6,8 @@ import { buildSearchIndex } from "@/lib/search";
 export const metadata: Metadata = {
   title: "Search",
   description: "Search 54 African country files, every indicator in the data hub, and Afronomics analysis.",
+  // An on-site search page has no content of its own to rank; keep it out of the index but let crawlers follow it.
+  robots: { index: false, follow: true },
 };
 
 export default function SearchPage() {

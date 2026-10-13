@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
+import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { getBondMarket } from "@/lib/data/sovereign-bonds";
+import { bondDatasetJsonLd } from "@/lib/seo/schema";
 import { PageShell } from "@/components/data/PageShell";
 import { YieldCurve } from "@/components/data/YieldCurve";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
@@ -33,18 +37,19 @@ export default function KenyaBondsPage() {
     : null;
   const latestAuction = file.rows.filter((row) => row.value_date === lastDate);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    name: "Kenya Treasury bond auction results",
-    description: "Every Central Bank of Kenya Treasury bond auction result: yields, coupons, bids and amounts accepted.",
-    url: `${site.url}/markets/kenya-bonds`,
-    temporalCoverage: first && lastDate ? `${first}/${lastDate}` : undefined,
-    spatialCoverage: "Kenya",
-    creator: { "@type": "Organization", name: site.name, url: site.url },
-    isBasedOn: file.sourcePage,
-    distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: `${site.url}/api/data/kenya-bonds` }],
-  };
+  // The shared Dataset builder (license, catalog, variables, freshness), plus this page's own Kenya CSV first.
+  const kenya = getBondMarket("kenya");
+  const shared = kenya ? bondDatasetJsonLd(kenya, "/markets/kenya-bonds") : null;
+  const jsonLd = shared
+    ? {
+        ...shared,
+        name: "Kenya Treasury bond auction results",
+        distribution: [
+          { "@type": "DataDownload", name: "Kenya Treasury bond auctions with CBK notice links (CSV)", encodingFormat: "text/csv", contentUrl: `${site.url}/api/data/kenya-bonds` },
+          ...shared.distribution,
+        ],
+      }
+    : null;
 
   return (
     <PageShell
@@ -70,7 +75,7 @@ export default function KenyaBondsPage() {
         </a>
       }
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {jsonLd ? <JsonLd data={jsonLd} /> : null}
       {file.rows.length === 0 ? (
         <p className="text-sm text-muted">The dataset is being compiled.</p>
       ) : (
@@ -153,6 +158,7 @@ export default function KenyaBondsPage() {
         </>
       )}
       <CiteBlock title="Kenya Treasury bond auction results" path="/markets/kenya-bonds" publisher="the Central Bank of Kenya" csv="/api/data/kenya-bonds" />
+      <DebtDataLinks country="Kenya" current="/markets/kenya-bonds" />
       <NewsletterBand lede="Kenya’s bond and bill auctions, plus 53 other economies, in one Monday email." />
     </PageShell>
   );

@@ -5,6 +5,8 @@ import { SectionTitle } from "@/components/data/parts";
 import { bondFacts, issuersOf, longDate, shortName, tenorText, todayIso } from "@/components/bonds/stats";
 import { renderTime } from "@/lib/data/fetcher";
 import { bondMarkets, loadBondMarket } from "@/lib/data/sovereign-bonds";
+import { dataCatalogJsonLd, frontierDebtDatasetJsonLd } from "@/lib/seo/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -50,6 +52,20 @@ export default function BondAuctionsIndex() {
         </Link>
       }
     >
+      <JsonLd
+        data={[
+          dataCatalogJsonLd(
+            "African government bond auction results",
+            "/markets/bonds",
+            description,
+            held.flatMap(({ market, issuers }) => [
+              { name: `${shortName(market)} government bond auction results`, path: market.slug === "kenya" ? "/markets/kenya-bonds" : `/markets/bonds/${market.slug}` },
+              ...issuers.map((i) => ({ name: `${i.name} government bond auction results`, path: `/markets/bonds/${market.slug}/${i.slug}` })),
+            ]),
+          ),
+          frontierDebtDatasetJsonLd(),
+        ]}
+      />
       <SectionTitle kicker="Markets" title="Pick a market" note="Ordered by results held. Dates are the newest result in each dataset; some publishers date results by settlement." />
       <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {markets.map(({ market, facts, issuers }) => {

@@ -43,17 +43,16 @@ export const metadata: Metadata = {
   // Let search and answer engines show full snippets and large previews of the data pages.
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
   alternates: { types: { "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} RSS` }] } },
+  // No og:title or og:description here. Metadata merges shallowly, so a page that sets no openGraph of its own
+  // would inherit "Afronomics" and the site blurb, and every T-bill page shared on WhatsApp or LinkedIn would look
+  // the same. Without them, link previews fall back to each page's own <title> and description.
   openGraph: {
-    title: site.name,
-    description: site.description,
     siteName: site.name,
     locale: "en_KE",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
-    description: site.description,
   },
 };
 

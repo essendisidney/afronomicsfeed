@@ -116,15 +116,16 @@ export function DebtHero() {
             <div className="rounded-3xl border border-night-line bg-night-2 p-2 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]">
               <div className="flex items-baseline justify-between gap-3 px-3 pb-3 pt-3 sm:px-4">
                 <h2 className="text-[15px] font-semibold">Latest bond auction, each market</h2>
-                <Link href="/data/frontier-local-debt" className="shrink-0 text-[13px] text-night-muted hover:text-night-ink">
-                  Detail →
+                <Link href="/markets/bonds" className="shrink-0 text-[13px] text-night-muted hover:text-night-ink">
+                  All bond auctions →
                 </Link>
               </div>
               <ul className="space-y-1">
                 {rows.map((row, i) => (
                   <li key={row.snap.market.slug} className="af-board-row" style={{ "--i": i } as React.CSSProperties}>
                     <Link
-                      href="/data/frontier-local-debt"
+                      // Each row goes to that market's own bond page, so the homepage passes weight to every one of them.
+                      href={row.snap.market.slug === "kenya" ? "/markets/kenya-bonds" : `/markets/bonds/${row.snap.market.slug}`}
                       className="flex items-center justify-between gap-3 rounded-2xl bg-night px-3 py-3 hover:bg-night/60 sm:px-4"
                     >
                       <span className="min-w-0">

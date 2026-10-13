@@ -16,7 +16,8 @@ export const metadata: Metadata = {
   title: "The Afronomics Morning — Africa’s markets before 7am",
   description:
     "Every weekday at 7am Nairobi: the currencies that moved overnight, the Treasury bill results that landed, what is due today and the headlines that matter, across Africa’s markets.",
-  alternates: { canonical: `${site.url}/morning` },
+  // hreflang must be reciprocal: /morning/sw names this page as its English version, so this page names it back.
+  alternates: { canonical: `${site.url}/morning`, languages: { en: `${site.url}/morning`, sw: `${site.url}/morning/sw` } },
 };
 
 export default async function MorningPage() {

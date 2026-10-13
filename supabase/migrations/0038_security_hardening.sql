@@ -1,4 +1,4 @@
--- Security review, 13 Oct 2026 (docs/security/security-review-2026-10-13.md). NOT APPLIED: apply after the app
+-- Security review, 13 Oct 2026 (docs/security/security-review-2026-10-13.md). Applied 13 Oct 2026, after the app
 -- change that calls the two-argument archive functions is deployed (lib/agents/archive.ts falls back to the old
 -- functions until this runs, so the order "deploy, then apply" never breaks the daily archive).
 --

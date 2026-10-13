@@ -5,6 +5,7 @@ import { MarketStrip } from "@/components/ui/MarketStrip";
 import { PageCounter } from "./PageCounter";
 import { AppInstall } from "./AppInstall";
 import { PageFeedback } from "@/components/ui/PageFeedback";
+import { MicroSurvey } from "@/components/ui/MicroSurvey";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const searchIndex = buildSearchIndex();
@@ -24,6 +25,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6">
           <PageFeedback />
         </div>
+        <MicroSurvey />
       </div>
       <Footer />
       <PageCounter />

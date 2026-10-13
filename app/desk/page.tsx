@@ -16,6 +16,7 @@ import { OwnerDevice } from "./OwnerDevice";
 import { MoneyPanel, type Money, type Referral } from "./MoneyPanel";
 import { CommandCentre, toUsd, type Deal, type PilotKey } from "./CommandCentre";
 import { StrategyBoard } from "./StrategyBoard";
+import { FunnelPanel, type Funnel } from "./FunnelPanel";
 import { loadFxQuote } from "@/lib/data/fx";
 import { AddCorrection, AddPress, GrantAccess, HideReport, IssueApiKey, RevokeApiKey } from "./DeskActions";
 import { country as reportCountry, item as reportItem } from "@/lib/reader-reports-core";
@@ -97,6 +98,12 @@ const sourceLabel = (source: string) => {
 };
 
 const DAY = 86400000;
+
+const EMPTY_DESK: Desk = {
+  views_by_day: [], views_7d: 0, views_prev_7d: 0, top_pages: [], referrers: [], countries: [], downloads_7d: [], api_7d: [], embeds_7d: [],
+  subscribers: 0, subscribers_7d: 0, unsubscribed_7d: 0, alert_subs: 0, alert_subs_7d: 0, leads: [], leads_total: 0, feedback: [],
+  feedback_found_rate: null, fx_last_day: null, wire_last: null, wire_24h: 0, push_state: [],
+};
 const ago = (iso: string | null, now: number) => {
   if (!iso) return "never";
   const h = (now - Date.parse(iso)) / 3600000;
@@ -142,29 +149,34 @@ function Bars({ rows, now }: { rows: { day: string; views: number; returning?: n
 
 export default async function DeskPage() {
   const key = (await cookies()).get("af_desk")?.value ?? "";
-  const result = key ? await rpc("af_desk", { p_secret: key }) : null;
-  const desk = result?.ok && result.value ? (result.value as Desk) : null;
-  const pay = desk ? await rpc("af_payments", { p_secret: key }) : null;
+  // Local development only: the desk key "preview-empty" opens the desk with no data, to check layout and empty
+  // states without the real key. Never active in a production build.
+  const preview = process.env.NODE_ENV === "development" && key === "preview-empty";
+  const result = key && !preview ? await rpc("af_desk", { p_secret: key }) : null;
+  const desk = preview ? EMPTY_DESK : result?.ok && result.value ? (result.value as Desk) : null;
+  const pay = desk && !preview ? await rpc("af_payments", { p_secret: key }) : null;
   const payments = pay?.ok && pay.value ? (pay.value as Payments) : null;
-  const aud = desk ? await rpc("af_desk_audience", { p_secret: key }) : null;
+  const aud = desk && !preview ? await rpc("af_desk_audience", { p_secret: key }) : null;
   const audience = aud?.ok && aud.value ? (aud.value as Audience) : null;
-  const ppl = desk ? await rpc("af_desk_people", { p_secret: key }) : null;
+  const ppl = desk && !preview ? await rpc("af_desk_people", { p_secret: key }) : null;
   const people = ppl?.ok && ppl.value ? (ppl.value as People) : null;
-  const mon = desk ? await rpc("af_desk_money", { p_secret: key }) : null;
+  const mon = desk && !preview ? await rpc("af_desk_money", { p_secret: key }) : null;
   const money = mon?.ok && mon.value ? (mon.value as Money) : null;
-  const ref = desk ? await rpc("af_desk_referrals", { p_secret: key }) : null;
+  const ref = desk && !preview ? await rpc("af_desk_referrals", { p_secret: key }) : null;
   const referrals = ref?.ok && Array.isArray(ref.value) ? (ref.value as Referral[]) : [];
-  const keyList = desk ? await rpc("af_api_keys_list", { p_secret: key }) : null;
+  const keyList = desk && !preview ? await rpc("af_api_keys_list", { p_secret: key }) : null;
   const apiKeys = keyList?.ok && Array.isArray(keyList.value)
     ? (keyList.value as { id: number; prefix: string; label: string; plan: string; created_at: string; revoked_at: string | null; last_used_at: string | null; calls_30d: number }[])
     : [];
-  const dl = desk ? await rpc("af_deals_list", { p_secret: key }) : null;
+  const dl = desk && !preview ? await rpc("af_deals_list", { p_secret: key }) : null;
   const deals = dl?.ok && Array.isArray(dl.value) ? (dl.value as Deal[]) : [];
-  const fx = desk ? await loadFxQuote() : null;
+  const fun = desk && !preview ? await rpc("af_desk_funnel", { p_secret: key }) : null;
+  const funnel = fun?.ok && fun.value ? (fun.value as Funnel) : null;
+  const fx = desk && !preview ? await loadFxQuote() : null;
   // Units of each currency per US dollar; a fixed fallback for KES only if the live rate is unavailable.
   const perUsd: Record<string, number> = { USD: 1, ...(fx?.rates ?? { KES: 129 }) };
   const fxNote = fx ? `${fx.sourceName} rates of ${fx.updated.slice(5, 16)}` : "a fixed KES 129 to the dollar (live rate unavailable)";
-  const rep = desk ? await rpc("af_reader_report_list", { p_secret: key, p_limit: 60 }) : null;
+  const rep = desk && !preview ? await rpc("af_reader_report_list", { p_secret: key, p_limit: 60 }) : null;
   const reports = rep?.ok && Array.isArray(rep.value) ? (rep.value as ReaderReport[]) : [];
 
   if (!desk) {
@@ -211,6 +223,7 @@ export default async function DeskPage() {
 
       <div className="mt-8">
         <CommandCentre money={money} deals={deals} pilots={apiKeys as PilotKey[]} perUsd={perUsd} fxNote={fxNote} />
+        <FunnelPanel funnel={funnel} deals={deals} keys={apiKeys as PilotKey[]} now={now} />
         <StrategyBoard
           collectedThisMonthUsd={toUsd((money?.revenue ?? []).map((r) => ({ currency: r.currency, amount: r.this_month })), perUsd).total}
           payingInstitutions={deals.filter((x) => x.stage === "won").length}
@@ -467,7 +480,7 @@ export default async function DeskPage() {
             <tbody>
               {desk.downloads_7d.map((r) => (
                 <tr key={r.path}>
-                  <td className="text-xs">{r.path.replace("/download/api/data/", "")}</td>
+                  <td className="text-xs">{r.path.replace("/download/data/", "")}</td>
                   <td className="text-right text-xs">{r.views}</td>
                 </tr>
               ))}

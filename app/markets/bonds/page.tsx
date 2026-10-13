@@ -45,7 +45,7 @@ export default function BondAuctionsIndex() {
         </p>
       }
       aside={
-        <Link href="/data/frontier-local-debt#pilot" className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
+        <Link href="/data/frontier-local-debt#pilot" data-track="pricing_cta_click" className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
           <p className="text-[13px] font-medium opacity-80">For desks and funds</p>
           <p className="mt-1 font-serif text-2xl">Request a 30-day pilot</p>
           <p className="text-[12px] opacity-80">Every market, delivered daily</p>

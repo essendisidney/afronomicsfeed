@@ -73,7 +73,7 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
       lede={
         <p>
           {rows.length.toLocaleString("en-US")} bond auction results from the{" "}
-          <a href={market.sourcePage} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">
+          <a href={market.sourcePage} target="_blank" rel="noopener noreferrer" data-track="source_click" className="underline underline-offset-2 hover:text-forest">
             {market.publisher}
           </a>
           ’s own publications, in one table. Rates are the {market.rateNote.replace(/; the issuing country is in the issue field$/, "")}. <em>Information, not advice.</em>
@@ -203,6 +203,7 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
                       href={r.source || market.sourcePage}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-track="source_click"
                       className="text-muted underline underline-offset-2 hover:text-forest"
                     >
                       {r.source ? "notice" : "publisher"}
@@ -281,7 +282,7 @@ function DownloadCard({ href, title, body, cta, download, strong }: { href: stri
     );
   }
   return (
-    <Link href={href} className={cls}>
+    <Link href={href} className={cls} data-track={href.includes("#pilot") ? "pricing_cta_click" : undefined}>
       {inner}
     </Link>
   );

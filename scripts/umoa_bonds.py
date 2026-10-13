@@ -75,6 +75,9 @@ def iso(d: str) -> str | None:
     return f"{m.group(3)}-{m.group(2)}-{m.group(1)}" if m else None
 
 
+TIME_BUDGET_S = 420  # seconds spent reading issue pages per run
+
+
 def get(url: str) -> str:
     for attempt in range(3):
         try:
@@ -225,7 +228,13 @@ def main() -> int:
     todo.sort(key=lambda x: x[1][0]["operation_date"], reverse=True)
     todo = todo[: 5 if inspect else budget]
     new = []
+    # The workflow step is killed at 12 minutes and this script only writes at the end, so stop reading new
+    # pages after a time budget and write what was read; the rest is picked up on the next run.
+    started = time.monotonic()
     for url, lines in todo:
+        if not inspect and time.monotonic() - started > TIME_BUDGET_S:
+            print(f"time budget of {TIME_BUDGET_S}s reached; stopping and writing what was read")
+            break
         try:
             page = get(url)
         except Exception as error:

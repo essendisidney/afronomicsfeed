@@ -6,7 +6,7 @@
   "failed": 0,
   "late": 5,
   "gap": 1,
-  "ok": 26
+  "ok": 33
  },
  "items": [
   {
@@ -91,6 +91,69 @@
    "link": "/rates/nigeria/check"
   },
   {
+   "area": "Bond auctions",
+   "name": "Egypt",
+   "status": "ok",
+   "detail": "latest result 13 Oct (auctions weekly)",
+   "latest": "2026-10-13",
+   "due_by": "2026-10-25",
+   "link": "/markets/bonds/egypt"
+  },
+  {
+   "area": "Bond auctions",
+   "name": "Kenya",
+   "status": "ok",
+   "detail": "latest result 07 Oct (auctions every two weeks)",
+   "latest": "2026-10-07",
+   "due_by": "2026-10-22",
+   "link": "/markets/bonds/kenya"
+  },
+  {
+   "area": "Bond auctions",
+   "name": "Morocco",
+   "status": "ok",
+   "detail": "latest result 06 Oct (auctions weekly)",
+   "latest": "2026-10-06",
+   "due_by": "2026-10-18",
+   "link": "/markets/bonds/morocco"
+  },
+  {
+   "area": "Bond auctions",
+   "name": "Nigeria",
+   "status": "ok",
+   "detail": "latest result 14 Sep (auctions monthly)",
+   "latest": "2026-09-14",
+   "due_by": "2026-10-26",
+   "link": "/markets/bonds/nigeria"
+  },
+  {
+   "area": "Bond auctions",
+   "name": "Uganda",
+   "status": "ok",
+   "detail": "latest result 07 Oct (auctions every two weeks)",
+   "latest": "2026-10-07",
+   "due_by": "2026-10-28",
+   "link": "/markets/bonds/uganda"
+  },
+  {
+   "area": "Bond auctions",
+   "name": "WAEMU (UMOA-Titres)",
+   "status": "ok",
+   "detail": "latest result 09 Oct (auctions weekly)",
+   "latest": "2026-10-09",
+   "due_by": "2026-10-16",
+   "link": "/markets/bonds/waemu"
+  },
+  {
+   "area": "Bond auctions",
+   "name": "Zambia",
+   "status": "ok",
+   "detail": "latest result 25 Sep (auctions monthly)",
+   "latest": "2026-09-25",
+   "due_by": "2026-11-16",
+   "link": "/markets/bonds/zambia"
+  },
+  {
    "area": "Eurobond yields",
    "name": "Kenya",
    "status": "ok",
@@ -130,8 +193,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "19.0% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "19.0% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -139,8 +202,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "14.0% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -148,8 +211,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "8.75% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -157,8 +220,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "24.0% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -166,8 +229,8 @@
    "area": "Policy rates",
    "name": "Mozambique",
    "status": "ok",
-   "detail": "9.25% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "9.25% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -175,8 +238,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "26.5% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "26.5% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -184,8 +247,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "7.25% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -193,8 +256,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "6.25% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -202,8 +265,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 12 Oct",
-   "latest": "2026-10-12",
+   "detail": "10.75% read 13 Oct",
+   "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -220,9 +283,9 @@
    "area": "T-bill auctions",
    "name": "Egypt",
    "status": "ok",
-   "detail": "latest auction 06 Oct (auctions weekly)",
-   "latest": "2026-10-06",
-   "due_by": "2026-10-17",
+   "detail": "latest auction 13 Oct (auctions weekly)",
+   "latest": "2026-10-13",
+   "due_by": "2026-10-24",
    "link": "/markets/tbills/egypt"
   },
   {

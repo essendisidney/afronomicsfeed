@@ -1,6 +1,6 @@
 import { sendEmail } from "@/lib/mail";
 import { isWebmail, pilotMarkets, pilotNextOptions, type PilotResult } from "@/lib/billing/pilot";
-import { institutionalPilot } from "@/lib/billing/ratecard";
+import { institutionalPilot, localInstitutionPrices } from "@/lib/billing/ratecard";
 import { rpc } from "@/lib/store";
 import { site } from "@/lib/site";
 
@@ -30,6 +30,7 @@ export async function POST(request: Request) {
   const organisation = str("organisation", 160);
   const markets = (Array.isArray(body.markets) ? body.markets : []).filter((m): m is string => typeof m === "string" && marketLabels.has(m));
   const next = str("next", 20);
+  const local = localInstitutionPrices.find((p) => p.id === str("country", 20));
 
   const missing = [
     !name && "your name",
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
 
   const marketText = markets.map((m) => marketLabels.get(m)).join(", ");
   const nextText = nextLabels.get(next)!;
+  const localText = local ? ` Local-institution price asked for: ${local.country} (${local.currency}).` : "";
   const webmail = isWebmail(email);
   const secret = process.env.AF_CRON_SECRET ?? "";
 
@@ -50,7 +52,7 @@ export async function POST(request: Request) {
     p_name: name,
     p_org: organisation,
     p_interest: "licensing",
-    p_message: `30-day pilot request (self-serve). Markets: ${marketText}. Would pay for next: ${nextText}.`,
+    p_message: `30-day pilot request (self-serve). Markets: ${marketText}. Would pay for next: ${nextText}.${localText}`,
     p_source: `pilot:${str("source", 150) || "/data/frontier-local-debt"}`,
   });
   if (!lead.ok) console.log(`[pilot] lead not stored: ${lead.reason} ${JSON.stringify({ email, organisation, markets, next })}`);
@@ -74,7 +76,7 @@ export async function POST(request: Request) {
       p_secret: secret, p_id: null, p_organisation: organisation, p_segment: "other", p_product: "frontier_debt", p_stage: "pilot",
       p_value_usd_month: null, p_source: "Self-serve pilot form", p_next_step: result.status === "issued" ? "Check in before the pilot ends: which plan fits?" : "Issue the 30-day trial key and send it",
       p_next_date: new Date(Date.now() + (result.status === "issued" ? 21 : 1) * 86_400_000).toISOString().slice(0, 10),
-      p_notes: `${name} <${email}>. Markets: ${marketText}. Would pay for next: ${nextText}.${webmail ? " Personal email address." : ""} ${keyNote}`, p_signed_at: null,
+      p_notes: `${name} <${email}>. Markets: ${marketText}. Would pay for next: ${nextText}.${localText}${webmail ? " Personal email address." : ""} ${keyNote}`, p_signed_at: null,
     });
     if (!deal.ok || deal.value == null) console.log(`[pilot] deal not stored: ${deal.ok ? "rejected" : deal.reason}`);
   }

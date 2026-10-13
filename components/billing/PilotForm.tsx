@@ -3,12 +3,16 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { pilotMarkets, pilotNextOptions, type PilotResult } from "@/lib/billing/pilot";
+import { localInstitutionPrices } from "@/lib/billing/ratecard";
 import { track } from "@/lib/track";
 
 const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 
-/** The self-serve 30-day pilot: five questions, then the key (or when it arrives) on screen. Posts to /api/pilot. */
-export function PilotForm({ siteUrl }: { siteUrl: string }) {
+/**
+ * The self-serve 30-day pilot: five questions, then the key (or when it arrives) on screen. Posts to /api/pilot.
+ * With `localPricing` it also asks for the country, for a local-institution price after the pilot (D-014).
+ */
+export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; localPricing?: boolean }) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<Extract<PilotResult, { ok: true }> | null>(null);
@@ -34,6 +38,7 @@ export function PilotForm({ siteUrl }: { siteUrl: string }) {
           organisation: form.get("organisation"),
           markets,
           next: form.get("next"),
+          country: form.get("country"),
           website: form.get("website"),
           source: window.location.pathname,
         }),
@@ -69,6 +74,21 @@ export function PilotForm({ siteUrl }: { siteUrl: string }) {
         <span className={label}>Organisation *</span>
         <input required name="organisation" autoComplete="organization" minLength={2} maxLength={160} className={field} />
       </label>
+      {localPricing ? (
+        <label className="block sm:col-span-2">
+          <span className={label}>Local-institution price for *</span>
+          <select required name="country" defaultValue="" className={field}>
+            <option value="" disabled>
+              Choose the country your institution is incorporated in
+            </option>
+            {localInstitutionPrices.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.country} ({p.currency})
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : null}
       <fieldset className="sm:col-span-2">
         <legend className={label}>Markets of interest *</legend>
         <div className="mt-1 grid grid-cols-2 gap-x-4 gap-y-1.5 sm:grid-cols-3">

@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 
 /** What the buyer gets, by checkout plan: the institutional ladder's own list, otherwise the rate card line. */
 function whatYouGet(plan: string | null): string[] {
-  if (plan === "analyst") return [...institutionalTier("analyst").includes];
-  if (plan === "data_team") return [...institutionalTier("team").includes];
+  if (plan === "analyst" || plan === "analyst_ke") return [...institutionalTier("analyst").includes];
+  if (plan === "data_team" || plan === "data_team_ke") return [...institutionalTier("team").includes];
   for (const g of rateCard) for (const i of g.items) if (i.checkout === plan) return [i.what];
   return [];
 }

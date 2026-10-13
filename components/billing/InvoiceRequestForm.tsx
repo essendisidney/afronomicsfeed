@@ -1,20 +1,26 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { institutionalLadder, institutionalPriceText } from "@/lib/billing/ratecard";
+import { institutionalLadder, institutionalPriceText, localInstitutionPrices, localPriceText } from "@/lib/billing/ratecard";
 import { track } from "@/lib/track";
 
 const plans = [...institutionalLadder].reverse().map((t) => ({ id: t.id, label: `${t.name} (${institutionalPriceText(t)} a month)` }));
 
 /** "Request an invoice" for the institutional ladder: a lead in `leads` through /api/enquiry (interest 'licensing'). */
-export function InvoiceRequestForm({ plan = "enterprise" }: { plan?: string }) {
+/** With `localPricing`, it asks for the country and quotes the local-institution price (D-014; Enterprise stays USD). */
+export function InvoiceRequestForm({ plan = "enterprise", localPricing = false }: { plan?: string; localPricing?: boolean }) {
   const [state, setState] = useState<"idle" | "pending" | "done" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const chosen = plans.find((p) => p.id === form.get("plan"))?.label ?? "Enterprise";
+    const tier = plans.find((p) => p.id === form.get("plan"));
+    const local = localInstitutionPrices.find((p) => p.id === form.get("country"));
+    const chosen =
+      local && tier && tier.id !== "enterprise"
+        ? `${tier.label.split(" (")[0]} at the local-institution price for ${local.country}: ${localPriceText(local, tier.id === "analyst" ? "analyst" : "team")} a month`
+        : `${tier?.label ?? "Enterprise"}${local ? ` (country: ${local.country})` : ""}`;
     setState("pending");
     setMessage(null);
     try {
@@ -79,6 +85,21 @@ export function InvoiceRequestForm({ plan = "enterprise" }: { plan?: string }) {
           ))}
         </select>
       </label>
+      {localPricing ? (
+        <label className="block sm:col-span-2">
+          <span className={label}>Local-institution price for *</span>
+          <select required name="country" defaultValue="" className={field}>
+            <option value="" disabled>
+              Choose the country your institution is incorporated in
+            </option>
+            {localInstitutionPrices.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.country} ({p.currency})
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : null}
       <label className="block sm:col-span-2">
         <span className={label}>Anything the invoice needs (PO number, billing address, teams, redistribution)</span>
         <textarea name="notes" rows={3} maxLength={2000} className={field} />

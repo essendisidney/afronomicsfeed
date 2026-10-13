@@ -234,6 +234,11 @@ export default async function PricingPage({
                       or start a free {institutionalPilot.days}-day pilot
                     </a>
                   )}
+                  {tier.id === "enterprise" ? null : (
+                    <Link href="/licensing#local" className="block text-center text-[12px] text-muted underline underline-offset-2 hover:text-forest">
+                      Local institution in Africa? See local prices
+                    </Link>
+                  )}
                 </div>
               </article>
             );

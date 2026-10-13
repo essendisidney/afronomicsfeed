@@ -104,6 +104,57 @@ export function institutionalPriceText(tier: InstitutionalTier): string {
   return tier.from ? `from ${amount}` : amount;
 }
 
+/**
+ * Local-institution prices for the institutional ladder (decision D-014, docs/strategy/country-pricing.md §3–4).
+ * A share of the USD list by band: 60% (South Africa, Egypt, Morocco), 50% (Kenya, Nigeria, Ghana, WAEMU),
+ * 40% (Uganda, Tanzania, Rwanda, Zambia, Malawi, Mozambique). Monthly, in local currency, with the rounded US-dollar
+ * equivalent the doc gives. Only for institutions that meet `localInstitutionRule`; geolocation never decides it.
+ * Enterprise is never local-priced: USD only, from $5,000.
+ */
+export type LocalInstitutionPrice = {
+  id: string;
+  country: string;
+  currency: string;
+  analyst: number;
+  team: number;
+  /** Share of the USD list, as a percentage. */
+  band: 60 | 50 | 40;
+  /** Rounded USD equivalents of the two prices (for a card charge in dollars or an invoice). */
+  usd: { analyst: number; team: number };
+};
+
+export const localInstitutionPrices: readonly LocalInstitutionPrice[] = [
+  { id: "kenya", country: "Kenya", currency: "KES", analyst: 16_000, team: 95_000, band: 50, usd: { analyst: 123, team: 732 } },
+  { id: "uganda", country: "Uganda", currency: "UGX", analyst: 375_000, team: 2_250_000, band: 40, usd: { analyst: 100, team: 600 } },
+  { id: "tanzania", country: "Tanzania", currency: "TZS", analyst: 265_000, team: 1_600_000, band: 40, usd: { analyst: 100, team: 603 } },
+  { id: "rwanda", country: "Rwanda", currency: "RWF", analyst: 145_000, team: 875_000, band: 40, usd: { analyst: 99, team: 598 } },
+  { id: "nigeria", country: "Nigeria", currency: "NGN", analyst: 175_000, team: 1_000_000, band: 50, usd: { analyst: 127, team: 727 } },
+  { id: "ghana", country: "Ghana", currency: "GHS", analyst: 1_500, team: 9_000, band: 50, usd: { analyst: 127, team: 765 } },
+  { id: "egypt", country: "Egypt", currency: "EGP", analyst: 7_500, team: 45_000, band: 60, usd: { analyst: 151, team: 903 } },
+  { id: "morocco", country: "Morocco", currency: "MAD", analyst: 1_400, team: 8_500, band: 60, usd: { analyst: 149, team: 907 } },
+  { id: "southafrica", country: "South Africa", currency: "ZAR", analyst: 2_450, team: 14_500, band: 60, usd: { analyst: 150, team: 886 } },
+  { id: "zambia", country: "Zambia", currency: "ZMW", analyst: 1_850, team: 11_000, band: 40, usd: { analyst: 99, team: 588 } },
+  { id: "malawi", country: "Malawi", currency: "MWK", analyst: 175_000, team: 1_050_000, band: 40, usd: { analyst: 101, team: 606 } },
+  { id: "mozambique", country: "Mozambique", currency: "MZN", analyst: 6_400, team: 38_000, band: 40, usd: { analyst: 100, team: 595 } },
+  { id: "waemu", country: "Côte d’Ivoire, Senegal and the WAEMU", currency: "XOF", analyst: 70_000, team: 425_000, band: 50, usd: { analyst: 123, team: 750 } },
+];
+
+/** Who qualifies for a local-institution price (D-014, docs/strategy/country-pricing.md §4). */
+export const localInstitutionRule: readonly string[] = [
+  "The contracting entity is incorporated, headquartered and licensed in the country: a pension scheme or administrator, SACCO, bank, insurer, microfinance bank, broker or dealer, or local fund manager.",
+  "Its ultimate parent is African and headquartered in the same country.",
+  "All users sit in that country, the data is used for the domestic book, and there is no redistribution.",
+  "It is invoiced to the local entity and paid from a local account. The licence states the qualification; a false claim moves the contract to the list price from day one.",
+  "Global and regional asset managers, sell-side desks and development finance institutions pay the US-dollar list price wherever their desk sits.",
+];
+
+export const localInstitutionPayment =
+  "Kenya: pay by M-Pesa or card in shillings at checkout. Elsewhere: a fixed US-dollar equivalent, paid by card through a payment link the desk sends, or by invoice.";
+
+export function localPriceText(p: LocalInstitutionPrice, tier: "analyst" | "team") {
+  return `${p.currency} ${p[tier].toLocaleString("en-US")}`;
+}
+
 export const rateCard: RateGroup[] = [
   {
     id: "readers",

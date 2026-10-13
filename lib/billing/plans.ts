@@ -1,4 +1,6 @@
-import { institutionalTier, KES_PER_USD, type InstitutionalTierId } from "./ratecard";
+import { institutionalTier, KES_PER_USD, localInstitutionPrices, type InstitutionalTierId } from "./ratecard";
+
+const kenyaLocal = localInstitutionPrices.find((p) => p.id === "kenya")!;
 
 /**
  * Checkout plans. Amounts are in the currency's subunit (KES cents / US cents).
@@ -8,7 +10,7 @@ import { institutionalTier, KES_PER_USD, type InstitutionalTierId } from "./rate
  * Team in dollars once that is on.
  *
  * If a Paystack plan code is set for a tier (PAYSTACK_PLAN_PRO, _TEAM, _PACK, _PACK_PLUS, _WHATSAPP, _LICENCE,
- * _WIDGET, _FUND, _TENDERS, _ANALYST, _DATA_TEAM), checkout creates a recurring monthly subscription and Paystack uses
+ * _WIDGET, _FUND, _TENDERS, _ANALYST, _DATA_TEAM, _ANALYST_KE, _DATA_TEAM_KE), checkout creates a recurring monthly subscription and Paystack uses
  * the plan's own amount and currency. Without a plan code it is a single charge for one period. Prices come from
  * lib/billing/ratecard.ts.
  *
@@ -72,6 +74,9 @@ export const checkoutPlans = {
   tender_alerts_year: { label: "Tender alerts (a year)", product: "Tender alerts, twelve months", amount: 500_000, currency: "KES", planEnv: null },
   analyst: { label: "Analyst (monthly)", product: "Afronomics Data: Analyst, one month", ...institutional("analyst"), planEnv: "PAYSTACK_PLAN_ANALYST" },
   data_team: { label: "Team and API (monthly)", product: "Afronomics Data: Team and API, one month", ...institutional("team"), planEnv: "PAYSTACK_PLAN_DATA_TEAM" },
+  // Kenyan local-institution prices (D-014): only for institutions that meet localInstitutionRule.
+  analyst_ke: { label: "Analyst, Kenyan institution (monthly)", product: "Afronomics Data: Analyst (Kenyan institution), one month", amount: kenyaLocal.analyst * 100, currency: "KES", planEnv: "PAYSTACK_PLAN_ANALYST_KE" },
+  data_team_ke: { label: "Team and API, Kenyan institution (monthly)", product: "Afronomics Data: Team and API (Kenyan institution), one month", amount: kenyaLocal.team * 100, currency: "KES", planEnv: "PAYSTACK_PLAN_DATA_TEAM_KE" },
 } as const;
 
 export type CheckoutPlanId = keyof typeof checkoutPlans;

@@ -2,7 +2,7 @@
 # auction results for each market and commit the datasets. GitHub starts scheduled runs late or drops them when it
 # is busy (in Oct 2026 the morning run never ran and the others started hours late), so runs are frequent: a run
 # with nothing new commits nothing. The commit triggers a Vercel deploy, so the site updates itself. The last step
-# sends email rate alerts (needs AF_CRON_SECRET; without it the step skips) and sends only what is new.
+# sends email rate alerts, then tender and bond-result alerts (need AF_CRON_SECRET; without it they skip) and sends only what is new.
 # Auction days differ (Egypt Sun-Mon, Malawi Tue, Nigeria/Tanzania/Mozambique Wed, Kenya/Zambia Thu, Ghana/South Africa Fri).
 name: African auctions
 
@@ -121,6 +121,12 @@ jobs:
           OMP_THREAD_LIMIT: "1"  # four notices are read at once: stop each Tesseract also spawning a thread per core
         continue-on-error: true
         timeout-minutes: 20
+      # Publication latency: for each new bill and bond result, when our reader first wrote it and, where the publisher
+      # gives one, when the publisher released it (data/latency.json, shown on /status). After every reader, before the
+      # commit; the bond-alert step below reads it to find new bond auctions.
+      - run: python scripts/latency.py
+        continue-on-error: true
+        timeout-minutes: 5
       # Is every figure as fresh as its publisher's rhythm says? Late or unread ones show as warnings on this run,
       # and data/health.json feeds /status and the desk.
       - run: python scripts/data_health.py
@@ -185,4 +191,16 @@ jobs:
         run: |
           if [ -z "$AF_CRON_SECRET" ]; then echo "AF_CRON_SECRET not set; skipping"; exit 0; fi
           curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" https://www.afronomicsfeed.com/api/send/tender-alerts
+        continue-on-error: true
+      # Bond-result emails to API key holders (pilot and paid): one per market per auction day, for bond results this
+      # or a recent run first saw (data/latency.json). Claimed in the database before each send, so nothing goes twice;
+      # with no key holders, or before migration 0037 is applied, it sends nothing. After the rate-alert step, which
+      # has already waited for this run's data to deploy.
+      - name: Send bond-result alerts
+        if: ${{ !cancelled() }}
+        env:
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
+        run: |
+          if [ -z "$AF_CRON_SECRET" ]; then echo "AF_CRON_SECRET not set; skipping"; exit 0; fi
+          curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" https://www.afronomicsfeed.com/api/send/bond-alerts
         continue-on-error: true

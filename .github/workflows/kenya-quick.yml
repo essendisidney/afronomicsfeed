@@ -23,12 +23,17 @@ jobs:
       - run: python scripts/kenya_tbills.py
       - run: python scripts/kenya_bonds.py
         continue-on-error: true
+      # Record when the new result was first seen, for the publication-latency figures (data/latency.json, /status).
+      - run: python scripts/latency.py
+        continue-on-error: true
+        timeout-minutes: 3
       - name: Commit if the dataset changed
         run: |
           if git diff --quiet -- data/kenya; then echo "No new Kenya result."; exit 0; fi
           git config user.name "afronomics-bot"
           git config user.email "afronomics-bot@users.noreply.github.com"
           git add data/kenya
+          if [ -f data/latency.json ]; then git add data/latency.json; fi
           git commit -m "Kenya T-bill auctions: add latest CBK results"
           # main can move while the job runs (a merge, another job): replay this commit on top and retry
           for attempt in 1 2 3; do
@@ -60,3 +65,12 @@ jobs:
             done
           fi
           curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" "$url"
+      # Bond-result emails to API key holders, for a Kenya bond result this run added (see african-auctions.yml).
+      - name: Send bond-result alerts
+        if: ${{ !cancelled() }}
+        env:
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
+        run: |
+          if [ -z "$AF_CRON_SECRET" ]; then echo "AF_CRON_SECRET not set; skipping"; exit 0; fi
+          curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" https://www.afronomicsfeed.com/api/send/bond-alerts
+        continue-on-error: true

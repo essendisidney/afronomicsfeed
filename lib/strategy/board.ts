@@ -9,6 +9,9 @@ export type BoardItem = { name: string; status: Status; note: string; href?: str
 
 export const BOARD_UPDATED = "2026-10-13";
 
+/** Outreach notes sent by the founder (the deal log is updated separately). */
+export const CONTACTED = { count: 6, on: "12 Oct 2026" };
+
 export const BOARD: BoardItem[] = [
   // Live: the wedge, African local-currency government debt data.
   { name: "Bond auction data: Kenya, Nigeria, Egypt, Uganda, Zambia, WAEMU (8 markets)", status: "live", note: "Official sources, checked on every run; T-bills in ten markets as short-end context", href: "/markets/bonds" },

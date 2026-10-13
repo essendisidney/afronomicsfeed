@@ -1,6 +1,7 @@
 import { after } from "next/server";
 import { verifyPaystackSignature } from "@/lib/billing/paystack";
-import { notifyPayment, recordPayment, recordSubscription } from "@/lib/billing/record";
+import { isTestCharge, planFromCode } from "@/lib/billing/paidkey";
+import { fulfilPayment, recordSubscription } from "@/lib/billing/record";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,6 +11,7 @@ type PaystackEvent = {
   data?: {
     reference?: string;
     status?: string;
+    domain?: string;
     amount?: number;
     currency?: string;
     paid_at?: string;
@@ -25,7 +27,9 @@ type PaystackEvent = {
 /**
  * Paystack webhook. Registered in Paystack (Settings → API Keys & Webhooks) as
  * https://www.afronomicsfeed.com/api/paystack/webhook. Every event with a valid signature is recorded through
- * af_record_payment / af_record_subscription; a charge also sends the receipt and a note to the desk.
+ * af_record_payment / af_record_subscription. A charge also issues or extends the Team and API key (migration 0036)
+ * and, after the response, sends the receipt (with the key) and a note to the desk, once per reference: the buyer's
+ * return to /thank-you does the same, and whichever arrives first does the work.
  */
 export async function POST(request: Request) {
   if (!process.env.PAYSTACK_SECRET_KEY) {
@@ -46,20 +50,18 @@ export async function POST(request: Request) {
     const payment = {
       reference: data.reference,
       email,
-      plan: metadata.plan ?? planCode,
+      // Subscription renewals carry the Paystack plan code but no metadata: map the code back to the checkout plan.
+      plan: metadata.plan ?? planFromCode(planCode) ?? planCode,
       amount: data.amount ?? 0,
       currency: data.currency ?? null,
-      status: data.status ?? "success",
+      // Test-mode charges are stored as 'test' (left out of the desk's money; never a key in production).
+      status: isTestCharge(data) ? "test" : data.status ?? "success",
       channel: data.channel ?? null,
       paidAt: data.paid_at ?? new Date().toISOString(),
       raw: event,
     };
-    const result = await recordPayment(payment);
-    if (!result.ok) console.log(`[paystack] payment not stored: ${result.reason} ${JSON.stringify({ reference: data.reference, domain: String(email ?? "").split("@")[1] ?? "" })}`);
-    after(async () => {
-      const sent = await notifyPayment(payment).catch((e) => [`error:${String(e)}`]);
-      console.log(`[paystack] ${data.reference} ${sent.join(" ")}`);
-    });
+    const { deliver } = await fulfilPayment(payment, { reveal: false, source: "webhook" });
+    after(deliver);
   }
 
   if ((event.event === "subscription.create" || event.event === "subscription.disable" || event.event === "subscription.not_renew") && data.subscription_code) {

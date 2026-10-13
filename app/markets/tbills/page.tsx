@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AlertButton } from "@/components/ui/AlertButton";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { SourceNote } from "@/components/ui/SourceNote";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
@@ -163,6 +164,7 @@ export default function BillMonitorPage() {
       <p className="mt-2 text-xs text-muted">
         Change is against each tenor’s previous auction. Rate measures differ by central bank and are shown as published; compare levels with that in mind.
       </p>
+      <SourceNote sources={billMarkets.map((m) => ({ name: m.publisher, href: m.sourcePage }))} className="mt-2" />
 
       <section className="mt-14">
         <SectionTitle

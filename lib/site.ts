@@ -117,7 +117,10 @@ export const footerGroups = [
     title: "Company",
     links: [
       { href: "/about", label: "About" },
+      { href: "/editorial-standards", label: "Editorial standards" },
+      { href: "/trust", label: "Trust & data security" },
       { href: "/for-institutions", label: "For institutions" },
+      { href: "/buying", label: "Buying for an institution" },
       { href: "/pricing", label: "Pricing" },
       { href: "/prices", label: "Price guide" },
       { href: "/jobs", label: "Jobs" },

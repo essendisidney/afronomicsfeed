@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
 import { ActionTile } from "@/components/ui/Card";
+import { SourceNote } from "@/components/ui/SourceNote";
 
 export const revalidate = 3600;
 
@@ -137,6 +138,7 @@ export default function BondAuctionsIndex() {
           );
         })}
       </ul>
+      <SourceNote sources={bondMarkets.map((m) => ({ name: m.publisher, href: m.sourcePage }))} className="mt-6" />
       <p className="mt-8 max-w-3xl text-sm leading-6 text-ink-soft">
         Every market is also available as CSV at <span className="font-mono text-[13px]">/api/data/bonds/&#123;market&#125;</span> and as JSON through the{" "}
         <Link href="/developers" className="underline underline-offset-2 hover:text-forest">

@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const shortFmt = new Intl.DateTimeFormat("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
+const dayFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 const bps = (v: number | null) => (v == null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : "±"}${Math.abs(v)} bps`);
 
 export default function BillIndexPage() {
@@ -59,7 +60,9 @@ export default function BillIndexPage() {
               </div>
             ))}
           </dl>
-          <p className="mt-3 text-[11px] text-muted">{idx.latest.markets} of 10 markets in this week’s reading</p>
+          <p className="mt-3 text-[11px] text-muted">
+            Reading of {dayFmt.format(new Date(idx.latest.date))} · {idx.latest.markets} of 10 markets in this week’s reading
+          </p>
         </div>
       }
     >

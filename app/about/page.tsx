@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProsePage } from "@/components/data/ProsePage";
+import { fitDescription } from "@/lib/seo";
+import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
+import { bondCoverageText, bondResultCount } from "@/lib/data/sovereign-bonds";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Afronomics is a single source for African markets, economies and capital flows — live, sourced and free to read.",
+  description: fitDescription(
+    "Who publishes Afronomics, what its data covers, how it is funded and the standards it keeps: African rates, auctions and economies, sourced and free to read.",
+  ),
   alternates: { canonical: `${site.url}/about` },
 };
 
 export default function AboutPage() {
+  const billResults = billMarkets.reduce((n, m) => n + loadBillMarket(m.slug).rows.length, 0);
   return (
     <ProsePage crumbs={[{ href: "/", label: "Home" }, { label: "About" }]} kicker="About" title="The price of money in Africa, for everyone" lede={site.promise}>
       <h2>Why Afronomics exists</h2>
@@ -53,31 +59,107 @@ export default function AboutPage() {
         </li>
       </ul>
 
-      <h2>How we earn trust</h2>
+      <h2>What the data covers today</h2>
       <p>
-        Every number links to the publisher that printed it and carries its year. Blank means the publisher has no value. We correct mistakes in
-        public. The full standard is on <Link href="/method">sources and method</Link>.
+        Treasury bill auctions in {billMarkets.length} markets and government bond auctions in {bondCoverageText()}:{" "}
+        {(billResults + bondResultCount()).toLocaleString("en-US")} auction results, each linked to the publisher&rsquo;s own notice. Counted from the data
+        files when this page was built. Market by market, with the official source of each, on{" "}
+        <Link href="/trust#datasets">trust and data security</Link>.
       </p>
 
-      <h2>How we are funded</h2>
-      <p>
-        Reading and citing Afronomics is free. Institutions pay for depth — full analysis, alerts, bulk data, licensed feeds and commissioned
-        research. See <Link href="/pricing">pricing</Link> and <Link href="/advisory">research and advisory</Link>. We do not take payment for
-        coverage.
-      </p>
+      <h2 id="publisher">Who publishes Afronomics</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th scope="row">Publisher</th>
+            <td>
+              <a href={site.houseUrl} target="_blank" rel="noopener noreferrer">
+                {site.houseName}
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Published from</th>
+            <td>Nairobi, Kenya</td>
+          </tr>
+          <tr>
+            <th scope="row">Website</th>
+            <td>{site.url.replace("https://", "")}</td>
+          </tr>
+          <tr>
+            <th scope="row">Contact</th>
+            <td>
+              <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a> · <Link href="/contact">contact page</Link>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Terms governed by</th>
+            <td>The laws of Kenya</td>
+          </tr>
+          <tr>
+            <th scope="row">Personal data</th>
+            <td>
+              Kenya&rsquo;s Data Protection Act, 2019 (<Link href="/legal/privacy">privacy notice</Link>)
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Elsewhere</th>
+            <td>
+              <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>{" "}
+              ·{" "}
+              <a href={site.telegramUrl} target="_blank" rel="noopener noreferrer">
+                Telegram
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-      <h2>Who we are</h2>
+      <h2 id="funding">How we are funded</h2>
       <p>
-        Afronomics is published from Nairobi by{" "}
-        <a href={site.houseUrl} target="_blank" rel="noopener noreferrer">
-          {site.houseName}
-        </a>
-        . Write to <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a> or follow us on{" "}
-        <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer">
-          LinkedIn
-        </a>
-        .
+        Reading, citing and the open API are free. Revenue comes from the sources below, and each is disclosed where it appears:
       </p>
+      <ul>
+        <li>
+          Institutional data plans and licences (Analyst, Team and API, Enterprise) and the Investment Committee Pack: see <Link href="/pricing">pricing</Link> and{" "}
+          <Link href="/buying">buying for an institution</Link>.
+        </li>
+        <li>Reader plans (Pro and Team) for the full analysis, the Morning note and alerts.</li>
+        <li>
+          Sponsorship, always labelled &ldquo;Sponsored&rdquo; or &ldquo;Presented by&rdquo; and never inside the data (<Link href="/advertise">advertise</Link>), and paid
+          job listings.
+        </li>
+        <li>Referral fees that some money-transfer links may earn, disclosed beside those links and never affecting the order.</li>
+        <li>
+          Commissioned research (<Link href="/advisory">research and advisory</Link>).
+        </li>
+      </ul>
+      <p>We do not take payment for coverage, and no customer, sponsor or partner sees or changes data, rankings or articles before they are published.</p>
+
+      <h2 id="trust">How we earn trust</h2>
+      <p>
+        Every number links to the publisher that printed it and carries its date. Blank means the publisher has no value. We correct mistakes in public and
+        list late figures openly. The rules are written down:
+      </p>
+      <ul>
+        <li>
+          <Link href="/editorial-standards">Editorial standards</Link>: independence, sourcing, corrections and how we use AI.
+        </li>
+        <li>
+          <Link href="/method">Sources and method</Link> and <Link href="/reference">the reference</Link>: where each number comes from and how it is defined.
+        </li>
+        <li>
+          <Link href="/trust">Trust and data security</Link>: how each dataset is collected and how the site and API are secured.
+        </li>
+        <li>
+          <Link href="/status">Data status</Link>: what is late or missing right now, and the measured delay after each publisher.
+        </li>
+        <li>
+          <Link href="/corrections">Corrections</Link>: the public log.
+        </li>
+      </ul>
     </ProsePage>
   );
 }

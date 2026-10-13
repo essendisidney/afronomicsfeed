@@ -1,0 +1,53 @@
+# The site quality gate: builds the site, serves it with `next start`, and runs scripts/site-qa.mjs over the pages in
+# tests/site/pages.json at 390px and 1280px, light and dark (overflow, console errors, broken internal links, axe
+# WCAG A/AA, alts, titles and descriptions, h1, tap targets, header/footer sanity, overclaims). Fails on any
+# problem not in tests/site/allowlist.json. The report and failure screenshots are uploaded as an artifact.
+# See docs/qa.md.
+name: Site QA
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    # 05:10 Nairobi (UTC+3, no daylight saving) every day: catches problems that arrive with new data, not code.
+    - cron: "10 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  site-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Cache the Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+      - run: npx next build
+      - name: Run site QA against next start
+        run: node scripts/site-qa.mjs --serve --port 3000 --concurrency 4 --out qa-report
+      - name: Upload report and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-qa-report
+          path: qa-report/
+          if-no-files-found: ignore
+          retention-days: 14

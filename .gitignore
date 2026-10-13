@@ -50,3 +50,6 @@ data/story_leads.json
 
 # publisher release times passed from readers to scripts/latency.py within one data run
 /data/latency_hints.json
+
+# site QA output (scripts/site-qa.mjs)
+/qa-report/

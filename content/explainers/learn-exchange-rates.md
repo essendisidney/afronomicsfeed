@@ -54,7 +54,7 @@ Kenya imports most of its fuel, and fuel moves the cost of transport and food. A
 
 ## Where to follow it
 
-- Every African currency against the dollar, with a converter: [currencies](/markets).
+- African currencies against the dollar, with a converter: [currencies](/markets).
 - The overnight move in the shilling, every weekday morning: [the Morning](/morning).
 
 *Information, not advice.*

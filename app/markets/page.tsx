@@ -19,7 +19,7 @@ export const revalidate = 900;
 
 export const metadata: Metadata = {
   title: "African currencies and markets",
-  description: "Live US dollar reference rates for every African currency, a converter, annual depreciation against the dollar, lending rates, and the day’s markets headlines.",
+  description: "Live US dollar reference rates for African currencies, a converter, annual depreciation against the dollar, lending rates, and the day’s markets headlines.",
   alternates: { canonical: `${site.url}/markets` },
 };
 
@@ -39,7 +39,7 @@ export default async function MarketsPage() {
     <PageShell
       crumbs={[{ href: "/", label: "Home" }, { label: "Markets" }]}
       kicker="Markets"
-      title="Every African currency against the dollar"
+      title="African currencies against the dollar"
       lede={<p>Hourly mid-market reference for all African currencies, with the annual official average and how far each moved on the year.</p>}
     >
       {fx ? <CurrencyConverter quote={fx} /> : null}

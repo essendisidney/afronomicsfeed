@@ -255,7 +255,7 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
           <DownloadCard
             href="/data/frontier-local-debt#pilot"
             title="Request a 30-day pilot"
-            body="Daily delivery across every African market we cover, for a desk or a fund."
+            body="Daily delivery across every market we cover, for a desk or a fund."
             cta="Frontier local debt →"
             strong
           />

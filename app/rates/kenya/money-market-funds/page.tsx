@@ -106,7 +106,7 @@ export default function MoneyMarketFundsPage() {
                         href={`/go/fund/${fundSlug(f.name)}`}
                         target="_blank"
                         rel="nofollow noopener"
-                        className="mt-1.5 inline-block whitespace-nowrap rounded-full bg-ink px-3 py-1 text-[12px] font-semibold text-paper hover:bg-forest"
+                        className="mt-1.5 inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-ink px-3 py-1 text-[12px] font-semibold text-paper hover:bg-forest sm:min-h-0"
                       >
                         Open an account
                       </a>

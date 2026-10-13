@@ -5,6 +5,7 @@ import { SectionTitle } from "@/components/data/parts";
 import { rpcRead } from "@/lib/store";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
+import { buttonClass } from "@/components/ui/Button";
 
 export const revalidate = 600;
 
@@ -44,7 +45,7 @@ export default async function JobsPage() {
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5 text-sm text-ink-soft">
           <p className="text-[14px] font-semibold text-ink">Hiring?</p>
           <p className="mt-1 leading-6">KES 10,000 for 30 days, listed beside our rates and auction data for ten markets. Live within a day.</p>
-          <Link href="/jobs/post" className="mt-4 inline-block rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
+          <Link href="/jobs/post" className={buttonClass({ className: "mt-4" })}>
             Post a role
           </Link>
         </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { buttonClass } from "@/components/ui/Button";
 
 /**
  * The way in to "What readers paid": a reader adds what they paid for food, fuel, fares or rent, or the rate their
@@ -13,7 +14,7 @@ export function ContributeBand({ ask, compact = false }: { ask?: string; compact
           <span className="font-semibold">{ask ?? "What did you pay this month?"}</span>{" "}
           <span className="text-ink-soft">Add it anonymously in 20 seconds and see what others near you paid.</span>
         </p>
-        <Link href={href} className="rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
+        <Link href={href} className={buttonClass()}>
           Add yours →
         </Link>
       </aside>

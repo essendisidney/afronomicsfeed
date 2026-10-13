@@ -440,7 +440,7 @@ export function BondAuctionView({
           </Card>
           <Card tone="emphasis">
             <p className="font-serif text-xl text-ink">For investment teams</p>
-            <p className="mt-1 text-sm leading-6 text-ink-soft">A 30-day pilot: an API key with the full history of every African market we cover, free.</p>
+            <p className="mt-1 text-sm leading-6 text-ink-soft">A 30-day pilot: an API key with the full history of every market we cover, free.</p>
             <ButtonLink href="/data/frontier-local-debt#pilot" size="sm" className="mt-3" data-track="pricing_cta_click">
               Request a pilot
             </ButtonLink>

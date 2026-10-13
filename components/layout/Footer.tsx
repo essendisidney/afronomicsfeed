@@ -64,14 +64,14 @@ export function Footer() {
         <p className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-night-muted">
           <span className="font-semibold text-night-soft">Topics</span>
           {footerTopics.map((item) => (
-            <Link key={item.href} href={item.href} className="inline-flex min-h-11 items-center hover:text-night-ink sm:min-h-0">
+            <Link key={item.href} href={item.href} className="inline-flex min-h-11 min-w-11 items-center justify-center hover:text-night-ink sm:min-h-0 sm:min-w-0">
               {item.label}
             </Link>
           ))}
         </p>
 
         <div className="mt-8 flex flex-col gap-4 border-t border-night-line pt-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center gap-x-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:items-center sm:[&>a]:min-h-0">
+          <div className="flex flex-wrap items-center gap-x-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:min-w-11 [&>a]:items-center [&>a]:justify-center sm:[&>a]:min-h-0 sm:[&>a]:min-w-0">
             {legal.map((item) => (
               <Link key={item.href} href={item.href} className="text-xs text-night-muted hover:text-night-ink">
                 {item.label}
@@ -81,7 +81,7 @@ export function Footer() {
               RSS
             </a>
           </div>
-          <div className="flex flex-wrap items-center gap-x-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:items-center sm:[&>a]:min-h-0">
+          <div className="flex flex-wrap items-center gap-x-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:min-w-11 [&>a]:items-center [&>a]:justify-center sm:[&>a]:min-h-0 sm:[&>a]:min-w-0">
             <a href={`mailto:${site.contactEmail}`} className="text-xs text-night-muted hover:text-night-ink">
               {site.contactEmail}
             </a>
@@ -99,7 +99,7 @@ export function Footer() {
         <p className="mt-6 max-w-3xl text-xs leading-5 text-night-muted">{disclaimer}</p>
         <p className="mt-4 text-[12px] font-medium text-night-muted">
           © {new Date().getFullYear()} {site.legalName} ·{" "}
-          <a href={site.houseUrl} target="_blank" rel="noopener noreferrer" className="hover:text-night-ink">
+          <a href={site.houseUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center hover:text-night-ink sm:min-h-0">
             {site.houseCredit}
           </a>
         </p>

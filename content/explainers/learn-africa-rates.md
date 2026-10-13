@@ -34,7 +34,7 @@ unknowns:
   - "Next week’s auctions in each market: published by each central bank."
 ---
 
-Every African government borrows by selling **Treasury bills**. The price it pays, the interest rate, is set at an auction, and it differs enormously from country to country.
+African governments borrow by selling **Treasury bills**. The price it pays, the interest rate, is set at an auction, and it differs enormously from country to country.
 
 ## One-year bills across Africa
 

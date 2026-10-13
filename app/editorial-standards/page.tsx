@@ -45,7 +45,7 @@ export default function EditorialStandardsPage() {
       <ul>
         <li>
           No one can pay to appear in, be removed from, or move up or down any table, ranking or comparison. Rankings (for example the cheapest way to send
-          money or the best money market fund this month) are ordered by the published figures alone.
+          money or the money market funds ranked by yield this month) are ordered by the published figures alone.
         </li>
         <li>We do not take payment for coverage. Customers, sponsors and partners do not see, edit, approve or order data, rankings or articles before publication.</li>
         <li>

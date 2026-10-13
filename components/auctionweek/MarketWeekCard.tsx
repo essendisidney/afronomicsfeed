@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FullHistoryLink } from "@/components/data/FullHistoryLink";
+import { bondAuctionPath } from "@/components/bonds/auction";
 import { fmtBpsSigned, fmtCover, fmtMillions, fmtRate, shortDate, type Compared, type MarketWeek } from "@/lib/data/auction-week";
 
 const KENYA_BONDS_CSV = "/api/data/kenya-bonds";
@@ -16,7 +17,7 @@ function hostLabel(href: string) {
 }
 
 /** One auction (one instrument, one date) inside a market card. */
-function AuctionTable({ rows, currency }: { rows: Compared[]; currency: string }) {
+function AuctionTable({ rows, currency, href }: { rows: Compared[]; currency: string; href: string | null }) {
   const first = rows[0];
   const sources = [...new Set(rows.map((r) => r.source).filter((s) => /^https?:\/\//.test(s)))];
   return (
@@ -24,7 +25,13 @@ function AuctionTable({ rows, currency }: { rows: Compared[]; currency: string }
       <p className="flex flex-wrap items-baseline justify-between gap-x-3 text-[12px] text-ink-soft">
         <span>
           <span className="font-semibold text-ink">{first.instrument === "bill" ? "Treasury bills" : "Treasury bonds"}</span> · {DATE_WORD[first.dateKind]}{" "}
-          {shortDate(first.date)}
+          {href ? (
+            <Link href={href} className={link}>
+              {shortDate(first.date)}
+            </Link>
+          ) : (
+            shortDate(first.date)
+          )}
         </span>
         {sources.length ? (
           <span>
@@ -141,7 +148,13 @@ export function MarketWeekCard({ market }: { market: MarketWeek }) {
         )}
       </p>
       {[...auctions.values()].map((rows) => (
-        <AuctionTable key={`${rows[0].instrument}-${rows[0].date}`} rows={rows} currency={meta.currency} />
+        <AuctionTable
+          key={`${rows[0].instrument}-${rows[0].date}`}
+          rows={rows}
+          currency={meta.currency}
+          // A bond auction links its own dated page (WAEMU: the issuer's auction that day).
+          href={rows[0].instrument === "bond" && meta.bondSlug ? bondAuctionPath(meta.bondSlug, rows[0].date, meta.group === "WAEMU" ? meta.country : null) : null}
+        />
       ))}
       <p className="mt-3 text-[11px] leading-4 text-muted">
         Rate: {notes.join("; ")}. Change: against the previous sale of the same tenor{meta.key === "kenya" && hasBond ? " (for Kenya’s bonds, the same bond line)" : ""}. Cover: bids received ÷ accepted.

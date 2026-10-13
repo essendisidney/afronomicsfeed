@@ -130,7 +130,7 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
       </div>
       <div className="mt-3 flex gap-2">
         {(["save", "borrow"] as const).map((m) => (
-          <button key={m} type="button" onClick={() => setMode(m)} className={`rounded-full px-4 py-1.5 text-[13px] font-semibold ${mode === m ? "bg-ink text-paper" : "border border-rule text-ink-soft hover:border-accent"}`}>
+          <button key={m} type="button" onClick={() => setMode(m)} className={`inline-flex min-h-11 items-center rounded-full px-4 py-1.5 text-[13px] font-semibold sm:min-h-9 ${mode === m ? "bg-ink text-paper" : "border border-rule text-ink-soft hover:border-accent"}`}>
             {m === "save" ? "I’m saving" : "I’m borrowing"}
           </button>
         ))}

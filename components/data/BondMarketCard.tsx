@@ -85,7 +85,7 @@ export function BondMarketCard({ snap, label }: { snap: BondSnapshot; label?: st
         </tbody>
       </table>
       <Trend points={snap.monthly} />
-      <p className="mt-auto flex flex-wrap gap-x-3 pt-3 text-[12px]">
+      <p className="mt-auto flex flex-wrap items-center gap-x-3 pt-3 text-[12px] [&_a]:inline-flex [&_a]:min-h-6 [&_a]:min-w-6 [&_a]:items-center">
         {latest[0]?.source ? (
           <a href={latest[0].source} target="_blank" rel="noopener noreferrer" className="text-forest underline underline-offset-2">
             Source notice

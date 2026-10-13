@@ -10,6 +10,7 @@ import { buildMorningNote, morningLines, morningLongDate, morningShortDate, morn
 import { ShareRow } from "@/components/ui/ShareRow";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
+import { buttonClass } from "@/components/ui/Button";
 
 export const revalidate = 900;
 
@@ -45,7 +46,7 @@ export default async function MorningPage() {
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5 text-sm text-ink-soft">
           <p className="text-[14px] font-semibold text-ink">In your inbox at 7:00</p>
           <p className="mt-1 leading-6">This note, every weekday morning, East Africa time. Free, and every figure linked to its source.</p>
-          <Link href="/subscribe?list=morning" className="mt-4 inline-block rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
+          <Link href="/subscribe?list=morning" className={buttonClass({ className: "mt-4" })}>
             Get the Morning
           </Link>
           <p className="mt-4 text-[13px] leading-5">

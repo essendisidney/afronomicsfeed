@@ -58,7 +58,7 @@ Every central bank does the same job under its own name: the **Monetary Policy R
 
 ## Where to follow it
 
-- Every African central bank’s rate, beside its one-year bill: [policy rates](/rates/policy).
+- African central banks’ policy rates, each beside its one-year bill: [policy rates](/rates/policy).
 - The committee meets about every two months; the Central Bank publishes each decision on its website.
 
 *Information, not advice.*

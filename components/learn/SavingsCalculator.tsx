@@ -41,7 +41,7 @@ export function SavingsCalculator({ presets, lang }: { presets: Preset[]; lang?:
       {presets.length ? (
         <div className="mt-3 flex flex-wrap gap-2">
           {presets.map((p) => (
-            <button key={p.label} type="button" onClick={() => setRate(Number(p.rate.toFixed(2)))} className={`rounded-full border px-3 py-1 text-[13px] ${Math.abs(rate - p.rate) < 0.005 ? "border-forest text-forest" : "border-rule text-ink-soft hover:border-gold"}`}>
+            <button key={p.label} type="button" onClick={() => setRate(Number(p.rate.toFixed(2)))} className={`inline-flex min-h-11 items-center rounded-full border px-3 py-1 text-[13px] sm:min-h-8 ${Math.abs(rate - p.rate) < 0.005 ? "border-forest text-forest" : "border-rule text-ink-soft hover:border-gold"}`}>
               {p.label}: {p.rate.toFixed(2)}%
             </button>
           ))}

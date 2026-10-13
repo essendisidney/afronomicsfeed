@@ -84,7 +84,7 @@ export function EnquiryForm({ interest = "other", cta = "Send enquiry" }: { inte
         <button
           type="submit"
           disabled={state === "pending"}
-          className="rounded-full bg-forest px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest-deep disabled:opacity-60"
+          className="inline-flex min-h-11 items-center justify-center rounded-full bg-forest px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest-deep disabled:opacity-60 sm:min-h-10"
         >
           {state === "pending" ? "Sending…" : cta}
         </button>

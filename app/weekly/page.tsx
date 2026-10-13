@@ -217,7 +217,7 @@ export default async function WeeklyPage() {
             Newsrooms, analysts and bloggers may use this chart in print, online or on social media, unchanged, with the credit “Source: Afronomics,
             compiled from central-bank auction results”. It updates as each market reports.
           </p>
-          <a href="/charts/week.png" download="afronomics-chart-of-the-week.png" className="mt-4 inline-block rounded-full bg-forest px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest-deep">
+          <a href="/charts/week.png" download="afronomics-chart-of-the-week.png" className="mt-4 inline-flex min-h-11 items-center rounded-full bg-forest px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest-deep sm:min-h-10">
             Download PNG
           </a>
         </div>

@@ -41,7 +41,7 @@ const copy = {
     business: ["Business & trade", "What did my currency do overnight?"],
     kesMove: "Shillings per US dollar (overnight change; + means the shilling gained)",
     biggest: (name: string) => `Biggest overnight move against the dollar: ${name}`,
-    converter: "Every African currency, converter",
+    converter: "African currencies, converter",
     policy: "Central-bank rates",
     institutions: ["Institutions", "Where are African rates heading?"],
     asbi: `${indexShort}: ten-market one-year bill index`,

@@ -104,7 +104,7 @@ export default async function SendMoneyCountryPage({ params }: Props) {
         <a href={file.source_page} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
           World Bank, Remittance Prices Worldwide
         </a>{" "}
-        ({period}). Every African destination:{" "}
+        ({period}). Every destination we cover:{" "}
         <Link href="/send-money" className="font-medium text-forest underline underline-offset-2">
           send money home
         </Link>

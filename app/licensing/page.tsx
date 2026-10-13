@@ -117,7 +117,7 @@ export default function LicensingPage() {
       name: "African FX reference archive",
       href: "/markets",
       coverage: "Daily from 30 Sep 2026 · 45 currencies",
-      detail: "The daily US-dollar mid-market reference for every African currency, archived at the same hour each day. Read from a third-party rates feed whose terms do not allow redistribution, so it is for reference inside your own work only.",
+      detail: "The daily US-dollar mid-market reference for 45 African currencies, archived at the same hour each day. Read from a third-party rates feed whose terms do not allow redistribution, so it is for reference inside your own work only.",
     },
     {
       name: "The Wire archive",

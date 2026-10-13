@@ -141,10 +141,11 @@ what we changed. Newest at the bottom. Read this first every week.
 
 ### D-015 · 13 Oct 2026 · Institutional checkout charged in KES
 - **Decided by the founder:** Analyst and Team & API are charged in Kenyan shillings at the rate card's KES 129 to the
-  dollar (KES 32,250 and KES 193,500 a month), so M-Pesa, cards and Pesalink all work. PAYSTACK_CURRENCY stays unset
-  (verified: the live test payment settled in KES by M-Pesa). USD list prices stay on the page.
+  dollar (KES 32,250 and KES 193,500 a month), so M-Pesa, cards and Pesalink all work. PAYSTACK_CURRENCY stays KES
+  (verified 13 Oct: set to KES in Vercel for production and preview, the same as the code's default; the live test
+  payment settled in KES by M-Pesa). USD list prices stay on the page.
 - **Open:** confirm in the Paystack dashboard that M-Pesa accepts KES 193,500 in one payment; until Paystack plan
-  codes are set, each purchase is one month and does not renew (the page says so).
+  codes are set (none are set in Vercel as of 13 Oct), each purchase is one month and does not renew (the page says so).
 
 ### D-016 · 13 Oct 2026 · Master plan v2 approved (docs/strategy/master-plan-v2.md)
 - **Decided by the founder:** the plan and its 90-day build list, with F1 as follows. Free for everyone: reading the

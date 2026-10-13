@@ -96,7 +96,7 @@ export default function DebtMonitorPage() {
             <p className="font-semibold text-ink">Get the data</p>
             <ul className="mt-2 space-y-1">
               <li>
-                CSV, full history per market: <code className="font-mono text-[13px] break-all text-ink">{site.url.replace("https://", "")}/api/data/bonds/{"{market}"}</code>
+                CSV per market (latest 12 months free; full history with a key):<code className="font-mono text-[13px] break-all text-ink">{site.url.replace("https://", "")}/api/data/bonds/{"{market}"}</code>
               </li>
               <li>
                 JSON API: <code className="font-mono text-[13px] break-all text-ink">{site.url.replace("https://", "")}/api/v1/bonds/{"{market}"}</code>

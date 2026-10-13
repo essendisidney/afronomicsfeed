@@ -12,6 +12,7 @@ import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
+import { DataTerms } from "@/components/billing/DataTerms";
 import { InstitutionalBuy } from "@/components/billing/InstitutionalBuy";
 import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { paystackConfigured } from "@/lib/billing/paystack";
@@ -40,13 +41,13 @@ const tiers: Tier[] = [
     name: "Open",
     buy: "open",
     price: "Free",
-    detail: "CSV downloads and the open JSON API for research, teaching and journalism, with the attribution line kept.",
+    detail: "The site, every table and chart, and the JSON API and CSV for the latest 12 months (up to 100 rows a call), for research, journalism, teaching and non-commercial apps, with the attribution line kept.",
   },
   {
     name: "Startup",
     buy: "startup",
     price: "KES 7,500/mo",
-    detail: "Commercial use inside one startup product: show the auction datasets, measures and FX archive to your own users with attribution, with an email or webhook on every new result. No resale of the raw data.",
+    detail: "Commercial use inside one startup product: a key with the full history, charts and figures shown to your own users with attribution, and an email or webhook on every new result. No redistribution: that is Enterprise only.",
   },
   ...institutionalLadder.map((tier) => ({
     name: tier.name,
@@ -173,8 +174,13 @@ export default function LicensingPage() {
         </table>
       </div>
 
+      <section className="mt-14" id="terms">
+        <SectionTitle kicker="Terms" title="What is free, what needs a key, what is Enterprise" />
+        <DataTerms />
+      </section>
+
       <section className="mt-14">
-        <SectionTitle kicker="Terms" title="Licences" note="Buy at checkout, or ask for an invoice in USD or KES. Not sure yet? Start a free 30-day pilot on the frontier local-debt page." />
+        <SectionTitle kicker="Licences" title="Licences" note="Buy at checkout, or ask for an invoice in USD or KES. Not sure yet? Start a free 30-day pilot on the frontier local-debt page." />
         <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {tiers.map((tier) => (
             <div key={tier.name} className="flex flex-col bg-surface px-5 py-6">
@@ -276,12 +282,12 @@ export default function LicensingPage() {
             </li>
             <li>
               <a className="text-forest underline" href="/api/data/kenya-tbills" download>
-                Kenya T-bill auctions (CSV)
+                Kenya T-bill auctions (CSV: latest 12 months free; full history with a key)
               </a>
             </li>
             <li>
               <a className="text-forest underline" href="/api/data/kenya-bonds" download>
-                Kenya Treasury bond auctions (CSV)
+                Kenya Treasury bond auctions (CSV: latest 12 months free; full history with a key)
               </a>
             </li>
             <li>

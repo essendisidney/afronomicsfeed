@@ -1,18 +1,21 @@
+import { apiAccess, apiCsv, CSV_KEYED, csvError, readRange, sliceRows } from "@/lib/api";
 import { billsCsv, getBillMarket, loadBillMarket } from "@/lib/data/sovereign-bills";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
-export async function GET(_request: Request, { params }: { params: Promise<{ country: string }> }) {
+/**
+ * A market's Treasury bill auctions as CSV. Without a key: the latest 12 months, up to 100 rows (the `#` lines at the
+ * top say so and link the next page). With a key (Authorization: Bearer afk_…): the full history. Optional from, to, limit.
+ */
+export async function GET(request: Request, { params }: { params: Promise<{ country: string }> }) {
   const { country } = await params;
   const market = getBillMarket(country);
-  if (!market) return new Response("Unknown market", { status: 404 });
+  if (!market) return csvError("Unknown market", 404);
+  const range = readRange(request);
+  if (!range) return csvError("Dates must be YYYY-MM-DD.", 400);
   const { rows, updatedAt } = loadBillMarket(market.slug);
-  if (rows.length === 0) return new Response("Dataset not yet published", { status: 404 });
-  return new Response(billsCsv(market, rows, updatedAt), {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="afronomics-${market.slug}-tbills.csv"`,
-      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-    },
-  });
+  if (rows.length === 0) return csvError("Dataset not yet published", 404);
+  const access = await apiAccess(request, `/data/tbills/${market.slug}`);
+  const sliced = sliceRows(request, rows, (r) => r.date, range, access, CSV_KEYED);
+  return apiCsv(billsCsv(market, sliced.rows, updatedAt), `afronomics-${market.slug}-tbills.csv`, access, sliced.free);
 }

@@ -78,7 +78,8 @@ export default function KenyaTbillsPage() {
       aside={
         <a href="/api/data/kenya-tbills" download className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
           <p className="font-medium text-[12px] opacity-80">Download</p>
-          <p className="mt-1 font-serif text-2xl">Full history · CSV</p>
+          <p className="mt-1 font-serif text-2xl">CSV download</p>
+          <p className="text-[11px] opacity-80">Latest 12 months free; full history with a key</p>
           <p className="text-[11px] opacity-80">Every row links to its CBK notice</p>
         </a>
       }

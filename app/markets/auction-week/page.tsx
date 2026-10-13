@@ -84,7 +84,7 @@ export default function AuctionWeekPage() {
         </div>
         <div className="rounded-xl border border-rule bg-paper-2 px-4 py-4">
           <p className="text-[15px] font-semibold text-ink">CSV and API</p>
-          <p className="mt-1 text-[13px] leading-5 text-ink-soft">Full histories in one format. Each card above links its own files.</p>
+          <p className="mt-1 text-[13px] leading-5 text-ink-soft">One format for every market. Each card above links its own files: latest 12 months free; full history with a key.</p>
           <p className="mt-2 flex flex-wrap gap-x-3 text-[13px]">
             <a href={API.bills} className={link}>
               Bills API

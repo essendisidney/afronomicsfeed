@@ -1,4 +1,4 @@
--- NOT YET APPLIED. Paid API keys without the desk (master plan v2, build item 3; decision D-016).
+-- Applied 13 Oct 2026. Paid API keys without the desk (master plan v2, build item 3; decision D-016).
 --
 -- When a Paystack charge for the Team and API plan (checkout plans data_team and data_team_ke) is confirmed, the app
 -- issues an API key at once, shows it once on /thank-you and emails it with the receipt. The key expires at the end of

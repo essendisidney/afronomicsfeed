@@ -7,6 +7,9 @@ import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { tenorLabel } from "@/lib/data/kenya-tbills";
 import { billMarkets, billTenors, latestBills, loadBillMarket } from "@/lib/data/sovereign-bills";
+import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { billPagePath, dataCatalogJsonLd } from "@/lib/seo/schema";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -94,6 +97,14 @@ export default function BillMonitorPage() {
         </div>
       }
     >
+      <JsonLd
+        data={dataCatalogJsonLd(
+          "African Treasury bill auction results",
+          "/markets/tbills",
+          "Latest 91-, 182- and 364-day Treasury bill auction rates in ten African markets, each compiled from the central bank’s own results, with full histories as free CSV and JSON.",
+          live.map(({ market }) => ({ name: `${market.country} Treasury bill auction results`, path: billPagePath(market.slug) })),
+        )}
+      />
       <div className="overflow-x-auto">
         <table className="data-table">
           <thead>
@@ -185,6 +196,7 @@ export default function BillMonitorPage() {
         .
       </p>
       <CiteBlock title="Africa Treasury bill monitor" path="/markets/tbills" publisher="ten African central banks" />
+      <DebtDataLinks current="/markets/tbills" />
       <NewsletterBand />
     </PageShell>
   );

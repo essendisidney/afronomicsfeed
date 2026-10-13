@@ -10,6 +10,7 @@ import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { tenorColor, tenorLabel } from "@/lib/data/kenya-tbills";
 import { billHistory, billMarkets, billTenors, billWeeks, getBillMarket, latestBills, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { tbillDatasetJsonLd } from "@/lib/seo/schema";
 
@@ -174,6 +175,7 @@ export default async function BillMarketPage({ params }: Props) {
       {rows.length ? (
         <CiteBlock title={`${market.country} Treasury bill auction results`} path={`/markets/tbills/${market.slug}`} publisher={`the ${market.publisher}`} csv={`/api/data/tbills/${market.slug}`} />
       ) : null}
+      <DebtDataLinks country={market.country} current={`/markets/tbills/${market.slug}`} />
       <NewsletterBand />
     </PageShell>
   );

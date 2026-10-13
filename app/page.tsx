@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { ContributeBand } from "@/components/data/ContributeBand";
+import { site } from "@/lib/site";
 import { renderTime } from "@/lib/data/fetcher";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
@@ -20,6 +22,17 @@ import { latestByTenor, loadTbills, tenorLabel, tenors } from "@/lib/data/kenya-
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
 
 export const revalidate = 900;
+
+const homeTitle = `${site.name}: African T-bill rates, bond auctions, currencies and inflation`;
+const homeDescription =
+  "The price of money in Africa: Treasury bill and government bond auction results from ten central banks, policy rates, money market fund yields, exchange rates and inflation, from the source, the day it is published.";
+
+export const metadata: Metadata = {
+  title: { absolute: homeTitle },
+  description: homeDescription,
+  alternates: { canonical: site.url, types: { "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} RSS` }] } },
+  openGraph: { title: homeTitle, description: homeDescription, url: site.url, siteName: site.name, locale: "en_KE", type: "website" },
+};
 
 const regions = ["North Africa", "West Africa", "Central Africa", "East Africa", "Southern Africa"] as const;
 

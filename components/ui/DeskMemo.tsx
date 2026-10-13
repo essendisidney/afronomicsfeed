@@ -11,7 +11,7 @@ export function DeskMemo({
 
   if (gated) {
     return (
-      <aside className="mt-8 border border-gold/35 bg-gold/10 px-5 py-5">
+      <aside className="mt-6 rounded-3xl border border-gold/35 bg-gold/10 px-5 py-6 sm:px-7">
         <p className="text-[12.5px] font-semibold text-gold">
           Desk memo — Pro
         </p>
@@ -23,11 +23,11 @@ export function DeskMemo({
   }
 
   return (
-    <aside className="mt-8 border border-rule bg-paper-2 px-5 py-5">
-      <p className="text-[12.5px] font-semibold text-gold">
+    <aside className="mt-6 rounded-3xl border border-rule bg-paper-2 px-5 py-6 sm:px-7">
+      <p className="text-[11.5px] font-semibold uppercase tracking-[0.18em] text-gold">
         Desk memo
       </p>
-      {soWhat ? <p className="mt-3 text-[15px] leading-7 text-ink-soft">{soWhat}</p> : null}
+      {soWhat ? <p className="mt-3 text-[16px] leading-7 text-ink">{soWhat}</p> : null}
       {unknowns && unknowns.length > 0 ? (
         <div className="mt-4">
           <p className="font-medium text-[12px] text-muted">Still unknown</p>

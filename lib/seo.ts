@@ -35,8 +35,14 @@ export function fitDescription(text: string, max = DESCRIPTION_MAX): string {
   return `${head.slice(0, head.lastIndexOf(" ")).replace(/[\s,;:—–-]+$/, "")}…`;
 }
 
+/**
+ * A story's metadata. The search title and description are fitted to a results page; the share preview (Open
+ * Graph, X) keeps the whole headline, which cards show in full, and a description fitted to the ~200 characters
+ * LinkedIn, WhatsApp and X show. The image comes from the route's opengraph-image (lib/og-article.tsx).
+ */
 export function articleMetadata(article: Article): Metadata {
   const url = `${site.url}${articleHref(article.category, article.slug)}`;
+  const shareDescription = fitDescription(article.summary, 200);
 
   return {
     title: fitTitle(article.title),
@@ -45,8 +51,10 @@ export function articleMetadata(article: Article): Metadata {
     openGraph: {
       type: "article",
       title: article.title,
-      description: article.summary,
+      description: shareDescription,
       url,
+      siteName: site.name,
+      locale: "en_KE",
       publishedTime: `${article.date}T06:00:00+03:00`,
       authors: article.authors,
       section: categoryLabel(article.category),
@@ -55,7 +63,7 @@ export function articleMetadata(article: Article): Metadata {
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.summary,
+      description: shareDescription,
     },
   };
 }

@@ -4,7 +4,7 @@ export const site = {
   tagline: "The price of money in Africa",
   line: "Rates · Currencies · Inflation · for everyone",
   promise:
-    "What African governments pay to borrow, what a shilling earns, what a loan should cost and what the currency buys — from the source, the day it is published, free to see and explained for anyone, in ten markets and counting.",
+    "What African governments pay to borrow, what a shilling earns, what a loan should cost and what the currency buys — from the source, the day it is published, free to see and explained for anyone, across Africa.",
   /** Canonical host. The apex domain redirects here (vercel.json). */
   url: "https://www.afronomicsfeed.com",
   houseCredit: "A product of Pesara Limited",
@@ -12,7 +12,7 @@ export const site = {
   houseUrl: "https://pesara.com",
   locale: "en",
   description:
-    "The price of money in Africa: Treasury bill rates in ten markets, currencies, inflation and what they mean for a saver, a borrower and a treasury — from the central banks, the minute they publish, free to see, cited by institutions. Plus every African economy’s data and the headlines that move markets.",
+    "The price of money in Africa: Treasury bill rates in ten markets, currencies, inflation and what they mean for a saver, a borrower and a treasury — from the central banks, the day they publish, free to see. Plus every African economy’s data and the headlines that move markets.",
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "desk@afronomicsfeed.com",
   linkedinUrl: "https://www.linkedin.com/company/afronomicsfeed/",
   telegramUrl: "https://t.me/afronomic",
@@ -134,7 +134,97 @@ export const footerGroups = [
   },
 ] as const;
 
+/** Every page, grouped (site search reads this; the footer shows the shorter footerColumns below). */
 export const footerNav = footerGroups.flatMap((group) => [...group.links]);
+
+/** The footer: five balanced columns of short labels, then a topics line. Full page list stays in footerGroups for search. */
+export const footerColumns = [
+  {
+    title: "For institutions",
+    links: [
+      { href: "/data/frontier-local-debt", label: "Local debt data" },
+      { href: "/data/frontier-local-debt/monitor", label: "Debt Monitor" },
+      { href: "/markets/bonds", label: "Bond auctions" },
+      { href: "/markets/auction-week", label: "Auction week" },
+      { href: "/data-api", label: "Data API" },
+      { href: "/licensing", label: "Licensing" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/buying", label: "Buying guide" },
+      { href: "/trust", label: "Trust & security" },
+      { href: "/pack", label: "Committee pack" },
+    ],
+  },
+  {
+    title: "Markets",
+    links: [
+      { href: "/markets/tbills", label: "T-bills" },
+      { href: "/markets/kenya-bonds", label: "Kenya bonds" },
+      { href: "/east-africa", label: "East Africa" },
+      { href: "/markets/bill-index", label: "Bill Index" },
+      { href: "/markets/borrowing-costs", label: "Borrowing costs" },
+      { href: "/markets/eurobonds", label: "Eurobonds" },
+      { href: "/rates/policy", label: "Policy rates" },
+      { href: "/markets", label: "Currencies" },
+      { href: "/countries", label: "Country files" },
+      { href: "/tenders", label: "Kenya tenders" },
+    ],
+  },
+  {
+    title: "Your money",
+    links: [
+      { href: "/rates/kenya", label: "Kenya rates" },
+      { href: "/rates/kenya/money-market-funds", label: "Money market funds" },
+      { href: "/rates/kenya/saccos", label: "SACCOs" },
+      { href: "/chama", label: "Chama hub" },
+      { href: "/rates/kenya/loan-apps", label: "Loan app checker" },
+      { href: "/rates/kenya/mobile-loans", label: "Mobile loan costs" },
+      { href: "/send-money", label: "Send money home" },
+      { href: "/pay-check", label: "Salary check" },
+      { href: "/rent-check", label: "Rent check" },
+      { href: "/rates/what-readers-paid", label: "What readers paid" },
+    ],
+  },
+  {
+    title: "Read",
+    links: [
+      { href: "/brief", label: "Briefs" },
+      { href: "/morning", label: "The Morning" },
+      { href: "/morning/sw", label: "Asubuhi" },
+      { href: "/weekly", label: "Weekly" },
+      { href: "/news", label: "The Wire" },
+      { href: "/explainers", label: "Explainers" },
+      { href: "/alerts", label: "Alerts" },
+      { href: "/ask", label: "Ask the data" },
+      { href: "/radio", label: "Radio" },
+      { href: "/archive", label: "Archive" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { href: "/about", label: "About" },
+      { href: "/editorial-standards", label: "Standards" },
+      { href: "/method", label: "Sources & method" },
+      { href: "/status", label: "Data status" },
+      { href: "/corrections", label: "Corrections" },
+      { href: "/developers", label: "Developers" },
+      { href: "/advertise", label: "Advertise" },
+      { href: "/jobs", label: "Jobs" },
+      { href: "/subscribe", label: "Newsletter" },
+      { href: "/contact", label: "Contact" },
+    ],
+  },
+] as const;
+
+export const footerTopics = [
+  { href: "/economy", label: "Economy" },
+  { href: "/capital", label: "Capital & DFI flows" },
+  { href: "/climate", label: "Climate & energy" },
+  { href: "/technology", label: "Technology" },
+  { href: "/trade", label: "Trade" },
+  { href: "/data", label: "Data hub" },
+  { href: "/reference", label: "Reference" },
+] as const;
 
 export const disclaimer =
   "Afronomics publishes data, journalism and market intelligence for information only. It is not investment, legal or tax advice, and nothing here is a recommendation to buy, sell or hold any security. Third-party data remains the property of its publisher and is shown with attribution; headlines link to the original publisher.";

@@ -30,8 +30,11 @@ export function organizationJsonLd() {
     email: site.contactEmail,
     sameAs: [site.linkedinUrl, site.telegramUrl],
     parentOrganization: { "@type": "Organization", name: site.houseName, url: site.houseUrl },
-    publishingPrinciples: u("/method"),
+    publishingPrinciples: u("/editorial-standards"),
     correctionsPolicy: u("/corrections"),
+    ethicsPolicy: u("/editorial-standards"),
+    ownershipFundingInfo: u("/about#funding"),
+    actionableFeedbackPolicy: u("/corrections"),
   };
 }
 

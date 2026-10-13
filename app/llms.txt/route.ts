@@ -64,7 +64,7 @@ export function GET() {
     "",
     "## About",
     "",
-    `- [Sources and method](${u("/method")}) · [About](${u("/about")}) · [Corrections](${u("/corrections")}) · Contact: ${site.contactEmail}`,
+    `- [Sources and method](${u("/method")}) · [About](${u("/about")}) · [Editorial standards](${u("/editorial-standards")}) · [Trust and data security](${u("/trust")}) · [Buying for an institution](${u("/buying")}) · [Corrections](${u("/corrections")}) · Contact: ${site.contactEmail}`,
     "",
   );
   return new Response(lines.join("\n"), {

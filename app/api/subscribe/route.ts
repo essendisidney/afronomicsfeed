@@ -36,8 +36,8 @@ export async function POST(request: Request) {
 
   const result = await rpc("af_subscribe_v2", { p_email: email, p_role: role, p_source: source });
   if (!result.ok) {
-    // Still visible in the deployment's function logs so no sign-up is lost.
-    console.log(`[subscribe] ${JSON.stringify({ email, role, source, at: new Date().toISOString(), reason: result.reason })}`);
+    // Logged without the address (no emails in logs): only the domain, so a failure can be seen and fixed.
+    console.log(`[subscribe] not stored ${JSON.stringify({ domain: email.split("@")[1], role, source, at: new Date().toISOString(), reason: result.reason })}`);
     return Response.json({ ok: true, stored: false });
   }
   if (result.value === "welcome") {

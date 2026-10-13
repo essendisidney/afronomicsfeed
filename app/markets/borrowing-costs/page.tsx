@@ -6,13 +6,13 @@ import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { auctionCalendar, demand, realYields } from "@/lib/data/bill-measures";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "African government borrowing costs — real yields, auction demand and the auction calendar",
-  description:
-    "Three measures Afronomics builds from ten central banks’ Treasury bill auctions: what governments pay after inflation, how heavily their auctions are bid, and when each market auctions next.",
+  title: "African government borrowing costs and real yields",
+  description: fitDescription("Three measures Afronomics builds from ten central banks’ Treasury bill auctions: what governments pay after inflation, how heavily their auctions are bid, and when each market auctions next."),
   alternates: { canonical: `${site.url}/markets/borrowing-costs` },
 };
 

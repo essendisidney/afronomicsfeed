@@ -7,6 +7,7 @@ import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { loadAuctionWeek, longDate, rangeLabel, shortDate } from "@/lib/data/auction-week";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -21,8 +22,8 @@ export function generateMetadata(): Metadata {
     ? `${week.auctions} government bill and bond auctions in ${week.marketsActive} African markets, ${rangeLabel(week.window.start, week.window.end)}: rates by tenor and the change from each previous sale, bid cover and amounts accepted, from the publishers' own results.`
     : "Government bill and bond auction results from African central banks, week by week.";
   return {
-    title,
-    description,
+    title: fitTitle(title),
+    description: fitDescription(description),
     alternates: { canonical: `${site.url}${PATH}` },
     openGraph: { title, description, url: `${site.url}${PATH}`, type: "article" },
     twitter: { card: "summary_large_image", title, description },

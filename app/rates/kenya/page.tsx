@@ -10,13 +10,13 @@ import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { bankRateHistory, fairBench, rateOptions } from "@/lib/data/kenya-rates";
 import { FairRate } from "@/components/data/FairRate";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
-  title: "Where your shilling earns most — Kenya T-bills, money market funds and bank rates compared",
-  description:
-    "Every place to put Kenya shillings on one scale, after tax: Treasury bills and bonds, money market fund yields from the managers themselves, and the Central Bank of Kenya’s bank deposit and savings averages. Updated as each publishes.",
+  title: "Kenya savings rates: T-bills, MMFs and banks",
+  description: fitDescription("Every place to put Kenya shillings on one scale, after tax: Treasury bills and bonds, money market fund yields from the managers themselves, and the Central Bank of Kenya’s bank deposit and savings averages. Updated as each publishes."),
   alternates: { canonical: `${site.url}/rates/kenya` },
 };
 

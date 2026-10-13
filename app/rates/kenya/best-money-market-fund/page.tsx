@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BASE, MmfMonthView, mmfMonthDescription, mmfMonthTitle } from "@/components/data/MmfMonthView";
 import { mmfMonths } from "@/lib/data/mmf-months";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 1800;
 
@@ -9,7 +10,7 @@ export const revalidate = 1800;
 export function generateMetadata(): Metadata {
   const m = mmfMonths()[0];
   if (!m) return { title: "Best money market fund in Kenya" };
-  return { title: mmfMonthTitle(m), description: mmfMonthDescription(m), alternates: { canonical: `${site.url}${BASE}` } };
+  return { title: fitTitle(mmfMonthTitle(m)), description: fitDescription(mmfMonthDescription(m)), alternates: { canonical: `${site.url}${BASE}` } };
 }
 
 export default function BestMoneyMarketFundPage() {

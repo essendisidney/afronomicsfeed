@@ -10,6 +10,7 @@ import { loadSaccos, saccoLatest } from "@/lib/data/saccos";
 import { paystackConfigured } from "@/lib/billing/paystack";
 import { chargeLabel } from "@/lib/billing/plans";
 import { site } from "@/lib/site";
+import { fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -17,10 +18,10 @@ export function generateMetadata(): Metadata {
   const s = saccoLatest();
   return {
     title: s
-      ? `SACCO dividend and interest rates in Kenya: ${s.dividend_pct.toFixed(2)}% on shares, ${s.deposit_interest_pct.toFixed(2)}% on deposits (${s.year})`
+      ? fitTitle(`Kenya SACCO rates ${s.year}: ${s.dividend_pct.toFixed(2)}% dividend, ${s.deposit_interest_pct.toFixed(2)}% on deposits`)
       : "SACCO dividend and interest rates in Kenya",
     description: s
-      ? `Kenya's regulated SACCOs paid an average ${s.dividend_pct.toFixed(2)}% dividend on share capital and ${s.deposit_interest_pct.toFixed(2)}% interest on deposits for ${s.year} (SASRA), beside Treasury bills, money market funds and bank savings, with each SACCO's declared rates from its own notice.`
+      ? `Kenya's regulated SACCOs paid an average ${s.dividend_pct.toFixed(2)}% dividend and ${s.deposit_interest_pct.toFixed(2)}% on deposits for ${s.year} (SASRA), beside T-bills, money market funds and banks.`
       : "Kenya SACCO returns from the regulator, beside Treasury bills, money market funds and bank savings.",
     alternates: { canonical: `${site.url}/rates/kenya/saccos` },
   };

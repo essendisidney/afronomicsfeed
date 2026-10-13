@@ -7,12 +7,13 @@ import { Questions } from "@/components/seo/Questions";
 import { bondLabel, eurobondTable, loadEurobonds, type EurobondCountry, type EurobondRow } from "@/lib/data/eurobonds";
 import { eurobondAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export function generateMetadata(): Metadata {
   const { title, description } = eurobondAnswers();
-  return { title, description, alternates: { canonical: `${site.url}/markets/eurobonds` } };
+  return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/markets/eurobonds` } };
 }
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });

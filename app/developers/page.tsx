@@ -7,11 +7,11 @@ import { DataTerms } from "@/components/billing/DataTerms";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Afronomics data API — African government bond and bill auctions as JSON",
-  description:
-    "A free JSON API for African government bond and Treasury bill auction results and the Afronomics borrowing-cost measures, every row linked to its source. The latest 12 months are free with no key; full history and commercial use need a pilot or paid key.",
+  title: "Data API: African bond and T-bill auctions as JSON",
+  description: fitDescription("A free JSON API for African government bond and Treasury bill auction results and the Afronomics borrowing-cost measures, every row linked to its source. The latest 12 months are free with no key; full history and commercial use need a pilot or paid key."),
   alternates: { canonical: `${site.url}/developers` },
 };
 

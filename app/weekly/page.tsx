@@ -12,13 +12,13 @@ import { pairHref } from "@/lib/data/fx";
 import { projectsSource } from "@/lib/data/projects";
 import { bpsText, buildWeeklyEdition, fxText, headlines, pctText } from "@/lib/editions/weekly";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
   title: "The Afronomics Weekly — Africa’s week in numbers",
-  description:
-    "Every Monday: Kenya T-bill and bond auction results, African currency moves, World Bank Board dates and the week’s business headlines from across 54 economies — each figure sourced.",
+  description: fitDescription("Every Monday: Kenya T-bill and bond auction results, African currency moves, World Bank Board dates and the week’s business headlines from across 54 economies — each figure sourced."),
   alternates: { canonical: `${site.url}/weekly` },
 };
 

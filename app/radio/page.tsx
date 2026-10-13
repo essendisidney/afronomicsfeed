@@ -7,13 +7,13 @@ import { ShareRow } from "@/components/ui/ShareRow";
 import { renderTime } from "@/lib/data/fetcher";
 import { buildRadio } from "@/lib/editions/radio";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
-  title: "The radio bulletin — the price of money this week, in sixty seconds, English and Kiswahili",
-  description:
-    "A sixty-second script on Treasury bill rates, the shilling and the African index, written for presenters to read on air. English and Kiswahili, free for any station, from the central banks' own figures. Kenya, Tanzania and Uganda.",
+  title: "Radio bulletin: the price of money in 60 seconds",
+  description: fitDescription("A sixty-second script on Treasury bill rates, the shilling and the African index, written for presenters to read on air. English and Kiswahili, free for any station, from the central banks' own figures. Kenya, Tanzania and Uganda."),
   alternates: { canonical: `${site.url}/radio` },
 };
 

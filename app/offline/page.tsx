@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Offline", robots: { index: false } };
+export const metadata: Metadata = {
+  title: "Offline",
+  description: "You are offline. Pages you opened recently still work; live rates and headlines return when you reconnect.",
+  robots: { index: false },
+};
 
 export default function OfflinePage() {
   return (

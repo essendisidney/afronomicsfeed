@@ -4,13 +4,13 @@ import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { rpcRead } from "@/lib/store";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 600;
 
 export const metadata: Metadata = {
-  title: "Jobs — treasury, risk, research and analyst roles across African finance",
-  description:
-    "Roles at the banks, funds, SACCOs, insurers and DFIs that read Afronomics: treasury, ALM, fixed income, risk, research and data. Listed by the institutions themselves; KES 10,000 for 30 days.",
+  title: "Jobs in African finance: treasury, risk and research",
+  description: fitDescription("Roles at the banks, funds, SACCOs, insurers and DFIs that read Afronomics: treasury, ALM, fixed income, risk, research and data. Listed by the institutions themselves; KES 10,000 for 30 days."),
   alternates: { canonical: `${site.url}/jobs` },
 };
 

@@ -12,12 +12,13 @@ import { mobileLoanBoard } from "@/lib/data/mobile-loans";
 import { mobileLoanAnswers } from "@/lib/seo/answers";
 import { mobileSentence } from "@/lib/share-card";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export function generateMetadata(): Metadata {
   const { title, description } = mobileLoanAnswers();
-  return { title, description, alternates: { canonical: `${site.url}/rates/kenya/mobile-loans` } };
+  return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/rates/kenya/mobile-loans` } };
 }
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });

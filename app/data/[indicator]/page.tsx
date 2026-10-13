@@ -7,6 +7,7 @@ import { Sparkline } from "@/components/data/Sparkline";
 import { IndicatorSource, RankBars, SectionTitle } from "@/components/data/parts";
 import { deskLabels, formatChange, formatValue, getIndicatorDef, indicatorDefs, indicatorsForDesk } from "@/lib/data/indicators";
 import { continentalMedian, coveredTotal, loadIndicator, movers, ranked } from "@/lib/data/series";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -21,8 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ indicator
   if (!def) return {};
   const title = `${def.short} by African country — ranking and history`;
   return {
-    title,
-    description: `${def.label} for all 54 African countries: latest ranking, change on the year, history since 2010 and a free CSV download. Source: World Bank (${def.code}).`,
+    title: fitTitle(title),
+    description: fitDescription(`${def.label} for all 54 African countries: latest ranking, change on the year, history since 2010 and a free CSV. Source: World Bank.`),
     alternates: { canonical: `${site.url}/data/${def.slug}` },
   };
 }

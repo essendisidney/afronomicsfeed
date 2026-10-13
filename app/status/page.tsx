@@ -6,12 +6,13 @@ import { SectionTitle } from "@/components/data/parts";
 import { loadHealth } from "@/lib/data/health";
 import { hoursText, latencyDate, loadLatency } from "@/lib/data/latency";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
   title: "Data status: is every figure up to date?",
-  description: "Whether each rate, auction and yield on Afronomics is as fresh as its publisher’s own release rhythm, checked after every data run. Late or unreadable figures are listed, not hidden.",
+  description: fitDescription("Whether each rate, auction and yield on Afronomics is as fresh as its publisher’s own release rhythm, checked after every data run. Late or unreadable figures are listed, not hidden."),
   alternates: { canonical: `${site.url}/status` },
 };
 

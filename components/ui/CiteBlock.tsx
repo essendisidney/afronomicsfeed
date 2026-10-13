@@ -19,7 +19,9 @@ export function CiteBlock({ title, path, publisher, csv }: { title: string; path
       <p className="mt-2 max-w-3xl text-sm leading-6 text-ink-soft">
         Free to quote, chart and republish with the credit “Source: Afronomics{publisher ? `, compiled from ${publisher}` : ""}” and a link to this page.
       </p>
-      <p className="mt-3 max-w-3xl rounded-xl bg-paper-2 px-4 py-3 text-[13px] leading-6 text-ink">{citation}</p>
+      {/* The citation ends in the page's full URL, one unbreakable token that is wider than a phone screen on long
+          slugs (/markets/tbills/mozambique); let it wrap mid-URL instead of widening the page. */}
+      <p className="mt-3 max-w-3xl break-words rounded-xl bg-paper-2 px-4 py-3 text-[13px] leading-6 text-ink">{citation}</p>
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <CopyCitation text={citation} />
         {csv ? (

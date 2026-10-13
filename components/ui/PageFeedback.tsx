@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { INSTITUTIONAL_PATHS } from "./MicroSurvey";
 
 const roles = [
   { value: "", label: "I work in… (optional)" },
@@ -33,6 +34,8 @@ export function PageFeedback() {
     }).catch(() => undefined);
 
   if (!path || !/^\/(markets|data|countries|capital|weekly|news|economy|climate|technology|trade|signals)(\/|$)/.test(path)) return null;
+  // Institutional pages ask "What would you pay for next?" instead (MicroSurvey): one question per page.
+  if (INSTITUTIONAL_PATHS.test(path)) return null;
 
   if (state === "done") {
     return <p className="mt-12 border-t border-rule pt-4 text-sm text-ink-soft">Thank you — the desk reads every answer.</p>;

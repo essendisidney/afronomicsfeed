@@ -9,11 +9,14 @@ export function PaystackCheckout({
   label,
   variant = "primary",
   defaultEmail = "",
+  note = "M-Pesa, card or bank transfer. Cancel any time.",
 }: {
   plan: CheckoutPlanId;
   label: string;
   variant?: "primary" | "accent" | "ghost";
   defaultEmail?: string;
+  /** The line under the button: how it can be paid. */
+  note?: string;
 }) {
   const [email, setEmail] = useState(defaultEmail);
   const [message, setMessage] = useState<string | null>(null);
@@ -67,7 +70,7 @@ export function PaystackCheckout({
       <button type="submit" disabled={pending} className={`w-full rounded-full px-4 py-3 text-[13px] font-semibold transition disabled:opacity-60 ${styles}`}>
         {pending ? "Opening Paystack…" : label}
       </button>
-      <p className={`text-center text-[11px] ${variant === "accent" ? "text-night-soft" : "text-muted"}`}>M-Pesa, card or bank transfer. Cancel any time.</p>
+      <p className={`text-center text-[11px] ${variant === "accent" ? "text-night-soft" : "text-muted"}`}>{note}</p>
       {message ? (
         <p role="status" className="text-center text-[12px] text-down">
           {message}

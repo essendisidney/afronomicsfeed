@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { isOwnerDevice } from "@/lib/track";
+import { isOwnerDevice, isTrackEvent, track } from "@/lib/track";
 
 /** Sends one anonymous page-view beacon per navigation. See app/api/hit/route.ts. */
 export function PageCounter() {
@@ -32,13 +32,26 @@ export function PageCounter() {
       }
     } catch {}
   }, [pathname]);
-  // Downloads are the strongest demand signal: count clicks on any data file link.
+  // Clicks that matter, counted anonymously (lib/track.ts): data downloads (the strongest demand signal), anything
+  // tagged data-track="<event>", and calls to action on /pricing. The one-question survey listens for downloads.
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
-      const link = (event.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
-      if (!link || isOwnerDevice()) return;
+      const target = event.target as Element | null;
+      const tagged = target?.closest?.("[data-track]");
+      const name = tagged?.getAttribute("data-track");
+      if (isTrackEvent(name)) track(name);
+      const link = target?.closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!tagged && window.location.pathname === "/pricing" && target?.closest?.("#main a[href], #main button") && !target.closest("[data-no-track]")) {
+        track("pricing_cta_click");
+      }
+      if (!link) return;
       const url = new URL(link.href, window.location.href);
-      if (url.origin !== window.location.origin || !url.pathname.startsWith("/api/data/")) return;
+      const data = url.origin === window.location.origin && (url.pathname.startsWith("/api/data/") || url.pathname.startsWith("/api/v1/"));
+      if (!data) return;
+      window.dispatchEvent(new CustomEvent("af:download"));
+      if (isOwnerDevice()) return;
+      track("download_click");
+      if (!url.pathname.startsWith("/api/data/")) return;
       const body = JSON.stringify({ path: `/download${url.pathname.slice(4)}`, referrer: document.referrer });
       try {
         navigator.sendBeacon?.("/api/hit", new Blob([body], { type: "application/json" }));

@@ -24,7 +24,8 @@ export async function POST(request: Request) {
   };
   const result = await rpc("af_lead", args);
   if (!result.ok) {
-    console.log(`[enquiry] ${JSON.stringify({ ...args, at: new Date().toISOString(), reason: result.reason })}`);
+    // No emails, names or messages in logs: enough to see that an enquiry from an organisation was not stored.
+    console.log(`[enquiry] not stored ${JSON.stringify({ org: args.p_org, interest: args.p_interest, source: args.p_source, domain: email.split("@")[1], at: new Date().toISOString(), reason: result.reason })}`);
   }
   return Response.json({ ok: true });
 }

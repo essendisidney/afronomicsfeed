@@ -73,9 +73,15 @@ function productName(plan: string | null) {
   return p?.product ?? plan ?? "Afronomics";
 }
 
-/** What happens next, by product, for the receipt. */
-function nextStep(plan: string | null) {
+/** What happens next, by product, for the receipt and the thank-you page. */
+export function nextStep(plan: string | null) {
   switch (plan) {
+    case "analyst":
+    case "analyst_ke":
+      return "Your Analyst month starts today. Within one working day the desk confirms your seat at this address and sends the full-history downloads for every covered market; reply with the markets you want first.";
+    case "data_team":
+    case "data_team_ke":
+      return "Your Team and API month starts today. Within one working day the desk sends your API key to this address (it is shown once; keep it safe) with your named contact. Reply with the markets and fields you need first.";
     case "pack":
     case "pack_plus":
       return "Reply to this email with the name of the institution to put on the cover and up to five email addresses to receive it. The first pack arrives within two working days.";

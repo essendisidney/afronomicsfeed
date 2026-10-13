@@ -19,6 +19,27 @@ export default function PrivacyPage() {
           link. Unconfirmed requests are deleted after 7 days and stopped alerts within 30 days.
         </li>
         <li>
+          <strong>Tender alerts and phone alerts</strong> — for tender alerts, your email address and keywords, on the same confirm-first,
+          one-click-stop terms as rate alerts. For phone (push) alerts, only the browser’s push address and the markets you chose; no name or email.
+        </li>
+        <li>
+          <strong>Enquiries and pilot requests</strong> — the name, email, organisation and message you send, to reply to you, run a pilot and
+          keep a record of what was agreed. We note the stage of a conversation (for example “pilot” or “proposal”) and the next follow-up date.
+        </li>
+        <li>
+          <strong>API keys</strong> — if you have a pilot or licence key, we count your calls per key, day and endpoint (for example which
+          markets you query), to support you and to invoice. The key itself is stored only as a one-way hash.
+        </li>
+        <li>
+          <strong>Prices, rates and stories you report</strong> — what you submit, plus any contact detail you choose to add. To stop one person
+          voting many times, we keep a one-way code made from your connection and the day; it cannot be turned back into an IP address and changes daily.
+        </li>
+        <li>
+          <strong>Feedback and one-question surveys</strong> — your answer (for example “Did you find it?”, “What would you pay for next?” or
+          “What do you use this for?”), the page and your country as reported by our host. Answering is optional and anonymous; please don’t type
+          personal details in the free-text box.
+        </li>
+        <li>
           <strong>Payments</strong> — if you subscribe, Paystack processes your payment. We receive your email, plan and payment status, never
           your full card details.
         </li>
@@ -34,6 +55,24 @@ export default function PrivacyPage() {
       <p>
         To know which pages are read, we count page views: the page, the day, the referring website and the visitor’s country as reported by our
         host. Each count also says whether this browser has visited before, from a first-visit date kept only in your browser’s local storage. No cookie is set and no IP address, device identifier or other personal data is stored with the count.
+      </p>
+      <p>
+        We also count a few actions the same way, one total per action, page, day and country: sign-ups, data downloads, clicks on share
+        buttons, on pricing and pilot buttons and on links to a central bank’s own notice, the start and sending of a pilot request form, and
+        survey answers. Nothing identifies who clicked.
+      </p>
+      <h2>Why, and on what basis</h2>
+      <ul>
+        <li>Newsletter, alerts and surveys: your consent, which you can withdraw at any time (every email has a stop link).</li>
+        <li>Enquiries, pilots, API keys and payments: to take steps you asked for and to perform our agreement with you.</li>
+        <li>
+          Anonymous counts and security logs: our legitimate interest in knowing which data is useful, what to build or price next, and keeping
+          the site safe.
+        </li>
+      </ul>
+      <p>
+        Only the founder’s desk and tools we control under the same rules (including an AI assistant that helps sort and draft replies) read
+        this data. Nobody else sees it, and it is never used to profile you for advertising.
       </p>
       <h2>Where it is kept</h2>
       <p>

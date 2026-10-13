@@ -20,6 +20,10 @@ export default function CookiesPage() {
           reader from a returning one. Only a yes or no (“has visited before”) is sent with the count; the date itself never leaves your device.
         </li>
         <li>
+          <strong>Surveys</strong> — once you answer or close a one-question survey, a marker in local storage stops us asking again. It never
+          leaves your device.
+        </li>
+        <li>
           <strong>Payments</strong> — when you pay, Paystack’s hosted checkout sets its own cookies under its own policy.
         </li>
         <li>

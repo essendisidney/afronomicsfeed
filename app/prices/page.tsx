@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckoutNotice } from "@/components/billing/CheckoutNotice";
+import { InstitutionalBuy } from "@/components/billing/InstitutionalBuy";
 import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
@@ -26,6 +27,9 @@ function Price({ item }: { item: RateItem }) {
 }
 
 function Action({ item, live }: { item: RateItem; live: boolean }) {
+  if (item.checkout === "analyst" || item.checkout === "data_team") {
+    return <InstitutionalBuy tier={item.checkout === "analyst" ? "analyst" : "team"} name={item.name} />;
+  }
   if (item.checkout && live) {
     return <PaystackCheckout plan={item.checkout} label={item.amount && item.unit.includes("month") ? "Subscribe" : "Pay now"} variant="primary" />;
   }

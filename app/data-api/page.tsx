@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
-import { EnquiryForm } from "@/components/ui/EnquiryForm";
-import { aboutText, priceText, rateItem } from "@/lib/billing/ratecard";
+import { InstitutionalBuy } from "@/components/billing/InstitutionalBuy";
+import { PilotForm } from "@/components/billing/PilotForm";
+import { aboutText, institutionalTier, priceText, rateItem } from "@/lib/billing/ratecard";
 import { policyBoard } from "@/lib/data/policy-rates";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
@@ -18,7 +19,11 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/data-api` },
 };
 
-const PLANS = ["licence_institution", "data_api", "enterprise"] as const;
+const PLANS = [
+  { id: "licence_institution", tier: "analyst" },
+  { id: "data_api", tier: "team" },
+  { id: "enterprise", tier: "enterprise" },
+] as const;
 
 export default function DataApiPage() {
   const markets = billMarkets.map((m) => loadBillMarket(m.slug).rows);
@@ -65,7 +70,7 @@ export default function DataApiPage() {
       <section className="mt-12">
         <SectionTitle kicker="Plans" title="Priced in dollars for funds and institutions" note="Invoiced in USD or KES. Kenyan and African desks: the shilling prices on /prices still apply." />
         <div className="mt-4 grid gap-4 lg:grid-cols-3">
-          {PLANS.map((id) => {
+          {PLANS.map(({ id, tier }) => {
             const p = rateItem(id)!;
             return (
               <div key={id} className="flex flex-col rounded-2xl border border-rule bg-surface px-5 py-5">
@@ -76,6 +81,9 @@ export default function DataApiPage() {
                 </p>
                 <p className="text-[12px] text-muted">{aboutText(p)}{p.currency === "KES" ? ", invoiced in dollars on request" : ""}</p>
                 <p className="mt-3 flex-1 text-[14px] leading-6 text-ink-soft">{p.what}</p>
+                <div className="mt-4">
+                  <InstitutionalBuy tier={tier} name={institutionalTier(tier).name} variant={tier === "team" ? "primary" : "ghost"} />
+                </div>
               </div>
             );
           })}
@@ -130,9 +138,13 @@ export default function DataApiPage() {
       </section>
 
       <section className="mt-12 max-w-2xl">
-        <SectionTitle kicker="Start" title="Ask for a 30-day free pilot or an invoice" note="Tell us your firm and what you are building. Reply within one business day." />
-        <div className="mt-4">
-          <EnquiryForm interest="licensing" cta="Request a 30-day pilot" />
+        <SectionTitle
+          kicker="Start"
+          title="Start a free 30-day pilot"
+          note="An API key with the full history, free for 30 days. Five questions, no payment details. Prefer an invoice? Use the invoice form on the pricing page."
+        />
+        <div id="pilot" className="mt-4 scroll-mt-24">
+          <PilotForm siteUrl={site.url} />
         </div>
       </section>
 

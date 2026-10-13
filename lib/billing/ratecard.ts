@@ -33,7 +33,8 @@ export type RateGroup = { id: string; title: string; who: string; items: RateIte
 /**
  * The institutional data-product ladder: African local-currency government debt auction data
  * (bond auctions for Nigeria, Egypt, Kenya, Uganda, Zambia, Morocco and the eight WAEMU markets; bills in ten markets).
- * The one source of truth for these prices. Invoiced in US dollars, never sold through Paystack checkout.
+ * The one source of truth for these prices. Priced in US dollars. Analyst and Team and API can be bought by Paystack checkout
+ * (checkout plans `analyst` and `data_team` in plans.ts) or invoiced; Enterprise is always invoiced.
  */
 export type InstitutionalTierId = "analyst" | "team" | "enterprise";
 
@@ -65,9 +66,9 @@ export const institutionalLadder: readonly InstitutionalTier[] = [
     name: "Team and API",
     monthlyUsd: 1500,
     from: false,
-    summary: "an API key for your systems, alerts, usage reporting, a named contact",
+    summary: "an API key for your systems, Treasury-bill result alerts, usage reporting, a named contact",
     audience: "A desk or research team feeding the data into its own models and systems.",
-    includes: ["An API key for your systems", "Alerts when a market’s result is in", "Usage reporting", "A named contact"],
+    includes: ["An API key for your systems", "Treasury-bill result alerts (push in ten markets, email for Kenya)", "Usage reporting", "A named contact"],
   },
   {
     id: "enterprise",
@@ -91,7 +92,7 @@ export const institutionalLinks = {
   apiDocs: "/data-api",
 } as const;
 
-export const institutionalCurrencyNote = "Invoiced in US dollars.";
+export const institutionalCurrencyNote = "Priced in US dollars: pay at checkout or ask for an invoice.";
 
 export function institutionalTier(id: InstitutionalTierId): InstitutionalTier {
   return institutionalLadder.find((tier) => tier.id === id)!;
@@ -101,6 +102,57 @@ export function institutionalTier(id: InstitutionalTierId): InstitutionalTier {
 export function institutionalPriceText(tier: InstitutionalTier): string {
   const amount = `$${tier.monthlyUsd.toLocaleString("en-US")}`;
   return tier.from ? `from ${amount}` : amount;
+}
+
+/**
+ * Local-institution prices for the institutional ladder (decision D-014, docs/strategy/country-pricing.md §3–4).
+ * A share of the USD list by band: 60% (South Africa, Egypt, Morocco), 50% (Kenya, Nigeria, Ghana, WAEMU),
+ * 40% (Uganda, Tanzania, Rwanda, Zambia, Malawi, Mozambique). Monthly, in local currency, with the rounded US-dollar
+ * equivalent the doc gives. Only for institutions that meet `localInstitutionRule`; geolocation never decides it.
+ * Enterprise is never local-priced: USD only, from $5,000.
+ */
+export type LocalInstitutionPrice = {
+  id: string;
+  country: string;
+  currency: string;
+  analyst: number;
+  team: number;
+  /** Share of the USD list, as a percentage. */
+  band: 60 | 50 | 40;
+  /** Rounded USD equivalents of the two prices (for a card charge in dollars or an invoice). */
+  usd: { analyst: number; team: number };
+};
+
+export const localInstitutionPrices: readonly LocalInstitutionPrice[] = [
+  { id: "kenya", country: "Kenya", currency: "KES", analyst: 16_000, team: 95_000, band: 50, usd: { analyst: 123, team: 732 } },
+  { id: "uganda", country: "Uganda", currency: "UGX", analyst: 375_000, team: 2_250_000, band: 40, usd: { analyst: 100, team: 600 } },
+  { id: "tanzania", country: "Tanzania", currency: "TZS", analyst: 265_000, team: 1_600_000, band: 40, usd: { analyst: 100, team: 603 } },
+  { id: "rwanda", country: "Rwanda", currency: "RWF", analyst: 145_000, team: 875_000, band: 40, usd: { analyst: 99, team: 598 } },
+  { id: "nigeria", country: "Nigeria", currency: "NGN", analyst: 175_000, team: 1_000_000, band: 50, usd: { analyst: 127, team: 727 } },
+  { id: "ghana", country: "Ghana", currency: "GHS", analyst: 1_500, team: 9_000, band: 50, usd: { analyst: 127, team: 765 } },
+  { id: "egypt", country: "Egypt", currency: "EGP", analyst: 7_500, team: 45_000, band: 60, usd: { analyst: 151, team: 903 } },
+  { id: "morocco", country: "Morocco", currency: "MAD", analyst: 1_400, team: 8_500, band: 60, usd: { analyst: 149, team: 907 } },
+  { id: "southafrica", country: "South Africa", currency: "ZAR", analyst: 2_450, team: 14_500, band: 60, usd: { analyst: 150, team: 886 } },
+  { id: "zambia", country: "Zambia", currency: "ZMW", analyst: 1_850, team: 11_000, band: 40, usd: { analyst: 99, team: 588 } },
+  { id: "malawi", country: "Malawi", currency: "MWK", analyst: 175_000, team: 1_050_000, band: 40, usd: { analyst: 101, team: 606 } },
+  { id: "mozambique", country: "Mozambique", currency: "MZN", analyst: 6_400, team: 38_000, band: 40, usd: { analyst: 100, team: 595 } },
+  { id: "waemu", country: "Côte d’Ivoire, Senegal and the WAEMU", currency: "XOF", analyst: 70_000, team: 425_000, band: 50, usd: { analyst: 123, team: 750 } },
+];
+
+/** Who qualifies for a local-institution price (D-014, docs/strategy/country-pricing.md §4). */
+export const localInstitutionRule: readonly string[] = [
+  "The contracting entity is incorporated, headquartered and licensed in the country: a pension scheme or administrator, SACCO, bank, insurer, microfinance bank, broker or dealer, or local fund manager.",
+  "Its ultimate parent is African and headquartered in the same country.",
+  "All users sit in that country, the data is used for the domestic book, and there is no redistribution.",
+  "It is invoiced to the local entity and paid from a local account. The licence states the qualification; a false claim moves the contract to the list price from day one.",
+  "Global and regional asset managers, sell-side desks and development finance institutions pay the US-dollar list price wherever their desk sits.",
+];
+
+export const localInstitutionPayment =
+  "Kenya: pay by M-Pesa or card in shillings at checkout. Elsewhere: a fixed US-dollar equivalent, paid by card through a payment link the desk sends, or by invoice.";
+
+export function localPriceText(p: LocalInstitutionPrice, tier: "analyst" | "team") {
+  return `${p.currency} ${p[tier].toLocaleString("en-US")}`;
 }
 
 export const rateCard: RateGroup[] = [
@@ -139,8 +191,8 @@ export const rateCard: RateGroup[] = [
     items: [
       { id: "api", name: "Open API", amount: 0, currency: "KES", unit: "", what: "Every auction dataset, the measures and the index as JSON, no key, five-minute cache, with attribution. Research, journalism, teaching and non-commercial apps.", href: "/developers" },
       { id: "licence_startup", name: "Startup licence", amount: 7500, currency: "KES", unit: "a month", what: "Commercial use inside one product of a startup: show the auction datasets, the measures and the FX archive to your own users with attribution, an email or webhook on every new result, and a named contact. Resale or bulk redistribution of the raw data needs the Enterprise licence.", checkout: "licence_startup", href: "/licensing" },
-      { id: "licence_institution", name: institutionalTier("analyst").name, amount: institutionalTier("analyst").monthlyUsd, currency: "USD", unit: "a month per user", what: "One user: the web tables and full-history downloads for every covered market. Invoiced in dollars.", enquiry: "licensing", href: "/data/frontier-local-debt" },
-      { id: "data_api", name: "Afronomics Data API", amount: institutionalTier("team").monthlyUsd, currency: "USD", unit: "a month", what: "A keyed feed for production systems: government bond auctions across the covered markets and every Treasury bill auction in ten markets, with full history, policy rates, Eurobond yields and the bill index, uncached responses, usage reporting per key, change notifications and a named contact. Invoiced in dollars.", enquiry: "licensing", href: "/data-api" },
+      { id: "licence_institution", name: institutionalTier("analyst").name, amount: institutionalTier("analyst").monthlyUsd, currency: "USD", unit: "a month per user", what: "One user: the web tables and full-history downloads for every covered market. Priced in dollars.", checkout: "analyst", enquiry: "licensing", href: "/data/frontier-local-debt" },
+      { id: "data_api", name: "Afronomics Data API", amount: institutionalTier("team").monthlyUsd, currency: "USD", unit: "a month", what: "A keyed feed for production systems: government bond auctions across the covered markets and every Treasury bill auction in ten markets, with full history, policy rates, Eurobond yields and the bill index, uncached responses, usage reporting per key, Treasury-bill result alerts and a named contact. Priced in dollars.", checkout: "data_team", enquiry: "licensing", href: "/data-api" },
       { id: "enterprise", name: "Enterprise and redistribution", amount: institutionalTier("enterprise").monthlyUsd, currency: "USD", unit: "a month, from", what: "Redistribution to your own clients, several teams and keys, custom datasets and delivery (SFTP, Excel, Google Sheets), and a service agreement. Priced by scope from $5,000 a month.", enquiry: "licensing", href: "/data-api" },
       { id: "widget", name: "Branded live-rates widget", amount: 40000, currency: "KES", unit: "a month", what: "Our live T-bill, bond or FX widget on your site with your branding and no Afronomics link, updated the moment each result lands. The free widgets are the demo.", checkout: "widget", href: "/widgets" },
       { id: "bulk", name: "Bulk and AI training licence", amount: null, currency: "USD", unit: "", what: "Clean, dated, sourced African financial data for models and bulk redistribution, with the full change history. Priced by scope.", enquiry: "licensing" },

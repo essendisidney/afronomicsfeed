@@ -55,7 +55,7 @@ export async function POST(request: Request) {
       raw: event,
     };
     const result = await recordPayment(payment);
-    if (!result.ok) console.log(`[paystack] payment not stored: ${result.reason} ${JSON.stringify({ reference: data.reference, email })}`);
+    if (!result.ok) console.log(`[paystack] payment not stored: ${result.reason} ${JSON.stringify({ reference: data.reference, domain: String(email ?? "").split("@")[1] ?? "" })}`);
     after(async () => {
       const sent = await notifyPayment(payment).catch((e) => [`error:${String(e)}`]);
       console.log(`[paystack] ${data.reference} ${sent.join(" ")}`);
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
       status: event.event === "subscription.create" ? "active" : event.event === "subscription.disable" ? "disabled" : "non-renewing",
       next: data.next_payment_date ?? null,
     });
-    if (!result.ok) console.log(`[paystack] subscription not stored: ${result.reason} ${JSON.stringify({ code: data.subscription_code, email })}`);
+    if (!result.ok) console.log(`[paystack] subscription not stored: ${result.reason} ${JSON.stringify({ code: data.subscription_code, domain: String(email ?? "").split("@")[1] ?? "" })}`);
   }
 
   // Always 200 once the signature is valid, so Paystack does not retry a stored event.

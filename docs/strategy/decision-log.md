@@ -113,3 +113,28 @@ what we changed. Newest at the bottom. Read this first every week.
   the first 10 prospects (founder action) and the first replies are in. Build work in the meantime is limited to
   what makes the pilot convincing (the "Latest results" cards, the sample pack) and keeping readers healthy.
 - **Kill rule stands:** no pilot after 25 qualified contacts, or no payment after 3 used pilots.
+
+### D-013 · 13 Oct 2026 · Outreach wave 2 sent; daily desk and sale watch running
+- **Did:** 15 more pilot notes sent on 13 Oct (14 wave-2 institutions plus Allan Gray), each address confirmed on the
+  institution's own page first (probe run); 5 unconfirmed addresses dropped. Claims trimmed to what the site shows
+  (Morocco left out until its data landed; "alerts" removed from the pilot offer). Ninety One's send was blocked by the
+  session's safety check and waits in the founder's Gmail drafts.
+- **Happened (VERIFIED):** 21 institutions now "contacted" in `deals`; one follow-up each on 21–22 Oct, then stop.
+  Payments: 0 real (1 test). Leads: 0.
+- **Changed:** the founder delegated day-to-day management. Routines: sale watch every 2 hours (07–21 Nairobi) with
+  a FIRST SALE alert; desk operator and customer support three times each weekday; weekly money sprint re-enabled.
+
+### D-014 · 13 Oct 2026 · Country pricing approved (docs/strategy/country-pricing.md)
+- **Decided by the founder:** all three recommendations.
+  1. Local-institution prices in local currency at 60% of the USD list (South Africa, Egypt, Morocco), 50% (Kenya,
+     Nigeria, Ghana, XOF) and 40% (Uganda, Tanzania, Rwanda, Zambia, Malawi, Mozambique), only for organisations
+     incorporated, headquartered, licensed and ultimately owned in that country, users in-country, no redistribution.
+     Global managers, sell-side desks (including Standard Bank and Absa CIB) and DFIs pay the USD list.
+  2. Payment phase 1: one Kenyan Paystack account (KES incl. M-Pesa, and USD cards); other markets see their local
+     price and pay a fixed USD equivalent by card, institutions by invoice. Local accounts (Paystack NG/GH/ZA,
+     Flutterwave) only when sales in a market justify a local entity.
+  3. Timing: the local-institution price sheet is offered now, with the pilot offer and on request; the
+     country-priced reader page waits until the first payments. Reader prices unchanged for now (global stays USD 12).
+- **Re-pricing rule:** review quarterly; re-price a market when its 30-day average FX is more than 10% off the table
+  rate, at once above 20%; increases with 30 days' notice, at most every 6 months.
+- **Test:** local-institution pilots requested from Kenya/Uganda/Nigeria within 60 days; if none, drop the sheet.

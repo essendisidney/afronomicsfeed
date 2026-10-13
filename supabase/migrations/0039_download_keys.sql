@@ -1,4 +1,4 @@
--- NOT APPLIED. Full-history downloads in a browser, and download keys for Analyst buyers (decision D-016).
+-- Applied 13 Oct 2026. Full-history downloads in a browser, and download keys for Analyst buyers (decision D-016).
 --
 -- 1. data_keys.plan gains 'analyst': a key for full-history CSV downloads only. The app refuses it on the JSON API
 --    (lib/api.ts DOWNLOAD_ONLY_PLANS) and accepts it on /api/data CSV files, by header or browser session.

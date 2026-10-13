@@ -1,5 +1,6 @@
 # Offline regression tests for the bond-auction readers in scripts/: each parser is run against fixtures built
 # from the publishers' real document layouts. No network access (the tests refuse any HTTP call).
+# tests/site checks the site QA configuration and its overclaim rules (the browser run is site-qa.yml).
 name: Reader tests
 
 on:
@@ -22,4 +23,4 @@ jobs:
           cache: pip
           cache-dependency-path: .github/workflows/tests.yml
       - run: pip install pdfplumber requests openpyxl pytest
-      - run: python -m pytest tests/readers -q
+      - run: python -m pytest tests/readers tests/site -q

@@ -42,7 +42,7 @@ export function StorySignup() {
           <p className="text-[15px] font-semibold text-ink">Liked this? Get the next one.</p>
           <p className="mt-0.5 text-[13px] leading-5 text-ink-soft">One new story a week and the day&rsquo;s rates every weekday morning, free. Plus our guide to where your shilling earns most.</p>
         </div>
-        <button type="button" onClick={() => setOpen(false)} aria-label="Close" className="-mr-1 rounded-full px-2 text-xl leading-none text-muted hover:text-ink">
+        <button type="button" onClick={() => setOpen(false)} aria-label="Close" className="-mr-3 -mt-2 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-xl leading-none text-muted hover:text-ink">
           ×
         </button>
       </div>

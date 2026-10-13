@@ -52,9 +52,9 @@ const buyers: Buyer[] = [
   {
     id: "investors",
     who: "DFIs, funds abroad and researchers",
-    job: "Follow African sovereign funding costs across ten markets with full history, change notifications and someone to ask.",
+    job: "Follow African sovereign funding costs across ten markets with full history, Treasury-bill result alerts and someone to ask.",
     products: ["licence_institution", "data_api", "enterprise", "research", "bulk"],
-    start: { href: "/data-api", label: "See Afronomics Data" },
+    start: { href: "/data/frontier-local-debt#pilot", label: "Start a free 30-day pilot" },
   },
 ];
 
@@ -155,7 +155,11 @@ export default function ForInstitutionsPage() {
           <Link href="/prices" className="underline underline-offset-2">
             price guide
           </Link>
-          . Annual billing takes two months off. M-Pesa, card, bank transfer or invoice.
+          . Annual billing takes two months off. M-Pesa, card, bank transfer or invoice. Analyst and Team and API can be bought on{" "}
+          <Link href="/pricing#institutions" className="underline underline-offset-2">
+            the pricing page
+          </Link>
+          .
         </p>
       </section>
 

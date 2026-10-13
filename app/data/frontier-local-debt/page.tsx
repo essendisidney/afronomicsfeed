@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
-import { EnquiryForm } from "@/components/ui/EnquiryForm";
+import { InstitutionalBuy } from "@/components/billing/InstitutionalBuy";
+import { PilotForm } from "@/components/billing/PilotForm";
 import { billMarkets, loadBillMarket, type BillMarket } from "@/lib/data/sovereign-bills";
 import { bondMarkets, bondSnapshot, loadBondMarket, type BondMarket } from "@/lib/data/sovereign-bonds";
 import { BondMarketCard } from "@/components/data/BondMarketCard";
@@ -206,28 +207,32 @@ export default function FrontierLocalDebtPage() {
               <strong className="text-ink">History in one format:</strong> the full record in the same columns for every market, by API or CSV (Excel on request).
             </li>
             <li>
-              <strong className="text-ink">Alerts:</strong> a notification when a market’s result is in (email today; webhooks for licensed keys on request).
+              <strong className="text-ink">Alerts:</strong> Treasury-bill results by browser push in ten markets and by email for Kenya. There are no bond-result alerts yet.
             </li>
             <li>
               <strong className="text-ink">Honest gaps:</strong> bond auctions are covered for {bondCountries.join(", ")} only so far; South Africa, Ghana, Tunisia and
               Angola are not covered yet. We do not sell secondary-market prices: those come from dealers and exchanges. Pilot institutions shape the order.
             </li>
           </ul>
-          <div className="mt-4 overflow-x-auto">
-            <table className="data-table">
-              <tbody>
-                {institutionalLadder.map((tier) => (
-                  <tr key={tier.id}>
-                    <td className="font-medium text-ink">{tier.name}</td>
-                    <td>{tier.summary}</td>
-                    <td className="text-right whitespace-nowrap">{institutionalPriceText(tier)} a month</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-4 divide-y divide-rule border-y border-rule">
+            {institutionalLadder.map((tier) => (
+              <div key={tier.id} className="grid gap-3 py-4 sm:grid-cols-[1fr_15rem] sm:items-start">
+                <div>
+                  <p className="text-[15px] font-semibold text-ink">
+                    {tier.name} <span className="font-normal text-ink-soft">· {institutionalPriceText(tier)} a month</span>
+                  </p>
+                  <p className="mt-1 text-[13px] leading-5 text-ink-soft">{tier.summary.charAt(0).toUpperCase() + tier.summary.slice(1)}.</p>
+                </div>
+                <InstitutionalBuy tier={tier.id} name={tier.name} variant={tier.id === "team" ? "primary" : "ghost"} />
+              </div>
+            ))}
           </div>
           <p className="mt-3 text-sm text-ink-soft">
-            Invoiced in US dollars.{" "}
+            Priced in US dollars; pay at checkout or{" "}
+            <Link href="/pricing?plan=enterprise#invoice" className="underline underline-offset-2">
+              ask for an invoice
+            </Link>
+            .{" "}
             <Link href="/data-api" className="font-semibold text-forest underline underline-offset-2">
               Terms and API
             </Link>
@@ -235,12 +240,12 @@ export default function FrontierLocalDebtPage() {
           </p>
         </div>
         <div id="pilot" className="scroll-mt-24 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
-          <p className="text-[17px] font-semibold text-ink">Request a 30-day pilot</p>
+          <p className="text-[17px] font-semibold text-ink">Start a free 30-day pilot</p>
           <p className="mt-1 mb-4 text-[14px] text-ink-soft">
-            For investment managers, banks, development finance institutions and research teams. A pilot gets an API key, the full history and alerts for 30
-            days, free. Tell us the markets and fields you need.
+            For investment managers, banks, development finance institutions and research teams: an API key with the full history of every market above,
+            free for 30 days. Five questions, no payment details.
           </p>
-          <EnquiryForm interest="licensing" cta="Request a pilot" />
+          <PilotForm siteUrl={site.url} />
         </div>
       </section>
 

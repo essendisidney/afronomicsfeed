@@ -1,10 +1,23 @@
-import { institutionalLadder, institutionalPriceText } from "@/lib/billing/ratecard";
+import {
+  institutionalLadder,
+  institutionalPriceText,
+  localInstitutionPayment,
+  localInstitutionPrices,
+  localInstitutionRule,
+  localPriceText,
+} from "@/lib/billing/ratecard";
 import { bondCoverageText, bondResultCount } from "@/lib/data/sovereign-bonds";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
+import { InstitutionalBuy } from "@/components/billing/InstitutionalBuy";
+import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
+import { paystackConfigured } from "@/lib/billing/paystack";
+import { chargeLabel } from "@/lib/billing/plans";
+import { InvoiceRequestForm } from "@/components/billing/InvoiceRequestForm";
+import { PilotForm } from "@/components/billing/PilotForm";
 import { indicatorDefs } from "@/lib/data/indicators";
 import { loadBonds } from "@/lib/data/kenya-bonds";
 import { loadTbills } from "@/lib/data/kenya-tbills";
@@ -20,14 +33,18 @@ export const metadata: Metadata = {
 
 const year = (date?: string) => date?.slice(0, 4) ?? "—";
 
-const tiers = [
+type Tier = { name: string; price: string; detail: string; buy?: "open" | "startup" | "analyst" | "team" | "enterprise" };
+
+const tiers: Tier[] = [
   {
     name: "Open",
+    buy: "open",
     price: "Free",
     detail: "CSV downloads and the open JSON API for research, teaching and journalism, with the attribution line kept.",
   },
   {
     name: "Startup",
+    buy: "startup",
     price: "KES 7,500/mo",
     detail: "Commercial use inside one startup product: show the auction datasets, measures and FX archive to your own users with attribution, with an email or webhook on every new result. No resale of the raw data.",
   },
@@ -35,8 +52,28 @@ const tiers = [
     name: tier.name,
     price: `${institutionalPriceText(tier)}/mo`,
     detail: `${tier.summary.charAt(0).toUpperCase()}${tier.summary.slice(1)}. ${tier.audience}`,
+    buy: tier.id,
   })),
 ];
+
+function TierAction({ tier }: { tier: Tier }) {
+  if (tier.buy === "open")
+    return (
+      <Link href="/developers" className="block rounded-full border border-ink/20 px-4 py-3 text-center text-[13px] font-semibold text-ink hover:border-accent">
+        Use the open API
+      </Link>
+    );
+  if (tier.buy === "startup")
+    return paystackConfigured() ? (
+      <PaystackCheckout plan="licence_startup" label={`Buy · ${chargeLabel("licence_startup")}/mo`} variant="ghost" />
+    ) : (
+      <a href="#enquiry" className="block rounded-full border border-ink/20 px-4 py-3 text-center text-[13px] font-semibold text-ink hover:border-accent">
+        Request an invoice
+      </a>
+    );
+  if (tier.buy) return <InstitutionalBuy tier={tier.buy} name={tier.name} variant={tier.buy === "team" ? "primary" : "ghost"} />;
+  return null;
+}
 
 export default function LicensingPage() {
   const bills = loadTbills();
@@ -137,15 +174,94 @@ export default function LicensingPage() {
       </div>
 
       <section className="mt-14">
-        <SectionTitle kicker="Terms" title="Licences" note="Annual billing takes two months off. Invoiced in USD or KES." />
-        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2 lg:grid-cols-4">
+        <SectionTitle kicker="Terms" title="Licences" note="Buy at checkout, or ask for an invoice in USD or KES. Not sure yet? Start a free 30-day pilot on the frontier local-debt page." />
+        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {tiers.map((tier) => (
-            <div key={tier.name} className="bg-surface px-5 py-6">
+            <div key={tier.name} className="flex flex-col bg-surface px-5 py-6">
               <p className="text-[12px] font-semibold text-gold">{tier.name}</p>
               <p className="mt-2 font-serif text-3xl text-ink">{tier.price}</p>
-              <p className="mt-3 text-sm leading-6 text-ink-soft">{tier.detail}</p>
+              <p className="mt-3 flex-1 text-sm leading-6 text-ink-soft">{tier.detail}</p>
+              <div className="mt-5">
+                <TierAction tier={tier} />
+              </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section id="local" className="mt-14 scroll-mt-24">
+        <SectionTitle
+          kicker="Local institutions in Africa"
+          title="Local prices for domestic institutions"
+          note="Analyst and Team and API, a month, for institutions that meet the rule below. Enterprise and redistribution stay in US dollars, from $5,000 a month, everywhere."
+        />
+        <div className="mt-4 overflow-x-auto">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Country</th>
+                <th className="text-right">Analyst</th>
+                <th className="text-right">Team and API</th>
+                <th className="text-right">Share of the USD list</th>
+                <th className="text-right">About, in USD</th>
+              </tr>
+            </thead>
+            <tbody>
+              {localInstitutionPrices.map((p) => (
+                <tr key={p.id}>
+                  <td className="font-medium text-ink">{p.country}</td>
+                  <td className="text-right whitespace-nowrap">{localPriceText(p, "analyst")}</td>
+                  <td className="text-right whitespace-nowrap">{localPriceText(p, "team")}</td>
+                  <td className="text-right">{p.band}%</td>
+                  <td className="text-right whitespace-nowrap text-ink-soft">
+                    ${p.usd.analyst} · ${p.usd.team}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-6 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 className="font-serif text-xl text-ink">Who qualifies</h3>
+            <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-ink-soft">
+              {localInstitutionRule.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ol>
+          </div>
+          <div>
+            <h3 className="font-serif text-xl text-ink">How to pay</h3>
+            <p className="mt-2 text-sm leading-6 text-ink-soft">{localInstitutionPayment}</p>
+            {paystackConfigured() ? (
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <PaystackCheckout
+                  plan="analyst_ke"
+                  label={`Kenya: Analyst · ${chargeLabel("analyst_ke")}/mo`}
+                  variant="ghost"
+                  note="M-Pesa, card or bank transfer. One month. By paying you confirm your institution meets the rule."
+                />
+                <PaystackCheckout
+                  plan="data_team_ke"
+                  label={`Kenya: Team and API · ${chargeLabel("data_team_ke")}/mo`}
+                  variant="primary"
+                  note="M-Pesa, card or bank transfer. One month. By paying you confirm your institution meets the rule."
+                />
+              </div>
+            ) : null}
+          </div>
+        </div>
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          <div id="local-pilot" className="scroll-mt-24 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
+            <p className="text-[17px] font-semibold text-ink">Start a free 30-day pilot</p>
+            <p className="mt-1 mb-4 text-sm leading-6 text-ink-soft">An API key with the full history, free for 30 days, then the local price for your country.</p>
+            <PilotForm siteUrl={site.url} localPricing />
+          </div>
+          <div id="local-invoice" className="scroll-mt-24 rounded-2xl border border-rule bg-surface px-5 py-5">
+            <p className="text-[17px] font-semibold text-ink">Request an invoice at the local price</p>
+            <p className="mt-1 mb-4 text-sm leading-6 text-ink-soft">Invoiced to your local entity. The desk replies within one working day.</p>
+            <InvoiceRequestForm plan="team" localPricing />
+          </div>
         </div>
       </section>
 

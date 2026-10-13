@@ -15,11 +15,9 @@ export async function POST(request: Request) {
   }
 
   const origin = new URL(request.url).origin;
-  const result = await startCheckout({
-    plan: plan.id,
-    email,
-    callbackUrl: `${origin}/${plan.id.startsWith("pack") ? "pack" : plan.id === "pro" || plan.id === "professional" || plan.id === "trial" ? "pricing" : plan.id === "job_listing" ? "jobs/post" : plan.id.startsWith("tender_alerts") ? "tenders/pay" : "prices"}?checkout=returned`,
-  });
+  // Tender alerts and job listings have their own pages; everything else lands on the one thank-you page.
+  const back = plan.id === "job_listing" ? "jobs/post" : plan.id.startsWith("tender_alerts") ? "tenders/pay" : "thank-you";
+  const result = await startCheckout({ plan: plan.id, email, callbackUrl: `${origin}/${back}?checkout=returned` });
 
   if (!result.ok) {
     return Response.json(result, { status: result.reason === "Paystack is not connected." ? 503 : 502 });

@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
+import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { bondDatasetJsonLd } from "@/lib/seo/schema";
 import { renderTime } from "@/lib/data/fetcher";
 import type { BondMarket, BondRow } from "@/lib/data/sovereign-bonds";
 import { site } from "@/lib/site";
@@ -51,24 +54,9 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
   const showCover = rows.some((r) => r.bid_cover != null);
   const ccy = market.currency;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    name: `${n.place} government bond auction results`,
-    description: n.description,
-    url: `${site.url}${n.path}`,
-    spatialCoverage: issuer ? issuer.name : market.country,
-    temporalCoverage: facts ? `${facts.first}/${facts.newest}` : undefined,
-    creator: { "@type": "Organization", name: site.name, url: site.url },
-    isBasedOn: market.sourcePage,
-    license: `${site.url}/data-api`,
-    dateModified: updatedAt ?? undefined,
-    variableMeasured: [market.rateNote, "bid cover", `amounts offered, bid and accepted, ${ccy} millions`],
-    distribution: [
-      { "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: `${site.url}${n.csv}` },
-      { "@type": "DataDownload", encodingFormat: "application/json", contentUrl: `${site.url}${n.api}` },
-    ],
-  };
+  // One Dataset builder for every bond page (lib/seo/schema.ts), so the license, catalog and variables never drift.
+  const dates = rows.map((r) => r.date).sort();
+  const jsonLd = bondDatasetJsonLd(market, n.path, issuer ? { name: issuer.name, first: dates[0] ?? null, last: dates.at(-1) ?? null } : undefined);
 
   const crumbs = [
     { href: "/", label: "Home" },
@@ -101,7 +89,16 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
         </a>
       }
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
+      {market.slug === "kenya" ? (
+        <p className="mb-6 text-sm text-ink-soft">
+          The fuller Kenya page, with the auction yield curve, infrastructure-bond share and a page for every auction, is{" "}
+          <Link href="/markets/kenya-bonds" className="font-medium text-forest underline underline-offset-2 hover:text-gold">
+            Kenya Treasury bond auction results
+          </Link>
+          .
+        </p>
+      ) : null}
 
       {issuers.length ? <IssuerNav market={market} active={issuer} issuers={issuers} /> : null}
 
@@ -250,6 +247,7 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
       <div className="[overflow-wrap:anywhere]">
         <CiteBlock title={`${n.place} government bond auction results`} path={n.path} publisher={`the ${market.publisher}`} csv={n.csv} />
       </div>
+      <DebtDataLinks country={issuer ? issuer.name : market.country} current={n.path} />
     </PageShell>
   );
 }

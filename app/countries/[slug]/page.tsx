@@ -6,6 +6,8 @@ import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { ProjectTable } from "@/components/data/ProjectTable";
 import { WireList } from "@/components/data/WireList";
 import { Kicker, SectionTitle, SourceLine, StatTile, usd } from "@/components/data/parts";
+import { countryDebtLinks } from "@/components/seo/DebtDataLinks";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { getAllArticles } from "@/lib/content";
 import { countries, getCountry } from "@/lib/data/countries";
@@ -68,6 +70,8 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
   const official = officialSources(country);
   const peers = countries.filter((item) => item.region === country.region && item.slug !== country.slug);
   const analysis = country.iso === "KE" ? getAllArticles().slice(0, 4) : [];
+  // This country's Treasury bill and bond auction pages, where Afronomics holds the data.
+  const debtLinks = countryDebtLinks(country.name);
 
   const get = (slug: string) => readings.find((item) => item.file.def.slug === slug)?.reading ?? null;
   const gdp = get("gdp");
@@ -93,7 +97,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <Breadcrumbs items={[{ href: "/", label: "Home" }, { href: "/countries", label: "Countries" }, { label: country.name }]} />
 
       <header className="mt-6 grid gap-6 lg:grid-cols-12 lg:items-end">
@@ -132,11 +136,11 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
             {label}
           </a>
         ))}
-        {country.iso === "KE" ? (
-          <Link href="/markets/kenya-tbills" className="text-gold hover:text-forest">
-            T-bill auctions dataset →
+        {debtLinks.map((item) => (
+          <Link key={item.href} href={item.href} className="text-gold hover:text-forest">
+            {item.label} →
           </Link>
-        ) : null}
+        ))}
       </nav>
 
       <section id="data" className="mt-10 space-y-10">

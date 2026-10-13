@@ -6,7 +6,11 @@ import { AlertButton } from "@/components/ui/AlertButton";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { EmailAlertBox } from "@/components/ui/RateAlertForm";
 import { PageShell } from "@/components/data/PageShell";
+import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Questions } from "@/components/seo/Questions";
+import { getBillMarket } from "@/lib/data/sovereign-bills";
+import { tbillDatasetJsonLd } from "@/lib/seo/schema";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { auctionWeeks, latestByTenor, loadTbills, rateHistory, tenorColor, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
 import { tbillAnswers } from "@/lib/seo/answers";
@@ -39,18 +43,18 @@ export default function KenyaTbillsPage() {
   const ytdOffered = ytd.reduce((total, row) => total + (row.offered_kes_m ?? 0), 0);
   const ytdReceived = ytd.reduce((total, row) => total + (row.received_kes_m ?? 0), 0);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    name: "Kenya Treasury bill auction results",
-    description: "Every Central Bank of Kenya Treasury bill auction: rates, amounts offered, received and accepted, by tenor.",
-    url: `${site.url}/markets/kenya-tbills`,
-    temporalCoverage: first && lastDate ? `${first}/${lastDate}` : undefined,
-    spatialCoverage: "Kenya",
-    creator: { "@type": "Organization", name: site.name, url: site.url },
-    isBasedOn: file.sourcePage,
-    distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: `${site.url}/api/data/kenya-tbills` }],
-  };
+  // The shared Dataset builder (license, catalog, variables, freshness), plus this page's own Kenya CSV first.
+  const kenya = getBillMarket("kenya");
+  const shared = kenya ? tbillDatasetJsonLd(kenya) : null;
+  const jsonLd = shared
+    ? {
+        ...shared,
+        distribution: [
+          { "@type": "DataDownload", name: "Kenya Treasury bill auctions with CBK notice links (CSV)", encodingFormat: "text/csv", contentUrl: `${site.url}/api/data/kenya-tbills` },
+          ...shared.distribution,
+        ],
+      }
+    : null;
 
   return (
     <PageShell
@@ -79,7 +83,7 @@ export default function KenyaTbillsPage() {
         </a>
       }
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {jsonLd ? <JsonLd data={jsonLd} /> : null}
 
       {file.rows.length === 0 ? (
         <p className="text-sm text-muted">The dataset is being compiled.</p>
@@ -218,6 +222,7 @@ export default function KenyaTbillsPage() {
 
       <CiteBlock title="Kenya Treasury bill auction results" path="/markets/kenya-tbills" publisher="the Central Bank of Kenya" csv="/api/data/kenya-tbills" />
       <Questions items={tbillAnswers().items} />
+      <DebtDataLinks country="Kenya" current="/markets/kenya-tbills" />
       <NewsletterBand lede="Kenya’s auction results, plus 53 other economies, in one Monday email." />
     </PageShell>
   );

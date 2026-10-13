@@ -129,12 +129,12 @@ export default function DataApiPage() {
         </div>
         <div className="min-w-0">
           <SectionTitle kicker="Example" title="Nigeria’s last ten 364-day auctions" />
-          <pre className="mt-4 max-w-full overflow-x-auto whitespace-pre-wrap break-all rounded-xl bg-ink px-4 py-4 text-[12px] leading-5 text-paper">
+          <pre className="mt-4 max-w-full overflow-x-auto whitespace-pre-wrap break-all rounded-xl bg-night px-4 py-4 text-[12px] leading-5 text-night-ink ring-1 ring-night-line">
             {`curl -H "Authorization: Bearer afk_YOUR_KEY" \\
   "${site.url}/api/v1/tbills/nigeria?tenor=364&limit=10"`}
           </pre>
           <p className="mt-3 text-[13px] text-ink-soft">Government bond auctions ({bondCoverageText()}), by market and ISIN:</p>
-          <pre className="mt-2 max-w-full overflow-x-auto whitespace-pre-wrap break-all rounded-xl bg-ink px-4 py-4 text-[12px] leading-5 text-paper">
+          <pre className="mt-2 max-w-full overflow-x-auto whitespace-pre-wrap break-all rounded-xl bg-night px-4 py-4 text-[12px] leading-5 text-night-ink ring-1 ring-night-line">
             {`curl -H "Authorization: Bearer afk_YOUR_KEY" \\
   "${site.url}/api/v1/bonds/egypt?from=2015-01-01"`}
           </pre>
@@ -156,7 +156,7 @@ export default function DataApiPage() {
           title="Start a free 30-day pilot"
           note="An API key with the full history, free for 30 days. Five questions, no payment details. Prefer an invoice? Use the invoice form on the pricing page."
         />
-        <div id="pilot" className="mt-4 scroll-mt-24">
+        <div id="pilot" className="mt-4">
           <PilotForm siteUrl={site.url} />
         </div>
       </section>

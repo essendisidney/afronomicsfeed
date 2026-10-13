@@ -119,7 +119,7 @@ export default async function LoanAppsPage() {
                 : "Collecting from today: add a loan you have taken below. The first lender appears once five borrowers have reported it."}
             </p>
           )}
-          <div id="report" className="mt-6 scroll-mt-24">
+          <div id="report" className="mt-6">
             <LoanReportForm lenders={lenders.map((l) => l.name)} />
           </div>
           <p className="mt-2 text-[12px] text-muted">

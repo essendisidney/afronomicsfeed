@@ -19,7 +19,7 @@ export async function MoneyToday() {
       </div>
       <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {doors.map((door) => (
-          <div key={door.id} id={door.id} className="flex scroll-mt-24 flex-col rounded-2xl border border-rule bg-surface px-5 py-5">
+          <div key={door.id} id={door.id} className="flex flex-col rounded-2xl border border-rule bg-surface px-5 py-5">
             <p className="text-[13px] font-semibold text-forest">{door.who}</p>
             <h3 className="mt-1 text-[17px] font-semibold leading-snug text-ink">{door.question}</h3>
             {door.lines.length ? (

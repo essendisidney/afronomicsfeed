@@ -12,6 +12,7 @@ import type { BondMarket, BondRow } from "@/lib/data/sovereign-bonds";
 import { site } from "@/lib/site";
 import { AuctionRateChart } from "./AuctionRateChart";
 import { bondFacts, longDate, millions, shortName, tableOrder, tenorText, todayIso, type Issuer } from "./stats";
+import { ActionTile } from "@/components/ui/Card";
 
 const TABLE_LIMIT = 100;
 
@@ -81,14 +82,12 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
         </p>
       }
       aside={
-        <a href={n.csv} download className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
-          <p className="text-[13px] font-medium opacity-80">Download</p>
-          <p className="mt-1 font-serif text-2xl">CSV download</p>
-          <p className="text-[12px] opacity-80">Latest 12 months free; full history with a key</p>
-          <p className="text-[12px] opacity-80">
+        <ActionTile href={n.csv} download kicker="Download" title="The table as CSV">
+          <span className="block">Latest 12 months free; full history with a key</span>
+          <span className="block">
             {market.slug === "waemu" ? "All eight WAEMU issuers" : `${market.country}`} · source: {market.publisher}
-          </p>
-        </a>
+          </span>
+        </ActionTile>
       }
     >
       <JsonLd data={jsonLd} />

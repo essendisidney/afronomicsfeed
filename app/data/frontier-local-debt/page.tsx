@@ -243,7 +243,7 @@ export default function FrontierLocalDebtPage() {
             .
           </p>
         </div>
-        <div id="pilot" className="scroll-mt-24 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
+        <div id="pilot" className="rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
           <p className="text-[17px] font-semibold text-ink">Start a free 30-day pilot</p>
           <p className="mt-1 mb-4 text-[14px] text-ink-soft">
             For investment managers, banks, development finance institutions and research teams: an API key with the full history of every market above,

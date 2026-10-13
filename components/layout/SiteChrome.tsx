@@ -20,13 +20,13 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       </a>
       <MarketStrip />
       <Header searchIndex={searchIndex} />
-      <div id="main" className="flex-1">
+      <main id="main" className="flex-1">
         {children}
         <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6">
           <PageFeedback />
         </div>
         <MicroSurvey />
-      </div>
+      </main>
       <Footer />
       <PageCounter />
       <AppInstall />

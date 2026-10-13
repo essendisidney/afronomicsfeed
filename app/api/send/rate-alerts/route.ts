@@ -1,3 +1,4 @@
+import { bearerOk, redactEmails } from "@/lib/security";
 import { sendEmail } from "@/lib/mail";
 import { alertEmail, alertSnapshot } from "@/lib/rate-alerts";
 import { alertKinds, dueCheck, type LiveAlert } from "@/lib/rate-alerts-core";
@@ -16,7 +17,7 @@ export const maxDuration = 300;
  */
 export async function POST(request: Request) {
   const secret = process.env.AF_CRON_SECRET;
-  if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) return new Response("forbidden", { status: 403 });
+  if (!secret || !bearerOk(request, secret)) return new Response("forbidden", { status: 403 });
   const dry = new URL(request.url).searchParams.get("dry") === "1";
 
   const list = await rpc("af_rate_alerts_live", { p_secret: secret });
@@ -52,7 +53,7 @@ export async function POST(request: Request) {
     const result = await sendEmail(alert.email, mail.subject, mail.html, mail.text, mail.unsubscribe);
     if (result.ok) sent += 1;
     else {
-      failures.push(result.reason);
+      failures.push(redactEmails(result.reason));
       await mark(alert.id, check.key, alert.last_sent_key ?? "", false); // hand it back to the next run
       if (result.reason.includes("RESEND_API_KEY")) break;
     }

@@ -1,3 +1,4 @@
+import { bearerOk, redactEmails } from "@/lib/security";
 import { renderTime } from "@/lib/data/fetcher";
 import { buildMorningNote, morningSubject, morningText } from "@/lib/editions/morning";
 import { morningEmailHtml } from "@/lib/editions/morning-email";
@@ -15,7 +16,7 @@ export const maxDuration = 300;
  */
 export async function POST(request: Request) {
   const secret = process.env.AF_CRON_SECRET;
-  if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) return new Response("forbidden", { status: 403 });
+  if (!secret || !bearerOk(request, secret)) return new Response("forbidden", { status: 403 });
   const list = await rpc("af_subscribers", { p_secret: secret });
   if (!list.ok || !Array.isArray(list.value)) return Response.json({ sent: 0, reason: `subscribers: ${list.ok ? "bad shape" : list.reason}` }, { status: 502 });
   const emails = (list.value as { email: string }[]).map((r) => r.email);
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
     const unsub = `${site.url}/api/unsubscribe?e=${encodeURIComponent(email)}&t=${await unsubscribeToken(email)}`;
     const result = await sendEmail(email, subject, morningEmailHtml(note, unsub), `${text}\n\nUnsubscribe: ${unsub}`, unsub);
     if (result.ok) sent += 1;
-    else failures.push(result.reason);
+    else failures.push(redactEmails(result.reason));
     if (!result.ok && result.reason.includes("RESEND_API_KEY")) break;
     await new Promise((r) => setTimeout(r, 120)); // Resend allows ~10 requests a second
   }

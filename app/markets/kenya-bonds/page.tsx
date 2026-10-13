@@ -12,6 +12,7 @@ import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { auctionCurve, loadBonds, yearsToMaturity } from "@/lib/data/kenya-bonds";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
+import { ActionTile } from "@/components/ui/Card";
 
 export const metadata: Metadata = {
   title: "Kenya Treasury bond auction results and yield curve",
@@ -68,12 +69,10 @@ export default function KenyaBondsPage() {
         </p>
       }
       aside={
-        <a href="/api/data/kenya-bonds" download className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
-          <p className="font-medium text-[12px] opacity-80">Download</p>
-          <p className="mt-1 font-serif text-2xl">CSV download</p>
-          <p className="text-[11px] opacity-80">Latest 12 months free; full history with a key</p>
-          <p className="text-[11px] opacity-80">Every row links to its CBK notice</p>
-        </a>
+        <ActionTile href="/api/data/kenya-bonds" download kicker="Download" title="The table as CSV">
+          <span className="block">Latest 12 months free; full history with a key</span>
+          <span className="block">Every row links to its CBK notice</span>
+        </ActionTile>
       }
     >
       {jsonLd ? <JsonLd data={jsonLd} /> : null}

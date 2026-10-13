@@ -91,7 +91,7 @@ export default async function SendMoneyCountryPage({ params }: Props) {
       </p>
 
       {v.list.map((c) => (
-        <section key={c.src} id={`from-${c.src.toLowerCase()}`} className="mt-12 scroll-mt-24">
+        <section key={c.src} id={`from-${c.src.toLowerCase()}`} className="mt-12">
           <SectionTitle kicker={`${countryName(c.src_name)} to ${v.name}`} title={`From ${countryName(c.src_name)}: ${c.cheapest.firm} is cheapest at ${usd(c.cheapest.cost_pct)}`} />
           <div className="mt-4">
             <SendMoneyTable c={c} />

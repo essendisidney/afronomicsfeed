@@ -135,13 +135,13 @@ export default function DevelopersPage() {
       <section className="mt-14 grid gap-8 lg:grid-cols-2">
         <div className="min-w-0">
           <SectionTitle kicker="Python" title="From Python" />
-          <pre className="mt-4 max-w-full overflow-x-auto rounded-2xl bg-night p-5 text-[13px] leading-6 text-night-ink">
+          <pre tabIndex={0} className="mt-4 max-w-full overflow-x-auto rounded-2xl bg-night p-5 text-[13px] leading-6 text-night-ink">
             <code>{python}</code>
           </pre>
         </div>
         <div className="min-w-0">
           <SectionTitle kicker="Shell" title="From the command line" />
-          <pre className="mt-4 max-w-full overflow-x-auto rounded-2xl bg-night p-5 text-[13px] leading-6 text-night-ink">
+          <pre tabIndex={0} className="mt-4 max-w-full overflow-x-auto rounded-2xl bg-night p-5 text-[13px] leading-6 text-night-ink">
             <code>{curl}</code>
           </pre>
           <p className="mt-4 text-sm leading-6 text-ink-soft">

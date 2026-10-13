@@ -1,3 +1,4 @@
+import { bearerOk, redactEmails } from "@/lib/security";
 import { moneyLabel } from "@/lib/billing/plans";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { sendEmail } from "@/lib/mail";
@@ -13,7 +14,7 @@ type Pay = { totals: { currency: string | null; amount: number; month_amount: nu
 /** Monday owner email: the week in numbers, what needs a hand, and anything stale. Called by the index-release workflow. */
 export async function POST(request: Request) {
   const secret = process.env.AF_CRON_SECRET;
-  if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) return new Response("forbidden", { status: 403 });
+  if (!secret || !bearerOk(request, secret)) return new Response("forbidden", { status: 403 });
   const [d, p] = await Promise.all([rpc("af_desk", { p_secret: secret }), rpc("af_payments", { p_secret: secret })]);
   const desk = d.ok ? (d.value as Desk) : null;
   const pay = p.ok ? (p.value as Pay) : null;
@@ -46,5 +47,5 @@ export async function POST(request: Request) {
   const html = `<pre style="font-family:Archivo,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;white-space:pre-wrap;color:#121826">${text.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</pre>`;
   const to = process.env.PAYMENTS_NOTIFY_EMAIL ?? site.contactEmail;
   const r = await sendEmail(to, `Afronomics week: ${desk.views_7d} views, ${desk.subscribers} subscribers${pending.length ? `, ${pending.length} to grant` : ""}`, html, text);
-  return Response.json({ to, sent: r.ok ? 1 : 0, reason: r.ok ? undefined : r.reason });
+  return Response.json({ to: redactEmails(to), sent: r.ok ? 1 : 0, reason: r.ok ? undefined : redactEmails(r.reason) });
 }

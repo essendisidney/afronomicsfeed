@@ -42,7 +42,7 @@ export function MarketSections({ markets }: { markets: MarketSummary[] }) {
   return (
     <div className="mon-sections mt-4 xl:columns-2 xl:gap-8">
       {markets.map((m) => (
-        <section key={m.market.slug} id={`m-${m.market.slug}`} className="mon-section min-w-0 mb-8 scroll-mt-24 break-inside-avoid">
+        <section key={m.market.slug} id={`m-${m.market.slug}`} className="mon-section min-w-0 mb-8 break-inside-avoid">
           <div className="flex flex-wrap items-baseline justify-between gap-x-3 border-b border-ink/70 pb-1.5">
             <h3 className="font-serif text-xl text-ink">{m.label}</h3>
             <a href={m.market.sourcePage} target="_blank" rel="noopener noreferrer" className="text-[12px] text-muted underline underline-offset-2">

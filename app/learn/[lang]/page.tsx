@@ -64,21 +64,21 @@ export default async function LearnLangPage({ params }: { params: Promise<{ lang
           </ol>
         </section>
 
-        <section id="savings-calculator" className="mt-14 scroll-mt-24">
+        <section id="savings-calculator" className="mt-14">
           <SectionTitle kicker={t.tryIt} title={t.savingsTitle} note={t.savingsNote} />
           <div className="mt-4">
             <SavingsCalculator presets={[]} lang={lang} />
           </div>
         </section>
 
-        <section id="loan-calculator" className="mt-14 scroll-mt-24">
+        <section id="loan-calculator" className="mt-14">
           <SectionTitle kicker={t.tryIt} title={t.loanTitle} note={t.loanNote} />
           <div className="mt-4">
             <LoanCalculator bankAverage={null} lang={lang} />
           </div>
         </section>
 
-        <section id="glossary" className="mt-14 scroll-mt-24">
+        <section id="glossary" className="mt-14">
           <SectionTitle kicker={t.glossary} title={t.glossary} />
           <dl className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2">
             {t.terms.map((g) => (

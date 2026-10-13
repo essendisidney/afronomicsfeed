@@ -58,7 +58,7 @@ export function PageFeedback() {
                 void send({ found: option.value });
                 setState("detail");
               }}
-              className="border border-rule px-3 py-1 font-medium text-[12.5px] text-ink hover:border-gold"
+              className="inline-flex min-h-11 items-center border border-rule px-3 py-1 font-medium text-[12.5px] sm:min-h-0 text-ink hover:border-gold"
             >
               {option.label}
             </button>

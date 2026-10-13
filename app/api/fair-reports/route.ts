@@ -1,3 +1,4 @@
+import { redactEmails } from "@/lib/security";
 import { createHash } from "node:crypto";
 import { MIN_FAIR, parseFair, type FairCell } from "@/lib/fair-core";
 import { rpc } from "@/lib/store";
@@ -41,7 +42,7 @@ export async function POST(request: Request) {
   });
   const status = added.ok ? (added.value as string | null) : null;
   if (!status) {
-    console.log(`[fair-reports] add failed: ${added.ok ? "no result (secret mismatch?)" : added.reason}`);
+    console.log(`[fair-reports] add failed: ${added.ok ? "no result (secret mismatch?)" : redactEmails(added.reason)}`);
     return Response.json({ ok: false, reason: "That didn’t go through. Please try again." }, { status: 502 });
   }
   if (status === "limited") return Response.json({ ok: false, reason: "You’ve sent a lot today. Thank you — please try again tomorrow." }, { status: 429 });

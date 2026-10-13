@@ -108,21 +108,21 @@ export default function LearnPage() {
         ))}
       </section>
 
-      <section id="savings-calculator" className="mt-14 scroll-mt-24">
+      <section id="savings-calculator" className="mt-14">
         <SectionTitle kicker="Try it" title="How much will my savings grow?" note="Works in any currency. The quick rates are Kenya’s today, after tax; type your own country’s rate." />
         <div className="mt-4">
           <SavingsCalculator presets={presets} />
         </div>
       </section>
 
-      <section id="loan-calculator" className="mt-14 scroll-mt-24">
+      <section id="loan-calculator" className="mt-14">
         <SectionTitle kicker="Try it" title="What will this loan cost me?" note="Works in any currency: flat rate and reducing balance, side by side, for the same headline rate." />
         <div className="mt-4">
           <LoanCalculator bankAverage={bench?.lendingAvg ?? null} />
         </div>
       </section>
 
-      <section id="glossary" className="mt-14 scroll-mt-24">
+      <section id="glossary" className="mt-14">
         <SectionTitle kicker="Words" title="Glossary, in English and Kiswahili" />
         <dl className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2">
           {glossary.map((g) => (

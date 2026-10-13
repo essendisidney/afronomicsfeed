@@ -11,6 +11,7 @@ import { renderTime } from "@/lib/data/fetcher";
 import type { BondMarket, BondRow } from "@/lib/data/sovereign-bonds";
 import { site } from "@/lib/site";
 import { AuctionRateChart } from "./AuctionRateChart";
+import { bondAuctionPath } from "./auction";
 import { bondFacts, longDate, millions, shortName, tableOrder, tenorText, todayIso, type Issuer } from "./stats";
 import { ActionTile } from "@/components/ui/Card";
 
@@ -165,7 +166,7 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
         <SectionTitle
           kicker="Table"
           title={rows.length > TABLE_LIMIT ? `The latest ${TABLE_LIMIT} results` : `All ${rows.length} results`}
-          note={`Newest first. Amounts in ${ccy} millions; bid cover is bids received divided by the amount accepted.${
+          note={`Newest first; each date opens that auction's own page. Amounts in ${ccy} millions; bid cover is bids received divided by the amount accepted.${
             rows.length > TABLE_LIMIT ? ` The other ${(rows.length - TABLE_LIMIT).toLocaleString("en-US")} are in the CSV.` : ""
           }`}
         />
@@ -187,7 +188,16 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
             <tbody>
               {table.map((r, i) => (
                 <tr key={`${r.date}-${r.isin ?? r.issue ?? ""}-${r.tenor_years ?? ""}-${i}`}>
-                  <td className="whitespace-nowrap font-mono text-xs">{r.date}</td>
+                  <td className="whitespace-nowrap font-mono text-xs">
+                    {/* Each date opens that auction's own page (WAEMU: the issuer's auction that day). */}
+                    {bondAuctionPath(market.slug, r.date, r.issue) ? (
+                      <Link href={bondAuctionPath(market.slug, r.date, r.issue)!} className="text-forest underline underline-offset-2 hover:text-gold">
+                        {r.date}
+                      </Link>
+                    ) : (
+                      r.date
+                    )}
+                  </td>
                   <td className="text-xs">
                     {r.issue ? <span className="text-ink">{r.issue}</span> : null}
                     {r.isin ? <span className={`block font-mono text-[11px] ${r.issue ? "text-muted" : "text-ink"}`}>{r.isin}</span> : null}

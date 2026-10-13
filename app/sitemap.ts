@@ -15,6 +15,7 @@ import { institutions, topics } from "@/lib/taxonomy";
 import { allTbillWeeks, bondDates } from "@/lib/data/auction-stories";
 import { loadBondMarket } from "@/lib/data/sovereign-bonds";
 import { issuersOf, marketsWithRows } from "@/components/bonds/stats";
+import { allAuctionPaths } from "@/components/bonds/auction";
 import { allBillsUpdated, allBondsUpdated, billUpdated, bondUpdated, fileUpdated, newest } from "@/lib/seo/freshness";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -161,6 +162,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.5,
     })),
+    // Every other market's dated bond auction pages (WAEMU per issuer). Kenya's are the kenya-bonds dates above.
+    ...marketsWithRows()
+      .filter(({ market: m }) => m.slug !== "kenya")
+      .flatMap(({ market: m }) =>
+        allAuctionPaths(m.slug).map(({ path, date }) => ({
+          url: `${site.url}${path}`,
+          lastModified: new Date(`${date}T12:00:00+03:00`),
+          changeFrequency: "yearly" as const,
+          priority: 0.5,
+        })),
+      ),
     ...institutions.map((item) => page(`/institutions/${item.slug}`, "monthly", 0.3)),
     ...topics.map((item) => page(`/topics/${item.slug}`, "monthly", 0.3)),
   ];

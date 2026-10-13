@@ -21,7 +21,7 @@ const DOWN = "#5CD6A8";
 
 const fontDir = path.join(process.cwd(), "assets", "og-fonts");
 let fontsPromise: Promise<{ name: string; data: Buffer; weight: 400 | 500 | 600; style: "normal" }[]> | null = null;
-function fonts() {
+export function fonts() {
   fontsPromise ??= Promise.all([
     readFile(path.join(fontDir, "ArchivoCondensed-Bold.ttf")).then((data) => ({ name: "Serif", data, weight: 600 as const, style: "normal" as const })),
     readFile(path.join(fontDir, "Archivo-Regular.ttf")).then((data) => ({ name: "Sans", data, weight: 400 as const, style: "normal" as const })),

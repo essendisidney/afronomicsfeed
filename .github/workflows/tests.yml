@@ -1,0 +1,25 @@
+# Offline regression tests for the bond-auction readers in scripts/: each parser is run against fixtures built
+# from the publishers' real document layouts. No network access (the tests refuse any HTTP call).
+name: Reader tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: .github/workflows/tests.yml
+      - run: pip install pdfplumber requests openpyxl pytest
+      - run: python -m pytest tests/readers -q

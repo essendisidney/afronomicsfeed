@@ -91,7 +91,7 @@ export default async function PricesPage({ searchParams }: { searchParams: Promi
       </nav>
 
       {rateCard.map((g) => (
-        <section key={g.id} id={g.id} className="mt-12 scroll-mt-24">
+        <section key={g.id} id={g.id} className="mt-12">
           <SectionTitle kicker={g.title} title={g.who} />
           <div className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2">
             {g.items.map((item) => (
@@ -123,7 +123,7 @@ export default async function PricesPage({ searchParams }: { searchParams: Promi
         </section>
       ))}
 
-      <section id="compare" className="mt-14 scroll-mt-24">
+      <section id="compare" className="mt-14">
         <SectionTitle kicker="Against the world" title="What the same thing costs elsewhere" />
         <div className="overflow-x-auto">
           <table className="data-table mt-4">

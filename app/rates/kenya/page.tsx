@@ -11,6 +11,7 @@ import { bankRateHistory, fairBench, rateOptions } from "@/lib/data/kenya-rates"
 import { FairRate } from "@/components/data/FairRate";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
+import { TableScroll } from "@/components/ui/DataTable";
 
 export const revalidate = 1800;
 
@@ -66,12 +67,14 @@ export default function KenyaRatesPage() {
       ) : null}
       <section>
         <SectionTitle kicker="Compared" title="Annual return, before and after tax" note="Sorted by what you keep. Bars show the published rate; the darker part is what remains after withholding tax." />
-        <div className="mt-4 overflow-x-auto">
+        <TableScroll label="Kenya savings options, before and after tax" className="mt-4">
           <table className="data-table">
             <thead>
               <tr>
                 <th>Option</th>
-                <th className="w-[28%]"></th>
+                <th className="hidden w-[28%] sm:table-cell">
+                  <span className="sr-only">Published and after-tax rate, as bars</span>
+                </th>
                 <th className="text-right">Published</th>
                 <th className="text-right">After tax</th>
                 <th>Money tied up</th>
@@ -84,7 +87,7 @@ export default function KenyaRatesPage() {
                 if (!rows.length) return [];
                 return [
                   <tr key={group}>
-                    <th colSpan={6} className="bg-paper-2 pt-4 text-[13px] font-semibold text-ink">
+                    <th colSpan={6} scope="rowgroup" className="bg-paper-2 pt-4 text-[13px] font-semibold text-ink">
                       {group}
                     </th>
                   </tr>,
@@ -96,7 +99,7 @@ export default function KenyaRatesPage() {
                         </a>
                         <span className="block text-[11px] text-muted">{o.publisher}</span>
                       </td>
-                      <td>
+                      <td className="hidden sm:table-cell">
                         <div className="relative h-3 w-full overflow-hidden rounded-full bg-paper-3">
                           <div className="absolute inset-y-0 left-0 rounded-full bg-accent/35" style={{ width: `${(o.gross / max) * 100}%` }} />
                           <div className="absolute inset-y-0 left-0 rounded-full bg-accent" style={{ width: `${(o.net / max) * 100}%` }} />
@@ -112,7 +115,7 @@ export default function KenyaRatesPage() {
               })}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
         <p className="mt-3 max-w-3xl text-xs leading-5 text-muted">
           After-tax figures apply Kenya’s withholding tax on interest for residents: 15% on bills, deposits and fund returns, 10% on bonds of ten years or
           more, none on infrastructure bonds. Bonds shown are the latest auction nearest each point on the curve; every issue is on the bond page. Fund yields are the managers’ effective annual yields before fees shown as

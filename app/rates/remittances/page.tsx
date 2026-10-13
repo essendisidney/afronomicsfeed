@@ -146,7 +146,7 @@ export default function RemittancesPage() {
             </nav>
             <div className="mt-6 space-y-8">
               {dests.map((d) => (
-                <div key={d.dst} id={d.dst} className="scroll-mt-24">
+                <div key={d.dst} id={d.dst}>
                   <h3 className="font-serif text-2xl text-ink">Sending money to {countryName(d.name)}</h3>
                   <div className="mt-2 overflow-x-auto">
                     <table className="data-table">

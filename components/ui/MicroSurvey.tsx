@@ -125,7 +125,7 @@ export function MicroSurvey() {
                 key={value}
                 type="button"
                 onClick={() => (value === "other" ? setOther(q) : answer(q, value))}
-                className="rounded-full border border-rule px-3 py-1 text-[12.5px] font-medium text-ink hover:border-gold"
+                className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1 text-[12.5px] sm:min-h-0 font-medium text-ink hover:border-gold"
               >
                 {label}
               </button>

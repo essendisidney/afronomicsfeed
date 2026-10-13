@@ -111,7 +111,7 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
         ))}
       </section>
 
-      <section id="alerts" className="mt-8 scroll-mt-24 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
+      <section id="alerts" className="mt-8 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
         <p className="text-[17px] font-semibold text-ink">Get the tenders that fit your business by email</p>
         <p className="mt-1 mb-4 text-[14px] text-ink-soft">Every open match now, then an email whenever new matching tenders are published. Never more than one a day.</p>
         <TenderAlertForm initialKeywords={words.join(", ")} />

@@ -99,6 +99,13 @@ export default function DebtMonitorPage() {
                 CSV per market (latest 12 months free; full history with a key):<code className="font-mono text-[13px] break-all text-ink">{site.url.replace("https://", "")}/api/data/bonds/{"{market}"}</code>
               </li>
               <li>
+                Full history in a browser: key holders sign in once at{" "}
+                <Link href="/downloads" className="font-semibold text-forest underline underline-offset-2">
+                  {site.url.replace("https://", "")}/downloads
+                </Link>
+                .
+              </li>
+              <li>
                 JSON API: <code className="font-mono text-[13px] break-all text-ink">{site.url.replace("https://", "")}/api/v1/bonds/{"{market}"}</code>
               </li>
               <li>

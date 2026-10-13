@@ -148,6 +148,7 @@ export function IssueApiKey() {
           <option value="trial">Trial</option>
           <option value="startup">Startup licence</option>
           <option value="institution">Institution / Team</option>
+          <option value="analyst">Analyst (CSV downloads only; needs migration 0039)</option>
           <option value="data_api">Data API ($1,500)</option>
           <option value="enterprise">Enterprise</option>
         </select>

@@ -13,6 +13,7 @@ import { site } from "@/lib/site";
 import { AuctionRateChart } from "./AuctionRateChart";
 import { bondFacts, longDate, millions, shortName, tableOrder, tenorText, todayIso, type Issuer } from "./stats";
 import { ActionTile } from "@/components/ui/Card";
+import { FullHistoryLink } from "@/components/data/FullHistoryLink";
 
 const TABLE_LIMIT = 100;
 
@@ -82,12 +83,17 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
         </p>
       }
       aside={
-        <ActionTile href={n.csv} download kicker="Download" title="The table as CSV">
-          <span className="block">Latest 12 months free; full history with a key</span>
-          <span className="block">
-            {market.slug === "waemu" ? "All eight WAEMU issuers" : `${market.country}`} · source: {market.publisher}
-          </span>
-        </ActionTile>
+        <>
+          <ActionTile href={n.csv} download kicker="Download" title="The table as CSV">
+            <span className="block">Latest 12 months free; full history with a key</span>
+            <span className="block">
+              {market.slug === "waemu" ? "All eight WAEMU issuers" : `${market.country}`} · source: {market.publisher}
+            </span>
+          </ActionTile>
+          <p className="mt-2 px-1 text-[13px] font-medium">
+            <FullHistoryLink csv={n.csv} />
+          </p>
+        </>
       }
     >
       <JsonLd data={jsonLd} />
@@ -219,9 +225,10 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
           <p className="mt-3 text-sm text-ink-soft">
             Showing {TABLE_LIMIT} of {rows.length.toLocaleString("en-US")}.{" "}
             <a href={n.csv} download className="font-medium text-forest underline underline-offset-2 hover:text-gold">
-              Download the full CSV
+              Download the CSV
             </a>{" "}
-            or query the{" "}
+            (latest 12 months free;{" "}
+            <FullHistoryLink csv={n.csv} className="font-medium text-forest underline underline-offset-2 hover:text-gold" />) or query the{" "}
             <a href={n.api} className="font-medium text-forest underline underline-offset-2 hover:text-gold">
               JSON API
             </a>
@@ -233,7 +240,7 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
       <section className="mt-14">
         <SectionTitle kicker="Downloads" title="Take the data with you" />
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <DownloadCard href={n.csv} download title="CSV" body={`Every ${shortName(market)} result we hold, one row per bond, free.`} cta={n.csv} />
+          <DownloadCard href={n.csv} download title="CSV" body={`${shortName(market)} results, one row per bond: the latest 12 months free, the full history with a key.`} cta={n.csv} />
           <DownloadCard href={n.api} title="JSON API" body="Filter by ISIN, issue and date range; up to 5,000 rows a call." cta={decodeURIComponent(n.api)} />
           <DownloadCard
             href="/data/frontier-local-debt#pilot"
@@ -243,6 +250,9 @@ export function BondMarketView({ market, rows, updatedAt, issuer = null, issuers
             strong
           />
         </div>
+        <p className="mt-3 text-[13px] font-medium">
+          <FullHistoryLink csv={n.csv} />
+        </p>
       </section>
 
       {/* Long citation URLs must wrap on phones. */}

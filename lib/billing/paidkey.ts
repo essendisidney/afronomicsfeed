@@ -5,30 +5,43 @@ import { checkoutPlans, getCheckoutPlan, isCheckoutPlan } from "./plans";
 import { institutionalTier, KES_PER_USD, localInstitutionPrices } from "./ratecard";
 
 /**
- * Paid API keys without the desk (master plan v2, item 3; migration 0036). A confirmed charge for Team and API
- * (data_team, data_team_ke) issues one key per payment reference, valid to the end of the paid period plus three days;
- * a later payment by the same email extends that key. Analyst has no API access, so it gets no key.
+ * Paid keys without the desk (master plan v2, item 3; migrations 0036 and 0039). A confirmed charge for Team and API
+ * (data_team, data_team_ke) or Analyst (analyst, analyst_ke) issues one key per payment reference, valid to the end of
+ * the paid period plus three days; a later payment by the same email for the same tier extends that key.
+ *
+ * Team and API keys are data_keys plan data_api (the JSON API and every CSV). Analyst keys are plan analyst: they
+ * unlock full-history CSV downloads (in a browser through /downloads, or with the header), not the JSON API
+ * (lib/api.ts). Analyst keys need migration 0039; until it is applied the database answers wrong_plan and the desk
+ * issues the key by hand, as before.
  *
  * The key is derived from the reference with a server-only secret, so the database stores only its hash and yet
  * /thank-you can still show a key the webhook issued first (once, within three days, checked against the hash).
  * Never log the key or the buyer's email.
  */
 
-export const keyPlans = ["data_team", "data_team_ke"] as const;
+export const keyPlans = ["data_team", "data_team_ke", "analyst", "analyst_ke"] as const;
 export type KeyPlan = (typeof keyPlans)[number];
 
 export function isKeyPlan(plan: string | null | undefined): plan is KeyPlan {
-  return plan === "data_team" || plan === "data_team_ke";
+  return (keyPlans as readonly string[]).includes(plan ?? "");
 }
 
-const kenyaTeam = localInstitutionPrices.find((p) => p.id === "kenya")!;
+/** Analyst checkout plans: the key is for full-history downloads, not the API. */
+export function isAnalystPlan(plan: string | null | undefined) {
+  return plan === "analyst" || plan === "analyst_ke";
+}
+
+const kenyaLocal = localInstitutionPrices.find((p) => p.id === "kenya")!;
 
 /** One paid month of a key plan, in subunits, for each currency it may be collected in. */
 function monthPrice(plan: KeyPlan, currency: string | null): number | null {
   const c = (currency ?? "").toUpperCase();
-  const team = institutionalTier("team").monthlyUsd;
-  if (plan === "data_team") return c === "USD" ? team * 100 : c === "KES" ? team * KES_PER_USD * 100 : null;
-  return c === "KES" ? kenyaTeam.team * 100 : c === "USD" ? kenyaTeam.usd.team * 100 : null;
+  const tier = isAnalystPlan(plan) ? "analyst" : "team";
+  if (plan === "data_team" || plan === "analyst") {
+    const usd = institutionalTier(tier).monthlyUsd;
+    return c === "USD" ? usd * 100 : c === "KES" ? usd * KES_PER_USD * 100 : null;
+  }
+  return c === "KES" ? kenyaLocal[tier] * 100 : c === "USD" ? kenyaLocal.usd[tier] * 100 : null;
 }
 
 /**
@@ -127,13 +140,14 @@ export async function issuePaidKey(
     p_months: months,
     p_key_hash: derived.hash,
     p_prefix: derived.prefix,
-    p_label: `${test ? "TEST " : ""}Team and API: ${p.email.slice(p.email.lastIndexOf("@") + 1)} (${p.reference})`.slice(0, 120),
+    p_label: `${test ? "TEST " : ""}${isAnalystPlan(p.plan) ? "Analyst" : "Team and API"}: ${p.email.slice(p.email.lastIndexOf("@") + 1)} (${p.reference})`.slice(0, 120),
     p_allow_test: test,
     p_reveal: opts.reveal,
   });
   if (!r.ok) return manual(missingFunction(r.reason) ? "migration 0036 not applied" : `rpc failed: ${r.reason.slice(0, 80)}`);
   const v = (r.value ?? null) as IssueRow | null;
   if (!v?.status) return manual("secret rejected");
+  if (v.status === "wrong_plan" && isAnalystPlan(p.plan)) return manual("Analyst keys need migration 0039");
 
   const base = { prefix: v.prefix ?? derived.prefix, expiresAt: v.expires_at ?? "", paidUntil: v.paid_until ?? v.expires_at ?? "", test };
   if (v.status === "issued") return { outcome: { kind: "issued", key: derived.key, ...base }, fresh: true };

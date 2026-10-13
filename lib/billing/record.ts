@@ -1,7 +1,7 @@
 import { rpc } from "@/lib/store";
 import { sendEmail } from "@/lib/mail";
 import { site } from "@/lib/site";
-import { claimReceipt, isKeyPlan, issuePaidKey, markKeyEmail, type KeyOutcome } from "./paidkey";
+import { claimReceipt, isAnalystPlan, isKeyPlan, issuePaidKey, markKeyEmail, type KeyOutcome } from "./paidkey";
 import { getCheckoutPlan, moneyLabel, paidInFull, planPriceLabel } from "./plans";
 
 /**
@@ -82,7 +82,7 @@ const longDate = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { da
 function teamStep(key: KeyOutcome | undefined) {
   const contact = "Your named contact writes within one working day; reply with the markets and fields you need first.";
   if (key?.kind === "issued" && key.expiresAt) {
-    return `Your Team and API month starts today. Your API key is issued: it is shown once on the confirmation page and sent with this receipt, and it works until ${longDate(key.expiresAt)} (the end of the paid period plus three days’ grace). Each renewal payment extends the same key. ${contact}`;
+    return `Your Team and API month starts today. Your API key is issued: it is shown once on the confirmation page and sent with this receipt, and it works until ${longDate(key.expiresAt)} (the end of the paid period plus three days’ grace). Each renewal payment extends the same key, which also signs you in for full-history CSV downloads in a browser at ${site.url}/downloads. ${contact}`;
   }
   if (key?.kind === "renewed" && key.expiresAt) {
     return `Your Team and API access is renewed: your existing API key (${key.prefix}…) now works until ${longDate(key.expiresAt)} (the end of the paid period plus three days’ grace). Nothing to change in your systems.`;
@@ -93,12 +93,27 @@ function teamStep(key: KeyOutcome | undefined) {
   return `Your Team and API month starts today. Your API key is issued as soon as the payment is confirmed: shown once on the confirmation page and emailed to this address with the receipt. It works to the end of the paid period plus three days’ grace, and each renewal payment extends it. ${contact}`;
 }
 
-/** What happens next, by product, for the receipt and the thank-you page. For Team and API, pass the key outcome. */
+/** The Analyst line, by what happened to the download key. */
+function analystStep(key: KeyOutcome | undefined) {
+  const how = `To download, open ${site.url}/downloads, paste the key once, and every CSV link on the site gives the full history in that browser for 12 hours (sign in again after that).`;
+  if (key?.kind === "issued" && key.expiresAt) {
+    return `Your Analyst month starts today. Your download key is issued: it is shown once on the confirmation page and sent with this receipt, and it works until ${longDate(key.expiresAt)} (the end of the paid period plus three days’ grace). ${how} Each renewal payment extends the same key.`;
+  }
+  if (key?.kind === "renewed" && key.expiresAt) {
+    return `Your Analyst access is renewed: your download key (${key.prefix}…) now works until ${longDate(key.expiresAt)}. Nothing to change. ${how}`;
+  }
+  if (key?.kind === "manual") {
+    return `Your Analyst month starts today. Your download key could not be issued automatically this time, so the desk sends it to this address within one working day. ${how}`;
+  }
+  return `Your Analyst month starts today, and this receipt confirms your seat for this address. Your download key is issued as soon as the payment is confirmed. ${how}`;
+}
+
+/** What happens next, by product, for the receipt and the thank-you page. For Team and API and Analyst, pass the key outcome. */
 export function nextStep(plan: string | null, key?: KeyOutcome) {
   switch (plan) {
     case "analyst":
     case "analyst_ke":
-      return "Your Analyst month starts today, and this receipt confirms your seat for this address. Within one working day the desk sends the full-history downloads for every covered market; reply with the markets you want first.";
+      return analystStep(key);
     case "data_team":
     case "data_team_ke":
       return teamStep(key);
@@ -150,14 +165,17 @@ function keyStatus(key: KeyOutcome, emailed: string | null) {
 }
 
 /** What the desk should do, by key outcome. */
-function deskAction(key: KeyOutcome, emailed: string | null) {
+function deskAction(key: KeyOutcome, emailed: string | null, plan: string | null) {
   if (key.kind === "issued" || key.kind === "renewed") {
     if (emailed === "sent") return "Access is delivered and marked sent on /desk. The named contact still writes within one working day.";
     return key.kind === "issued"
       ? "Key issued, email failed. The buyer sees the key once on /thank-you if they are there. Check with them; if they never got it, revoke it on /desk and send a new one by hand."
       : "Key renewed, email failed. The key keeps working; tell the buyer the new end date.";
   }
-  if (key.kind === "manual") return "Issue the Team and API key by hand (plan data_api) and mark access sent on /desk.";
+  if (key.kind === "manual")
+    return isAnalystPlan(plan)
+      ? "Issue the Analyst download key by hand (plan analyst once migration 0039 is applied; until then plan institution, which also opens the API) and mark access sent on /desk. The buyer signs in with it at /downloads."
+      : "Issue the Team and API key by hand (plan data_api) and mark access sent on /desk.";
   return "Grant access and mark it done on /desk.";
 }
 
@@ -176,7 +194,19 @@ export async function notifyPayment(p: PaymentRecord, key: KeyOutcome = { kind: 
   let emailed: string | null = null;
 
   if (p.email) {
-    const keyLines = secretKey
+    const analyst = isAnalystPlan(p.plan);
+    const keyLines = secretKey && analyst
+      ? [
+          ``,
+          `Your download key (we keep only a fingerprint of it, so this email is your copy):`,
+          ``,
+          secretKey,
+          ``,
+          `Full-history downloads in a browser: open ${site.url}/downloads and paste the key once; every CSV link on the site then gives the full history in that browser for 12 hours.`,
+          `In code, send it as a header to the CSV files: curl -H "Authorization: Bearer YOUR_KEY" "${site.url}/api/data/bonds/egypt"`,
+          `Keep it private. If it leaks, reply and we replace it.`,
+        ]
+      : secretKey
       ? [
           ``,
           `Your API key (we keep only a fingerprint of it, so this email is your copy):`,
@@ -201,7 +231,11 @@ export async function notifyPayment(p: PaymentRecord, key: KeyOutcome = { kind: 
       `Questions: ${site.contactEmail}`,
       `Afronomics · ${site.url}`,
     ].join("\n");
-    const keyHtml = secretKey
+    const keyHtml = secretKey && analyst
+      ? `<p style="margin-top:18px;font-weight:600">Your download key</p>
+      <p style="font-family:monospace;font-size:14px;background:#f3f1ea;padding:10px 12px;word-break:break-all">${esc(secretKey)}</p>
+      <p style="color:#636b7d;font-size:13px">We keep only a fingerprint of it, so this email is your copy. Open <a href="${site.url}/downloads" style="color:#5b3fd6">afronomicsfeed.com/downloads</a>, paste the key once, and every CSV link on the site gives the full history in that browser for 12 hours. In code, send it as a header: <code>Authorization: Bearer YOUR_KEY</code>. Keep it private; if it leaks, reply and we replace it.</p>`
+      : secretKey
       ? `<p style="margin-top:18px;font-weight:600">Your API key</p>
       <p style="font-family:monospace;font-size:14px;background:#f3f1ea;padding:10px 12px;word-break:break-all">${esc(secretKey)}</p>
       <p style="color:#636b7d;font-size:13px">We keep only a fingerprint of it, so this email is your copy. Send it as a header: <code>Authorization: Bearer YOUR_KEY</code>. Endpoints and terms: <a href="${site.url}/data-api" style="color:#5b3fd6">afronomicsfeed.com/data-api</a>. Keep it private; if it leaks, reply and we replace it.</p>`
@@ -213,7 +247,7 @@ export async function notifyPayment(p: PaymentRecord, key: KeyOutcome = { kind: 
       <p>${esc(nextStep(p.plan, key))}</p>${keyHtml}
       <p style="color:#636b7d;font-size:13px">Questions: <a href="mailto:${esc(site.contactEmail)}" style="color:#5b3fd6">${esc(site.contactEmail)}</a> · <a href="${site.url}" style="color:#5b3fd6">afronomicsfeed.com</a></p>
     </div>`;
-    const subject = secretKey ? `Afronomics: your API key and receipt (${money})` : `Afronomics: ${product} confirmed (${money})`;
+    const subject = secretKey ? `Afronomics: your ${analyst ? "download" : "API"} key and receipt (${money})` : `Afronomics: ${product} confirmed (${money})`;
     const r = await sendEmail(p.email, subject, html, text);
     emailed = r.ok ? "sent" : r.reason.slice(0, 120);
     results.push(`customer:${r.ok ? "sent" : r.reason}`);
@@ -227,7 +261,9 @@ export async function notifyPayment(p: PaymentRecord, key: KeyOutcome = { kind: 
   // Metadata (the plan) is set by the payer: flag any charge below the plan's price before anyone grants access by hand.
   const short = p.plan && getCheckoutPlan(p.plan) && !paidInFull(p.plan, p.amount, p.currency) ? ` · CHECK AMOUNT: plan price is ${planPriceLabel(p.plan)}` : "";
   const summary = `${money} · ${product} · ${p.email ?? "no email"} · ${p.channel ?? ""} · ref ${p.reference}${status ? ` · ${status}` : ""}${short}`;
-  const action = short ? `Do not grant access until the amount is checked: ${money} was paid against a plan price of ${planPriceLabel(p.plan)}. ${deskAction(key, emailed)}` : deskAction(key, emailed);
+  const action = short
+    ? `Do not grant access until the amount is checked: ${money} was paid against a plan price of ${planPriceLabel(p.plan)}. ${deskAction(key, emailed, p.plan)}`
+    : deskAction(key, emailed, p.plan);
   const r = await sendEmail(
     owner,
     `New payment: ${summary}`.slice(0, 250),

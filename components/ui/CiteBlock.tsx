@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { FullHistoryLink } from "@/components/data/FullHistoryLink";
 import { CopyCitation } from "@/components/ui/CopyCitation";
+import { isGatedCsv } from "@/lib/downloads-core";
 import { renderTime } from "@/lib/data/fetcher";
 import { site } from "@/lib/site";
 
@@ -28,6 +30,12 @@ export function CiteBlock({ title, path, publisher, csv }: { title: string; path
           <a href={csv} download className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1.5 text-[13px] sm:min-h-0 font-medium text-ink-soft hover:border-gold">
             Download CSV
           </a>
+        ) : null}
+        {csv && isGatedCsv(csv) ? (
+          <FullHistoryLink
+            csv={csv}
+            className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1.5 text-[13px] sm:min-h-0 font-medium text-ink-soft hover:border-gold"
+          />
         ) : null}
         <Link href="/widgets" className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1.5 text-[13px] sm:min-h-0 font-medium text-ink-soft hover:border-gold">
           Embed a live widget

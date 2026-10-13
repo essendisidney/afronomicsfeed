@@ -192,7 +192,7 @@ function PilotDone({ result, siteUrl, copied, onCopy }: { result: Extract<PilotR
         <Link href="/developers" className="underline underline-offset-2">
           open API
         </Link>{" "}
-        serves the same datasets with no key and a five-minute cache.
+        serves the latest 12 months of the same datasets with no key and a five-minute cache.
       </p>
     </div>
   );

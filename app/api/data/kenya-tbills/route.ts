@@ -1,15 +1,17 @@
+import { apiAccess, apiCsv, CSV_KEYED, csvError, readRange, sliceRows } from "@/lib/api";
 import { loadTbills, tbillsCsv } from "@/lib/data/kenya-tbills";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
-/** Free CSV of every Kenya Treasury bill auction. */
-export function GET() {
+/**
+ * Kenya Treasury bill auctions as CSV, with CBK notice links. Without a key: the latest 12 months, up to 100 rows.
+ * With a key (Authorization: Bearer afk_…): the full history. Optional from, to, limit.
+ */
+export async function GET(request: Request) {
+  const range = readRange(request);
+  if (!range) return csvError("Dates must be YYYY-MM-DD.", 400);
   const file = loadTbills();
-  return new Response(tbillsCsv(file), {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="afronomics-kenya-tbill-auctions.csv"',
-      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-    },
-  });
+  const access = await apiAccess(request, "/data/kenya-tbills");
+  const sliced = sliceRows(request, file.rows, (r) => r.value_date, range, access, CSV_KEYED);
+  return apiCsv(tbillsCsv({ ...file, rows: sliced.rows }), "afronomics-kenya-tbill-auctions.csv", access, sliced.free);
 }

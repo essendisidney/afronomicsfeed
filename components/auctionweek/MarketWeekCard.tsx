@@ -177,6 +177,7 @@ export function MarketWeekCard({ market }: { market: MarketWeek }) {
             Bonds API
           </a>
         ) : null}
+        {(hasBill && meta.billSlug) || (hasBond && meta.bondSlug) ? <span className="text-muted">latest 12 months free; full history with a key</span> : null}
       </p>
     </article>
   );

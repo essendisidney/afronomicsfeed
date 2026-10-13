@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
+import { DataTerms } from "@/components/billing/DataTerms";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
@@ -10,7 +11,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Afronomics data API — African government bond and bill auctions as JSON",
   description:
-    "A free JSON API for African government bond and Treasury bill auction results and the Afronomics borrowing-cost measures, every row linked to its source. No key needed; licences for commercial use and alerts.",
+    "A free JSON API for African government bond and Treasury bill auction results and the Afronomics borrowing-cost measures, every row linked to its source. The latest 12 months are free with no key; full history and commercial use need a pilot or paid key.",
   alternates: { canonical: `${site.url}/developers` },
 };
 
@@ -21,7 +22,7 @@ const endpoints = [
   },
   {
     path: "/api/v1/tbills/{market}",
-    what: "One market’s auction history. Optional: tenor=91|182|364, from and to (YYYY-MM-DD), limit (default 500, up to 5,000). Newest first.",
+    what: "One market’s auction history. Optional: tenor=91|182|364, from and to (YYYY-MM-DD), limit. Newest first. No key: the latest 12 months, up to 100 rows a call. With a key: full history, limit default 500, up to 5,000.",
   },
   {
     path: "/api/v1/bonds",
@@ -29,11 +30,11 @@ const endpoints = [
   },
   {
     path: "/api/v1/bonds/{market}",
-    what: "One market’s bond auction history: ISIN, tenor, amounts offered, bid and accepted, bid-to-cover, rate and coupon, with the source. Optional: isin, issue (the WAEMU country, e.g. issue=senegal), from and to (YYYY-MM-DD), limit. Newest first.",
+    what: "One market’s bond auction history: ISIN, tenor, amounts offered, bid and accepted, bid-to-cover, rate and coupon, with the source. Optional: isin, issue (the WAEMU country, e.g. issue=senegal), from and to (YYYY-MM-DD), limit. Newest first. Same free and keyed limits as bills.",
   },
   {
     path: "/api/v1/index",
-    what: "The Afronomics African Sovereign Bill Index: latest weekly reading, changes, each market’s contribution and the full series. tenor=91 for the three-month version.",
+    what: "The Afronomics African Sovereign Bill Index: latest weekly reading, changes, each market’s contribution and the weekly series (the latest 12 months without a key, the full series with one). tenor=91 for the three-month version.",
   },
   {
     path: "/api/v1/measures",
@@ -51,12 +52,20 @@ for m in requests.get(f"{base}/tbills").json()["markets"]:
     if one_year:
         print(m["country"], one_year["rate"], one_year["date"])
 
-# Kenya's 91-day history since 2024, into pandas
+# Kenya's 91-day rate over the last 12 months (free), into pandas
 import pandas as pd
-rows = requests.get(f"{base}/tbills/kenya", params={"tenor": 91, "from": "2024-01-01"}).json()["rows"]
-df = pd.DataFrame(rows).set_index("date").sort_index()`;
+rows = requests.get(f"{base}/tbills/kenya", params={"tenor": 91}).json()["rows"]
+df = pd.DataFrame(rows).set_index("date").sort_index()
 
-const curl = `curl "${site.url}/api/v1/tbills/nigeria?tenor=364&limit=10"`;
+# Full history: send your pilot or licence key
+key = {"Authorization": "Bearer afk_YOUR_KEY"}
+rows = requests.get(f"{base}/tbills/kenya", params={"tenor": 91, "from": "2010-01-01"}, headers=key).json()["rows"]`;
+
+const curl = `curl "${site.url}/api/v1/tbills/nigeria?tenor=364&limit=10"
+
+# With a key: full history, up to 5,000 rows a call
+curl -H "Authorization: Bearer afk_YOUR_KEY" \\
+  "${site.url}/api/v1/tbills/nigeria?tenor=364&from=2010-01-01"`;
 
 export default function DevelopersPage() {
   return (
@@ -74,12 +83,20 @@ export default function DevelopersPage() {
           <Link href="/markets/borrowing-costs" className="underline underline-offset-2">
             borrowing-cost measures
           </Link>
-          , open to any script or spreadsheet. No key and no sign-up: call it, keep the credit line, and link back. Running it in
-          production?{" "}
-          <Link href="/data-api" className="font-semibold text-forest underline underline-offset-2">
+          , open to any script or spreadsheet. The latest 12 months, up to 100 rows a call, need no key and no sign-up: call it, keep the credit
+          line, and link back. Full history, larger calls and any commercial use, including internal use at a fund, bank or firm, need a{" "}
+          <Link href="/pricing#pilot" className="font-semibold text-forest underline underline-offset-2">
+            pilot or paid key
+          </Link>
+          ; see the{" "}
+          <a href="#terms" className="underline underline-offset-2">
+            terms
+          </a>{" "}
+          and{" "}
+          <Link href="/data-api" className="underline underline-offset-2">
             Afronomics Data
-          </Link>{" "}
-          adds a key, uncached responses and usage reports.
+          </Link>
+          .
         </p>
       }
     >
@@ -134,30 +151,40 @@ export default function DevelopersPage() {
         </div>
       </section>
 
+      <section className="mt-14 max-w-3xl" id="free-tier">
+        <SectionTitle kicker="Free tier and keys" title="What a call without a key returns" />
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-ink-soft">
+          <li>
+            History calls (<code className="text-[13px]">/tbills/&#123;market&#125;</code>, <code className="text-[13px]">/bonds/&#123;market&#125;</code> and the
+            CSV files under <code className="text-[13px]">/api/data/</code>) return rows dated in the latest 12 months, by auction or settlement date, up to 100 a
+            call. Nothing is cut silently: whenever a key would have returned more, the response says{" "}
+            <code className="text-[13px]">&quot;truncated&quot;: true</code> with an <code className="text-[13px]">upgrade</code> link. It also carries a{" "}
+            <code className="text-[13px]">free_tier</code> note, with <code className="text-[13px]">free_tier.next</code> for the next page inside the free
+            window, and every keyless response has the header <code className="text-[13px]">X-Afronomics-Free-Tier: true</code>. CSV files say the same in the{" "}
+            <code className="text-[13px]">#</code> lines at the top.
+          </li>
+          <li>
+            Send a key as <code className="text-[13px]">Authorization: Bearer afk_…</code> (or <code className="text-[13px]">X-API-Key: afk_…</code>) for the full
+            history and up to 5,000 rows a call; a CSV file with a key is the whole file. Keyed calls are served fresh and counted per key.
+          </li>
+          <li>
+            A key that is unknown, revoked or expired is not an error: the call gets the free tier, with{" "}
+            <code className="text-[13px]">&quot;key_status&quot;: &quot;not_recognised&quot;</code> and the header{" "}
+            <code className="text-[13px]">X-Afronomics-Key: not-recognised</code>.
+          </li>
+        </ul>
+      </section>
+
       <section className="mt-14" id="terms">
-        <SectionTitle kicker="Terms" title="Free to build on, licensed to resell" />
-        <div className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2">
-          <div className="bg-surface px-5 py-6">
-            <p className="text-[13px] font-semibold text-gold">Open</p>
-            <p className="mt-2 font-serif text-3xl text-ink">Free</p>
-            <p className="mt-3 text-sm leading-6 text-ink-soft">
-              Research, journalism, teaching, internal analysis and non-commercial apps. Keep the credit “Source: Afronomics” with a link. Fair use: please cache on
-              your side rather than calling on every page view.
-            </p>
-          </div>
-          <div className="bg-surface px-5 py-6">
-            <p className="text-[13px] font-semibold text-gold">Licensed</p>
-            <p className="mt-2 font-serif text-3xl text-ink">From KES 7,500 a month</p>
-            <p className="mt-3 text-sm leading-6 text-ink-soft">
-              About $60. Use inside a commercial product or client work, redistribution, a webhook or email the moment each market reports, the full field set for every
-              auction, and a named contact. Details on the{" "}
-              <Link href="/licensing" className="underline underline-offset-2">
-                licensing page
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
+        <SectionTitle kicker="Terms" title="Free to read and cite; a key for history and commercial use" />
+        <DataTerms />
+        <p className="mt-3 text-sm leading-6 text-ink-soft">
+          Fair use: please cache on your side rather than calling on every page view. Plans and prices are on the{" "}
+          <Link href="/licensing" className="underline underline-offset-2">
+            licensing page
+          </Link>
+          .
+        </p>
       </section>
 
       <section className="mt-14 max-w-2xl" id="enquiry">

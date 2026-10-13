@@ -142,7 +142,7 @@ export default function BondAuctionsIndex() {
         <Link href="/developers" className="underline underline-offset-2 hover:text-forest">
           data API
         </Link>{" "}
-        at <span className="font-mono text-[13px]">/api/v1/bonds/&#123;market&#125;</span>. Treasury bills are on the{" "}
+        at <span className="font-mono text-[13px]">/api/v1/bonds/&#123;market&#125;</span> (latest 12 months free; full history with a key). Treasury bills are on the{" "}
         <Link href="/markets/tbills" className="underline underline-offset-2 hover:text-forest">
           Africa T-bill monitor
         </Link>

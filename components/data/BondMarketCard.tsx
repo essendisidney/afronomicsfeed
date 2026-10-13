@@ -90,12 +90,13 @@ export function BondMarketCard({ snap, label }: { snap: BondSnapshot; label?: st
             Source notice
           </a>
         ) : null}
-        <a href={`/api/data/bonds/${market.slug}`} className="text-forest underline underline-offset-2">
+        <a href={`/api/data/bonds/${market.slug}`} title="Latest 12 months free; full history with a key" className="text-forest underline underline-offset-2">
           CSV
         </a>
-        <a href={`/api/v1/bonds/${market.slug}`} className="text-forest underline underline-offset-2">
+        <a href={`/api/v1/bonds/${market.slug}`} title="Latest 12 months free; full history with a key" className="text-forest underline underline-offset-2">
           API
         </a>
+        <span className="text-muted">latest 12 months free; full history with a key</span>
         <span className="text-muted">{market.publisher}</span>
       </p>
     </article>

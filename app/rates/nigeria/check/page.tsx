@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CountryCheck } from "@/components/data/CountryCheck";
 import { nigeriaBench } from "@/lib/data/west-africa-rates";
 import { site } from "@/lib/site";
+import { fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -9,10 +10,10 @@ export function generateMetadata(): Metadata {
   const b = nigeriaBench();
   return {
     title: b
-      ? `Is my interest rate fair? Nigeria: banks pay ${b.savingsAvg.toFixed(2)}% on savings, the government ${b.save[0].rate.toFixed(2)}%`
+      ? fitTitle(`Is my rate fair? Nigeria banks pay ${b.savingsAvg.toFixed(2)}%, T-bills ${b.save[0].rate.toFixed(2)}%`)
       : "Is my rate fair? Check a Nigeria savings or loan rate",
     description:
-      "Type the rate a Nigerian bank, cooperative or lender offered you and compare it with Treasury bills, the FGN Savings Bond and the Central Bank of Nigeria's averages for savings, prime and maximum lending rates, with the gap in naira.",
+      "Compare the rate a Nigerian bank, cooperative or lender offered you with Treasury bills, the FGN Savings Bond and CBN average rates, with the gap in naira.",
     alternates: { canonical: `${site.url}/rates/nigeria/check` },
   };
 }

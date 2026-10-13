@@ -7,6 +7,7 @@ import { SectionTitle } from "@/components/data/parts";
 import { SendMoneyTable } from "@/components/data/SendMoneyTable";
 import { Questions } from "@/components/seo/Questions";
 import { corridorsTo, countryName, destSlug, loadRemittances, periodLabel } from "@/lib/data/remittances";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -32,8 +33,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const v = view(country);
   if (!v) return {};
   return {
-    title: `Cheapest way to send money to ${v.name}`,
-    description: `Every money-transfer service the World Bank surveyed into ${v.name}, ranked by the total cost of sending $200 (fee plus exchange-rate margin), from ${v.list.length} sending countries. Cheapest: ${v.best.cheapest.firm} from ${countryName(v.best.src_name)} at ${usd(v.best.cheapest.cost_pct)}.`,
+    title: fitTitle(`Cheapest way to send money to ${v.name}`),
+    description: fitDescription(
+      `Sending $200 to ${v.name}: cheapest is ${v.best.cheapest.firm} from ${countryName(v.best.src_name)} at ${usd(v.best.cheapest.cost_pct)}. Every service the World Bank surveyed, from ${v.list.length} sending countries, ranked by total cost.`,
+    ),
     alternates: { canonical: `${site.url}/send-money/${country}` },
   };
 }

@@ -8,9 +8,8 @@ import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Afronomics data API — African government bond and bill auctions as JSON",
-  description:
-    "A free JSON API for African government bond and Treasury bill auction results and the Afronomics borrowing-cost measures, every row linked to its source. No key needed; licences for commercial use and alerts.",
+  title: "Data API: African bond and T-bill auctions as JSON",
+  description: fitDescription("A free JSON API for African government bond and Treasury bill auction results and the Afronomics borrowing-cost measures, every row linked to its source. No key needed; licences for commercial use and alerts."),
   alternates: { canonical: `${site.url}/developers` },
 };
 
@@ -55,6 +54,7 @@ for m in requests.get(f"{base}/tbills").json()["markets"]:
 import pandas as pd
 rows = requests.get(f"{base}/tbills/kenya", params={"tenor": 91, "from": "2024-01-01"}).json()["rows"]
 df = pd.DataFrame(rows).set_index("date").sort_index()`;
+import { fitDescription } from "@/lib/seo";
 
 const curl = `curl "${site.url}/api/v1/tbills/nigeria?tenor=364&limit=10"`;
 

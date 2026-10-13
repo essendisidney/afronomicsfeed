@@ -12,12 +12,13 @@ import { loadMpc, nextDecisions } from "@/lib/data/mpc-calendar";
 import { policyBoard } from "@/lib/data/policy-rates";
 import { policyAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 1800;
 
 export function generateMetadata(): Metadata {
   const { title, description } = policyAnswers();
-  return { title, description, alternates: { canonical: `${site.url}/rates/policy` } };
+  return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/rates/policy` } };
 }
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });

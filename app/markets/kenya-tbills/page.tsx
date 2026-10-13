@@ -15,10 +15,11 @@ import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { auctionWeeks, latestByTenor, loadTbills, rateHistory, tenorColor, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
 import { tbillAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export function generateMetadata(): Metadata {
   const { title, description } = tbillAnswers();
-  return { title, description, alternates: { canonical: `${site.url}/markets/kenya-tbills` } };
+  return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/markets/kenya-tbills` } };
 }
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });

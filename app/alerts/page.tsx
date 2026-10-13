@@ -10,13 +10,13 @@ import { latestByTenor, loadTbills } from "@/lib/data/kenya-tbills";
 import { renderTime } from "@/lib/data/fetcher";
 import { billMarkets, latestBills, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 900;
 
 export const metadata: Metadata = {
   title: "Alerts — follow the markets you care about",
-  description:
-    "Get the Treasury bill result on your phone the moment each central bank publishes it: Kenya, Nigeria, Ghana, Uganda, Tanzania, Egypt, South Africa, Zambia, Malawi and Mozambique. Free, no app store, and WhatsApp for Kenya.",
+  description: fitDescription("Get the Treasury bill result on your phone the moment each central bank publishes it: Kenya, Nigeria, Ghana, Uganda, Tanzania, Egypt, South Africa, Zambia, Malawi and Mozambique. Free, no app store, and WhatsApp for Kenya."),
   alternates: { canonical: `${site.url}/alerts` },
 };
 

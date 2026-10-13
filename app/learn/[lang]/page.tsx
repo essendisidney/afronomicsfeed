@@ -6,6 +6,7 @@ import { SectionTitle } from "@/components/data/parts";
 import { LoanCalculator } from "@/components/learn/LoanCalculator";
 import { SavingsCalculator } from "@/components/learn/SavingsCalculator";
 import { isLearnLang, langMeta, learnLangs, loadLessons, ui } from "@/lib/learn-i18n";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -16,8 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params;
   if (!isLearnLang(lang)) return {};
   return {
-    title: ui[lang].title,
-    description: ui[lang].lede,
+    title: fitTitle(ui[lang].title),
+    description: fitDescription(ui[lang].lede),
     alternates: {
       canonical: `${site.url}/learn/${lang}`,
       languages: { en: `${site.url}/learn`, ...Object.fromEntries(learnLangs.map((l) => [l, `${site.url}/learn/${l}`])) },

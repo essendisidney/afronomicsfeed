@@ -9,11 +9,11 @@ import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { paystackConfigured } from "@/lib/billing/paystack";
 import { aboutText, comparables, KES_PER_USD, priceText, rateCard, type RateItem } from "@/lib/billing/ratecard";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Price guide — everything Afronomics sells, in shillings and dollars",
-  description:
-    "The full Afronomics rate card: Pro from KES 1,500 a month, the Investment Committee Pack from KES 12,000, data licences from KES 7,500, sponsorships, widgets, training, benchmarking and research. Priced for Africa, the same price anywhere, paid by M-Pesa, card or invoice.",
+  title: "Price guide: everything Afronomics sells",
+  description: fitDescription("The full Afronomics rate card: Pro from KES 1,500 a month, the Investment Committee Pack from KES 12,000, data licences from KES 7,500, sponsorships, widgets, training, benchmarking and research. Priced for Africa, the same price anywhere, paid by M-Pesa, card or invoice."),
   alternates: { canonical: `${site.url}/prices` },
 };
 

@@ -5,6 +5,7 @@ import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { bondDatasetJsonLd } from "@/lib/seo/schema";
 import { renderTime } from "@/lib/data/fetcher";
 import type { BondMarket, BondRow } from "@/lib/data/sovereign-bonds";
@@ -29,17 +30,17 @@ function names({ market, rows, issuer }: Scope) {
     api,
     csv,
     title: `${place} government bond auctions: results since ${firstYear}`,
-    description: `Every ${place} government bond auction result since ${firstYear} that Afronomics holds from the ${market.publisher}: rate, tenor, bid cover and amounts by bond, with CSV and API. Information, not advice.`,
+    description: `${place} government bond auction results since ${firstYear}, from the ${market.publisher}: rate, tenor, bid cover and amounts by bond, with CSV and API.`,
   };
 }
 
 export function bondMetadata(scope: Scope): Metadata {
   const n = names(scope);
   return {
-    title: n.title,
-    description: n.description,
+    title: fitTitle(n.title),
+    description: fitDescription(n.description),
     alternates: { canonical: `${site.url}${n.path}` },
-    openGraph: { title: n.title, description: n.description, url: `${site.url}${n.path}` },
+    openGraph: { title: n.title, description: fitDescription(n.description, 200), url: `${site.url}${n.path}` },
   };
 }
 

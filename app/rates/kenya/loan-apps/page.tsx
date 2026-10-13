@@ -19,7 +19,7 @@ const longDate = (iso: string | null | undefined) =>
 export function generateMetadata(): Metadata {
   const f = loadLenders();
   return {
-    title: "Is this loan app licensed? Kenya's licensed digital lenders, searchable",
+    title: "Is this loan app licensed? Kenya digital lenders",
     description: f
       ? `Search all ${f.lenders.length} digital credit providers licensed by the Central Bank of Kenya (directory of ${longDate(f.updated)}), and see which were added or dropped.`
       : "Search the digital credit providers licensed by the Central Bank of Kenya.",

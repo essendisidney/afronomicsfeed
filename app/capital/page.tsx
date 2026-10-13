@@ -11,13 +11,13 @@ import { groupBy, loadAfricaProjects, projectsSource, sumAmounts } from "@/lib/d
 import { coveredTotal, loadIndicators, ranked } from "@/lib/data/series";
 import { loadWire, wireFor } from "@/lib/data/wire";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 900;
 
 export const metadata: Metadata = {
-  title: "Capital flows into Africa: DFI pipeline, FDI and remittances",
-  description:
-    "Every World Bank project heading to an African Board, recent approvals by country and theme, FDI and remittance inflows for 54 economies, and the day’s deal headlines.",
+  title: fitTitle("Capital flows into Africa: DFI pipeline, FDI and remittances"),
+  description: fitDescription("Every World Bank project heading to an African Board, recent approvals by country and theme, FDI and remittance inflows for 54 economies, and the day’s deal headlines."),
   alternates: { canonical: `${site.url}/capital` },
 };
 

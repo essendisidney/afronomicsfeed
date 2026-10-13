@@ -9,13 +9,13 @@ import { MarketTable } from "@/components/monitor/MarketTable";
 import { PrintButton } from "@/components/monitor/PrintButton";
 import { PrintStyles } from "@/components/monitor/PrintStyles";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "African Local-Currency Debt Monitor: government bond auctions, market by market",
-  description:
-    "The newest government bond auction results in Kenya, Nigeria, Egypt, Zambia, Uganda and the WAEMU markets: rates, tenors, bid cover and amounts accepted, each read from the issuer's own notice and linked to it, with Treasury-bill context.",
+  title: "African local-currency debt monitor by market",
+  description: fitDescription("The newest government bond auction results in Kenya, Nigeria, Egypt, Zambia, Uganda and the WAEMU markets: rates, tenors, bid cover and amounts accepted, each read from the issuer's own notice and linked to it, with Treasury-bill context."),
   alternates: { canonical: `${site.url}/data/frontier-local-debt/monitor` },
 };
 

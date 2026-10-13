@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Page not found",
+  description: "This page does not exist on Afronomics, or the brief has not been published yet.",
+};
 
 export default function NotFound() {
   return (

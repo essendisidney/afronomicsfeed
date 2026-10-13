@@ -9,13 +9,13 @@ import { aboutText, institutionalTier, priceText, rateItem } from "@/lib/billing
 import { policyBoard } from "@/lib/data/policy-rates";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Afronomics Data — African government bond and bill auctions as an API",
-  description:
-    "African local-currency government bond and Treasury bill auction results, read from each issuer the day they publish, with the source for every figure: an API and CSV with full history. Analyst $250 a month, Team and API $1,500, Enterprise from $5,000.",
+  title: "Afronomics Data: African bond and T-bill auction API",
+  description: fitDescription("African local-currency government bond and Treasury bill auction results, read from each issuer the day they publish, with the source for every figure: an API and CSV with full history. Analyst $250 a month, Team and API $1,500, Enterprise from $5,000."),
   alternates: { canonical: `${site.url}/data-api` },
 };
 

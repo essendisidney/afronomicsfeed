@@ -14,7 +14,7 @@ import { rpcRead } from "@/lib/store";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Advertise and sponsor — reach the people who move African capital",
+  title: "Advertise and sponsor on Afronomics",
   description:
     "Sponsor the Afronomics Weekly, the Kenya rates pages, country files and embeddable widgets. Founding-sponsor rates for banks, funds, fintechs and advisers.",
   alternates: { canonical: `${site.url}/advertise` },

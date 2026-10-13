@@ -7,12 +7,13 @@ import { ShareRow } from "@/components/ui/ShareRow";
 import { indexName, indexShort } from "@/lib/data/bill-index";
 import { buildIndexRelease, indexReleaseText } from "@/lib/editions/index-release";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 900;
 
 export const metadata: Metadata = {
-  title: `${indexShort} weekly release — the Afronomics African Sovereign Bill Index`,
-  description: "The Monday release of the Afronomics African Sovereign Bill Index in one fixed format: the reading, the change, the movers, and every market's contribution. Free to quote with attribution.",
+  title: `${indexShort} weekly release: African Sovereign Bill Index`,
+  description: fitDescription("The Monday release of the Afronomics African Sovereign Bill Index in one fixed format: the reading, the change, the movers, and every market's contribution. Free to quote with attribution."),
   alternates: { canonical: `${site.url}/markets/bill-index/release` },
 };
 

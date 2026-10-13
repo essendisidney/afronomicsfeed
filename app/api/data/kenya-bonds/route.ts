@@ -1,14 +1,17 @@
+import { apiAccess, apiCsv, CSV_KEYED, csvError, readRange, sliceRows } from "@/lib/api";
 import { bondsCsv, loadBonds } from "@/lib/data/kenya-bonds";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
-/** Free CSV of every Kenya Treasury bond auction result. */
-export function GET() {
-  return new Response(bondsCsv(loadBonds()), {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="afronomics-kenya-bond-auctions.csv"',
-      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-    },
-  });
+/**
+ * Kenya Treasury bond auction results as CSV, with CBK notice links. Without a key: the latest 12 months, up to 100
+ * rows. With a key (Authorization: Bearer afk_…): the full history. Optional from, to, limit.
+ */
+export async function GET(request: Request) {
+  const range = readRange(request);
+  if (!range) return csvError("Dates must be YYYY-MM-DD.", 400);
+  const file = loadBonds();
+  const access = await apiAccess(request, "/data/kenya-bonds");
+  const sliced = sliceRows(request, file.rows, (r) => r.value_date, range, access, CSV_KEYED);
+  return apiCsv(bondsCsv({ ...file, rows: sliced.rows }), "afronomics-kenya-bond-auctions.csv", access, sliced.free);
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
+import { DataTerms } from "@/components/billing/DataTerms";
 import { InstitutionalBuy } from "@/components/billing/InstitutionalBuy";
 import { PilotForm } from "@/components/billing/PilotForm";
 import { aboutText, institutionalTier, priceText, rateItem } from "@/lib/billing/ratecard";
@@ -15,7 +16,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Afronomics Data — African government bond and bill auctions as an API",
   description:
-    "African local-currency government bond and Treasury bill auction results, read from each issuer the day they publish, with the source for every figure: an API and CSV with full history. Analyst $250 a month, Team and API $1,500, Enterprise from $5,000.",
+    "African local-currency government bond and Treasury bill auction results, read from each issuer the day they publish, with the source for every figure: an API and CSV, the latest 12 months free and the full history with a key. Analyst $250 a month, Team and API $1,500, Enterprise from $5,000.",
   alternates: { canonical: `${site.url}/data-api` },
 };
 
@@ -108,11 +109,14 @@ export default function DataApiPage() {
               <Link href="/developers" className="underline underline-offset-2">
                 open API
               </Link>{" "}
-              serves the same datasets with a five-minute cache, free with attribution.
+              serves the latest 12 months of the same datasets, up to 100 rows a call, with a five-minute cache and attribution. For research, journalism,
+              teaching and non-commercial apps.
             </li>
             <li>
-              <strong className="text-ink">Licensed customers get a key:</strong> send it as <code className="font-mono text-[13px]">Authorization: Bearer afk_…</code>.
-              Keyed calls are served fresh, never from the shared cache, and counted per key so you get usage reports.
+              <strong className="text-ink">Pilot and licensed customers get a key:</strong> send it as{" "}
+              <code className="font-mono text-[13px]">Authorization: Bearer afk_…</code> for the full history and up to 5,000 rows a call. Keyed calls are served
+              fresh, never from the shared cache, and counted per key so you get usage reports. Any commercial use, including internal use at a fund, bank or
+              firm, needs a key.
             </li>
             <li>
               <strong className="text-ink">Every figure has its source:</strong> each auction result links to the central bank’s own notice, and corrections are
@@ -131,10 +135,19 @@ export default function DataApiPage() {
           </pre>
           <p className="mt-3 text-[13px] text-ink-soft">Government bond auctions ({bondCoverageText()}), by market and ISIN:</p>
           <pre className="mt-2 max-w-full overflow-x-auto whitespace-pre-wrap break-all rounded-xl bg-ink px-4 py-4 text-[12px] leading-5 text-paper">
-            {`curl "${site.url}/api/v1/bonds/egypt?from=2026-01-01"`}
+            {`curl -H "Authorization: Bearer afk_YOUR_KEY" \\
+  "${site.url}/api/v1/bonds/egypt?from=2015-01-01"`}
           </pre>
-          <p className="mt-2 text-[12px] text-muted">Leave out the header to call the open API.</p>
+          <p className="mt-2 text-[12px] text-muted">
+            Leave out the header to call the open API: the latest 12 months, up to 100 rows, marked <code className="font-mono">&quot;truncated&quot;: true</code>{" "}
+            when a key would return more.
+          </p>
         </div>
+      </section>
+
+      <section className="mt-12" id="terms">
+        <SectionTitle kicker="Terms" title="What is free, what needs a key, what is Enterprise" />
+        <DataTerms />
       </section>
 
       <section className="mt-12 max-w-2xl">

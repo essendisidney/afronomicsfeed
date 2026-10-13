@@ -1,13 +1,15 @@
 import { rpc } from "@/lib/store";
 import { sendEmail } from "@/lib/mail";
 import { site } from "@/lib/site";
+import { claimReceipt, isKeyPlan, issuePaidKey, markKeyEmail, type KeyOutcome } from "./paidkey";
 import { getCheckoutPlan, moneyLabel } from "./plans";
 
 /**
  * Where a confirmed Paystack charge goes: the `payments` table through a secret-gated database function
- * (no service-role key on the server), then a receipt to the customer and a note to the desk. Called from
- * the webhook and, as a safety net, from the return page, so a payment is recorded even if the webhook
- * is not yet registered in Paystack.
+ * (no service-role key on the server), then, for Team and API, the API key (lib/billing/paidkey.ts), then a receipt
+ * to the customer and a note to the desk, once per reference. Called from the webhook and from the return page, so a
+ * payment is recorded even if the webhook is not yet registered in Paystack; whichever arrives first does the work.
+ * Logs carry the reference and the email's domain, never the address or a key.
  */
 
 const secret = () => process.env.AF_CRON_SECRET ?? "";
@@ -73,15 +75,32 @@ function productName(plan: string | null) {
   return p?.product ?? plan ?? "Afronomics";
 }
 
-/** What happens next, by product, for the receipt and the thank-you page. */
-export function nextStep(plan: string | null) {
+const longDate = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+
+/** The Team and API line, by what happened to the key. */
+function teamStep(key: KeyOutcome | undefined) {
+  const contact = "Your named contact writes within one working day; reply with the markets and fields you need first.";
+  if (key?.kind === "issued" && key.expiresAt) {
+    return `Your Team and API month starts today. Your API key is issued: it is shown once on the confirmation page and sent with this receipt, and it works until ${longDate(key.expiresAt)} (the end of the paid period plus three days’ grace). Each renewal payment extends the same key. ${contact}`;
+  }
+  if (key?.kind === "renewed" && key.expiresAt) {
+    return `Your Team and API access is renewed: your existing API key (${key.prefix}…) now works until ${longDate(key.expiresAt)} (the end of the paid period plus three days’ grace). Nothing to change in your systems.`;
+  }
+  if (key?.kind === "manual") {
+    return "Your Team and API month starts today. Your API key could not be issued automatically this time, so the desk sends it to this address within one working day (it is shown once; keep it safe) with your named contact. Reply with the markets and fields you need first.";
+  }
+  return `Your Team and API month starts today. Your API key is issued as soon as the payment is confirmed: shown once on the confirmation page and emailed to this address with the receipt. It works to the end of the paid period plus three days’ grace, and each renewal payment extends it. ${contact}`;
+}
+
+/** What happens next, by product, for the receipt and the thank-you page. For Team and API, pass the key outcome. */
+export function nextStep(plan: string | null, key?: KeyOutcome) {
   switch (plan) {
     case "analyst":
     case "analyst_ke":
-      return "Your Analyst month starts today. Within one working day the desk confirms your seat at this address and sends the full-history downloads for every covered market; reply with the markets you want first.";
+      return "Your Analyst month starts today, and this receipt confirms your seat for this address. Within one working day the desk sends the full-history downloads for every covered market; reply with the markets you want first.";
     case "data_team":
     case "data_team_ke":
-      return "Your Team and API month starts today. Within one working day the desk sends your API key to this address (it is shown once; keep it safe) with your named contact. Reply with the markets and fields you need first.";
+      return teamStep(key);
     case "pack":
     case "pack_plus":
       return "Reply to this email with the name of the institution to put on the cover and up to five email addresses to receive it. The first pack arrives within two working days.";
@@ -111,39 +130,139 @@ export function nextStep(plan: string | null) {
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-/** Receipt to the customer and a heads-up to the desk. Best effort: a missing mail key is logged, not thrown. */
-export async function notifyPayment(p: PaymentRecord) {
+const domainOf = (email: string | null) => (email ? email.slice(email.lastIndexOf("@") + 1).toLowerCase() : "none");
+
+/** The desk's view of the key in one phrase, e.g. "key issued afk_1a2b3c… to 16 November 2026, email failed (…)". */
+function keyStatus(key: KeyOutcome, emailed: string | null) {
+  const mail = emailed === null ? "" : emailed === "sent" ? ", emailed" : `, email failed (${emailed})`;
+  const test = (k: { test: boolean }) => (k.test ? " (TEST)" : "");
+  switch (key.kind) {
+    case "issued":
+      return `key issued ${key.prefix}… to ${longDate(key.expiresAt)}${test(key)}${mail}`;
+    case "renewed":
+      return `key renewed ${key.prefix}… to ${longDate(key.expiresAt)}${test(key)}${mail}`;
+    case "manual":
+      return `KEY NOT ISSUED (${key.reason})`;
+    default:
+      return "";
+  }
+}
+
+/** What the desk should do, by key outcome. */
+function deskAction(key: KeyOutcome, emailed: string | null) {
+  if (key.kind === "issued" || key.kind === "renewed") {
+    if (emailed === "sent") return "Access is delivered and marked sent on /desk. The named contact still writes within one working day.";
+    return key.kind === "issued"
+      ? "Key issued, email failed. The buyer sees the key once on /thank-you if they are there. Check with them; if they never got it, revoke it on /desk and send a new one by hand."
+      : "Key renewed, email failed. The key keeps working; tell the buyer the new end date.";
+  }
+  if (key.kind === "manual") return "Issue the Team and API key by hand (plan data_api) and mark access sent on /desk.";
+  return "Grant access and mark it done on /desk.";
+}
+
+/**
+ * Receipt to the customer and a heads-up to the desk. Best effort: a missing mail key is logged, not thrown. For Team
+ * and API the receipt carries the new key (or the renewed end date), and the desk note says whether that email went
+ * out ("key issued, email failed"). The desk note never contains the key.
+ */
+export async function notifyPayment(p: PaymentRecord, key: KeyOutcome = { kind: "none" }) {
   const product = productName(p.plan);
   const money = moneyLabel(p.amount, p.currency);
   const when = p.paidAt ? new Date(p.paidAt).toUTCString() : new Date().toUTCString();
   const results: string[] = [];
+  const secretKey = key.kind === "issued" ? key.key : null;
+  const keyed = key.kind === "issued" || key.kind === "renewed";
+  let emailed: string | null = null;
 
   if (p.email) {
+    const keyLines = secretKey
+      ? [
+          ``,
+          `Your API key (we keep only a fingerprint of it, so this email is your copy):`,
+          ``,
+          secretKey,
+          ``,
+          `Send it as a header: Authorization: Bearer YOUR_KEY`,
+          `Example: curl -H "Authorization: Bearer YOUR_KEY" "${site.url}/api/v1/bonds/egypt?from=2026-01-01"`,
+          `Endpoints and terms: ${site.url}/data-api`,
+          `Keep it private. If it leaks, reply and we replace it.`,
+        ]
+      : [];
     const text = [
       `Thank you — your payment of ${money} for ${product} is confirmed.`,
       ``,
       `Reference: ${p.reference}`,
       `Paid: ${when}`,
       ``,
-      nextStep(p.plan),
+      nextStep(p.plan, key),
+      ...keyLines,
       ``,
       `Questions: ${site.contactEmail}`,
       `Afronomics · ${site.url}`,
     ].join("\n");
+    const keyHtml = secretKey
+      ? `<p style="margin-top:18px;font-weight:600">Your API key</p>
+      <p style="font-family:monospace;font-size:14px;background:#f3f1ea;padding:10px 12px;word-break:break-all">${esc(secretKey)}</p>
+      <p style="color:#636b7d;font-size:13px">We keep only a fingerprint of it, so this email is your copy. Send it as a header: <code>Authorization: Bearer YOUR_KEY</code>. Endpoints and terms: <a href="${site.url}/data-api" style="color:#5b3fd6">afronomicsfeed.com/data-api</a>. Keep it private; if it leaks, reply and we replace it.</p>`
+      : "";
     const html = `<div style="font-family:Archivo,Helvetica,Arial,sans-serif;color:#121826;max-width:560px;line-height:1.55">
       <p style="font-size:18px;font-weight:600">Payment confirmed</p>
       <p>Thank you — your payment of <strong>${esc(money)}</strong> for <strong>${esc(product)}</strong> is confirmed.</p>
       <p style="color:#636b7d;font-size:13px">Reference ${esc(p.reference)} · ${esc(when)}</p>
-      <p>${esc(nextStep(p.plan))}</p>
+      <p>${esc(nextStep(p.plan, key))}</p>${keyHtml}
       <p style="color:#636b7d;font-size:13px">Questions: <a href="mailto:${esc(site.contactEmail)}" style="color:#5b3fd6">${esc(site.contactEmail)}</a> · <a href="${site.url}" style="color:#5b3fd6">afronomicsfeed.com</a></p>
     </div>`;
-    const r = await sendEmail(p.email, `Afronomics: ${product} confirmed (${money})`, html, text);
+    const subject = secretKey ? `Afronomics: your API key and receipt (${money})` : `Afronomics: ${product} confirmed (${money})`;
+    const r = await sendEmail(p.email, subject, html, text);
+    emailed = r.ok ? "sent" : r.reason.slice(0, 120);
     results.push(`customer:${r.ok ? "sent" : r.reason}`);
+  } else if (keyed) {
+    emailed = "no email on the payment";
   }
+  if (keyed && emailed !== null) await markKeyEmail(p.reference, emailed === "sent", emailed === "sent" ? null : emailed);
 
   const owner = process.env.PAYMENTS_NOTIFY_EMAIL ?? site.contactEmail;
-  const summary = `${money} · ${product} · ${p.email ?? "no email"} · ${p.channel ?? ""} · ref ${p.reference}`;
-  const r = await sendEmail(owner, `New payment: ${summary}`, `<pre style="font-family:monospace">${esc(summary)}</pre><p>Grant access and mark it done on <a href="${site.url}/desk">/desk</a>.</p>`, `${summary}\n\nGrant access and mark it done on ${site.url}/desk`);
+  const status = keyStatus(key, emailed);
+  const summary = `${money} · ${product} · ${p.email ?? "no email"} · ${p.channel ?? ""} · ref ${p.reference}${status ? ` · ${status}` : ""}`;
+  const action = deskAction(key, emailed);
+  const r = await sendEmail(
+    owner,
+    `New payment: ${summary}`.slice(0, 250),
+    `<pre style="font-family:monospace;white-space:pre-wrap">${esc(summary)}</pre><p>${esc(action)} <a href="${site.url}/desk">${site.url}/desk</a></p>`,
+    `${summary}\n\n${action} ${site.url}/desk`,
+  );
   results.push(`desk:${r.ok ? "sent" : r.reason}`);
   return results;
+}
+
+/**
+ * Everything after a confirmed charge, safe to call from both the webhook and /thank-you in any order: record the
+ * payment, issue or extend the Team and API key, and return the outcome plus `deliver`, which sends the receipt and
+ * the desk note once per reference (callers run it in after()). With `reveal` (the /thank-you path) the outcome
+ * carries the key for showing on screen once, even when the webhook issued it first.
+ */
+export async function fulfilPayment(p: PaymentRecord, opts: { reveal: boolean; source: "webhook" | "return" }) {
+  const stored = await recordPayment(p);
+  // Logs: reference and email domain only, never the address or a key.
+  const log = (msg: string) => console.log(`[billing] ${opts.source} ${p.reference} @${domainOf(p.email)}: ${msg}`);
+  if (!stored.ok) log(`payment not stored: ${stored.reason}`);
+
+  let outcome: KeyOutcome = { kind: "none" };
+  let fresh = false;
+  if (stored.ok) ({ outcome, fresh } = await issuePaidKey(p, { reveal: opts.reveal }));
+  else if (isKeyPlan(p.plan)) outcome = { kind: "manual", reason: "payment not stored" };
+  if (outcome.kind === "manual") log(`key not issued: ${outcome.reason}`);
+  else if (outcome.kind !== "none") log(`key ${outcome.kind}${fresh ? "" : " earlier"}${opts.reveal && outcome.kind === "issued" && outcome.key ? ", shown on the page" : ""}`);
+
+  const deliver = async () => {
+    const keyed = outcome.kind === "issued" || outcome.kind === "renewed";
+    // A key or renewal is emailed only by the call that made it, and always by that call (so a receipt sent without
+    // a key after a failed earlier attempt cannot swallow it); it still claims the receipt so nobody sends another.
+    if (keyed && !fresh) return;
+    const first = stored.ok ? await claimReceipt(p.reference) : true;
+    if (!first && !keyed) return;
+    const sent = await notifyPayment(p, outcome).catch((e) => [`error:${String(e).slice(0, 80)}`]);
+    log(sent.map((s) => s.replace(/\S+@\S+/g, "[address]").slice(0, 80)).join(" "));
+  };
+  return { stored: stored.ok, outcome, deliver };
 }

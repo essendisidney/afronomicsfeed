@@ -99,8 +99,8 @@ export function tbillDatasetJsonLd(market: BillMarket) {
     variableMeasured: billVariables(market),
     includedInDataCatalog: catalog,
     distribution: [
-      csv(`/api/data/tbills/${market.slug}`, `${market.country} Treasury bill auctions, full history (CSV)`),
-      json(`/api/v1/tbills/${market.slug}`, `${market.country} Treasury bill auctions (JSON API; limit up to 5,000 rows)`),
+      csv(`/api/data/tbills/${market.slug}`, `${market.country} Treasury bill auctions (CSV; latest 12 months free, full history with a key)`),
+      json(`/api/v1/tbills/${market.slug}`, `${market.country} Treasury bill auctions (JSON API; latest 12 months free, full history with a key)`),
     ],
   };
 }
@@ -134,10 +134,10 @@ export function bondDatasetJsonLd(
     variableMeasured: bondVariables(market),
     includedInDataCatalog: catalog,
     distribution: [
-      csv(`/api/data/bonds/${market.slug}`, `${place} government bond auctions, full history (CSV)`),
+      csv(`/api/data/bonds/${market.slug}`, `${place} government bond auctions (CSV; latest 12 months free, full history with a key)`),
       json(
         `/api/v1/bonds/${market.slug}${issuer ? `?issue=${encodeURIComponent(issuer.name)}` : ""}`,
-        `${place} government bond auctions (JSON API; limit up to 5,000 rows)`,
+        `${place} government bond auctions (JSON API; latest 12 months free, full history with a key)`,
       ),
     ],
   };

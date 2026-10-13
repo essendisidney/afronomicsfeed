@@ -4,6 +4,7 @@ import { HealthList } from "@/components/data/HealthList";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { loadHealth } from "@/lib/data/health";
+import { hoursText, latencyDate, loadLatency } from "@/lib/data/latency";
 import { site } from "@/lib/site";
 
 export const revalidate = 1800;
@@ -20,6 +21,7 @@ export default function StatusPage() {
   const health = loadHealth();
   const attention = health?.items.filter((x) => x.status !== "ok") ?? [];
   const fine = health?.items.filter((x) => x.status === "ok") ?? [];
+  const latency = loadLatency();
   return (
     <PageShell
       crumbs={[{ href: "/", label: "Home" }, { href: "/method", label: "Sources & method" }, { label: "Data status" }]}
@@ -66,6 +68,54 @@ export default function StatusPage() {
           </section>
         </>
       )}
+      <section id="latency" className="mt-12 scroll-mt-24">
+        <SectionTitle
+          kicker="Publication delay"
+          title="How long after the publisher do we carry each result?"
+          note={
+            latency
+              ? `Measured since ${latencyDate(latency.since)}, for every new bill and bond auction result. Figures from ${latency.min_results} results with the publisher’s own release time; fewer, and no figure is shown.`
+              : "Measuring starts with the next data run."
+          }
+        />
+        <p className="mt-3 max-w-3xl text-sm text-ink-soft">
+          For each new result we record when our reader first wrote it (the site and API carry it a few minutes later, once it deploys) and, only where
+          the publisher exposes one, when the publisher released it: a time in its own listing, or the Last-Modified time of the result’s own
+          document. Where a publisher gives no time, the market says “publisher time unknown”: we never estimate one. Readers run every two hours on
+          weekdays and every four at weekends, so the delay includes that wait.
+        </p>
+        {latency ? (
+          <div className="mt-4 overflow-x-auto">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Market</th>
+                  <th>Auctions</th>
+                  <th className="text-right">New results</th>
+                  <th className="text-right">With publisher time</th>
+                  <th className="text-right">Median (p50)</th>
+                  <th className="text-right">p90</th>
+                  <th>Publisher time from</th>
+                </tr>
+              </thead>
+              <tbody>
+                {latency.summary.map((m) => (
+                  <tr key={`${m.kind}:${m.market}`}>
+                    <td className="font-medium text-ink">{m.name}</td>
+                    <td>{m.kind === "bills" ? "T-bills" : "Bonds"}</td>
+                    <td className="text-right">{m.results}</td>
+                    <td className="text-right">{m.timed}</td>
+                    <td className="text-right">{m.p50_h != null ? hoursText(m.p50_h) : "—"}</td>
+                    <td className="text-right">{m.p90_h != null ? hoursText(m.p90_h) : "—"}</td>
+                    <td className="text-[13px] text-ink-soft">{m.p50_h != null ? (m.publisher_time ?? "—") : m.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
+      </section>
+
       <p className="mt-10 max-w-3xl text-sm text-ink-soft">
         Spotted a figure that looks wrong? Tell us at{" "}
         <a href={`mailto:${site.contactEmail}`} className="underline underline-offset-2">

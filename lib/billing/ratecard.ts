@@ -81,6 +81,43 @@ export const institutionalLadder: readonly InstitutionalTier[] = [
   },
 ];
 
+/**
+ * The one statement of what is free and what needs a key or a licence (decision D-016, founder decision F1).
+ * /developers#terms, /licensing, /data-api and the rate card all show this text; the API enforces it (lib/api.ts).
+ * Change the wording here only, so the four places keep saying the same thing.
+ */
+export const dataTerms = {
+  free: {
+    title: "Free, no key",
+    points: [
+      "Reading the site: every page, table and chart.",
+      "Quoting and citing figures with the credit “Source: Afronomics” and a link.",
+      "The JSON API and CSV downloads for the latest 12 months (by auction or settlement date), up to 100 rows a call.",
+      "For research, journalism, teaching and non-commercial apps.",
+    ],
+  },
+  keyed: {
+    title: "A key: pilot or paid licence",
+    points: [
+      "Full history (rows older than 12 months), more than 100 rows a call, and bulk CSV beyond the free window.",
+      "Any commercial use, including internal use at a fund, bank, insurer, DFI or other firm: analysis, models, committee papers and client work.",
+      "Start with a free 30-day pilot key, then Analyst, Team and API, or the Startup licence for one product.",
+    ],
+  },
+  enterprise: {
+    title: "Enterprise only: redistribution",
+    points: [
+      "Passing the data, or files and feeds built from it, to clients or other third parties, or reselling it.",
+      "No other plan includes redistribution. Enterprise also covers several teams, custom delivery and a service agreement, from $5,000 a month.",
+    ],
+  },
+  /** The check a reviewer should be able to answer the same way from every page. */
+  fundQuestion: {
+    q: "Can a fund, bank or firm use the free API for its own internal analysis?",
+    a: "No. Internal use at a fund, bank or firm is commercial use and needs a pilot key or a paid licence. The free tier is for research, journalism, teaching and non-commercial apps.",
+  },
+} as const;
+
 export const institutionalPilot = {
   days: 30,
   label: "30-day free pilot",
@@ -161,7 +198,7 @@ export const rateCard: RateGroup[] = [
     title: "Readers",
     who: "Analysts, treasurers, journalists, students and investors",
     items: [
-      { id: "open", name: "Open", amount: 0, currency: "KES", unit: "", what: "Every number, headline, country file, the T-bill monitor, auction pages, the Sovereign Bill Index, CSV downloads and the Weekly. Free, with attribution.", href: "/subscribe" },
+      { id: "open", name: "Open", amount: 0, currency: "KES", unit: "", what: "Every number, headline, country file, the T-bill monitor, auction pages, the Sovereign Bill Index, CSV downloads of the latest 12 months and the Weekly. Free, with attribution.", href: "/subscribe" },
       { id: "pro", name: "Pro", amount: 1500, currency: "KES", unit: "a month", what: "The Morning note by email every weekday, auction alerts the moment each market reports, every brief in full, and the web tools and CSV downloads. One seat. KES 15,000 a year.", checkout: "pro", href: "/pricing" },
       { id: "team", name: "Team", amount: 6000, currency: "KES", unit: "a month", what: "Five Pro seats on one invoice and priority requests for new datasets. KES 60,000 a year.", checkout: "professional", href: "/pricing" },
       { id: "trial", name: "Kenya desk trial", amount: 200, currency: "KES", unit: "for 14 days", what: "Fourteen days of Pro, paid by M-Pesa, so a desk can try it before the finance department is involved.", checkout: "trial", href: "/pricing" },
@@ -189,13 +226,13 @@ export const rateCard: RateGroup[] = [
     title: "Data and developers",
     who: "Fintechs, research desks, bank treasuries, DFIs, model builders and funds abroad",
     items: [
-      { id: "api", name: "Open API", amount: 0, currency: "KES", unit: "", what: "Every auction dataset, the measures and the index as JSON, no key, five-minute cache, with attribution. Research, journalism, teaching and non-commercial apps.", href: "/developers" },
-      { id: "licence_startup", name: "Startup licence", amount: 7500, currency: "KES", unit: "a month", what: "Commercial use inside one product of a startup: show the auction datasets, the measures and the FX archive to your own users with attribution, an email or webhook on every new result, and a named contact. Resale or bulk redistribution of the raw data needs the Enterprise licence.", checkout: "licence_startup", href: "/licensing" },
+      { id: "api", name: "Open API", amount: 0, currency: "KES", unit: "", what: "Every auction dataset, the measures and the index as JSON and CSV, no key: the latest 12 months, up to 100 rows a call, with attribution. Research, journalism, teaching and non-commercial apps; full history and any commercial use, including internal use at a fund, bank or firm, need a key.", href: "/developers" },
+      { id: "licence_startup", name: "Startup licence", amount: 7500, currency: "KES", unit: "a month", what: "Commercial use inside one product of a startup: an API key with the full history, charts and figures shown to your own users with attribution, an email or webhook on every new result, and a named contact. No redistribution: passing the data, files or feeds on to others is Enterprise only.", checkout: "licence_startup", href: "/licensing" },
       { id: "licence_institution", name: institutionalTier("analyst").name, amount: institutionalTier("analyst").monthlyUsd, currency: "USD", unit: "a month per user", what: "One user: the web tables and full-history downloads for every covered market. Priced in dollars.", checkout: "analyst", enquiry: "licensing", href: "/data/frontier-local-debt" },
       { id: "data_api", name: "Afronomics Data API", amount: institutionalTier("team").monthlyUsd, currency: "USD", unit: "a month", what: "A keyed feed for production systems: government bond auctions across the covered markets and every Treasury bill auction in ten markets, with full history, policy rates, Eurobond yields and the bill index, uncached responses, usage reporting per key, Treasury-bill result alerts and a named contact. Priced in dollars.", checkout: "data_team", enquiry: "licensing", href: "/data-api" },
       { id: "enterprise", name: "Enterprise and redistribution", amount: institutionalTier("enterprise").monthlyUsd, currency: "USD", unit: "a month, from", what: "Redistribution to your own clients, several teams and keys, custom datasets and delivery (SFTP, Excel, Google Sheets), and a service agreement. Priced by scope from $5,000 a month.", enquiry: "licensing", href: "/data-api" },
       { id: "widget", name: "Branded live-rates widget", amount: 40000, currency: "KES", unit: "a month", what: "Our live T-bill, bond or FX widget on your site with your branding and no Afronomics link, updated the moment each result lands. The free widgets are the demo.", checkout: "widget", href: "/widgets" },
-      { id: "bulk", name: "Bulk and AI training licence", amount: null, currency: "USD", unit: "", what: "Clean, dated, sourced African financial data for models and bulk redistribution, with the full change history. Priced by scope.", enquiry: "licensing" },
+      { id: "bulk", name: "Bulk and AI training licence", amount: null, currency: "USD", unit: "", what: "Clean, dated, sourced African financial data for models, with the full change history. Priced by scope; any redistribution is under an Enterprise licence.", enquiry: "licensing" },
     ],
   },
   {

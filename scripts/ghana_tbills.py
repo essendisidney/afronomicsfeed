@@ -43,7 +43,7 @@ def list_notices(session: requests.Session) -> list[dict]:
     found: dict[int, dict] = {}
     page = 1
     while True:
-        r = session.get(MEDIA_API, params={"search": "Auctresult", "per_page": 100, "page": page, "_fields": "source_url,date"}, headers=UA, timeout=60)
+        r = session.get(MEDIA_API, params={"search": "Auctresult", "per_page": 100, "page": page, "_fields": "source_url,date,date_gmt"}, headers=UA, timeout=60)
         if r.status_code != 200:
             break
         items = r.json()
@@ -58,11 +58,25 @@ def list_notices(session: requests.Session) -> list[dict]:
                 continue
             tender = int(m.group(1))
             if tender not in found or item.get("date", "") > found[tender]["uploaded"]:
-                found[tender] = {"url": url, "tender": tender, "uploaded": item.get("date", "")}
+                found[tender] = {"url": url, "tender": tender, "uploaded": item.get("date", ""), "uploaded_gmt": item.get("date_gmt") or None}
         if page >= int(r.headers.get("X-WP-TotalPages", "1")):
             break
         page += 1
     return sorted(found.values(), key=lambda n: n["tender"])
+
+
+def note_release(notice: dict, parsed: list[dict]) -> None:
+    """The notice's upload time in the media index (WordPress date_gmt, UTC) is the Bank of Ghana's release time:
+    passed to scripts/latency.py. Never stops the reader."""
+    if not notice.get("uploaded_gmt"):
+        return
+    try:
+        from latency import latency_hint
+
+        for d in {r.get("auction_date") or r.get("value_date") for r in parsed} - {None}:
+            latency_hint("bills", "ghana", d, f"{notice['uploaded_gmt']}+00:00", "upload time in the Bank of Ghana's media index")
+    except Exception as e:  # noqa: BLE001
+        print(f"latency hint skipped: {e}")
 
 
 def parse_date(text: str) -> str | None:
@@ -168,6 +182,7 @@ def main() -> int:
                 row["source"] = notice["url"]
                 rows.append(row)
             sources[notice["url"]] = {"status": "parsed", "tenors": [r["tenor"] for r in parsed]}
+            note_release(notice, parsed)
             if count % 100 == 0:
                 print(f"  {count}/{len(notices)}", flush=True)
 

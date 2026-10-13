@@ -145,7 +145,7 @@ export default async function ReferencePage() {
             ["One auction", "/markets/tbills/{market}/{value-date}", "Kenya: /markets/kenya-tbills/{value-date}. Rates, amounts, the source document, and the plain-language meaning."],
             ["One market’s history", "/markets/tbills/{market}", "Every result since the series starts, chart, CSV."],
             ["The index", "/markets/bill-index", "Weekly readings, contributions, highs and lows."],
-            ["Machine-readable", "/api/v1/tbills/{market}?tenor=364&from=YYYY-MM-DD", "JSON, no key, five-minute cache, attribution line in every response."],
+            ["Machine-readable", "/api/v1/tbills/{market}?tenor=364&from=YYYY-MM-DD", "JSON; the latest 12 months with no key (full history with a key), five-minute cache, attribution line in every response."],
           ].map(([what, path, note]) => (
             <div key={what} className="bg-surface px-5 py-4">
               <p className="text-[12px] font-semibold text-accent">{what}</p>
@@ -269,9 +269,10 @@ export default async function ReferencePage() {
         <div>
           <h3 className="font-serif text-xl text-ink">Licence</h3>
           <p className="mt-2">
-            Free to quote, chart and republish with the credit “Source: Afronomics, compiled from [publisher]” and a link. Commercial redistribution is{" "}
-            <Link href="/licensing" className="underline underline-offset-2">
-              licensed
+            Free to quote, chart and cite with the credit “Source: Afronomics, compiled from [publisher]” and a link. Commercial use, including internal use
+            at a fund, bank or firm, needs a pilot or paid licence, and redistribution of the data is Enterprise only:{" "}
+            <Link href="/licensing#terms" className="underline underline-offset-2">
+              terms
             </Link>
             .
           </p>

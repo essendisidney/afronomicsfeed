@@ -75,6 +75,25 @@ def read_pdf(url: str) -> dict[int, dict] | None:
     return None
 
 
+def release_time(file_attrs: dict | None, node_attrs: dict) -> tuple[str, str] | None:
+    """When the Bank of Zambia released a result, from its JSON:API: the result notice file's `created` time, else the
+    auction node's `changed` time. For scripts/latency.py; None when neither is given."""
+    if file_attrs and file_attrs.get("created"):
+        return str(file_attrs["created"]), "created time of the result notice in the Bank of Zambia's JSON:API"
+    if node_attrs.get("changed"):
+        return str(node_attrs["changed"]), "last-changed time of the auction entry in the Bank of Zambia's JSON:API"
+    return None
+
+
+def hint(kind: str, market: str, day: str, when: str, how: str) -> None:
+    try:
+        from latency import latency_hint
+
+        latency_hint(kind, market, day, when, how)
+    except Exception as e:  # noqa: BLE001  (never stops the reader)
+        print(f"latency hint skipped: {e}")
+
+
 def pages():
     url = f"{BASE}?include=field_tbills_auction_results,field_auction&sort=-field_tbills_auction_date&page[limit]=50"
     while url:
@@ -105,10 +124,12 @@ def main() -> int:
                 continue
             rel = node.get("relationships", {})
             pdf = None
+            released = release_time(None, a)
             f = (rel.get("field_auction") or {}).get("data")
             if f and f.get("id") in included:
                 uri = (included[f["id"]]["attributes"].get("uri") or {}).get("url")
                 pdf = f"https://www.boz.zm{uri}" if uri and uri.startswith("/") else uri
+                released = release_time(included[f["id"]]["attributes"], a)
             structured = {}
             for ref in (rel.get("field_tbills_auction_results") or {}).get("data") or []:
                 p = included.get(ref["id"])
@@ -121,7 +142,7 @@ def main() -> int:
                     "discount": next((num(v) for k, v in attrs.items() if "discount" in k), None),
                     "isin": next((v for k, v in attrs.items() if k.endswith("isin")), None),
                 }
-            records.append({"day": day, "tender": a.get("title"), "pdf": pdf, "structured": structured})
+            records.append({"day": day, "tender": a.get("title"), "pdf": pdf, "structured": structured, "released": released})
 
     todo = [r["pdf"] for r in records if r["pdf"] and r["pdf"] not in cache]
     print(f"auction records: {len(records)}, notices to read: {len(todo)}")
@@ -164,6 +185,9 @@ def main() -> int:
         rows=rows,
         sources=cache,
     )
+    for rec in records:
+        if rec["released"] and any(r["auction_date"] == rec["day"] for r in rows):
+            hint("bills", "zambia", rec["day"], *rec["released"])
     return 0
 
 

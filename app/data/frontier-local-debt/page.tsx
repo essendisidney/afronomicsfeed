@@ -178,7 +178,7 @@ export default function FrontierLocalDebtPage() {
           {EDGE_SOURCES.map((s, i) => (
             <span key={s.href}>
               {i ? "; " : ""}
-              <a href={s.href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+              <a href={s.href} target="_blank" rel="noopener noreferrer" data-track="source_click" className="underline underline-offset-2">
                 {s.label}
               </a>
             </span>

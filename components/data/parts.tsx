@@ -41,7 +41,7 @@ export function SourceLine({ name, href, detail }: { name: string; href: string;
   return (
     <p className="mt-3 font-mono text-[10px] leading-5 tracking-[0.04em] text-muted">
       Source:{" "}
-      <a href={href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">
+      <a href={href} target="_blank" rel="noopener noreferrer" data-track="source_click" className="underline underline-offset-2 hover:text-forest">
         {name}
       </a>
       {detail ? ` · ${detail}` : null}

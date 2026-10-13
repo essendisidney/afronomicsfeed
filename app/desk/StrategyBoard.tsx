@@ -81,7 +81,7 @@ export function StrategyBoard({
         <ul className="mt-2 space-y-1 text-sm text-ink-soft">
           <li>Proprietary data: bill auctions in {billMarkets.length} markets since {firstYear}; bond auctions in {bondMarkets.length} ({bondMarkets.join(", ")})</li>
           <li>Embeddedness: {pilots} pilot key{pilots === 1 ? "" : "s"} active; {apiCalls7d.toLocaleString("en-US")} API calls in 7 days</li>
-          <li>Pipeline: {prospects} prospect{prospects === 1 ? "" : "s"} in the deal log; {CONTACTED.count} contacted by the founder on {CONTACTED.on}, 0 pilots so far</li>
+          <li>Pipeline: {prospects} prospect{prospects === 1 ? "" : "s"} in the deal log; {CONTACTED.count} contacted on {CONTACTED.on}, 0 pilots so far</li>
           <li>Margins and net revenue retention: not measurable until there is revenue</li>
         </ul>
       </div>

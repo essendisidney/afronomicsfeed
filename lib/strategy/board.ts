@@ -10,7 +10,7 @@ export type BoardItem = { name: string; status: Status; note: string; href?: str
 export const BOARD_UPDATED = "2026-10-13";
 
 /** Outreach notes sent by the founder (the deal log is updated separately). */
-export const CONTACTED = { count: 6, on: "12 Oct 2026" };
+export const CONTACTED = { count: 21, on: "12–13 Oct 2026" };
 
 export const BOARD: BoardItem[] = [
   // Live: the wedge, African local-currency government debt data.
@@ -24,7 +24,7 @@ export const BOARD: BoardItem[] = [
   { name: "Founder command centre", status: "live", note: "Collected vs signed vs pipeline vs pilots; model vs reality; this board" },
   // Build.
   { name: "Morocco bond history", status: "build", note: "Newest Treasury results read; older years need paging through the Ministry's archive" },
-  { name: "Outreach wave 2", status: "build", note: "6 of 25 contacted on 12 Oct (D-004 test); next 19 qualified contacts" },
+  { name: "Outreach wave 2", status: "build", note: "21 of 25 contacted on 12–13 Oct (D-004 test); Ninety One draft waits on the founder; follow-ups 21–22 Oct" },
   { name: "Reader tests (automated checks for each data reader)", status: "build", note: "Needed before institutional pilots scale" },
   // Parked (kept live, no investment).
   { name: "Consumer tools (pay, rent, loan-cost, price reports, chama, diaspora)", status: "parked", note: "D-001: 1 reader report in total; no building until there is traffic" },
@@ -36,7 +36,7 @@ export const BOARD: BoardItem[] = [
 ];
 
 export const DECISIONS: { ask: string; why: string }[] = [
-  { ask: "Send or drop the Ninety One and Allan Gray drafts", why: "Two of the top-10 prospects; the D-004 test needs 25 qualified contacts by about 26 Oct (6 so far)" },
+  { ask: "Send the Ninety One draft in Gmail (automatic send was blocked)", why: "A top-10 prospect; the D-004 test needs 25 qualified contacts by about 26 Oct (21 so far)" },
   { ask: "Outreach route: automatic sending, or drafts that you send", why: "Sets how fast wave 2 goes out and who is accountable for each note" },
   { ask: "Legal: Kenya CIS advertising rules (LN 173/2023), plus a standard data licence and pilot terms", why: "Before any paid fund listing and before the first paid licence" },
   { ask: "Repository: keep public or make private", why: "The whole dataset can be copied from a public repo; private costs about USD 20–40 a month in automation" },

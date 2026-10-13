@@ -36,20 +36,63 @@ const legacy: Array<[string, string]> = [
   ["/graph", "/countries"],
 ];
 
+/**
+ * Paystack origins. Checkout today is a top-level redirect to checkout.paystack.com (CSP does not govern
+ * navigations), and the browser never calls Paystack directly; these are listed so a switch to Paystack's inline
+ * popup (script from js.paystack.co, iframe from checkout.paystack.com, XHR to api.paystack.co) does not report.
+ */
+const paystack = "https://js.paystack.co https://checkout.paystack.com https://api.paystack.co https://standard.paystack.co";
+
+/**
+ * Content-Security-Policy, sent as Report-Only: violations are posted to /api/csp-report and nothing is blocked.
+ * Built from what the site loads today: scripts, styles, fonts (next/font/local), images, OG cards and fetches are
+ * all same-origin; Supabase is called only from the server; there is no third-party analytics. JSON-LD blocks are
+ * data, not script, so CSP ignores them. Next's App Router streams per-page inline bootstrap scripts
+ * (self.__next_f.push) and the theme script is inline, so script-src carries 'unsafe-inline': hashes cannot cover
+ * per-page payloads, and nonces would force every page to render per request (no static/ISR, no CDN cache).
+ * next dev also needs 'unsafe-eval' and the HMR websocket.
+ */
+function contentSecurityPolicy(frameAncestors: string) {
+  const dev = process.env.NODE_ENV === "development";
+  return [
+    "default-src 'self'",
+    `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} ${paystack}`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "font-src 'self' data:",
+    `connect-src 'self' ${paystack}${dev ? " ws: wss:" : ""}`,
+    `frame-src 'self' ${paystack}`,
+    "worker-src 'self'",
+    "manifest-src 'self'",
+    "media-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    `form-action 'self' ${paystack}`,
+    `frame-ancestors ${frameAncestors}`,
+    "report-uri /api/csp-report",
+    "report-to csp",
+  ].join("; ");
+}
+
 const nextConfig: NextConfig = {
   async headers() {
     // Baseline security headers that institutional security reviews look for. Widgets under /embed/ are meant to
     // be framed on other sites, so only they may be framed; everything else refuses framing by other sites.
-    // A full Content-Security-Policy comes later, in report-only mode first, so nothing breaks unseen.
+    // The Content-Security-Policy is report-only for now, so violations surface in logs before anything is enforced.
     const security = [
       { key: "X-Content-Type-Options", value: "nosniff" },
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
       { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(self)" },
       { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+      { key: "Reporting-Endpoints", value: 'csp="/api/csp-report"' },
+      { key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy("'self'") },
     ];
     return [
       { source: "/:path*", headers: security },
       { source: "/((?!embed/).*)", headers: [{ key: "X-Frame-Options", value: "SAMEORIGIN" }] },
+      // Widgets are framed by other sites (the route itself enforces frame-ancestors *), so the report-only policy
+      // agrees there. Listed after the catch-all so this value replaces it for /embed/*.
+      { source: "/embed/:path*", headers: [{ key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy("*") }] },
       {
         source: "/sw.js",
         headers: [

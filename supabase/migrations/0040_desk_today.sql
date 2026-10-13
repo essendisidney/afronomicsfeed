@@ -1,4 +1,4 @@
--- NOT APPLIED. The founder's morning desk (docs/desk-redesign.md): the "Today" strip, the inbox with "mark handled",
+-- Applied 13 Oct 2026. The founder's morning desk (docs/desk-redesign.md): the "Today" strip, the inbox with "mark handled",
 -- pilot days-used for the D-004 gate, and content traffic by campaign.
 --
 -- Adds:

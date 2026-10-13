@@ -145,3 +145,15 @@ what we changed. Newest at the bottom. Read this first every week.
   (verified: the live test payment settled in KES by M-Pesa). USD list prices stay on the page.
 - **Open:** confirm in the Paystack dashboard that M-Pesa accepts KES 193,500 in one payment; until Paystack plan
   codes are set, each purchase is one month and does not renew (the page says so).
+
+### D-016 · 13 Oct 2026 · Master plan v2 approved (docs/strategy/master-plan-v2.md)
+- **Decided by the founder:** the plan and its 90-day build list, with F1 as follows. Free for everyone: reading the
+  site, every table and chart, citing with credit, and the API for the latest 12 months at up to 100 rows a call. A key
+  (pilot or paid) is needed for full history, bulk downloads over 100 rows, and any commercial use including internal
+  use at a fund, bank or firm. Redistribution is Enterprise only (the "from KES 7,500" line goes).
+- **Build now:** (1) measured publication latency per market, (2) bond-result email alerts for key holders,
+  (3) API key issued automatically on a Team payment, expiring with the paid period, (4) one set of free/paid terms
+  across /developers, /licensing, /data-api and the rate card. The money sprint routine is pointed at this list and the
+  D-004 numbers (F6).
+- **Gated:** items 5–10 wait for their evidence (first pilot key, first payment, a request, or the D-004 result).
+- **Test:** within 30 days, at least 3 pilot keys used on 5+ days; if 0 after 25 contacts, the D-004 kill rule applies.

@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { pilotMarkets, pilotNextOptions, type PilotResult } from "@/lib/billing/pilot";
 import { localInstitutionPrices } from "@/lib/billing/ratecard";
-import { track } from "@/lib/track";
+import { track, trackPilotForm } from "@/lib/track";
 
 const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 
@@ -46,6 +46,7 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
       const body = (await response.json().catch(() => null)) as PilotResult | null;
       if (body?.ok) {
         track("enquiry");
+        trackPilotForm("submit");
         setResult(body);
       } else setError(body && !body.ok ? body.reason : "That didn’t go through. Please try again.");
     } catch {
@@ -61,7 +62,7 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
   const label = "text-[13px] font-medium text-muted";
 
   return (
-    <form className="grid gap-3 sm:grid-cols-2" onSubmit={submit}>
+    <form className="grid gap-3 sm:grid-cols-2" onSubmit={submit} onChange={() => trackPilotForm("start")}>
       <label className="block">
         <span className={label}>Name *</span>
         <input required name="name" autoComplete="name" maxLength={120} className={field} />

@@ -1,4 +1,4 @@
--- NOT YET APPLIED. Self-serve 30-day pilot keys for the frontier local-debt data (/api/pilot).
+-- Applied 13 Oct 2026. Self-serve 30-day pilot keys for the frontier local-debt data (/api/pilot).
 --
 -- Until this is applied, /api/pilot records the lead and the deal and tells the requester the key arrives within one
 -- working day (the desk issues it from /desk as today). Once applied, /api/pilot issues the key on the spot through

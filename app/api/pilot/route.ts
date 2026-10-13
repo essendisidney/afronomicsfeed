@@ -17,7 +17,7 @@ const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "n
 /**
  * Self-serve 30-day pilot of the frontier local-debt data. Records a lead (af_lead, throttled to 5 a day per address)
  * and a deal at stage 'pilot' (the deals check constraint has no 'pilot_requested'), then issues a trial key at once
- * when migration 0034 is applied and the address is a work address; otherwise the desk issues it within a working day.
+ * when migration 0035 is applied and the address is a work address; otherwise the desk issues it within a working day.
  */
 export async function POST(request: Request) {
   const body = (await request.json().catch(() => null)) as Record<string, unknown> | null;
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
   // af_lead returns false when this address has already sent five enquiries today: no new deal, no new key.
   if (lead.ok && lead.value === false) return Response.json({ ok: true, status: "duplicate", email } satisfies PilotResult);
 
-  // A key, at once, only for a work address and only once migration 0034 provides af_trial_key_issue.
+  // A key, at once, only for a work address and only once migration 0035 provides af_trial_key_issue.
   let result: PilotResult = { ok: true, status: webmail ? "webmail" : "pending", email };
   if (!webmail && secret) {
     const issued = await rpc("af_trial_key_issue", { p_secret: secret, p_email: email, p_label: `Pilot: ${organisation} (${email})`, p_days: institutionalPilot.days });

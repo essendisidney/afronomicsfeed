@@ -155,7 +155,7 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
         <div id="site-menu" className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-t border-night-line bg-night px-4 pb-6 pt-4 xl:hidden">
           <nav aria-label="For institutions" className="rounded-2xl border border-night-line bg-night-2 p-4">
             <p className="text-[12px] font-semibold text-accent">For funds, banks and DFIs</p>
-            <p className="mt-1 text-[14px] leading-5 text-night-soft">Every African bond and bill auction by API, with the full history.</p>
+            <p className="mt-1 text-[14px] leading-5 text-night-soft">African government bond and bill auctions by API, with the full history.</p>
             <Link
               href={institutionalPilot.href}
               data-track="pricing_cta_click"

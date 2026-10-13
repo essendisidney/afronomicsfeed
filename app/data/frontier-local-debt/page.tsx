@@ -9,6 +9,7 @@ import { billMarkets, loadBillMarket, type BillMarket } from "@/lib/data/soverei
 import { bondMarkets, bondSnapshot, loadBondMarket, type BondMarket } from "@/lib/data/sovereign-bonds";
 import { BondMarketCard } from "@/components/data/BondMarketCard";
 import { site } from "@/lib/site";
+import { latencyLine, loadLatency } from "@/lib/data/latency";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { frontierDebtDatasetJsonLd } from "@/lib/seo/schema";
 
@@ -194,7 +195,10 @@ export default function FrontierLocalDebtPage() {
           <ul className="mt-4 space-y-3 text-[14px] leading-6 text-ink-soft">
             <li>
               <strong className="text-ink">Every auction, within hours of the release:</strong> amounts offered, bid and accepted, and the rate, by tenor, read from each central
-              bank’s own release, with the link to it.
+              bank’s own release, with the link to it. {latencyLine(loadLatency())}{" "}
+              <Link href="/status#latency" className="underline underline-offset-2">
+                By market
+              </Link>
             </li>
             <li>
               <strong className="text-ink">Checked before it is published:</strong> each result must pass range and consistency checks (against the release’s own

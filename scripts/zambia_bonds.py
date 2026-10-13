@@ -25,6 +25,7 @@ import requests
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
 from bills_common import ROOT, UA, num  # noqa: E402
+from zambia_tbills import hint, release_time  # noqa: E402  (the release time for scripts/latency.py)
 
 warnings.filterwarnings("ignore")
 OUT = ROOT / "data" / "zambia" / "bond_auctions.json"
@@ -109,6 +110,7 @@ def main() -> int:
     rows: list[dict] = []
     old = previous()
     notices: dict[str, dict] = {}
+    releases: dict[str, tuple[str, str]] = {}
     for body in pages(limit=1 if inspect else None):
         included = {i["id"]: i for i in body.get("included", [])}
         for node in body.get("data", []):
@@ -118,10 +120,14 @@ def main() -> int:
                 continue
             rel = node.get("relationships", {})
             pdf = None
+            released = release_time(None, a)
             f = (rel.get("field_results_file") or {}).get("data")
             if f and f.get("id") in included:
                 uri = (included[f["id"]]["attributes"].get("uri") or {}).get("url")
                 pdf = f"https://www.boz.zm{uri}" if uri and uri.startswith("/") else uri
+                released = release_time(included[f["id"]]["attributes"], a)
+            if released:
+                releases[day] = min(releases.get(day, released), released)
             for ref in (rel.get("field_auction_results") or {}).get("data") or []:
                 p = included.get(ref["id"])
                 m = re.search(r"(\d+)_year", p["type"]) if p else None
@@ -171,6 +177,9 @@ def main() -> int:
         "compiled_by": "Afronomics (afronomicsfeed.com)",
         "rows": rows,
     }, ensure_ascii=False, indent=0), encoding="utf-8")
+    for day, released in releases.items():
+        if any(r["auction_date"] == day for r in rows):
+            hint("bonds", "zambia", day, *released)
     auctions = len({r["tender"] for r in rows})
     print(f"wrote {len(rows)} tenor results from {auctions} Zambia bond auctions; latest {rows[0]['auction_date']}")
     return 0

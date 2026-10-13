@@ -2,10 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { SectionTitle } from "@/components/data/parts";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
-import { BOARD, BOARD_UPDATED, CONTACTED, DECISIONS, type Status } from "@/lib/strategy/board";
+import { BOARD, BOARD_UPDATED, CONTACTED, type Status } from "@/lib/strategy/board";
 
 /**
- * The rest of the founder's command centre: model vs reality, the moat, the status board and decisions waiting.
+ * The rest of the founder's command centre: model vs reality, the moat and the status board (decisions waiting are
+ * in the desk's Decisions panel, lib/desk/reference.ts).
  * Model figures are assumptions from scripts/financial_model.py (data/strategy/model.json), shown beside what was
  * actually collected and never mixed with it.
  */
@@ -109,15 +110,6 @@ export function StrategyBoard({
             </div>
           ))}
         </div>
-        <p className="mt-6 text-[13px] font-semibold text-ink">Decisions waiting on you</p>
-        <ol className="mt-2 list-decimal space-y-2 pl-5 text-sm text-ink-soft">
-          {DECISIONS.map((x) => (
-            <li key={x.ask}>
-              <span className="text-ink">{x.ask}</span>
-              <span className="block text-[12px] text-muted">{x.why}</span>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
   );

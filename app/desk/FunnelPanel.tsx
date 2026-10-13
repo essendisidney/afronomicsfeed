@@ -1,11 +1,10 @@
 import { SectionTitle } from "@/components/data/parts";
 import { moneyLabel } from "@/lib/billing/plans";
-import type { Deal, PilotKey } from "./CommandCentre";
+import type { PilotKey } from "./CommandCentre";
 
 /**
  * How visitors become paying institutions, from real counts only (af_desk_funnel, migration 0034): no estimate or
- * model figure is shown here. Deals by stage and follow-ups come from the deal log the desk already reads, so they
- * show even before the migration is applied.
+ * model figure is shown here. Deals, follow-ups and key usage moved to the pipeline board and the pilots panel.
  */
 
 type Window = {
@@ -33,8 +32,6 @@ export type Funnel = {
   survey_notes: { when: string; question: string; answer: string; path: string; note: string }[];
 };
 
-const STAGES = ["prospect", "contacted", "qualified", "pilot", "proposal", "won", "lost"] as const;
-const PILOT_DAYS = 30;
 const DAY = 86400000;
 const n = (v: number | undefined) => (v ?? 0).toLocaleString("en-US");
 
@@ -70,7 +67,7 @@ function when(iso: string | null, now: number) {
   return d <= 0 ? "today" : d === 1 ? "yesterday" : `${d} d ago`;
 }
 
-export function FunnelPanel({ funnel, deals, keys, now }: { funnel: Funnel | null; deals: Deal[]; keys: PilotKey[]; now: number }) {
+export function FunnelPanel({ funnel, now }: { funnel: Funnel | null; now: number }) {
   const w7 = funnel?.windows.find((w) => w.days === 7);
   const w30 = funnel?.windows.find((w) => w.days === 30);
   const steps: { label: string; note: string; get: (w: Window) => string }[] = [
@@ -86,14 +83,6 @@ export function FunnelPanel({ funnel, deals, keys, now }: { funnel: Funnel | nul
       get: (w) => (w.payments ? `${w.payments} · ${w.paid.map((p) => moneyLabel(p.amount, p.currency)).join(" + ")}` : "0"),
     },
   ];
-
-  const open = deals.filter((d) => d.stage !== "won" && d.stage !== "lost");
-  const followUps = open.filter((d) => d.next_date).sort((a, b) => (a.next_date ?? "").localeCompare(b.next_date ?? "")).slice(0, 15);
-  const noFollowUp = open.filter((d) => !d.next_date).length;
-  const today = new Date(now).toISOString().slice(0, 10);
-
-  const rows: FunnelKey[] = funnel?.keys ?? keys.map((k) => ({ ...k, calls_7d: NaN, last_day: null, paths_30d: [] }));
-  const pilots = rows.filter((k) => !k.revoked_at).sort((a, b) => (a.plan === "trial" ? 0 : 1) - (b.plan === "trial" ? 0 : 1));
 
   return (
     <section className="mt-8 rounded-2xl border border-rule bg-surface px-5 py-5">
@@ -130,7 +119,7 @@ export function FunnelPanel({ funnel, deals, keys, now }: { funnel: Funnel | nul
         </p>
       )}
 
-      <div className="mt-6 grid gap-8 lg:grid-cols-2">
+      <div className="mt-6">
         <div>
           <p className="text-[13px] font-semibold text-ink">Moments that matter</p>
           {funnel && w7 && w30 ? (
@@ -157,78 +146,6 @@ export function FunnelPanel({ funnel, deals, keys, now }: { funnel: Funnel | nul
           )}
           <p className="mt-1 text-[11px] text-muted">New click counts start on the day migration 0034 is applied; a zero before then means not yet counted.</p>
         </div>
-        <div>
-          <p className="text-[13px] font-semibold text-ink">Deals by stage</p>
-          <div className="mt-2 flex flex-wrap gap-2 text-[13px]">
-            {STAGES.map((s) => (
-              <span key={s} className="rounded-full border border-rule px-3 py-1">
-                {s === "won" ? "won (signed)" : s} <strong>{deals.filter((d) => d.stage === s).length}</strong>
-              </span>
-            ))}
-          </div>
-          <p className="mt-4 text-[13px] font-semibold text-ink">Next follow-ups</p>
-          {followUps.length ? (
-            <ul className="mt-2 divide-y divide-rule text-sm">
-              {followUps.map((d) => (
-                <li key={d.id} className="flex flex-wrap items-baseline gap-x-3 py-1.5">
-                  <span className={`font-mono text-[12px] ${d.next_date! < today ? "text-down" : d.next_date === today ? "text-accent" : "text-muted"}`}>{d.next_date}</span>
-                  <span className="font-semibold text-ink">{d.organisation}</span>
-                  <span className="text-[12px] text-muted">
-                    {d.stage}
-                    {d.next_step ? ` · ${d.next_step}` : ""}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="mt-2 text-sm text-muted">No follow-up dates set.</p>
-          )}
-          {noFollowUp ? <p className="mt-2 text-[12px] text-muted">{noFollowUp} open deal{noFollowUp === 1 ? " has" : "s have"} no follow-up date.</p> : null}
-        </div>
-      </div>
-
-      <div className="mt-6">
-        <p className="text-[13px] font-semibold text-ink">Who is using a key, and when to ask for payment</p>
-        {pilots.length ? (
-          <div className="mt-2 overflow-x-auto">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Organisation (key label)</th>
-                  <th>Plan</th>
-                  <th>Key created</th>
-                  <th className="text-right">Calls, 7 d</th>
-                  <th className="text-right">Calls, 30 d</th>
-                  <th>Last call</th>
-                  <th>Markets queried, 30 d</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pilots.map((k) => {
-                  const age = Math.floor((now - Date.parse(k.created_at)) / DAY);
-                  const day = k.plan === "trial" ? `pilot day ${Math.min(age + 1, 99)} of ${PILOT_DAYS}` : "";
-                  return (
-                    <tr key={k.id}>
-                      <td className="text-sm text-ink">{k.label}</td>
-                      <td className="text-xs">
-                        {k.plan}
-                        {day ? <span className={`block ${age + 1 >= PILOT_DAYS - 7 ? "text-down" : "text-muted"}`}>{day}</span> : null}
-                      </td>
-                      <td className="text-xs text-muted">{k.created_at.slice(0, 10)}</td>
-                      <td className="text-right text-xs">{Number.isNaN(k.calls_7d) ? "—" : n(k.calls_7d)}</td>
-                      <td className="text-right text-xs">{n(k.calls_30d)}</td>
-                      <td className="text-xs text-muted">{when(k.last_used_at ?? k.last_day, now)}</td>
-                      <td className="text-xs text-muted">{k.paths_30d.length ? marketsOf(k.paths_30d).join(", ") : funnel ? "none" : "—"}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <p className="mt-2 text-sm text-muted">No keys issued yet, so no pilot usage to show. Issue a key with plan “trial” in “API keys” below when an institution starts a pilot.</p>
-        )}
-        <p className="mt-1 text-[11px] text-muted">Pilot day turns red in the last week of a {PILOT_DAYS}-day pilot: the time to ask for payment. Calls are counted only for keyed requests.</p>
       </div>
 
       <div className="mt-6">

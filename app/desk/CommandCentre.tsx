@@ -1,6 +1,5 @@
 import { SectionTitle } from "@/components/data/parts";
 import type { Money } from "./MoneyPanel";
-import { SaveDeal } from "./DeskActions";
 
 /**
  * The founder command centre: progress toward USD 1 million a month (docs/strategy/usd-1m-plan.md). Four numbers
@@ -98,7 +97,7 @@ export function CommandCentre({ money, deals, pilots, perUsd, fxNote }: { money:
         <p className="text-[11px] text-muted">Progress is the higher of this month’s and last month’s collected revenue, against a month’s target.</p>
       </div>
 
-      <div className="mt-6 grid gap-8 lg:grid-cols-2">
+      <div className="mt-6 max-w-xl">
         <div>
           <p className="text-[13px] font-semibold text-ink">Pipeline by stage</p>
           <table className="data-table mt-2">
@@ -119,47 +118,6 @@ export function CommandCentre({ money, deals, pilots, perUsd, fxNote }: { money:
               ))}
             </tbody>
           </table>
-        </div>
-        <div>
-          <p className="text-[13px] font-semibold text-ink">Pilots (trial API keys)</p>
-          {activePilots.length ? (
-            <ul className="mt-2 divide-y divide-rule text-sm">
-              {activePilots.map((k) => (
-                <li key={k.id} className="flex justify-between gap-3 py-2">
-                  <span className="text-ink">{k.label}</span>
-                  <span className="text-[12px] text-muted">{k.calls_30d.toLocaleString("en-US")} calls in 30 days</span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="mt-2 text-sm text-muted">No pilots yet. Issue a key with plan “trial” below when an institution starts one.</p>
-          )}
-        </div>
-      </div>
-
-      <div className="mt-6">
-        <p className="text-[13px] font-semibold text-ink">Deals</p>
-        {deals.length ? (
-          <ul className="mt-2 divide-y divide-rule text-sm">
-            {deals.slice(0, 25).map((d) => (
-              <li key={d.id} className="flex flex-wrap items-baseline gap-x-3 py-2">
-                <span className="text-[12px] text-muted">#{d.id}</span>
-                <span className="font-semibold text-ink">{d.organisation}</span>
-                <span className="text-ink-soft">{d.stage}</span>
-                <span className="text-[12px] text-muted">
-                  {d.product.replace(/_/g, " ")} · {d.segment.replace(/_/g, " ")}
-                  {d.value_usd_month ? ` · est. ${usd(d.value_usd_month)}/mo` : ""}
-                  {d.signed_at ? ` · signed ${d.signed_at}` : ""}
-                  {d.next_step ? ` · next: ${d.next_step}${d.next_date ? ` (${d.next_date})` : ""}` : ""}
-                </span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-2 text-sm text-muted">No deals logged yet.</p>
-        )}
-        <div className="mt-4">
-          <SaveDeal />
         </div>
       </div>
     </section>

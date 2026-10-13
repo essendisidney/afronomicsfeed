@@ -62,7 +62,10 @@ where status = 'success' and paid_at > now() - interval '1 day';
 select question, answer, count(*) from survey_answers where created_at > now() - interval '7 days' group by 1, 2 order by 1, 3 desc;
 ```
 
-Then open `/desk` and check the command centre, the funnel panel and "Is the data fresh?" match what you read.
+Then open `/desk` and check that "Needs you today", the pipeline board, the inbox, "Pilots and keys" and "Data
+health" match what you read (the command centre and the funnel are under Reference; see `docs/desk-redesign.md`).
+Once migration 0040 is applied, mark each inbox item you have dealt with as handled, so the founder sees only what is
+left.
 
 ## 2. Read Gmail
 

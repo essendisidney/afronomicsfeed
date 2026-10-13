@@ -328,9 +328,9 @@
    "area": "T-bill auctions",
    "name": "South Africa",
    "status": "ok",
-   "detail": "latest auction 05 Oct (auctions weekly)",
-   "latest": "2026-10-05",
-   "due_by": "2026-10-16",
+   "detail": "latest auction 12 Oct (auctions weekly)",
+   "latest": "2026-10-12",
+   "due_by": "2026-10-23",
    "link": "/markets/tbills/southafrica"
   },
   {

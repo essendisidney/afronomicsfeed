@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FullHistoryLink } from "@/components/data/FullHistoryLink";
 import { AlertButton } from "@/components/ui/AlertButton";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { notFound, redirect } from "next/navigation";
@@ -73,12 +74,17 @@ export default async function BillMarketPage({ params }: Props) {
       }
       aside={
         rows.length ? (
-          <a href={`/api/data/tbills/${market.slug}`} download className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
-            <p className="text-[13px] font-medium opacity-80">Download</p>
-            <p className="mt-1 font-serif text-2xl">CSV download</p>
-            <p className="text-[12px] opacity-80">Latest 12 months free; full history with a key</p>
-            <p className="text-[12px] opacity-80">Source: {market.publisher}</p>
-          </a>
+          <>
+            <a href={`/api/data/tbills/${market.slug}`} download className="block rounded-2xl bg-ink px-5 py-5 text-paper hover:bg-forest">
+              <p className="text-[13px] font-medium opacity-80">Download</p>
+              <p className="mt-1 font-serif text-2xl">CSV download</p>
+              <p className="text-[12px] opacity-80">Latest 12 months free; full history with a key</p>
+              <p className="text-[12px] opacity-80">Source: {market.publisher}</p>
+            </a>
+            <p className="mt-2 px-1 text-[13px] font-medium">
+              <FullHistoryLink csv={`/api/data/tbills/${market.slug}`} />
+            </p>
+          </>
         ) : null
       }
     >

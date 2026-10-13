@@ -57,9 +57,13 @@ export const institutionalLadder: readonly InstitutionalTier[] = [
     name: "Analyst",
     monthlyUsd: 250,
     from: false,
-    summary: "one user: the web tables and full-history downloads",
+    summary: "one user: the web tables and full-history CSV downloads, with a download key",
     audience: "One analyst or economist who needs the auction record at their desk.",
-    includes: ["One user", "Web tables for every covered market", "Full-history downloads"],
+    includes: [
+      "One user",
+      "Web tables for every covered market",
+      "Full-history CSV downloads in your browser: a download key, issued at checkout, signs you in at /downloads (CSV only, no API)",
+    ],
   },
   {
     id: "team",
@@ -228,7 +232,7 @@ export const rateCard: RateGroup[] = [
     items: [
       { id: "api", name: "Open API", amount: 0, currency: "KES", unit: "", what: "Every auction dataset, the measures and the index as JSON and CSV, no key: the latest 12 months, up to 100 rows a call, with attribution. Research, journalism, teaching and non-commercial apps; full history and any commercial use, including internal use at a fund, bank or firm, need a key.", href: "/developers" },
       { id: "licence_startup", name: "Startup licence", amount: 7500, currency: "KES", unit: "a month", what: "Commercial use inside one product of a startup: an API key with the full history, charts and figures shown to your own users with attribution, an email or webhook on every new result, and a named contact. No redistribution: passing the data, files or feeds on to others is Enterprise only.", checkout: "licence_startup", href: "/licensing" },
-      { id: "licence_institution", name: institutionalTier("analyst").name, amount: institutionalTier("analyst").monthlyUsd, currency: "USD", unit: "a month per user", what: "One user: the web tables and full-history downloads for every covered market. Priced in dollars.", checkout: "analyst", enquiry: "licensing", href: "/data/frontier-local-debt" },
+      { id: "licence_institution", name: institutionalTier("analyst").name, amount: institutionalTier("analyst").monthlyUsd, currency: "USD", unit: "a month per user", what: "One user: the web tables and full-history CSV downloads for every covered market, with a download key issued at checkout and used in the browser at /downloads (no API). Priced in dollars.", checkout: "analyst", enquiry: "licensing", href: "/data/frontier-local-debt" },
       { id: "data_api", name: "Afronomics Data API", amount: institutionalTier("team").monthlyUsd, currency: "USD", unit: "a month", what: "A keyed feed for production systems: government bond auctions across the covered markets and every Treasury bill auction in ten markets, with full history, policy rates, Eurobond yields and the bill index, uncached responses, usage reporting per key, Treasury-bill result alerts and a named contact. Priced in dollars.", checkout: "data_team", enquiry: "licensing", href: "/data-api" },
       { id: "enterprise", name: "Enterprise and redistribution", amount: institutionalTier("enterprise").monthlyUsd, currency: "USD", unit: "a month, from", what: "Redistribution to your own clients, several teams and keys, custom datasets and delivery (SFTP, Excel, Google Sheets), and a service agreement. Priced by scope from $5,000 a month.", enquiry: "licensing", href: "/data-api" },
       { id: "widget", name: "Branded live-rates widget", amount: 40000, currency: "KES", unit: "a month", what: "Our live T-bill, bond or FX widget on your site with your branding and no Afronomics link, updated the moment each result lands. The free widgets are the demo.", checkout: "widget", href: "/widgets" },

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FullHistoryLink } from "@/components/data/FullHistoryLink";
 import { fmtBpsSigned, fmtCover, fmtMillions, fmtRate, shortDate, type Compared, type MarketWeek } from "@/lib/data/auction-week";
 
 const KENYA_BONDS_CSV = "/api/data/kenya-bonds";
@@ -162,15 +163,19 @@ export function MarketWeekCard({ market }: { market: MarketWeek }) {
             <a href={`/api/data/tbills/${meta.billSlug}`} className={link}>
               Bills CSV
             </a>
+            <FullHistoryLink csv={`/api/data/tbills/${meta.billSlug}`} className={link} />
             <a href={`/api/v1/tbills/${meta.billSlug}`} className={link}>
               Bills API
             </a>
           </>
         ) : null}
         {hasBond && meta.bondSlug === "kenya" ? (
-          <a href={KENYA_BONDS_CSV} className={link}>
-            Bonds CSV
-          </a>
+          <>
+            <a href={KENYA_BONDS_CSV} className={link}>
+              Bonds CSV
+            </a>
+            <FullHistoryLink csv={KENYA_BONDS_CSV} className={link} />
+          </>
         ) : null}
         {hasBond && meta.bondSlug ? (
           <a href={`/api/v1/bonds/${meta.bondSlug}${issueQuery}`} className={link}>

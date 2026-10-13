@@ -168,6 +168,14 @@ export default function DevelopersPage() {
             history and up to 5,000 rows a call; a CSV file with a key is the whole file. Keyed calls are served fresh and counted per key.
           </li>
           <li>
+            In a browser, where a link cannot send a header, sign in once at{" "}
+            <Link href="/downloads" className="underline underline-offset-2">
+              /downloads
+            </Link>{" "}
+            with your key: for 12 hours the site&apos;s CSV links give the full history, counted against the key. The key never goes into a link. Analyst keys
+            work for CSV files only, not the JSON API.
+          </li>
+          <li>
             A key that is unknown, revoked or expired is not an error: the call gets the free tier, with{" "}
             <code className="text-[13px]">&quot;key_status&quot;: &quot;not_recognised&quot;</code> and the header{" "}
             <code className="text-[13px]">X-Afronomics-Key: not-recognised</code>.

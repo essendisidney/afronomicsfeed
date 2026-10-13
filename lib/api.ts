@@ -1,5 +1,6 @@
 import { after } from "next/server";
 import { isCrawlerOrOwnJob } from "@/lib/bots";
+import { checkSession, sessionToken, verifySession } from "@/lib/downloads";
 import { rpc } from "@/lib/store";
 import { site } from "@/lib/site";
 
@@ -13,7 +14,8 @@ import { site } from "@/lib/site";
  * `X-Afronomics-Free-Tier: true` header (CSV: `#` comment lines at the top).
  *
  * The site's own pages and embeds read the data through lib/data loaders, not through this API, so none of this
- * changes what readers see on afronomicsfeed.com.
+ * changes what readers see on afronomicsfeed.com. In a browser, where a link cannot send a header, a key holder signs
+ * in once on /downloads and the CSV routes accept that session as the key (lib/downloads.ts).
  */
 export const FREE_MONTHS = 12;
 export const FREE_ROWS = 100;
@@ -32,24 +34,52 @@ function keyOf(request: Request) {
   return /^afk_[0-9a-f]{48}$/.test(key) ? key : key ? "invalid" : "";
 }
 
-/** none: no key sent. valid: a live key (plan set). not_recognised: a key was sent but is unknown, revoked, expired or could not be checked. */
-export type ApiAccess = { plan: string | null; key: "none" | "valid" | "not_recognised" };
+export const DOWNLOADS_URL = `${site.url}/downloads`;
+
+/**
+ * none: no key sent. valid: a live key (plan set). not_recognised: a key was sent but is unknown, revoked, expired or
+ * could not be checked. downloads_only: an Analyst key on the JSON API (Analyst covers full-history CSV downloads,
+ * not the API). session_expired: a browser download session (lib/downloads.ts) that is expired or not valid.
+ * `personal`: the request is tied to one visitor (a download session cookie or ?full=1), so it is never cached.
+ */
+export type ApiAccess = {
+  plan: string | null;
+  key: "none" | "valid" | "not_recognised" | "downloads_only" | "session_expired";
+  via?: "header" | "session";
+  personal?: boolean;
+};
 
 const checked = new WeakMap<Request, Promise<ApiAccess>>();
 
+/** Plans whose keys unlock CSV downloads only, not the JSON API. */
+const DOWNLOAD_ONLY_PLANS = new Set(["analyst"]);
+
 /**
  * Check the request's key once (memoised per request, so a route and apiJson can both ask without counting twice).
- * A valid key is counted in data_key_usage by af_api_key_use, as before.
+ * A valid key is counted in data_key_usage by af_api_key_use, as before. With `csv` (the /api/data CSV routes), a
+ * browser download session from /downloads counts as a valid key when no header key is sent; it is checked against
+ * the key's live state and counted per key too (lib/downloads.ts).
  */
-export function apiAccess(request: Request, path: string): Promise<ApiAccess> {
+export function apiAccess(request: Request, path: string, opts: { csv?: boolean } = {}): Promise<ApiAccess> {
   let access = checked.get(request);
   if (!access) {
     access = (async (): Promise<ApiAccess> => {
       const key = keyOf(request);
-      if (!key) return { plan: null, key: "none" };
-      const result = key === "invalid" ? null : await rpc("af_api_key_use", { p_secret: process.env.AF_CRON_SECRET ?? "", p_key: key, p_path: path });
-      const plan = result?.ok ? ((result.value as string | null) ?? null) : null;
-      return plan ? { plan, key: "valid" } : { plan: null, key: "not_recognised" };
+      const token = opts.csv ? sessionToken(request) : null;
+      const personal = Boolean(opts.csv && (token || new URL(request.url).searchParams.has("full")));
+      if (key) {
+        const result = key === "invalid" ? null : await rpc("af_api_key_use", { p_secret: process.env.AF_CRON_SECRET ?? "", p_key: key, p_path: path });
+        const plan = result?.ok ? ((result.value as string | null) ?? null) : null;
+        if (plan && DOWNLOAD_ONLY_PLANS.has(plan) && !opts.csv) return { plan: null, key: "downloads_only", via: "header", personal };
+        return plan ? { plan, key: "valid", via: "header", personal } : { plan: null, key: "not_recognised", via: "header", personal };
+      }
+      if (token) {
+        const session = verifySession(token);
+        if (!session) return { plan: null, key: "session_expired", via: "session", personal };
+        const plan = await checkSession(session, path);
+        return plan ? { plan, key: "valid", via: "session", personal } : { plan: null, key: "not_recognised", via: "session", personal };
+      }
+      return { plan: null, key: "none", personal };
     })();
     checked.set(request, access);
   }
@@ -151,6 +181,18 @@ function freeNote(free: FreeTier) {
 
 const KEY_NOT_RECOGNISED =
   "API key not recognised (unknown, revoked or expired), so this is the free tier. Check the key, or ask the desk for a new one: " + UPGRADE_URL;
+const SESSION_KEY_NOT_RECOGNISED =
+  "The key behind your download session is no longer valid (revoked or expired), so this is the free tier. Ask the desk for a new key: " + UPGRADE_URL;
+const SESSION_EXPIRED = `Your full-history download session has ended, so this is the free tier. Sign in again with your key: ${DOWNLOADS_URL}`;
+const DOWNLOADS_ONLY = `This is an Analyst key: it unlocks full-history CSV downloads (/api/data/..., or in a browser at ${DOWNLOADS_URL}), not the JSON API, so this is the free tier. The API is in Team and API: ${UPGRADE_URL}`;
+
+/** The one-line notice for a key or session that did not unlock full access, or null. */
+function keyNote(access: ApiAccess) {
+  if (access.key === "not_recognised") return access.via === "session" ? SESSION_KEY_NOT_RECOGNISED : KEY_NOT_RECOGNISED;
+  if (access.key === "session_expired") return SESSION_EXPIRED;
+  if (access.key === "downloads_only") return DOWNLOADS_ONLY;
+  return null;
+}
 
 /** The JSON fields that describe a free (or unrecognised-key) response. Empty for a valid key (free is null then). */
 export function freeFields(free: FreeTier | null) {
@@ -166,15 +208,25 @@ export function freeFields(free: FreeTier | null) {
 }
 
 /** Headers shared by JSON and CSV responses for this access level. */
+const KEY_HEADER: Partial<Record<ApiAccess["key"], string>> = {
+  not_recognised: "not-recognised",
+  session_expired: "session-expired",
+  downloads_only: "downloads-only",
+};
+
 function accessHeaders(access: ApiAccess, free: FreeTier | null): Record<string, string> {
+  const keyHeader = KEY_HEADER[access.key];
   return {
-    Vary: "Authorization, X-API-Key",
+    Vary: access.via === "session" || access.personal ? "Authorization, X-API-Key, Cookie" : "Authorization, X-API-Key",
     ...(access.plan
       ? { "X-Afronomics-Plan": access.plan, "Cache-Control": "private, no-store" }
       : {
           "X-Afronomics-Free-Tier": "true",
           ...(free?.truncated ? { "X-Afronomics-Truncated": "true" } : {}),
-          ...(access.key === "not_recognised" ? { "X-Afronomics-Key": "not-recognised", "Cache-Control": "no-store" } : {}),
+          ...(keyHeader ? { "X-Afronomics-Key": keyHeader, "Cache-Control": "no-store" } : {}),
+          // A visitor's own download (session cookie or ?full=1) is never stored by the CDN, so a key holder is never
+          // served a cached free file under the full-history URL, and nobody is served a holder's file.
+          ...(access.personal ? { "Cache-Control": "private, no-store" } : {}),
         }),
   };
 }
@@ -201,7 +253,7 @@ export async function apiJson(request: Request, path: string, data: unknown, sta
       {
         ...(data as object),
         ...(status < 400 ? freeFields(free) : {}),
-        ...(access.key === "not_recognised" ? { key_status: "not_recognised", key_note: KEY_NOT_RECOGNISED } : {}),
+        ...(keyNote(access) ? { key_status: access.key, key_note: keyNote(access) } : {}),
         attribution: `Source: Afronomics (${site.url.replace("https://", "")}), compiled from central-bank publications. Credit Afronomics with a link.`,
         licence: access.plan ? `Licensed under your ${access.plan} plan. Terms: ${TERMS_URL}` : `${LICENCE_LINE} Terms: ${TERMS_URL}`,
       },
@@ -226,7 +278,7 @@ export function apiCsv(body: string, filename: string, access: ApiAccess, free: 
   const lines = access.plan
     ? [`# Licensed under your ${access.plan} plan. Terms: ${TERMS_URL}`]
     : [
-        ...(access.key === "not_recognised" ? [`# ${KEY_NOT_RECOGNISED}`] : []),
+        ...(keyNote(access) ? [`# ${keyNote(access)}`] : []),
         ...(free ? [`# ${freeNote(free)}`, `# truncated: ${free.truncated}${free.truncated ? `; upgrade: ${UPGRADE_URL}` : ""}`] : []),
         ...(free?.next ? [`# Next page (older rows inside the free window): ${free.next}`] : []),
         `# Licence: ${LICENCE_LINE} Terms: ${TERMS_URL}`,

@@ -5,6 +5,15 @@ import { rpc } from "@/lib/store";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const DEAL_STAGES = new Set(["prospect", "contacted", "qualified", "pilot", "proposal", "won", "lost"]);
+
+/** Append a line to deal notes, dropping the oldest lines so the total stays within the column's 4,000 characters. */
+function appendNote(existing: string | null, line: string) {
+  const lines = [...(existing ?? "").split("\n").filter((x) => x.trim()), line];
+  while (lines.join("\n").length > 4000 && lines.length > 1) lines.shift();
+  return lines.join("\n").slice(-4000);
+}
+
 /** Desk actions, authorised by the af_desk cookie (the shared secret), which the database re-checks on every call. */
 export async function POST(request: Request) {
   if (!sameOrigin(request)) return Response.json({ ok: false, reason: "Cross-site request refused." }, { status: 403 });
@@ -32,6 +41,34 @@ export async function POST(request: Request) {
       p_secret: key, p_id: id, p_organisation: s("organisation", 160), p_segment: s("segment", 20), p_product: s("product", 20), p_stage: s("stage", 20),
       p_value_usd_month: num("value"), p_source: s("source", 200), p_next_step: s("next_step", 500), p_next_date: date("next_date"), p_notes: s("notes", 4000), p_signed_at: date("signed_at"),
     });
+  } else if (b.action === "deal_quick") {
+    // One-click stage change, next step and date, and a dated note appended to the deal's notes (af_deal_save keeps
+    // every field passed as null). Nothing from the request is logged.
+    const id = Number(s("id", 20));
+    if (!Number.isInteger(id) || id <= 0) return Response.json({ ok: false, reason: "No deal number." }, { status: 400 });
+    const stage = s("stage", 20);
+    if (stage && !DEAL_STAGES.has(stage)) return Response.json({ ok: false, reason: "Unknown stage." }, { status: 400 });
+    const date = (k: string) => (/^\d{4}-\d{2}-\d{2}$/.test(s(k, 10) ?? "") ? s(k, 10) : null);
+    if (stage === "won" && !date("signed_at")) return Response.json({ ok: false, reason: "“Won” needs the date the agreement was signed." }, { status: 400 });
+    const note = s("note", 300);
+    let notes: string | null = null;
+    if (note) {
+      const list = await rpc("af_deals_list", { p_secret: key });
+      if (!list.ok || !Array.isArray(list.value)) return Response.json({ ok: false, reason: "Could not read the deal." }, { status: 502 });
+      const deal = (list.value as { id: number; notes: string | null }[]).find((d) => d.id === id);
+      if (!deal) return Response.json({ ok: false, reason: "No such deal." }, { status: 404 });
+      notes = appendNote(deal.notes, `${new Date().toISOString().slice(0, 10)} desk: ${note.replace(/\s+/g, " ")}`);
+    }
+    result = await rpc("af_deal_save", {
+      p_secret: key, p_id: id, p_organisation: null, p_segment: null, p_product: null, p_stage: stage, p_value_usd_month: null, p_source: null,
+      p_next_step: s("next_step", 500), p_next_date: date("next_date"), p_notes: notes, p_signed_at: date("signed_at"),
+    });
+  } else if (b.action === "inbox_handle") {
+    const kind = s("kind", 20);
+    const id = Number(s("id", 20));
+    if (!kind || !["lead", "survey", "feedback"].includes(kind) || !Number.isInteger(id) || id <= 0) return Response.json({ ok: false, reason: "Bad item." }, { status: 400 });
+    result = await rpc("af_desk_handle", { p_secret: key, p_kind: kind, p_id: id, p_undo: b.undo === "1" });
+    if (!result.ok && /PGRST202|404/.test(result.reason)) return Response.json({ ok: false, reason: "Needs migration 0040." }, { status: 501 });
   } else if (b.action === "api_key_revoke") result = await rpc("af_api_key_revoke", { p_secret: key, p_id: Number(s("id", 20)) || 0 });
   else return Response.json({ ok: false, reason: "Unknown action." }, { status: 400 });
   if (!result.ok) return Response.json({ ok: false, reason: result.reason }, { status: 502 });

@@ -1,7 +1,6 @@
 /**
- * The founder's status board on /desk: what is live, in build, parked or only an idea, and the decisions waiting on
- * the founder. Kept by hand (or by the weekly learning loop) in step with docs/strategy/decision-log.md, so the desk
- * never claims more than is true. A prototype is "build", never "live".
+ * The founder's status board on /desk: what is live, in build, parked or only an idea. Kept by hand (or by the
+ * weekly learning loop) in step with docs/strategy/decision-log.md, so the desk never claims more than is true. A prototype is "build", never "live".
  */
 
 export type Status = "live" | "build" | "parked" | "idea";
@@ -35,11 +34,4 @@ export const BOARD: BoardItem[] = [
   { name: "Licensable auction-yield index", status: "idea", note: "Enterprise and index licensing; part of the path beyond the debt wedge" },
 ];
 
-export const DECISIONS: { ask: string; why: string }[] = [
-  { ask: "Send the Ninety One draft in Gmail (automatic send was blocked)", why: "A top-10 prospect; the D-004 test needs 25 qualified contacts by about 26 Oct (21 so far)" },
-  { ask: "Outreach route: automatic sending, or drafts that you send", why: "Sets how fast wave 2 goes out and who is accountable for each note" },
-  { ask: "Legal: Kenya CIS advertising rules (LN 173/2023), plus a standard data licence and pilot terms", why: "Before any paid fund listing and before the first paid licence" },
-  { ask: "Repository: keep public or make private", why: "The whole dataset can be copied from a public repo; private costs about USD 20–40 a month in automation" },
-  { ask: "Re-enable the weekly sprint, or keep it paused", why: "It ships code on its own; paused since 12 Oct (D-005)" },
-  { ask: "Raise capital or not", why: "The debt wedge caps at about USD 2–3m a year; only the aggressive case (capital, a seller, a second dataset) passes USD 50k a month within 36 months" },
-];
+// Decisions waiting on the founder moved to lib/desk/reference.ts (F1–F11, A1–A4), shown in the desk's Decisions panel.

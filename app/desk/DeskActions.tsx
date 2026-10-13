@@ -1,16 +1,22 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
+/** Posts a desk action, then refreshes the server-rendered desk so the change shows without a reload. */
 function useAction() {
+  const router = useRouter();
   const [msg, setMsg] = useState<string | null>(null);
   async function run(action: string, form: HTMLFormElement) {
     const payload = Object.fromEntries([...new FormData(form).entries()].map(([k, v]) => [k, String(v)]));
     setMsg("…");
-    const r = await fetch("/desk/actions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, ...payload }) });
-    const body = (await r.json()) as { ok: boolean; reason?: string };
-    setMsg(body.ok ? "Done. Refresh to see it." : body.reason ?? "Failed.");
-    if (body.ok) form.reset();
+    const r = await fetch("/desk/actions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, ...payload }) }).catch(() => null);
+    const body = r ? ((await r.json().catch(() => ({ ok: false }))) as { ok: boolean; reason?: string }) : { ok: false, reason: "No connection." };
+    setMsg(body.ok ? "Saved." : body.reason ?? "Failed.");
+    if (body.ok) {
+      form.reset();
+      router.refresh();
+    }
   }
   return { msg, run };
 }
@@ -125,6 +131,7 @@ export function HideReport({ id }: { id: number }) {
 
 /** Issue a Data API key for a licensed customer. The key is shown once, here; only its hash is kept. */
 export function IssueApiKey() {
+  const router = useRouter();
   const [state, setState] = useState<{ msg?: string; key?: string } | null>(null);
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -134,7 +141,10 @@ export function IssueApiKey() {
     const r = await fetch("/desk/actions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "api_key_create", ...payload }) });
     const body = (await r.json()) as { ok: boolean; reason?: string; value?: { key: string } };
     setState(body.ok && body.value ? { key: body.value.key } : { msg: body.reason ?? "Failed." });
-    if (body.ok) form.reset();
+    if (body.ok) {
+      form.reset();
+      router.refresh();
+    }
   }
   return (
     <form onSubmit={submit} className="grid gap-3 sm:grid-cols-3">
@@ -260,6 +270,98 @@ export function SaveDeal() {
         </button>
         {msg ? <span className="text-[12px] text-muted">{msg}</span> : null}
       </div>
+    </form>
+  );
+}
+
+const NEXT_STAGE: Record<string, string> = { prospect: "contacted", contacted: "qualified", qualified: "pilot", pilot: "proposal" };
+
+/** One click: move a deal to the next stage (prospect → contacted → qualified → pilot → proposal). */
+export function DealMove({ id, stage }: { id: number; stage: string }) {
+  const { msg, run } = useAction();
+  const next = NEXT_STAGE[stage];
+  if (!next) return null;
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    void run("deal_quick", e.currentTarget);
+  }
+  return (
+    <form onSubmit={submit} className="inline">
+      <input type="hidden" name="id" value={id} />
+      <input type="hidden" name="stage" value={next} />
+      <button type="submit" className="min-h-9 rounded-full border border-rule px-3 text-[12px] font-semibold text-forest hover:border-accent">
+        {msg ?? `→ ${next}`}
+      </button>
+    </form>
+  );
+}
+
+/** Change stage, next step and date, and add a dated note line, for one deal. Blank fields keep their value. */
+export function DealEdit({ id, stage }: { id: number; stage: string }) {
+  const { msg, run } = useAction();
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    void run("deal_quick", e.currentTarget);
+  }
+  return (
+    <details className="group open:w-full">
+      <summary className="inline-flex min-h-9 cursor-pointer list-none items-center text-[12px] font-semibold text-muted underline underline-offset-2 hover:text-ink">Edit · note</summary>
+      <form onSubmit={submit} className="mt-2 grid gap-2">
+        <input type="hidden" name="id" value={id} />
+        <label className="block">
+          <span className={label}>Stage</span>
+          <select name="stage" className={field} defaultValue={stage}>
+            {STAGES.map((o) => (
+              <option key={o} value={o}>
+                {o}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="block">
+          <span className={label}>Next step</span>
+          <input name="next_step" className={field} maxLength={500} />
+        </label>
+        <div className="grid grid-cols-2 gap-2">
+          <label className="block">
+            <span className={label}>Next date</span>
+            <input name="next_date" type="date" className={field} />
+          </label>
+          <label className="block">
+            <span className={label}>Signed (for won)</span>
+            <input name="signed_at" type="date" className={field} />
+          </label>
+        </div>
+        <label className="block">
+          <span className={label}>Add a note (dated, appended)</span>
+          <input name="note" className={field} maxLength={300} placeholder="Call held; sending proposal" />
+        </label>
+        <div className="flex items-center gap-3">
+          <button type="submit" className={btn}>
+            Save
+          </button>
+          {msg ? <span className="text-[12px] text-muted">{msg}</span> : null}
+        </div>
+      </form>
+    </details>
+  );
+}
+
+/** Mark an inbox item handled, or bring it back. */
+export function MarkHandled({ kind, id, undo = false }: { kind: string; id: number; undo?: boolean }) {
+  const { msg, run } = useAction();
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    void run("inbox_handle", e.currentTarget);
+  }
+  return (
+    <form onSubmit={submit} className="inline">
+      <input type="hidden" name="kind" value={kind} />
+      <input type="hidden" name="id" value={id} />
+      {undo ? <input type="hidden" name="undo" value="1" /> : null}
+      <button type="submit" className="min-h-9 rounded-full border border-rule px-3 text-[12px] font-semibold text-ink-soft hover:border-accent hover:text-forest">
+        {msg ?? (undo ? "bring back" : "mark handled")}
+      </button>
     </form>
   );
 }

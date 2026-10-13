@@ -1,3 +1,4 @@
+import { redactEmails } from "@/lib/security";
 import { createHash } from "node:crypto";
 import { loadLenders } from "@/lib/data/loan-apps";
 import { rpc } from "@/lib/store";
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
   const added = await rpc("af_loan_report_add", { p_secret: secret, p_lender: lender, p_borrowed: borrowed, p_repaid: repaid, p_days: days, p_shamed: shamed, p_voter: voter });
   const status = added.ok ? (added.value as string | null) : null;
   if (!status) {
-    console.log(`[loan-reports] add failed: ${added.ok ? "no result (secret mismatch?)" : added.reason}`);
+    console.log(`[loan-reports] add failed: ${added.ok ? "no result (secret mismatch?)" : redactEmails(added.reason)}`);
     return Response.json({ ok: false, reason: "That didn’t go through. Please try again." }, { status: 502 });
   }
   if (status === "limited") return Response.json({ ok: false, reason: "Too many reports right now. Please try again later." }, { status: 429 });

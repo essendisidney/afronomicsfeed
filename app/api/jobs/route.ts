@@ -8,18 +8,22 @@ export async function POST(request: Request) {
   if (!b) return Response.json({ ok: false, reason: "Bad request" }, { status: 400 });
   if (b.website) return Response.json({ ok: true, id: 0 }); // honeypot
   const str = (k: string, max: number) => (b[k] ?? "").toString().trim().slice(0, max) || null;
+  const applyUrl = str("apply_url", 500);
+  if (applyUrl && !/^(https?:\/\/\S+|[^@\s/:]+@[^@\s]+\.[^@\s]+)$/i.test(applyUrl)) {
+    return Response.json({ ok: false, reason: "Check the apply link: a web address starting https:// or an email address." }, { status: 400 });
+  }
   const result = await rpc("af_job_submit", {
     p_title: str("title", 120),
     p_institution: str("institution", 120),
     p_location: str("location", 80),
     p_role_type: str("role_type", 40),
     p_closes: /^\d{4}-\d{2}-\d{2}$/.test(b.closes ?? "") ? b.closes : null,
-    p_apply_url: str("apply_url", 500),
+    p_apply_url: applyUrl,
     p_description: str("description", 4000),
     p_email: str("email", 200)?.toLowerCase() ?? null,
   });
   if (!result.ok) {
-    const reason = /title|institution|email|length|limit/.exec(result.reason)?.[0];
+    const reason = /title|institution|email|length|limit|link/.exec(result.reason)?.[0];
     return Response.json({ ok: false, reason: reason ? `Check the ${reason === "limit" ? "number of submissions today" : reason}.` : "Could not save the listing." }, { status: 400 });
   }
   return Response.json({ ok: true, id: result.value });

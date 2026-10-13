@@ -1,3 +1,4 @@
+import { redactEmails } from "@/lib/security";
 import { createHash } from "node:crypto";
 import { parseReport } from "@/lib/reader-reports-core";
 import { rpc } from "@/lib/store";
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
   });
   const status = result.ok ? (result.value as string | null) : null;
   if (!status) {
-    console.log(`[reader-reports] add failed: ${result.ok ? "no result (secret mismatch?)" : result.reason}`);
+    console.log(`[reader-reports] add failed: ${result.ok ? "no result (secret mismatch?)" : redactEmails(result.reason)}`);
     return Response.json({ ok: false, reason: "That didn’t go through. Please try again." }, { status: 502 });
   }
   if (status === "limited") return Response.json({ ok: false, reason: "You’ve sent a lot today. Thank you — please try again tomorrow." }, { status: 429 });

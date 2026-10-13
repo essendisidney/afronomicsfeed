@@ -1,3 +1,4 @@
+import { bearerOk } from "@/lib/security";
 import { revalidatePath } from "next/cache";
 import { runArchive } from "@/lib/agents/archive";
 
@@ -12,7 +13,7 @@ export const dynamic = "force-dynamic";
 function authorized(request: Request) {
   const secret = process.env.CRON_SECRET;
   if (!secret) return true;
-  return request.headers.get("authorization") === `Bearer ${secret}`;
+  return bearerOk(request, secret);
 }
 
 /** Daily: archive FX and headlines, then refresh the data pages. */

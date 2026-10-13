@@ -1,3 +1,4 @@
+import { bearerOk, redactEmails } from "@/lib/security";
 import { paystackLive } from "@/lib/billing/paystack";
 import { loadTenders } from "@/lib/data/tenders";
 import { sendEmail } from "@/lib/mail";
@@ -24,7 +25,7 @@ const today = (ms: number) => nairobi(ms).toISOString().slice(0, 10);
  */
 export async function POST(request: Request) {
   const secret = process.env.AF_CRON_SECRET;
-  if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) return new Response("forbidden", { status: 403 });
+  if (!secret || !bearerOk(request, secret)) return new Response("forbidden", { status: 403 });
   const dry = new URL(request.url).searchParams.get("dry") === "1";
   const now = Date.now();
   const file = loadTenders();
@@ -66,7 +67,7 @@ export async function POST(request: Request) {
       const missed = matching.filter((t) => isNew(t, a.last_sent_at ?? `${a.trial_until}T00:00:00+03:00`)).length;
       const mail = tenderPaymentEmail({ keywords: a.keywords, token: a.token, pay: pay!, email: a.email, trialUntil: a.trial_until, missed });
       const r = await sendEmail(a.email, mail.subject, mail.html, mail.text, mail.unsubscribe);
-      if (!r.ok) failures.push(r.reason);
+      if (!r.ok) failures.push(redactEmails(r.reason));
       continue;
     }
 
@@ -90,7 +91,7 @@ export async function POST(request: Request) {
     const r = await sendEmail(a.email, mail.subject, mail.html, mail.text, mail.unsubscribe);
     if (r.ok) sent += 1;
     else {
-      failures.push(r.reason);
+      failures.push(redactEmails(r.reason));
       await mark(secret, a.id, stamp, a.last_sent_at); // hand it back to the next run
       if (r.reason.includes("RESEND_API_KEY")) break;
     }

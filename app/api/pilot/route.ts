@@ -1,6 +1,7 @@
 import { sendEmail } from "@/lib/mail";
 import { isWebmail, pilotMarkets, pilotNextOptions, type PilotResult } from "@/lib/billing/pilot";
 import { institutionalPilot, localInstitutionPrices } from "@/lib/billing/ratecard";
+import { emailDomain, redactEmails } from "@/lib/security";
 import { rpc } from "@/lib/store";
 import { site } from "@/lib/site";
 
@@ -18,6 +19,10 @@ const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "n
  * Self-serve 30-day pilot of the frontier local-debt data. Records a lead (af_lead, throttled to 5 a day per address)
  * and a deal at stage 'pilot' (the deals check constraint has no 'pilot_requested'), then issues a trial key at once
  * when migration 0035 is applied and the address is a work address; otherwise the desk issues it within a working day.
+ *
+ * The key goes only to the address typed in the form, never into the HTTP response: anyone can type any work
+ * address, so showing the key on screen would hand a pilot key to whoever typed someone else's email (security
+ * review, 13 Oct 2026). The response carries the key's prefix and end date so the form can say where it went.
  */
 export async function POST(request: Request) {
   const body = (await request.json().catch(() => null)) as Record<string, unknown> | null;
@@ -55,48 +60,58 @@ export async function POST(request: Request) {
     p_message: `30-day pilot request (self-serve). Markets: ${marketText}. Would pay for next: ${nextText}.${localText}`,
     p_source: `pilot:${str("source", 150) || "/data/frontier-local-debt"}`,
   });
-  if (!lead.ok) console.log(`[pilot] lead not stored: ${lead.reason} ${JSON.stringify({ email, organisation, markets, next })}`);
+  if (!lead.ok) console.log(`[pilot] lead not stored: ${redactEmails(lead.reason)} ${JSON.stringify({ domain: emailDomain(email), organisation, markets, next })}`);
   // af_lead returns false when this address has already sent five enquiries today: no new deal, no new key.
   if (lead.ok && lead.value === false) return Response.json({ ok: true, status: "duplicate", email } satisfies PilotResult);
 
   // A key, at once, only for a work address and only once migration 0035 provides af_trial_key_issue.
   let result: PilotResult = { ok: true, status: webmail ? "webmail" : "pending", email };
+  let issuedKey: string | null = null;
   if (!webmail && secret) {
     const issued = await rpc("af_trial_key_issue", { p_secret: secret, p_email: email, p_label: `Pilot: ${organisation} (${email})`, p_days: institutionalPilot.days });
     const v = issued.ok ? (issued.value as { status?: string; key?: string; expires_at?: string } | null) : null;
-    if (v?.status === "issued" && v.key && v.expires_at) result = { ok: true, status: "issued", key: v.key, expiresAt: v.expires_at, email };
+    if (v?.status === "issued" && v.key && v.expires_at) {
+      issuedKey = v.key;
+      result = { ok: true, status: "issued", prefix: v.key.slice(0, 10), expiresAt: v.expires_at, email };
+    }
     else if (v?.status === "exists") result = { ok: true, status: "exists", expiresAt: v.expires_at, email };
     else if (v?.status === "limited") result = { ok: true, status: "limited", email };
-    else if (!issued.ok && !/PGRST202|404/.test(issued.reason)) console.log(`[pilot] key not issued: ${issued.reason}`);
+    else if (!issued.ok && !/PGRST202|404/.test(issued.reason)) console.log(`[pilot] key not issued: ${redactEmails(issued.reason)}`);
   }
 
   if (secret && result.ok && result.status !== "exists") {
-    const keyNote = result.status === "issued" ? `Trial key ${result.key.slice(0, 10)}… issued, ends ${day(result.expiresAt)}.` : "Key to issue from /desk (plan: trial).";
+    const keyNote = result.status === "issued" ? `Trial key ${result.prefix}… issued, ends ${day(result.expiresAt)}.` : "Key to issue from /desk (plan: trial).";
     const deal = await rpc("af_deal_save", {
       p_secret: secret, p_id: null, p_organisation: organisation, p_segment: "other", p_product: "frontier_debt", p_stage: "pilot",
       p_value_usd_month: null, p_source: "Self-serve pilot form", p_next_step: result.status === "issued" ? "Check in before the pilot ends: which plan fits?" : "Issue the 30-day trial key and send it",
       p_next_date: new Date(Date.now() + (result.status === "issued" ? 21 : 1) * 86_400_000).toISOString().slice(0, 10),
       p_notes: `${name} <${email}>. Markets: ${marketText}. Would pay for next: ${nextText}.${localText}${webmail ? " Personal email address." : ""} ${keyNote}`, p_signed_at: null,
     });
-    if (!deal.ok || deal.value == null) console.log(`[pilot] deal not stored: ${deal.ok ? "rejected" : deal.reason}`);
+    if (!deal.ok || deal.value == null) console.log(`[pilot] deal not stored: ${deal.ok ? "rejected" : redactEmails(deal.reason)}`);
   }
 
-  await notify(result, { name, organisation, marketText, nextText }).catch((e) => console.log(`[pilot] mail: ${String(e)}`));
+  const mailed = await notify(result, issuedKey, { name, organisation, marketText, nextText }).catch((e) => {
+    console.log(`[pilot] mail: ${redactEmails(String(e))}`);
+    return false;
+  });
+  // The key was issued but its only copy could not be sent: the form tells the person to ask the desk for it.
+  if (result.ok && result.status === "issued" && !mailed) return Response.json({ ...result, emailed: false } satisfies PilotResult);
   return Response.json(result);
 }
 
 /** Confirmation to the requester (with the key when it was issued) and a note to the desk. Best effort. */
-async function notify(result: PilotResult, p: { name: string; organisation: string; marketText: string; nextText: string }) {
-  if (!result.ok) return;
+async function notify(result: PilotResult, issuedKey: string | null, p: { name: string; organisation: string; marketText: string; nextText: string }) {
+  if (!result.ok) return false;
+  let delivered = true;
   const docs = `${site.url}/data-api`;
   const lines =
-    result.status === "issued"
+    result.status === "issued" && issuedKey
       ? [
           `Your 30-day pilot key for Afronomics Data (it works until ${day(result.expiresAt)}):`,
           ``,
-          result.key,
+          issuedKey,
           ``,
-          `Send it as a header: Authorization: Bearer ${result.key.slice(0, 10)}…`,
+          `Send it as a header: Authorization: Bearer ${issuedKey.slice(0, 10)}…`,
           `Example: curl -H "Authorization: Bearer YOUR_KEY" "${site.url}/api/v1/bonds/egypt?from=2026-01-01"`,
           `Endpoints and terms: ${docs}`,
           ``,
@@ -107,7 +122,7 @@ async function notify(result: PilotResult, p: { name: string; organisation: stri
         : [];
   if (lines.length) {
     const text = [`Hello ${p.name},`, ``, ...lines, ``, `Markets: ${p.marketText}`, ``, `Questions: reply to this email or write to ${site.contactEmail}.`, `Information, not advice.`, `Afronomics · ${site.url}`].join("\n");
-    const key = result.status === "issued" ? result.key : null;
+    const key = result.status === "issued" ? issuedKey : null;
     const html = `<div style="font-family:Archivo,Helvetica,Arial,sans-serif;color:#121826;max-width:560px;line-height:1.55">${text
       .split("\n")
       .filter(Boolean)
@@ -115,9 +130,14 @@ async function notify(result: PilotResult, p: { name: string; organisation: stri
       .join("")}</div>`;
     const subject = key ? "Your Afronomics Data pilot key (30 days)" : "Your Afronomics Data pilot request";
     const r = await sendEmail(result.email, subject, html, text);
-    if (!r.ok) console.log(`[pilot] confirmation not sent: ${r.reason}`);
+    if (!r.ok) {
+      delivered = false;
+      console.log(`[pilot] confirmation not sent: ${redactEmails(r.reason)}`);
+    }
   }
   const owner = process.env.PAYMENTS_NOTIFY_EMAIL ?? site.contactEmail;
-  const summary = `Pilot ${result.status}: ${p.organisation} · ${p.name} <${result.email}> · ${p.marketText} · next: ${p.nextText}`;
+  const failed = result.status === "issued" && !delivered ? " · KEY EMAIL FAILED: revoke and reissue on /desk" : "";
+  const summary = `Pilot ${result.status}: ${p.organisation} · ${p.name} <${result.email}> · ${p.marketText} · next: ${p.nextText}${failed}`;
   await sendEmail(owner, summary.slice(0, 180), `<pre style="font-family:monospace;white-space:pre-wrap">${esc(summary)}</pre><p>Deals and keys: <a href="${site.url}/desk">/desk</a></p>`, `${summary}\n\n${site.url}/desk`);
+  return delivered;
 }

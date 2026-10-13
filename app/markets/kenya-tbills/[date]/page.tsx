@@ -57,7 +57,7 @@ export default async function TbillAuctionPage({ params }: Props) {
       kicker={`Kenya Treasury bills · auction of ${fmtDate(week.date)}`}
       title={story.headline}
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <StoryBody paragraphs={story.paragraphs} />
       <PlainMeaning
         currency="KES"

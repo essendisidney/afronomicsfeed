@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { sameOrigin } from "@/lib/security";
 import { rpc } from "@/lib/store";
 
 export const runtime = "nodejs";
@@ -6,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 /** Desk actions, authorised by the af_desk cookie (the shared secret), which the database re-checks on every call. */
 export async function POST(request: Request) {
+  if (!sameOrigin(request)) return Response.json({ ok: false, reason: "Cross-site request refused." }, { status: 403 });
   const key = (await cookies()).get("af_desk")?.value ?? "";
   if (!key) return Response.json({ ok: false, reason: "No desk key." }, { status: 401 });
   const b = (await request.json().catch(() => null)) as Record<string, string> | null;

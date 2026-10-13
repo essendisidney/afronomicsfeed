@@ -7,7 +7,7 @@ function useAction() {
   async function run(action: string, form: HTMLFormElement) {
     const payload = Object.fromEntries([...new FormData(form).entries()].map(([k, v]) => [k, String(v)]));
     setMsg("…");
-    const r = await fetch("/api/desk", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, ...payload }) });
+    const r = await fetch("/desk/actions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, ...payload }) });
     const body = (await r.json()) as { ok: boolean; reason?: string };
     setMsg(body.ok ? "Done. Refresh to see it." : body.reason ?? "Failed.");
     if (body.ok) form.reset();
@@ -131,7 +131,7 @@ export function IssueApiKey() {
     const form = e.currentTarget;
     const payload = Object.fromEntries([...new FormData(form).entries()].map(([k, v]) => [k, String(v)]));
     setState({ msg: "…" });
-    const r = await fetch("/api/desk", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "api_key_create", ...payload }) });
+    const r = await fetch("/desk/actions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "api_key_create", ...payload }) });
     const body = (await r.json()) as { ok: boolean; reason?: string; value?: { key: string } };
     setState(body.ok && body.value ? { key: body.value.key } : { msg: body.reason ?? "Failed." });
     if (body.ok) form.reset();

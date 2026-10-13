@@ -14,6 +14,14 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/jobs` },
 };
 
+/** Only http(s) links and email addresses become an Apply link; anything else (javascript:, data:, …) is dropped. */
+function applyHref(url: string | null) {
+  const u = (url ?? "").trim();
+  if (/^https?:\/\/\S+$/i.test(u)) return u;
+  if (/^[^@\s/:]+@[^@\s]+\.[^@\s]+$/.test(u)) return `mailto:${u}`;
+  return null;
+}
+
 type Job = { id: number; title: string; institution: string; location: string | null; role_type: string | null; closes: string | null; apply_url: string | null; description: string | null; published_at: string };
 
 const fmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
@@ -56,10 +64,10 @@ export default async function JobsPage() {
               {j.role_type ? ` · ${j.role_type}` : ""}
             </p>
             {j.description ? <p className="mt-2 whitespace-pre-line text-[15px] leading-7 text-ink-soft">{j.description}</p> : null}
-            {j.apply_url ? (
+            {applyHref(j.apply_url) ? (
               <p className="mt-3">
                 <a
-                  href={j.apply_url.includes("@") && !j.apply_url.startsWith("http") ? `mailto:${j.apply_url}` : j.apply_url}
+                  href={applyHref(j.apply_url)!}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
                   className="inline-block rounded-full border border-ink/20 px-4 py-2 text-[13px] font-semibold text-ink hover:border-accent"

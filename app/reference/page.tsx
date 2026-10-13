@@ -79,7 +79,7 @@ export default async function ReferencePage() {
         </div>
       }
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
       <SectionTitle kicker="Definitions" title="The Afronomics rate, market by market" />
       <p className="mt-2 max-w-3xl text-sm leading-6 text-ink-soft">

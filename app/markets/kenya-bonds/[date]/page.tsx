@@ -56,7 +56,7 @@ export default async function BondAuctionPage({ params }: Props) {
       kicker={`Kenya Treasury bonds · auction of ${fmtDate(date)}`}
       title={story.headline}
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <StoryBody paragraphs={story.paragraphs} />
       <BondMeaning rows={story.rows} />
 

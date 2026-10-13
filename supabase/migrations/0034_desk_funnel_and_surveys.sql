@@ -1,4 +1,4 @@
--- NOT YET APPLIED. The desk's money funnel, per-pilot usage, new action counts and the one-question surveys.
+-- Applied 13 Oct 2026. The desk's money funnel, per-pilot usage, new action counts and the one-question surveys.
 --
 -- 1. af_event accepts six more action names (still one anonymous daily count per action, page and country):
 --      download_click     a CSV / JSON data link clicked (path = the page it was clicked on)

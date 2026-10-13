@@ -17,7 +17,7 @@ const p = (n: number) => `${n.toFixed(2)}%`;
 export const BASE = "/rates/kenya/best-money-market-fund";
 
 export function mmfMonthTitle(m: MonthRanking) {
-  return `Best money market fund in Kenya, ${m.label}${m.complete ? "" : " (so far)"}`;
+  return `Best money market fund in Kenya by yield, ${m.label}${m.complete ? "" : " (so far)"}`;
 }
 
 export function mmfMonthDescription(m: MonthRanking) {
@@ -138,11 +138,11 @@ export function MmfMonthView({ m, all }: { m: MonthRanking; all: MonthRanking[] 
               Not ranked yet: {m.pending.join(", ")}, which publish{m.pending.length === 1 ? "es" : ""} a monthly figure that is not out for {m.label} yet.
             </p>
           ) : null}
-          <ShareResult spec={{ kind: "mmf_month", month: m.complete ? m.month : null }} text={`Best money market fund in Kenya, ${m.label}: ${mmfMonthSentence(m)}. The full ranking:`} />
+          <ShareResult spec={{ kind: "mmf_month", month: m.complete ? m.month : null }} text={`Best money market fund in Kenya by yield, ${m.label}: ${mmfMonthSentence(m)}. The full ranking:`} />
           <p className="mt-3 max-w-3xl text-xs leading-5 text-muted">
             A fund’s published yield is its recent return annualised, not a promise of what it will pay; fees may be taken before or after it depending on
-            the fund. A yield far above the Treasury bill usually means the fund holds longer or riskier paper. Check the fund’s own documents before you
-            invest. This is information, not advice.
+            the fund. A yield far above the Treasury bill usually means the fund holds longer or riskier paper. Past yields are not a guide to future returns,
+            and a ranking by one measure is not a rating or a recommendation. Check the fund’s own documents before you invest. This is information, not advice.
           </p>
         </section>
       )}

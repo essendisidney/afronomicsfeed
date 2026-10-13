@@ -101,7 +101,14 @@ export default async function LenderPage({ params }: Props) {
             <strong className="text-ink">No longer on the CBK’s list.</strong> {name} was in the directory
             {removed!.last_listed ? ` of ${longDate(removed!.last_listed)}` : " we read earlier"} and is missing from the directory of {updated}.
           </p>
-          <p className="mt-2 text-[14px]">A digital lender that is not on the current list is not licensed by the Central Bank to lend.</p>
+          <p className="mt-2 text-[14px]">
+            A digital lender that is not on the current list is not licensed by the Central Bank to lend. A name can also drop off after a change of name
+            or a directory error, so check with the CBK before you rely on this. If you are {name} and this is wrong, write to{" "}
+            <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent("Lender response")}`} className="underline underline-offset-2">
+              {site.contactEmail}
+            </a>
+            .
+          </p>
         </div>
       )}
 
@@ -152,7 +159,14 @@ export default async function LenderPage({ params }: Props) {
               , anonymously.
             </p>
           )}
-          <p className="mt-2 text-[12px] text-muted">For comparison, a bank or SACCO loan at 15% a year costs about KES 12 per KES 1,000 for 30 days.</p>
+          <p className="mt-2 text-[12px] text-muted">
+            For comparison, a bank or SACCO loan at 15% a year costs about KES 12 per KES 1,000 for 30 days. Borrowers’ reports are checked only for range and
+            not verified with the lender. {name} can ask us to look again at any figure, or send a response to publish beside it, at{" "}
+            <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent("Lender response")}`} className="underline underline-offset-2">
+              {site.contactEmail}
+            </a>
+            .
+          </p>
         </section>
       ) : null}
 

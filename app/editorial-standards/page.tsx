@@ -56,6 +56,11 @@ export default function EditorialStandardsPage() {
           Some money-transfer links may earn Afronomics a referral fee. Those links are marked as sponsored in the page code, the page says so next to them,
           and the fee never changes the order. An article that names a provider we may earn from says so.
         </li>
+        <li>
+          &ldquo;Open an account&rdquo; links in the money market fund table go to the manager&rsquo;s own site and are counted. A manager may in future pay
+          Afronomics for an account opened through such a link; if one does, the table will say so beside the link, the order will still be by yield after
+          tax alone, and funds that pay nothing will be listed the same way.
+        </li>
         <li>We do not give buy, sell or hold recommendations or promise returns. Everything here is information, not advice.</li>
       </ul>
 

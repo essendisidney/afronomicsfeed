@@ -154,7 +154,8 @@ export default function MoneyMarketFundsPage() {
           <p className="mt-3 max-w-3xl text-xs leading-5 text-muted">
             A fund’s published yield is its recent return annualised; it is not a promise of what it will pay, and fees are taken before or after it
             depending on the fund. A yield far above the Treasury bill usually means the fund holds longer or riskier paper, or that the published
-            figure is old. Check the fund’s own documents before you invest. This is information, not advice.
+            figure is old. Past yields are not a guide to future returns, and a ranking by one measure is not a rating or a recommendation. Check the
+            fund’s own documents before you invest. This is information, not advice.
           </p>
           <p className="mt-2 max-w-3xl text-xs leading-5 text-muted">
             “Open an account” goes to the fund manager’s own page; we count the click, not who you are. A manager may in future pay Afronomics when you

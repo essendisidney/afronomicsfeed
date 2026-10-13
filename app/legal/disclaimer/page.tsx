@@ -20,6 +20,11 @@ export default function DisclaimerPage() {
         context.
       </p>
       <p>
+        Rankings and league tables (for example of money market funds, loan costs or money-transfer services) order published or reported figures
+        by one stated measure. They are not ratings or recommendations, they do not weigh risk, fees or suitability unless they say so, and past
+        yields or prices are not a guide to future returns.
+      </p>
+      <p>
         Nothing on this site is an offer or solicitation to deal in securities, deposits or insurance products, and nothing is tailored to your
         circumstances. Check the linked primary source before relying on any figure, and take professional advice before acting.
       </p>

@@ -22,7 +22,7 @@ export default function ImprintPage() {
         Editorial and data contact: <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.
       </p>
       <p>
-        Third-party data is reproduced under each publisher’s licence and credited where it appears. World Bank data is used under CC BY 4.0.
+        Third-party data is reproduced subject to each publisher’s terms of use and credited where it appears. World Bank data is used under CC BY 4.0.
         Headlines on the Wire belong to their publishers and link to the original article.
       </p>
     </ProsePage>

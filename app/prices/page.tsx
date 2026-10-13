@@ -150,7 +150,7 @@ export default async function PricesPage({ searchParams }: { searchParams: Promi
 
       <section className="mt-14 grid gap-8 md:grid-cols-3">
         {[
-          ["How payment works", "Checkout is Paystack: M-Pesa, Kenyan and Nigerian cards, bank transfer, and Visa or Mastercard from anywhere, converted at the card’s rate. You get a receipt by email that says exactly what to reply with, and the desk sets you up from that address. Monthly items renew until you say stop."],
+          ["How payment works", "Checkout is Paystack: M-Pesa, Kenyan and Nigerian cards, bank transfer, and Visa or Mastercard from anywhere, converted at the card’s rate. You get a receipt by email that says exactly what to reply with, and the desk sets you up from that address. A payment covers the period shown at checkout; an item renews only if checkout shows it as renewing, and you can stop it any time."],
           ["Invoices and procurement", "Any item can be invoiced in KES or USD, with a pro-forma, a supplier letter and KRA PIN on request. Annual invoices take two months off. Associations and groups get one invoice for all their members."],
           ["What never costs anything", "Reading, citing and downloading the data, the T-bill monitor and every auction page, the index, the free widgets and the open API. Sponsors never see, edit or order the data."],
         ].map(([t, b]) => (

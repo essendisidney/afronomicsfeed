@@ -158,3 +158,17 @@ what we changed. Newest at the bottom. Read this first every week.
   D-004 numbers (F6).
 - **Gated:** items 5–10 wait for their evidence (first pilot key, first payment, a request, or the D-004 result).
 - **Test:** within 30 days, at least 3 pilot keys used on 5+ days; if 0 after 25 contacts, the D-004 kill rule applies.
+
+### D-017 · 13 Oct 2026 · Sales guardrails approved; sales operator switched on
+- **Decided by the founder ("approve sales guardrails"):** (A1) the email texts in `docs/sales/sequences.md` are
+  approved, so the sales operator may send them (not only draft) to people allowed by `docs/sales/sales-operator.md`
+  §2: those who requested a pilot, hold a key, paid, or replied. (A3) One 15-day pilot extension per organisation,
+  only if its key was used on at least 5 distinct days. (A4) A deal is set to `won` automatically when a real checkout
+  payment (status <> 'test') arrives, with the payment date as `signed_at`.
+- **Unchanged guardrails (`docs/sales/playbook.md` §6):** rate-card prices only; the local-institution price only after
+  written confirmation of the D-014 eligibility points; Enterprise, discounts, contract terms, liability, exclusivity,
+  redistribution, legal, invoices/POs, refunds, new cold contacts and anything uncertain go to the founder.
+- **Operational:** weekday sales-operator routine 09:23 Nairobi plus a Friday pipeline report. If Gmail sending is
+  blocked by the session's safety check, the operator saves a draft and lists it for the founder.
+- **Test:** by 13 Nov, at least 3 pilots used on 5+ days and 1 payment; if 0 pilots after 25 contacts, D-004's kill
+  rule applies.

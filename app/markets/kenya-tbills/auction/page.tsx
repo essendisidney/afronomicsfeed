@@ -8,6 +8,7 @@ import { FollowUp } from "@/components/ui/FollowUp";
 import { latestAuctions, nextAuction, outlook } from "@/lib/data/auction-intel";
 import { loadTbills, tenorLabel } from "@/lib/data/kenya-tbills";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const short = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
@@ -18,7 +19,7 @@ export function generateMetadata(): Metadata {
   const next = nextAuction();
   const title = "Kenya T-bill auction: likely rates and “did my bid win?”";
   const description = `Before Kenya's next Treasury bill auction${next ? ` (bids close ${d(next.bidsClose, short)})` : ""}: the likely range for each bill's rate, with its track record since 2011. After it: did your bid win, and what does the bill pay after tax?`;
-  return { title, description, alternates: { canonical: `${site.url}/markets/kenya-tbills/auction` } };
+  return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/markets/kenya-tbills/auction` } };
 }
 
 export default function AuctionPage() {

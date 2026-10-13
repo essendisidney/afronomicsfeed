@@ -10,6 +10,7 @@ import { CiteBlock } from "@/components/ui/CiteBlock";
 import { PlainMeaning } from "@/components/data/PlainMeaning";
 import { fmtDate, marketDates, marketStory } from "@/lib/data/market-stories";
 import { billMarkets } from "@/lib/data/sovereign-bills";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const revalidate = 86400;
@@ -29,8 +30,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const story = ISO.test(date) ? marketStory(country, date) : null;
   if (!story) return { title: "Auction not found" };
   return {
-    title: story.headline,
-    description: story.paragraphs.slice(0, 2).join(" ").slice(0, 300),
+    title: fitTitle(story.headline),
+    description: fitDescription(story.paragraphs.slice(0, 2).join(" ")),
     alternates: { canonical: `${site.url}/markets/tbills/${story.market.slug}/${date}` },
   };
 }

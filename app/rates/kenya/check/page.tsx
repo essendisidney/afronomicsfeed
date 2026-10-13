@@ -5,13 +5,13 @@ import { FairRate } from "@/components/data/FairRate";
 import { PageShell } from "@/components/data/PageShell";
 import { fairBench } from "@/lib/data/kenya-rates";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Is my rate fair? — check a Kenya savings or loan rate against the published benchmarks",
-  description:
-    "Type the interest rate a bank, SACCO, fund or lender offered you and see how it compares with the Treasury bill, the best published money market fund after tax, and the Central Bank's averages for what banks pay and charge — with the gap in shillings.",
+  title: "Is my rate fair? Check a Kenya savings or loan rate",
+  description: fitDescription("Type the interest rate a bank, SACCO, fund or lender offered you and see how it compares with the Treasury bill, the best published money market fund after tax, and the Central Bank's averages for what banks pay and charge — with the gap in shillings."),
   alternates: { canonical: `${site.url}/rates/kenya/check` },
 };
 

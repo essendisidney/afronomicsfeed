@@ -7,13 +7,13 @@ import { aboutText, priceText, rateItem } from "@/lib/billing/ratecard";
 import { policyBoard } from "@/lib/data/policy-rates";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "For institutions — African rates data, committee packs and licences",
-  description:
-    "For SACCOs, pension funds, insurers, bank treasuries, fintechs, media and DFIs: every Treasury bill auction in ten African markets, policy rates and Kenya's curve, as a committee pack, an API, a licence or a widget. Priced in shillings, with free samples.",
+  title: "African rates data for institutions",
+  description: fitDescription("For SACCOs, pension funds, insurers, bank treasuries, fintechs, media and DFIs: every Treasury bill auction in ten African markets, policy rates and Kenya's curve, as a committee pack, an API, a licence or a widget. Priced in shillings, with free samples."),
   alternates: { canonical: `${site.url}/for-institutions` },
 };
 

@@ -10,12 +10,13 @@ import { renderTime } from "@/lib/data/fetcher";
 import { loadSavingsBond } from "@/lib/data/nigeria-savings-bond";
 import { savingsBondAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export function generateMetadata(): Metadata {
   const { title, description } = savingsBondAnswers();
-  return { title, description, alternates: { canonical: `${site.url}/rates/nigeria/savings-bond` } };
+  return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/rates/nigeria/savings-bond` } };
 }
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });

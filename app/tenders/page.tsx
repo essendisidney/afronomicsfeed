@@ -17,9 +17,9 @@ type Search = { q?: string; cat?: string; closing?: string; sort?: string; page?
 export function generateMetadata(): Metadata {
   const f = loadTenders();
   return {
-    title: "Kenya government tenders open now — search and daily alerts",
+    title: "Kenya government tenders open now, with alerts",
     description: f
-      ? `${f.tenders.length.toLocaleString("en-US")} Kenyan government tenders open for bids now, from ministries, counties, schools and hospitals. Search by what you supply and get new matches by email. From the PPRA's open data.`
+      ? `${f.tenders.length.toLocaleString("en-US")} Kenyan government tenders open for bids now, from ministries, counties, schools and hospitals. Search them and get new matches by email.`
       : "Kenyan government tenders open for bids, from the Public Procurement Regulatory Authority's open data.",
     alternates: { canonical: `${site.url}/tenders` },
   };

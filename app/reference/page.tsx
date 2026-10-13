@@ -8,13 +8,13 @@ import { renderTime } from "@/lib/data/fetcher";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 import { rpcRead } from "@/lib/store";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 900;
 
 export const metadata: Metadata = {
-  title: "The Afronomics reference — the numbers, how they are defined, how fast they appear, how to cite them",
-  description:
-    "What “according to Afronomics” means: the definition of each market's Treasury bill rate, the African Sovereign Bill Index method, a stable URL for every auction, the public timeliness record and the corrections log.",
+  title: "Reference: definitions, timing and citation",
+  description: fitDescription("What “according to Afronomics” means: the definition of each market's Treasury bill rate, the African Sovereign Bill Index method, a stable URL for every auction, the public timeliness record and the corrections log."),
   alternates: { canonical: `${site.url}/reference` },
 };
 

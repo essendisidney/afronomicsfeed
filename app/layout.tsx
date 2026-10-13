@@ -36,7 +36,8 @@ export const metadata: Metadata = {
     default: `${site.name} — ${site.tagline}`,
     template: `%s — ${site.name}`,
   },
-  description: site.description,
+  // site.description runs past what a search result shows, so pages without their own description get this one.
+  description: "The price of money in Africa: Treasury bill and bond auction results, currencies and inflation from the central banks, the day they publish.",
   creator: site.name,
   publisher: site.name,
   category: "finance",

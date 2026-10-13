@@ -7,6 +7,7 @@ import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { bondDates, bondStory, fmtDate } from "@/lib/data/auction-stories";
 import { yearsToMaturity } from "@/lib/data/kenya-bonds";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const revalidate = 86400;
@@ -24,8 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const story = /^\d{4}-\d{2}-\d{2}$/.test(date) ? bondStory(date) : null;
   if (!story) return { title: "Auction not found" };
   return {
-    title: story.headline,
-    description: story.paragraphs.slice(0, 2).join(" ").slice(0, 300),
+    title: fitTitle(story.headline),
+    description: fitDescription(story.paragraphs.slice(0, 2).join(" ")),
     alternates: { canonical: `${site.url}/markets/kenya-bonds/${date}` },
   };
 }

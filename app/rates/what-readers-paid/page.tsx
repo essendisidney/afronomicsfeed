@@ -7,13 +7,13 @@ import { ReaderReportForm } from "@/components/ui/ReaderReportForm";
 import { readerSummary } from "@/lib/reader-reports";
 import { COUNTRIES, ITEMS, MIN_REPORTS, WINDOW_DAYS, type Country, type Item, type SummaryRow } from "@/lib/reader-reports-core";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 600;
 
 export const metadata: Metadata = {
-  title: "What readers paid: food, fuel, rent and rates across Africa",
-  description:
-    "What Afronomics readers in Kenya, Nigeria, Ghana, Uganda, Tanzania and South Africa paid this month for maize flour, sugar, cooking gas, fuel, fares and rent, and the rates their banks and SACCOs pay and charge. Add yours.",
+  title: fitTitle("What readers paid: food, fuel, rent and rates across Africa"),
+  description: fitDescription("What Afronomics readers in Kenya, Nigeria, Ghana, Uganda, Tanzania and South Africa paid this month for maize flour, sugar, cooking gas, fuel, fares and rent, and the rates their banks and SACCOs pay and charge. Add yours."),
   alternates: { canonical: `${site.url}/rates/what-readers-paid` },
 };
 

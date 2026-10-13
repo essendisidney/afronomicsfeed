@@ -12,6 +12,7 @@ import { billHistory, billMarkets, billTenors, billWeeks, getBillMarket, latestB
 import { site } from "@/lib/site";
 import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { tbillDatasetJsonLd } from "@/lib/seo/schema";
 
 export const revalidate = 3600;
@@ -27,8 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const market = getBillMarket(country);
   if (!market) return { title: "Not found" };
   return {
-    title: `${market.country} Treasury bill auction results — every auction, rates and history`,
-    description: `Every ${market.publisher} Treasury bill auction in one table: 91-, 182- and 364-day rates, bids and amounts accepted, with a free CSV.`,
+    title: fitTitle(`${market.country} Treasury bill auction results and rates`),
+    description: fitDescription(`Every ${market.publisher} Treasury bill auction in one table: 91-, 182- and 364-day rates, bids and amounts accepted, with a free CSV.`),
     alternates: { canonical: `${site.url}/markets/tbills/${market.slug}` },
   };
 }

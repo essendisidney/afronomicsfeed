@@ -6,11 +6,12 @@ import { WireList } from "@/components/data/WireList";
 import { SectionTitle } from "@/components/data/parts";
 import { feeds, loadWire, publishersLive, wireFor, type WireDesk } from "@/lib/data/wire";
 import { site } from "@/lib/site";
+import { fitTitle } from "@/lib/seo";
 
 export const revalidate = 900;
 
 export const metadata: Metadata = {
-  title: "The Wire — African business, markets and tech headlines",
+  title: fitTitle("The Wire — African business, markets and tech headlines"),
   description: "Live headlines from African business, markets, technology and energy publishers, tagged by country and desk and refreshed every 15 minutes.",
   alternates: { canonical: `${site.url}/news` },
 };

@@ -14,12 +14,13 @@ import { fundLeague, loadFundHistory, rateOptions } from "@/lib/data/kenya-rates
 import { fundAnswers } from "@/lib/seo/answers";
 import { mmfSentence } from "@/lib/share-card";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 1800;
 
 export function generateMetadata(): Metadata {
   const { title, description } = fundAnswers();
-  return { title, description, alternates: { canonical: `${site.url}/rates/kenya/money-market-funds` } };
+  return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/rates/kenya/money-market-funds` } };
 }
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });

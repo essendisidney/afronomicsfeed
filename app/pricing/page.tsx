@@ -17,13 +17,16 @@ import {
   institutionalLadder,
 } from "@/lib/billing/ratecard";
 import { pricing, site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Pricing — African government debt auction data for institutions, and reader plans",
+  title: "Pricing: African auction data and reader plans",
   description:
-    `African local-currency government bond and bill auction data for institutions: ${institutionalLadder
-      .map((tier) => `${tier.name} ${institutionalPriceText(tier)}`)
-      .join(", ")} a month, priced in US dollars and paid at checkout or by invoice, with a ${institutionalPilot.label}. Reader plans: everything free to read and cite; Pro from KES 1,500 a month by M-Pesa or card.`,
+    fitDescription(
+      `African bond and T-bill auction data for institutions: ${institutionalLadder
+        .map((tier) => `${tier.name} ${institutionalPriceText(tier)}`)
+        .join(", ")} a month, with a ${institutionalPilot.label}. Reader Pro from KES 1,500 a month.`,
+    ),
   alternates: { canonical: `${site.url}/pricing` },
 };
 

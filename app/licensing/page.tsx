@@ -24,11 +24,11 @@ import { loadBonds } from "@/lib/data/kenya-bonds";
 import { loadTbills } from "@/lib/data/kenya-tbills";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Data licensing and API — African government auctions, FX and the Wire",
-  description:
-    "License Afronomics datasets for your products and models: African government bond auctions, Treasury bill auctions in ten African markets, derived borrowing-cost measures, the African FX archive, the Wire headline archive and 22 series for 54 economies.",
+  title: "Data licensing: African auctions, FX and news",
+  description: fitDescription("License Afronomics datasets for your products and models: African government bond auctions, Treasury bill auctions in ten African markets, derived borrowing-cost measures, the African FX archive, the Wire headline archive and 22 series for 54 economies."),
   alternates: { canonical: `${site.url}/licensing` },
 };
 

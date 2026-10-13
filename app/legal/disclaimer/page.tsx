@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { ProsePage } from "@/components/data/ProsePage";
 import { disclaimer } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Disclaimer" };
+export const metadata: Metadata = {
+  title: "Disclaimer",
+  description: "Afronomics publishes information, not investment, legal or tax advice. How the data is sourced and the limits of relying on it.",
+};
 
 export default function DisclaimerPage() {
   return (

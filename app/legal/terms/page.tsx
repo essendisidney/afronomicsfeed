@@ -3,7 +3,10 @@ import Link from "next/link";
 import { ProsePage } from "@/components/data/ProsePage";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Terms of use" };
+export const metadata: Metadata = {
+  title: "Terms of use",
+  description: "The terms for using Afronomics: reuse of data with attribution, subscriptions and cancellation, no advice, and liability.",
+};
 
 export default function TermsPage() {
   return (

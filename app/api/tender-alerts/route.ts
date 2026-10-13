@@ -1,3 +1,4 @@
+import { redactEmails } from "@/lib/security";
 import { sendEmail } from "@/lib/mail";
 import { tenderConfirmationEmail } from "@/lib/tender-alerts";
 import { parseKeywords } from "@/lib/tenders-core";
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
   const result = await rpc("af_tender_alert_create", { p_secret: secret, p_email: email, p_keywords: keywords });
   const value = result.ok ? (result.value as { status?: string; token?: string; resend?: boolean } | null) : null;
   if (!value?.status) {
-    console.log(`[tender-alerts] create failed: ${result.ok ? "no result (secret mismatch?)" : result.reason}`);
+    console.log(`[tender-alerts] create failed: ${result.ok ? "no result (secret mismatch?)" : redactEmails(result.reason)}`);
     return Response.json({ ok: false, reason: "That didn’t go through. Please try again." }, { status: 502 });
   }
   if (value.status === "limited") return Response.json({ ok: false, reason: "Too many requests for this address. Please try again later." }, { status: 429 });
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
     const mail = tenderConfirmationEmail(keywords, value.token);
     const sent = await sendEmail(email, mail.subject, mail.html, mail.text);
     if (!sent.ok) {
-      console.log(`[tender-alerts] confirmation not sent: ${sent.reason}`);
+      console.log(`[tender-alerts] confirmation not sent: ${redactEmails(sent.reason)}`);
       return Response.json({ ok: false, reason: "We couldn’t send the confirmation email. Please try again later." }, { status: 502 });
     }
   }

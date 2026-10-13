@@ -79,7 +79,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ indi
         </div>
       }
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
       <div className="grid gap-12 lg:grid-cols-12">
         <section className="lg:col-span-7">

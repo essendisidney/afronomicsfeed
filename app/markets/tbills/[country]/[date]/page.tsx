@@ -60,7 +60,7 @@ export default async function MarketAuctionPage({ params }: Props) {
       kicker={`${market.country} Treasury bills · auction of ${fmtDate(week.date)}`}
       title={story.headline}
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <StoryBody paragraphs={story.paragraphs} />
       <PlainMeaning
         currency={market.currency}

@@ -1,3 +1,4 @@
+import { bearerOk, redactEmails } from "@/lib/security";
 import { buildIndexRelease, indexReleaseHtml, indexReleaseText } from "@/lib/editions/index-release";
 import { sendEmail } from "@/lib/mail";
 import { rpc } from "@/lib/store";
@@ -12,7 +13,7 @@ export const maxDuration = 300;
  */
 export async function POST(request: Request) {
   const secret = process.env.AF_CRON_SECRET;
-  if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) return new Response("forbidden", { status: 403 });
+  if (!secret || !bearerOk(request, secret)) return new Response("forbidden", { status: 403 });
   const r = buildIndexRelease();
   if (!r) return Response.json({ sent: 0, reason: "no reading" }, { status: 503 });
   const list = await rpc("af_press", { p_secret: secret });
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
   for (const email of emails) {
     const result = await sendEmail(email, subject, indexReleaseHtml(r), indexReleaseText(r));
     if (result.ok) sent += 1;
-    else failures.push(result.reason);
+    else failures.push(redactEmails(result.reason));
     if (!result.ok && result.reason.includes("RESEND_API_KEY")) break;
     await new Promise((res) => setTimeout(res, 120));
   }

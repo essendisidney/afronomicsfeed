@@ -120,4 +120,23 @@ export function moneyLabel(amount: number, currency: string | null) {
   return currency === "USD" ? `$${text}` : `${currency ?? ""} ${text}`.trim();
 }
 
+/**
+ * Did a charge cover one period of its plan? Paystack metadata (the plan) can be set by anyone who opens a Paystack
+ * popup with the public key, so a payment tagged with a plan proves nothing about its price: anything granted
+ * automatically, and anything the desk grants by hand, must check the amount too. A charge in another currency than
+ * the plan's counts as not verified (false), for the desk to check by eye. 5% tolerance for rounding.
+ */
+export function paidInFull(planId: string | null | undefined, amount: number, currency: string | null | undefined) {
+  const plan = planId ? getCheckoutPlan(planId) : null;
+  if (!plan || !Number.isFinite(amount) || amount <= 0) return false;
+  if ((currency ?? "").toUpperCase() !== plan.currency) return false;
+  return amount >= plan.amount * 0.95;
+}
+
+/** The plan's own price as a label, e.g. "KES 10,000", for desk notes. */
+export function planPriceLabel(planId: string | null | undefined) {
+  const plan = planId ? getCheckoutPlan(planId) : null;
+  return plan ? moneyLabel(plan.amount, plan.currency) : "unknown plan";
+}
+
 // Keys: PAYSTACK_SECRET_KEY on Vercel (live in production, test in preview).

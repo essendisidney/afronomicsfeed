@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { PageShell } from "@/components/data/PageShell";
 import { confirmReturnWithKey } from "@/lib/billing/confirm";
 import type { KeyOutcome } from "@/lib/billing/paidkey";
@@ -92,7 +93,14 @@ function KeyPanel({ keyOutcome, email }: { keyOutcome: KeyOutcome; email: string
 export default async function ThankYouPage({ searchParams }: { searchParams: Promise<{ checkout?: string; reference?: string; trxref?: string }> }) {
   const query = await searchParams;
   const reference = query.reference ?? query.trxref;
-  const { payment, key } = reference ? await confirmReturnWithKey(reference, { reveal: true }) : { payment: null, key: { kind: "none" } as KeyOutcome };
+  // Show a key on screen only in the browser that started this checkout (cookie set by /api/checkout). Anyone else
+  // holding the reference still gets the confirmation, but not the key: it is in the buyer's receipt email.
+  const bound = Boolean(reference) && (await cookies()).get("af_checkout")?.value === reference;
+  const confirmed = reference ? await confirmReturnWithKey(reference, { reveal: bound }) : { payment: null, key: { kind: "none" } as KeyOutcome };
+  const payment = confirmed.payment;
+  // The buyer's address in full only to the browser that paid; elsewhere masked (a reference alone is not identity).
+  const shownEmail = !payment?.email ? "" : bound ? payment.email : payment.email.replace(/^(.).*(@.*)$/, "$1…$2");
+  const key: KeyOutcome = !bound && confirmed.key.kind === "issued" ? { ...confirmed.key, key: null } : confirmed.key;
   const help = `mailto:${site.contactEmail}?subject=${encodeURIComponent(`Payment ${reference ?? ""}`.trim())}`;
 
   if (!payment || payment.status !== "success") {
@@ -133,7 +141,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
     ["Product", product],
     ["Paid", `${moneyLabel(payment.amount, payment.currency)}${payment.channel ? ` by ${payment.channel.replace(/_/g, " ")}` : ""}`],
     ["Reference", <span key="ref" className="font-mono">{payment.reference}</span>],
-    ["Receipt sent to", payment.email || "the email you paid with"],
+    ["Receipt sent to", shownEmail || "the email you paid with"],
     ["Renewal", recurring ? "Monthly, through Paystack; cancel any time from the Paystack email." : "None: this was a one-off payment. Nothing renews automatically."],
   ];
 
@@ -141,7 +149,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
     <PageShell crumbs={[{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }, { label: "Thank you" }]} kicker="Payment confirmed" title="Thank you. You’re in.">
       <div className="grid max-w-4xl gap-8 lg:grid-cols-[1fr_18rem]">
         <div>
-          <KeyPanel keyOutcome={key} email={payment.email} />
+          <KeyPanel keyOutcome={key} email={shownEmail} />
           <table className="data-table">
             <tbody>
               {rows.map(([k, v]) => (

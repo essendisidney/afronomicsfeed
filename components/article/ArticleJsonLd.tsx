@@ -5,7 +5,7 @@ export function ArticleJsonLd({ article }: { article: Article }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd(article)) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd(article)).replace(/</g, "\\u003c") }}
     />
   );
 }

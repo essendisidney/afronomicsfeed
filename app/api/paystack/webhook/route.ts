@@ -1,3 +1,4 @@
+import { redactEmails } from "@/lib/security";
 import { after } from "next/server";
 import { verifyPaystackSignature } from "@/lib/billing/paystack";
 import { isTestCharge, planFromCode } from "@/lib/billing/paidkey";
@@ -72,7 +73,7 @@ export async function POST(request: Request) {
       status: event.event === "subscription.create" ? "active" : event.event === "subscription.disable" ? "disabled" : "non-renewing",
       next: data.next_payment_date ?? null,
     });
-    if (!result.ok) console.log(`[paystack] subscription not stored: ${result.reason} ${JSON.stringify({ code: data.subscription_code, domain: String(email ?? "").split("@")[1] ?? "" })}`);
+    if (!result.ok) console.log(`[paystack] subscription not stored: ${redactEmails(result.reason)} ${JSON.stringify({ code: data.subscription_code, domain: String(email ?? "").split("@")[1] ?? "" })}`);
   }
 
   // Always 200 once the signature is valid, so Paystack does not retry a stored event.

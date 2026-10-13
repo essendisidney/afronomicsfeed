@@ -47,6 +47,7 @@ export function isWebmail(email: string) {
 
 /** What /api/pilot answers. */
 export type PilotResult =
-  | { ok: true; status: "issued"; key: string; expiresAt: string; email: string }
+  /** The key itself is only ever emailed; `emailed: false` when that email failed. */
+  | { ok: true; status: "issued"; prefix: string; expiresAt: string; email: string; emailed?: boolean }
   | { ok: true; status: "pending" | "webmail" | "exists" | "limited" | "duplicate"; email: string; expiresAt?: string }
   | { ok: false; reason: string };

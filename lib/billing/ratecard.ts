@@ -33,7 +33,8 @@ export type RateGroup = { id: string; title: string; who: string; items: RateIte
 /**
  * The institutional data-product ladder: African local-currency government debt auction data
  * (bond auctions for Nigeria, Egypt, Kenya, Uganda, Zambia, Morocco and the eight WAEMU markets; bills in ten markets).
- * The one source of truth for these prices. Invoiced in US dollars, never sold through Paystack checkout.
+ * The one source of truth for these prices. Priced in US dollars. Analyst and Team and API can be bought by Paystack checkout
+ * (checkout plans `analyst` and `data_team` in plans.ts) or invoiced; Enterprise is always invoiced.
  */
 export type InstitutionalTierId = "analyst" | "team" | "enterprise";
 
@@ -65,9 +66,9 @@ export const institutionalLadder: readonly InstitutionalTier[] = [
     name: "Team and API",
     monthlyUsd: 1500,
     from: false,
-    summary: "an API key for your systems, alerts, usage reporting, a named contact",
+    summary: "an API key for your systems, Treasury-bill result alerts, usage reporting, a named contact",
     audience: "A desk or research team feeding the data into its own models and systems.",
-    includes: ["An API key for your systems", "Alerts when a market’s result is in", "Usage reporting", "A named contact"],
+    includes: ["An API key for your systems", "Treasury-bill result alerts (push in ten markets, email for Kenya)", "Usage reporting", "A named contact"],
   },
   {
     id: "enterprise",
@@ -91,7 +92,7 @@ export const institutionalLinks = {
   apiDocs: "/data-api",
 } as const;
 
-export const institutionalCurrencyNote = "Invoiced in US dollars.";
+export const institutionalCurrencyNote = "Priced in US dollars: pay at checkout or ask for an invoice.";
 
 export function institutionalTier(id: InstitutionalTierId): InstitutionalTier {
   return institutionalLadder.find((tier) => tier.id === id)!;
@@ -139,8 +140,8 @@ export const rateCard: RateGroup[] = [
     items: [
       { id: "api", name: "Open API", amount: 0, currency: "KES", unit: "", what: "Every auction dataset, the measures and the index as JSON, no key, five-minute cache, with attribution. Research, journalism, teaching and non-commercial apps.", href: "/developers" },
       { id: "licence_startup", name: "Startup licence", amount: 7500, currency: "KES", unit: "a month", what: "Commercial use inside one product of a startup: show the auction datasets, the measures and the FX archive to your own users with attribution, an email or webhook on every new result, and a named contact. Resale or bulk redistribution of the raw data needs the Enterprise licence.", checkout: "licence_startup", href: "/licensing" },
-      { id: "licence_institution", name: institutionalTier("analyst").name, amount: institutionalTier("analyst").monthlyUsd, currency: "USD", unit: "a month per user", what: "One user: the web tables and full-history downloads for every covered market. Invoiced in dollars.", enquiry: "licensing", href: "/data/frontier-local-debt" },
-      { id: "data_api", name: "Afronomics Data API", amount: institutionalTier("team").monthlyUsd, currency: "USD", unit: "a month", what: "A keyed feed for production systems: government bond auctions across the covered markets and every Treasury bill auction in ten markets, with full history, policy rates, Eurobond yields and the bill index, uncached responses, usage reporting per key, change notifications and a named contact. Invoiced in dollars.", enquiry: "licensing", href: "/data-api" },
+      { id: "licence_institution", name: institutionalTier("analyst").name, amount: institutionalTier("analyst").monthlyUsd, currency: "USD", unit: "a month per user", what: "One user: the web tables and full-history downloads for every covered market. Priced in dollars.", checkout: "analyst", enquiry: "licensing", href: "/data/frontier-local-debt" },
+      { id: "data_api", name: "Afronomics Data API", amount: institutionalTier("team").monthlyUsd, currency: "USD", unit: "a month", what: "A keyed feed for production systems: government bond auctions across the covered markets and every Treasury bill auction in ten markets, with full history, policy rates, Eurobond yields and the bill index, uncached responses, usage reporting per key, Treasury-bill result alerts and a named contact. Priced in dollars.", checkout: "data_team", enquiry: "licensing", href: "/data-api" },
       { id: "enterprise", name: "Enterprise and redistribution", amount: institutionalTier("enterprise").monthlyUsd, currency: "USD", unit: "a month, from", what: "Redistribution to your own clients, several teams and keys, custom datasets and delivery (SFTP, Excel, Google Sheets), and a service agreement. Priced by scope from $5,000 a month.", enquiry: "licensing", href: "/data-api" },
       { id: "widget", name: "Branded live-rates widget", amount: 40000, currency: "KES", unit: "a month", what: "Our live T-bill, bond or FX widget on your site with your branding and no Afronomics link, updated the moment each result lands. The free widgets are the demo.", checkout: "widget", href: "/widgets" },
       { id: "bulk", name: "Bulk and AI training licence", amount: null, currency: "USD", unit: "", what: "Clean, dated, sourced African financial data for models and bulk redistribution, with the full change history. Priced by scope.", enquiry: "licensing" },

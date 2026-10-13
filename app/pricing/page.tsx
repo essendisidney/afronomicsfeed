@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckoutNotice } from "@/components/billing/CheckoutNotice";
+import { InstitutionalBuy } from "@/components/billing/InstitutionalBuy";
+import { InvoiceRequestForm } from "@/components/billing/InvoiceRequestForm";
 import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
+import { PilotForm } from "@/components/billing/PilotForm";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { paystackConfigured } from "@/lib/billing/paystack";
@@ -20,7 +23,7 @@ export const metadata: Metadata = {
   description:
     `African local-currency government bond and bill auction data for institutions: ${institutionalLadder
       .map((tier) => `${tier.name} ${institutionalPriceText(tier)}`)
-      .join(", ")} a month, invoiced in US dollars, with a ${institutionalPilot.label}. Reader plans: everything free to read and cite; Pro from KES 1,500 a month by M-Pesa or card.`,
+      .join(", ")} a month, priced in US dollars and paid at checkout or by invoice, with a ${institutionalPilot.label}. Reader plans: everything free to read and cite; Pro from KES 1,500 a month by M-Pesa or card.`,
   alternates: { canonical: `${site.url}/pricing` },
 };
 
@@ -31,7 +34,7 @@ const rows: Array<[string, boolean | string, boolean | string, boolean | string,
   ["Data hub rankings and CSV downloads", true, true, true, true],
   ["The Afronomics Weekly newsletter", true, true, true, true],
   ["The Morning note, every weekday before 07:30 Nairobi", "On the site", "By email", "By email", "By email"],
-  ["Auction alerts the moment each market reports", "On your phone", "Email and phone", "Email and phone", "Email and webhook"],
+  ["Treasury-bill auction alerts (push in ten markets, email for Kenya)", "Push", "Push and email", "Push and email", "Push and email"],
   ["Open data API: no key, 5-minute cache, with attribution", true, true, true, true],
   ["Full briefs, weekly analysis and explainers", "Summaries", true, true, true],
   ["Seats", "1", "1", "5", "By agreement"],
@@ -47,7 +50,7 @@ const rows: Array<[string, boolean | string, boolean | string, boolean | string,
  */
 const readerCopy: Record<string, { label?: string; detail?: string }> = {
   [pricing.pro.name]: {
-    detail: "About $12. Every brief and weekly analysis in full, the Morning note by email, auction alerts the moment each market reports, and the web tools and CSV downloads. One seat.",
+    detail: "About $12. Every brief and weekly analysis in full, the Morning note by email, Treasury-bill auction alerts, and the web tools and CSV downloads. One seat.",
   },
   [pricing.professional.name]: {
     detail: "About $49. Five Pro seats on one invoice and priority requests for new datasets.",
@@ -117,8 +120,12 @@ const institutionalFaq: Array<{ q: string; a: React.ReactNode }> = [
     q: "How does invoicing work?",
     a: (
       <>
-        Institutional licences are priced per month and invoiced in US dollars. They are not bought through the card checkout on this page; the reader
-        plans further down are separate and priced in Kenyan shillings.
+        Institutional licences are priced per month in US dollars. Analyst and Team and API can be bought on this page through Paystack (card, and
+        M-Pesa or bank transfer when charged in shillings), or{" "}
+        <a href="#invoice" className="underline underline-offset-2">
+          invoiced
+        </a>{" "}
+        and paid by bank transfer. Enterprise is always invoiced. The reader plans further down are separate and priced in Kenyan shillings.
       </>
     ),
   },
@@ -126,12 +133,12 @@ const institutionalFaq: Array<{ q: string; a: React.ReactNode }> = [
     q: "How does the pilot work?",
     a: (
       <>
-        Request one with the{" "}
-        <Link href={institutionalPilot.href} className="underline underline-offset-2">
+        Fill in the{" "}
+        <a href="#pilot" className="underline underline-offset-2">
           pilot form
-        </Link>{" "}
-        and tell us the markets and fields you need. A pilot gets an API key, the full history and alerts for {institutionalPilot.days} days, free. The
-        form asks for no payment details.
+        </a>
+        : five questions, no payment details. Work email addresses get an API key with the full history for {institutionalPilot.days} days, free; the
+        desk follows up before it ends.
       </>
     ),
   },
@@ -146,7 +153,7 @@ function cell(value: boolean | string) {
 export default async function PricingPage({
   searchParams,
 }: {
-  searchParams: Promise<{ checkout?: string; reference?: string; trxref?: string }>;
+  searchParams: Promise<{ checkout?: string; reference?: string; trxref?: string; plan?: string }>;
 }) {
   const query = await searchParams;
   const live = paystackConfigured();
@@ -160,13 +167,15 @@ export default async function PricingPage({
       lede={
         <>
           <p>
-            Institutions license African local-currency government debt auction data, invoiced in US dollars, with a {institutionalPilot.label}. Every number,
+            Institutions license African local-currency government debt auction data, priced in US dollars and bought here at checkout or by invoice,
+            with a {institutionalPilot.label}. Every number,
             headline and country file on Afronomics stays free to read and cite, and reader plans add depth from KES 1,500 a month,
             about $12, paid by M-Pesa, card or bank transfer.
           </p>
           <nav aria-label="On this page" className="mt-5 flex flex-wrap gap-2 text-[13px] font-medium">
             {[
               ["#institutions", "Institutional data"],
+              ["#pilot", "Free 30-day pilot"],
               ["#institutional-faq", "Institutional FAQ"],
               ["#readers", "Reader plans"],
             ].map(([href, label]) => (
@@ -216,37 +225,40 @@ export default async function PricingPage({
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href={tier.id === "enterprise" ? "/contact?interest=licensing#enquiry" : institutionalPilot.href}
-                  className={`mt-6 block rounded-full px-4 py-3 text-center text-[13px] font-semibold ${
-                    api ? "bg-ink text-paper hover:bg-forest" : "border border-ink/20 text-ink hover:border-accent"
-                  }`}
-                >
-                  {tier.id === "enterprise" ? "Talk to us about Enterprise" : `Start a ${institutionalPilot.days}-day pilot`}
-                </Link>
+                <div className="mt-6 space-y-2">
+                  <InstitutionalBuy tier={tier.id} name={tier.name} variant={api ? "primary" : "ghost"} />
+                  {tier.id === "enterprise" ? (
+                    <p className="text-center text-[11px] text-muted">Priced by scope. The desk replies within one working day.</p>
+                  ) : (
+                    <a href="#pilot" className="block text-center text-[13px] font-semibold text-forest underline underline-offset-2">
+                      or start a free {institutionalPilot.days}-day pilot
+                    </a>
+                  )}
+                </div>
               </article>
             );
           })}
         </div>
 
-        <div className="mt-4 grid gap-5 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5 md:grid-cols-[1fr_auto] md:items-center">
-          <div>
-            <p className="text-[17px] font-semibold text-ink">Start with a {institutionalPilot.label}</p>
-            <p className="mt-1 text-sm leading-6 text-ink-soft">
-              For investment managers, banks, development finance institutions and research teams: an API key, the full history and alerts, free for{" "}
-              {institutionalPilot.days} days. {institutionalCurrencyNote} Prices are per month.
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
+          <div id="pilot" className="scroll-mt-24 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
+            <p className="text-[17px] font-semibold text-ink">Start a {institutionalPilot.label}</p>
+            <p className="mt-1 mb-4 text-sm leading-6 text-ink-soft">
+              For investment managers, banks, development finance institutions and research teams: an API key with the full history, free for{" "}
+              {institutionalPilot.days} days. No payment details.{" "}
+              <Link href={institutionalLinks.apiDocs} className="underline underline-offset-2">
+                API docs and terms
+              </Link>
+              .
             </p>
+            <PilotForm siteUrl={site.url} />
           </div>
-          <div className="flex flex-col gap-2 sm:flex-row">
-            <Link href={institutionalPilot.href} className="rounded-full bg-ink px-5 py-3 text-center text-[13px] font-semibold text-paper hover:bg-forest">
-              Request a pilot
-            </Link>
-            <Link
-              href={institutionalLinks.apiDocs}
-              className="rounded-full border border-ink/20 px-5 py-3 text-center text-[13px] font-semibold text-ink hover:border-accent"
-            >
-              API docs and terms
-            </Link>
+          <div id="invoice" className="scroll-mt-24 rounded-2xl border border-rule bg-surface px-5 py-5">
+            <p className="text-[17px] font-semibold text-ink">Request an invoice</p>
+            <p className="mt-1 mb-4 text-sm leading-6 text-ink-soft">
+              For Enterprise, or for any plan your finance team pays by bank transfer. {institutionalCurrencyNote}
+            </p>
+            <InvoiceRequestForm plan={query.plan} />
           </div>
         </div>
       </section>

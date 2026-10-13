@@ -5,6 +5,10 @@ import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
+import { InstitutionalBuy } from "@/components/billing/InstitutionalBuy";
+import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
+import { paystackConfigured } from "@/lib/billing/paystack";
+import { chargeLabel } from "@/lib/billing/plans";
 import { indicatorDefs } from "@/lib/data/indicators";
 import { loadBonds } from "@/lib/data/kenya-bonds";
 import { loadTbills } from "@/lib/data/kenya-tbills";
@@ -20,14 +24,18 @@ export const metadata: Metadata = {
 
 const year = (date?: string) => date?.slice(0, 4) ?? "—";
 
-const tiers = [
+type Tier = { name: string; price: string; detail: string; buy?: "open" | "startup" | "analyst" | "team" | "enterprise" };
+
+const tiers: Tier[] = [
   {
     name: "Open",
+    buy: "open",
     price: "Free",
     detail: "CSV downloads and the open JSON API for research, teaching and journalism, with the attribution line kept.",
   },
   {
     name: "Startup",
+    buy: "startup",
     price: "KES 7,500/mo",
     detail: "Commercial use inside one startup product: show the auction datasets, measures and FX archive to your own users with attribution, with an email or webhook on every new result. No resale of the raw data.",
   },
@@ -35,8 +43,28 @@ const tiers = [
     name: tier.name,
     price: `${institutionalPriceText(tier)}/mo`,
     detail: `${tier.summary.charAt(0).toUpperCase()}${tier.summary.slice(1)}. ${tier.audience}`,
+    buy: tier.id,
   })),
 ];
+
+function TierAction({ tier }: { tier: Tier }) {
+  if (tier.buy === "open")
+    return (
+      <Link href="/developers" className="block rounded-full border border-ink/20 px-4 py-3 text-center text-[13px] font-semibold text-ink hover:border-accent">
+        Use the open API
+      </Link>
+    );
+  if (tier.buy === "startup")
+    return paystackConfigured() ? (
+      <PaystackCheckout plan="licence_startup" label={`Buy · ${chargeLabel("licence_startup")}/mo`} variant="ghost" />
+    ) : (
+      <a href="#enquiry" className="block rounded-full border border-ink/20 px-4 py-3 text-center text-[13px] font-semibold text-ink hover:border-accent">
+        Request an invoice
+      </a>
+    );
+  if (tier.buy) return <InstitutionalBuy tier={tier.buy} name={tier.name} variant={tier.buy === "team" ? "primary" : "ghost"} />;
+  return null;
+}
 
 export default function LicensingPage() {
   const bills = loadTbills();
@@ -137,13 +165,16 @@ export default function LicensingPage() {
       </div>
 
       <section className="mt-14">
-        <SectionTitle kicker="Terms" title="Licences" note="Annual billing takes two months off. Invoiced in USD or KES." />
-        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2 lg:grid-cols-4">
+        <SectionTitle kicker="Terms" title="Licences" note="Buy at checkout, or ask for an invoice in USD or KES. Not sure yet? Start a free 30-day pilot on the frontier local-debt page." />
+        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {tiers.map((tier) => (
-            <div key={tier.name} className="bg-surface px-5 py-6">
+            <div key={tier.name} className="flex flex-col bg-surface px-5 py-6">
               <p className="text-[12px] font-semibold text-gold">{tier.name}</p>
               <p className="mt-2 font-serif text-3xl text-ink">{tier.price}</p>
-              <p className="mt-3 text-sm leading-6 text-ink-soft">{tier.detail}</p>
+              <p className="mt-3 flex-1 text-sm leading-6 text-ink-soft">{tier.detail}</p>
+              <div className="mt-5">
+                <TierAction tier={tier} />
+              </div>
             </div>
           ))}
         </div>

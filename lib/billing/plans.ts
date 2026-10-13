@@ -1,3 +1,5 @@
+import { institutionalTier, KES_PER_USD, type InstitutionalTierId } from "./ratecard";
+
 /**
  * Checkout plans. Amounts are in the currency's subunit (KES cents / US cents).
  *
@@ -6,10 +8,21 @@
  * Team in dollars once that is on.
  *
  * If a Paystack plan code is set for a tier (PAYSTACK_PLAN_PRO, _TEAM, _PACK, _PACK_PLUS, _WHATSAPP, _LICENCE,
- * _WIDGET, _FUND, _TENDERS), checkout creates a recurring monthly subscription and Paystack uses the plan's own amount
- * and currency. Without a plan code it is a single charge for one period. Prices come from lib/billing/ratecard.ts.
+ * _WIDGET, _FUND, _TENDERS, _ANALYST, _DATA_TEAM), checkout creates a recurring monthly subscription and Paystack uses
+ * the plan's own amount and currency. Without a plan code it is a single charge for one period. Prices come from
+ * lib/billing/ratecard.ts.
+ *
+ * The institutional ladder (Analyst, Team and API) is priced in US dollars on the rate card. With PAYSTACK_CURRENCY=USD
+ * it is charged in dollars (card only); otherwise it is charged as the shilling equivalent at the rate card's own
+ * KES_PER_USD, so M-Pesa works too. The dollar price never changes; only the currency it is collected in.
  */
 const usd = (process.env.PAYSTACK_CURRENCY ?? "KES").toUpperCase() === "USD";
+
+/** A rate-card dollar price in the currency the checkout collects, in subunits. */
+function institutional(id: InstitutionalTierId) {
+  const dollars = institutionalTier(id).monthlyUsd;
+  return usd ? { amount: dollars * 100, currency: "USD" as const } : { amount: dollars * KES_PER_USD * 100, currency: "KES" as const };
+}
 
 export const checkoutPlans = {
   trial: {
@@ -57,6 +70,8 @@ export const checkoutPlans = {
   job_listing: { label: "Jobs listing (30 days)", product: "Jobs listing, 30 days", amount: 1_000_000, currency: "KES", planEnv: null },
   tender_alerts: { label: "Tender alerts (monthly)", product: "Tender alerts, one month", amount: 50_000, currency: "KES", planEnv: "PAYSTACK_PLAN_TENDERS" },
   tender_alerts_year: { label: "Tender alerts (a year)", product: "Tender alerts, twelve months", amount: 500_000, currency: "KES", planEnv: null },
+  analyst: { label: "Analyst (monthly)", product: "Afronomics Data: Analyst, one month", ...institutional("analyst"), planEnv: "PAYSTACK_PLAN_ANALYST" },
+  data_team: { label: "Team and API (monthly)", product: "Afronomics Data: Team and API, one month", ...institutional("team"), planEnv: "PAYSTACK_PLAN_DATA_TEAM" },
 } as const;
 
 export type CheckoutPlanId = keyof typeof checkoutPlans;
@@ -78,6 +93,19 @@ export function chargeLabel(id: CheckoutPlanId) {
   const major = plan.amount / 100;
   const amount = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(major);
   return plan.currency === "USD" ? `$${amount}` : `${plan.currency} ${amount}`;
+}
+
+/** The rate-card dollar price of an institutional checkout plan, and what checkout will actually take. */
+export function institutionalCharge(id: "analyst" | "data_team") {
+  const plan = checkoutPlans[id];
+  const usdPrice = institutionalTier(id === "analyst" ? "analyst" : "team").monthlyUsd;
+  const dollars = `$${usdPrice.toLocaleString("en-US")}`;
+  if (plan.currency === "USD") return { dollars, charged: dollars, note: "Card payment in US dollars." };
+  return {
+    dollars,
+    charged: chargeLabel(id),
+    note: `Charged as ${chargeLabel(id)} (KES ${KES_PER_USD} to the dollar), so M-Pesa, card and bank transfer all work.`,
+  };
 }
 
 /** Money as paid, from a Paystack amount in subunits. */

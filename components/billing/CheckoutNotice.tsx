@@ -1,7 +1,5 @@
-import { after } from "next/server";
-import { verifyTransaction } from "@/lib/billing/paystack";
+import { confirmReturn } from "@/lib/billing/confirm";
 import { moneyLabel } from "@/lib/billing/plans";
-import { notifyPayment, recordPayment } from "@/lib/billing/record";
 import { site } from "@/lib/site";
 
 /**
@@ -12,25 +10,9 @@ import { site } from "@/lib/site";
 export async function CheckoutNotice({ query }: { query: { checkout?: string; reference?: string; trxref?: string } }) {
   if (query.checkout !== "returned") return null;
   const reference = query.reference ?? query.trxref;
-  const payment = reference ? await verifyTransaction(reference) : null;
+  const payment = await confirmReturn(reference);
 
   if (payment?.status === "success") {
-    const record = {
-      reference: payment.reference,
-      email: payment.email || null,
-      plan: payment.plan,
-      amount: payment.amount,
-      currency: payment.currency,
-      status: payment.status,
-      channel: payment.channel,
-      paidAt: payment.paidAt,
-      raw: payment.raw,
-    };
-    after(async () => {
-      const stored = await recordPayment(record);
-      // The webhook sends the receipt when it is registered; send it here only if this page stored the record first.
-      if (stored.ok) await notifyPayment(record).catch(() => null);
-    });
     return (
       <p className="mb-8 rounded-2xl border border-up/40 bg-surface px-5 py-4 text-sm text-ink">
         <strong>Payment confirmed — thank you.</strong> {moneyLabel(payment.amount, payment.currency)}, reference{" "}

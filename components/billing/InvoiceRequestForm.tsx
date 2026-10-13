@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/Button";
 import { useState, type FormEvent } from "react";
 import { institutionalLadder, institutionalPriceText, localInstitutionPrices, localPriceText } from "@/lib/billing/ratecard";
 import { track } from "@/lib/track";
@@ -59,8 +60,8 @@ export function InvoiceRequestForm({ plan = "enterprise", localPricing = false }
     );
   }
 
-  const field = "mt-1 w-full border border-rule bg-paper px-3 py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
-  const label = "text-[13px] font-medium text-muted";
+  const field = "mt-1 w-full border border-rule bg-paper px-3 py-3 sm:py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
+  const label = "block text-[13px] font-medium leading-5 text-muted";
   return (
     <form className="grid gap-3 sm:grid-cols-2" onSubmit={submit}>
       <label className="block">
@@ -109,11 +110,15 @@ export function InvoiceRequestForm({ plan = "enterprise", localPricing = false }
         <button
           type="submit"
           disabled={state === "pending"}
-          className="rounded-full bg-forest px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest-deep disabled:opacity-60"
+          className={buttonClass({ variant: "primary" })}
         >
           {state === "pending" ? "Sending…" : "Request an invoice"}
         </button>
-        {message ? <p className="text-sm text-down">{message}</p> : null}
+        {message ? (
+          <p role="alert" className="text-sm text-down">
+            {message}
+          </p>
+        ) : null}
       </div>
     </form>
   );

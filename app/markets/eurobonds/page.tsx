@@ -61,7 +61,7 @@ function CountryBlock({ id, c }: { id: string; c: EurobondCountry }) {
   const hasSize = rows.some((r) => r.size);
   const hasPrice = rows.some((r) => r.price != null);
   return (
-    <section id={id} className="mt-12 scroll-mt-24">
+    <section id={id} className="mt-12">
       <SectionTitle
         kicker={`${c.country} · ${dateFmt.format(new Date(c.latest.date))}`}
         title={`${c.country}’s Eurobonds`}

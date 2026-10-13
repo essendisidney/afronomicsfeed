@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { buttonClass } from "@/components/ui/Button";
 import { pilotMarkets, pilotNextOptions, type PilotResult } from "@/lib/billing/pilot";
 import { localInstitutionPrices } from "@/lib/billing/ratecard";
 import { track, trackPilotForm } from "@/lib/track";
@@ -57,8 +58,8 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
 
   if (result) return <PilotDone result={result} siteUrl={siteUrl} />;
 
-  const field = "mt-1 w-full border border-rule bg-paper px-3 py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
-  const label = "text-[13px] font-medium text-muted";
+  const field = "mt-1 w-full border border-rule bg-paper px-3 py-3 sm:py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
+  const label = "block text-[13px] font-medium leading-5 text-muted";
 
   return (
     <form className="grid gap-3 sm:grid-cols-2" onSubmit={submit} onChange={() => trackPilotForm("start")}>
@@ -91,10 +92,10 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
       ) : null}
       <fieldset className="sm:col-span-2">
         <legend className={label}>Markets of interest *</legend>
-        <div className="mt-1 grid grid-cols-2 gap-x-4 gap-y-1.5 sm:grid-cols-3">
+        <div className="mt-1 grid grid-cols-2 gap-x-4 sm:grid-cols-3 sm:gap-y-1.5">
           {pilotMarkets.map((m) => (
-            <label key={m.id} className="flex items-start gap-2 text-[13px] text-ink">
-              <input type="checkbox" name="markets" value={m.id} className="mt-0.5 accent-forest" />
+            <label key={m.id} className="flex min-h-11 cursor-pointer items-center gap-2.5 py-1 text-[13px] leading-5 text-ink sm:min-h-0 sm:items-start sm:py-0">
+              <input type="checkbox" name="markets" value={m.id} className="sm:mt-0.5" />
               <span>{m.label}</span>
             </label>
           ))}
@@ -102,10 +103,10 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
       </fieldset>
       <fieldset className="sm:col-span-2">
         <legend className={label}>Which would you pay for next? *</legend>
-        <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1.5">
+        <div className="mt-1 flex flex-wrap gap-x-5 sm:gap-y-1.5">
           {pilotNextOptions.map((o) => (
-            <label key={o.id} className="flex items-center gap-2 text-[13px] text-ink">
-              <input type="radio" name="next" value={o.id} required className="accent-forest" />
+            <label key={o.id} className="flex min-h-11 cursor-pointer items-center gap-2.5 text-[13px] text-ink sm:min-h-0">
+              <input type="radio" name="next" value={o.id} required />
               <span>{o.label}</span>
             </label>
           ))}
@@ -113,11 +114,7 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
       </fieldset>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
       <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
-        <button
-          type="submit"
-          disabled={pending}
-          className="rounded-full bg-forest px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest-deep disabled:opacity-60"
-        >
+        <button type="submit" disabled={pending} className={buttonClass({ variant: "primary" })}>
           {pending ? "Sending…" : "Start my 30-day pilot"}
         </button>
         <p className="text-[12px] text-muted">Free. No payment details. Trial keys go to work email addresses.</p>

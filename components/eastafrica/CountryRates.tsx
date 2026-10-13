@@ -29,7 +29,7 @@ export function CountryRates({ c }: { c: EaCountry }) {
   const billDates = [...new Set((c.bill?.rows ?? []).map((r) => r.date))];
   const sameBillDate = billDates.length === 1;
   return (
-    <article id={`ea-card-${c.slug}`} className="flex min-w-0 scroll-mt-24 flex-col gap-3 rounded-2xl border border-rule bg-surface px-4 py-4 sm:px-5" aria-labelledby={`ea-${c.slug}`}>
+    <article id={`ea-card-${c.slug}`} className="flex min-w-0 flex-col gap-3 rounded-2xl border border-rule bg-surface px-4 py-4 sm:px-5" aria-labelledby={`ea-${c.slug}`}>
       <header className="flex items-baseline justify-between gap-3">
         <h3 id={`ea-${c.slug}`} className="font-serif text-2xl text-ink">
           <Link href={c.countryHref} className="hover:text-forest">

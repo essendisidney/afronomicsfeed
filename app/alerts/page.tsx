@@ -69,7 +69,7 @@ export default function AlertsPage() {
         </div>
       }
     >
-      <section id="email-alerts" className="mb-12 scroll-mt-24">
+      <section id="email-alerts" className="mb-12">
         <Suspense fallback={null}>
           <RateAlertStatus />
         </Suspense>

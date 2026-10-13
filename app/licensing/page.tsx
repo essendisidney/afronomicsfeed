@@ -25,6 +25,7 @@ import { loadTbills } from "@/lib/data/kenya-tbills";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
+import { DataTable, TableScroll } from "@/components/ui/DataTable";
 
 export const metadata: Metadata = {
   title: "Data licensing: African auctions, FX and news",
@@ -149,30 +150,27 @@ export default function LicensingPage() {
       }
     >
       <SectionTitle kicker="Datasets" title="What you can license" />
-      <div className="overflow-x-auto">
-        <table className="data-table mt-2">
-          <thead>
-            <tr>
-              <th>Dataset</th>
-              <th>Coverage</th>
-              <th>Contents</th>
-            </tr>
-          </thead>
-          <tbody>
-            {datasets.map((item) => (
-              <tr key={item.name}>
-                <td className="whitespace-nowrap">
-                  <Link href={item.href} className="hover:text-forest">
-                    {item.name}
-                  </Link>
-                </td>
-                <td className="whitespace-nowrap text-[12px]">{item.coverage}</td>
-                <td className="text-sm text-ink-soft">{item.detail}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <DataTable
+        label="Datasets you can license"
+        className="mt-2"
+        mobile="cards"
+        rows={[...datasets]}
+        rowKey={(item) => item.name}
+        columns={[
+          {
+            key: "name",
+            header: "Dataset",
+            className: "sm:whitespace-nowrap",
+            cell: (item) => (
+              <Link href={item.href} className="font-medium hover:text-forest">
+                {item.name}
+              </Link>
+            ),
+          },
+          { key: "coverage", header: "Coverage", className: "text-[12px] sm:whitespace-nowrap", cell: (item) => item.coverage },
+          { key: "detail", header: "Contents", className: "text-sm text-ink-soft", cell: (item) => item.detail },
+        ]}
+      />
 
       <section className="mt-14" id="terms">
         <SectionTitle kicker="Terms" title="What is free, what needs a key, what is Enterprise" />
@@ -195,13 +193,13 @@ export default function LicensingPage() {
         </div>
       </section>
 
-      <section id="local" className="mt-14 scroll-mt-24">
+      <section id="local" className="mt-14">
         <SectionTitle
           kicker="Local institutions in Africa"
           title="Local prices for domestic institutions"
           note="Analyst and Team and API, a month, for institutions that meet the rule below. Enterprise and redistribution stay in US dollars, from $5,000 a month, everywhere."
         />
-        <div className="mt-4 overflow-x-auto">
+        <TableScroll label="Local-institution prices by country" className="mt-4">
           <table className="data-table">
             <thead>
               <tr>
@@ -226,7 +224,7 @@ export default function LicensingPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
         <div className="mt-6 grid gap-8 lg:grid-cols-2">
           <div>
             <h3 className="font-serif text-xl text-ink">Who qualifies</h3>
@@ -258,12 +256,12 @@ export default function LicensingPage() {
           </div>
         </div>
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
-          <div id="local-pilot" className="scroll-mt-24 rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
+          <div id="local-pilot" className="rounded-2xl border-2 border-forest/30 bg-surface px-5 py-5">
             <p className="text-[17px] font-semibold text-ink">Start a free 30-day pilot</p>
             <p className="mt-1 mb-4 text-sm leading-6 text-ink-soft">An API key with the full history, free for 30 days, then the local price for your country.</p>
             <PilotForm siteUrl={site.url} localPricing />
           </div>
-          <div id="local-invoice" className="scroll-mt-24 rounded-2xl border border-rule bg-surface px-5 py-5">
+          <div id="local-invoice" className="rounded-2xl border border-rule bg-surface px-5 py-5">
             <p className="text-[17px] font-semibold text-ink">Request an invoice at the local price</p>
             <p className="mt-1 mb-4 text-sm leading-6 text-ink-soft">Invoiced to your local entity. The desk replies within one working day.</p>
             <InvoiceRequestForm plan="team" localPricing />

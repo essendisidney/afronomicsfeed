@@ -34,7 +34,7 @@ function CountryTable({ c, rows }: { c: Country; rows: SummaryRow[] }) {
   const byItem = new Map(rows.map((r) => [r.item, r]));
   const shown = ITEMS.filter((i) => byItem.has(i.id));
   return (
-    <section id={c.code.toLowerCase()} className="mt-10 scroll-mt-24">
+    <section id={c.code.toLowerCase()} className="mt-10">
       <SectionTitle kicker={`${c.name} · last ${WINDOW_DAYS} days`} title={`What readers in ${c.name} paid`} />
       <div className="mt-3 overflow-x-auto">
         <table className="data-table">

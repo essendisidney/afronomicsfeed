@@ -6,13 +6,13 @@ import { SectionTitle } from "@/components/data/parts";
 import { rateOptions, type RateOption } from "@/lib/data/kenya-rates";
 import { saccoLatest } from "@/lib/data/saccos";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Where your shilling earns most: Kenya's savings options compared, after tax",
-  description:
-    "Treasury bills and bonds, money market funds, SACCOs and bank accounts side by side: the rate after tax and what KES 100,000 earns in a year, from each publisher's latest figure. Free guide, updated automatically.",
+  title: "Where Kenyan savings earn most, after tax",
+  description: fitDescription("Treasury bills and bonds, money market funds, SACCOs and bank accounts side by side: the rate after tax and what KES 100,000 earns in a year, from each publisher's latest figure. Free guide, updated automatically."),
   alternates: { canonical: `${site.url}/guides/where-your-shilling-earns-most` },
 };
 

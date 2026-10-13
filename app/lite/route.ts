@@ -44,10 +44,10 @@ export async function GET(request: Request) {
 
   const fx = note.fx.moves.slice(0, 8).map((m) => `<tr><td>${esc(m.name)}</td><td>${m.now.toFixed(m.now >= 100 ? 1 : 3)}</td><td>${morningSigned(m.changePct)}%</td></tr>`).join("");
   const t = sw
-    ? { title: "Afronomics (toleo jepesi)", morning: "Asubuhi", bills: "Hati za hazina, riba za hivi punde (%)", market: "Soko", date: "Tarehe", fx: "Dhidi ya dola, usiku kucha", due: "Minada inayotarajiwa", full: "Tovuti kamili", other: "In English" }
-    : { title: "Afronomics (low-data)", morning: "The Morning", bills: "Treasury bills, latest rates (%)", market: "Market", date: "Date", fx: "Against the dollar, overnight", due: "Next auctions expected", full: "Full site", other: "Kwa Kiswahili" };
+    ? { title: "Afronomics (toleo jepesi)", description: "Riba za hati za hazina za Afrika, sarafu na minada ijayo, katika ukurasa mwepesi kwa simu na data kidogo.", morning: "Asubuhi", bills: "Hati za hazina, riba za hivi punde (%)", market: "Soko", date: "Tarehe", fx: "Dhidi ya dola, usiku kucha", due: "Minada inayotarajiwa", full: "Tovuti kamili", other: "In English" }
+    : { title: "Afronomics (low-data)", description: "African Treasury bill rates, currencies and upcoming auctions on one light page for slow connections and small data bundles.", morning: "The Morning", bills: "Treasury bills, latest rates (%)", market: "Market", date: "Date", fx: "Against the dollar, overnight", due: "Next auctions expected", full: "Full site", other: "Kwa Kiswahili" };
 
-  const html = `<!doctype html><html lang="${sw ? "sw" : "en"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${t.title}</title>
+  const html = `<!doctype html><html lang="${sw ? "sw" : "en"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${t.title}</title><meta name="description" content="${t.description}">
 <style>body{font:15px/1.45 system-ui,sans-serif;margin:12px;color:#121826;background:#fff;max-width:640px}table{border-collapse:collapse;width:100%;margin:6px 0 14px}td,th{text-align:left;padding:3px 6px 3px 0;border-bottom:1px solid #ddd;font-size:14px}th{font-weight:600}h1{font-size:18px;margin:0 0 4px}h2{font-size:15px;margin:16px 0 4px;color:#5b3fd6}a{color:#121826}small{color:#636b7d}</style></head><body>
 <h1>${t.title}</h1><small>${esc(morningLongDate.format(new Date(note.day)))} · <a href="/lite?lang=${sw ? "en" : "sw"}">${t.other}</a> · <a href="/">${t.full}</a></small>
 <h2>${esc(today.title)}</h2><small>${esc(today.note)}</small>${doors}

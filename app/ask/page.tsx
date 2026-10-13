@@ -4,13 +4,13 @@ import { AskBox } from "@/components/ui/AskBox";
 import { ask } from "@/lib/ask";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Ask the data — African Treasury bill rates, answered from the source",
-  description:
-    "Ask a question about Treasury bill rates, auctions, demand, real yields or the Sovereign Bill Index in ten African markets and get the answer from the published results, with the source. No model writes the answer.",
+  title: "Ask the data: African T-bill rates, from the source",
+  description: fitDescription("Ask a question about Treasury bill rates, auctions, demand, real yields or the Sovereign Bill Index in ten African markets and get the answer from the published results, with the source. No model writes the answer."),
   alternates: { canonical: `${site.url}/ask` },
 };
 

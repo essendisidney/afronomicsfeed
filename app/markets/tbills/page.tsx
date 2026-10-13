@@ -11,13 +11,13 @@ import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { billPagePath, dataCatalogJsonLd } from "@/lib/seo/schema";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Africa Treasury bill monitor — ten African markets’ auction rates side by side",
-  description:
-    "Latest 91-, 182- and 364-day Treasury bill auction rates for Egypt, Nigeria, Ghana, Kenya, Uganda, Tanzania, Zambia, Malawi, Mozambique and South Africa, compiled from each central bank’s own results, with full histories and free CSVs.",
+  title: "Africa T-bill monitor: auction rates in ten markets",
+  description: fitDescription("Latest 91-, 182- and 364-day Treasury bill auction rates for Egypt, Nigeria, Ghana, Kenya, Uganda, Tanzania, Zambia, Malawi, Mozambique and South Africa, compiled from each central bank’s own results, with full histories and free CSVs."),
   alternates: { canonical: `${site.url}/markets/tbills` },
 };
 

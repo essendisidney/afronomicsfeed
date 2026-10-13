@@ -7,12 +7,13 @@ import { Questions } from "@/components/seo/Questions";
 import { AFRICA_ISO3, banksDearest, byDestination, countryName, loadRemittances, periodLabel, SDG_TARGET, type Corridor } from "@/lib/data/remittances";
 import { remittanceAnswers } from "@/lib/seo/remittances";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export function generateMetadata(): Metadata {
   const { title, description } = remittanceAnswers();
-  return { title, description, alternates: { canonical: `${site.url}/rates/remittances` } };
+  return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/rates/remittances` } };
 }
 
 const usd = (pct: number) => `$${((200 * pct) / 100).toFixed(2)}`;

@@ -9,13 +9,13 @@ import { getArticle } from "@/lib/content";
 import { fairBench } from "@/lib/data/kenya-rates";
 import { langMeta, learnLangs } from "@/lib/learn-ui";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Learn money: saving, borrowing, rates and currencies, explained",
-  description:
-    "Short, plain-language lessons on Treasury bills, money market funds, the real cost of a loan, compound interest, inflation, exchange rates and the Central Bank Rate — each linked to today’s real figures, with savings and loan calculators and a glossary in English and Kiswahili.",
+  title: fitTitle("Learn money: saving, borrowing, rates and currencies, explained"),
+  description: fitDescription("Short, plain-language lessons on Treasury bills, money market funds, the real cost of a loan, compound interest, inflation, exchange rates and the Central Bank Rate — each linked to today’s real figures, with savings and loan calculators and a glossary in English and Kiswahili."),
   alternates: { canonical: `${site.url}/learn`, languages: { fr: `${site.url}/learn/fr`, pt: `${site.url}/learn/pt`, ar: `${site.url}/learn/ar`, sw: `${site.url}/learn/sw` } },
 };
 

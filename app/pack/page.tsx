@@ -9,11 +9,11 @@ import { paystackConfigured } from "@/lib/billing/paystack";
 import { chargeLabel } from "@/lib/billing/plans";
 import { site } from "@/lib/site";
 import { billMarkets } from "@/lib/data/sovereign-bills";
+import { fitDescription } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "The Investment Committee Pack — African rates, Kenya’s curve and the month ahead, ready to table",
-  description:
-    "A monthly, sourced pack for SACCO, insurer and pension investment committees: Treasury bill rates in ten African markets, Kenya’s government yield curve, where the shilling earns most after tax, currency moves and the auction calendar. Sample free.",
+  title: "The Investment Committee Pack: African rates monthly",
+  description: fitDescription("A monthly, sourced pack for SACCO, insurer and pension investment committees: Treasury bill rates in ten African markets, Kenya’s government yield curve, where the shilling earns most after tax, currency moves and the auction calendar. Sample free."),
   alternates: { canonical: `${site.url}/pack` },
 };
 

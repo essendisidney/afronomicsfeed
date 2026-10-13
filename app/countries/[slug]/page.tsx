@@ -18,6 +18,7 @@ import { loadCountryProjects, projectsSource, sumAmounts } from "@/lib/data/proj
 import { loadIndicators, ranked, readingFor } from "@/lib/data/series";
 import { loadCountryWire, loadWire } from "@/lib/data/wire";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -33,8 +34,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const title = `${country.name} economy, markets and data`;
   const description = `${country.name}: GDP, growth, inflation, debt, FDI, remittances, ${country.currency} exchange rate, World Bank projects and the latest business headlines — every figure sourced.`;
   return {
-    title,
-    description,
+    title: fitTitle(title),
+    description: fitDescription(description),
     alternates: { canonical: `${site.url}/countries/${country.slug}` },
     openGraph: { title: `${country.name} — Afronomics`, description },
   };

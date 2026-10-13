@@ -12,13 +12,13 @@ import { site } from "@/lib/site";
 import { latencyLine, loadLatency } from "@/lib/data/latency";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { frontierDebtDatasetJsonLd } from "@/lib/seo/schema";
+import { fitDescription } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "African local-currency government debt data for frontier-market investors",
-  description:
-    "Primary auction results from African central banks, checked and published within hours, with history back to 2000 in some markets, for investors in the African markets of JPMorgan's GBI-EM Edge frontier local-currency bond index. Coverage by market, honest gaps, API and 30-day pilots.",
+  title: "Local-currency debt data for frontier investors",
+  description: fitDescription("Primary auction results from African central banks, checked and published within hours, with history back to 2000 in some markets, for investors in the African markets of JPMorgan's GBI-EM Edge frontier local-currency bond index. Coverage by market, honest gaps, API and 30-day pilots."),
   alternates: { canonical: `${site.url}/data/frontier-local-debt` },
 };
 

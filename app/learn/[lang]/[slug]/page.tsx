@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { PageShell } from "@/components/data/PageShell";
 import { MarkdownBody } from "@/components/ui/MarkdownBody";
 import { getLesson, isLearnLang, langMeta, learnLangs, loadLessons, ui } from "@/lib/learn-i18n";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -16,8 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const lesson = getLesson(lang, slug);
   if (!lesson) return {};
   return {
-    title: lesson.title,
-    description: lesson.summary,
+    title: fitTitle(lesson.title),
+    description: fitDescription(lesson.summary),
     alternates: { canonical: `${site.url}/learn/${lang}/${slug}`, languages: lesson.en ? { en: `${site.url}/explainers/${lesson.en}` } : undefined },
   };
 }

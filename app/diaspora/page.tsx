@@ -11,13 +11,13 @@ import { fundLeague, loadKenyaRates, WHT_INTEREST } from "@/lib/data/kenya-rates
 import { loadTbills } from "@/lib/data/kenya-tbills";
 import { corridorsTo, countryName, loadRemittances, periodLabel } from "@/lib/data/remittances";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Diaspora Desk — sending money home to Kenya and earning on it",
-  description:
-    "For Kenyans abroad: the cheapest way to send money home from each country, today's shilling rates, and what money earns at home after tax in Treasury bills, money market funds and savings accounts. From the World Bank, the CBK and the fund managers.",
+  title: fitTitle("Diaspora Desk — sending money home to Kenya and earning on it"),
+  description: fitDescription("For Kenyans abroad: the cheapest way to send money home from each country, today's shilling rates, and what money earns at home after tax in Treasury bills, money market funds and savings accounts. From the World Bank, the CBK and the fund managers."),
   alternates: { canonical: `${site.url}/diaspora` },
 };
 

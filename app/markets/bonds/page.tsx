@@ -8,6 +8,7 @@ import { bondMarkets, loadBondMarket } from "@/lib/data/sovereign-bonds";
 import { dataCatalogJsonLd, frontierDebtDatasetJsonLd } from "@/lib/seo/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -16,8 +17,8 @@ const description =
   "Every local-currency government bond auction result Afronomics holds, by market: Kenya, Nigeria, Egypt, Uganda, Zambia, Morocco and the eight WAEMU treasuries. Rates, bid cover and amounts from the publishers, with CSV and API.";
 
 export const metadata: Metadata = {
-  title,
-  description,
+  title: fitTitle(title),
+  description: fitDescription(description),
   alternates: { canonical: `${site.url}/markets/bonds` },
   openGraph: { title, description, url: `${site.url}/markets/bonds` },
 };

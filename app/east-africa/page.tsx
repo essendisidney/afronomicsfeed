@@ -11,6 +11,7 @@ import { CiteBlock } from "@/components/ui/CiteBlock";
 import { EmailAlertBox } from "@/components/ui/RateAlertForm";
 import { eaDate, eastAfricaCountries, kenyaSavings, monthChanges, newestDate } from "@/lib/data/east-africa";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -19,8 +20,8 @@ const description =
   "Policy rates, 91-, 182- and 364-day Treasury bill rates, the latest government bond auctions and Eurobond yields for Kenya, Uganda and Tanzania, each linked to the central bank’s own notice — plus Kenya money market fund yields beside the 91-day bill.";
 
 export const metadata: Metadata = {
-  title,
-  description,
+  title: fitTitle(title),
+  description: fitDescription(description),
   alternates: { canonical: `${site.url}/east-africa` },
   openGraph: { title, description, url: `${site.url}/east-africa` },
 };

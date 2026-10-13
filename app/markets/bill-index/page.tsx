@@ -7,13 +7,13 @@ import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
 import { billIndexLatest, indexName, indexShort } from "@/lib/data/bill-index";
 import { site } from "@/lib/site";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: `${indexName} (${indexShort}) — what African governments pay to borrow, in one number`,
-  description:
-    "Published every Monday: the average one-year Treasury bill rate across ten African markets, from each central bank’s own auction results, with weekly, monthly and yearly changes and every market’s contribution.",
+  title: fitTitle(`${indexName} (${indexShort}) — what African governments pay to borrow, in one number`),
+  description: fitDescription("Published every Monday: the average one-year Treasury bill rate across ten African markets, from each central bank’s own auction results, with weekly, monthly and yearly changes and every market’s contribution."),
   alternates: { canonical: `${site.url}/markets/bill-index` },
 };
 

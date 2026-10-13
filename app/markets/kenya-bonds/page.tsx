@@ -11,11 +11,11 @@ import { YieldCurve } from "@/components/data/YieldCurve";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { auctionCurve, loadBonds, yearsToMaturity } from "@/lib/data/kenya-bonds";
 import { site } from "@/lib/site";
+import { fitDescription } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Kenya Treasury bond auction results and yield curve",
-  description:
-    "Every Central Bank of Kenya Treasury bond auction — fixed-coupon, infrastructure and savings bonds, re-openings, taps and switches — with yields, coupons, bids and amounts accepted, the auction yield curve and a free CSV.",
+  description: fitDescription("Every Central Bank of Kenya Treasury bond auction — fixed-coupon, infrastructure and savings bonds, re-openings, taps and switches — with yields, coupons, bids and amounts accepted, the auction yield curve and a free CSV."),
   alternates: { canonical: `${site.url}/markets/kenya-bonds` },
 };
 

@@ -5,7 +5,7 @@ import { embedSnippet, widgets } from "@/lib/embeds";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Free widgets — Kenya T-bill rates, African FX and headlines for your site",
+  title: "Free T-bill, FX and news widgets for your site",
   description:
     "Embed live Kenya Treasury bill rates, African currency rates and Africa business headlines on your website or blog. Free, sourced, one line of HTML.",
   alternates: { canonical: `${site.url}/widgets` },

@@ -6,6 +6,7 @@ import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle, SourceLine } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { bankRateHistory, fairBench, rateOptions } from "@/lib/data/kenya-rates";
 import { FairRate } from "@/components/data/FairRate";
 import { site } from "@/lib/site";
@@ -176,6 +177,7 @@ export default function KenyaRatesPage() {
       </p>
       <CiteBlock title="Where your shilling earns most: Kenya rates compared" path="/rates/kenya" publisher="the Central Bank of Kenya and fund managers’ published yields" />
       <ContributeBand compact ask="What does your bank or SACCO actually pay you?" />
+      <DebtDataLinks country="Kenya" title="Government paper: auction data" />
       <NewsletterBand />
     </PageShell>
   );

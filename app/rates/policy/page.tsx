@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
+import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { Questions } from "@/components/seo/Questions";
 import { SectionTitle } from "@/components/data/parts";
 import { CiteBlock } from "@/components/ui/CiteBlock";
@@ -157,6 +158,7 @@ export default function PolicyRatesPage() {
       <EmailAlertBox kinds={["policy_change"]} />
       <CiteBlock title="African central-bank policy rates" path="/rates/policy" publisher="the central banks’ own websites" />
       <Questions items={policyAnswers().items} />
+      <DebtDataLinks title="What governments pay to borrow" />
       <NewsletterBand />
     </PageShell>
   );

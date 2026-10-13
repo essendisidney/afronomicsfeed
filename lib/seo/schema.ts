@@ -75,7 +75,10 @@ const bondVariables = (m: Pick<BondMarket, "currency" | "rateNote">) => [
 const csv = (path: string, name: string) => ({ "@type": "DataDownload", name, encodingFormat: "text/csv", contentUrl: u(path) });
 const json = (path: string, name: string) => ({ "@type": "DataDownload", name, encodingFormat: "application/json", contentUrl: u(path) });
 
-/** One African market's Treasury bill auction results (the /markets/tbills/{country} pages). */
+/** The page a market's Treasury bill results live on: Kenya keeps its own long-standing page. */
+export const billPagePath = (slug: BillMarket["slug"]) => (slug === "kenya" ? "/markets/kenya-tbills" : `/markets/tbills/${slug}`);
+
+/** One African market's Treasury bill auction results (/markets/tbills/{country}, and /markets/kenya-tbills). */
 export function tbillDatasetJsonLd(market: BillMarket) {
   const { first, last } = billSpan(market.slug);
   return {
@@ -83,7 +86,7 @@ export function tbillDatasetJsonLd(market: BillMarket) {
     "@type": "Dataset",
     name: `${market.country} Treasury bill auction results`,
     description: `Every ${market.publisher} Treasury bill auction compiled by ${site.name}: 91-, 182- and 364-day rates (${market.rateNote}), amounts offered, bids received and amounts accepted, with a link to the publisher's own notice for each result.`,
-    url: u(`/markets/tbills/${market.slug}`),
+    url: u(billPagePath(market.slug)),
     keywords: [`${market.country} Treasury bills`, "T-bill auction results", "government securities", "interest rates", market.currency, "Africa"],
     creator: organizationRef,
     publisher: organizationRef,
@@ -102,30 +105,57 @@ export function tbillDatasetJsonLd(market: BillMarket) {
   };
 }
 
-/** One market's government bond auction results (for the /markets/bonds/{market} pages). */
-export function bondDatasetJsonLd(market: BondMarket, path = `/markets/bonds/${market.slug}`) {
-  const { first, last } = bondSpan(market.slug);
+/**
+ * One market's government bond auction results (the /markets/bonds/{market} pages and /markets/kenya-bonds), or one
+ * issuing country inside a pooled market (/markets/bonds/waemu/{issuer}) when `issuer` is given with its rows' span.
+ */
+export function bondDatasetJsonLd(
+  market: BondMarket,
+  path = `/markets/bonds/${market.slug}`,
+  issuer?: { name: string; first: string | null; last: string | null },
+) {
+  const { first, last } = issuer ?? bondSpan(market.slug);
+  const place = issuer ? issuer.name : market.slug === "waemu" ? "WAEMU" : market.country;
   return {
     "@context": "https://schema.org",
     "@type": "Dataset",
-    name: `${market.country} government bond auction results`,
-    description: `Every ${market.publisher} government bond auction compiled by ${site.name}: rate (${market.rateNote}), tenor, coupon, amounts offered, bids received and accepted, and bid-to-cover, with the source for each result.`,
+    name: `${issuer ? `${issuer.name} (WAEMU)` : market.country} government bond auction results`,
+    description: `Every ${market.publisher} government bond auction${issuer ? ` for ${issuer.name}` : ""} compiled by ${site.name}: rate (${market.rateNote}), tenor, coupon, amounts offered, bids received and accepted, and bid-to-cover, with the source for each result.`,
     url: u(path),
-    keywords: [`${market.country} government bonds`, "bond auction results", "local-currency debt", market.currency, "Africa"],
+    keywords: [`${place} government bonds`, `${place} bond auction results`, "local-currency debt", market.currency, "Africa"],
     creator: organizationRef,
     publisher: organizationRef,
     isBasedOn: market.sourcePage,
     license: DATA_LICENSE_URL,
     isAccessibleForFree: true,
     temporalCoverage: coverage(first, last),
-    spatialCoverage: { "@type": "Place", name: market.country },
+    spatialCoverage: { "@type": "Place", name: issuer ? issuer.name : market.country },
     dateModified: iso(bondUpdated(market.slug)),
     variableMeasured: bondVariables(market),
     includedInDataCatalog: catalog,
     distribution: [
-      csv(`/api/data/bonds/${market.slug}`, `${market.country} government bond auctions, full history (CSV)`),
-      json(`/api/v1/bonds/${market.slug}`, `${market.country} government bond auctions (JSON API; limit up to 5,000 rows)`),
+      csv(`/api/data/bonds/${market.slug}`, `${place} government bond auctions, full history (CSV)`),
+      json(
+        `/api/v1/bonds/${market.slug}${issuer ? `?issue=${encodeURIComponent(issuer.name)}` : ""}`,
+        `${place} government bond auctions (JSON API; limit up to 5,000 rows)`,
+      ),
     ],
+  };
+}
+
+/** A hub page that lists several datasets (/markets/bonds, /markets/tbills): a DataCatalog naming each one. */
+export function dataCatalogJsonLd(name: string, path: string, description: string, datasets: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DataCatalog",
+    name,
+    description,
+    url: u(path),
+    creator: organizationRef,
+    publisher: organizationRef,
+    license: DATA_LICENSE_URL,
+    isAccessibleForFree: true,
+    dataset: datasets.map((d) => ({ "@type": "Dataset", name: d.name, url: u(d.path) })),
   };
 }
 

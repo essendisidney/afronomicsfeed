@@ -5,6 +5,7 @@ import { CurrencyConverter } from "@/components/markets/CurrencyConverter";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { WireList } from "@/components/data/WireList";
+import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { IndicatorSource, RankBars, SectionTitle, SourceLine } from "@/components/data/parts";
 import { countries } from "@/lib/data/countries";
 import { currencyName, formatFx, loadFxQuote, pairHref } from "@/lib/data/fx";
@@ -156,6 +157,7 @@ export default async function MarketsPage() {
         </aside>
       </div>
 
+      <DebtDataLinks title="Government debt: auction data" />
       <NewsletterBand />
     </PageShell>
   );

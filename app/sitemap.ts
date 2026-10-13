@@ -13,7 +13,8 @@ import { site } from "@/lib/site";
 import { learnLangs, loadLessons } from "@/lib/learn-i18n";
 import { institutions, topics } from "@/lib/taxonomy";
 import { allTbillWeeks, bondDates } from "@/lib/data/auction-stories";
-import { bondMarkets } from "@/lib/data/sovereign-bonds";
+import { loadBondMarket } from "@/lib/data/sovereign-bonds";
+import { issuersOf, marketsWithRows } from "@/components/bonds/stats";
 import { allBillsUpdated, allBondsUpdated, billUpdated, bondUpdated, fileUpdated, newest } from "@/lib/seo/freshness";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -43,7 +44,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/markets/bill-index", "weekly", 0.9, bills),
     page("/markets/bill-index/release", "weekly", 0.7, bills),
     page("/markets/bonds", "daily", 0.9, bonds),
-    ...bondMarkets.map((m) => page(`/markets/bonds/${m.slug}`, "daily", 0.8, bondUpdated(m.slug))),
+    // Only markets whose page exists (dynamicParams is off, so an empty market's URL would 404).
+    ...marketsWithRows().map(({ market: m }) => page(`/markets/bonds/${m.slug}`, "daily", 0.8, bondUpdated(m.slug))),
+    // Each WAEMU issuer has its own page (/markets/bonds/waemu/senegal): the queries are per country.
+    ...issuersOf(loadBondMarket("waemu").rows).map((i) => page(`/markets/bonds/waemu/${i.slug}`, "daily", 0.8, bondUpdated("waemu"))),
     page("/markets/auction-week", "daily", 0.8, debt),
     page("/morning", "hourly", 0.9),
     page("/morning/sw", "daily", 0.6),
@@ -79,17 +83,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/pack", "monthly", 0.7),
     page("/developers", "monthly", 0.6, debt),
     page("/data-api", "monthly", 0.7, bills),
-    page("/data/frontier-local-debt", "weekly", 0.8, debt),
+    page("/data/frontier-local-debt", "weekly", 0.9, debt),
     page("/data/frontier-local-debt/monitor", "daily", 0.8, debt),
-    page("/markets/tbills/nigeria", "daily", 0.8, billUpdated("nigeria")),
-    page("/markets/tbills/ghana", "daily", 0.8, billUpdated("ghana")),
-    page("/markets/tbills/uganda", "daily", 0.8, billUpdated("uganda")),
-    page("/markets/tbills/tanzania", "daily", 0.8, billUpdated("tanzania")),
-    page("/markets/tbills/egypt", "daily", 0.8, billUpdated("egypt")),
-    page("/markets/tbills/southafrica", "daily", 0.8, billUpdated("southafrica")),
-    page("/markets/tbills/zambia", "daily", 0.8, billUpdated("zambia")),
-    page("/markets/tbills/malawi", "daily", 0.8, billUpdated("malawi")),
-    page("/markets/tbills/mozambique", "daily", 0.8, billUpdated("mozambique")),
+    // From the market list, so a new bill market is in the sitemap the day it ships (Kenya has its own page above).
+    ...billMarkets.filter((m) => m.slug !== "kenya").map((m) => page(`/markets/tbills/${m.slug}`, "daily", 0.8, billUpdated(m.slug))),
+    page("/east-africa", "daily", 0.8, debt),
     page("/economy", "daily", 0.8),
     page("/capital", "daily", 0.8),
     page("/climate", "daily", 0.8),

@@ -9,6 +9,7 @@ export function articleMetadata(article: Article): Metadata {
   return {
     title: article.title,
     description: article.summary,
+    alternates: { canonical: url },
     openGraph: {
       type: "article",
       title: article.title,

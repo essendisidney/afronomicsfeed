@@ -117,13 +117,13 @@ export default function LicensingPage() {
       name: "African FX reference archive",
       href: "/markets",
       coverage: "Daily from 30 Sep 2026 · 45 currencies",
-      detail: "The daily US-dollar mid-market reference for every African currency, archived at the same hour each day.",
+      detail: "The daily US-dollar mid-market reference for every African currency, archived at the same hour each day. Read from a third-party rates feed whose terms do not allow redistribution, so it is for reference inside your own work only.",
     },
     {
       name: "The Wire archive",
       href: "/news",
       coverage: "Daily from 30 Sep 2026",
-      detail: "Every headline carried from African business publishers, tagged by country and desk — a ready-made corpus for monitoring and NLP.",
+      detail: "Every headline carried from African business publishers, tagged by country and desk, with the link to the original. Headlines and excerpts remain their publishers’ copyright: the licence covers our tags, dates and links, not the publishers’ text.",
     },
     {
       name: "54-economy panel",

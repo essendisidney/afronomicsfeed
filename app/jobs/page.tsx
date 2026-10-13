@@ -10,7 +10,7 @@ export const revalidate = 600;
 
 export const metadata: Metadata = {
   title: "Jobs in African finance: treasury, risk and research",
-  description: fitDescription("Roles at the banks, funds, SACCOs, insurers and DFIs that read Afronomics: treasury, ALM, fixed income, risk, research and data. Listed by the institutions themselves; KES 10,000 for 30 days."),
+  description: fitDescription("Roles at banks, funds, SACCOs, insurers and DFIs: treasury, ALM, fixed income, risk, research and data. Listed by the institutions themselves; KES 10,000 for 30 days."),
   alternates: { canonical: `${site.url}/jobs` },
 };
 
@@ -36,14 +36,14 @@ export default async function JobsPage() {
       title="Roles for people who read the numbers"
       lede={
         <p>
-          Treasury, asset–liability, fixed income, risk, research and data roles at the institutions that use Afronomics. Listed by the
+          Treasury, asset–liability, fixed income, risk, research and data roles at banks, funds, SACCOs, insurers and DFIs. Listed by the
           institutions themselves, never scraped; free to read and apply, always with the original application link.
         </p>
       }
       aside={
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5 text-sm text-ink-soft">
           <p className="text-[14px] font-semibold text-ink">Hiring?</p>
-          <p className="mt-1 leading-6">KES 10,000 for 30 days, in front of treasurers, analysts and investment committees across ten markets. Live within a day.</p>
+          <p className="mt-1 leading-6">KES 10,000 for 30 days, listed beside our rates and auction data for ten markets. Live within a day.</p>
           <Link href="/jobs/post" className="mt-4 inline-block rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
             Post a role
           </Link>
@@ -88,7 +88,7 @@ export default async function JobsPage() {
           </li>
         ) : null}
       </ul>
-      <p className="mt-8 text-xs text-muted">Afronomics verifies that each listing comes from the named institution before it goes live, and never charges applicants. Report a listing: desk@afronomicsfeed.com.</p>
+      <p className="mt-8 text-xs text-muted">The desk checks each listing after it goes live and takes down any that does not come from the named institution. Afronomics never charges applicants, and a genuine employer will not ask you to pay to apply. Report a listing: desk@afronomicsfeed.com.</p>
     </PageShell>
   );
 }

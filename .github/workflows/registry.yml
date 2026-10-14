@@ -1,0 +1,63 @@
+# Monthly: read what SASRA and CBK have published about each licensed SACCO, microfinance bank and bank, and add any
+# new edition to data/registry/ (docs/rebuild/phase-3-plan.md). The regulators publish per-institution figures once
+# a year and their lists a few times a year, so most runs add nothing and commit nothing. Each reader checks its
+# document against itself and writes nothing if it does not add up; one reader's refusal does not stop the others,
+# but it fails the run so it shows on the desk.
+name: Institutions registry
+
+on:
+  schedule:
+    - cron: "41 5 3 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests pdfplumber
+      - id: sasra_list
+        continue-on-error: true
+        run: python scripts/sasra_list.py
+      - id: sasra_annual
+        continue-on-error: true
+        run: python scripts/sasra_annual.py
+      - id: cbk_directories
+        continue-on-error: true
+        run: python scripts/cbk_directories.py
+      - id: cbk_bsar
+        continue-on-error: true
+        run: python scripts/cbk_bsar.py
+      - name: Commit any new edition
+        run: |
+          if git diff --quiet -- data/registry && [ -z "$(git ls-files --others --exclude-standard data/registry)" ]; then
+            echo "Nothing new from the regulators."
+            exit 0
+          fi
+          git config user.name "afronomics-bot"
+          git config user.email "afronomics-bot@users.noreply.github.com"
+          git add data/registry
+          git commit -m "Institutions registry: new regulator editions"
+          branch="${GITHUB_REF_NAME}"
+          for attempt in 1 2 3; do
+            # The registry files only ever grow; a concurrent run's copy is replayed on top.
+            if ! git pull --rebase origin "$branch"; then
+              for f in $(git diff --name-only --diff-filter=U); do git checkout --theirs -- "$f" && git add "$f"; done
+              GIT_EDITOR=true git rebase --continue || { git rebase --abort 2>/dev/null; false; }
+            fi && git push origin "HEAD:$branch" && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 10))
+          done
+          exit 1
+      - name: Fail if a reader refused its document
+        if: steps.sasra_list.outcome == 'failure' || steps.sasra_annual.outcome == 'failure' || steps.cbk_directories.outcome == 'failure' || steps.cbk_bsar.outcome == 'failure'
+        run: |
+          echo "sasra_list=${{ steps.sasra_list.outcome }} sasra_annual=${{ steps.sasra_annual.outcome }} cbk_directories=${{ steps.cbk_directories.outcome }} cbk_bsar=${{ steps.cbk_bsar.outcome }}"
+          exit 1

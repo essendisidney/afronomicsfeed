@@ -46,5 +46,6 @@ export const ROUTINES: Routine[] = [
   { name: "Morning note", when: "Weekdays 07:00", does: "The morning email", where: "GitHub Actions" },
   { name: "Weekly edition and index release", when: "Mon 07:00 and 07:30", does: "Weekly snapshot; ASBI index release", where: "GitHub Actions" },
   { name: "Remittance prices", when: "1st and 15th, 09:23", does: "Send-money prices", where: "GitHub Actions" },
+  { name: "Institutions registry", when: "3rd of the month, 08:41", does: "SASRA and CBK lists and annual figures for SACCOs, microfinance banks and banks", where: "GitHub Actions" },
   { name: "Archive (FX and wire)", when: "Daily 07:15", does: "FX and headline archive", where: "Vercel cron" },
 ];

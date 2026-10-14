@@ -20,6 +20,12 @@ on:
       raw:
         description: "Also search the raw HTML (1 = yes)"
         default: ""
+      pages:
+        description: "PDF pages to print, e.g. 170-188,96 (at most 80)"
+        default: ""
+      layout:
+        description: "Keep column positions when printing pages (1 = yes)"
+        default: ""
 
 permissions:
   contents: read
@@ -41,3 +47,5 @@ jobs:
           PROBE_LINKS: ${{ inputs.links }}
           PROBE_FULL: ${{ inputs.full }}
           PROBE_RAW: ${{ inputs.raw }}
+          PROBE_PAGES: ${{ inputs.pages }}
+          PROBE_LAYOUT: ${{ inputs.layout }}

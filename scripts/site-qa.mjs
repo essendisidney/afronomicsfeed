@@ -25,6 +25,11 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(path.join(root, "package.json"));
 
+// Every request the QA makes says it is ours (lib/bots.ts INTERNAL_HEADER, and an Afronomics user agent on the link
+// checks), so a run against production or a CI `next start` is never counted as readers, clicks or API usage.
+const INTERNAL_HEADERS = { "x-afronomics-internal": "site-qa" };
+const FETCH_HEADERS = { ...INTERNAL_HEADERS, "user-agent": "AfronomicsSiteQA/1.0 (+link check)" };
+
 // ---------------------------------------------------------------------------------------------------------------
 // Options
 // ---------------------------------------------------------------------------------------------------------------
@@ -160,7 +165,7 @@ async function waitForServer(base, ms = 60_000) {
   const until = Date.now() + ms;
   while (Date.now() < until) {
     try {
-      const res = await fetch(base, { redirect: "manual" });
+      const res = await fetch(base, { redirect: "manual", headers: FETCH_HEADERS });
       if (res.status < 500) return;
     } catch {
       /* not up yet */
@@ -334,7 +339,7 @@ async function resolvePages(browser, base, config) {
     if (!pages.some((p) => p.path === entry.path)) pages.push(entry);
   };
   const linksOn = async (pagePath) => {
-    const context = await browser.newContext();
+    const context = await browser.newContext({ extraHTTPHeaders: INTERNAL_HEADERS });
     const page = await context.newPage();
     try {
       await page.goto(base + pagePath, { waitUntil: "domcontentloaded", timeout: 60_000 });
@@ -376,6 +381,7 @@ async function checkPage(browser, { base, axe, target, variant, primary, screens
     isMobile: Boolean(variant.mobile),
     hasTouch: Boolean(variant.mobile),
     deviceScaleFactor: 1,
+    extraHTTPHeaders: INTERNAL_HEADERS,
   });
   const page = await context.newPage();
   const consoleErrors = [];
@@ -480,8 +486,8 @@ async function checkPage(browser, { base, axe, target, variant, primary, screens
 async function internalStatus(url, origin) {
   let current = url;
   for (let hop = 0; hop < 6; hop++) {
-    let res = await fetch(current, { method: "HEAD", redirect: "manual" });
-    if (res.status === 405 || res.status >= 400) res = await fetch(current, { method: "GET", redirect: "manual" });
+    let res = await fetch(current, { method: "HEAD", redirect: "manual", headers: FETCH_HEADERS });
+    if (res.status === 405 || res.status >= 400) res = await fetch(current, { method: "GET", redirect: "manual", headers: FETCH_HEADERS });
     await res.body?.cancel?.();
     if (res.status >= 300 && res.status < 400) {
       const location = res.headers.get("location");

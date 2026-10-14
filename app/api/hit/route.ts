@@ -1,5 +1,6 @@
-import { isAutomated } from "@/lib/bots";
+import { isAutomated, isInternalCall } from "@/lib/bots";
 import { rpc } from "@/lib/store";
+import { eventPath } from "@/lib/track";
 
 export const runtime = "nodejs";
 
@@ -8,13 +9,15 @@ export const runtime = "nodejs";
  * count per reader action. No cookies, no IP addresses, no user identifiers are stored.
  */
 export async function POST(request: Request) {
-  if (isAutomated(request.headers.get("user-agent"))) return new Response(null, { status: 204 });
-  const body = (await request.json().catch(() => null)) as { path?: string; referrer?: string; returning?: boolean; visitor?: boolean; campaign?: string; event?: string } | null;
+  // Browsers only, and only requests Vercel received from the internet: a local or CI `next start` (site QA, tests)
+  // has no x-vercel-ip-country and must not write to the production counts (lib/bots.ts isInternalCall).
+  if (isAutomated(request.headers.get("user-agent")) || isInternalCall(request.headers)) return new Response(null, { status: 204 });
+  const body = (await request.json().catch(() => null)) as { path?: string; referrer?: string; returning?: boolean; visitor?: boolean; campaign?: string; event?: string; network?: string } | null;
   const path = (body?.path ?? "").split("?")[0].slice(0, 200);
   const country = request.headers.get("x-vercel-ip-country") ?? "";
   // An action (sign-up, rate check, report, share): one daily count per action and page. The database checks the name.
   if (body?.event) {
-    await rpc("af_event", { p_name: body.event.slice(0, 40), p_path: path, p_country: country });
+    await rpc("af_event", { p_name: body.event.slice(0, 40), p_path: eventPath(body.event, path, body.network), p_country: country });
     return new Response(null, { status: 204 });
   }
   let referrer = "";

@@ -36,10 +36,13 @@ export function PageCounter() {
   // tagged data-track="<event>", and calls to action on /pricing. The one-question survey listens for downloads.
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
+      // auxclick: a middle-click opens a share or download link in a new tab without firing "click".
+      if (event.type === "auxclick" && event.button !== 1) return;
       const target = event.target as Element | null;
       const tagged = target?.closest?.("[data-track]");
       const name = tagged?.getAttribute("data-track");
-      if (isTrackEvent(name)) track(name);
+      // Shares carry the network (data-network="whatsapp", "linkedin", "copy", ...), stored with the page path.
+      if (isTrackEvent(name)) track(name, tagged?.getAttribute("data-network"));
       const link = target?.closest?.("a[href]") as HTMLAnchorElement | null;
       if (!tagged && window.location.pathname === "/pricing" && target?.closest?.("#main a[href], #main button") && !target.closest("[data-no-track]")) {
         track("pricing_cta_click");
@@ -58,7 +61,11 @@ export function PageCounter() {
       } catch {}
     };
     document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
+    document.addEventListener("auxclick", onClick);
+    return () => {
+      document.removeEventListener("click", onClick);
+      document.removeEventListener("auxclick", onClick);
+    };
   }, []);
   return null;
 }

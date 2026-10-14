@@ -18,5 +18,5 @@
       "permanent": true
     }
   ],
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)brand' ':(exclude)editions' ':(exclude)scripts' ':(exclude)supabase' ':(exclude).github' ':(exclude)*.md'"
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)brand' ':(exclude)editions' ':(exclude)scripts' ':(exclude)supabase' ':(exclude).github' ':(exclude,glob)*.md' ':(exclude)docs'"
 }

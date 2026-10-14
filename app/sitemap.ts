@@ -9,6 +9,7 @@ import { mmfMonths } from "@/lib/data/mmf-months";
 import { lenderHref, loadLenders } from "@/lib/data/loan-apps";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
+import { visibleCases } from "@/lib/cases";
 import { learnLangs, loadLessons } from "@/lib/learn-i18n";
 import { institutions, topics } from "@/lib/taxonomy";
 import { allTbillWeeks, bondDates } from "@/lib/data/auction-stories";
@@ -27,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   });
 
+  const publicCases = visibleCases(false);
   const bills = allBillsUpdated();
   const bonds = allBondsUpdated();
   const debt = newest(bills, bonds);
@@ -54,6 +56,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/markets/auction-week", "daily", 0.8, debt),
     page("/morning", "hourly", 0.9),
     page("/morning/sw", "daily", 0.6),
+    page("/sw", "daily", 0.7),
+    // The casebook is listed once a case is signed off; drafts never are.
+    ...(publicCases.length ? [page("/casebook", "weekly", 0.8), ...publicCases.map((c) => page(`/casebook/${c.id}`, "monthly", 0.7))] : []),
     page("/rates/kenya", "daily", 0.9, fileUpdated("kenya/rates.json")),
     page("/guides/where-your-shilling-earns-most", "daily", 0.9),
     page("/rates/kenya/money-market-funds", "daily", 0.9),

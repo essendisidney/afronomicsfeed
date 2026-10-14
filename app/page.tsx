@@ -19,7 +19,7 @@ const homeDescription =
 export const metadata: Metadata = {
   title: { absolute: homeTitle },
   description: fitDescription(homeDescription),
-  alternates: { canonical: site.url, types: { "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} RSS` }] } },
+  alternates: { canonical: site.url, languages: { en: site.url, sw: `${site.url}/sw` }, types: { "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} RSS` }] } },
   openGraph: { title: homeTitle, description: homeDescription, url: site.url, siteName: site.name, locale: "en_KE", type: "website" },
 };
 
@@ -63,7 +63,10 @@ export default async function TodayPage() {
         </h1>
         <p className="mt-3 max-w-2xl text-[16px] leading-7 text-ink-soft">
           Every figure names its source and the date it is as of. Tap the tag to open the source.{" "}
-          <em className="not-italic font-semibold text-ink">Information, not advice.</em>
+          <em className="not-italic font-semibold text-ink">Information, not advice.</em>{" "}
+          <Link href="/sw" lang="sw" hrefLang="sw" className="underline underline-offset-2">
+            Soma kwa Kiswahili
+          </Link>
         </p>
       </header>
 

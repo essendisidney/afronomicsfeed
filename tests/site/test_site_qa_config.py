@@ -22,7 +22,7 @@ REQUIRED = [
     "/markets/bonds", "/markets/kenya-tbills", "/markets/kenya-bonds", "/east-africa", "/rates/kenya",
     "/rates/kenya/money-market-funds", "/rates/kenya/loan-apps", "/brief", "/weekly", "/morning", "/developers",
     "/data-api", "/downloads", "/status", "/corrections", "/countries/kenya", "/thank-you",
-    "/numbers", "/compare", "/stories",
+    "/numbers", "/compare", "/stories", "/sw", "/casebook",
 ]
 
 

@@ -172,3 +172,11 @@ what we changed. Newest at the bottom. Read this first every week.
   blocked by the session's safety check, the operator saves a draft and lists it for the founder.
 - **Test:** by 13 Nov, at least 3 pilots used on 5+ days and 1 payment; if 0 pilots after 25 contacts, D-004's kill
   rule applies.
+
+### D-018 · 14 Oct 2026 · Rebuild brief adopted; Phase 1 (Shell) approved and released
+- **Decided by the founder:** the rebuild brief (`docs/rebuild/BRIEF.md`) is the plan for the front of the site and
+  the Desk layer; the data engine stays. Phase 1 plan approved "with your recommendations": hubs link to existing
+  pages (no mass move of addresses), Casebook stays out of the navigation until Phase 2 ships real cases, parked
+  routes redirect permanently except `/chama` (live until end of October), Kiswahili Today in Phase 2.
+- **Released:** PR #129 merged 14 Oct after build, tests and site QA passed and the founder said "release it".
+- **Next:** Phase 2 (Casebook) plan in `docs/rebuild/phase-2-plan.md`, for approval before any code.

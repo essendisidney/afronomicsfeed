@@ -23,8 +23,8 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 0,
-  "results": 0,
+  "timed": 1,
+  "results": 1,
   "p50_h": null,
   "p90_h": null
  },
@@ -198,12 +198,12 @@
    "kind": "bonds",
    "market": "morocco",
    "name": "Morocco",
-   "results": 0,
-   "timed": 0,
+   "results": 1,
+   "timed": 1,
    "p50_h": null,
    "p90_h": null,
-   "publisher_time": null,
-   "status": "no new result since measuring began"
+   "publisher_time": "Last-Modified of the result's own document",
+   "status": "1 timed result so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -218,6 +218,16 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:morocco:2026-10-13",
+   "kind": "bonds",
+   "market": "morocco",
+   "date": "2026-10-13",
+   "first_seen_at": "2026-10-14T09:33:37+00:00",
+   "published_at": "2026-10-13T18:36:57+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 14.94
+  },
   {
    "key": "bonds:egypt:2026-10-13",
    "kind": "bonds",
@@ -611,5 +621,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-13T11:57:14+00:00"
+ "updated_at": "2026-10-14T09:43:35+00:00"
 }

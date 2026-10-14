@@ -9,7 +9,7 @@ const description =
   "Peer tables in the same units: money market funds, SACCOs, banks, mobile lenders, government borrowing costs and the cost of sending money home.";
 
 export const metadata: Metadata = {
-  title: "Compare: savers, lenders and governments side by side",
+  title: "Compare savers, lenders and governments",
   description: fitDescription(description),
   alternates: { canonical: `${site.url}/compare` },
 };

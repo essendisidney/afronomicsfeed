@@ -30,7 +30,7 @@ export const numbersSections: readonly HubSection[] = [
     links: [
       { href: "/rates/kenya", label: "Kenya savings and loan rates compared", note: "Banks, money market funds, SACCOs and T-bills side by side" },
       { href: "/rates/kenya/money-market-funds", label: "Money market fund yields", note: "Every fund's published yield" },
-      { href: "/rates/kenya/best-money-market-fund", label: "Best money market fund this month", note: "Ranked by yield, with the caveats" },
+      { href: "/rates/kenya/best-money-market-fund", label: "Top money market fund by yield", note: "This month's ranking by yield, with the caveats" },
       { href: "/rates/kenya/saccos", label: "SACCO rates", note: "What SACCOs pay and charge" },
       { href: "/markets/kenya-tbills/auction", label: "Kenya T-bill auction: likely rates", note: "Our range for the next auction, and did your bid win" },
       { href: "/guides/where-your-shilling-earns-most", label: "Where your shilling earns most", note: "A guide, with the numbers kept current" },

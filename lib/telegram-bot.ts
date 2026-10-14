@@ -92,7 +92,7 @@ function market(slug: BillMarket["slug"]): string {
 function auction(): string {
   const next = nextAuction();
   const lines = outlook().map(
-    (v) => `${v.tenor}-day: last <b>${pct(v.last.weighted_avg_rate)}</b>, likely next ${pct(v.low)} – ${pct(v.high)} (held ${Math.round((v.trackRecord.inside / v.trackRecord.tested) * 100)}% of the time since 2011)`,
+    (v) => `${v.tenor}-day: last <b>${pct(v.last.weighted_avg_rate)}</b>, likely next ${pct(v.low)} – ${pct(v.high)} (ranges built this way held ${Math.round((v.trackRecord.inside / v.trackRecord.tested) * 100)}% of past auctions since 2011)`,
   );
   return [
     "🔨 <b>Kenya's next T-bill auction</b>",

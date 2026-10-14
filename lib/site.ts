@@ -216,7 +216,7 @@ export const footerColumns = [
 /** The house line under the columns (rebuild brief, section 6): Method · Our record · Corrections · Learn · About · Kiswahili. */
 export const footerLine = [
   { href: "/method", label: "Method" },
-  { href: "/#record", label: "Our record" },
+  { href: "/#record", label: "How the method has done" },
   { href: "/corrections", label: "Corrections" },
   { href: "/learn", label: "Learn" },
   { href: "/about", label: "About" },

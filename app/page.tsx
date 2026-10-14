@@ -105,14 +105,16 @@ export default async function TodayPage() {
         <section id="record" aria-labelledby="our-record" className="mt-12 grid gap-6 rounded-3xl border border-rule bg-surface px-6 py-7 sm:px-8 lg:grid-cols-[1fr_2fr] lg:items-center">
           <div>
             <h2 id="our-record" className="font-serif text-2xl text-ink sm:text-3xl">
-              Our record
+              How the method has done
             </h2>
             <p className="tabular mt-3 font-serif text-[2.6rem] leading-none text-ink">{Math.round(record.share * 100)}%</p>
           </div>
           <div>
             <p className="tabular text-[16px] leading-7 text-ink">
-              Before each Kenya Treasury bill auction we publish a likely range for each tenor. Across {record.tested.toLocaleString("en-US")}{" "}
-              past auctions in {record.tenors} tenors, the result landed inside our range {record.inside.toLocaleString("en-US")} times.
+              Before each Kenya Treasury bill auction we show a likely range for each tenor: the latest rate plus the 10th to 90th
+              percentile of the last 26 weekly moves. Tested on {record.tested.toLocaleString("en-US")} past auctions in {record.tenors} tenors since
+              2011, the result fell inside the range {record.inside.toLocaleString("en-US")} times. A range built this way aims for about 80%, so it
+              has been too narrow.
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <EvidenceTag source="Central Bank of Kenya auction results" href={record.source} asOf={record.asOf} />
@@ -120,7 +122,10 @@ export default async function TodayPage() {
                 This week&rsquo;s ranges →
               </Link>
             </div>
-            <p className="mt-2 text-[13px] text-muted">The full forecast ledger, graded automatically for every market, follows on its own page.</p>
+            <p className="mt-2 text-[13px] text-muted">
+              This is a backtest: the method run over past auctions, not ranges we published at the time. From now on each week&rsquo;s range is
+              published before bids close and graded by code against the CBK result.
+            </p>
           </div>
         </section>
       ) : null}

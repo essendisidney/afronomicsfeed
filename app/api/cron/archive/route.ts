@@ -20,7 +20,7 @@ function authorized(request: Request) {
 export async function GET(request: Request) {
   if (!authorized(request)) return Response.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   const report = await runArchive();
-  for (const path of ["/", "/news", "/markets", "/capital", "/signals", "/data", "/countries"]) revalidatePath(path);
+  for (const path of ["/", "/news", "/markets", "/data", "/countries"]) revalidatePath(path);
   revalidatePath("/countries/[slug]", "page");
   revalidatePath("/data/[indicator]", "page");
   return Response.json({ ok: report.errors.length === 0, ...report });

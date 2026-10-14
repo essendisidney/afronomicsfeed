@@ -1,7 +1,5 @@
 import { loadTbills, tenors, type TbillAuction, type Tenor } from "./kenya-tbills";
 
-export { checkBid, priceFor, WHT, type BidCheck, type BidVerdict } from "@/lib/auction-math";
-
 /**
  * Auction intelligence for Kenya's weekly Treasury bill auction.
  *

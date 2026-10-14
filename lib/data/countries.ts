@@ -155,28 +155,3 @@ export const countries: CountryProfile[] = [
 export function getCountry(slug: string) {
   return countries.find((c) => c.slug === slug);
 }
-
-export const featuredCountrySlugs = ["kenya", "nigeria", "south-africa", "egypt", "ghana", "rwanda"] as const;
-
-export const indicatorSlots = [
-  "GDP",
-  "GDP per capita",
-  "Inflation",
-  "Policy rate",
-  "FX",
-  "Public debt",
-  "Trade balance",
-  "FDI",
-] as const;
-
-export const kenyaGraph = [
-  { from: "Kenya", rel: "currency", to: "KES" },
-  { from: "Kenya", rel: "central bank", to: "CBK" },
-  { from: "CBK", rel: "policy", to: "Interest rates" },
-  { from: "CBK", rel: "supervises", to: "Banks" },
-  { from: "Kenya", rel: "exchange", to: "NSE" },
-  { from: "Kenya", rel: "sector", to: "Agriculture" },
-  { from: "Kenya", rel: "sector", to: "Energy" },
-  { from: "Energy", rel: "exposes", to: "Inflation / manufacturing costs" },
-  { from: "Kenya", rel: "corridor", to: "Northern Corridor" },
-] as const;

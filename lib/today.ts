@@ -133,7 +133,9 @@ function auctionItem(p: Pair): TodayMove {
     shillings,
     direction: up ? "up" : "down",
     href: (p.latest.instrument === "bill" ? p.meta.billHref : p.meta.bondSlug ? `/markets/bonds/${p.meta.bondSlug}` : null) ?? "/numbers",
-    evidence: { source: publisher ?? p.meta.country, href: p.latest.source, asOf: p.latest.date },
+    // CBK dates each result by its value date, which falls days after the result is published: say so, rather than
+    // show what reads as a future "as of" date.
+    evidence: { source: publisher ?? p.meta.country, href: p.latest.source, asOf: p.latest.date, ...(p.meta.key === "kenya" ? { dateKind: "value" as const } : {}) },
     sw,
   };
 }

@@ -123,27 +123,6 @@ export function getLatestArticles(limit = 3): Article[] {
   return getAllArticles().slice(0, limit);
 }
 
-export function searchArticles(query: string): Article[] {
-  const q = query.trim().toLowerCase();
-  if (!q) return [];
-
-  return getAllArticles().filter((article) => {
-    const haystack = [
-      article.title,
-      article.summary,
-      article.teaser.join(" "),
-      article.authors.join(" "),
-      article.labels.join(" "),
-      article.topics?.join(" ") ?? "",
-      article.institutions?.join(" ") ?? "",
-      article.body,
-    ]
-      .join(" ")
-      .toLowerCase();
-    return haystack.includes(q);
-  });
-}
-
 export function toIndexItem(article: Article) {
   const { body, ...item } = article;
   void body;

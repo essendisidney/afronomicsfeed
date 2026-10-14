@@ -5,22 +5,8 @@ const dateFormatter = new Intl.DateTimeFormat("en-KE", {
   timeZone: "Africa/Nairobi",
 });
 
-const dateTimeFormatter = new Intl.DateTimeFormat("en-KE", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-  timeZone: "Africa/Nairobi",
-  timeZoneName: "short",
-});
-
 export function formatDate(iso: string) {
   return dateFormatter.format(new Date(`${iso}T00:00:00+03:00`));
-}
-
-export function formatDateTime(iso: string) {
-  return dateTimeFormatter.format(new Date(iso));
 }
 
 export function categoryLabel(category: "brief" | "weekly" | "explainer") {

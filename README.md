@@ -1,114 +1,91 @@
 # Afronomics Feed
 
-Kenya-first financial intelligence: banking, capital markets, and financial regulation. Primary sources. No tape noise.
+The price of money in Africa, from the source. Kenya first.
 
-This is a clean Next.js rebuild — not a scrape or clone of the prior live site.
+Afronomics reads what central banks, treasuries and regulators publish (auction results, policy rates, bank and SACCO
+returns), keeps a dated history of it, and shows it with its source. It compares institutions, keeps a casebook of
+past money events, and grades its own forecasts in public. Information, not advice.
 
-## Stack
+This guide is for a new contributor. How the site runs day to day is in [`OPERATIONS.md`](OPERATIONS.md); what it is
+for and what comes next is in [`AFRONOMICS_BUILD_PLAN.md`](AFRONOMICS_BUILD_PLAN.md); the rebuild that gave the site
+its current shape is in [`docs/rebuild/BRIEF.md`](docs/rebuild/BRIEF.md).
 
-- Next.js (App Router) + TypeScript + Tailwind CSS v4
-- Filesystem Markdown + YAML frontmatter (`gray-matter`)
-- Deploy-ready for Vercel
+## Run it
 
-## Run locally
+Next.js 16 (App Router), TypeScript and Tailwind CSS v4. This Next.js has breaking changes from older versions: read
+`AGENTS.md` and the guide in `node_modules/next/dist/docs/` before writing code.
 
 ```bash
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+The collectors and tests are Python 3.12 (`pip install pdfplumber requests openpyxl pytest pyyaml`).
+
+## Checks before every pull request
 
 ```bash
+npx tsc --noEmit
+npx eslint
+python -m pytest tests/site tests/readers
 npm run build
-npm start
+node scripts/site-qa.mjs --serve      # after the build; see docs/qa.md
 ```
 
-## How to add a Daily Brief
+The same tests and site QA run on every pull request in GitHub Actions. Check every changed page at 390px and 1280px
+wide, in light and dark. The full release routine is in `OPERATIONS.md`.
 
-1. Create `content/briefs/your-slug.md`.
-2. Use this frontmatter (all fields required except `asOf` and `gated`):
+## Where things live
 
-```yaml
----
-title: "Your headline"
-date: "2026-09-10"
-authors:
-  - "Afronomics Desk"
-category: brief
-labels:
-  - Facts
-  - Analysis
-sources:
-  - name: "Central Bank of Kenya"
-    url: "https://www.centralbank.go.ke/"
-    date: "2026-09-10"
-asOf: "2026-09-10"
-summary: "One sentence for indexes and RSS."
-teaser:
-  - "Free bullet one."
-  - "Free bullet two."
-  - "Free bullet three."
-gated: true
----
-```
+### Data and collectors
 
-3. Write the full body in Markdown below the frontmatter.
-4. Optional but preferred: `topics` and `institutions` from `lib/taxonomy.ts`, plus a desk memo: `urgency` (`file` | `watch` | `cadence` | `reference`), `minutes`, `fileFor`, `soWhat`, `unknowns`.
-5. The index at `/brief` and the article at `/brief/your-slug` pick it up automatically.
+| What | Where |
+| --- | --- |
+| Collected data and its history (auctions, rates, registry, forecasts) | `data/` (one folder per country, plus `data/registry/`, `data/forecasts/`, `data/watch/`) |
+| Readers and collectors, one per source | `scripts/*.py` |
+| Offline reader tests and saved copies of publishers' documents | `tests/readers/`, `tests/readers/fixtures/` |
+| Data loaders and arithmetic | `lib/data/`, `lib/auction-math.ts` |
+| Scheduled jobs | `.github/workflows/`, `vercel.json` (listed in `OPERATIONS.md`) |
+| Snapshots of the Morning, the weekly edition and the index release | `editions/` |
+| Database migrations | `supabase/migrations/` |
 
-Weekly notes live in `content/weekly/`. Explainers live in `content/explainers/` (`category: weekly` or `explainer`). Explainers default to open (`gated: false`) unless you set `gated: true`.
+`data/` is append-only. Never delete or rewrite a row: a correction is a new row that says what it corrects.
 
-### Trust rules for new copy
+### Pages
 
-- Labels must be one or more of `Facts`, `Analysis`, `Opinion`.
-- Every piece needs `sources[]` with `name`, `url`, and `date`.
-- Any market figure needs `asOf`. If the figure is not copied from a cited public document, label it **EXAMPLE DATA** in the prose. Do not invent CBK or NSE prints and present them as fact.
-- Do not use buy / sell / hold / overweight, price targets as advice, “guaranteed returns”, or personalized portfolio language.
+| Section | Route | Where |
+| --- | --- | --- |
+| Today (home) | `/`, Kiswahili at `/sw` | `app/page.tsx`, `app/sw/` |
+| Numbers | `/numbers`, gathering `/markets/*`, `/rates/*`, `/data/*`, `/countries/*` | `app/numbers/`, `lib/hubs.ts` |
+| Stories | `/stories`, gathering `/brief`, `/weekly`, `/explainers` | `app/stories/`, `content/` |
+| Learn | `/learn`, with Kiswahili and other languages | `app/learn/`, `content/learn/` |
+| For institutions | `/for-institutions`, `/pricing`, `/pack`, `/licensing` | `app/for-institutions/`, prices in `lib/billing/ratecard.ts` |
+| Casebook | `/casebook`, `/casebook/[id]` | `content/cases/<id>.md`, `lib/cases.ts`, checked by `scripts/case_check.py` |
+| Registry | `/registry`, `/registry/[slug]`, CSV at `/api/registry` | `data/registry/`, `lib/registry.ts` |
+| Compare | `/compare` | `app/compare/`, from the registry |
+| Our record (forecast ledger) | `/record`, CSV at `/api/record` | `data/forecasts/`, `lib/ledger.ts`, `scripts/forecast_ledger.py` |
+| Watch pack | public sample at `/watch/sample`; private links at `/watch/<slug>/<token>` | `lib/watch.ts`, `lib/watch-link.ts`, withdrawn links in `data/watch/revoked.json` |
+| The desk (internal) | `/desk`, Watch packs at `/desk/watch` | `app/desk/` |
 
-## Deploy on Vercel
+Casebook drafts show only in preview deployments and on `/desk`. Production shows a case only once it is published
+and signed off by the founder. Watch pack links are signed for one SACCO, expire, and are never public.
 
-1. Push this repository to GitHub.
-2. Import the project at [vercel.com/new](https://vercel.com/new).
-3. Framework preset: Next.js. Build command: `npm run build`. Output: default.
-4. No environment variables are required for the MVP.
-5. After go-live, set the production domain. `metadataBase` in `app/layout.tsx` currently uses `https://afronomicsfeed.com`.
+### Writing a story
 
-## What this MVP does not do
+Briefs, weekly notes and explainers are Markdown files with YAML frontmatter in `content/briefs/`, `content/weekly/`
+and `content/explainers/`. `lib/content.ts` refuses a file without `title`, `date`, `authors`, `category`, `labels`,
+`sources` (each with `name`, `url` and `date`), `teaser` and `summary`. Labels are `Facts`, `Analysis` or `Opinion`.
+Topics and institutions must come from `lib/taxonomy.ts`. A brief drafted from a story lead
+(`scripts/story_finder.py`) is checked with `python scripts/story_check.py content/briefs/<slug>.md <lead id>` before
+it ships (see `docs/story-engine.md`). The house voice is in `docs/editorial/voice.md`.
 
-- User accounts (Paystack checkout is live; access is granted by email from /desk)
-- Live NSE quote redistribution or scraping (strip is static; tape links to [nse.co.ke](https://www.nse.co.ke/))
-- Comments, tips, or UGC
-- A CMS admin (edit Markdown on disk)
+## The honesty rules
 
-## Stretch included
-
-- Dark / light toggle (class on `html`, remembered in `localStorage`)
-- Client search over published teasers (`⌘K` / `Ctrl+K`)
-- RSS of free teasers at `/rss.xml`
-
-## Wave 4
-
-Habit and willingness to pay — not more chrome.
-
-- Desk memo fields on pieces: `urgency`, `minutes`, `fileFor`, `soWhat`, `unknowns` (memo gated on paid series)
-- `/today` rebuilt as an 8-minute morning file + standing cadence (confirm on official sites)
-- Pricing states who pays, what they buy, and who should not
-- New brief: *When the T-bill result notice posts: a 12-minute file*
-
-## Wave 3
-
-- `/today` — morning file assembled from teasers + labelled tracker stubs
-- `/institutions` and `/topics` — navigate by primary and subject
-- Archive filters for series, Facts/Analysis/Opinion, and topic
-- Regulatory tracker filter by authority
-- Copy citation / copy link on articles; explainer table of contents
-- New brief: *Anatomy of an NSE issuer announcement*
-
-## Wave 2
-
-- `/method` — house standard (labels, citations, bans, corrections)
-- `/archive` — full file with type filters
-- Article pages: lede preview on gated pieces, related briefs, newer/older in the same file
-- Open Graph images (`next/og`) and Article JSON-LD
-- Print stylesheet hides chrome and the paywall
+- Every figure shows its source, a link and an as-of date.
+- Code does the arithmetic. A model never produces a number a reader sees.
+- No demo or invented figures in production.
+- No verdict on a named institution in public. Public pages show the regulators' figures and sector-level patterns;
+  a SACCO is set against SASRA's minimums only in its own private Watch pack.
+- Information, not advice: no buy, sell or hold; no promised returns.
+- Historical data is appended, never overwritten. Corrections are logged in `lib/corrections.ts` and shown at
+  `/corrections`.

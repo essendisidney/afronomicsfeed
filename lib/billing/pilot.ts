@@ -25,9 +25,6 @@ export const pilotNextOptions = [
   { id: "inflation", label: "Inflation" },
 ] as const;
 
-export type PilotMarketId = (typeof pilotMarkets)[number]["id"];
-export type PilotNextId = (typeof pilotNextOptions)[number]["id"];
-
 /** Free mailbox providers. Instant institutional trial keys go to work addresses only; requests from these are still recorded. */
 const webmail = new Set([
   "gmail.com", "googlemail.com", "yahoo.com", "yahoo.co.uk", "yahoo.fr", "ymail.com", "rocketmail.com",

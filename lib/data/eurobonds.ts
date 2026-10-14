@@ -67,17 +67,6 @@ export function eurobondTable(c: EurobondCountry): EurobondRow[] {
 export const bondLabel = (b: Pick<Eurobond, "coupon" | "maturity">) =>
   b.coupon != null ? `${b.coupon.toFixed(3)}% due ${maturityLabel(b.maturity)}` : `${b.maturity} bond`;
 
-/** Simple average yield across a country's bonds on each day read, oldest first, for the trend line. */
-export function averageSeries(c: EurobondCountry): { date: string; avg: number; n: number }[] {
-  return [...c.history]
-    .reverse()
-    .map((h) => {
-      const v = Object.values(h.yields);
-      return { date: h.date, avg: v.reduce((s, x) => s + x, 0) / v.length, n: v.length };
-    })
-    .filter((x) => x.n > 0);
-}
-
 export const maturityLabel = (ym: string) =>
   ym.length === 4
     ? ym

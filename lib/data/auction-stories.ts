@@ -14,8 +14,6 @@ const bpsWords = (from: number, to: number) => {
   return d === 0 ? "unchanged" : `${d > 0 ? "up" : "down"} ${Math.abs(d)} basis point${Math.abs(d) === 1 ? "" : "s"}`;
 };
 
-export type TbillWeek = ReturnType<typeof auctionWeeks>[number];
-
 export function allTbillWeeks() {
   return auctionWeeks(loadTbills().rows, 100000);
 }

@@ -60,19 +60,3 @@ export function ButtonLink({
     </a>
   );
 }
-
-export function Button({
-  variant,
-  size,
-  block,
-  className,
-  children,
-  type = "button",
-  ...rest
-}: Common & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">) {
-  return (
-    <button type={type} className={buttonClass({ variant, size, block, className })} {...rest}>
-      {children}
-    </button>
-  );
-}

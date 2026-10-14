@@ -99,5 +99,3 @@ export function mmfMonths(history: FundReading[] = loadFundHistory(), now = new 
     };
   });
 }
-
-export const mmfMonth = (month: string) => mmfMonths().find((m) => m.month === month);

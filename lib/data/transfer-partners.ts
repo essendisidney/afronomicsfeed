@@ -26,7 +26,6 @@ export const partners: Partner[] = [
   { slug: "hellopaisa", name: "Hello Paisa", site: "https://www.hellopaisa.co.za", match: /^hello-? ?paisa\b/i },
 ];
 
-export const partnerFor = (firm: string) => partners.find((p) => p.match.test(firm.trim())) ?? null;
 export const partnerBySlug = (slug: string) => partners.find((p) => p.slug === slug) ?? null;
 
 /** Where /go/<slug> sends the reader: the affiliate link when set (https only), else the provider's own site. */

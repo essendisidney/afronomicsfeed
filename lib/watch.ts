@@ -162,9 +162,4 @@ export async function buildWatch(slug: string | null, now: number): Promise<Watc
   };
 }
 
-/** For the sample: the subject's figure is the tier median itself, so the page shows the layout without a SACCO. */
-export function sampleValue(l: Line): number | null {
-  return l.median;
-}
-
 export { latest };

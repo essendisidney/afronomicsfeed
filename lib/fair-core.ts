@@ -65,8 +65,6 @@ export const HOMES: Category[] = [
 ];
 
 export const categories = (kind: FairKind) => (kind === "pay" ? JOBS : HOMES);
-export const categoryLabel = (kind: FairKind, id: string) => categories(kind).find((c) => c.id === id)?.label ?? id;
-export const townLabel = (code: string, id: string) => (id === "all" ? `All of ${findCountry(code)?.name ?? code}` : TOWNS[code]?.find((t) => t.id === id)?.label ?? id);
 
 // Monthly amounts in US dollars that a figure must fall within: wide on purpose, only to catch typos.
 const BOUNDS_USD: Record<FairKind, [number, number]> = { pay: [15, 60000], rent: [5, 15000] };

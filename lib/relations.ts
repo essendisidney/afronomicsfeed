@@ -29,17 +29,3 @@ export function getNeighbors(article: Article): {
     older: index >= 0 && index < list.length - 1 ? toIndexItem(list[index + 1]) : null,
   };
 }
-
-export function getDeskLead() {
-  const briefs = getArticlesByCategory("brief");
-  const lead = briefs[0] ?? getAllArticles()[0];
-  const supporting = getAllArticles()
-    .filter((item) => item.slug !== lead?.slug || item.category !== lead?.category)
-    .slice(0, 4)
-    .map(toIndexItem);
-
-  return {
-    lead: lead ? toIndexItem(lead) : null,
-    supporting,
-  };
-}

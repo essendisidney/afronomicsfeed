@@ -144,12 +144,3 @@ export async function loadCountryProjects(iso: string, rows = 25): Promise<Proje
 export function sumAmounts(list: Project[]) {
   return list.reduce((total, project) => total + project.amountUsd, 0);
 }
-
-export function groupBy<T, K extends string>(list: T[], key: (item: T) => K) {
-  const out = new Map<K, T[]>();
-  for (const item of list) {
-    const k = key(item);
-    out.set(k, [...(out.get(k) ?? []), item]);
-  }
-  return out;
-}

@@ -18,7 +18,6 @@ export type Tender = {
 
 export const PORTAL = "https://tenders.go.ke/";
 export const TENDER_PRICE_KES = 500;
-export const TRIAL_DAYS = 14;
 export const MAX_KEYWORDS = 10;
 
 export const CATEGORY_LABEL: Record<string, string> = {
@@ -27,9 +26,6 @@ export const CATEGORY_LABEL: Record<string, string> = {
   services: "Services",
   consultingServices: "Consultancy",
 };
-
-const METHOD_LABEL: Record<string, string> = { open: "Open tender", selective: "Restricted", limited: "Restricted", direct: "Direct" };
-export const methodLabel = (m: string) => METHOD_LABEL[m] ?? (m ? m[0].toUpperCase() + m.slice(1) : "");
 
 /** "ICT, cleaning; Kisumu" -> ["ict", "cleaning", "kisumu"]: 2-40 characters each, at most ten, no repeats. */
 export function parseKeywords(input: unknown): string[] {

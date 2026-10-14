@@ -113,14 +113,6 @@ export function formatFx(value: number) {
   }).format(value);
 }
 
-/** USD/KES means units of KES per one US dollar. */
-export function fxForLabel(label: string, quote: FxQuote | null) {
-  if (!quote || !label.startsWith("USD/")) return null;
-  const value = quote.rates[label.slice(4)];
-  if (value == null) return null;
-  return formatFx(value);
-}
-
 export function convertAmount(amount: number, from: string, to: string, rates: Record<string, number>) {
   if (!Number.isFinite(amount)) return null;
   const fromRate = rates[from];

@@ -14,8 +14,6 @@ const bpsWords = (from: number, to: number) => {
 };
 const tenorWord = (t: number) => `${t}-day`;
 
-export type MarketWeek = ReturnType<typeof billWeeks>[number];
-
 export function marketDates(slug: BillMarket["slug"]) {
   return billWeeks(loadBillMarket(slug).rows, 100000);
 }

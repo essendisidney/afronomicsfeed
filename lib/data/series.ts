@@ -152,7 +152,7 @@ export function readingFor(file: IndicatorFile, iso: string): Reading | null {
 }
 
 /** Continental total for summable series, using only countries that reported in that year. */
-export function continentalTotal(file: IndicatorFile, year: number) {
+function continentalTotal(file: IndicatorFile, year: number) {
   let sum = 0;
   let reporting = 0;
   for (const item of file.series) {
@@ -192,12 +192,6 @@ export function movers(file: IndicatorFile, limit = 5): Mover[] {
     return { ...reading, delta };
   });
   return scored.sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta)).slice(0, limit);
-}
-
-/** All indicator readings for one country — the country file. */
-export async function countryReadings(iso: string, slugs?: string[]) {
-  const files = await loadIndicators(slugs);
-  return files.map((file) => ({ file, reading: readingFor(file, iso) }));
 }
 
 /** CSV of the full file, with a provenance header. */

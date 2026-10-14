@@ -69,6 +69,12 @@ def test_every_parked_route_is_redirected():
     assert not (KEPT_FOR_NOW & sources), "/chama stays live until the end of October 2026"
 
 
+def test_parked_pages_are_out_of_the_build():
+    # Phase 6: a parked route keeps its redirect but has no page in app/; the code stays in git history.
+    left = [s for s, _ in PARKED if ":" not in s and (ROOT / "app" / s.lstrip("/")).exists()]
+    assert not left, f"parked routes still in app/: {left}"
+
+
 def test_parked_subpaths_are_covered():
     sources = {s for s, _ in PARKED}
     for base in ("/tenders", "/jobs", "/send-money"):

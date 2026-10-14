@@ -21,6 +21,3 @@ export const loadTenders = cache((): TenderFile | null => {
   const now = Date.now();
   return { ...f, tenders: f.tenders.filter((t) => Date.parse(t.closes) >= now) };
 });
-
-/** The time a request is answered at (the tenders page is rendered per request, so "closes in N days" is current). */
-export const requestTime = () => Date.now();

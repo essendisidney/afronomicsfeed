@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from registry_common import UA, append_rows, close, fetch_pdf, open_pdf  # noqa: E402
+from registry_common import UA, append_rows, sasra_file_link, close, fetch_pdf, open_pdf  # noqa: E402
 
 OUT = "sasra_figures.json"
 INDEX = "https://www.sasra.go.ke/sacco-supervision-reports/"
@@ -78,6 +78,7 @@ def read_table(pages: list[tuple[int, str]], kind: str) -> list[dict]:
     rows: list[dict] = []
     tier = None
     for page_no, text in pages:
+        last_was_row = False  # a wrapped name continues on the line straight after its row, on the same page
         for line in text.splitlines():
             line = line.strip()
             t = TIER.search(line)
@@ -85,12 +86,14 @@ def read_table(pages: list[tuple[int, str]], kind: str) -> list[dict]:
                 tier = t.group(1).lower()
                 continue
             m = rx.match(line)
-            if m and not NOT_A_NAME.search(m.group(2)):
+            row_line = bool(m and not NOT_A_NAME.search(m.group(2)))
+            if row_line:
                 values = [float(v.replace(",", "").rstrip("%")) for v in m.group(3).split()]
                 rank = int(m.group(1)) if m.group(1) else None
                 rows.append({"rank": rank, "name": m.group(2).strip(), "tier": tier, "values": values, "page": page_no})
-            elif rows and not HEADER_WORDS.search(line) and re.fullmatch(r"[A-Z][A-Z0-9 ()&'’.-]*", line) and len(line) <= 40:
+            elif last_was_row and not HEADER_WORDS.search(line) and re.fullmatch(r"[A-Z][A-Z0-9 ()&'’.-]*", line) and len(line) <= 40:
                 rows[-1]["name"] = f"{rows[-1]['name']} {line}"  # a name wrapped onto the next line
+            last_was_row = row_line
     # An unnumbered row takes the rank between its neighbours only when exactly one rank is missing there.
     for k, r in enumerate(rows):
         if r["rank"] is None:
@@ -100,6 +103,28 @@ def read_table(pages: list[tuple[int, str]], kind: str) -> list[dict]:
                 r["rank"] = before + 1
                 r["rank_inferred"] = True
     return [r for r in rows if r["rank"] is not None]
+
+
+def reconcile(growth: list[dict], stab: list[dict]) -> None:
+    """Make each rank's name agree between a growth and a stability table, which list the same SACCOs in the same
+    order. A name wrapped over two lines can be read short in one table: the longer reading wins, unless its extra
+    words start the next SACCO's name (then they were that SACCO's first line, printed above its row)."""
+    g = {r["rank"]: r for r in growth}
+    s = {r["rank"]: r for r in stab}
+    for rank in sorted(set(g) & set(s)):
+        a, b = g[rank]["name"], s[rank]["name"]
+        if a == b:
+            continue
+        short, long_ = sorted((a, b), key=len)
+        if long_.endswith(" " + short):
+            name = long_  # the first line was printed above the row in one table
+        elif long_.startswith(short + " "):
+            extra = long_[len(short) + 1 :]
+            nxt = [t[rank + 1]["name"] for t in (g, s) if rank + 1 in t]
+            name = short if any(n.startswith(extra) for n in nxt) else long_
+        else:
+            continue  # two different readings: left as printed, and the registry will not join them
+        g[rank]["name"] = s[rank]["name"] = name
 
 
 def stated_billions(pdf) -> list[float]:
@@ -175,16 +200,19 @@ def find_latest() -> tuple[str, int]:
         raise SystemExit("no annual report found on the SASRA page")
     page, year = max(pages, key=lambda p: int(p[1]))
     dl = requests.get(page, headers=UA, timeout=(15, 60), verify=False).text
-    m = re.search(r"(https://www\.sasra\.go\.ke/\?wpdmdl=\d+)", dl)
-    if not m:
+    link = sasra_file_link(dl)
+    if not link:
         raise SystemExit(f"no file link on {page}")
-    return m.group(1), int(year)
+    return link, int(year)
 
 
 def read(data: bytes | Path) -> tuple[dict[str, list[dict]], list[str]]:
     with open_pdf(data) as pdf:
         pages = appendix_pages(pdf)
         tables = {name: read_table([(i + 1, pdf.pages[i].extract_text() or "") for i in idx], APPENDICES[name][1]) for name, idx in pages.items()}
+        for growth, stab in (("III", "V"), ("IV", "VI")):
+            if growth in tables and stab in tables:
+                reconcile(tables[growth], tables[stab])
         problems = check(tables, stated_billions(pdf))
     for name in APPENDICES:
         if name not in tables:

@@ -46,7 +46,7 @@ def county_at_end(line: str) -> str | None:
 
 
 _STRIP = re.compile(
-    r"\b(sacco|saccos|society|societies|ltd|limited|plc|co-operative savings and credit|cooperative|and|dt|nwdt|bank|kenya|"
+    r"\b(sacco|saccos|society|societies|ltd|limited|plc|co-operative savings and credit|and|dt|nwdt|regulated|bank|kenya|"
     r"microfinance|mfb|the|\(k\)|k)\b",
     re.I,
 )
@@ -54,13 +54,18 @@ _STRIP = re.compile(
 
 def match_key(name: str) -> str:
     """A loose key for matching one institution's name across documents: 'Mwalimu National Sacco Society Ltd' and
-    'MWALIMU NATIONAL DT' both give 'mwalimu national'. Used only to suggest a match; a match is accepted only when
-    exactly one institution has the key (see lib/registry.ts and data/registry/aliases.json)."""
-    s = name.replace("’", "'").replace("&", " ")
+    'MWALIMU NATIONAL DT' both give 'mwalimunational'. Spaces, accents and the legal words are ignored, so
+    'TRANSNATION DT' meets 'Trans Nation Sacco' and 'NGÁRISHA' meets 'Ng'arisha'. lib/registry.ts uses the same rule,
+    with data/registry/aliases.json for names the rule cannot join."""
+    import unicodedata
+
+    s = unicodedata.normalize("NFD", name)
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    s = s.replace("’", "'").replace("&", " ")
     s = re.sub(r"\(([^)]*)\)", r" \1 ", s)
     s = _STRIP.sub(" ", s.lower())
     s = re.sub(r"[^a-z0-9' ]+", " ", s).replace("'", "")
-    return re.sub(r"\s+", " ", s).strip()
+    return re.sub(r"\s+", "", s)
 
 
 def slug(name: str) -> str:
@@ -79,6 +84,13 @@ def number(text: str) -> float | None:
     except ValueError:
         return None
     return -v if neg else v
+
+
+def sasra_file_link(html: str) -> str | None:
+    """The file behind a SASRA download page, in its stable form (https://www.sasra.go.ke/?wpdmdl=1772). The page
+    puts it in a data-downloadurl attribute with a one-off refresh token, which is dropped."""
+    m = re.search(r"[?&](?:amp;)?wpdmdl=(\d+)", html)
+    return f"https://www.sasra.go.ke/?wpdmdl={m.group(1)}" if m else None
 
 
 def fetch_pdf(url: str) -> bytes:

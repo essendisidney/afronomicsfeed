@@ -1,6 +1,6 @@
 {
 "source": "SASRA, list of licensed and authorised SACCO societies",
- "updated": "2026-10-14T18:08:15Z",
+ "updated": "2026-10-14T18:12:11Z",
 "rows": [
 {"year":2026,"schedule":"I","number":1,"name":"2NK Sacco Society Ltd","type":"dt","status":"licensed","county":"Nyeri","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},
 {"year":2026,"schedule":"I","number":2,"name":"Acumen DT Sacco Society Limited","type":"dt","status":"licensed","county":"Kajiado","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},
@@ -169,7 +169,7 @@
 {"year":2026,"schedule":"I","number":165,"name":"Vision Afrika Sacco Society Ltd","type":"dt","status":"licensed","county":"Nakuru","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},
 {"year":2026,"schedule":"I","number":166,"name":"Vision Point Sacco Society Ltd","type":"dt","status":"licensed","county":"Kisii","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},
 {"year":2026,"schedule":"I","number":167,"name":"Wakenya Pamoja Sacco Society Ltd.","type":"dt","status":"licensed","county":"Kisii","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},
-{"year":2026,"schedule":"I","number":168,"name":"Wakulima Commercial Sacco Society Ltd weini Mukurweini Town","type":"dt","status":"licensed","county":"Nyeri","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},
+{"year":2026,"schedule":"I","number":168,"name":"Wakulima Commercial Sacco Society Ltd","type":"dt","status":"licensed","county":"Nyeri","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},
 {"year":2026,"schedule":"I","number":169,"name":"Wanaanga Sacco Society Ltd","type":"dt","status":"licensed","county":"Nairobi","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},
 {"year":2026,"schedule":"I","number":170,"name":"Wananchi Sacco Society Ltd","type":"dt","status":"licensed","county":"Nyeri","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},
 {"year":2026,"schedule":"I","number":171,"name":"Wanandege Sacco Society Ltd","type":"dt","status":"licensed","county":"Nairobi","as_of":"2026-02-03","source":"https://www.sasra.go.ke/?wpdmdl=1573"},

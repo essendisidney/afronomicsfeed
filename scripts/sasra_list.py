@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from registry_common import UA, append_rows, county_at_end, fetch_pdf, open_pdf  # noqa: E402
+from registry_common import UA, append_rows, sasra_file_link, county_at_end, fetch_pdf, open_pdf  # noqa: E402
 
 OUT = "sasra_licences.json"
 INDEX = "https://www.sasra.go.ke/licensed-dt-saccos/"
@@ -93,7 +93,11 @@ def parse(pdf) -> tuple[list[dict], dict[str, int], str | None]:
             if rows and rows[-1]["schedule"] == schedule:
                 last = rows[-1]
                 if last["name"].endswith("-") and line:
-                    last["name"] = last["name"][:-1] + line.split("  ")[0].split(" P.O")[0].strip()
+                    # The rest of a broken word, up to "Ltd" when the line also carries the end of the address
+                    # ("Sacco Soci-" / "ety Ltd weini Mukurweini Town").
+                    ltd = ENDS_LTD.match(line)
+                    tail = ltd.group(1) if ltd else line.split(" P.O")[0].split(" ")[0]
+                    last["name"] = last["name"][:-1] + tail.strip()
                 elif re.fullmatch(r"(Ltd\.?|Limited)", line.split(" ")[0]) and not last["name"].lower().endswith(("ltd", "ltd.", "limited")):
                     last["name"] = f"{last['name']} {line.split(' ')[0]}"
                 if not last["county"]:
@@ -156,10 +160,10 @@ def find_latest() -> tuple[str, int]:
         raise SystemExit("no list found on the SASRA page")
     page, year = max(pages, key=lambda p: int(p[1]))
     dl = requests.get(page, headers=UA, timeout=(15, 60), verify=False).text
-    m = re.search(r"(https://www\.sasra\.go\.ke/\?wpdmdl=\d+)", dl)
-    if not m:
+    link = sasra_file_link(dl)
+    if not link:
         raise SystemExit(f"no file link on {page}")
-    return m.group(1), int(year)
+    return link, int(year)
 
 
 def main() -> int:

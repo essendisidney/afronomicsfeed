@@ -1,0 +1,18 @@
+{
+ "about": "Names the automatic key in lib/registry.ts cannot join: the same institution spelled differently in two regulator documents. Each entry maps '<group>:<key of the name as printed>' to the key of the listed institution. Add an entry only when both names clearly refer to one institution; anything uncertain stays unjoined (it is listed on the desk) rather than guessed.",
+ "aliases": {
+  "sacco:mudetefactoryteagrowers": "mudete",
+  "sacco:kolenge": "kolengetea",
+  "sacco:vihigacounty": "vihigacountyfarmers",
+  "sacco:kma": "medicalassociation",
+  "sacco:ackkiharaparish": "ackkihara",
+  "sacco:christianentreprenuers": "christianenterpreneurs",
+  "sacco:stokediaspora": "stokeukdiaspora",
+  "sacco:apollosure": "appollosure",
+  "sacco:ramco": "ramcogroup",
+  "sacco:greenaro": "greenarocommunity",
+  "sacco:jumuiyayaulaya": "jumuiayaulaya",
+  "sacco:kiambuchania": "kiambuchaniaumoja",
+  "sacco:grandgranite": "grandgranitediaspora"
+ }
+}

@@ -199,3 +199,9 @@ def test_licensed_on_formats():
     assert cbk_directories.licensed_on("02.06.2015") == "2015-06-02"
     assert cbk_directories.licensed_on("1916") == "1916"
     assert cbk_directories.licensed_on("") is None
+
+
+def test_sasra_file_link_drops_the_refresh_token():
+    html = """<a class='wpdm-download-link' href='#' data-downloadurl="https://www.sasra.go.ke/download/sacco-supervision-annual-report-2025/?wpdmdl=1772&refresh=6acfc7066d29c1792001798">Download</a>"""
+    assert registry_common.sasra_file_link(html) == "https://www.sasra.go.ke/?wpdmdl=1772"
+    assert registry_common.sasra_file_link("<p>no file</p>") is None

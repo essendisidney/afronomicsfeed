@@ -27,7 +27,9 @@ const serif = localFont({
   variable: "--font-headline",
   src: [{ path: "./fonts/source-serif-4-latin-wght-normal.woff2", weight: "200 900", style: "normal" }],
   fallback: ["Georgia", "Times New Roman", "serif"],
-  display: "optional",
+  // Headlines wait for their own font (it is preloaded) rather than paint in a fallback and re-wrap when it lands:
+  // phones without Times New Roman (Android, Linux) have no size-matched fallback, so a swap changes line counts.
+  display: "block",
   adjustFontFallback: "Times New Roman",
 });
 

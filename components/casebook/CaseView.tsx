@@ -30,9 +30,9 @@ function Missing({ what }: { what: string }) {
 function Figures({ c, rows, label }: { c: Case; rows: CaseFigure[]; label: string }) {
   if (!rows.length) return <Missing what={label} />;
   return (
-    <ul className="grid gap-3 sm:grid-cols-2">
+    <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       {rows.map((f, i) => (
-        <li key={i} className="rounded-2xl border border-rule bg-surface px-4 py-4">
+        <li key={i} className="min-w-0 rounded-2xl border border-rule bg-surface px-4 py-4">
           <p className="text-[13px] text-muted">{f.metric}</p>
           <p className="tabular mt-1 text-[1.25rem] font-semibold text-ink" data-num>
             {f.value}
@@ -118,9 +118,9 @@ export function CaseView({ c }: { c: Case }) {
 
       <Section id="who-lost" title="Who lost" label="Facts">
         {c.who_lost.length ? (
-          <ul className="grid gap-3 sm:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {c.who_lost.map((l, i) => (
-              <li key={i} className="rounded-2xl border border-rule bg-surface px-4 py-4">
+              <li key={i} className="min-w-0 rounded-2xl border border-rule bg-surface px-4 py-4">
                 <p className="text-[15px] font-semibold text-ink">{l.group}</p>
                 {l.amount ? (
                   <p className="tabular mt-1 text-[1.15rem] text-ink" data-num>
@@ -144,7 +144,7 @@ export function CaseView({ c }: { c: Case }) {
         {c.response.length ? (
           <ul className="space-y-4">
             {c.response.map((r, i) => (
-              <li key={i} className="max-w-3xl">
+              <li key={i} className="min-w-0 max-w-3xl">
                 <p className="text-[15px] leading-7 text-ink">
                   <time dateTime={r.date} className="tabular font-semibold">
                     {asOfLabel(r.date)}:
@@ -181,7 +181,7 @@ export function CaseView({ c }: { c: Case }) {
       </Section>
 
       <Section id="sources" title="Sources" label="Facts">
-        <ol className="max-w-3xl list-decimal space-y-2 pl-5 text-[14px] leading-6 text-ink-soft">
+        <ol className="max-w-3xl list-decimal space-y-2 pl-5 text-[14px] leading-6 text-ink-soft [overflow-wrap:anywhere]">
           {c.sources.map((s) => (
             <li key={s.url}>
               <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-ink underline underline-offset-2 hover:text-forest">
@@ -198,7 +198,7 @@ export function CaseView({ c }: { c: Case }) {
           <h2 id="todo" className="text-[15px] font-semibold text-ink">
             Still to source before sign-off ({c.todo.length})
           </h2>
-          <ul className="mt-2 list-disc space-y-1 pl-5 text-[14px] leading-6 text-ink-soft">
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-[14px] leading-6 text-ink-soft [overflow-wrap:anywhere]">
             {c.todo.map((t, i) => (
               <li key={i}>{t}</li>
             ))}

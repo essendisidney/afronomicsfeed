@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { CaseView } from "@/components/casebook/CaseView";
 import { PageShell } from "@/components/data/PageShell";
 import { getCase, isPublic, visibleCases } from "@/lib/cases";
-import { fitDescription } from "@/lib/seo";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const c = getCase((await params).id);
   if (!c) return {};
   return {
-    title: `${c.title} (${c.id})`,
+    title: fitTitle(`${c.id}: ${c.title}`),
     description: fitDescription(c.summary),
     alternates: { canonical: `${site.url}/casebook/${c.id}` },
     robots: isPublic(c) ? undefined : { index: false, follow: false },

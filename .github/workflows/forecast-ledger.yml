@@ -27,6 +27,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/forecast_ledger.py
+      # Editorial calls our own data can settle (a Kenya T-bill rate) are graded in the same run.
+      - run: pip install pyyaml && python scripts/calls_ledger.py
       - name: Commit the ledger if it grew
         run: |
           if git diff --quiet -- data/forecasts && [ -z "$(git ls-files --others --exclude-standard data/forecasts)" ]; then
@@ -36,7 +38,7 @@ jobs:
           git config user.name "afronomics-bot"
           git config user.email "afronomics-bot@users.noreply.github.com"
           git add data/forecasts
-          git commit -m "Forecast ledger: Kenya T-bill ranges and outcomes"
+          git commit -m "Forecast ledger: ranges, calls and outcomes"
           for attempt in 1 2 3; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
             git rebase --abort 2>/dev/null || true

@@ -3,8 +3,10 @@ import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { BarChart } from "@/components/charts/BarChart";
 import { ChartFrame } from "@/components/charts/ChartFrame";
 import { asOfLabel } from "@/components/evidence/EvidenceTag";
+import { statusLabel, statusTone } from "@/components/record/EditorialCalls";
 import { ReceiptBody } from "@/components/receipts/ReceiptBody";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
+import { editorialRows } from "@/lib/editorial";
 import { deskSlug, receiptEvidence, sectorNames, type Receipt, type ReceiptChart, type ReceiptTile } from "@/lib/receipts";
 
 /**
@@ -83,6 +85,8 @@ export function ReceiptChartView({ r, chart }: { r: Receipt; chart: ReceiptChart
 
 export function ReceiptView({ r }: { r: Receipt }) {
   const [lead, ...rest] = r.charts;
+  // The ledger's own rows for this Receipt (ids RC-<slug>-<n>, scripts/calls_ledger.py), so each call shows its status.
+  const ledger = new Map(editorialRows().filter((x) => x.receipt === r.slug).map((x) => [x.id, x]));
   return (
     <article className="mx-auto max-w-3xl">
       {r.status !== "published" ? (
@@ -140,16 +144,28 @@ export function ReceiptView({ r }: { r: Receipt }) {
           <h2 id="calls" className="t-h2 text-ink">
             Our calls, on the record
           </h2>
-          <p className="mt-1 text-[14px] text-ink-soft">Each is dated and graded against the source named, when it publishes. Win or lose, it stays on the record.</p>
+          <p className="mt-1 text-[14px] text-ink-soft">
+            {r.status === "published"
+              ? "Each is dated and graded against the source named, when it publishes. Win or lose, it stays on the record."
+              : "These go on the public record when this Receipt is published; a call whose date has passed by then is left off."}
+          </p>
           <ol className="mt-4 divide-y divide-rule">
-            {r.calls.map((c) => (
-              <li key={c.statement} className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                <p className="text-[15px] leading-6 text-ink">{c.statement}</p>
-                <p className="tabular shrink-0 text-[12.5px] text-muted">
-                  Settled by {c.check_source}, {receiptDate(c.check_date)}
-                </p>
-              </li>
-            ))}
+            {r.calls.map((c, i) => {
+              const row = ledger.get(`RC-${r.slug}-${i + 1}`);
+              return (
+                <li key={c.statement} className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                  <p className="text-[15px] leading-6 text-ink">{c.statement}</p>
+                  <p className="tabular shrink-0 text-[12.5px] text-muted sm:text-right">
+                    Settled by {c.check_source}, {receiptDate(c.check_date)}
+                    {row ? (
+                      <Link href={`/record#${row.id}`} className={`t-label mt-0.5 block ${statusTone[row.status]}`}>
+                        {statusLabel[row.status]}
+                      </Link>
+                    ) : null}
+                  </p>
+                </li>
+              );
+            })}
           </ol>
           <Link href="/record" className="mt-2 inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-ink">
             Our record →

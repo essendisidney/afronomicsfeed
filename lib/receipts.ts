@@ -40,7 +40,18 @@ export const sectorNames: Record<string, string> = {
 };
 
 export type ReceiptSource = { name: string; url: string; date: string };
-export type ReceiptCall = { statement: string; check_source: string; check_date: string };
+export type Comparator = "<" | "<=" | ">" | ">=" | "between" | "is";
+export type ReceiptCall = {
+  statement: string;
+  check_source: string;
+  check_date: string;
+  /** What the settling source reports, compared with the threshold by code (docs/rebuild/receipts-r2-plan.md). */
+  measure: string;
+  comparator: Comparator;
+  threshold: number | [number, number] | string;
+  unit?: string;
+};
+const COMPARATORS = ["<", "<=", ">", ">=", "between", "is"];
 export type ReceiptTile = { label: string; value: string; note?: string; source: string };
 /** A chart drawn from the Receipt's own figures (RECEIPTS.md "Charts and graphics"). */
 export type ReceiptChart = {
@@ -120,6 +131,12 @@ export function receiptProblems(data: Record<string, unknown>, body: string, fil
   calls.forEach((c, i) => {
     if (!str(c.statement) || !str(c.check_source)) at(`calls[${i}]`, "needs a statement and the source that will settle it");
     date(c.check_date, `calls[${i}].check_date`);
+    if (!str(c.measure)) at(`calls[${i}]`, "needs a measure (what the settling source reports)");
+    if (!COMPARATORS.includes(String(c.comparator))) at(`calls[${i}].comparator`, `one of ${COMPARATORS.join(" ")}`);
+    const t = c.threshold;
+    if (c.comparator === "between" && !(Array.isArray(t) && t.length === 2 && t.every((x) => typeof x === "number") && t[0] < t[1])) at(`calls[${i}]`, "'between' needs threshold [low, high]");
+    if (["<", "<=", ">", ">="].includes(String(c.comparator)) && typeof t !== "number") at(`calls[${i}]`, "needs a numeric threshold");
+    if (c.comparator === "is" && (t == null || t === "")) at(`calls[${i}]`, "'is' needs the expected value as threshold");
   });
   const tiles = Array.isArray(data.tiles) ? (data.tiles as Record<string, unknown>[]) : [];
   tiles.forEach((t, i) => {

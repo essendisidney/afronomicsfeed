@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
+import { EditorialCalls } from "@/components/record/EditorialCalls";
 import { EvidenceTag, asOfLabel } from "@/components/evidence/EvidenceTag";
+import { editorialRows, loadEditorial } from "@/lib/editorial";
 import { LEDGER_FILE, LEDGER_HISTORY, TARGET, backtest, loadLedger, score, type LedgerRow } from "@/lib/ledger";
 import { fitDescription } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -9,7 +11,7 @@ import { site } from "@/lib/site";
 export const revalidate = 3600;
 
 const description =
-  "Every Kenya Treasury bill range Afronomics publishes, written down before bids close and graded by code against the Central Bank's result. Hits, misses and calibration, with a free CSV.";
+  "Every Kenya Treasury bill range and every editorial call Afronomics publishes, written down first and graded by code against the published result. Two records, two hit rates, free CSVs.";
 
 export const metadata: Metadata = {
   title: "Our record: forecasts graded against results",
@@ -40,14 +42,24 @@ export default function RecordPage() {
   const live = score(rows);
   const bt = backtest();
   const tenors = [91, 182, 364] as const;
+  const calls = editorialRows();
+  const notRecorded = loadEditorial().not_recorded;
 
   return (
     <PageShell
       crumbs={[{ href: "/", label: "Today" }, { label: "Our record" }]}
       kicker="Our record"
       title="Forecasts written down first, graded against the result"
-      lede="Before each Kenya Treasury bill auction we publish a likely range for each bill's rate. Each range is committed to a public file before bids close, and code grades it against the Central Bank's result. Nothing is edited afterwards."
+      lede="Two records, each with its own hit rate: the range we publish for each Kenya Treasury bill auction before bids close, and the dated calls at the end of each Receipt. Both are committed to public files first and graded by code against the published result. Nothing is edited afterwards."
     >
+      <nav aria-label="On this page" className="mb-6 flex flex-wrap gap-2 text-[13px] font-semibold">
+        <a href="#live" className="inline-flex min-h-11 items-center rounded-full border border-rule bg-surface px-4 text-ink hover:border-ink sm:min-h-9">
+          Auction ranges
+        </a>
+        <a href="#calls" className="inline-flex min-h-11 items-center rounded-full border border-rule bg-surface px-4 text-ink hover:border-ink sm:min-h-9">
+          Editorial calls{calls.length ? ` (${calls.length})` : ""}
+        </a>
+      </nav>
       <section aria-labelledby="live" className="grid gap-4 sm:grid-cols-3">
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <h2 id="live" className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">
@@ -175,6 +187,8 @@ export default function RecordPage() {
           </table>
         </div>
       </section>
+
+      <EditorialCalls rows={calls} notRecorded={notRecorded} />
 
       <section aria-labelledby="method" className="mt-10 max-w-3xl text-[14px] leading-6 text-ink-soft">
         <h2 id="method" className="font-serif text-2xl text-ink">

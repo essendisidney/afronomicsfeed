@@ -79,7 +79,9 @@ export const LIMITS = {
   // site measured on 14 Oct 2026 (largest content 1.0-2.1 s, 147-162 KB of script): the framework alone sends about
   // 140 KB, so the plan's first guess of 120 KB was below the floor.
   lcpMs: 2500,
-  clsMax: 0.05,
+  // Google's "good" threshold. The founder set this on 14 Oct (plan said 0.05); /rates/kenya, /registry and
+  // /receipts measured 0.05-0.1 and come under 0.05 in 7b, when their templates are rebuilt.
+  clsMax: 0.1,
   scriptKb: 175,
 };
 

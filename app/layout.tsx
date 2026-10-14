@@ -15,8 +15,9 @@ const sans = localFont({
     { path: "./fonts/archivo-latin-wdth-italic.woff2", weight: "100 900", style: "italic" },
   ],
   declarations: [{ prop: "font-stretch", value: "62% 125%" }],
-  display: "swap",
-  // A fallback sized to Archivo's metrics, so text keeps its shape when the font arrives (no layout shift).
+  // "optional": the font is preloaded and used when it arrives in time (almost always); on a very slow first visit the
+  // size-matched fallback stays for that page instead of the text re-wrapping when the font lands (no layout shift).
+  display: "optional",
   fallback: ["Arial", "Helvetica", "sans-serif"],
   adjustFontFallback: "Arial",
 });
@@ -26,7 +27,7 @@ const serif = localFont({
   variable: "--font-headline",
   src: [{ path: "./fonts/source-serif-4-latin-wght-normal.woff2", weight: "200 900", style: "normal" }],
   fallback: ["Georgia", "Times New Roman", "serif"],
-  display: "swap",
+  display: "optional",
   adjustFontFallback: "Times New Roman",
 });
 

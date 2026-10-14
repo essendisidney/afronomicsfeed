@@ -59,7 +59,10 @@ export function buildSearchIndex(): SearchHit[] {
   });
 
   const toolHits = [
-    { href: "/ask", title: "Ask the data", kicker: "Tool", summary: "A question about African rates, answered from the source." },
+    { href: "/", title: "Today", kicker: "Section", summary: "What changed in African money today, who it touches, and our forecast record." },
+    { href: "/numbers", title: "Numbers", kicker: "Section", summary: "Every number we keep, by question: borrowing, savings, loans, policy rates, currencies, economies." },
+    { href: "/compare", title: "Compare", kicker: "Section", summary: "Savers, lenders and governments side by side, in the same units." },
+    { href: "/stories", title: "Stories", kicker: "Section", summary: "Every brief, weekly note and explainer, filterable by type and topic." },
     { href: "/rates/kenya/check", title: "Is my rate fair?", kicker: "Tool", summary: "Check a Kenya savings or loan rate against the bill, the best fund and the bank averages." },
     { href: "/rates/nigeria/savings-bond", title: "FGN Savings Bond: this month’s offer", kicker: "Nigeria", summary: "Rates, dates and the minimum for Nigeria’s monthly savings bond, from the DMO’s offer document." },
     { href: "/learn", title: "Learn money, from the basics", kicker: "Learn", summary: "Plain lessons on saving, loans, rates, inflation and currencies; savings and loan calculators; glossary in English and Kiswahili." },
@@ -79,13 +82,11 @@ export function buildSearchIndex(): SearchHit[] {
     { href: "/alerts", title: "Alerts", kicker: "Tool", summary: "The auction result on your phone the minute it lands." },
     { href: "/morning", title: "The Morning", kicker: "Edition", summary: "Africa's markets before 7am, every weekday." },
     { href: "/morning/sw", title: "Asubuhi ya Afronomics (Kiswahili)", kicker: "Edition", summary: "Masoko ya Afrika kabla ya saa moja, kwa Kiswahili." },
-    { href: "/radio", title: "Radio bulletin", kicker: "Edition", summary: "Sixty seconds on the price of money, English and Kiswahili, free for any station." },
     { href: "/lite", title: "Low-data version", kicker: "Tool", summary: "The whole Morning and every rate in under 3 KB." },
     { href: "/reference", title: "The reference", kicker: "Method", summary: "Definitions, stable URLs, the timeliness record and corrections." },
     { href: "/for-institutions", title: "For institutions", kicker: "Product", summary: "Committee packs, API, licences and widgets for SACCOs, pension funds, treasuries, fintechs and DFIs. Free samples." },
     { href: "/pack", title: "Investment Committee Pack", kicker: "Product", summary: "The monthly pack for SACCOs, insurers and pension schemes, for ten markets." },
     { href: "/prices", title: "Price guide", kicker: "Pricing", summary: "Everything Afronomics sells, in shillings and dollars." },
-    { href: "/jobs", title: "Jobs", kicker: "Jobs", summary: "Treasury, risk, research and analyst roles across African finance." },
     { href: "/developers", title: "Data API", kicker: "Developers", summary: "African auction results as JSON, no key." },
   ];
 

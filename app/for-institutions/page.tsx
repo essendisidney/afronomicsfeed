@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
+import { HubLinks } from "@/components/hub/HubSections";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { aboutText, priceText, rateItem } from "@/lib/billing/ratecard";
 import { policyBoard } from "@/lib/data/policy-rates";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
+import { institutionSections } from "@/lib/hubs";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
 
@@ -244,6 +246,11 @@ export default function ForInstitutionsPage() {
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section className="mt-14" id="everything" aria-label="Everything for institutions">
+        <SectionTitle kicker="In one place" title="Everything for institutions" />
+        <HubLinks links={institutionSections} />
       </section>
 
       <section className="mt-14 max-w-2xl" id="enquiry">

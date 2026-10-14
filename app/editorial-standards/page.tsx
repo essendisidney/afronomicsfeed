@@ -89,10 +89,6 @@ export default function EditorialStandardsPage() {
           <strong>Correspondence and social posts.</strong> An AI assistant helps sort the inbox and draft replies and posts. Replies to customers are drafted, not
           sent, by the assistant.
         </li>
-        <li>
-          <strong>Not for answers.</strong> <Link href="/ask">Ask the data</Link> computes each answer from the published results by fixed rules and shows its
-          source; no language model writes it.
-        </li>
       </ul>
 
       <h2 id="corrections">Corrections</h2>

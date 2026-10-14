@@ -7,7 +7,6 @@ import { articleHref } from "@/lib/format";
 import { marketDates } from "@/lib/data/market-stories";
 import { mmfMonths } from "@/lib/data/mmf-months";
 import { lenderHref, loadLenders } from "@/lib/data/loan-apps";
-import { loadRemittances, destSlug } from "@/lib/data/remittances";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 import { learnLangs, loadLessons } from "@/lib/learn-i18n";
@@ -33,6 +32,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const debt = newest(bills, bonds);
 
   const hubs = [
+    page("/compare", "daily", 0.9),
+    page("/numbers", "daily", 0.9),
+    page("/stories", "daily", 0.9),
     page("/", "hourly", 1),
     page("/news", "hourly", 0.9),
     page("/markets", "hourly", 0.9),
@@ -60,15 +62,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter((m) => m.complete)
       .map((m) => page(`/rates/kenya/best-money-market-fund/${m.month}`, "monthly", 0.6)),
     page("/rates/remittances", "monthly", 0.8),
-    page("/send-money", "monthly", 0.9),
-    page("/diaspora", "daily", 0.9),
-    ...[...new Set((loadRemittances()?.corridors ?? []).map((c) => destSlug(c.dst_name)))].map((slug) => page(`/send-money/${slug}`, "monthly", 0.8)),
     page("/rates/what-readers-paid", "daily", 0.8),
-    page("/pay-check", "daily", 0.9),
-    page("/rent-check", "daily", 0.9),
     page("/rates/kenya/saccos", "monthly", 0.8),
     page("/chama", "daily", 0.9),
-    page("/tenders", "daily", 0.9),
     page("/rates/kenya/check", "weekly", 0.8),
     page("/rates/nigeria/check", "weekly", 0.8),
     page("/rates/ghana/check", "weekly", 0.8),
@@ -89,17 +85,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // From the market list, so a new bill market is in the sitemap the day it ships (Kenya has its own page above).
     ...billMarkets.filter((m) => m.slug !== "kenya").map((m) => page(`/markets/tbills/${m.slug}`, "daily", 0.8, billUpdated(m.slug))),
     page("/east-africa", "daily", 0.8, debt),
-    page("/economy", "daily", 0.8),
-    page("/capital", "daily", 0.8),
-    page("/climate", "daily", 0.8),
-    page("/technology", "daily", 0.8),
-    page("/trade", "daily", 0.8),
     page("/countries", "daily", 0.9),
     page("/data", "daily", 0.9),
-    page("/signals", "daily", 0.7),
     page("/alerts", "monthly", 0.5),
-    page("/ask", "weekly", 0.6),
-    page("/radio", "daily", 0.5),
     page("/reference", "monthly", 0.6),
     page("/brief", "weekly", 0.7),
     page("/weekly", "daily", 0.8),
@@ -117,8 +105,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/buying", "monthly", 0.6),
     page("/pricing", "monthly", 0.5),
     page("/prices", "monthly", 0.4),
-    page("/jobs", "daily", 0.5),
-    page("/jobs/post", "monthly", 0.3),
     page("/subscribe", "monthly", 0.5),
     page("/advisory", "monthly", 0.4),
     page("/contact", "monthly", 0.3),

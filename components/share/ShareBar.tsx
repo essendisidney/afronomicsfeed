@@ -75,7 +75,7 @@ export function ShareBar({
         aria-labelledby="share-block-heading"
         className={`no-print relative overflow-hidden rounded-3xl border border-rule bg-surface px-5 py-6 sm:px-8 sm:py-8 ${className}`}
       >
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent via-accent/60 to-transparent" />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-accent" />
         <p className="text-[11.5px] font-semibold uppercase tracking-[0.18em] text-accent">Pass it on</p>
         <h2 id="share-block-heading" className="mt-2 font-serif text-[1.65rem] leading-tight text-ink text-balance sm:text-3xl">
           Found this useful? Share it

@@ -49,9 +49,6 @@ export default function AboutPage() {
           <Link href="/countries">54 country files</Link> — growth, prices, debt, capital flows, connectivity and energy, each with history.
         </li>
         <li>
-          <Link href="/capital">The capital tracker</Link> — development finance heading to African Boards, by country and theme.
-        </li>
-        <li>
           <Link href="/data">The data hub</Link> — every series ranked across the continent, with free CSV downloads.
         </li>
         <li>

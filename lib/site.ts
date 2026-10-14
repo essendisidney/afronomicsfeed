@@ -18,46 +18,62 @@ export const site = {
   telegramUrl: "https://t.me/afronomic",
 } as const;
 
-/** The price of money first. Economy, Capital, Climate, Technology and Trade stay live, linked from the footer. */
+/**
+ * Main navigation (rebuild brief, section 6). Each section also lights up on the older pages it gathers: `match`
+ * lists the path prefixes it owns. Casebook joins after Phase 2 ships real cases (docs/rebuild/phase-1-plan.md).
+ */
 export const nav = [
-  { href: "/markets/tbills", label: "T-bills" },
-  { href: "/markets/bonds", label: "Bonds" },
-  { href: "/rates/kenya", label: "Savings & loans" },
-  { href: "/markets", label: "Currencies" },
-  { href: "/data/inflation", label: "Inflation" },
-  { href: "/countries", label: "Countries" },
-  { href: "/data", label: "Data" },
-  { href: "/learn", label: "Learn" },
-  { href: "/news", label: "Wire" },
-  { href: "/brief", label: "Analysis" },
+  { href: "/", label: "Today", match: [] },
+  { href: "/compare", label: "Compare", match: ["/compare"] },
+  {
+    href: "/numbers",
+    label: "Numbers",
+    match: ["/numbers", "/markets", "/rates", "/data", "/countries", "/prices", "/east-africa", "/charts"],
+  },
+  {
+    href: "/stories",
+    label: "Stories",
+    match: ["/stories", "/brief", "/weekly", "/explainers", "/news", "/archive", "/topics", "/institutions"],
+  },
+  {
+    href: "/for-institutions",
+    label: "For institutions",
+    match: ["/for-institutions", "/pricing", "/licensing", "/data-api", "/developers", "/advisory", "/advertise", "/buying", "/pack"],
+  },
 ] as const;
 
+/** The section a path belongs to: the nav item whose prefix matches most specifically (Today only on "/"). */
+export function sectionFor(pathname: string) {
+  if (pathname === "/") return "/";
+  let best: { href: string; len: number } | null = null;
+  for (const item of nav) {
+    for (const prefix of item.match) {
+      if ((pathname === prefix || pathname.startsWith(`${prefix}/`)) && (!best || prefix.length > best.len)) best = { href: item.href, len: prefix.length };
+    }
+  }
+  return best?.href ?? null;
+}
+
 export const utilityNav = [
-  { href: "/rates/what-readers-paid", label: "What did you pay?" },
   { href: "/morning", label: "Morning" },
   { href: "/alerts", label: "Alerts" },
-  { href: "/weekly", label: "Weekly" },
-  { href: "/signals", label: "Signals" },
-  { href: "/reference", label: "Reference" },
+  { href: "/learn", label: "Learn" },
+  { href: "/morning/sw", label: "Kiswahili" },
 ] as const;
 
 export const footerGroups = [
   {
-    title: "Coverage",
+    title: "Sections",
     links: [
-      { href: "/news", label: "The Wire" },
-      { href: "/markets", label: "Markets & FX" },
-      { href: "/economy", label: "Economy" },
-      { href: "/capital", label: "Capital & DFI flows" },
-      { href: "/climate", label: "Climate & energy" },
-      { href: "/technology", label: "Technology" },
-      { href: "/trade", label: "Trade" },
+      { href: "/", label: "Today" },
+      { href: "/compare", label: "Compare" },
+      { href: "/numbers", label: "Numbers" },
+      { href: "/stories", label: "Stories" },
     ],
   },
   {
     title: "Data",
     links: [
-      { href: "/tenders", label: "Kenya government tenders open now" },
       { href: "/data/frontier-local-debt", label: "Frontier local debt data (institutions)" },
       { href: "/data/frontier-local-debt/monitor", label: "African Local-Currency Debt Monitor" },
       { href: "/markets/bonds", label: "Government bond auctions, by market" },
@@ -77,12 +93,8 @@ export const footerGroups = [
       { href: "/chama", label: "Chama Money Hub" },
       { href: "/rates/kenya/mobile-loans", label: "Mobile loan costs" },
       { href: "/rates/kenya/loan-apps", label: "Is this loan app licensed?" },
-      { href: "/send-money", label: "Cheapest way to send money" },
-      { href: "/diaspora", label: "Diaspora Desk: money home and what it earns" },
       { href: "/rates/remittances", label: "Cost of sending money home" },
       { href: "/rates/what-readers-paid", label: "What readers paid" },
-      { href: "/pay-check", label: "Is my salary fair?" },
-      { href: "/rent-check", label: "Is my rent fair?" },
       { href: "/rates/kenya/check", label: "Is my rate fair? Kenya" },
       { href: "/rates/nigeria/check", label: "Is my rate fair? Nigeria" },
       { href: "/rates/ghana/check", label: "Is my rate fair? Ghana" },
@@ -90,7 +102,6 @@ export const footerGroups = [
       { href: "/data", label: "Data hub" },
       { href: "/developers", label: "Open data API" },
       { href: "/data-api", label: "Afronomics Data (licensed API)" },
-      { href: "/signals", label: "Signals" },
       { href: "/widgets", label: "Free widgets" },
       { href: "/licensing", label: "Data licensing" },
       { href: "/method", label: "Sources & method" },
@@ -105,12 +116,9 @@ export const footerGroups = [
       { href: "/morning", label: "The Morning" },
       { href: "/morning/sw", label: "Asubuhi (Kiswahili)" },
       { href: "/alerts", label: "Alerts" },
-      { href: "/ask", label: "Ask the data" },
-      { href: "/radio", label: "Radio bulletin" },
       { href: "/markets/bill-index/release", label: "ASBI weekly release" },
       { href: "/weekly", label: "Weekly" },
       { href: "/explainers", label: "Explainers" },
-      { href: "/archive", label: "Archive" },
     ],
   },
   {
@@ -123,7 +131,6 @@ export const footerGroups = [
       { href: "/buying", label: "Buying for an institution" },
       { href: "/pricing", label: "Pricing" },
       { href: "/prices", label: "Price guide" },
-      { href: "/jobs", label: "Jobs" },
       { href: "/pack", label: "Committee pack" },
       { href: "/advisory", label: "Research & advisory" },
       { href: "/advertise", label: "Advertise" },
@@ -137,93 +144,83 @@ export const footerGroups = [
 /** Every page, grouped (site search reads this; the footer shows the shorter footerColumns below). */
 export const footerNav = footerGroups.flatMap((group) => [...group.links]);
 
-/** The footer: five balanced columns of short labels, then a topics line. Full page list stays in footerGroups for search. */
+/** The footer: five balanced columns of short labels (rebuild brief, section 6). Full page list stays in footerGroups for search. */
 export const footerColumns = [
+  {
+    title: "Numbers",
+    links: [
+      { href: "/numbers", label: "All numbers" },
+      { href: "/markets/tbills", label: "T-bills" },
+      { href: "/markets/bonds", label: "Bond auctions" },
+      { href: "/markets/kenya-bonds", label: "Kenya bonds" },
+      { href: "/rates/policy", label: "Policy rates" },
+      { href: "/markets/eurobonds", label: "Eurobonds" },
+      { href: "/data/inflation", label: "Inflation" },
+      { href: "/countries", label: "Country files" },
+    ],
+  },
+  {
+    title: "Compare",
+    links: [
+      { href: "/compare", label: "All comparisons" },
+      { href: "/rates/kenya", label: "Kenya rates" },
+      { href: "/rates/kenya/money-market-funds", label: "Money market funds" },
+      { href: "/rates/kenya/saccos", label: "SACCOs" },
+      { href: "/rates/kenya/loan-apps", label: "Loan app checker" },
+      { href: "/rates/kenya/mobile-loans", label: "Mobile loan costs" },
+      { href: "/rates/remittances", label: "Sending money home" },
+      { href: "/rates/what-readers-paid", label: "What readers paid" },
+    ],
+  },
+  {
+    title: "Stories",
+    links: [
+      { href: "/stories", label: "All stories" },
+      { href: "/brief", label: "Briefs" },
+      { href: "/weekly", label: "Weekly" },
+      { href: "/explainers", label: "Explainers" },
+      { href: "/morning", label: "The Morning" },
+      { href: "/morning/sw", label: "Asubuhi" },
+      { href: "/alerts", label: "Alerts" },
+      { href: "/chama", label: "Chama hub" },
+    ],
+  },
   {
     title: "For institutions",
     links: [
+      { href: "/for-institutions", label: "Overview" },
       { href: "/data/frontier-local-debt", label: "Local debt data" },
       { href: "/data/frontier-local-debt/monitor", label: "Debt Monitor" },
-      { href: "/markets/bonds", label: "Bond auctions" },
-      { href: "/markets/auction-week", label: "Auction week" },
       { href: "/data-api", label: "Data API" },
       { href: "/licensing", label: "Licensing" },
       { href: "/pricing", label: "Pricing" },
       { href: "/buying", label: "Buying guide" },
       { href: "/trust", label: "Trust & security" },
-      { href: "/pack", label: "Committee pack" },
-    ],
-  },
-  {
-    title: "Markets",
-    links: [
-      { href: "/markets/tbills", label: "T-bills" },
-      { href: "/markets/kenya-bonds", label: "Kenya bonds" },
-      { href: "/east-africa", label: "East Africa" },
-      { href: "/markets/bill-index", label: "Bill Index" },
-      { href: "/markets/borrowing-costs", label: "Borrowing costs" },
-      { href: "/markets/eurobonds", label: "Eurobonds" },
-      { href: "/rates/policy", label: "Policy rates" },
-      { href: "/markets", label: "Currencies" },
-      { href: "/countries", label: "Country files" },
-      { href: "/tenders", label: "Kenya tenders" },
-    ],
-  },
-  {
-    title: "Your money",
-    links: [
-      { href: "/rates/kenya", label: "Kenya rates" },
-      { href: "/rates/kenya/money-market-funds", label: "Money market funds" },
-      { href: "/rates/kenya/saccos", label: "SACCOs" },
-      { href: "/chama", label: "Chama hub" },
-      { href: "/rates/kenya/loan-apps", label: "Loan app checker" },
-      { href: "/rates/kenya/mobile-loans", label: "Mobile loan costs" },
-      { href: "/send-money", label: "Send money home" },
-      { href: "/pay-check", label: "Salary check" },
-      { href: "/rent-check", label: "Rent check" },
-      { href: "/rates/what-readers-paid", label: "What readers paid" },
-    ],
-  },
-  {
-    title: "Read",
-    links: [
-      { href: "/brief", label: "Briefs" },
-      { href: "/morning", label: "The Morning" },
-      { href: "/morning/sw", label: "Asubuhi" },
-      { href: "/weekly", label: "Weekly" },
-      { href: "/news", label: "The Wire" },
-      { href: "/explainers", label: "Explainers" },
-      { href: "/alerts", label: "Alerts" },
-      { href: "/ask", label: "Ask the data" },
-      { href: "/radio", label: "Radio" },
-      { href: "/archive", label: "Archive" },
     ],
   },
   {
     title: "Company",
     links: [
-      { href: "/about", label: "About" },
       { href: "/editorial-standards", label: "Standards" },
-      { href: "/method", label: "Sources & method" },
       { href: "/status", label: "Data status" },
-      { href: "/corrections", label: "Corrections" },
       { href: "/developers", label: "Developers" },
+      { href: "/advisory", label: "Research & advisory" },
       { href: "/advertise", label: "Advertise" },
-      { href: "/jobs", label: "Jobs" },
       { href: "/subscribe", label: "Newsletter" },
       { href: "/contact", label: "Contact" },
+      { href: "/widgets", label: "Widgets" },
     ],
   },
 ] as const;
 
-export const footerTopics = [
-  { href: "/economy", label: "Economy" },
-  { href: "/capital", label: "Capital & DFI flows" },
-  { href: "/climate", label: "Climate & energy" },
-  { href: "/technology", label: "Technology" },
-  { href: "/trade", label: "Trade" },
-  { href: "/data", label: "Data hub" },
-  { href: "/reference", label: "Reference" },
+/** The house line under the columns (rebuild brief, section 6): Method · Our record · Corrections · Learn · About · Kiswahili. */
+export const footerLine = [
+  { href: "/method", label: "Method" },
+  { href: "/#record", label: "Our record" },
+  { href: "/corrections", label: "Corrections" },
+  { href: "/learn", label: "Learn" },
+  { href: "/about", label: "About" },
+  { href: "/morning/sw", label: "Kiswahili" },
 ] as const;
 
 export const disclaimer =

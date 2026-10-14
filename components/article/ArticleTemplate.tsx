@@ -56,10 +56,6 @@ export function ArticleTemplate({
       <ReadingProgress targetId="story-body" />
 
       <header className="relative border-b border-rule">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,var(--paper-2),var(--paper)_85%)]"
-        />
         <div className={`relative ${grid}`}>
           <div className="max-w-[56rem] pb-8 pt-6 sm:pt-8 lg:col-span-2 lg:col-start-2 lg:pb-12 lg:pt-12">
             <Breadcrumbs
@@ -203,7 +199,6 @@ export function ArticleTemplate({
 
           {!article.gated ? (
             <aside aria-labelledby="morning-cta" className="on-night no-print relative mt-8 overflow-hidden rounded-3xl bg-night px-6 py-7 text-night-ink sm:px-8 sm:py-8">
-              <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/25 blur-3xl" />
               <p className="relative text-[11.5px] font-semibold uppercase tracking-[0.18em] text-accent">The Morning · free, every weekday</p>
               <h2 id="morning-cta" className="relative mt-2 font-serif text-[1.65rem] leading-tight text-balance sm:text-3xl">
                 Rates, currencies and auction results before the day starts.

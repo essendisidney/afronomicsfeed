@@ -1,6 +1,31 @@
 import type { NextConfig } from "next";
 
 /** Old URLs from the first build, sent to their nearest live equivalent. */
+/**
+ * Parked routes (rebuild brief, section 4; docs/rebuild/phase-1-plan.md): out of the navigation and the sitemap,
+ * permanently redirected to the nearest page of the new structure. The code stays in git; /chama stays live until
+ * the end of October 2026 (founder decision, 14 Oct). tests/site/test_redirects.py checks this map.
+ */
+export const parked: Array<[string, string]> = [
+  ["/tenders", "/for-institutions"],
+  ["/tenders/:path*", "/for-institutions"],
+  ["/jobs", "/for-institutions"],
+  ["/jobs/:path*", "/for-institutions"],
+  ["/radio", "/morning"],
+  ["/rent-check", "/numbers"],
+  ["/pay-check", "/numbers"],
+  ["/diaspora", "/rates/remittances"],
+  ["/send-money", "/rates/remittances"],
+  ["/send-money/:path*", "/rates/remittances"],
+  ["/trade", "/numbers"],
+  ["/technology", "/numbers"],
+  ["/climate", "/numbers"],
+  ["/capital", "/numbers"],
+  ["/economy", "/numbers"],
+  ["/ask", "/search"],
+  ["/signals", "/"],
+];
+
 const legacy: Array<[string, string]> = [
   ["/pro", "/pricing"],
   ["/today", "/news"],
@@ -23,11 +48,11 @@ const legacy: Array<[string, string]> = [
   ["/economy/:slug", "/countries/:slug"],
   ["/climate/:slug", "/countries/:slug"],
   ["/projects/:slug", "/countries/:slug"],
-  ["/projects", "/capital"],
-  ["/capital/:path+", "/capital"],
-  ["/technology/:path+", "/technology"],
-  ["/trade/:path+", "/trade"],
-  ["/signals/:path+", "/signals"],
+  ["/projects", "/numbers"],
+  ["/capital/:path+", "/numbers"],
+  ["/technology/:path+", "/numbers"],
+  ["/trade/:path+", "/numbers"],
+  ["/signals/:path+", "/"],
   ["/markets/exchanges/:path+", "/markets"],
   ["/markets/commodities/:path+", "/markets"],
   ["/method/registry", "/method"],
@@ -108,6 +133,7 @@ const nextConfig: NextConfig = {
       // Short addresses for sharing by word of mouth and on WhatsApp.
       { source: "/pay", destination: "/rates/what-readers-paid", permanent: false },
       ...legacy.map(([source, destination]) => ({ source, destination, permanent: true })),
+      ...parked.map(([source, destination]) => ({ source, destination, permanent: true })),
     ];
   },
 };

@@ -21,7 +21,8 @@ REQUIRED = [
     "/data/frontier-local-debt", "/data/frontier-local-debt/monitor", "/markets", "/markets/tbills",
     "/markets/bonds", "/markets/kenya-tbills", "/markets/kenya-bonds", "/east-africa", "/rates/kenya",
     "/rates/kenya/money-market-funds", "/rates/kenya/loan-apps", "/brief", "/weekly", "/morning", "/developers",
-    "/data-api", "/downloads", "/status", "/corrections", "/jobs", "/countries/kenya", "/thank-you",
+    "/data-api", "/downloads", "/status", "/corrections", "/countries/kenya", "/thank-you",
+    "/numbers", "/compare", "/stories",
 ]
 
 

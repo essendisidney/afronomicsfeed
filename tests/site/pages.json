@@ -44,6 +44,7 @@
     "/sw",
     "/casebook",
     "/registry",
+    "/record",
     { "discover": "/registry", "match": "^/registry/[a-z0-9-]+$", "take": 2 },
     "/compare?peer=bank",
     "/registry/mwalimu-national-sacco",

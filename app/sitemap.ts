@@ -59,6 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/morning/sw", "daily", 0.6),
     page("/sw", "daily", 0.7),
     page("/registry", "monthly", 0.8),
+    page("/record", "weekly", 0.8),
     ...registryInstitutions().map((i) => page(`/registry/${i.slug}`, "monthly", 0.5)),
     // The casebook is listed once a case is signed off; drafts never are.
     ...(publicCases.length ? [page("/casebook", "weekly", 0.8), ...publicCases.map((c) => page(`/casebook/${c.id}`, "monthly", 0.7))] : []),

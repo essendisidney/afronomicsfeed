@@ -103,8 +103,8 @@ export default async function TodayPage() {
         </Link>
       </p>
 
-      <div className="mt-4 grid gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-8">
+      <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <div className="min-w-0 lg:col-span-8">
           {lead ? (
             <LeadReceipt r={lead} />
           ) : (
@@ -117,7 +117,7 @@ export default async function TodayPage() {
           )}
         </div>
 
-        <aside aria-label="Numbers and record" className="flex flex-col gap-4 lg:col-span-4">
+        <aside aria-label="Numbers and record" className="flex min-w-0 flex-col gap-4 lg:col-span-4">
           <section aria-labelledby="numbers-moved">
             <div className="flex items-baseline justify-between">
               <h2 id="numbers-moved" className="t-h3 text-ink">

@@ -18,7 +18,7 @@ export function BarChart({
   format?: (v: number) => string;
   label: string;
 }) {
-  const width = 640;
+  const width = 420; // narrow, so labels stay readable when the chart scales down to a phone
   const height = 240;
   const pad = { top: 26, right: 8, bottom: 30, left: 8 };
   const max = Math.max(...data.map((d) => d.value), reference?.value ?? 0, 0) * 1.08 || 1;
@@ -27,13 +27,13 @@ export function BarChart({
   const innerW = width - pad.left - pad.right;
   const innerH = height - pad.top - pad.bottom;
   const slot = innerW / data.length;
-  const barW = Math.min(72, slot * 0.62);
+  const barW = Math.min(56, slot * 0.6);
   const y = (v: number) => pad.top + (1 - (v - min) / span) * innerH;
   const zero = y(0);
 
   return (
     <>
-      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label} className="block h-auto w-full">
+      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label} className="block h-auto w-full max-w-xl">
         <line x1={pad.left} x2={width - pad.right} y1={zero} y2={zero} stroke="var(--rule)" strokeWidth={1} />
         {data.map((d, i) => {
           const cx = pad.left + slot * i + slot / 2;
@@ -57,7 +57,7 @@ export function BarChart({
         {reference ? (
           <g>
             <line x1={pad.left} x2={width - pad.right} y1={y(reference.value)} y2={y(reference.value)} stroke="var(--ink-soft)" strokeWidth={1} strokeDasharray="4 4" />
-            <text x={width - pad.right} y={y(reference.value) - 5} textAnchor="end" fontSize={11} fill="var(--ink-soft)">
+            <text x={pad.left} y={y(reference.value) - 5} textAnchor="start" fontSize={11} fill="var(--ink-soft)">
               {reference.label}
             </text>
           </g>

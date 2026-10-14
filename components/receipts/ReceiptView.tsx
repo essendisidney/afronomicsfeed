@@ -87,9 +87,17 @@ export function ReceiptView({ r }: { r: Receipt }) {
     <article className="mx-auto max-w-3xl">
       {r.status !== "published" ? (
         <p role="note" className="mb-5 rounded-xl border border-warn/60 bg-surface px-4 py-3 text-[14px] leading-6 text-ink">
-          <strong>Draft.</strong> Shown on preview deployments only. It publishes when every check below has been done against a primary
-          document:
-          <span className="mt-1 block text-[13px] text-ink-soft">{r.verify.join(" · ") || "no open checks"}</span>
+          <strong>Draft, shown on preview deployments only.</strong> It publishes when every open check has been done against a primary document.
+          {r.verify.length ? (
+            <details className="mt-1 text-[13px] text-ink-soft">
+              <summary className="cursor-pointer font-semibold text-ink">{r.verify.length} open checks</summary>
+              <ul className="mt-1 list-disc space-y-1 pl-5">
+                {r.verify.map((v) => (
+                  <li key={v}>{v}</li>
+                ))}
+              </ul>
+            </details>
+          ) : null}
         </p>
       ) : null}
       <ReceiptMeta r={r} />

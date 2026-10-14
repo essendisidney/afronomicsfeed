@@ -2,6 +2,9 @@
   "$comment": "Pages the site QA visits (scripts/site-qa.mjs). One entry per template. A string is a fixed path. A 'discover' entry opens that page and takes the first 'take' internal links whose path matches 'match' (a regex), so the newest brief or auction is always the one checked; 'each' repeats the discovery on every page found. 'status' is the HTTP status the page must answer with (default 200). See docs/qa.md.",
   "pages": [
     "/",
+    "/receipts",
+    { "discover": "/receipts", "match": "^/receipts/\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+$", "take": 1, "label": "Receipt page" },
+    "/for-institutions",
     "/pricing",
     "/licensing",
     "/buying",

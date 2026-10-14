@@ -141,6 +141,7 @@ export const institutionSections: readonly HubLink[] = [
   { href: "/data-api", label: "Data API", note: "Endpoints, fields and terms" },
   { href: "/developers", label: "Developers", note: "The open API and examples" },
   { href: "/pack", label: "Committee pack", note: "A monthly, sourced pack for SACCO, insurer and pension committees" },
+  { href: "/watch/sample", label: "Watch pack (sample)", note: "For a SACCO's board: the SACCO beside its SASRA tier and standards, every quarter" },
   { href: "/advisory", label: "Research and advisory", note: "Commissioned studies" },
   { href: "/buying", label: "Buying for an institution", note: "Procurement, invoices and vendor forms" },
   { href: "/advertise", label: "Advertise", note: "Reach our readers" },

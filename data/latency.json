@@ -23,8 +23,8 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 1,
-  "results": 1,
+  "timed": 2,
+  "results": 3,
   "p50_h": null,
   "p90_h": null
  },
@@ -143,12 +143,12 @@
    "kind": "bonds",
    "market": "kenya",
    "name": "Kenya",
-   "results": 0,
-   "timed": 0,
+   "results": 1,
+   "timed": 1,
    "p50_h": null,
    "p90_h": null,
-   "publisher_time": null,
-   "status": "no new result since measuring began"
+   "publisher_time": "Last-Modified of the result's own document",
+   "status": "1 timed result so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -209,15 +209,34 @@
    "kind": "bonds",
    "market": "waemu",
    "name": "WAEMU (UMOA-Titres)",
-   "results": 0,
+   "results": 1,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": null,
-   "status": "no new result since measuring began"
+   "status": "publisher time unknown"
   }
  ],
  "results": [
+  {
+   "key": "bonds:kenya:2026-10-19",
+   "kind": "bonds",
+   "market": "kenya",
+   "date": "2026-10-19",
+   "first_seen_at": "2026-10-14T15:06:29+00:00",
+   "published_at": "2026-10-14T10:37:18+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 4.49
+  },
+  {
+   "key": "bonds:waemu:2026-10-14:mali",
+   "kind": "bonds",
+   "market": "waemu",
+   "date": "2026-10-14",
+   "first_seen_at": "2026-10-14T15:17:59+00:00",
+   "published_at": null,
+   "published_how": null
+  },
   {
    "key": "bonds:morocco:2026-10-13",
    "kind": "bonds",
@@ -621,5 +640,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-14T09:43:35+00:00"
+ "updated_at": "2026-10-14T15:20:29+00:00"
 }

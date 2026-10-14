@@ -94,9 +94,9 @@
    "area": "Bond auctions",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest result 07 Oct (auctions every two weeks)",
-   "latest": "2026-10-07",
-   "due_by": "2026-10-22",
+   "detail": "latest result 19 Oct (auctions every two weeks)",
+   "latest": "2026-10-19",
+   "due_by": "2026-11-06",
    "link": "/markets/bonds/kenya"
   },
   {
@@ -130,9 +130,9 @@
    "area": "Bond auctions",
    "name": "WAEMU (UMOA-Titres)",
    "status": "ok",
-   "detail": "latest result 09 Oct (auctions weekly)",
-   "latest": "2026-10-09",
-   "due_by": "2026-10-16",
+   "detail": "latest result 14 Oct (auctions weekly)",
+   "latest": "2026-10-14",
+   "due_by": "2026-10-21",
    "link": "/markets/bonds/waemu"
   },
   {

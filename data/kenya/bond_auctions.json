@@ -3,12 +3,50 @@
  "publisher": "Central Bank of Kenya",
  "source_page": "https://www.centralbank.go.ke/bills-bonds/treasury-bonds/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-05T15:59:03+00:00",
+ "updated_at": "2026-10-14T15:06:29+00:00",
  "units": {
   "amounts": "KES millions",
   "rates": "percent per annum"
  },
  "rows": [
+  {
+   "value_date": "2026-10-19",
+   "issue": "SDB1/2011/030",
+   "type": "Savings development",
+   "tenor_years": 30,
+   "maturity": "2041-01-21",
+   "kind": "reopening",
+   "offered_total_kes_m": 50000.0,
+   "received_kes_m": 23722.22,
+   "accepted_kes_m": 19161.61,
+   "competitive_kes_m": 5895.86,
+   "noncompetitive_kes_m": 13265.75,
+   "bid_to_cover": 1.24,
+   "market_weighted_avg_rate": 13.7159,
+   "weighted_avg_rate": 13.6507,
+   "price_per_100": 91.9966,
+   "coupon": 12.0,
+   "source": "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/1810820315_RESULTS%20SDB1-2011-030%20AND%20FXD1-2026-030%20DATED%2019-10-2026.pdf"
+  },
+  {
+   "value_date": "2026-10-19",
+   "issue": "FXD1/2026/030",
+   "type": "Fixed coupon",
+   "tenor_years": 30,
+   "maturity": "2056-03-13",
+   "kind": "reopening",
+   "offered_total_kes_m": 50000.0,
+   "received_kes_m": 60103.63,
+   "accepted_kes_m": 33883.42,
+   "competitive_kes_m": 16493.21,
+   "noncompetitive_kes_m": 17390.21,
+   "bid_to_cover": 1.77,
+   "market_weighted_avg_rate": 14.2789,
+   "weighted_avg_rate": 14.183,
+   "price_per_100": 88.342,
+   "coupon": 12.5,
+   "source": "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/1810820315_RESULTS%20SDB1-2011-030%20AND%20FXD1-2026-030%20DATED%2019-10-2026.pdf"
+  },
   {
    "value_date": "2026-10-07",
    "issue": "FXD1/2018/015",
@@ -9064,6 +9102,13 @@
    "status": "parsed",
    "issues": [
     "FXD1/2018/015"
+   ]
+  },
+  "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/1810820315_RESULTS%20SDB1-2011-030%20AND%20FXD1-2026-030%20DATED%2019-10-2026.pdf": {
+   "status": "parsed",
+   "issues": [
+    "SDB1/2011/030",
+    "FXD1/2026/030"
    ]
   }
  }

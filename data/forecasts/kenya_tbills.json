@@ -1,0 +1,63 @@
+{
+ "about": "Kenya Treasury bill range forecasts, written before bids close and graded by code. Never edited.",
+ "methods": {
+  "v1": "Latest weighted average accepted rate plus the 10th to 90th percentile of the last 26 weekly moves (lib/data/auction-intel.ts). Aims to hold about 80% of results."
+ },
+ "forecasts": [
+  {
+   "id": "KE-TB-2026-10-19-91",
+   "market": "kenya",
+   "tenor": 91,
+   "auction_value_date": "2026-10-19",
+   "bids_close": "2026-10-15T11:00:00Z",
+   "written_at": "2026-10-14T19:13:58Z",
+   "method": "v1",
+   "from_value_date": "2026-10-12",
+   "from_rate": 8.7615,
+   "low": 8.7522,
+   "high": 8.9236,
+   "typical_move": 0.0087
+  },
+  {
+   "id": "KE-TB-2026-10-19-182",
+   "market": "kenya",
+   "tenor": 182,
+   "auction_value_date": "2026-10-19",
+   "bids_close": "2026-10-15T11:00:00Z",
+   "written_at": "2026-10-14T19:13:58Z",
+   "method": "v1",
+   "from_value_date": "2026-10-12",
+   "from_rate": 8.8744,
+   "low": 8.8609,
+   "high": 9.0281,
+   "typical_move": 0.0095
+  },
+  {
+   "id": "KE-TB-2026-10-19-364",
+   "market": "kenya",
+   "tenor": 364,
+   "auction_value_date": "2026-10-19",
+   "bids_close": "2026-10-15T11:00:00Z",
+   "written_at": "2026-10-14T19:13:58Z",
+   "method": "v1",
+   "from_value_date": "2026-10-12",
+   "from_rate": 9.0352,
+   "low": 9.0236,
+   "high": 9.1416,
+   "typical_move": 0.0135
+  }
+ ],
+ "outcomes": [],
+ "first_published": [
+  {
+   "ids": [
+    "KE-TB-2026-10-19-91",
+    "KE-TB-2026-10-19-182",
+    "KE-TB-2026-10-19-364"
+   ],
+   "commit": "https://github.com/essendisidney/afronomicsfeed/commit/8a8a3bf892c001fd4fd12257a240c0cf72d21380",
+   "at": "2026-10-14T19:13:58Z",
+   "note": "These forecasts were first committed on the branch that built the ledger, before it was merged; their time stamp is this commit, not the merge."
+  }
+ ]
+}

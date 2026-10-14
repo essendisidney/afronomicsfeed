@@ -62,6 +62,7 @@ export function GET() {
     `- [Kenya Treasury bonds](${u("/markets/kenya-bonds")}), [borrowing costs](${u("/markets/borrowing-costs")}), [currencies](${u("/markets")}).`,
     `- [Inflation by country](${u("/data/inflation")}), [54 country files](${u("/countries")}), [data hub](${u("/data")}).`,
     `- [Analysis](${u("/brief")}): data stories, each with its sources and arithmetic.`,
+    `- [Our record](${u("/record")}): every Kenya T-bill range we publish, written to a public file before bids close and graded by code against the CBK result; the backtest is shown apart.`,
     "",
     "## About",
     "",

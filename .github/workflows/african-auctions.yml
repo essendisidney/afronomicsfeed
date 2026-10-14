@@ -2,7 +2,7 @@
 # auction results for each market and commit the datasets. GitHub starts scheduled runs late or drops them when it
 # is busy (in Oct 2026 the morning run never ran and the others started hours late), so runs are frequent: a run
 # with nothing new commits nothing. The commit triggers a Vercel deploy, so the site updates itself. The last step
-# sends email rate alerts, then tender and bond-result alerts (need AF_CRON_SECRET; without it they skip) and sends only what is new.
+# sends email rate alerts, then bond-result alerts (need AF_CRON_SECRET; without it they skip) and sends only what is new.
 # Auction days differ (Egypt Sun-Mon, Malawi Tue, Nigeria/Tanzania/Mozambique Wed, Kenya/Zambia Thu, Ghana/South Africa Fri).
 name: African auctions
 
@@ -187,16 +187,6 @@ jobs:
             done
           fi
           curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" "$url"
-      # Tender alerts: each confirmed alert gets at most one email a day, only when a new tender matches its
-      # keywords. After the rate-alert step, which has already waited for this run's data to deploy.
-      - name: Send tender alerts
-        if: ${{ !cancelled() }}  # even when the rate-alert step failed
-        env:
-          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
-        run: |
-          if [ -z "$AF_CRON_SECRET" ]; then echo "AF_CRON_SECRET not set; skipping"; exit 0; fi
-          curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" https://www.afronomicsfeed.com/api/send/tender-alerts
-        continue-on-error: true
       # Bond-result emails to API key holders (pilot and paid): one per market per auction day, for bond results this
       # or a recent run first saw (data/latency.json). Claimed in the database before each send, so nothing goes twice;
       # with no key holders, or before migration 0037 is applied, it sends nothing. After the rate-alert step, which

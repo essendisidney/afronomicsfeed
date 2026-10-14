@@ -42,18 +42,6 @@ export async function recordPayment(p: PaymentRecord) {
   });
   if (!result.ok) return { ok: false as const, reason: result.reason };
   if (result.value !== true) return { ok: false as const, reason: "secret rejected" };
-  // A paid jobs listing goes live on its own, but only for a successful charge of the full listing fee: the plan comes
-  // from metadata the payer controls, so a KES 1 charge tagged job_listing must not publish anything.
-  if (p.plan === "job_listing" && p.email && p.status === "success" && paidInFull(p.plan, p.amount, p.currency)) await rpc("af_job_publish", { p_secret: secret(), p_email: p.email, p_id: null }).catch(() => null);
-  // Paid tender alerts switch on by themselves; each reference grants once however often Paystack reports it.
-  if (p.plan?.startsWith("tender_alerts") && p.email && p.status === "success" && p.currency === "KES") {
-    const months = p.plan === "tender_alerts_year" && p.amount >= 500_000 ? 12 : p.amount >= 50_000 ? 1 : 0;
-    if (months) {
-      const r = await rpc("af_tender_alert_pay", { p_secret: secret(), p_reference: p.reference, p_email: p.email, p_months: months }).catch(() => null);
-      const status = r?.ok ? (r.value as { status?: string } | null)?.status : null;
-      if (status !== "granted" && status !== "duplicate") console.log(`[billing] tender alerts not extended for ${p.reference}: ${status ?? "rpc failed"}`);
-    }
-  }
   return { ok: true as const };
 }
 
@@ -134,11 +122,6 @@ export function nextStep(plan: string | null, key?: KeyOutcome) {
       return "Reply with the fund’s name, latest published yield with its source, a logo and the link to invest; the listing goes live once the yield is verified.";
     case "sacco_listing":
       return "Reply with the SACCO's name, its SASRA licence category, the declared dividend and deposit rates with a link to the SACCO's own notice, a logo and a link for joining; the listing goes live once the rates are verified against the notice.";
-    case "tender_alerts":
-    case "tender_alerts_year":
-      return "Your tender alerts are paid up and keep coming as new matching tenders are published. If you paid with a different email from the one the alerts go to, reply with that address and we move it across.";
-    case "job_listing":
-      return "Reply with the role, the institution, location, closing date and how to apply; the listing is up within one working day for 30 days.";
     default:
       return "Your access is set up from this address within one business day. The Morning note starts tomorrow; auction alerts follow as each market reports.";
   }

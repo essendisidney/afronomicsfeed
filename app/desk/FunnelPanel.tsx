@@ -40,7 +40,7 @@ const ACTIONS: [string, string][] = [
   ["pricing_cta_click", "Pricing and pilot button clicks"],
   ["pilot_form_start", "Pilot form started"],
   ["pilot_form_submit", "Pilot form sent"],
-  ["alert_signup", "Alert sign-ups (rates and tenders)"],
+  ["alert_signup", "Alert sign-ups"],
   ["share", "Share clicks"],
   ["source_click", "Clicks to the issuer’s own notice"],
   ["survey_answer", "Survey answers"],

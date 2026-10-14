@@ -13,7 +13,7 @@ export const INSTITUTIONAL_PATHS = /^\/(data\/frontier-local-debt|markets\/bonds
  */
 export const KENYA_READER_PATHS = /^\/(rates\/kenya|rates\/what-readers-paid|chama|brief\/savers-lost-more-than-borrowers-gained)(\/|$)/;
 /** Reader tools and guides: an optional "What do you use this for?". */
-const READER_PATHS = /^\/(rates|prices|learn|send-money|rent-check|pay-check|chama|diaspora|guides|explainers|morning|brief|tenders|jobs)(\/|$)/;
+const READER_PATHS = /^\/(rates|prices|learn|chama|guides|explainers|morning|brief)(\/|$)/;
 
 type Q = "pay_next" | "use_for" | "pay_ke";
 

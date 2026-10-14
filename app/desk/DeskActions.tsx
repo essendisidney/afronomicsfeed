@@ -198,7 +198,7 @@ export function RevokeApiKey({ id }: { id: number }) {
 }
 
 const SEGMENTS = ["asset_manager", "bank", "dfi", "research", "pension", "insurer", "corporate", "government", "media", "other"];
-const PRODUCTS = ["frontier_debt", "data_api", "enterprise", "pack", "widget", "listing", "research", "tenders", "other"];
+const PRODUCTS = ["frontier_debt", "data_api", "enterprise", "pack", "widget", "listing", "research", "other"];
 const STAGES = ["prospect", "contacted", "qualified", "pilot", "proposal", "won", "lost"];
 
 /** Add a deal, or update one by its number (blank fields keep their value). "won" needs the signing date. */

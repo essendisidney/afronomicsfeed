@@ -111,7 +111,7 @@ function KeyPanel({ keyOutcome, email, plan }: { keyOutcome: KeyOutcome; email: 
 }
 
 /**
- * Where Paystack sends every buyer back (except tender alerts and job listings, which have their own pages). The
+ * Where Paystack sends every buyer back. The
  * reference is verified with Paystack server-side and the payment recorded; for Team and API the key is issued (or
  * picked up from the webhook) and shown once. The page says what was bought, what happens next and when, and how to
  * get help.

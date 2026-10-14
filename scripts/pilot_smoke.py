@@ -114,10 +114,16 @@ def main() -> int:
             )
             r = requests.get(f"{SITE}/api/data/kenya-bonds", headers=auth, timeout=30)
             lines = r.text.splitlines()
+            # A key holder's CSV starts with "# Licensed under your <plan> plan"; the free tier's starts with its notice
+            # and a "# truncated:" line and carries X-Afronomics-Free-Tier (lib/api.ts apiCsv).
             check(
-                "CSV with key: full file, no free-tier notice",
-                r.ok and not any(l.startswith("#") for l in lines[:3]) and len(lines) > 100,
-                f"HTTP {r.status_code}, {len(lines)} lines",
+                "CSV with key: full file, licensed, no free-tier notice",
+                r.ok
+                and r.headers.get("X-Afronomics-Free-Tier") is None
+                and lines[:1] and lines[0].startswith("# Licensed under your")
+                and not any(l.startswith("# truncated:") for l in lines[:5])
+                and len(lines) > 100,
+                f"HTTP {r.status_code}, {len(lines)} lines, first line {lines[0][:40] if lines else ''!r}",
             )
 
     failed = [n for n, ok, _ in results if not ok]

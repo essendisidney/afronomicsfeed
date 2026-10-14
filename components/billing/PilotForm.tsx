@@ -40,7 +40,7 @@ export function PilotForm({ siteUrl, localPricing = false }: { siteUrl: string; 
           next: form.get("next"),
           country: form.get("country"),
           website: form.get("website"),
-          source: window.location.pathname,
+          source: pilotSource(),
         }),
       });
       const body = (await response.json().catch(() => null)) as PilotResult | null;
@@ -193,4 +193,10 @@ function PilotDone({ result, siteUrl }: { result: Extract<PilotResult, { ok: tru
       </p>
     </div>
   );
+}
+
+/** The page the request came from; ?from=story-<slug> (links in components/article/PilotCta) attributes it to a story. */
+function pilotSource() {
+  const from = new URLSearchParams(window.location.search).get("from");
+  return `${window.location.pathname}${from ? `?from=${from}` : ""}`.slice(0, 150);
 }

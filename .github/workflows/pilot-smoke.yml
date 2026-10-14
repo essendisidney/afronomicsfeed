@@ -1,0 +1,25 @@
+# Manual only: walk the institutional pilot path on the live site (page, free tier, self-serve form, trial key,
+# full history). Uses Resend's test inbox, so no email reaches a person. Commits nothing. Remove the test rows
+# afterwards (docs/qa.md, "Pilot path smoke test").
+name: Pilot smoke
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python scripts/pilot_smoke.py
+        env:
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
+          SMOKE_TAG: run${{ github.run_id }}

@@ -108,3 +108,25 @@ Open the `site-qa-report` artifact (or `qa-report/report.md` locally). Each row 
 (`390-dark` etc.), the problem, and the elements involved; the screenshot shows the page as the check saw it. Fix
 the cause with the shared UI kit (`components/ui/Button.tsx` `buttonClass` gives every button a 44px phone height),
 or allowlist it with a reason if it is intentional.
+
+## Pilot path smoke test (manual)
+
+`.github/workflows/pilot-smoke.yml` (Actions → Pilot smoke → Run workflow) walks the path a prospect takes on the
+live site, using `scripts/pilot_smoke.py`:
+
+1. the pilot page loads and has the form (`#pilot`);
+2. the keyless API is the free tier (truncated, `X-Afronomics-Free-Tier`);
+3. the self-serve form issues a trial key at once and Resend accepts the key email;
+4. a trial key unlocks the full history on the JSON API and the CSV.
+
+Mail goes to Resend's test inbox (`delivered+…@resend.dev`), which accepts it without delivering it to anyone. The
+founder still gets the usual desk note ("Pilot issued: Afronomics smoke test (QA)"). The key is masked in the log.
+
+**Clean up after each run.** The run leaves a lead, a deal at stage `pilot`, and two trial keys. They would count
+towards the D-004 gate, and `af_trial_key_issue` allows only three trial keys per domain in 90 days. Remove them with:
+
+```sql
+delete from data_keys where email like '%@resend.dev';
+delete from deals where organisation = 'Afronomics smoke test (QA)';
+delete from leads where email like '%@resend.dev';
+```

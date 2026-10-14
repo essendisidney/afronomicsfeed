@@ -16,6 +16,11 @@ const country: Record<string, string> = {
   Tanzania: "Tanzania",
   Zambia: "Zambia",
   Malawi: "Malawi",
+  Morocco: "Moroko",
+  Mauritius: "Morisi",
+  Algeria: "Aljeria",
+  Cameroon: "Kamerun",
+  Ethiopia: "Ethiopia",
 };
 export const swCountry = (name: string) => country[name] ?? name;
 

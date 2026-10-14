@@ -58,7 +58,7 @@ export const utilityNav = [
   { href: "/morning", label: "Morning" },
   { href: "/alerts", label: "Alerts" },
   { href: "/learn", label: "Learn" },
-  { href: "/morning/sw", label: "Kiswahili" },
+  { href: "/sw", label: "Kiswahili" },
 ] as const;
 
 export const footerGroups = [
@@ -220,7 +220,7 @@ export const footerLine = [
   { href: "/corrections", label: "Corrections" },
   { href: "/learn", label: "Learn" },
   { href: "/about", label: "About" },
-  { href: "/morning/sw", label: "Kiswahili" },
+  { href: "/sw", label: "Kiswahili" },
 ] as const;
 
 export const disclaimer =

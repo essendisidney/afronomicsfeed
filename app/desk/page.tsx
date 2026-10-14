@@ -25,6 +25,8 @@ import { TodayStrip, type Gate } from "./TodayStrip";
 import { PipelineBoard } from "./PipelineBoard";
 import { Inbox } from "./Inbox";
 import { PilotsPanel } from "./PilotsPanel";
+import { CasebookPanel } from "./CasebookPanel";
+import { loadCases } from "@/lib/cases";
 import { ContentPanel, type Campaign } from "./ContentPanel";
 import { DecisionsPanel, HealthPanel, RoutinesPanel, type Freshness } from "./OpsPanels";
 import {
@@ -198,6 +200,7 @@ const NAV: [string, string][] = [
   ["#health", "Data"],
   ["#routines", "Routines"],
   ["#decisions", "Decisions"],
+  ["#casebook", "Casebook"],
   ["#reference", "Reference"],
 ];
 
@@ -384,6 +387,7 @@ export default async function DeskPage() {
         <HealthPanel health={loadHealth()} latency={loadLatency()} freshness={freshness} />
         <RoutinesPanel />
         <DecisionsPanel />
+        <CasebookPanel cases={loadCases()} />
       </div>
 
       <section id="reference" className="mt-14 scroll-mt-20 space-y-3">

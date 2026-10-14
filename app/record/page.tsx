@@ -122,7 +122,9 @@ export default function RecordPage() {
                   </td>
                   <td className="text-right text-[13px]" data-num>
                     {r.written_at.replace("T", " ").slice(0, 16)} UTC
-                    <span className="block text-[11px] text-muted">bids closed {r.bids_close.replace("T", " ").slice(0, 16)} UTC</span>
+                    <span className="block text-[11px] text-muted">
+                      bids {r.outcome ? "closed" : "close"} {r.bids_close.replace("T", " ").slice(0, 16)} UTC
+                    </span>
                   </td>
                   <td className="text-right" data-num>
                     <Result r={r} />

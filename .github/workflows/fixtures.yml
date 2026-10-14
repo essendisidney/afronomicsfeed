@@ -1,8 +1,13 @@
-# Manual only: save copies of publishers' documents into tests/readers/fixtures/ on a feature branch, so a new reader
-# can be tested offline against the real thing when the desk machine cannot reach the publisher. Never runs on main.
+# Save copies of publishers' documents into tests/readers/fixtures/<folder>/ on a feature branch, so a new reader can
+# be tested offline against the real thing when the desk machine cannot reach the publisher. Never runs on main.
+# Two ways to start it: push a request file tests/readers/fixtures/<folder>.request (one "name=url" per line) to a
+# feature branch, or run it by hand once this file is on main.
 name: Save reader fixtures
 
 on:
+  push:
+    branches-ignore: [main]
+    paths: ["tests/readers/fixtures/*.request"]
   workflow_dispatch:
     inputs:
       files:
@@ -22,11 +27,22 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - name: Download
         env:
           FILES: ${{ inputs.files }}
           FOLDER: ${{ inputs.folder }}
+          EVENT: ${{ github.event_name }}
         run: |
+          if [ "$EVENT" = "push" ]; then
+            # Every request file changed in this push; one folder per run keeps it simple.
+            req=$(git diff --name-only HEAD~1 HEAD -- 'tests/readers/fixtures/*.request' | head -1)
+            [ -n "$req" ] || { echo "no request file changed"; exit 0; }
+            FOLDER=$(basename "$req" .request)
+            FILES=$(grep -v '^#' "$req" | tr '\n' ' ')
+          fi
+          echo "FOLDER=$FOLDER" >> "$GITHUB_ENV"
           if ! [[ "$FOLDER" =~ ^[a-z0-9_-]+$ ]]; then echo "bad folder"; exit 1; fi
           dir="tests/readers/fixtures/$FOLDER"
           mkdir -p "$dir"
@@ -40,8 +56,6 @@ jobs:
             echo "$name: $size bytes from $url"
           done
       - name: Commit to this branch
-        env:
-          FOLDER: ${{ inputs.folder }}
         run: |
           git config user.name "afronomics-bot"
           git config user.email "afronomics-bot@users.noreply.github.com"

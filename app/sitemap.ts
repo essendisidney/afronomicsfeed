@@ -10,6 +10,7 @@ import { lenderHref, loadLenders } from "@/lib/data/loan-apps";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { site } from "@/lib/site";
 import { visibleCases } from "@/lib/cases";
+import { institutions as registryInstitutions } from "@/lib/registry";
 import { learnLangs, loadLessons } from "@/lib/learn-i18n";
 import { institutions, topics } from "@/lib/taxonomy";
 import { allTbillWeeks, bondDates } from "@/lib/data/auction-stories";
@@ -57,6 +58,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/morning", "hourly", 0.9),
     page("/morning/sw", "daily", 0.6),
     page("/sw", "daily", 0.7),
+    page("/registry", "monthly", 0.8),
+    ...registryInstitutions().map((i) => page(`/registry/${i.slug}`, "monthly", 0.5)),
     // The casebook is listed once a case is signed off; drafts never are.
     ...(publicCases.length ? [page("/casebook", "weekly", 0.8), ...publicCases.map((c) => page(`/casebook/${c.id}`, "monthly", 0.7))] : []),
     page("/rates/kenya", "daily", 0.9, fileUpdated("kenya/rates.json")),

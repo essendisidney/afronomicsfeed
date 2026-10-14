@@ -94,6 +94,13 @@ export function displayName(name: string): string {
     .trim();
 }
 
+/** SASRA lists non-deposit-taking SACCOs by bare name ("Equity", "Faulu Bank"); say they are SACCOs, so a staff
+ * SACCO is never mistaken for the bank it is named after. */
+function nameFor(kind: Kind, name: string): string {
+  const d = displayName(name);
+  return kind.startsWith("sacco") && !/\bsacco\b/i.test(d) ? `${d} Sacco` : d;
+}
+
 const slugOf = (name: string) =>
   displayName(name)
     .toLowerCase()
@@ -125,7 +132,7 @@ export const loadRegistry = cache((): Built => {
     const key = keyFor(kind, name);
     const existing = byKey.get(id(kind, key));
     if (existing) return existing;
-    const inst: Institution = { slug: "", key, kind, name: displayName(name), county, licences: [], status: null, directory: null, tier: null, figures: [] };
+    const inst: Institution = { slug: "", key, kind, name: nameFor(kind, name), county, licences: [], status: null, directory: null, tier: null, figures: [] };
     byKey.set(id(kind, key), inst);
     return inst;
   };
@@ -136,7 +143,7 @@ export const loadRegistry = cache((): Built => {
     const kind: Kind = r.type === "nwdt" ? "sacco_nwdt" : "sacco_dt";
     const inst = add(kind, r.name, r.county);
     if (r.type !== "any") inst.kind = kind;
-    inst.name = displayName(r.name);
+    inst.name = nameFor(kind, r.name);
     inst.county = r.county ?? inst.county;
     inst.licences.push({ year: r.year, status: r.status, schedule: r.schedule, asOf: r.as_of, source: r.source });
   }

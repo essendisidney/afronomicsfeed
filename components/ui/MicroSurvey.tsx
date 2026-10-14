@@ -7,10 +7,15 @@ import { isOwnerDevice, track } from "@/lib/track";
 
 /** Pages for institutions: they get "What would you pay for next?" in place of the found-it question. */
 export const INSTITUTIONAL_PATHS = /^\/(data\/frontier-local-debt|markets\/bonds|pricing|licensing|data-api)(\/|$)/;
+/**
+ * Kenyan reader tools: "Which would you pay for?" with prices in shillings, to learn what Kenyan readers would pay
+ * for and at what price (docs/strategy/africa-demand-check.md). Asked in place of "What do you use this for?".
+ */
+export const KENYA_READER_PATHS = /^\/(rates\/kenya|rates\/what-readers-paid|chama|brief\/savers-lost-more-than-borrowers-gained)(\/|$)/;
 /** Reader tools and guides: an optional "What do you use this for?". */
 const READER_PATHS = /^\/(rates|prices|learn|send-money|rent-check|pay-check|chama|diaspora|guides|explainers|morning|brief|tenders|jobs)(\/|$)/;
 
-type Q = "pay_next" | "use_for";
+type Q = "pay_next" | "use_for" | "pay_ke";
 
 const QUESTIONS: Record<Q, { ask: string; note?: string; options: [string, string][]; other: string }> = {
   pay_next: {
@@ -22,6 +27,18 @@ const QUESTIONS: Record<Q, { ask: string; note?: string; options: [string, strin
       ["other", "Something else"],
     ],
     other: "What would it be?",
+  },
+  pay_ke: {
+    ask: "Which would you pay for?",
+    note: "Nothing to pay now; we are asking before we build",
+    options: [
+      ["sms_50", "Auction results by SMS · KES 50 a month"],
+      ["whatsapp_300", "Rate and auction alerts on WhatsApp · KES 300 a month"],
+      ["pro_1500", "Pro: the Morning, every brief, all tools · KES 1,500 a month"],
+      ["free_only", "Nothing: I'd only use it free"],
+      ["other", "Something else"],
+    ],
+    other: "What would you pay for, and how much?",
   },
   use_for: {
     ask: "What do you use this for?",
@@ -43,9 +60,9 @@ let answered: string | null = null;
 const readAnswered = () => {
   if (answered == null) {
     try {
-      answered = `${localStorage.getItem("af_survey_pay_next") ?? ""},${localStorage.getItem("af_survey_use_for") ?? ""}`;
+      answered = ["pay_next", "use_for", "pay_ke"].map((q) => localStorage.getItem(`af_survey_${q}`) ?? "").join(",");
     } catch {
-      answered = "pay_next,use_for"; // storage blocked: do not ask on every page
+      answered = "pay_next,use_for,pay_ke"; // storage blocked: do not ask on every page
     }
   }
   return answered;
@@ -54,8 +71,9 @@ const noop = () => () => {};
 
 /**
  * One anonymous question, at most one per page: on institutional pages and after any data download, "What would
- * you pay for next?"; on reader tools, an optional "What do you use this for?". Each is asked until answered or
- * closed once in this browser. Answers go to /api/survey (migration 0034); the owner's own devices send nothing.
+ * you pay for next?"; on the Kenyan reader tools, "Which would you pay for?" priced in shillings; on other reader
+ * tools, an optional "What do you use this for?". Each is asked until answered or
+ * closed once in this browser. Answers go to /api/survey (migrations 0034, 0041); the owner's own devices send nothing.
  */
 export function MicroSurvey() {
   const path = usePathname() ?? "";
@@ -74,7 +92,13 @@ export function MicroSurvey() {
 
   if (stored == null) return null;
   const isDone = (q: Q) => stored.includes(q) || done.includes(q);
-  const pageQ: Q | null = INSTITUTIONAL_PATHS.test(path) ? "pay_next" : READER_PATHS.test(path) ? "use_for" : null;
+  const pageQ: Q | null = INSTITUTIONAL_PATHS.test(path)
+    ? "pay_next"
+    : KENYA_READER_PATHS.test(path)
+      ? "pay_ke"
+      : READER_PATHS.test(path)
+        ? "use_for"
+        : null;
   const afterDownload = floating && !isDone("pay_next");
   const q: Q | null = afterDownload ? "pay_next" : pageQ && !isDone(pageQ) ? pageQ : null;
 

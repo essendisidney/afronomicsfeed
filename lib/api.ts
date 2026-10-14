@@ -1,5 +1,5 @@
 import { after } from "next/server";
-import { isCrawlerOrOwnJob } from "@/lib/bots";
+import { countsAsApiCall } from "@/lib/bots";
 import { checkSession, sessionToken, verifySession } from "@/lib/downloads";
 import { rpc } from "@/lib/store";
 import { site } from "@/lib/site";
@@ -245,8 +245,10 @@ export async function apiJson(request: Request, path: string, data: unknown, sta
     caller = origin ? new URL(origin).hostname.replace(/^www\./, "") : "";
   } catch {}
   const country = request.headers.get("x-vercel-ip-country") ?? "";
-  // Count people and the sites building on the data, not crawlers or Afronomics' own alert checker.
-  if (!isCrawlerOrOwnJob(request.headers.get("user-agent")))
+  // Count people and the sites building on the data. Not counted (lib/bots.ts countsAsApiCall): crawlers and our own
+  // jobs (alert checker, readers), HEAD and prefetches (link checkers), and internal calls: anything without
+  // x-vercel-ip-country, i.e. not received from the internet by Vercel (the site QA's `next start` in CI, local runs).
+  if (countsAsApiCall(request.method, request.headers))
     after(() => rpc("af_hit", { p_path: `/api${path}`.slice(0, 200), p_referrer: caller || "api", p_country: country }).catch(() => undefined));
   return new Response(
     JSON.stringify(

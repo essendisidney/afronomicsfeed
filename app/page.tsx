@@ -123,8 +123,8 @@ export default async function TodayPage() {
               </Link>
             </div>
             <p className="mt-2 text-[13px] text-muted">
-              This is a backtest: the method run over past auctions, not ranges we published at the time. From now on each week&rsquo;s range is
-              published before bids close and graded by code against the CBK result.
+              This is a backtest: the method run over past auctions, not ranges we published at the time. A public ledger of each week&rsquo;s
+              range, written before bids close and graded by code against the CBK result, is being built.
             </p>
           </div>
         </section>

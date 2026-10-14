@@ -97,6 +97,7 @@ export const compareSections: readonly HubSection[] = [
     question: "Where does a saver get the most?",
     intro: "Peer tables for Kenyan savers, each from the providers' published rates.",
     links: [
+      { href: "/registry", label: "Institutions registry", note: "Every licensed SACCO, microfinance bank and bank, as the regulators list them" },
       { href: "/rates/kenya/money-market-funds", label: "Money market funds", note: "Yields fund by fund" },
       { href: "/rates/kenya/saccos", label: "SACCOs", note: "What SACCOs pay and charge" },
       { href: "/rates/kenya", label: "Banks, funds, SACCOs and T-bills", note: "The four side by side" },
@@ -134,6 +135,7 @@ export const compareSections: readonly HubSection[] = [
 /** The pages folded into "For institutions" (rebuild brief, section 4), listed on that page. */
 export const institutionSections: readonly HubLink[] = [
   { href: "/data/frontier-local-debt", label: "Local debt data", note: "Auction data for funds, banks and DFIs, with the free 30-day pilot" },
+  { href: "/registry", label: "Institutions registry", note: "Every licensed SACCO, microfinance bank and bank, with the regulators' figures and a CSV" },
   { href: "/pricing", label: "Pricing", note: "Every plan and what it includes" },
   { href: "/licensing", label: "Licensing", note: "Licences, terms, and prices for local institutions" },
   { href: "/data-api", label: "Data API", note: "Endpoints, fields and terms" },

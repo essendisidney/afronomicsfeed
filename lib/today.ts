@@ -182,7 +182,8 @@ export async function whatChanged(now = Date.now()): Promise<TodayMove[]> {
   return out;
 }
 
-/** "Our record": how often Kenya T-bill results landed inside our published range (lib/data/auction-intel.ts). */
+/** "How the method has done": a backtest of the Kenya T-bill range method over every auction since 2011
+ * (lib/data/auction-intel.ts). Not a record of published forecasts; that is the ledger (docs/rebuild/phase-4-plan.md). */
 export function ourRecord() {
   const rows = outlook();
   if (!rows.length) return null;

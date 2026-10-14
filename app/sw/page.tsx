@@ -94,15 +94,15 @@ export default async function TodaySwPage() {
         <section aria-labelledby="rekodi" className="mt-12 grid gap-6 rounded-3xl border border-rule bg-surface px-6 py-7 sm:px-8 lg:grid-cols-[1fr_2fr] lg:items-center">
           <div>
             <h2 id="rekodi" className="font-serif text-2xl text-ink sm:text-3xl">
-              Rekodi yetu
+              Jinsi mbinu ilivyofanya
             </h2>
             <p className="tabular mt-3 font-serif text-[2.6rem] leading-none text-ink">{Math.round(record.share * 100)}%</p>
           </div>
           <div>
             <p className="tabular text-[16px] leading-7 text-ink">
-              Kabla ya kila mnada wa hati za hazina za Kenya tunachapisha kiwango kinachotarajiwa kwa kila muda. Katika minada{" "}
-              {record.tested.toLocaleString("en-US")} iliyopita ya muda {record.tenors}, matokeo yaliangukia ndani ya kiwango chetu mara{" "}
-              {record.inside.toLocaleString("en-US")}.
+              Kabla ya kila mnada wa hati za hazina za Kenya tunaonyesha kiwango kinachotarajiwa kwa kila muda. Ikijaribiwa kwenye minada{" "}
+              {record.tested.toLocaleString("en-US")} iliyopita ya muda {record.tenors} tangu 2011, matokeo yaliangukia ndani ya kiwango mara{" "}
+              {record.inside.toLocaleString("en-US")}. Hili ni jaribio la mbinu kwenye minada ya zamani, si viwango tulivyochapisha wakati huo.
             </p>
             <div className="mt-3">
               <EvidenceTag source="Central Bank of Kenya auction results" href={record.source} asOf={record.asOf} />

@@ -19,7 +19,7 @@ const pct = (n: number) => `${n.toFixed(2)}%`;
 export function generateMetadata(): Metadata {
   const next = nextAuction();
   const title = "Kenya T-bill auction: likely rates and “did my bid win?”";
-  const description = `Before Kenya's next Treasury bill auction${next ? ` (bids close ${d(next.bidsClose, short)})` : ""}: the likely range for each bill's rate, with its track record since 2011. After it: did your bid win, and what does the bill pay after tax?`;
+  const description = `Before Kenya's next Treasury bill auction${next ? ` (bids close ${d(next.bidsClose, short)})` : ""}: the likely range for each bill's rate, tested on every auction since 2011. After it: did your bid win, and what does the bill pay after tax?`;
   return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/markets/kenya-tbills/auction` } };
 }
 
@@ -84,7 +84,7 @@ export default function AuctionPage() {
                 <th className="text-right">Last auction</th>
                 <th className="text-right">Likely next</th>
                 <th className="hidden text-right sm:table-cell">Typical weekly move</th>
-                <th className="text-right">Track record</th>
+                <th className="text-right">Tested since 2011</th>
               </tr>
             </thead>
             <tbody>

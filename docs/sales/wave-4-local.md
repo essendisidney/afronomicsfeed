@@ -1,7 +1,7 @@
 # Pilot wave 4: local institutions (drafted 14 Oct 2026)
 
-**Status: drafts only. Nothing sent until the founder approves.** Each email is saved as a Gmail draft
-(subject starts "Treasury bill ..."), campaign `pilot-wave4`.
+**Status: approved by the founder and sent 14 Oct 2026 to 9 of 10** (campaign `pilot-wave4`); deals moved to
+`contacted`, follow-up 22 Oct. Britam (no published address) stays a Gmail draft for the founder.
 
 **Why local now.** Waves 1 to 3 went to global funds, which are slow to answer cold emails. Local institutions can
 pay today: Kenya at checkout in KES (M-Pesa or card), elsewhere by a USD-equivalent card link or invoice

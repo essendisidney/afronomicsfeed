@@ -15,6 +15,7 @@ It is a read-only check, re-runnable with the snippet at the end.
 
 | Table | Rows (live count, 14 Oct) | Likely purpose (from its name and migration; not verified) |
 | --- | --- | --- |
+| `af_jobs` | 0 | the jobs board (removed 14 Oct) |
 | `af_push_keys` | 1 | web push (superseded by the alerts in use today) |
 | `af_push_state` | 10 | web push |
 | `api_keys` | 0 | the first API-key design (replaced by `data_keys`, migration 0028) |
@@ -40,6 +41,8 @@ It is a read-only check, re-runnable with the snippet at the end.
 | `saved_searches` | 0 | user accounts (never launched) |
 | `signal_evidence` | 0 | the first signals design |
 | `startups` | 0 | startup coverage (parked) |
+| `tender_alert_payments` | 0 | tender alerts (removed 14 Oct) |
+| `tender_alerts` | 0 | tender alerts (removed 14 Oct) |
 | `trade_flows` | 0 | trade coverage (parked) |
 | `watchlist_items` | 0 | user watchlists (never launched) |
 | `watchlists` | 0 | user watchlists (never launched) |
@@ -51,9 +54,9 @@ It is a read-only check, re-runnable with the snippet at the end.
 a database function that code calls (directly or through another function) reads it. That found one more table,
 `document_chunks`.
 
-**Waiting on one decision.** The jobs board and tender alerts were parked in Phase 1 and their tables are empty
-(`af_jobs`, `tender_alerts` and `tender_alert_payments`: 0 rows each on 14 Oct). Their sign-up and payment code
-is still in the site. Once that code is removed, those three tables join this list.
+**Jobs board and tender alerts (removed 14 Oct).** Their code was removed at the founder's request. Their three
+tables join this list: `af_jobs`, `tender_alerts` and `tender_alert_payments`, each with 0 rows on 14 Oct. Their
+database functions (`af_job_*`, `af_tender_alert_*`) also stay in place until the tables are dropped.
 
 ```python
 # Re-run from the repo root (prints tables with no reference in code or database functions).

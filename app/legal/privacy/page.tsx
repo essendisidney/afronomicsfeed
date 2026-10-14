@@ -22,8 +22,7 @@ export default function PrivacyPage() {
           link. Unconfirmed requests are deleted after 7 days and stopped alerts within 30 days.
         </li>
         <li>
-          <strong>Tender alerts and phone alerts</strong> — for tender alerts, your email address and keywords, on the same confirm-first,
-          one-click-stop terms as rate alerts. For phone (push) alerts, only the browser’s push address and the markets you chose; no name or email.
+          <strong>Phone alerts</strong> — for phone (push) alerts, only the browser’s push address and the markets you chose; no name or email.
         </li>
         <li>
           <strong>Enquiries and pilot requests</strong> — the name, email, organisation and message you send, to reply to you, run a pilot and

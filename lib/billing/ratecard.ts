@@ -250,7 +250,6 @@ export const rateCard: RateGroup[] = [
       { id: "country_sponsor", name: "Country file sponsor", amount: 15000, currency: "KES", unit: "per country a month", what: "Sole sponsor of one of the 54 country files: the page people land on when they search a market.", enquiry: "sponsorship", href: "/countries" },
       { id: "fund_listing", name: "Verified fund listing", amount: 20000, currency: "KES", unit: "a month", what: "Your money-market or bond fund listed on the rates comparison with a verified yield, your logo and an “invest” link that we count for you.", checkout: "fund_listing", href: "/rates/kenya" },
       { id: "sacco_listing", name: "Verified SACCO listing", amount: 20000, currency: "KES", unit: "a month", what: "Your SACCO on the SACCO rates comparison with its declared dividend and deposit rates verified against your own notice, your logo and a “join” link that we count for you. Regulated SACCOs only.", checkout: "sacco_listing", href: "/rates/kenya/saccos" },
-      { id: "job", name: "Jobs listing", amount: 10000, currency: "KES", unit: "per 30-day listing", what: "A treasury, risk, research or analyst role in front of the people who read the numbers. Reply to the receipt with the listing.", checkout: "job_listing" },
       { id: "breakfast", name: "The rates breakfast", amount: 750000, currency: "KES", unit: "per event", what: "Quarterly, Nairobi, sixty treasurers and investment-committee members, one sponsor, the index reading as the headline. Sponsor’s name on everything.", enquiry: "sponsorship" },
     ],
   },

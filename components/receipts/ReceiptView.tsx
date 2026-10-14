@@ -115,7 +115,7 @@ export function ReceiptView({ r }: { r: Receipt }) {
       </div>
 
       {rest.length ? (
-        <div className="mt-8 grid gap-4">
+        <div className="mt-8 grid grid-cols-1 gap-4">
           {rest.map((c) => (
             <ReceiptChartView key={c.title} r={r} chart={c} />
           ))}

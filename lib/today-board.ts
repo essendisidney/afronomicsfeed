@@ -66,7 +66,7 @@ function topFund(): BoardTile | null {
   if (!top) return null;
   return {
     id: "mmf",
-    label: "Best money market fund, after tax",
+    label: "Top money market fund by yield, after tax",
     value: pct(top.net),
     change: `${top.name}`,
     direction: "flat",

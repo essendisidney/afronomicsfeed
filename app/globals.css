@@ -699,3 +699,13 @@ table,
     border: 1px solid currentColor;
   }
 }
+
+/* The "Go deeper" panel on a Receipt sits on night: its list reads in the night palette. */
+.receipt-full .article-body,
+.receipt-full .article-body li,
+.receipt-full .article-body p {
+  color: var(--night-soft);
+}
+.receipt-full .article-body strong {
+  color: var(--night-ink);
+}

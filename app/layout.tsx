@@ -16,6 +16,9 @@ const sans = localFont({
   ],
   declarations: [{ prop: "font-stretch", value: "62% 125%" }],
   display: "swap",
+  // A fallback sized to Archivo's metrics, so text keeps its shape when the font arrives (no layout shift).
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+  adjustFontFallback: "Arial",
 });
 
 /* Headlines and case titles (rebuild brief, section 7): Source Serif 4, SIL Open Font Licence (fonts/SOURCE-SERIF-4-OFL.txt). */
@@ -24,6 +27,7 @@ const serif = localFont({
   src: [{ path: "./fonts/source-serif-4-latin-wght-normal.woff2", weight: "200 900", style: "normal" }],
   fallback: ["Georgia", "Times New Roman", "serif"],
   display: "swap",
+  adjustFontFallback: "Times New Roman",
 });
 
 export const viewport: Viewport = {

@@ -19,34 +19,37 @@ export const site = {
 } as const;
 
 /**
- * Main navigation (rebuild brief, section 6). Each section also lights up on the older pages it gathers: `match`
- * lists the path prefixes it owns. Casebook joins after Phase 2 ships real cases (docs/rebuild/phase-1-plan.md).
+ * Main navigation (RECEIPTS.md, "One site, one journey"; docs/rebuild/receipts-r1-plan.md): five sections. Receipts
+ * gathers the older story pages too. Each section also lights up on the pages it gathers: `match` lists the path
+ * prefixes it owns. For institutions sits beside the navigation as a quiet link (`institutionsNav`).
  */
 export const nav = [
   { href: "/", label: "Today", match: [] },
-  { href: "/compare", label: "Compare", match: ["/compare"] },
+  {
+    href: "/receipts",
+    label: "Receipts",
+    match: ["/receipts", "/stories", "/brief", "/weekly", "/explainers", "/news", "/archive", "/topics", "/institutions"],
+  },
   {
     href: "/numbers",
     label: "Numbers",
     match: ["/numbers", "/markets", "/rates", "/data", "/countries", "/prices", "/east-africa", "/charts"],
   },
-  {
-    href: "/stories",
-    label: "Stories",
-    match: ["/stories", "/brief", "/weekly", "/explainers", "/news", "/archive", "/topics", "/institutions"],
-  },
-  {
-    href: "/for-institutions",
-    label: "For institutions",
-    match: ["/for-institutions", "/pricing", "/licensing", "/data-api", "/developers", "/advisory", "/advertise", "/buying", "/pack"],
-  },
+  { href: "/compare", label: "Compare", match: ["/compare", "/registry"] },
+  { href: "/casebook", label: "Casebook", match: ["/casebook"] },
 ] as const;
+
+export const institutionsNav = {
+  href: "/for-institutions",
+  label: "For institutions",
+  match: ["/for-institutions", "/pricing", "/licensing", "/data-api", "/developers", "/advisory", "/advertise", "/buying", "/pack", "/watch"],
+} as const;
 
 /** The section a path belongs to: the nav item whose prefix matches most specifically (Today only on "/"). */
 export function sectionFor(pathname: string) {
   if (pathname === "/") return "/";
   let best: { href: string; len: number } | null = null;
-  for (const item of nav) {
+  for (const item of [...nav, institutionsNav]) {
     for (const prefix of item.match) {
       if ((pathname === prefix || pathname.startsWith(`${prefix}/`)) && (!best || prefix.length > best.len)) best = { href: item.href, len: prefix.length };
     }
@@ -66,8 +69,10 @@ export const footerGroups = [
     title: "Sections",
     links: [
       { href: "/", label: "Today" },
-      { href: "/compare", label: "Compare" },
+      { href: "/receipts", label: "Receipts" },
       { href: "/numbers", label: "Numbers" },
+      { href: "/compare", label: "Compare" },
+      { href: "/casebook", label: "Casebook" },
       { href: "/stories", label: "Stories" },
     ],
   },

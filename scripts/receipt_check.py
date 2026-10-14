@@ -14,6 +14,9 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from calls_ledger import call_problems  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 DIR = ROOT / "content" / "receipts"
 SPLIT = "<!-- full-file -->"
@@ -92,6 +95,8 @@ def problems(data: dict, body: str, file: str) -> list[str]:
         if not c.get("statement") or not c.get("check_source"):
             at(f"calls[{i}]", "needs a statement and the source that will settle it")
         need_date(c.get("check_date"), f"calls[{i}].check_date")
+        # Every call must be checkable by construction (docs/rebuild/receipts-r2-plan.md): measure, comparator, threshold.
+        out += [f"{file}: {p}" for p in call_problems(c, f"calls[{i}]")]
     for i, t in enumerate(data.get("tiles") or []):
         if not t.get("label") or not t.get("value") or t.get("source") not in names:
             at(f"tiles[{i}]", "needs a label, a value and one of the Receipt's sources")

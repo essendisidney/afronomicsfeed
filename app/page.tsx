@@ -7,6 +7,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
 import { institutionalPilot, institutionalTier, localInstitutionPrices, localPriceText } from "@/lib/billing/ratecard";
 import { getLatestArticles } from "@/lib/content";
+import { editorialRows, editorialScore } from "@/lib/editorial";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
 import { loadLedger, score } from "@/lib/ledger";
 import { visibleReceipts, type Receipt } from "@/lib/receipts";
@@ -87,7 +88,7 @@ export default async function TodayPage() {
   const stories = getLatestArticles(3);
   const ledger = loadLedger();
   const live = score(ledger.rows);
-  const openCalls = receipts.reduce((n, r) => n + r.calls.length, 0);
+  const calls = editorialScore(editorialRows());
   const nextGrade = ledger.rows.filter((r) => !r.outcome).map((r) => r.auction_value_date).sort()[0];
   const kenya = localInstitutionPrices.find((p) => p.id === "kenya");
 
@@ -140,7 +141,7 @@ export default async function TodayPage() {
               {live.graded
                 ? `${live.inside} of ${live.graded} published ranges held the result`
                 : `${ledger.rows.length} ranges published before bids close${nextGrade ? `, the first graded with the results for value ${formatDate(nextGrade)}` : ""}`}
-              {openCalls ? ` · ${openCalls} calls open` : ""}
+              {calls.open ? ` · ${calls.open} call${calls.open === 1 ? "" : "s"} open${calls.nextDue ? `, first due ${formatDate(calls.nextDue)}` : ""}` : ""}
               <span className="text-forest group-hover:text-ink"> →</span>
             </p>
           </Link>

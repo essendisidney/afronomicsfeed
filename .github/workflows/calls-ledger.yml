@@ -1,0 +1,46 @@
+# When a Receipt is published on main, write its calls to the editorial ledger (docs/rebuild/receipts-r2-plan.md).
+# The commit to this public repository is each call's time stamp. scripts/calls_ledger.py refuses a call whose own
+# date has passed (it is listed as not recorded instead) and never edits a call already written.
+name: Calls ledger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/receipts/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: forecast-ledger
+  cancel-in-progress: false
+
+jobs:
+  calls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - run: python scripts/calls_ledger.py
+      - name: Commit the ledger if it grew
+        run: |
+          if git diff --quiet -- data/forecasts; then
+            echo "No new calls."
+            exit 0
+          fi
+          git config user.name "afronomics-bot"
+          git config user.email "afronomics-bot@users.noreply.github.com"
+          git add data/forecasts
+          git commit -m "Calls ledger: calls from newly published Receipts"
+          for attempt in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 10))
+          done
+          exit 1

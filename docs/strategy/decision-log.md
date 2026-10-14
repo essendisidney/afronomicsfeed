@@ -180,3 +180,18 @@ what we changed. Newest at the bottom. Read this first every week.
   routes redirect permanently except `/chama` (live until end of October), Kiswahili Today in Phase 2.
 - **Released:** PR #129 merged 14 Oct after build, tests and site QA passed and the founder said "release it".
 - **Next:** Phase 2 (Casebook) plan in `docs/rebuild/phase-2-plan.md`, for approval before any code.
+
+### D-019 · 14 Oct 2026 · Receipts adopted; interface standard; editorial calls ledger rules
+- **Decided by the founder:** `docs/rebuild/RECEIPTS.md` is the plan for the daily verdict (phases R1 to R6), built
+  together with the interface redesign (`docs/rebuild/phase-7-plan.md`). Phase 7a and Receipts R1 approved with the
+  recommendations and released as PR #137. Named-company verdicts are allowed under RECEIPTS.md section 2; until the
+  first 30 have run cleanly, each needs the founder's one-tap approval, and a Receipt on a live public offer gets a
+  Kenyan securities lawyer's read first.
+- **Speed budget:** layout shift budget set to 0.1 (Google's "good" threshold) instead of the plan's 0.05;
+  `/rates/kenya`, `/registry` and `/receipts` come under 0.05 in 7b.
+- **Editorial calls ledger (R2, `docs/rebuild/receipts-r2-plan.md`):**
+  - A narrow exception to D-005: a pull request may merge without the founder's approval when it touches only
+    `data/forecasts/editorial.json`, every check passes, and each outcome it adds quotes its source and links to it.
+  - A call whose check date has passed when its Receipt is published is never written (no credit for hindsight); it
+    is listed as not recorded.
+  - A void call (the event could not happen) stays visible with its source and is left out of the hit rate.

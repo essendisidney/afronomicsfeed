@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/data/PageShell";
 import { ReceiptList } from "@/components/receipts/ReceiptList";
+import { editorialRows, editorialScore } from "@/lib/editorial";
 import { desks, visibleReceipts, type DeskSlug } from "@/lib/receipts";
 import { site } from "@/lib/site";
 
@@ -23,7 +24,9 @@ export default async function DeskPage({ params }: { params: Promise<{ desk: str
   const d = desks[slug];
   if (!d) notFound();
   const list = visibleReceipts().filter((r) => r.desk === d.name);
-  const calls = list.reduce((n, r) => n + r.calls.length, 0);
+  const slugs = new Set(list.map((r) => r.slug));
+  const score = editorialScore(editorialRows().filter((c) => slugs.has(c.receipt)));
+  const calls = score.open + score.due + score.graded;
   return (
     <PageShell
       crumbs={[{ href: "/", label: "Today" }, { href: "/receipts", label: "Receipts" }, { label: d.name }]}
@@ -44,6 +47,7 @@ export default async function DeskPage({ params }: { params: Promise<{ desk: str
         <Link href="/record" className="underline underline-offset-2">
           the record
         </Link>
+        {score.graded ? `: ${score.held} of ${score.graded} graded calls held` : ""}
       </p>
       <ReceiptList receipts={list} empty="No Receipts from this desk yet." />
     </PageShell>

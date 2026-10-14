@@ -180,8 +180,6 @@ export default async function WeeklyPage() {
         <SectionTitle
           kicker="Capital"
           title="World Bank Board dates, next six weeks"
-          href="/capital"
-          hrefLabel="Full pipeline →"
           note="Operations in the pipeline with an expected Board date between today and six weeks out, as published by the World Bank."
         />
         <div className="mt-4">
@@ -192,7 +190,7 @@ export default async function WeeklyPage() {
 
       {edition.signals.length ? (
         <section className="mt-14">
-          <SectionTitle kicker="Signals" title="Prints worth a second look" href="/signals" />
+          <SectionTitle kicker="Signals" title="Prints worth a second look" />
           <ul className="mt-2 grid gap-px bg-rule sm:grid-cols-2">
             {edition.signals.map((signal) => (
               <li key={signal.id} className="bg-paper px-4 py-4">

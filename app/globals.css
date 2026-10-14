@@ -11,7 +11,7 @@
  * Up and down moves keep their own green and red, so the accent never reads as a market signal.
  */
 :root {
-  --font-serif: var(--font-sans);
+  --font-serif: var(--font-headline), Georgia, serif;
   --font-mono: var(--font-sans);
   --paper: #f5f6f4;
   --paper-2: #ebedea;
@@ -489,11 +489,14 @@ body {
   }
 }
 
-/* One family, three widths: condensed for headlines, standard for reading, tabular figures for data. */
+/*
+ * Headlines and case titles in Source Serif 4 (editorial weight); Archivo for the interface and for numbers, with
+ * tabular figures wherever numbers line up.
+ */
 @layer components {
   .font-serif {
-    font-stretch: 76%;
-    font-weight: 640;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
   .font-mono {
@@ -617,4 +620,11 @@ html {
 /* Safety net: nothing may make a phone scroll sideways. clip (not hidden) keeps sticky headers working. */
 body {
   overflow-x: clip;
+}
+
+/* Numbers that line up: tables, figures and anything marked data-num use tabular figures. */
+table,
+[data-num],
+.tabular {
+  font-variant-numeric: tabular-nums;
 }

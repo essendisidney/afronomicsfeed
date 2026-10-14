@@ -6,7 +6,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { SearchDialog } from "@/components/search/SearchDialog";
 import { institutionalPilot } from "@/lib/billing/ratecard";
-import { nav, utilityNav } from "@/lib/site";
+import { nav, sectionFor, utilityNav } from "@/lib/site";
 import type { SearchHit } from "@/lib/search-core";
 
 function subscribeTheme(onStoreChange: () => void) {
@@ -21,10 +21,10 @@ function themeSnapshot() {
 
 /** The institutional path, one tap from any page: the pilot form, then pricing, the API and licences. */
 const institutionLinks = [
+  { href: "/for-institutions", label: "Overview" },
   { href: "/pricing", label: "Pricing" },
   { href: "/data-api", label: "Data API" },
   { href: "/licensing", label: "Licensing" },
-  { href: "/for-institutions", label: "For institutions" },
 ] as const;
 
 const readerLinks = [...utilityNav, { href: "/subscribe", label: "Newsletter" }, { href: "/pricing#readers", label: "Reader plans" }];
@@ -44,10 +44,8 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const dark = useSyncExternalStore(subscribeTheme, themeSnapshot, () => false);
   const open = menuPath === pathname;
-  // The most specific section wins, so /markets/tbills lights T-bills, not Currencies (/markets) as well.
-  const activeHref = nav
-    .filter((item) => pathname === item.href || pathname.startsWith(`${item.href}/`))
-    .sort((x, y) => y.href.length - x.href.length)[0]?.href;
+  // Each section also owns the older pages it gathers (lib/site.ts nav.match), so /markets/tbills lights Numbers.
+  const activeHref = sectionFor(pathname);
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -77,7 +75,7 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
           onClick={() => setSearchOpen(true)}
           className="hidden h-9 min-w-0 flex-1 items-center justify-between gap-3 rounded-full border border-night-line bg-night-2 px-4 text-left text-[13px] text-night-muted hover:border-night-soft/40 hover:text-night-soft md:flex md:max-w-sm lg:max-w-md"
         >
-          <span className="truncate">Search markets, countries and data</span>
+          <span className="truncate">Search numbers, stories and countries</span>
           <kbd className="shrink-0 whitespace-nowrap rounded-md border border-night-line px-1.5 py-0.5 font-sans text-[11px] text-night-muted">Ctrl K</kbd>
         </button>
         <div className="flex items-center gap-0.5 sm:gap-1.5">
@@ -138,13 +136,6 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
             );
           })}
           <span aria-hidden className="ml-auto h-4 w-px shrink-0 bg-night-line" />
-          <Link
-            href="/pricing"
-            aria-current={pathname === "/pricing" ? "page" : undefined}
-            className={`px-3 py-3 text-[14px] font-medium ${pathname === "/pricing" ? "text-night-ink" : "text-night-soft hover:text-night-ink"}`}
-          >
-            Pricing
-          </Link>
           <Link href="/subscribe" className="px-3 py-3 text-[14px] font-medium text-night-muted hover:text-night-ink">
             Newsletter
           </Link>
@@ -175,7 +166,7 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
           </nav>
 
           <nav aria-label="Sections" className="mt-5">
-            <p className="px-3 text-[12px] font-semibold text-night-muted">Markets and data</p>
+            <p className="px-3 text-[12px] font-semibold text-night-muted">Sections</p>
             <ul className="mt-1 grid grid-cols-2 gap-1">
               {nav.map((item) => (
                 <li key={item.href}>

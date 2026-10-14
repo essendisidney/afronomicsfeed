@@ -97,12 +97,6 @@ export default function RemittancesPage() {
             ))}
           </section>
 
-          <p className="mt-4 text-sm">
-            <Link href="/send-money" className="font-semibold text-forest underline underline-offset-2">
-              Sending money now? See every service ranked by cost for your corridor →
-            </Link>
-          </p>
-
           {avgWithin != null && avgAbroad != null && avgWithin > avgAbroad ? (
             <p className="mt-4 max-w-3xl text-sm leading-6 text-ink-soft">
               Sending money between African countries costs about {(avgWithin / avgAbroad).toFixed(1)} times as much as sending it from outside

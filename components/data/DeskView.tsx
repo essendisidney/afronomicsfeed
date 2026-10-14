@@ -92,7 +92,7 @@ export async function DeskView({ config }: { config: DeskConfig }) {
 
       {needsProjects ? (
         <section className="mt-16">
-          <SectionTitle kicker="Capital" title={config.projectTitle ?? "World Bank projects"} href="/capital" hrefLabel="Full pipeline →" />
+          <SectionTitle kicker="Capital" title={config.projectTitle ?? "World Bank projects"} />
           <div className="mt-4">
             <ProjectTable projects={deskProjects} />
           </div>

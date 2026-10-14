@@ -1,32 +1,20 @@
 import type { Metadata } from "next";
-import { ContributeBand } from "@/components/data/ContributeBand";
-import { site } from "@/lib/site";
-import { renderTime } from "@/lib/data/fetcher";
 import Link from "next/link";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
-import { DebtHero } from "@/components/home/DebtHero";
-import { EveryoneIntro } from "@/components/home/EveryoneIntro";
-import { MoneyToday } from "@/components/home/MoneyToday";
-import { ProjectTable } from "@/components/data/ProjectTable";
-import { WireList } from "@/components/data/WireList";
-import { RankBars, SectionTitle, SourceLine, usd } from "@/components/data/parts";
+import { EvidenceTag } from "@/components/evidence/EvidenceTag";
+import { ButtonLink } from "@/components/ui/Button";
+import { institutionalPilot, institutionalTier, localInstitutionPrices, localPriceText } from "@/lib/billing/ratecard";
 import { getLatestArticles } from "@/lib/content";
-import { countries } from "@/lib/data/countries";
-import { formatFx, loadFxQuote, pairHref, tapeCodes } from "@/lib/data/fx";
-import { formatValue, getIndicatorDef } from "@/lib/data/indicators";
-import { loadAfricaProjects, projectsSource, sumAmounts } from "@/lib/data/projects";
-import { continentalMedian, coveredTotal, loadIndicators, ranked } from "@/lib/data/series";
-import { loadDataSignals } from "@/lib/data/signals";
-import { loadWire, publishersLive } from "@/lib/data/wire";
-import { latestByTenor, loadTbills, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
 import { fitDescription } from "@/lib/seo";
+import { site } from "@/lib/site";
+import { ourRecord, whatChanged, type TodayMove } from "@/lib/today";
 
 export const revalidate = 900;
 
-const homeTitle = `${site.name}: African T-bill rates, bond auctions and FX`;
+const homeTitle = `${site.name}: what African money did today, and why`;
 const homeDescription =
-  "The price of money in Africa: Treasury bill and government bond auction results from ten central banks, policy rates, money market fund yields, exchange rates and inflation, from the source, the day it is published.";
+  "Africa's dated record of what money did, why it happened and what happened next: government borrowing costs, currencies and savings rates from the source, with our forecast record in public.";
 
 export const metadata: Metadata = {
   title: { absolute: homeTitle },
@@ -35,238 +23,152 @@ export const metadata: Metadata = {
   openGraph: { title: homeTitle, description: homeDescription, url: site.url, siteName: site.name, locale: "en_KE", type: "website" },
 };
 
-const regions = ["North Africa", "West Africa", "Central Africa", "East Africa", "Southern Africa"] as const;
+const todayFmt = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" });
 
-export default async function HomePage() {
-  const now = renderTime();
-  const [wire, files, projects, fx, signals] = await Promise.all([
-    loadWire(),
-    loadIndicators(["gdp", "gdp-growth", "inflation", "fdi", "remittances", "reserves", "population"]),
-    loadAfricaProjects(),
-    loadFxQuote(),
-    loadDataSignals(2),
-  ]);
-  const file = (slug: string) => files.find((item) => item.def.slug === slug);
-  const articles = getLatestArticles(4);
-  const tbills = latestByTenor(loadTbills().rows);
+function MoveCard({ move }: { move: TodayMove }) {
+  return (
+    <li className="flex flex-col rounded-2xl border border-rule bg-surface px-5 py-5">
+      <p className={`text-[12px] font-semibold uppercase tracking-[0.12em] ${move.direction === "up" ? "text-up" : "text-down"}`}>
+        <span aria-hidden="true">{move.direction === "up" ? "▲" : "▼"}</span> {move.kind === "fx" ? "Currency" : "Government borrowing"}
+      </p>
+      <h3 className="mt-2 font-serif text-[1.3rem] leading-snug text-ink text-balance">
+        <Link href={move.href} className="hover:text-forest">
+          {move.headline}
+        </Link>
+      </h3>
+      {move.shillings ? <p className="tabular mt-3 text-[15px] font-semibold leading-6 text-ink">{move.shillings}.</p> : null}
+      <p className="mt-2 text-[14px] leading-6 text-ink-soft">
+        <span className="font-semibold text-ink">Who it touches:</span> {move.touches}.
+      </p>
+      <div className="mt-auto pt-4">
+        <EvidenceTag {...move.evidence} />
+      </div>
+    </li>
+  );
+}
 
-  const gdp = file("gdp");
-  const fdi = file("fdi");
-  const remit = file("remittances");
-  const pop = file("population");
-  const inflation = file("inflation");
-  const growth = file("gdp-growth");
-  const reserves = file("reserves");
-
-  const total = (f: typeof gdp, label: string, href: string, fmt: (n: number) => string) => {
-    const t = f ? coveredTotal(f) : null;
-    return t ? { label: `${label} · ${t.year}`, value: fmt(t.sum), href, note: `${t.reporting} of 54 reporting` } : null;
-  };
-  // A feed that fails this hour gives no median; show nothing rather than a 0.0% that reads as a real print.
-  const medianInflation = inflation ? continentalMedian(inflation) : null;
-  const headline = [
-    total(gdp, "Africa GDP", "/data/gdp", usd),
-    pop ? total(pop, "Population", "/data/population", (n) => formatValue(pop.def, n)) : null,
-    inflation && medianInflation != null
-      ? { label: "Median inflation", value: formatValue(inflation.def, medianInflation), href: "/data/inflation", note: "latest print per country" }
-      : null,
-    total(fdi, "FDI inflows", "/data/fdi", usd),
-    total(remit, "Remittances", "/data/remittances", usd),
-    projects.length ? { label: "World Bank book", value: usd(sumAmounts(projects)), href: "/capital", note: `${projects.length} projects, pipeline + recent` } : null,
-  ].filter((item): item is { label: string; value: string; href: string; note: string } => item !== null);
-
-  const pipeline = projects.filter((project) => project.status === "Pipeline").slice(0, 8);
-  const fastest = growth ? ranked(growth, 1).slice(0, 8) : [];
-  const hottest = inflation ? ranked(inflation, 1).slice(0, 8) : [];
-  const thinnest = reserves ? [...ranked(reserves, 2)].reverse().slice(0, 8) : [];
+export default async function TodayPage() {
+  const [moves, record] = await Promise.all([whatChanged(), Promise.resolve(ourRecord())]);
+  const stories = getLatestArticles(3);
+  const kenya = localInstitutionPrices.find((p) => p.id === "kenya");
 
   return (
-    <>
-      <DebtHero />
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
+      <header className="border-b border-rule pb-6">
+        <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-muted">
+          Today · <time dateTime={new Date().toISOString().slice(0, 10)}>{todayFmt.format(new Date())}</time>
+        </p>
+        <h1 className="mt-2 max-w-3xl font-serif text-[2rem] leading-tight text-ink text-balance sm:text-[2.6rem]">
+          Africa&rsquo;s dated record of what money did, why it happened, and what happened next.
+        </h1>
+        <p className="mt-3 max-w-2xl text-[16px] leading-7 text-ink-soft">
+          Every figure names its source and the date it is as of. Tap the tag to open the source.{" "}
+          <em className="not-italic font-semibold text-ink">Information, not advice.</em>
+        </p>
+      </header>
 
-      <EveryoneIntro
-        fx={fx}
-        stats={[
-          { k: "economies covered", v: 54 },
-          { k: "publishers on the wire", v: publishersLive(wire) },
-          { k: "headlines in 10 days", v: wire.length },
-        ]
-          // the wire counts are zero only when every feed failed this hour; hide them rather than show a dash
-          .filter((item) => item.v > 0)}
-      />
-
-      <MoneyToday />
-
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      {headline.length > 0 ? (
-        <section className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-3 lg:grid-cols-6">
-          {headline.map((item) => (
-            <Link key={item.label} href={item.href} className="bg-surface px-4 py-4 hover:bg-paper-2">
-              <p className="text-[12px] font-medium text-muted">{item.label}</p>
-              <p className="mt-1 font-serif text-[1.7rem] leading-tight text-ink">{item.value}</p>
-              <p className="mt-0.5 text-[11px] text-muted">{item.note}</p>
-            </Link>
-          ))}
-        </section>
-      ) : null}
-
-      <ContributeBand />
-
-      <section className="mt-12 grid gap-10 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          <SectionTitle kicker="The Wire" title="Latest from African business media" href="/news" hrefLabel="All headlines →" />
-          <WireList items={wire.slice(0, 14)} now={now} />
+      <section aria-labelledby="what-changed" className="mt-8">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 id="what-changed" className="font-serif text-2xl text-ink sm:text-3xl">
+            What changed
+          </h2>
+          <Link href="/numbers" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-gold">
+            All the numbers →
+          </Link>
         </div>
-        <aside className="space-y-10 lg:col-span-5">
-          <div>
-            <SectionTitle kicker="Markets" title="US dollar reference" href="/markets" />
-            {fx ? (
-              <>
-                <table className="data-table mt-2">
-                  <tbody>
-                    {tapeCodes.flatMap((code) => {
-                      const rate = fx.rates[code];
-                      if (rate == null) return [];
-                      return [
-                        <tr key={code}>
-                          <td>
-                            <Link href={pairHref(code)} className="font-mono text-xs hover:text-forest">
-                              USD/{code}
-                            </Link>
-                          </td>
-                          <td className="text-right font-mono text-sm">{formatFx(rate)}</td>
-                        </tr>,
-                      ];
-                    })}
-                  </tbody>
-                </table>
-                <SourceLine name={fx.sourceName} href="https://www.exchangerate-api.com/" detail={`mid-market · ${fx.updated.replace(/ \+0000$/, " UTC")}`} />
-              </>
-            ) : (
-              <p className="mt-4 text-sm text-muted">The rate feed did not respond this hour.</p>
-            )}
-          </div>
-          {tbills.size > 0 ? (
-            <div>
-              <SectionTitle kicker="Afronomics dataset" title="Kenya T-bill auctions" href="/markets/kenya-tbills" hrefLabel="History →" />
-              <div className="mt-3 grid grid-cols-3 gap-px bg-rule">
-                {tenors.map((tenor) => {
-                  const item = tbills.get(tenor);
-                  const delta = item?.previous ? Math.round((item.latest.weighted_avg_rate - item.previous.weighted_avg_rate) * 100) : null;
-                  return (
-                    <Link key={tenor} href="/markets/kenya-tbills" className="bg-paper-2 px-3 py-3 hover:bg-paper-3">
-                      <p className="font-medium text-[12px] text-muted">{tenorLabel[tenor]}</p>
-                      <p className="mt-1 font-serif text-xl text-ink">{item ? `${item.latest.weighted_avg_rate.toFixed(2)}%` : "—"}</p>
-                      <p className="text-[11px] text-muted">{delta == null ? "" : `${delta > 0 ? "+" : delta < 0 ? "−" : "±"}${Math.abs(delta)} bps`}</p>
-                    </Link>
-                  );
-                })}
-              </div>
-              <SourceLine name="Central Bank of Kenya" href="https://www.centralbank.go.ke/bills-bonds/treasury-bills/" detail="latest auction, weighted average of accepted bids" />
-              <p className="mt-2 flex flex-wrap gap-x-4 text-[12px] font-semibold [&>a]:inline-flex [&>a]:min-h-11 [&>a]:items-center sm:[&>a]:min-h-6">
-                {tbills.get(91) ? (
-                  <Link href={`/markets/kenya-tbills/${tbills.get(91)!.latest.value_date}`} className="text-forest hover:text-gold">
-                    Latest auction report →
-                  </Link>
-                ) : null}
-                <Link href="/markets/kenya-bonds" className="text-forest hover:text-gold">Bond yield curve →</Link>
-                <Link href="/markets/tbills" className="text-forest hover:text-gold">Africa T-bill monitor →</Link>
-                <Link href="/widgets" className="text-forest hover:text-gold">Put these rates on your site →</Link>
-              </p>
-            </div>
-          ) : null}
-          <div>
-            <SectionTitle kicker="Signals" title="What moved on the latest print" href="/signals" />
-            <ul className="mt-2 divide-y divide-rule">
-              {signals.slice(0, 6).map((signal) => (
-                <li key={signal.id} className="py-3">
-                  <Link href={`/data/${signal.def.slug}`} className="text-[15px] leading-snug text-ink hover:text-forest">
-                    {signal.headline}
-                  </Link>
-                  <p className="mt-0.5 text-xs text-ink-soft">{signal.detail}</p>
-                </li>
-              ))}
-              {signals.length === 0 ? <li className="py-3 text-sm text-muted">Signals appear when the next annual prints load.</li> : null}
-            </ul>
-          </div>
-        </aside>
-      </section>
-
-      <section className="mt-16">
-        <SectionTitle
-          kicker="Capital"
-          title="Development finance heading to African boards"
-          href="/capital"
-          hrefLabel="Full pipeline →"
-          note="World Bank Group projects in the pipeline, with expected Board dates and commitments as published."
-        />
-        <div className="mt-4">
-          <ProjectTable projects={pipeline} />
-        </div>
-        <SourceLine name={projectsSource.name} href={projectsSource.url} />
-      </section>
-
-      <section className="mt-16 grid gap-10 lg:grid-cols-3">
-        {[
-          { title: "Fastest-growing economies", def: getIndicatorDef("gdp-growth")!, rows: fastest, href: "/data/gdp-growth" },
-          { title: "Highest inflation", def: getIndicatorDef("inflation")!, rows: hottest, href: "/data/inflation" },
-          { title: "Thinnest import cover", def: getIndicatorDef("reserves")!, rows: thinnest, href: "/data/reserves" },
-        ].map((panel) => (
-          <div key={panel.title}>
-            <SectionTitle kicker="League table" title={panel.title} href={panel.href} />
-            <div className="mt-4">
-              {panel.rows.length ? <RankBars def={panel.def} readings={panel.rows} /> : <p className="text-sm text-muted">Series did not load this hour.</p>}
-            </div>
-            <SourceLine name="World Bank Open Data" href={`https://data.worldbank.org/indicator/${panel.def.code}`} detail={panel.def.unit} />
-          </div>
-        ))}
-      </section>
-
-      <section className="mt-16">
-        <SectionTitle kicker="Countries" title="Fifty-four country files" href="/countries" hrefLabel="All countries →" />
-        <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
-          {regions.map((region) => (
-            <div key={region}>
-              <p className="text-[13px] font-semibold text-ink">{region}</p>
-              <ul className="mt-2 space-y-1 text-sm">
-                {countries
-                  .filter((country) => country.region === region)
-                  .map((country) => (
-                    <li key={country.slug}>
-                      <Link href={`/countries/${country.slug}`} className="text-ink-soft hover:text-forest">
-                        {country.name}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {articles.length > 0 ? (
-        <section className="mt-16">
-          <SectionTitle kicker="Analysis" title="From the Afronomics desk" href="/brief" />
-          <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {articles.map((article) => (
-              <article key={`${article.category}-${article.slug}`}>
-                <p className="font-medium text-[12px] text-muted">
-                  {categoryLabel(article.category)} · {formatDate(article.date)}
-                </p>
-                <h3 className="mt-2 font-serif text-xl leading-snug">
-                  <Link href={articleHref(article.category, article.slug)} className="hover:text-forest">
-                    {article.title}
-                  </Link>
-                </h3>
-                <p className="mt-2 line-clamp-3 text-sm leading-6 text-ink-soft">{article.summary}</p>
-              </article>
+        {moves.length ? (
+          <ul className="mt-4 grid gap-4 md:grid-cols-3">
+            {moves.map((move) => (
+              <MoveCard key={move.id} move={move} />
             ))}
+          </ul>
+        ) : (
+          <p className="mt-4 rounded-2xl border border-rule bg-surface px-5 py-5 text-[15px] text-ink-soft">
+            No market we cover has published a changed result in the last week. The latest results are on{" "}
+            <Link href="/numbers" className="underline underline-offset-2">
+              Numbers
+            </Link>
+            .
+          </p>
+        )}
+        <p className="mt-3 text-[13px] leading-5 text-muted">
+          How these are chosen: the largest auction rate change in any market in the last 7 days (against the previous sale of the same tenor), the largest overnight
+          move among traded African currencies, and the largest move in Kenya (or the next-largest elsewhere). Shilling
+          effects are worked out by code from the published rates; nothing here is estimated by a model.
+        </p>
+      </section>
+
+      {record ? (
+        <section id="record" aria-labelledby="our-record" className="mt-12 grid gap-6 rounded-3xl border border-rule bg-surface px-6 py-7 sm:px-8 lg:grid-cols-[1fr_2fr] lg:items-center">
+          <div>
+            <h2 id="our-record" className="font-serif text-2xl text-ink sm:text-3xl">
+              Our record
+            </h2>
+            <p className="tabular mt-3 font-serif text-[2.6rem] leading-none text-ink">{Math.round(record.share * 100)}%</p>
+          </div>
+          <div>
+            <p className="tabular text-[16px] leading-7 text-ink">
+              Before each Kenya Treasury bill auction we publish a likely range for each tenor. Across {record.tested.toLocaleString("en-US")}{" "}
+              past auctions in {record.tenors} tenors, the result landed inside our range {record.inside.toLocaleString("en-US")} times.
+            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <EvidenceTag source="Central Bank of Kenya auction results" href={record.source} asOf={record.asOf} />
+              <Link href="/markets/kenya-tbills/auction" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-gold">
+                This week&rsquo;s ranges →
+              </Link>
+            </div>
+            <p className="mt-2 text-[13px] text-muted">The full forecast ledger, graded automatically for every market, follows on its own page.</p>
           </div>
         </section>
       ) : null}
+
+      {stories.length ? (
+        <section aria-labelledby="latest-stories" className="mt-12">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h2 id="latest-stories" className="font-serif text-2xl text-ink sm:text-3xl">
+              Latest stories
+            </h2>
+            <Link href="/stories" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-gold">
+              All stories →
+            </Link>
+          </div>
+          <ul className="mt-4 grid gap-4 md:grid-cols-3">
+            {stories.map((a) => (
+              <li key={`${a.category}-${a.slug}`}>
+                <Link href={articleHref(a.category, a.slug)} className="block h-full rounded-2xl border border-rule bg-surface px-5 py-5 hover:border-forest">
+                  <p className="text-[12px] font-semibold text-muted">
+                    {categoryLabel(a.category)} · {formatDate(a.date)}
+                  </p>
+                  <p className="mt-2 font-serif text-[1.2rem] leading-snug text-ink text-balance">{a.title}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <section aria-labelledby="for-institutions-band" className="mt-12 rounded-3xl border-2 border-forest/30 bg-surface px-6 py-7 sm:px-8">
+        <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-forest">For institutions</p>
+        <h2 id="for-institutions-band" className="mt-2 max-w-2xl font-serif text-2xl leading-tight text-ink sm:text-3xl">
+          Boards, banks, SACCOs and funds: the full dated record, by API or CSV.
+        </h2>
+        <p className="tabular mt-3 max-w-2xl text-[15px] leading-6 text-ink-soft">
+          {institutionalTier("analyst").name} from USD {institutionalTier("analyst").monthlyUsd} a month and {institutionalTier("team").name} from USD{" "}
+          {institutionalTier("team").monthlyUsd.toLocaleString("en-US")}
+          {kenya ? `; Kenyan institutions pay ${localPriceText(kenya, "analyst")} and ${localPriceText(kenya, "team")}` : ""}. Start with a free{" "}
+          {institutionalPilot.days}-day pilot.
+        </p>
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <ButtonLink href={institutionalPilot.href} data-track="pricing_cta_click">
+            Start a {institutionalPilot.days}-day pilot
+          </ButtonLink>
+          <Link href="/for-institutions" className="inline-flex min-h-11 items-center px-2 text-[14px] font-semibold text-forest underline underline-offset-4">
+            What institutions get
+          </Link>
+        </div>
+      </section>
 
       <NewsletterBand />
     </div>
-    </>
   );
 }

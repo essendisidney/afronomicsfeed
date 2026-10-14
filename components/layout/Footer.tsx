@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { institutionalPilot } from "@/lib/billing/ratecard";
-import { disclaimer, footerColumns, footerTopics, site } from "@/lib/site";
+import { disclaimer, footerColumns, footerLine, site } from "@/lib/site";
 
 const legal = [
   { href: "/legal/disclaimer", label: "Disclaimer" },
@@ -61,14 +61,13 @@ export function Footer() {
           ))}
         </div>
 
-        <p className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-night-muted">
-          <span className="font-semibold text-night-soft">Topics</span>
-          {footerTopics.map((item) => (
-            <Link key={item.href} href={item.href} className="inline-flex min-h-11 min-w-11 items-center justify-center hover:text-night-ink sm:min-h-0 sm:min-w-0">
+        <nav aria-label="Afronomics" className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-1 text-[14px] text-night-soft">
+          {footerLine.map((item) => (
+            <Link key={item.href} href={item.href} className="inline-flex min-h-11 min-w-11 items-center hover:text-night-ink sm:min-h-0 sm:min-w-0">
               {item.label}
             </Link>
           ))}
-        </p>
+        </nav>
 
         <div className="mt-8 flex flex-col gap-4 border-t border-night-line pt-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-wrap items-center gap-x-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:min-w-11 [&>a]:items-center [&>a]:justify-center sm:[&>a]:min-h-0 sm:[&>a]:min-w-0">

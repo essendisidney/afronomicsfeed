@@ -18,6 +18,14 @@ const sans = localFont({
   display: "swap",
 });
 
+/* Headlines and case titles (rebuild brief, section 7): Source Serif 4, SIL Open Font Licence (fonts/SOURCE-SERIF-4-OFL.txt). */
+const serif = localFont({
+  variable: "--font-headline",
+  src: [{ path: "./fonts/source-serif-4-latin-wght-normal.woff2", weight: "200 900", style: "normal" }],
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  display: "swap",
+});
+
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#0e1524" },
@@ -62,7 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${sans.variable} h-full antialiased`}
+      className={`${sans.variable} ${serif.variable} h-full antialiased`}
     >
       <head>
         <ThemeScript />

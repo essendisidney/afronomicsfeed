@@ -1,7 +1,6 @@
 # Phase 6 plan: Clean up
 
-Written 14 Oct 2026 for `docs/rebuild/BRIEF.md` (section 8, item 6). **Status: waiting for founder approval.** No
-code until approved. Branch `rebuild/phase-6`; one PR; merge only with your approval.
+Written 14 Oct 2026 for `docs/rebuild/BRIEF.md` (section 8, item 6). **Status: approved 14 Oct 2026 ("remove anything not being used").** Branch `rebuild/phase-6`; one PR; merge only with your approval.
 
 ## What it is
 
@@ -137,3 +136,16 @@ One audit, with results in the PR:
 2. **`/chama`:** park it on 1 November as you decided (recommended), or keep it longer?
 3. **Old-URL audit:** include Vercel analytics' most-visited paths if available (recommended), or only the redirect
    map and past sitemaps?
+
+## What was decided (14 Oct)
+
+You approved the plan with one change: remove anything not being used, not only the parked pages. So:
+- **Code.** Files and exports that nothing uses are removed too. They were found with knip (`knip.json`) and each was
+  checked with a search.
+- **Tender alerts and the jobs board.** The database shows 0 subscribers, 0 payments and 0 job posts, so nobody needs
+  an unsubscribe link. Removing their sign-up and payment code needs a separate go-ahead, because it changes the
+  checkout plans, the rate card and the daily auctions workflow.
+- **Tables.** The unused tables are listed, not dropped. Dropping a table cannot be undone, and some still hold
+  rows. That needs its own go-ahead.
+- **Data collectors and `data/` files stay**, even where no page reads them yet. A missed day of collection can never
+  be recovered.

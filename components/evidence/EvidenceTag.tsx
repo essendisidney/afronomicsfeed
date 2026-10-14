@@ -12,17 +12,18 @@ export function asOfLabel(asOf: string) {
   return Number.isNaN(d.getTime()) ? asOf : dateFmt.format(d);
 }
 
-export type Evidence = { source: string; href: string; asOf: string };
+/** dateKind "value": the date is a settlement (value) date, which can be days after the result is published. */
+export type Evidence = { source: string; href: string; asOf: string; dateKind?: "value" };
 
-export function EvidenceTag({ source, href, asOf, className = "" }: Evidence & { className?: string }) {
-  const date = asOfLabel(asOf);
+export function EvidenceTag({ source, href, asOf, dateKind, className = "" }: Evidence & { className?: string }) {
+  const date = dateKind === "value" ? `for value ${asOfLabel(asOf)}` : asOfLabel(asOf);
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       data-track="source_click"
-      aria-label={`Source: ${source}, as of ${date} (opens the source)`}
+      aria-label={`Source: ${source}, ${dateKind === "value" ? date : `as of ${date}`} (opens the source)`}
       className={`evidence-tag inline-flex min-h-6 max-w-full items-center gap-1 rounded-md border border-rule bg-surface px-1.5 align-middle text-[11px] leading-none text-muted no-underline hover:border-forest hover:text-ink ${className}`}
     >
       <svg aria-hidden="true" viewBox="0 0 12 12" className="h-2.5 w-2.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.4">

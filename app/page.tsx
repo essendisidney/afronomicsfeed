@@ -123,8 +123,11 @@ export default async function TodayPage() {
               </Link>
             </div>
             <p className="mt-2 text-[13px] text-muted">
-              This is a backtest: the method run over past auctions, not ranges we published at the time. A public ledger of each week&rsquo;s
-              range, written before bids close and graded by code against the CBK result, is being built.
+              This is a backtest: the method run over past auctions, not ranges we published at the time. Each week&rsquo;s range is now written to
+              a public ledger before bids close and graded by code against the CBK result.{" "}
+              <Link href="/record" className="font-semibold text-forest underline underline-offset-2">
+                Our record →
+              </Link>
             </p>
           </div>
         </section>

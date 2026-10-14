@@ -102,7 +102,8 @@ export default async function TodaySwPage() {
             <p className="tabular text-[16px] leading-7 text-ink">
               Kabla ya kila mnada wa hati za hazina za Kenya tunaonyesha kiwango kinachotarajiwa kwa kila muda. Ikijaribiwa kwenye minada{" "}
               {record.tested.toLocaleString("en-US")} iliyopita ya muda {record.tenors} tangu 2011, matokeo yaliangukia ndani ya kiwango mara{" "}
-              {record.inside.toLocaleString("en-US")}. Hili ni jaribio la mbinu kwenye minada ya zamani, si viwango tulivyochapisha wakati huo.
+              {record.inside.toLocaleString("en-US")}. Hili ni jaribio la mbinu kwenye minada ya zamani, si viwango tulivyochapisha wakati huo. Sasa kila kiwango cha wiki
+              kinaandikwa kwenye daftari la wazi kabla ya zabuni kufungwa, na kupimwa dhidi ya matokeo ya CBK.
             </p>
             <div className="mt-3">
               <EvidenceTag source="Central Bank of Kenya auction results" href={record.source} asOf={record.asOf} />

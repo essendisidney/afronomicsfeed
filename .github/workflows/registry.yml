@@ -29,6 +29,9 @@ jobs:
       - id: sasra_annual
         continue-on-error: true
         run: python scripts/sasra_annual.py
+      - id: sasra_quarterly
+        continue-on-error: true
+        run: python scripts/sasra_quarterly.py
       - id: cbk_directories
         continue-on-error: true
         run: python scripts/cbk_directories.py
@@ -57,7 +60,7 @@ jobs:
           done
           exit 1
       - name: Fail if a reader refused its document
-        if: steps.sasra_list.outcome == 'failure' || steps.sasra_annual.outcome == 'failure' || steps.cbk_directories.outcome == 'failure' || steps.cbk_bsar.outcome == 'failure'
+        if: steps.sasra_list.outcome == 'failure' || steps.sasra_annual.outcome == 'failure' || steps.sasra_quarterly.outcome == 'failure' || steps.cbk_directories.outcome == 'failure' || steps.cbk_bsar.outcome == 'failure'
         run: |
-          echo "sasra_list=${{ steps.sasra_list.outcome }} sasra_annual=${{ steps.sasra_annual.outcome }} cbk_directories=${{ steps.cbk_directories.outcome }} cbk_bsar=${{ steps.cbk_bsar.outcome }}"
+          echo "sasra_list=${{ steps.sasra_list.outcome }} sasra_annual=${{ steps.sasra_annual.outcome }} sasra_quarterly=${{ steps.sasra_quarterly.outcome }} cbk_directories=${{ steps.cbk_directories.outcome }} cbk_bsar=${{ steps.cbk_bsar.outcome }}"
           exit 1

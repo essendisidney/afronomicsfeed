@@ -10,6 +10,8 @@ export function CasebookPanel({ cases }: { cases: Case[] }) {
       <SectionTitle
         kicker="Casebook"
         title={`${drafts.length} ${drafts.length === 1 ? "draft" : "drafts"} waiting for your sign-off, ${cases.length - drafts.length} public`}
+        href="/desk/watch"
+        hrefLabel="Watch packs →"
         note="To publish a case: check each fact against its link, then set status: published and signed_off (your name and the date) in content/cases/<id>.md. The validator refuses a case with open TODOs."
       />
       {cases.length ? (

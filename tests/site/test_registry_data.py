@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from registry_common import match_key  # noqa: E402
 
 DATA = ROOT / "data" / "registry"
-FILES = ["sasra_licences.json", "sasra_figures.json", "cbk_figures.json", "cbk_directories.json"]
+FILES = ["sasra_licences.json", "sasra_figures.json", "sasra_sector.json", "cbk_figures.json", "cbk_directories.json"]
 
 
 def rows(name: str) -> list[dict]:

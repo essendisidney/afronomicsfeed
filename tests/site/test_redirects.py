@@ -34,9 +34,11 @@ SOURCES = {s for s, _ in PARKED + LEGACY} | {"/pay"}
 
 
 def route_patterns() -> list[re.Pattern[str]]:
-    """Every page in app/ as a regex: [slug] matches one segment."""
+    """Every page (and document route) in app/ as a regex: [slug] matches one segment."""
     out = []
-    for page in (ROOT / "app").rglob("page.tsx"):
+    # Pages, and route handlers that serve a document (e.g. the print-ready /pack/sample and /watch/sample).
+    files = list((ROOT / "app").rglob("page.tsx")) + [p for p in (ROOT / "app").rglob("route.ts") if "/api/" not in p.as_posix()]
+    for page in files:
         rel = page.parent.relative_to(ROOT / "app").as_posix()
         path = "/" if rel == "." else "/" + rel
         out.append(re.compile("^" + re.sub(r"\\\[[^\]]+\\\]", "[^/]+", re.escape(path)) + "$"))

@@ -7,6 +7,7 @@ import { Questions } from "@/components/seo/Questions";
 import { FollowUp } from "@/components/ui/FollowUp";
 import { latestAuctions, nextAuction, outlook } from "@/lib/data/auction-intel";
 import { loadTbills, tenorLabel } from "@/lib/data/kenya-tbills";
+import { publishedFor } from "@/lib/ledger";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
 
@@ -25,7 +26,13 @@ export function generateMetadata(): Metadata {
 export default function AuctionPage() {
   const file = loadTbills();
   const next = nextAuction(file.rows);
-  const views = outlook(file.rows);
+  // Once a range is in the forecast ledger, show exactly what was published there, not a fresh calculation.
+  const published = next ? publishedFor(next.valueDate) : new Map();
+  const views = outlook(file.rows).map((v) => {
+    const p = published.get(v.tenor);
+    return p ? { ...v, low: p.low, high: p.high, writtenAt: p.written_at as string } : { ...v, writtenAt: null as string | null };
+  });
+  const writtenAt = views.find((v) => v.writtenAt)?.writtenAt ?? null;
   const latest = latestAuctions(file.rows);
   const last = file.rows[0]?.value_date;
   const tested = views.reduce((n, v) => n + v.trackRecord.tested, 0);
@@ -101,8 +108,18 @@ export default function AuctionPage() {
             </tbody>
           </table>
         </div>
+        {writtenAt ? (
+          <p className="mt-3 text-[13px] text-ink-soft">
+            These ranges were written to the public forecast ledger on {writtenAt.replace("T", " ").slice(0, 16)} UTC, before bids close, and will be graded
+            against the CBK result.{" "}
+            <Link href="/record" className="font-semibold text-forest underline underline-offset-2">
+              Our record →
+            </Link>
+          </p>
+        ) : null}
         <p className="mt-2 text-[12px] text-muted">
-          Track record: how often a range built this way, before each auction since 2011, held the rate the CBK then accepted.{" "}
+          Tested since 2011: how often a range built this way would have held the rate the CBK then accepted, if it had been drawn before each
+          auction. A range this wide aims for about 8 in 10.{" "}
           {missShare != null ? `About ${missShare} in ten auctions land outside it, so treat it as a guide, not a promise.` : null}
         </p>
       </section>

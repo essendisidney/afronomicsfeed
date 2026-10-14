@@ -47,5 +47,17 @@
    "typical_move": 0.0135
   }
  ],
- "outcomes": []
+ "outcomes": [],
+ "first_published": [
+  {
+   "ids": [
+    "KE-TB-2026-10-19-91",
+    "KE-TB-2026-10-19-182",
+    "KE-TB-2026-10-19-364"
+   ],
+   "commit": "https://github.com/essendisidney/afronomicsfeed/commit/8a8a3bf892c001fd4fd12257a240c0cf72d21380",
+   "at": "2026-10-14T19:13:58Z",
+   "note": "These forecasts were first committed on the branch that built the ledger, before it was merged; their time stamp is this commit, not the merge."
+  }
+ ]
 }

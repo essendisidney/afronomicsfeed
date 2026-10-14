@@ -29,9 +29,14 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pdfplumber requests openpyxl
-      - run: python scripts/kenya_tbills.py
-      - run: python scripts/kenya_bonds.py
       # Each market is independent: one publisher being down must not stop the others.
+      # (A CBK timeout on 13 Oct used to abort every market, the rates and the commit.)
+      - run: python scripts/kenya_tbills.py
+        continue-on-error: true
+        timeout-minutes: 10
+      - run: python scripts/kenya_bonds.py
+        continue-on-error: true
+        timeout-minutes: 10
       - run: python scripts/nigeria_tbills.py
         continue-on-error: true
         timeout-minutes: 5

@@ -11,6 +11,7 @@ import { TopicChips } from "@/components/ui/TopicChips";
 import { StorySignup } from "@/components/ui/StorySignup";
 import { ShareBar } from "@/components/share/ShareBar";
 import { QuoteShare } from "@/components/share/QuoteShare";
+import { PilotCta, showsPilotCta } from "@/components/article/PilotCta";
 import { articleHref, categoryLabel, categoryPath, citationText, extractHeadings, formatDate } from "@/lib/format";
 import { previewBody } from "@/lib/preview";
 import { readingMinutes } from "@/lib/reading";
@@ -197,6 +198,8 @@ export function ArticleTemplate({
               </div>
             </SourcesBlock>
           </div>
+
+          {showsPilotCta(article) ? <PilotCta slug={article.slug} /> : null}
 
           {!article.gated ? (
             <aside aria-labelledby="morning-cta" className="on-night no-print relative mt-8 overflow-hidden rounded-3xl bg-night px-6 py-7 text-night-ink sm:px-8 sm:py-8">

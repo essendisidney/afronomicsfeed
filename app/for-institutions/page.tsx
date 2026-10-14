@@ -88,7 +88,7 @@ export default function ForInstitutionsPage() {
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <p className="text-[14px] font-semibold text-ink">Talk to the desk</p>
           <p className="mt-1 text-[13px] leading-5 text-ink-soft">A 20-minute walkthrough on your own market, or an invoice in KES or USD. Reply within one business day.</p>
-          <a href="#enquiry" className="mt-4 inline-block rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
+          <a href="#enquiry" className="mt-4 inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
             Book a walkthrough
           </a>
         </div>
@@ -140,11 +140,11 @@ export default function ForInstitutionsPage() {
               </ul>
               <div className="mt-5">
                 {b.start.external ? (
-                  <a href={b.start.href} target="_blank" rel="noopener" className="inline-block rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
+                  <a href={b.start.href} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
                     {b.start.label}
                   </a>
                 ) : (
-                  <Link href={b.start.href} className="inline-block rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
+                  <Link href={b.start.href} className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
                     {b.start.label}
                   </Link>
                 )}

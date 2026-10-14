@@ -6,8 +6,14 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { SearchDialog } from "@/components/search/SearchDialog";
 import { institutionalPilot } from "@/lib/billing/ratecard";
-import { nav, sectionFor, utilityNav } from "@/lib/site";
+import { institutionsNav, nav, sectionFor, utilityNav } from "@/lib/site";
 import type { SearchHit } from "@/lib/search-core";
+
+/**
+ * The header (docs/rebuild/phase-7-plan.md, 7a; RECEIPTS.md "One site, one journey"): one slim bar with the five
+ * sections, search and a quiet For institutions link; everything else (theme, Kiswahili, the Morning, alerts) is in
+ * the menu. On phones a bottom bar keeps Today, Receipts, Numbers, Search and the menu under the thumb.
+ */
 
 function subscribeTheme(onStoreChange: () => void) {
   const observer = new MutationObserver(onStoreChange);
@@ -19,24 +25,29 @@ function themeSnapshot() {
   return document.documentElement.classList.contains("dark");
 }
 
-/** The institutional path, one tap from any page: the pilot form, then pricing, the API and licences. */
 const institutionLinks = [
   { href: "/for-institutions", label: "Overview" },
   { href: "/pricing", label: "Pricing" },
   { href: "/data-api", label: "Data API" },
-  { href: "/licensing", label: "Licensing" },
+  { href: "/watch/sample", label: "Watch pack sample" },
 ] as const;
 
-const readerLinks = [...utilityNav, { href: "/subscribe", label: "Newsletter" }, { href: "/pricing#readers", label: "Reader plans" }];
+const readerLinks = [...utilityNav, { href: "/stories", label: "Stories" }, { href: "/subscribe", label: "Newsletter" }, { href: "/pricing#readers", label: "Pro" }];
 
-function SearchIcon() {
+function SearchIcon({ className = "h-[18px] w-[18px]" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" className={className} fill="none" stroke="currentColor" strokeWidth="1.8">
       <circle cx="8.5" cy="8.5" r="5.75" />
       <path d="m13 13 4.25 4.25" strokeLinecap="round" />
     </svg>
   );
 }
+
+const tabIcons: Record<string, React.ReactNode> = {
+  "/": <path d="M3 9.5 10 4l7 5.5V16a1 1 0 0 1-1 1h-3.5v-4.5h-5V17H4a1 1 0 0 1-1-1z" />,
+  "/receipts": <path d="M5 3h10v14l-2-1.3-1.5 1.3-1.5-1.3L8.5 17 7 15.7 5 17zM8 7h4M8 10h4" />,
+  "/numbers": <path d="M4 16V9M8 16V5M12 16v-5M16 16V7" />,
+};
 
 export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
   const pathname = usePathname();
@@ -44,8 +55,8 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const dark = useSyncExternalStore(subscribeTheme, themeSnapshot, () => false);
   const open = menuPath === pathname;
-  // Each section also owns the older pages it gathers (lib/site.ts nav.match), so /markets/tbills lights Numbers.
   const activeHref = sectionFor(pathname);
+  const toggleMenu = () => setMenuPath((current) => (current === pathname ? null : pathname));
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -64,147 +75,177 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
     localStorage.setItem("af-theme", next ? "dark" : "light");
   }
 
-  const chip = "min-h-11 items-center whitespace-nowrap rounded-full px-3 text-[13px] font-medium text-night-soft hover:bg-night-2 hover:text-night-ink sm:min-h-9";
-
   return (
-    <header className="no-print on-night sticky top-0 z-40 bg-night text-night-ink" aria-label="Site">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-1.5 sm:gap-4 sm:px-6 sm:py-3">
-        <Wordmark compact night logoClassName="h-7 w-auto sm:h-10" />
-        <button
-          type="button"
-          onClick={() => setSearchOpen(true)}
-          className="hidden h-9 min-w-0 flex-1 items-center justify-between gap-3 rounded-full border border-night-line bg-night-2 px-4 text-left text-[13px] text-night-muted hover:border-night-soft/40 hover:text-night-soft md:flex md:max-w-sm lg:max-w-md"
-        >
-          <span className="truncate">Search numbers, stories and countries</span>
-          <kbd className="shrink-0 whitespace-nowrap rounded-md border border-night-line px-1.5 py-0.5 font-sans text-[11px] text-night-muted">Ctrl K</kbd>
-        </button>
-        <div className="flex items-center gap-0.5 sm:gap-1.5">
-          {utilityNav.map((item) => (
-            <Link key={item.href} href={item.href} className={`${chip} hidden xl:inline-flex`}>
-              {item.label}
+    <>
+      <header className="no-print on-night sticky top-0 z-40 bg-night text-night-ink" aria-label="Site">
+        <div className="mx-auto flex h-14 max-w-7xl items-center gap-3 px-4 sm:px-6">
+          <Wordmark compact night logoClassName="h-7 w-auto" />
+          <nav aria-label="Sections" className="ml-4 hidden h-full items-stretch lg:flex">
+            {nav.map((item) => {
+              const active = item.href === activeHref;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`relative flex items-center px-3 text-[14px] font-medium ${
+                    active
+                      ? "text-night-ink after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:bg-accent"
+                      : "text-night-muted hover:text-night-ink"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+          <div className="ml-auto flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="hidden h-9 items-center gap-2 rounded-full border border-night-line bg-night-2 pl-3 pr-2 text-[13px] text-night-muted hover:text-night-soft md:flex"
+            >
+              <SearchIcon className="h-4 w-4" />
+              <span>Search</span>
+              <kbd className="rounded border border-night-line px-1 font-sans text-[10.5px]">Ctrl K</kbd>
+            </button>
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-soft hover:bg-night-2 hover:text-night-ink md:hidden"
+              aria-label="Search"
+            >
+              <SearchIcon />
+            </button>
+            <Link
+              href={institutionsNav.href}
+              aria-current={activeHref === institutionsNav.href ? "page" : undefined}
+              className="hidden min-h-9 items-center whitespace-nowrap rounded-full px-3 text-[13px] font-medium text-night-soft hover:bg-night-2 hover:text-night-ink aria-[current=page]:text-night-ink lg:inline-flex"
+            >
+              {institutionsNav.label}
             </Link>
-          ))}
-          <button
-            type="button"
-            onClick={() => setSearchOpen(true)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-soft hover:bg-night-2 hover:text-night-ink md:hidden"
-            aria-label="Search"
-          >
-            <SearchIcon />
-          </button>
-          <button type="button" onClick={toggleTheme} className={`${chip} hidden sm:inline-flex`}>
-            <span suppressHydrationWarning>{dark ? "Light" : "Dark"}</span>
-            <span className="sr-only"> theme</span>
-          </button>
-          <Link
-            href={institutionalPilot.href}
-            data-track="pricing_cta_click"
-            className="relative inline-flex min-h-9 items-center whitespace-nowrap rounded-full bg-accent px-3 before:absolute before:inset-x-0 before:-inset-y-1 text-[13px] font-semibold text-night hover:bg-gold-soft sm:ml-1 sm:px-4"
-          >
-            <span className="sm:hidden">Free pilot</span>
-            <span className="hidden sm:inline xl:hidden">Start a pilot</span>
-            <span className="hidden xl:inline">Start a 30-day pilot</span>
-          </Link>
-          <button
-            type="button"
-            className={`${chip} inline-flex xl:hidden`}
-            onClick={() => setMenuPath((current) => (current === pathname ? null : pathname))}
-            aria-expanded={open}
-            aria-controls="site-menu"
-          >
-            {open ? "Close" : "Menu"}
-          </button>
+            <button
+              type="button"
+              className="inline-flex min-h-11 items-center rounded-full px-3 text-[13px] font-medium text-night-soft hover:bg-night-2 hover:text-night-ink sm:min-h-9"
+              onClick={toggleMenu}
+              aria-expanded={open}
+              aria-controls="site-menu"
+            >
+              {open ? "Close" : "Menu"}
+            </button>
+          </div>
         </div>
-      </div>
-      <nav className="hidden border-t border-night-line lg:block" aria-label="Sections">
-        <div className="mx-auto flex max-w-7xl items-center gap-x-1 overflow-x-auto px-4 sm:px-6">
-          {nav.map((item) => {
+
+        {open ? (
+          <div id="site-menu" className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-t border-night-line bg-night">
+            <div className="mx-auto grid max-w-7xl gap-5 px-4 pb-24 pt-4 sm:px-6 lg:grid-cols-3 lg:pb-6">
+              <nav aria-label="Sections">
+                <p className="px-3 text-[12px] font-semibold text-night-muted">Sections</p>
+                <ul className="mt-1 grid grid-cols-2 gap-1">
+                  {nav.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        aria-current={item.href === activeHref ? "page" : undefined}
+                        className="flex min-h-11 items-center rounded-xl px-3 text-[15px] font-medium text-night-ink hover:bg-night-2 aria-[current=page]:bg-night-2"
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <nav aria-label="Reader tools">
+                <p className="px-3 text-[12px] font-semibold text-night-muted">For readers</p>
+                <ul className="mt-1 grid grid-cols-2 gap-1">
+                  {readerLinks.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="flex min-h-11 items-center rounded-xl px-3 text-[15px] font-medium text-night-soft hover:bg-night-2 hover:text-night-ink">
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                  <li>
+                    <button
+                      type="button"
+                      onClick={toggleTheme}
+                      className="flex min-h-11 w-full items-center rounded-xl px-3 text-left text-[15px] font-medium text-night-soft hover:bg-night-2 hover:text-night-ink"
+                    >
+                      <span suppressHydrationWarning>{dark ? "Light theme" : "Dark theme"}</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+              <nav aria-label="For institutions" className="rounded-2xl border border-night-line bg-night-2 p-4">
+                <p className="text-[12px] font-semibold text-accent">For boards, banks, SACCOs and funds</p>
+                <ul className="mt-2 grid grid-cols-2 gap-1">
+                  {institutionLinks.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="flex min-h-11 items-center rounded-xl px-3 text-[15px] font-medium text-night-ink hover:bg-night">
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={institutionalPilot.href}
+                  data-track="pricing_cta_click"
+                  className="mt-3 flex min-h-11 items-center justify-center rounded-full bg-accent px-4 text-[14px] font-semibold text-night hover:bg-gold-soft"
+                >
+                  Start a free {institutionalPilot.days}-day pilot
+                </Link>
+              </nav>
+            </div>
+          </div>
+        ) : null}
+      </header>
+
+      <nav aria-label="Quick" className="no-print on-night fixed inset-x-0 bottom-0 z-40 border-t border-night-line bg-night pb-[env(safe-area-inset-bottom)] text-night-ink lg:hidden">
+        <ul className="grid grid-cols-5">
+          {nav.slice(0, 3).map((item) => {
             const active = item.href === activeHref;
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={`relative px-3 py-3 text-[14px] font-medium ${
-                  active
-                    ? "text-night-ink after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:bg-accent"
-                    : "text-night-muted hover:text-night-ink"
-                }`}
-              >
-                {item.label}
-              </Link>
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`flex h-14 flex-col items-center justify-center gap-0.5 text-[11px] font-medium ${active ? "text-night-ink" : "text-night-muted"}`}
+                >
+                  <svg viewBox="0 0 20 20" aria-hidden="true" className={`h-5 w-5 ${active ? "text-accent" : ""}`} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round">
+                    {tabIcons[item.href]}
+                  </svg>
+                  {item.label}
+                </Link>
+              </li>
             );
           })}
-          <span aria-hidden className="ml-auto h-4 w-px shrink-0 bg-night-line" />
-          <Link href="/subscribe" className="px-3 py-3 text-[14px] font-medium text-night-muted hover:text-night-ink">
-            Newsletter
-          </Link>
-        </div>
+          <li>
+            <button type="button" onClick={() => setSearchOpen(true)} className="flex h-14 w-full flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-night-muted">
+              <SearchIcon className="h-5 w-5" />
+              Search
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                toggleMenu();
+                window.scrollTo({ top: 0 });
+              }}
+              aria-expanded={open}
+              aria-controls="site-menu"
+              className="flex h-14 w-full flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-night-muted"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                <path d="M4 6h12M4 10h12M4 14h12" />
+              </svg>
+              More
+            </button>
+          </li>
+        </ul>
       </nav>
 
-      {open ? (
-        <div id="site-menu" className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-t border-night-line bg-night px-4 pb-6 pt-4 xl:hidden">
-          <nav aria-label="For institutions" className="rounded-2xl border border-night-line bg-night-2 p-4">
-            <p className="text-[12px] font-semibold text-accent">For funds, banks and DFIs</p>
-            <p className="mt-1 text-[14px] leading-5 text-night-soft">African government bond and bill auctions by API, with the full history.</p>
-            <Link
-              href={institutionalPilot.href}
-              data-track="pricing_cta_click"
-              className="mt-3 flex min-h-11 items-center justify-center rounded-full bg-accent px-4 text-[14px] font-semibold text-night hover:bg-gold-soft"
-            >
-              Start a free 30-day pilot
-            </Link>
-            <ul className="mt-2 grid grid-cols-2 gap-1">
-              {institutionLinks.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="flex min-h-11 items-center rounded-xl px-3 text-[15px] font-medium text-night-ink hover:bg-night">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="Sections" className="mt-5">
-            <p className="px-3 text-[12px] font-semibold text-night-muted">Sections</p>
-            <ul className="mt-1 grid grid-cols-2 gap-1">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={item.href === activeHref ? "page" : undefined}
-                    className="flex min-h-11 items-center rounded-xl px-3 text-[15px] font-medium text-night-ink hover:bg-night-2 aria-[current=page]:bg-night-2"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="Reader tools" className="mt-5">
-            <p className="px-3 text-[12px] font-semibold text-night-muted">For readers</p>
-            <ul className="mt-1 grid grid-cols-2 gap-1">
-              {readerLinks.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="flex min-h-11 items-center rounded-xl px-3 text-[15px] font-medium text-night-soft hover:bg-night-2 hover:text-night-ink">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="mt-4 flex min-h-11 w-full items-center rounded-xl border border-night-line px-3 text-left text-[15px] font-medium text-night-soft sm:hidden"
-          >
-            <span suppressHydrationWarning>{dark ? "Switch to light theme" : "Switch to dark theme"}</span>
-          </button>
-        </div>
-      ) : null}
-
       <SearchDialog index={searchIndex} open={searchOpen} onClose={() => setSearchOpen(false)} />
-    </header>
+    </>
   );
 }

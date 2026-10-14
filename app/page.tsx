@@ -1,20 +1,25 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { NewsletterBand } from "@/components/data/NewsletterBand";
+import { StatTile } from "@/components/data/StatTile";
 import { EvidenceTag } from "@/components/evidence/EvidenceTag";
+import { FigureTiles, ReceiptChartView, ReceiptMeta, VerdictLine } from "@/components/receipts/ReceiptView";
 import { ButtonLink } from "@/components/ui/Button";
+import { SubscribeForm } from "@/components/ui/SubscribeForm";
 import { institutionalPilot, institutionalTier, localInstitutionPrices, localPriceText } from "@/lib/billing/ratecard";
 import { getLatestArticles } from "@/lib/content";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
+import { loadLedger, score } from "@/lib/ledger";
+import { visibleReceipts, type Receipt } from "@/lib/receipts";
 import { fitDescription } from "@/lib/seo";
 import { site } from "@/lib/site";
-import { ourRecord, whatChanged, type TodayMove } from "@/lib/today";
+import { whatChanged, type TodayMove } from "@/lib/today";
+import { numbersThatMoved } from "@/lib/today-board";
 
 export const revalidate = 900;
 
 const homeTitle = `${site.name}: what African money did today, and why`;
 const homeDescription =
-  "Africa's dated record of what money did, why it happened and what happened next: government borrowing costs, currencies and savings rates from the source, with our forecast record in public.";
+  "Africa's dated record of what money did, why it happened and what happened next: a daily verdict with the receipts, government borrowing costs, currencies and savings rates from the source, and our forecast record in public.";
 
 export const metadata: Metadata = {
   title: { absolute: homeTitle },
@@ -25,22 +30,49 @@ export const metadata: Metadata = {
 
 const todayFmt = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" });
 
-function MoveCard({ move }: { move: TodayMove }) {
+/** Today's Receipt, made to be read without a click: headline, verdict, the two figures, the lead chart. */
+function LeadReceipt({ r }: { r: Receipt }) {
   return (
-    <li className="flex flex-col rounded-2xl border border-rule bg-surface px-5 py-5">
-      <p className={`text-[12px] font-semibold uppercase tracking-[0.12em] ${move.direction === "up" ? "text-up" : "text-down"}`}>
-        <span aria-hidden="true">{move.direction === "up" ? "▲" : "▼"}</span> {move.kind === "fx" ? "Currency" : "Government borrowing"}
-      </p>
-      <h3 className="mt-2 font-serif text-[1.3rem] leading-snug text-ink text-balance">
-        <Link href={move.href} className="hover:text-forest">
-          {move.headline}
+    <article aria-labelledby="lead-receipt" className="rounded-2xl border border-rule bg-surface px-5 py-5 sm:px-6 sm:py-6">
+      <ReceiptMeta r={r} />
+      <h2 id="lead-receipt" className="t-display mt-3 text-ink text-balance">
+        <Link href={`/receipts/${r.slug}`} className="hover:text-forest">
+          {r.title}
         </Link>
-      </h3>
-      {move.shillings ? <p className="tabular mt-3 text-[15px] font-semibold leading-6 text-ink">{move.shillings}.</p> : null}
-      <p className="mt-2 text-[14px] leading-6 text-ink-soft">
-        <span className="font-semibold text-ink">Who it touches:</span> {move.touches}.
-      </p>
-      <div className="mt-auto pt-4">
+      </h2>
+      <VerdictLine r={r} />
+      <FigureTiles r={r} tiles={r.tiles.slice(0, 2)} />
+      {r.charts[0] ? (
+        <div className="mt-4">
+          <ReceiptChartView r={r} chart={r.charts[0]} />
+        </div>
+      ) : null}
+      <div className="mt-5 flex flex-wrap items-center gap-4">
+        <ButtonLink href={`/receipts/${r.slug}`}>Read the Receipt, free</ButtonLink>
+        {r.calls.length ? <span className="text-[13px] text-muted">{r.calls.length} dated calls on the record</span> : null}
+      </div>
+    </article>
+  );
+}
+
+function MoveRow({ move }: { move: TodayMove }) {
+  return (
+    <li className="grid gap-1.5 py-4 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-6">
+      <div>
+        <p className={`t-label ${move.direction === "up" ? "text-up" : "text-down"}`}>
+          <span aria-hidden="true">{move.direction === "up" ? "▲" : "▼"}</span> {move.kind === "fx" ? "Currency" : "Government borrowing"}
+        </p>
+        <h3 className="mt-1 font-serif text-[1.15rem] leading-snug text-ink text-balance">
+          <Link href={move.href} className="hover:text-forest">
+            {move.headline}
+          </Link>
+        </h3>
+        <p className="mt-1 text-[14px] leading-6 text-ink-soft">
+          {move.shillings ? <span className="tabular font-semibold text-ink">{move.shillings}. </span> : null}
+          <span className="font-semibold text-ink">Who it touches:</span> {move.touches}.
+        </p>
+      </div>
+      <div className="sm:pt-5">
         <EvidenceTag {...move.evidence} />
       </div>
     </li>
@@ -48,109 +80,128 @@ function MoveCard({ move }: { move: TodayMove }) {
 }
 
 export default async function TodayPage() {
-  const [moves, record] = await Promise.all([whatChanged(), Promise.resolve(ourRecord())]);
+  const moves = await whatChanged();
+  const tiles = numbersThatMoved();
+  const receipts = visibleReceipts();
+  const lead = receipts[0] ?? null;
   const stories = getLatestArticles(3);
+  const ledger = loadLedger();
+  const live = score(ledger.rows);
+  const openCalls = receipts.reduce((n, r) => n + r.calls.length, 0);
+  const nextGrade = ledger.rows.filter((r) => !r.outcome).map((r) => r.auction_value_date).sort()[0];
   const kenya = localInstitutionPrices.find((p) => p.id === "kenya");
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
-      <header className="border-b border-rule pb-6">
-        <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-muted">
+    <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-7">
+      <h1 className="sr-only">Afronomics Today: Africa&rsquo;s dated record of what money did, why it happened, and what happened next</h1>
+      <p className="t-label flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
+        <span>
           Today · <time dateTime={new Date().toISOString().slice(0, 10)}>{todayFmt.format(new Date())}</time>
-        </p>
-        <h1 className="mt-2 max-w-3xl font-serif text-[2rem] leading-tight text-ink text-balance sm:text-[2.6rem]">
-          Africa&rsquo;s dated record of what money did, why it happened, and what happened next.
-        </h1>
-        <p className="mt-3 max-w-2xl text-[16px] leading-7 text-ink-soft">
-          Every figure names its source and the date it is as of. Tap the tag to open the source.{" "}
-          <em className="not-italic font-semibold text-ink">Information, not advice.</em>{" "}
-          <Link href="/sw" lang="sw" hrefLang="sw" className="underline underline-offset-2">
-            Soma kwa Kiswahili
-          </Link>
-        </p>
-      </header>
+        </span>
+        <Link href="/sw" lang="sw" hrefLang="sw" className="normal-case tracking-normal text-forest underline underline-offset-2">
+          Soma kwa Kiswahili
+        </Link>
+      </p>
 
-      <section aria-labelledby="what-changed" className="mt-8">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 id="what-changed" className="font-serif text-2xl text-ink sm:text-3xl">
-            What changed
-          </h2>
-          <Link href="/numbers" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-gold">
-            All the numbers →
-          </Link>
+      <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <div className="min-w-0 lg:col-span-8">
+          {lead ? (
+            <LeadReceipt r={lead} />
+          ) : (
+            <section aria-labelledby="what-changed-lead" className="rounded-2xl border border-rule bg-surface px-5 py-2 sm:px-6">
+              <h2 id="what-changed-lead" className="t-h2 pt-4 text-ink">
+                What changed
+              </h2>
+              <ul className="divide-y divide-rule">{moves.map((m) => <MoveRow key={m.id} move={m} />)}</ul>
+            </section>
+          )}
         </div>
-        {moves.length ? (
-          <ul className="mt-4 grid gap-4 md:grid-cols-3">
-            {moves.map((move) => (
-              <MoveCard key={move.id} move={move} />
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-4 rounded-2xl border border-rule bg-surface px-5 py-5 text-[15px] text-ink-soft">
-            No market we cover has published a changed result in the last week. The latest results are on{" "}
-            <Link href="/numbers" className="underline underline-offset-2">
-              Numbers
-            </Link>
-            .
-          </p>
-        )}
-        <p className="mt-3 text-[13px] leading-5 text-muted">
-          How these are chosen: the largest auction rate change in any market in the last 7 days (against the previous sale of the same tenor), the largest overnight
-          move among traded African currencies, and the largest move in Kenya (or the next-largest elsewhere). Shilling
-          effects are worked out by code from the published rates; nothing here is estimated by a model.
-        </p>
-      </section>
 
-      {record ? (
-        <section id="record" aria-labelledby="our-record" className="mt-12 grid gap-6 rounded-3xl border border-rule bg-surface px-6 py-7 sm:px-8 lg:grid-cols-[1fr_2fr] lg:items-center">
-          <div>
-            <h2 id="our-record" className="font-serif text-2xl text-ink sm:text-3xl">
-              How the method has done
-            </h2>
-            <p className="tabular mt-3 font-serif text-[2.6rem] leading-none text-ink">{Math.round(record.share * 100)}%</p>
-          </div>
-          <div>
-            <p className="tabular text-[16px] leading-7 text-ink">
-              Before each Kenya Treasury bill auction we show a likely range for each tenor: the latest rate plus the 10th to 90th
-              percentile of the last 26 weekly moves. Tested on {record.tested.toLocaleString("en-US")} past auctions in {record.tenors} tenors since
-              2011, the result fell inside the range {record.inside.toLocaleString("en-US")} times. A range built this way aims for about 80%, so it
-              has been too narrow.
-            </p>
-            <div className="mt-3 flex flex-wrap items-center gap-3">
-              <EvidenceTag source="Central Bank of Kenya auction results" href={record.source} asOf={record.asOf} />
-              <Link href="/markets/kenya-tbills/auction" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-gold">
-                This week&rsquo;s ranges →
+        <aside aria-label="Numbers and record" className="flex min-w-0 flex-col gap-4 lg:col-span-4">
+          <section aria-labelledby="numbers-moved">
+            <div className="flex items-baseline justify-between">
+              <h2 id="numbers-moved" className="t-h3 text-ink">
+                Numbers that moved
+              </h2>
+              <Link href="/numbers" className="text-[13px] font-semibold text-forest hover:text-ink">
+                All numbers →
               </Link>
             </div>
-            <p className="mt-2 text-[13px] text-muted">
-              This is a backtest: the method run over past auctions, not ranges we published at the time. Each week&rsquo;s range is now written to
-              a public ledger before bids close and graded by code against the CBK result.{" "}
-              <Link href="/record" className="font-semibold text-forest underline underline-offset-2">
-                Our record →
-              </Link>
+            <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
+              {tiles.map((t) => (
+                <StatTile key={t.id} label={t.label} value={t.value} change={t.change} direction={t.direction} trend={t.trend} evidence={t.evidence} href={t.href} />
+              ))}
+            </div>
+          </section>
+
+          <Link href="/record" className="group rounded-2xl border border-rule bg-surface px-4 py-3.5 hover:border-forest">
+            <p className="t-label text-muted">Our record</p>
+            <p className="tabular mt-1 text-[15px] leading-6 text-ink">
+              {live.graded
+                ? `${live.inside} of ${live.graded} published ranges held the result`
+                : `${ledger.rows.length} ranges published before bids close${nextGrade ? `, the first graded with the results for value ${formatDate(nextGrade)}` : ""}`}
+              {openCalls ? ` · ${openCalls} calls open` : ""}
+              <span className="text-forest group-hover:text-ink"> →</span>
             </p>
+          </Link>
+
+          <section aria-labelledby="signup" className="rounded-2xl border border-rule bg-surface px-4 py-4">
+            <h2 id="signup" className="t-h3 text-ink">
+              The Morning, before 07:30
+            </h2>
+            <p className="mt-1 text-[13.5px] leading-5 text-ink-soft">What moved overnight and what it means for your money. Free, every weekday.</p>
+            <div className="mt-3">
+              <SubscribeForm button="Send it to me" />
+            </div>
+          </section>
+        </aside>
+      </div>
+
+      {lead && moves.length ? (
+        <section aria-labelledby="what-changed" className="mt-10">
+          <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-2">
+            <h2 id="what-changed" className="t-h2 text-ink">
+              What changed
+            </h2>
+            <Link href="/numbers" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-ink">
+              All the numbers →
+            </Link>
           </div>
+          <ul className="divide-y divide-rule">{moves.map((m) => <MoveRow key={m.id} move={m} />)}</ul>
         </section>
       ) : null}
+      <p className="mt-3 max-w-3xl text-[12.5px] leading-5 text-muted">
+        How the moves are chosen: the largest auction rate change in any market in the last 7 days (against the previous sale of the same tenor), the
+        largest overnight move among traded African currencies, and the largest move in Kenya. Shilling effects are worked out by code from the
+        published rates; nothing here is estimated by a model. Information, not advice.
+      </p>
 
-      {stories.length ? (
-        <section aria-labelledby="latest-stories" className="mt-12">
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h2 id="latest-stories" className="font-serif text-2xl text-ink sm:text-3xl">
-              Latest stories
+      {receipts.length > 1 || stories.length ? (
+        <section aria-labelledby="latest" className="mt-10">
+          <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-2">
+            <h2 id="latest" className="t-h2 text-ink">
+              Latest
             </h2>
-            <Link href="/stories" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-gold">
-              All stories →
+            <Link href="/receipts" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-ink">
+              All Receipts →
             </Link>
           </div>
           <ul className="mt-4 grid gap-4 md:grid-cols-3">
-            {stories.map((a) => (
+            {receipts.slice(1, 4).map((r) => (
+              <li key={r.slug} className="rounded-2xl border border-rule bg-surface px-5 py-4">
+                <ReceiptMeta r={r} />
+                <Link href={`/receipts/${r.slug}`} className="mt-2 block font-serif text-[1.15rem] leading-snug text-ink hover:text-forest">
+                  {r.title}
+                </Link>
+              </li>
+            ))}
+            {stories.slice(0, Math.max(0, 3 - Math.max(0, receipts.length - 1))).map((a) => (
               <li key={`${a.category}-${a.slug}`}>
-                <Link href={articleHref(a.category, a.slug)} className="block h-full rounded-2xl border border-rule bg-surface px-5 py-5 hover:border-forest">
-                  <p className="text-[12px] font-semibold text-muted">
+                <Link href={articleHref(a.category, a.slug)} className="block h-full rounded-2xl border border-rule bg-surface px-5 py-4 hover:border-forest">
+                  <p className="t-label text-muted">
                     {categoryLabel(a.category)} · {formatDate(a.date)}
                   </p>
-                  <p className="mt-2 font-serif text-[1.2rem] leading-snug text-ink text-balance">{a.title}</p>
+                  <p className="mt-2 font-serif text-[1.15rem] leading-snug text-ink text-balance">{a.title}</p>
                 </Link>
               </li>
             ))}
@@ -158,28 +209,26 @@ export default async function TodayPage() {
         </section>
       ) : null}
 
-      <section aria-labelledby="for-institutions-band" className="mt-12 rounded-3xl border-2 border-forest/30 bg-surface px-6 py-7 sm:px-8">
-        <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-forest">For institutions</p>
-        <h2 id="for-institutions-band" className="mt-2 max-w-2xl font-serif text-2xl leading-tight text-ink sm:text-3xl">
-          Boards, banks, SACCOs and funds: the full dated record, by API or CSV.
-        </h2>
-        <p className="tabular mt-3 max-w-2xl text-[15px] leading-6 text-ink-soft">
-          {institutionalTier("analyst").name} from USD {institutionalTier("analyst").monthlyUsd} a month and {institutionalTier("team").name} from USD{" "}
-          {institutionalTier("team").monthlyUsd.toLocaleString("en-US")}
-          {kenya ? `; Kenyan institutions pay ${localPriceText(kenya, "analyst")} and ${localPriceText(kenya, "team")}` : ""}. Start with a free{" "}
-          {institutionalPilot.days}-day pilot.
-        </p>
-        <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <section aria-labelledby="for-institutions-band" className="mt-10 flex flex-col gap-4 rounded-2xl border border-rule bg-surface px-5 py-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+        <div className="max-w-3xl">
+          <p className="t-label text-forest">For institutions</p>
+          <h2 id="for-institutions-band" className="t-h2 mt-1 text-ink text-balance">
+            Boards, banks, SACCOs and funds: the full dated record, by API, pack or CSV.
+          </h2>
+          <p className="tabular mt-2 text-[14px] leading-6 text-ink-soft">
+            {institutionalTier("analyst").name} from USD {institutionalTier("analyst").monthlyUsd} a month
+            {kenya ? `; Kenyan institutions from ${localPriceText(kenya, "analyst")}` : ""}. Free {institutionalPilot.days}-day pilot.
+          </p>
+        </div>
+        <div className="flex shrink-0 flex-wrap items-center gap-3">
           <ButtonLink href={institutionalPilot.href} data-track="pricing_cta_click">
-            Start a {institutionalPilot.days}-day pilot
+            Start a pilot
           </ButtonLink>
           <Link href="/for-institutions" className="inline-flex min-h-11 items-center px-2 text-[14px] font-semibold text-forest underline underline-offset-4">
             What institutions get
           </Link>
         </div>
       </section>
-
-      <NewsletterBand />
     </div>
   );
 }

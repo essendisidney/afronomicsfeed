@@ -75,7 +75,53 @@ export const LIMITS = {
   footerColumnMin: 4,
   footerColumnMax: 14,
   footerColumnRatio: 2,
+  // Speed budget (docs/rebuild/phase-7-plan.md, 7a), on a phone over slow 4G with a 4x slower CPU. Set from what the
+  // site measured on 14 Oct 2026 (largest content 1.0-2.1 s, 147-162 KB of script): the framework alone sends about
+  // 140 KB, so the plan's first guess of 120 KB was below the floor.
+  lcpMs: 2500,
+  // Google's "good" threshold. The founder set this on 14 Oct (plan said 0.05); /rates/kenya, /registry and
+  // /receipts measured 0.05-0.1 and come under 0.05 in 7b, when their templates are rebuilt.
+  clsMax: 0.1,
+  scriptKb: 175,
 };
+
+/** The page templates the speed budget is measured on, one at a time so the timing is not skewed by parallel work. */
+const SPEED_PAGES = ["/", "/receipts", "/numbers", "/markets/tbills", "/rates/kenya", "/registry", "/compare", "/casebook", "/record", "/for-institutions"];
+
+async function checkSpeed(browser, base, target) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, extraHTTPHeaders: INTERNAL_HEADERS });
+  const page = await context.newPage();
+  const found = [];
+  try {
+    const cdp = await context.newCDPSession(page);
+    await cdp.send("Network.enable");
+    await cdp.send("Network.emulateNetworkConditions", { offline: false, latency: 150, downloadThroughput: (1.6 * 1024 * 1024) / 8, uploadThroughput: (750 * 1024) / 8 });
+    await cdp.send("Emulation.setCPUThrottlingRate", { rate: 4 });
+    await page.addInitScript(() => {
+      window.__lcp = 0;
+      window.__cls = 0;
+      new PerformanceObserver((l) => l.getEntries().forEach((e) => (window.__lcp = e.startTime))).observe({ type: "largest-contentful-paint", buffered: true });
+      new PerformanceObserver((l) => l.getEntries().forEach((e) => !e.hadRecentInput && (window.__cls += e.value))).observe({ type: "layout-shift", buffered: true });
+    });
+    await page.goto(base + target.path, { waitUntil: "load", timeout: 60_000 });
+    await page.waitForTimeout(1500);
+    const m = await page.evaluate(() => ({
+      lcp: Math.round(window.__lcp),
+      cls: window.__cls,
+      kb: Math.round(performance.getEntriesByType("resource").filter((r) => r.initiatorType === "script").reduce((n, r) => n + r.transferSize, 0) / 1024),
+    }));
+    const push = (message) => found.push({ check: "speed", page: target.path, variant: "390-slow-4g", message, detail: null });
+    if (m.lcp > LIMITS.lcpMs) push(`Largest content took ${m.lcp} ms (budget ${LIMITS.lcpMs} ms)`);
+    if (m.cls > LIMITS.clsMax) push(`Layout shift ${m.cls.toFixed(3)} (budget ${LIMITS.clsMax})`);
+    if (m.kb > LIMITS.scriptKb) push(`${m.kb} KB of script (budget ${LIMITS.scriptKb} KB)`);
+    console.log(`speed ${target.path}: ${m.lcp} ms, shift ${m.cls.toFixed(3)}, ${m.kb} KB script`);
+  } catch (err) {
+    found.push({ check: "speed", page: target.path, variant: "390-slow-4g", message: `Could not measure: ${String(err.message || err).slice(0, 200)}`, detail: null });
+  } finally {
+    await context.close();
+  }
+  return found;
+}
 
 /**
  * Known overclaims. Each rule matches within one sentence of visible copy (plus <title> and meta description).
@@ -552,6 +598,7 @@ const CHECK_NAMES = {
   "tap-target": "Tap targets under 44px (390px)",
   layout: "Shared layout",
   copy: "Copy: overclaims",
+  speed: "Speed budget (390px, slow 4G)",
 };
 
 function markdown({ base, pages, failures, allowedRows, staleAllowlist, seconds, linkCount }) {
@@ -630,6 +677,8 @@ async function main() {
       console.log(`[${String(done).padStart(3)}/${jobs.length}] ${job.target.path} ${job.variant.id}: ${mark}`);
       return { ...job, ...r };
     });
+    const speedFindings = [];
+    for (const target of pages.filter((p) => p.status === 200 && SPEED_PAGES.includes(p.path))) speedFindings.push(...(await checkSpeed(browser, opts.base, target)));
     await browser.close();
 
     // Internal links, de-duplicated across every page and variant.
@@ -654,7 +703,7 @@ async function main() {
     const expectedErrors = new Set(pages.filter((p) => p.status >= 400).map((p) => new URL(p.path, opts.base).href));
     const linkFindings = await checkLinks(opts.base, linkPages, expectedErrors, opts.skipLinks);
 
-    const rows = group([...results.flatMap((r) => r.found), ...linkFindings]);
+    const rows = group([...results.flatMap((r) => r.found), ...linkFindings, ...speedFindings]);
     const failures = [];
     const allowedRows = [];
     const used = new Set();

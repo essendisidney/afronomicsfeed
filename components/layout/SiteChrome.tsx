@@ -28,6 +28,8 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         <MicroSurvey />
       </main>
       <Footer />
+      {/* Room for the phone tab bar (components/layout/Header.tsx), so it never covers the footer. */}
+      <div aria-hidden="true" className="h-[calc(3.5rem+env(safe-area-inset-bottom))] lg:hidden" />
       <PageCounter />
       <AppInstall />
     </>

@@ -628,3 +628,84 @@ table,
 .tabular {
   font-variant-numeric: tabular-nums;
 }
+
+/*
+ * Design system v2 (docs/rebuild/phase-7-plan.md, 7a). A fixed type scale so no size is set by hand, a warning amber,
+ * and the quiet grey that every chart uses for everything except the point being made.
+ */
+:root {
+  --warn: #a15c00;
+  --chart-quiet: #8b93a3;
+  --chart-quiet-ink: #636b7d;
+}
+.dark {
+  --warn: #f0b35a;
+  --chart-quiet: #6b7590;
+  --chart-quiet-ink: #8b93a7;
+}
+
+@layer components {
+  .t-display {
+    font-family: var(--font-serif), Georgia, serif;
+    font-size: 1.875rem;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  .t-h1 {
+    font-family: var(--font-serif), Georgia, serif;
+    font-size: 1.75rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .t-h2 {
+    font-family: var(--font-serif), Georgia, serif;
+    font-size: 1.375rem;
+    line-height: 1.25;
+  }
+  .t-h3 {
+    font-size: 1rem;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+  .t-label {
+    font-size: 0.71875rem;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  @media (min-width: 640px) {
+    .t-display {
+      font-size: 2.5rem;
+    }
+    .t-h1 {
+      font-size: 2.25rem;
+    }
+    .t-h2 {
+      font-size: 1.625rem;
+    }
+  }
+  /* The (Facts) / (Analysis) / (Opinion) label at the start of a Receipt paragraph. */
+  .label-chip {
+    display: inline-block;
+    margin-right: 0.4em;
+    padding: 0.05em 0.45em;
+    border-radius: 0.3rem;
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    vertical-align: 0.12em;
+    border: 1px solid currentColor;
+  }
+}
+
+/* The "Go deeper" panel on a Receipt sits on night: its list reads in the night palette. */
+.receipt-full .article-body,
+.receipt-full .article-body li,
+.receipt-full .article-body p {
+  color: var(--night-soft);
+}
+.receipt-full .article-body strong {
+  color: var(--night-ink);
+}

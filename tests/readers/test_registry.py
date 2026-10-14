@@ -205,3 +205,33 @@ def test_sasra_file_link_drops_the_refresh_token():
     html = """<a class='wpdm-download-link' href='#' data-downloadurl="https://www.sasra.go.ke/download/sacco-supervision-annual-report-2025/?wpdmdl=1772&refresh=6acfc7066d29c1792001798">Download</a>"""
     assert registry_common.sasra_file_link(html) == "https://www.sasra.go.ke/?wpdmdl=1772"
     assert registry_common.sasra_file_link("<p>no file</p>") is None
+
+
+# --- SASRA quarterly report (Phase 5)
+
+import sasra_quarterly  # noqa: E402
+
+QFIX = Path(__file__).parent / "fixtures" / "sasra-quarterly"
+
+
+def test_sasra_quarterly_june_2026():
+    parsed, problems = sasra_quarterly.read(QFIX / "sasra_quarterly_2026_06.pdf")
+    assert problems == []
+    assert parsed["period"] == "2026-06-30"
+    assert parsed["quarters"] == ["2025-03-31", "2025-06-30", "2025-09-30", "2025-12-31", "2026-03-31", "2026-06-30"]
+    rows = {(r["segment"], r["metric"], r["period"]): r for r in sasra_quarterly.to_rows(parsed, "u")}
+    assert rows[("dt", "assets", "2026-06-30")]["value"] == 1105.60
+    assert rows[("dt", "assets", "2025-12-31")]["value"] == 1069.34  # audited, as the June edition gives it
+    assert rows[("dt", "npl_ratio", "2026-06-30")]["value"] == 6.56
+    assert rows[("dt", "core_capital_to_assets", "2026-06-30")]["prescribed"] == "10%"
+
+
+def test_sasra_quarterly_march_2026_keeps_its_own_december():
+    parsed, problems = sasra_quarterly.read(QFIX / "sasra_quarterly_2026_03.pdf")
+    assert problems == [] and parsed["period"] == "2026-03-31" and len(parsed["quarters"]) == 5
+    rows = {(r["segment"], r["metric"], r["period"]): r for r in sasra_quarterly.to_rows(parsed, "u")}
+    assert rows[("dt", "assets", "2025-12-31")]["value"] == 1069.05  # from returns, before the audit
+
+
+def test_sasra_quarterly_quarter_ends_run_back_in_order():
+    assert sasra_quarterly.periods_back(__import__("datetime").date(2026, 3, 31), 3) == ["2025-09-30", "2025-12-31", "2026-03-31"]

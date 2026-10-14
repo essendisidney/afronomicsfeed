@@ -123,10 +123,32 @@ Mail goes to Resend's test inbox (`delivered+…@resend.dev`), which accepts it 
 founder still gets the usual desk note ("Pilot issued: Afronomics smoke test (QA)"). The key is masked in the log.
 
 **Clean up after each run.** The run leaves a lead, a deal at stage `pilot`, and two trial keys. They would count
-towards the D-004 gate, and `af_trial_key_issue` allows only three trial keys per domain in 90 days. Remove them with:
+towards the D-004 gate. The agent's database connection runs updates but not deletes (deletes wait for a
+confirmation that never comes), so neutralise the rows with:
+
+```sql
+update data_keys set revoked_at = now() where email like '%@resend.dev' and revoked_at is null;
+update deals set stage = 'lost', next_step = 'None: smoke test row' where organisation = 'Afronomics smoke test (QA)';
+```
+
+The rows can then be deleted from the Supabase dashboard (founder):
 
 ```sql
 delete from data_keys where email like '%@resend.dev';
 delete from deals where organisation = 'Afronomics smoke test (QA)';
 delete from leads where email like '%@resend.dev';
 ```
+
+**Limit.** `af_trial_key_issue` allows three trial keys per domain in 90 days, and revoked keys still count. Each run
+takes two `resend.dev` keys, so a second run fails "limited" until those rows are deleted.
+
+**First run, 14 Oct 2026** (run 38550437546):
+- 9 of 10 checks passed.
+- The form issued a key and the email was accepted.
+- The key unlocked 388 Kenya bond rows from 2010-03-29; the free tier gives 54.
+- The CSV check failed only because the check was wrong: a key holder's CSV correctly starts with
+  `# Licensed under your trial plan`, and the check has been fixed.
+- Rows neutralised the same day:
+  - keys 1 and 2 revoked;
+  - deal 72 marked `lost`;
+  - lead source `pilot:smoke-test` left in place.

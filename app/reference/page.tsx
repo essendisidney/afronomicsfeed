@@ -71,7 +71,7 @@ export default async function ReferencePage() {
           <p className="text-[14px] font-semibold text-ink">For newsrooms</p>
           <p className="mt-2 leading-6">
             Use the phrase “{boiler}”. Every figure has a page you can link that will still be there next year, and a CSV of the full series.
-            Reply within the hour on a working day: {site.contactEmail}.
+            Reply within one working day: {site.contactEmail}.
           </p>
           <div className="mt-3">
             <CopyCitation text={cite} />

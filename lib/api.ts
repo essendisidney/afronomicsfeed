@@ -1,5 +1,6 @@
 import { after } from "next/server";
 import { countsAsApiCall } from "@/lib/bots";
+import { csvTopLines, fileName, parseCsv, workbook, type DataFile } from "@/lib/documents/data-files";
 import { checkSession, sessionToken, verifySession } from "@/lib/downloads";
 import { rpc } from "@/lib/store";
 import { site } from "@/lib/site";
@@ -275,8 +276,12 @@ export async function apiJson(request: Request, path: string, data: unknown, sta
   );
 }
 
-/** A CSV download under the same rule. `body` is the dataset's own CSV (with its own `#` source lines); notice lines go on top. */
-export function apiCsv(body: string, filename: string, access: ApiAccess, free: FreeTier | null): Response {
+/**
+ * A CSV download under the same rule. `body` is the dataset's own CSV (with its own `#` source lines); notice lines go
+ * on top. With `file` (lib/documents/data-files.ts) the download is named afronomics_<dataset>_<as-of>.csv, opens with
+ * its as-of date and citation, and `?format=xlsx` returns the same rows as an Excel workbook.
+ */
+export async function apiCsv(body: string, filename: string, access: ApiAccess, free: FreeTier | null, file?: { meta: Omit<DataFile, "asOf"> & { asOf?: string }; request: Request }): Promise<Response> {
   const lines = access.plan
     ? [`# Licensed under your ${access.plan} plan. Terms: ${TERMS_URL}`]
     : [
@@ -285,15 +290,45 @@ export function apiCsv(body: string, filename: string, access: ApiAccess, free: 
         ...(free?.next ? [`# Next page (older rows inside the free window): ${free.next}`] : []),
         `# Licence: ${LICENCE_LINE} Terms: ${TERMS_URL}`,
       ];
-  return new Response(`${lines.join("\n")}\n${body}`, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="${filename}"`,
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Expose-Headers": "X-Afronomics-Free-Tier, X-Afronomics-Truncated, X-Afronomics-Key, X-Afronomics-Plan",
-      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-      ...accessHeaders(access, free),
-    },
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Expose-Headers": "X-Afronomics-Free-Tier, X-Afronomics-Truncated, X-Afronomics-Key, X-Afronomics-Plan",
+    "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+    ...accessHeaders(access, free),
+  };
+  if (!file) {
+    return new Response(`${lines.join("\n")}\n${body}`, { headers: { "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": `attachment; filename="${filename}"`, ...headers } });
+  }
+  return dataFileResponse(file.request, `${lines.join("\n")}\n${body}`, { ...file.meta, asOf: file.meta.asOf ?? asOfFrom(body) }, access.plan ? `Licensed under your ${access.plan} plan. Terms: ${TERMS_URL}` : `${LICENCE_LINE} Terms: ${TERMS_URL}`, headers);
+}
+
+/**
+ * The newest date in the CSV's own date column (value, settlement, auction or as-of date), never later than today:
+ * a bond auction's value date can be days after its result is published.
+ */
+function asOfFrom(csv: string) {
+  const { header, rows } = parseCsv(csv);
+  const col = header.findIndex((h) => ["value_date", "settlement_date", "auction_date", "date", "as_of"].includes(h));
+  const dates = col < 0 ? [] : rows.map((r) => r[col]).filter((v) => /^\d{4}-\d{2}-\d{2}$/.test(v ?? ""));
+  const today = new Date().toISOString().slice(0, 10);
+  return dates.filter((d) => d <= today).sort().at(-1) ?? today;
+}
+
+/** A dataset as CSV (default) or, with ?format=xlsx, as the Excel workbook; named afronomics_<dataset>_<as-of>. */
+export async function dataFileResponse(request: Request, csv: string, meta: DataFile, licence: string, extra: Record<string, string> = {}): Promise<Response> {
+  if (new URL(request.url).searchParams.get("format") === "xlsx") {
+    const bytes = await workbook(csv, meta, licence);
+    return new Response(new Uint8Array(bytes), {
+      headers: {
+        "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "Content-Disposition": `attachment; filename="${fileName(meta, "xlsx")}"`,
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+        ...extra,
+      },
+    });
+  }
+  return new Response(`${csvTopLines(meta).join("\n")}\n${csv}`, {
+    headers: { "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": `attachment; filename="${fileName(meta, "csv")}"`, "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400", ...extra },
   });
 }
 

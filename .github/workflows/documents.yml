@@ -1,0 +1,83 @@
+# Prints our documents to PDF from the live site (docs/rebuild/phase-7e-r3-plan.md, PR 1) and commits them to
+# public/documents, so every reader downloads the same file: the committee pack and its market samples, the Watch pack
+# sample and the weekly index release, each in A4 and US Letter, with an A4 copy of the main series archived under its
+# document number. Each run checks the files with tests/site/test_documents.py before committing.
+# Private packs: run by hand with `url` and `name`; the PDF is kept as a private artifact for 7 days, never committed.
+name: Documents
+
+on:
+  schedule:
+    # Monday 08:15 Nairobi, after the index release (07:30) and the weekly edition: the index release and the packs.
+    - cron: "15 5 * * 1"
+    # The 1st of each month, 08:15 Nairobi: the new month's committee pack.
+    - cron: "15 5 1 * *"
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "A private document's URL (leave empty for the public documents)"
+        default: ""
+      name:
+        description: "File name for a private document (letters, digits, -)"
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: documents
+  cancel-in-progress: false
+
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: pip install pypdf openpyxl pytest pyyaml
+      - name: Private document
+        if: inputs.url != ''
+        env:
+          URL: ${{ inputs.url }}
+          NAME: ${{ inputs.name }}
+        run: node scripts/make-documents.mjs --url "$URL" --name "$NAME" --out private-docs
+      - name: Keep the private document for 7 days
+        if: inputs.url != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: private-document
+          path: private-docs/
+          retention-days: 7
+      - name: Public documents
+        if: inputs.url == ''
+        run: |
+          node scripts/make-documents.mjs
+          python -m pytest tests/site/test_documents.py -q
+      - name: Commit the documents
+        if: inputs.url == ''
+        run: |
+          if git diff --quiet -- public/documents && [ -z "$(git ls-files --others --exclude-standard public/documents)" ]; then
+            echo "No document changed."
+            exit 0
+          fi
+          git config user.name "afronomics-bot"
+          git config user.email "afronomics-bot@users.noreply.github.com"
+          git add public/documents
+          git commit -m "Documents: refresh the PDFs"
+          for attempt in 1 2 3; do
+            if ! git pull --rebase origin main; then
+              for f in $(git diff --name-only --diff-filter=U); do git checkout --theirs -- "$f" && git add "$f"; done
+              GIT_EDITOR=true git rebase --continue || { git rebase --abort 2>/dev/null; false; }
+            fi && git push && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 10))
+          done
+          exit 1

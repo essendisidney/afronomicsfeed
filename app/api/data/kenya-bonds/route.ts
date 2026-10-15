@@ -13,5 +13,5 @@ export async function GET(request: Request) {
   const file = loadBonds();
   const access = await apiAccess(request, "/data/kenya-bonds", { csv: true });
   const sliced = sliceRows(request, file.rows, (r) => r.value_date, range, access, CSV_KEYED);
-  return apiCsv(bondsCsv({ ...file, rows: sliced.rows }), "afronomics-kenya-bond-auctions.csv", access, sliced.free);
+  return apiCsv(bondsCsv({ ...file, rows: sliced.rows }), "afronomics-kenya-bond-auctions.csv", access, sliced.free, { request, meta: { dataset: "kenya-bond-auctions", title: "Kenya government bond auctions", href: "/markets/kenya-bonds" } });
 }

@@ -35,7 +35,7 @@ const buyers: Buyer[] = [
     who: "SACCOs, pension funds and insurers",
     job: "Table the rates, the curve and where the money earns most at every investment committee, without an analyst losing a day to it.",
     products: ["pack", "pack_plus", "benchmarking", "bidding"],
-    start: { href: "/pack/sample", label: "Open this month's sample pack", external: true },
+    start: { href: "/documents/committee-pack-sample.pdf", label: "Download this month's sample pack (PDF)", external: true },
   },
   {
     id: "treasuries",
@@ -170,9 +170,9 @@ export default function ForInstitutionsPage() {
         <div className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-3">
           <div className="bg-surface px-5 py-5">
             <p className="text-[13px] font-semibold text-gold">See the pack</p>
-            <p className="mt-2 text-sm leading-6 text-ink-soft">This month&rsquo;s committee pack with live figures, for Kenya or any of the ten markets. Open it and print to PDF.</p>
-            <a href="/pack/sample" target="_blank" rel="noopener" className="mt-3 inline-block text-[14px] font-semibold text-forest underline underline-offset-2">
-              Open the sample
+            <p className="mt-2 text-sm leading-6 text-ink-soft">This month&rsquo;s committee pack with live figures, for Kenya or any of the ten markets, as a PDF.</p>
+            <a href="/documents/committee-pack-sample.pdf" className="mt-3 inline-flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
+              Download the sample (PDF)
             </a>
           </div>
           <div className="bg-surface px-5 py-5">

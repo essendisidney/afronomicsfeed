@@ -17,5 +17,5 @@ export async function GET(request: Request, { params }: { params: Promise<{ coun
   if (rows.length === 0) return csvError("Dataset not yet published", 404);
   const access = await apiAccess(request, `/data/tbills/${market.slug}`, { csv: true });
   const sliced = sliceRows(request, rows, (r) => r.date, range, access, CSV_KEYED);
-  return apiCsv(billsCsv(market, sliced.rows, updatedAt), `afronomics-${market.slug}-tbills.csv`, access, sliced.free);
+  return apiCsv(billsCsv(market, sliced.rows, updatedAt), `afronomics-${market.slug}-tbills.csv`, access, sliced.free, { request, meta: { dataset: `${market.slug}-tbill-auctions`, title: `${market.country} Treasury bill auctions`, href: market.href } });
 }

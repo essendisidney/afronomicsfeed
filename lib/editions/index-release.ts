@@ -1,4 +1,5 @@
-import { billIndexLatest, indexName, indexShort } from "@/lib/data/bill-index";
+import { billIndexLatest, billIndexSeries, indexName, indexShort } from "@/lib/data/bill-index";
+import { documentHtml, exhibit, section } from "@/lib/documents/design";
 import { site } from "@/lib/site";
 
 /**
@@ -82,4 +83,77 @@ export function indexReleaseHtml(r: IndexRelease) {
 <tr><td style="padding:18px 28px 26px;"><a href="${r.url}?utm_source=email&utm_medium=release&utm_campaign=asbi" style="display:inline-block;background:#121826;${base}color:#f5f6f4;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;text-decoration:none;">Chart, series and contributions</a></td></tr>
 <tr><td style="background:#ebedea;padding:16px 28px;${base}font-size:12px;line-height:18px;color:#636b7d;">${esc(r.boiler)} Press: ${esc(site.contactEmail)}.</td></tr>
 </table></td></tr></table></body></html>`;
+}
+
+/** One year of the index as a line, for the release document. */
+function indexChart(points: { date: string; value: number }[], w = 640, h = 220) {
+  if (points.length < 2) return "";
+  const lo = Math.floor(Math.min(...points.map((p) => p.value)) - 0.25);
+  const hi = Math.ceil(Math.max(...points.map((p) => p.value)) + 0.25);
+  const x = (i: number) => 44 + (i / (points.length - 1)) * (w - 64);
+  const y = (v: number) => 12 + (1 - (v - lo) / Math.max(0.5, hi - lo)) * (h - 44);
+  const ticks = [];
+  for (let v = lo; v <= hi; v += 1) ticks.push(`<line x1="44" x2="${w - 20}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" stroke="#e0e3df"/><text x="38" y="${(y(v) + 3).toFixed(1)}" font-size="10" text-anchor="end" fill="#636b7d">${v}%</text>`);
+  const months = points
+    .map((p, i) => ({ p, i }))
+    .filter(({ p, i }) => i === 0 || p.date.slice(5, 7) !== points[i - 1].date.slice(5, 7))
+    .filter((_, k, all) => k % 2 === 0 || k === all.length - 1)
+    .map(({ p, i }) => `<text x="${x(i).toFixed(1)}" y="${h - 10}" font-size="9.5" text-anchor="middle" fill="#636b7d">${new Intl.DateTimeFormat("en-GB", { month: "short", year: "2-digit", timeZone: "UTC" }).format(new Date(`${p.date}T00:00:00Z`))}</text>`);
+  const path = points.map((p, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join(" ");
+  const last = points.at(-1)!;
+  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${indexShort}, weekly, last 52 weeks">${ticks.join("")}${months.join("")}<path d="${path}" fill="none" stroke="#5b3fd6" stroke-width="2"/><circle cx="${x(points.length - 1).toFixed(1)}" cy="${y(last.value).toFixed(1)}" r="3.5" fill="#5b3fd6"/></svg>`;
+}
+
+/** The weekly release as a document in the house design (lib/documents/design.ts), printed to PDF each Monday. */
+export function indexReleaseDocument(r: IndexRelease) {
+  const year = billIndexSeries(364).slice(-52);
+  const monday = r.index.latest.date;
+  const meta = {
+    series: `${indexShort} weekly release`,
+    title: r.headline,
+    subtitle: r.lead,
+    number: `AF-ASBI-${monday}`,
+    edition: `Week of ${r.week}`,
+    asOf: monday,
+    sections: ["This week", "By market"],
+    method: [
+      `The ${indexName} is the equal-weighted average of the latest 364-day Treasury bill rate in ${r.index.latest.markets} African markets, read every Monday. A market’s rate stays in the index until its next auction.`,
+      "Rates are as each central bank publishes them; the measure differs by central bank (weighted average, cut-off or stop rate) and is shown on each market’s page.",
+    ],
+    sources: [
+      { name: "Central banks of the markets in the index", note: "Treasury bill auction results", url: `${site.url}/markets/tbills` },
+      { name: `${indexName}: method, series and contributions`, url: r.url },
+    ],
+    licence: "Free to quote and to share in full, with attribution to Afronomics.",
+    href: "/markets/bill-index",
+    pdf: "/documents/index-release",
+    letter: true,
+  };
+  const s1 = section(
+    1,
+    "This week",
+    `<div class="kpis">
+<div class="kpi"><b>${r.index.latest.value.toFixed(2)}%</b><span>${indexShort}, week of ${r.week}</span></div>
+<div class="kpi"><b>${r.index.bpsWeek == null ? "—" : `${signed(r.index.bpsWeek)} bps`}</b><span>On the week</span></div>
+<div class="kpi"><b>${r.index.bpsMonth == null ? "—" : `${signed(r.index.bpsMonth)} bps`}</b><span>On the month</span></div>
+<div class="kpi"><b>${r.index.bpsYear == null ? "—" : `${signed(r.index.bpsYear)} bps`}</b><span>On the year</span></div>
+</div>
+<p>${esc(r.moversText)}</p>
+<p>${esc(r.range)}</p>
+${exhibit({ title: `The ${indexShort} over the last 52 weeks`, body: indexChart(year), source: `Afronomics ${indexShort}, from central banks’ auction results`, asOf: monday, wide: true })}`,
+  );
+  const s2 = section(
+    2,
+    "By market",
+    exhibit({
+      title: "One-year Treasury bill rate by market, highest first",
+      body: `<table><thead><tr><th>Market</th><th class="num">364-day</th><th class="num">On the week</th><th>Result of</th></tr></thead><tbody>${r.table
+        .map((t) => `<tr><td>${esc(t.country)}</td><td class="num"><b>${t.rate.toFixed(2)}%</b></td><td class="num ${t.bps == null || t.bps === 0 ? "muted" : t.bps > 0 ? "down" : "up"}">${t.bps == null ? "—" : `${signed(t.bps)} bps`}</td><td class="small">${esc(t.date)}</td></tr>`)
+        .join("")}</tbody></table>`,
+      note: "A rise in a bill rate is shown in red: it raises the government’s cost of borrowing.",
+      source: "Central banks of each market, auction results",
+      asOf: monday,
+    }),
+  );
+  return documentHtml(meta, s1 + s2);
 }

@@ -13,6 +13,7 @@ import { auctionCurve, loadBonds, yearsToMaturity } from "@/lib/data/kenya-bonds
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
 import { FullHistoryLink } from "@/components/data/FullHistoryLink";
+import { xlsxHref } from "@/lib/downloads-core";
 import { ActionTile } from "@/components/ui/Card";
 
 export const metadata: Metadata = {
@@ -77,6 +78,10 @@ export default function KenyaBondsPage() {
           </ActionTile>
           <p className="mt-2 px-1 text-[13px] font-medium">
             <FullHistoryLink csv={"/api/data/kenya-bonds"} />
+            <span aria-hidden="true"> · </span>
+            <a href={xlsxHref("/api/data/kenya-bonds")} download className="text-forest underline underline-offset-2">
+              Excel workbook
+            </a>
           </p>
         </>
       }

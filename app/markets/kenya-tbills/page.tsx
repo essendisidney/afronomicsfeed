@@ -17,6 +17,7 @@ import { tbillAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
 import { FullHistoryLink } from "@/components/data/FullHistoryLink";
+import { xlsxHref } from "@/lib/downloads-core";
 import { ActionTile } from "@/components/ui/Card";
 
 export function generateMetadata(): Metadata {
@@ -86,6 +87,10 @@ export default function KenyaTbillsPage() {
           </ActionTile>
           <p className="mt-2 px-1 text-[13px] font-medium">
             <FullHistoryLink csv={"/api/data/kenya-tbills"} />
+            <span aria-hidden="true"> · </span>
+            <a href={xlsxHref("/api/data/kenya-tbills")} download className="text-forest underline underline-offset-2">
+              Excel workbook
+            </a>
           </p>
         </>
       }

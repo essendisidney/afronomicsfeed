@@ -51,5 +51,5 @@ export async function GET(request: Request) {
     header.join(","),
     ...picked.map((r) => [r.name, r.slug, r.kind, r.county, r.status, r.metric, r.year, r.value, r.unit, r.asOf, r.source, r.page, r.note].map(q).join(",")),
   ].join("\n");
-  return apiCsv(body, "afronomics-kenya-registry.csv", access, null);
+  return apiCsv(body, "afronomics-kenya-registry.csv", access, null, { request, meta: { dataset: "kenya-registry", title: "Kenya’s licensed SACCOs, microfinance banks and banks", href: "/registry" } });
 }

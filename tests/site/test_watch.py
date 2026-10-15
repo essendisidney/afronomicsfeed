@@ -18,7 +18,9 @@ VERDICTS = re.compile(r"\b(weak|strong|healthy|unhealthy|risky|at risk|breach|fa
 
 
 def test_soundness_page_has_no_verdict_words():
-    p2 = HTML.split("const p2 =", 1)[1].split("const p3 =", 1)[0]
+    # The soundness section: from its heading to the sector section that follows it (lib/editions/watch-html.ts).
+    p2 = HTML.split("meta.sections[1],", 1)[1].split("    sector\n      ? section(", 1)[0]
+    assert "Soundness ratios" in p2
     assert not VERDICTS.search(p2), VERDICTS.search(p2)
     standards = WATCH.split("const STANDARDS", 1)[1].split("};", 1)[0]
     assert not VERDICTS.search(standards)

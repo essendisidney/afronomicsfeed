@@ -43,6 +43,24 @@ jobs:
       - run: npx next build
       - name: Run site QA against next start
         run: node scripts/site-qa.mjs --serve --port 3000 --concurrency 4 --out qa-report
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Print the documents from this build and check them (tests/site/test_documents.py)
+        run: |
+          pip install -q pypdf openpyxl pytest pyyaml
+          npx next start -p 3100 > next-docs.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf http://127.0.0.1:3100/pack/sample > /dev/null && break; sleep 2; done
+          node scripts/make-documents.mjs --base http://127.0.0.1:3100 --out docs-check --data
+          DOCS_DIR=docs-check python -m pytest tests/site/test_documents.py -q
+      - name: Upload the documents
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: documents
+          path: docs-check/
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Upload report and failure screenshots
         if: always()
         uses: actions/upload-artifact@v4

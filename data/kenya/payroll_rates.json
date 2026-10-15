@@ -1,0 +1,26 @@
+{
+  "dataset": "Kenya payroll deductions: PAYE, SHIF, Affordable Housing Levy",
+  "checked": "2026-10-15",
+  "sources": {
+    "paye": "https://www.kra.go.ke/individual/filing-paying/types-of-taxes/paye",
+    "shif": "https://www.sha.go.ke/premium-rates/",
+    "housing_levy": "https://www.kra.go.ke/news-center/public-notices/2099-collection-of-the-affordable-housing-levy-by-kenya-revenue-authority",
+    "nssf": "https://www.nssf.or.ke/clarification-on-the-status-of-nssf-contributions"
+  },
+  "note": "Copied by hand from KRA, SHA and NSSF pages on the checked date. PAYE bands are monthly taxable pay. SHIF, the Housing Levy, and pension contributions (NSSF included, up to the cap) are deducted before PAYE, as KRA's PAYE page sets out. NSSF's 4 June 2026 statement says contributions stay at the 'year four' rates of the NSSF Act's Third Schedule, without giving the KES limits, so the calculator takes the NSSF figure from the payslip.",
+  "paye": {
+    "bands": [
+      { "width": 24000, "rate": 10 },
+      { "width": 8333, "rate": 25 },
+      { "width": 467667, "rate": 30 },
+      { "width": 300000, "rate": 32.5 },
+      { "width": null, "rate": 35 }
+    ],
+    "personal_relief": 2400,
+    "pension_cap": 30000,
+    "mortgage_interest_cap": 30000,
+    "post_retirement_medical_cap": 15000
+  },
+  "shif": { "rate_pct": 2.75, "minimum": 300 },
+  "housing_levy": { "employee_pct": 1.5, "employer_pct": 1.5 }
+}

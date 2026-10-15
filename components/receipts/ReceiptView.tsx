@@ -129,11 +129,11 @@ export function ReceiptView({ r }: { r: Receipt }) {
 
       {r.disclosure ? <p className="mt-6 text-[13px] leading-5 text-muted">Disclosure: {r.disclosure}</p> : null}
       <p className="mt-2 text-[13px] leading-5 text-muted">
-        Written by the {r.desk}: a research and writing agent working under the{" "}
+        By the {r.desk}. Checked against the sources below and published under our{" "}
         <Link href="/method" className="underline underline-offset-2">
           house rules
         </Link>
-        . Afronomics Feed, as publisher, is accountable for every word.{" "}
+        ; Afronomics Feed is accountable for every word.{" "}
         <Link href="/corrections" className="underline underline-offset-2">
           Report a correction
         </Link>

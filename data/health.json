@@ -157,9 +157,9 @@
    "area": "Eurobond yields",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "latest prices 13 Oct",
-   "latest": "2026-10-13",
-   "due_by": "2026-10-17",
+   "detail": "latest prices 14 Oct",
+   "latest": "2026-10-14",
+   "due_by": "2026-10-18",
    "link": "/markets/eurobonds"
   },
   {
@@ -301,9 +301,9 @@
    "area": "T-bill auctions",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest auction 12 Oct (auctions weekly)",
-   "latest": "2026-10-12",
-   "due_by": "2026-10-23",
+   "detail": "latest auction 19 Oct (auctions weekly)",
+   "latest": "2026-10-19",
+   "due_by": "2026-10-30",
    "link": "/markets/kenya-tbills"
   },
   {
@@ -319,9 +319,9 @@
    "area": "T-bill auctions",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "latest auction 07 Oct (auctions every two weeks)",
-   "latest": "2026-10-07",
-   "due_by": "2026-10-28",
+   "detail": "latest auction 14 Oct (auctions every two weeks)",
+   "latest": "2026-10-14",
+   "due_by": "2026-11-04",
    "link": "/markets/tbills/nigeria"
   },
   {
@@ -355,23 +355,17 @@
    "area": "T-bill auctions",
    "name": "Zambia",
    "status": "ok",
-   "detail": "latest auction 01 Oct (auctions every two weeks)",
-   "latest": "2026-10-01",
-   "due_by": "2026-10-22",
+   "detail": "latest auction 15 Oct (auctions every two weeks)",
+   "latest": "2026-10-15",
+   "due_by": "2026-11-05",
    "link": "/markets/tbills/zambia"
   }
  ],
  "workflows": [
   {
-   "name": "Pilot smoke",
-   "result": "failure",
-   "day": "2026-10-14",
-   "failures_in_row": 1
-  },
-  {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-10-14",
+   "day": "2026-10-15",
    "failures_in_row": 0
   },
   {
@@ -382,6 +376,12 @@
   },
   {
    "name": "Documents",
+   "result": "success",
+   "day": "2026-10-15",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Forecast ledger",
    "result": "success",
    "day": "2026-10-15",
    "failures_in_row": 0
@@ -400,6 +400,12 @@
   },
   {
    "name": "Reader tests",
+   "result": "success",
+   "day": "2026-10-15",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Remittance prices",
    "result": "success",
    "day": "2026-10-15",
    "failures_in_row": 0

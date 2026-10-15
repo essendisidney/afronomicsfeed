@@ -23,8 +23,8 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 2,
-  "results": 3,
+  "timed": 4,
+  "results": 6,
   "p50_h": null,
   "p90_h": null
  },
@@ -33,23 +33,23 @@
    "kind": "bills",
    "market": "kenya",
    "name": "Kenya",
-   "results": 0,
-   "timed": 0,
+   "results": 1,
+   "timed": 1,
    "p50_h": null,
    "p90_h": null,
-   "publisher_time": null,
-   "status": "no new result since measuring began"
+   "publisher_time": "Last-Modified of the result's own document",
+   "status": "1 timed result so far; figures from 5"
   },
   {
    "kind": "bills",
    "market": "nigeria",
    "name": "Nigeria",
-   "results": 0,
+   "results": 1,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": null,
-   "status": "no new result since measuring began"
+   "status": "publisher time unknown"
   },
   {
    "kind": "bills",
@@ -110,12 +110,12 @@
    "kind": "bills",
    "market": "zambia",
    "name": "Zambia",
-   "results": 0,
-   "timed": 0,
+   "results": 1,
+   "timed": 1,
    "p50_h": null,
    "p90_h": null,
-   "publisher_time": null,
-   "status": "no new result since measuring began"
+   "publisher_time": "last-changed time of the auction entry in the Bank of Zambia's JSON:API",
+   "status": "1 timed result so far; figures from 5"
   },
   {
    "kind": "bills",
@@ -229,11 +229,40 @@
    "delay_h": 4.49
   },
   {
+   "key": "bills:kenya:2026-10-19",
+   "kind": "bills",
+   "market": "kenya",
+   "date": "2026-10-19",
+   "first_seen_at": "2026-10-15T14:58:56+00:00",
+   "published_at": "2026-10-15T13:29:50+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 1.49
+  },
+  {
+   "key": "bills:zambia:2026-10-15",
+   "kind": "bills",
+   "market": "zambia",
+   "date": "2026-10-15",
+   "first_seen_at": "2026-10-15T15:01:06+00:00",
+   "published_at": "2026-10-15T14:04:14+00:00",
+   "published_how": "last-changed time of the auction entry in the Bank of Zambia's JSON:API",
+   "delay_h": 0.95
+  },
+  {
    "key": "bonds:waemu:2026-10-14:mali",
    "kind": "bonds",
    "market": "waemu",
    "date": "2026-10-14",
    "first_seen_at": "2026-10-14T15:17:59+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:nigeria:2026-10-14",
+   "kind": "bills",
+   "market": "nigeria",
+   "date": "2026-10-14",
+   "first_seen_at": "2026-10-15T14:59:08+00:00",
    "published_at": null,
    "published_how": null
   },
@@ -640,5 +669,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-14T15:20:29+00:00"
+ "updated_at": "2026-10-15T15:13:09+00:00"
 }

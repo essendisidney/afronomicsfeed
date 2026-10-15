@@ -1,7 +1,7 @@
 {
  "dataset": "African government Eurobond yields",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "read_at": "2026-10-14T09:41:47+00:00",
+ "read_at": "2026-10-15T15:11:16+00:00",
  "countries": {
   "nigeria": {
    "country": "Nigeria",
@@ -9,132 +9,152 @@
    "source_page": "https://www.dmo.gov.ng/fgn-bonds/eurobonds-trading",
    "note": "Closing prices and yields as the DMO publishes them each business day (its stated source: Bloomberg).",
    "latest": {
-    "date": "2026-10-13",
-    "source": "https://www.dmo.gov.ng/6107-nigeria-s-eurobonds-closing-prices-and-yields-as-at-monday-october-13-2026/file",
+    "date": "2026-10-14",
+    "source": "https://www.dmo.gov.ng/6108-nigeria-s-eurobonds-closing-prices-and-yields-as-at-wednesday-october-14-2026/file",
     "bonds": [
      {
       "id": "6.500-2027-11",
       "coupon": 6.5,
       "maturity": "2027-11",
       "size": "US$1.5B",
-      "price": 100.451,
-      "yield": 6.07
+      "price": 100.575,
+      "yield": 5.952
      },
      {
       "id": "6.125-2028-09",
       "coupon": 6.125,
       "maturity": "2028-09",
       "size": "US$1.25B",
-      "price": 99.566,
-      "yield": 6.362
+      "price": 99.699,
+      "yield": 6.289
      },
      {
       "id": "8.375-2029-03",
       "coupon": 8.375,
       "maturity": "2029-03",
       "size": "US$1.25B",
-      "price": 103.434,
-      "yield": 6.823
+      "price": 103.825,
+      "yield": 6.647
      },
      {
       "id": "7.143-2030-02",
       "coupon": 7.143,
       "maturity": "2030-02",
       "size": "US$1.2B",
-      "price": 100.138,
-      "yield": 7.092
+      "price": 100.54,
+      "yield": 6.955
      },
      {
       "id": "8.747-2031-01",
       "coupon": 8.747,
       "maturity": "2031-01",
       "size": "US$1.0B",
-      "price": 104.962,
-      "yield": 7.366
+      "price": 105.451,
+      "yield": 7.233
      },
      {
       "id": "9.625-2031-06",
       "coupon": 9.625,
       "maturity": "2031-06",
       "size": "US$700M",
-      "price": 108.358,
-      "yield": 7.461
+      "price": 109.039,
+      "yield": 7.293
      },
      {
       "id": "7.875-2032-02",
       "coupon": 7.875,
       "maturity": "2032-02",
       "size": "US$1.5B",
-      "price": 101.824,
-      "yield": 7.451
+      "price": 102.115,
+      "yield": 7.384
      },
      {
       "id": "7.375-2033-09",
       "coupon": 7.375,
       "maturity": "2033-09",
       "size": "US$1.5B",
-      "price": 97.519,
-      "yield": 7.843
+      "price": 98.13,
+      "yield": 7.727
      },
      {
       "id": "10.375-2034-12",
       "coupon": 10.375,
       "maturity": "2034-12",
       "size": "US$1.5B",
-      "price": 113.701,
-      "yield": 8.047
+      "price": 114.516,
+      "yield": 7.92
      },
      {
       "id": "8.631-2036-01",
       "coupon": 8.631,
       "maturity": "2036-01",
       "size": "US$1.25B",
-      "price": 103.446,
-      "yield": 8.091
+      "price": 103.88,
+      "yield": 8.025
      },
      {
       "id": "7.696-2038-02",
       "coupon": 7.696,
       "maturity": "2038-02",
       "size": "US$1.25B",
-      "price": 97.233,
-      "yield": 8.071
+      "price": 97.808,
+      "yield": 7.991
      },
      {
       "id": "9.129-2046-01",
       "coupon": 9.129,
       "maturity": "2046-01",
       "size": "US$1.10B",
-      "price": 104.501,
-      "yield": 8.643
+      "price": 105.001,
+      "yield": 8.591
      },
      {
       "id": "7.625-2047-11",
       "coupon": 7.625,
       "maturity": "2047-11",
       "size": "US$1.5B",
-      "price": 91.691,
-      "yield": 8.475
+      "price": 92.252,
+      "yield": 8.414
      },
      {
       "id": "9.248-2049-01",
       "coupon": 9.248,
       "maturity": "2049-01",
       "size": "US$750M",
-      "price": 106.189,
-      "yield": 8.616
+      "price": 106.537,
+      "yield": 8.582
      },
      {
       "id": "8.250-2051-09",
       "coupon": 8.25,
       "maturity": "2051-09",
       "size": "US$1.25B",
-      "price": 95.266,
-      "yield": 8.718
+      "price": 95.936,
+      "yield": 8.649
      }
     ]
    },
    "history": [
+    {
+     "date": "2026-10-14",
+     "yields": {
+      "6.500-2027-11": 5.952,
+      "6.125-2028-09": 6.289,
+      "8.375-2029-03": 6.647,
+      "7.143-2030-02": 6.955,
+      "8.747-2031-01": 7.233,
+      "9.625-2031-06": 7.293,
+      "7.875-2032-02": 7.384,
+      "7.375-2033-09": 7.727,
+      "10.375-2034-12": 7.92,
+      "8.631-2036-01": 8.025,
+      "7.696-2038-02": 7.991,
+      "9.129-2046-01": 8.591,
+      "7.625-2047-11": 8.414,
+      "9.248-2049-01": 8.582,
+      "8.250-2051-09": 8.649
+     }
+    },
     {
      "date": "2026-10-13",
      "yields": {

@@ -65,6 +65,7 @@ export function buildSearchIndex(): SearchHit[] {
     { href: "/stories", title: "Stories", kicker: "Section", summary: "Every brief, weekly note and explainer, filterable by type and topic." },
     { href: "/rates/kenya/mpesa-charges", title: "M-PESA and Fuliza charges calculator", kicker: "Tool", summary: "What sending, withdrawing and Fuliza cost you, by transaction or by month, from Safaricom's published charges." },
     { href: "/rates/kenya/net-salary", title: "Net salary calculator Kenya (PAYE, SHIF, Housing Levy)", kicker: "Tool", summary: "Gross pay to take-home with KRA's PAYE bands, SHIF, the Housing Levy and your NSSF; or the gross to ask for a take-home you want." },
+    { href: "/rates/kenya/loan-cost", title: "Loan true-cost calculator Kenya (flat vs reducing, APR)", kicker: "Tool", summary: "Any loan quote turned into its true yearly rate, with fees, flat or reducing balance, against the banks' average lending rate." },
     { href: "/markets/kenya-tbills/calculator", title: "Treasury bill calculator", kicker: "Tool", summary: "What a Kenya T-bill costs, pays back and leaves you after 15% tax, at the latest auction." },
     { href: "/rates/kenya/check", title: "Is my rate fair?", kicker: "Tool", summary: "Check a Kenya savings or loan rate against the bill, the best fund and the bank averages." },
     { href: "/rates/nigeria/savings-bond", title: "FGN Savings Bond: this month’s offer", kicker: "Nigeria", summary: "Rates, dates and the minimum for Nigeria’s monthly savings bond, from the DMO’s offer document." },

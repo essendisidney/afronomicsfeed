@@ -100,6 +100,7 @@ export const footerGroups = [
       { href: "/rates/kenya/mobile-loans", label: "Mobile loan costs" },
       { href: "/rates/kenya/mpesa-charges", label: "M-PESA and Fuliza charges" },
       { href: "/rates/kenya/net-salary", label: "Net salary calculator" },
+      { href: "/rates/kenya/loan-cost", label: "Loan true-cost calculator" },
       { href: "/rates/kenya/loan-apps", label: "Is this loan app licensed?" },
       { href: "/rates/remittances", label: "Cost of sending money home" },
       { href: "/rates/what-readers-paid", label: "What readers paid" },

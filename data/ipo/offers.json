@@ -1,0 +1,45 @@
+{
+  "dataset": "Open share offers in Kenya, for the IPO helper",
+  "note": "Every term is copied from our published Receipt for the offer, which cites the offer documents. When a Receipt is corrected, this file is corrected with it (tests/site/test_ipo_calc.py checks the two agree).",
+  "offers": [
+    {
+      "id": "quickmart",
+      "name": "Quickmart",
+      "unit": "share",
+      "units": "shares",
+      "price": 7.5,
+      "min_units": 500,
+      "currency": "KES",
+      "closes": "2026-10-30",
+      "results": "2026-11-06",
+      "trading": "2026-11-12",
+      "trading_note": "on the NSE",
+      "dividend_per_unit": 0.5,
+      "dividend_note": "the company's forecast for 2026",
+      "dividend_tax_pct": 5,
+      "costs_note": "The KES 575.6 million in offer costs is paid by the seller. If buyers take less than 75% of the shares, the offer lapses and everyone is refunded without interest.",
+      "receipt": "2026-10-14-quickmart-ipo",
+      "checked": "2026-10-15"
+    },
+    {
+      "id": "dangote",
+      "name": "Dangote refinery (Kenya receipts)",
+      "unit": "receipt",
+      "units": "receipts",
+      "price": 53.5,
+      "min_units": 10,
+      "min_note": "Cut from 2,000 to 10 receipts, as reported by Business Today; we have not yet seen the amended memorandum.",
+      "currency": "KES",
+      "closes": "2026-10-27",
+      "results": "2026-11-20",
+      "trading": null,
+      "trading_note": "on the NSE, expected in December",
+      "dividend_per_unit": null,
+      "dividend_note": "The prospectus sets no dividend payout. Any dividend is taxed 10% in Nigeria and 5% in Kenya.",
+      "dividend_tax_pct": null,
+      "costs_note": "The memorandum puts the Kenyan offer's costs at about 1.8% of the target, paid by holders, plus a custody fee of 0.16% a year. A receipt's value moves with the naira against the shilling as well as with the refinery.",
+      "receipt": "2026-10-15-dangote-refinery-ipo",
+      "checked": "2026-10-15"
+    }
+  ]
+}

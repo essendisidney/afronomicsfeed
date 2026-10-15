@@ -26,6 +26,8 @@ export type RateItem = {
   href?: string;
   launch?: string;
   status?: "live" | "soon";
+  /** The dollar figure the founder set for this price, shown instead of the converted one ("about $49"). */
+  usd?: number;
 };
 
 export type RateGroup = { id: string; title: string; who: string; items: RateItem[] };
@@ -204,7 +206,7 @@ export const rateCard: RateGroup[] = [
     items: [
       { id: "open", name: "Open", amount: 0, currency: "KES", unit: "", what: "Every number, headline, country file, the T-bill monitor, auction pages, the Sovereign Bill Index, CSV downloads of the latest 12 months and the Weekly. Free, with attribution.", href: "/subscribe" },
       { id: "pro", name: "Pro", amount: 1500, currency: "KES", unit: "a month", what: "The Morning note by email every weekday, auction alerts the moment each market reports, every brief in full, and the web tools and CSV downloads. One seat. KES 15,000 a year.", checkout: "pro", href: "/pricing" },
-      { id: "team", name: "Team", amount: 6000, currency: "KES", unit: "a month", what: "Five Pro seats on one invoice and priority requests for new datasets. KES 60,000 a year.", checkout: "professional", href: "/pricing" },
+      { id: "team", name: "Team", amount: 6000, currency: "KES", usd: 49, unit: "a month", what: "Five Pro seats on one invoice and priority requests for new datasets. KES 60,000 a year.", checkout: "professional", href: "/pricing" },
       { id: "trial", name: "Kenya desk trial", amount: 200, currency: "KES", unit: "for 14 days", what: "Fourteen days of Pro, paid by M-Pesa, so a desk can try it before the finance department is involved.", checkout: "trial", href: "/pricing" },
       { id: "whatsapp", name: "Auction alerts on WhatsApp", amount: 300, currency: "KES", unit: "a month", what: "The Kenya auction result on WhatsApp within minutes of the CBK posting it, with the 91-, 182- and 364-day rates and the change. Reply to the receipt with your number.", checkout: "alerts_whatsapp" },
       { id: "sms", name: "The Sunday rates SMS", amount: 100, currency: "KES", unit: "a month", what: "One text a week: the latest bill rates, the best money-market yield after tax and the shilling. Joining list open.", enquiry: "access", status: "soon" },
@@ -271,6 +273,7 @@ export function priceText(i: RateItem) {
 export function aboutText(i: RateItem) {
   if (!i.amount) return "";
   if (i.currency === "USD") return `about KES ${new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(Math.round((i.amount * KES_PER_USD) / 1000) * 1000)}`;
+  if (i.usd) return `about $${i.usd}`;
   const usd = i.amount / KES_PER_USD;
   const rounded = usd >= 100 ? Math.round(usd / 10) * 10 : usd >= 20 ? Math.round(usd / 5) * 5 : Math.round(usd);
   return `about $${rounded}`;

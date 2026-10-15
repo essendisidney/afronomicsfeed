@@ -35,7 +35,7 @@ export default async function PackPage({ searchParams }: { searchParams: Promise
       lede={
         <p>
           Someone on your team spends a day each month pulling rates, curves and currency moves into a document for the investment committee. This is that
-          document, assembled from the published results the moment they land, with the source under every figure. Four sections, A4 or US Letter, your
+          document, assembled from the published results, with the source under every figure. Four sections, A4 or US Letter, your
           institution’s name on the cover and on every page.
         </p>
       }

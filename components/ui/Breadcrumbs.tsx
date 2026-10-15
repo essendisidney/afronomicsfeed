@@ -21,13 +21,22 @@ function breadcrumbJsonLd(items: Crumb[]) {
   };
 }
 
-export function Breadcrumbs({ items }: { items: Crumb[] }) {
+/**
+ * The home page is "Today" in the navigation, so the first crumb says so on every page (older pages passed "Home").
+ * A long last crumb (the page's own title, already the h1 below) is left out on phones, where it wrapped onto a line
+ * of its own behind a stray "/".
+ */
+export function Breadcrumbs({ items: given }: { items: Crumb[] }) {
+  const items = given.map((item) => (item.href === "/" ? { ...item, label: "Today" } : item));
   return (
     <nav aria-label="Breadcrumb" className="font-medium text-[12.5px] text-muted">
       {items.length > 1 ? <JsonLd data={breadcrumbJsonLd(items)} /> : null}
       <ol className="flex flex-wrap items-center gap-2">
         {items.map((item, index) => (
-          <li key={`${item.label}-${index}`} className="flex items-center gap-2">
+          <li
+            key={`${item.label}-${index}`}
+            className={`items-center gap-2 ${index > 0 && index === items.length - 1 && !item.href && item.label.length > 28 ? "hidden sm:flex" : "flex"}`}
+          >
             {index > 0 ? <span aria-hidden="true">/</span> : null}
             {item.href ? (
               <Link href={item.href} className="hover:text-forest">

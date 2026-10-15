@@ -101,7 +101,7 @@ export default function BondAuctionsIndex() {
                       <dt className="text-[12px] text-muted">{settlement ? "Newest settlement" : "Newest auction"}</dt>
                       <dd className="font-mono text-ink">
                         {longDate(facts.newest)}
-                        {facts.newestIsFuture ? <span className="block text-[11px] text-muted">{settlement ? "settles" : "scheduled"}</span> : null}
+                        {facts.newestIsFuture ? <span className="block text-[11px] text-muted">{settlement ? "still to settle" : "scheduled"}</span> : null}
                       </dd>
                     </div>
                     <div>

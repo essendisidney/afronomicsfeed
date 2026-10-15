@@ -457,6 +457,11 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* A figure never breaks across lines ("KES 75.27 / bn" on a phone); the table scrolls sideways instead. */
+.data-table td[data-num] {
+  white-space: nowrap;
+}
+
 /* Row headers (th scope="row") wrap like body cells; only column headers stay on one line. */
 .data-table tbody th {
   white-space: normal;

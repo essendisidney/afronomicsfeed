@@ -236,7 +236,7 @@ export const pricing = {
     name: "Open",
     price: "$0",
     period: "",
-    detail: "The Wire, all 54 country files, the data hub with history and CSV downloads, the DFI pipeline, signals and the weekly newsletter.",
+    detail: "The Wire, all 54 country files, the data hub with history and CSV downloads, the Morning on the site and the weekly newsletter.",
   },
   pro: {
     name: "Pro",

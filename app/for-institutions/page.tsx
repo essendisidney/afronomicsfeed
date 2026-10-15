@@ -40,7 +40,7 @@ const buyers: Buyer[] = [
   {
     id: "treasuries",
     who: "Bank and corporate treasuries",
-    job: "Know each auction result the moment it lands, read the curve before you price, and brief the desk before 07:30.",
+    job: "Get each auction result by alert, read the curve before you price, and brief the desk before 07:30.",
     products: ["trial", "pro", "team", "training"],
     start: { href: "/pricing", label: "Try Pro for 14 days" },
   },
@@ -80,7 +80,7 @@ export default function ForInstitutionsPage() {
       lede={
         <p>
           Afronomics reads every Treasury bill auction in ten African markets, central-bank policy rates and Kenya&rsquo;s bond curve from the publishers&rsquo;
-          own documents, the moment they land. Institutions take it as a monthly committee pack, an API, a licence or a widget, priced in shillings for the
+          own documents. Institutions take it as a monthly committee pack, an API, a licence or a widget, priced in shillings for the
           people who use it most. Reading and citing stays free for everyone.
         </p>
       }

@@ -80,7 +80,7 @@ export function buildSearchIndex(): SearchHit[] {
     { href: "/markets/bill-index", title: "African Sovereign Bill Index (ASBI)", kicker: "Index", summary: "Weekly average one-year rate across ten markets, since 2016." },
     { href: "/markets/bill-index/release", title: "ASBI weekly release", kicker: "Index", summary: "The Monday release in a fixed format for editors." },
     { href: "/alerts", title: "Alerts", kicker: "Tool", summary: "The auction result on your phone the minute it lands." },
-    { href: "/morning", title: "The Morning", kicker: "Edition", summary: "Africa's markets before 7am, every weekday." },
+    { href: "/morning", title: "The Morning", kicker: "Edition", summary: "Africa's markets before 07:30, every weekday." },
     { href: "/morning/sw", title: "Asubuhi ya Afronomics (Kiswahili)", kicker: "Edition", summary: "Masoko ya Afrika kabla ya saa moja, kwa Kiswahili." },
     { href: "/lite", title: "Low-data version", kicker: "Tool", summary: "The whole Morning and every rate in under 3 KB." },
     { href: "/reference", title: "The reference", kicker: "Method", summary: "Definitions, stable URLs, the timeliness record and corrections." },

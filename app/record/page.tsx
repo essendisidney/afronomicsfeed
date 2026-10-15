@@ -92,7 +92,7 @@ export default function RecordPage() {
 
       <section aria-labelledby="ledger" className="mt-10">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h2 id="ledger" className="font-serif text-2xl text-ink">
+          <h2 id="ledger" className="t-h2 text-ink">
             Every forecast
           </h2>
           <span className="flex flex-wrap gap-4 text-[14px] font-semibold">
@@ -149,7 +149,7 @@ export default function RecordPage() {
       </section>
 
       <section aria-labelledby="by-tenor" className="mt-10">
-        <h2 id="by-tenor" className="font-serif text-2xl text-ink">
+        <h2 id="by-tenor" className="t-h2 text-ink">
           By bill
         </h2>
         <div className="table-box mt-3 overflow-x-auto" tabIndex={0} role="region" aria-label="Results by bill (scrolls sideways)">
@@ -191,7 +191,7 @@ export default function RecordPage() {
       <EditorialCalls rows={calls} notRecorded={notRecorded} />
 
       <section aria-labelledby="method" className="mt-10 max-w-3xl text-[14px] leading-6 text-ink-soft">
-        <h2 id="method" className="font-serif text-2xl text-ink">
+        <h2 id="method" className="t-h2 text-ink">
           How it works
         </h2>
         <ul className="mt-3 list-disc space-y-2 pl-5">

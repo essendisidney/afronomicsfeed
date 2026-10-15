@@ -10,12 +10,13 @@ const legal = [
   { href: "/imprint", label: "Imprint" },
 ] as const;
 
-function Column({ title, links }: { title: string; links: readonly { href: string; label: string }[] }) {
+/** `wide`: on a phone the odd fifth column spans both columns with its links in two, instead of sitting alone on the left. */
+function Column({ title, links, wide = false }: { title: string; links: readonly { href: string; label: string }[]; wide?: boolean }) {
   return (
-    <nav aria-label={title}>
+    <nav aria-label={title} className={wide ? "col-span-2 sm:col-span-1" : undefined}>
       <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-night-muted">{title}</p>
       {/* A 44px row on a phone (easy to hit), the usual tight list from sm. */}
-      <ul className="mt-3 sm:space-y-2.5">
+      <ul className={`mt-3 sm:block sm:space-y-2.5 ${wide ? "grid grid-cols-2 gap-x-6" : ""}`}>
         {links.map((item) => (
           <li key={item.href}>
             <Link href={item.href} className="flex min-h-11 items-center text-[14px] text-night-soft hover:text-night-ink sm:inline sm:min-h-0">
@@ -56,8 +57,8 @@ export function Footer() {
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
-          {footerColumns.map((group) => (
-            <Column key={group.title} title={group.title} links={group.links} />
+          {footerColumns.map((group, index) => (
+            <Column key={group.title} title={group.title} links={group.links} wide={footerColumns.length % 2 === 1 && index === footerColumns.length - 1} />
           ))}
         </div>
 

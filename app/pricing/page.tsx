@@ -411,7 +411,7 @@ export default async function PricingPage({
         <section className="mt-14 grid gap-8 md:grid-cols-3">
           {[
             [
-              "Why this cheap",
+              "Why the price is low",
               "A Bloomberg terminal costs more each month than most African analysts earn. Afronomics is built by software from public central-bank results, so the price can be set for the people who use it most: analysts, treasurers, fund managers and journalists on the continent. Institutions that license the data for their own systems use the ladder above, in US dollars.",
             ],
             [

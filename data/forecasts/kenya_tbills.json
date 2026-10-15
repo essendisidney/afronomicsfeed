@@ -45,9 +45,85 @@
    "low": 9.0236,
    "high": 9.1416,
    "typical_move": 0.0135
+  },
+  {
+   "id": "KE-TB-2026-10-26-91",
+   "market": "kenya",
+   "tenor": 91,
+   "auction_value_date": "2026-10-26",
+   "bids_close": "2026-10-22T11:00:00Z",
+   "written_at": "2026-10-15T19:21:39Z",
+   "method": "v1",
+   "from_value_date": "2026-10-19",
+   "from_rate": 8.75,
+   "low": 8.7392,
+   "high": 8.899,
+   "typical_move": 0.0087
+  },
+  {
+   "id": "KE-TB-2026-10-26-182",
+   "market": "kenya",
+   "tenor": 182,
+   "auction_value_date": "2026-10-26",
+   "bids_close": "2026-10-22T11:00:00Z",
+   "written_at": "2026-10-15T19:21:39Z",
+   "method": "v1",
+   "from_value_date": "2026-10-19",
+   "from_rate": 8.86,
+   "low": 8.8452,
+   "high": 9.0137,
+   "typical_move": 0.0095
+  },
+  {
+   "id": "KE-TB-2026-10-26-364",
+   "market": "kenya",
+   "tenor": 364,
+   "auction_value_date": "2026-10-26",
+   "bids_close": "2026-10-22T11:00:00Z",
+   "written_at": "2026-10-15T19:21:39Z",
+   "method": "v1",
+   "from_value_date": "2026-10-19",
+   "from_rate": 9.0383,
+   "low": 9.0267,
+   "high": 9.1447,
+   "typical_move": 0.0135
   }
  ],
- "outcomes": [],
+ "outcomes": [
+  {
+   "id": "KE-TB-2026-10-19-91",
+   "graded_at": "2026-10-15T19:21:39Z",
+   "status": "graded",
+   "result_value_date": "2026-10-19",
+   "result_rate": 8.75,
+   "inside": false,
+   "miss_bps": 0.2,
+   "side": "below",
+   "source": "https://www.centralbank.go.ke/uploads/91_day_historical_treasury_bill_results/1647758237_RESULTS%202704-091%202678-182%202633-364%20DATED%2019-10-2026.pdf"
+  },
+  {
+   "id": "KE-TB-2026-10-19-182",
+   "graded_at": "2026-10-15T19:21:39Z",
+   "status": "graded",
+   "result_value_date": "2026-10-19",
+   "result_rate": 8.86,
+   "inside": false,
+   "miss_bps": 0.1,
+   "side": "below",
+   "source": "https://www.centralbank.go.ke/uploads/91_day_historical_treasury_bill_results/1647758237_RESULTS%202704-091%202678-182%202633-364%20DATED%2019-10-2026.pdf"
+  },
+  {
+   "id": "KE-TB-2026-10-19-364",
+   "graded_at": "2026-10-15T19:21:39Z",
+   "status": "graded",
+   "result_value_date": "2026-10-19",
+   "result_rate": 9.0383,
+   "inside": true,
+   "miss_bps": 0.0,
+   "side": null,
+   "source": "https://www.centralbank.go.ke/uploads/91_day_historical_treasury_bill_results/1647758237_RESULTS%202704-091%202678-182%202633-364%20DATED%2019-10-2026.pdf"
+  }
+ ],
  "first_published": [
   {
    "ids": [

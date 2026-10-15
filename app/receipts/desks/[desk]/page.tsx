@@ -34,11 +34,11 @@ export default async function DeskPage({ params }: { params: Promise<{ desk: str
       title={d.name}
       lede={
         <>
-          Covers {d.covers}. This desk is a research and writing agent working under the{" "}
+          Covers {d.covers}. Every Receipt from this desk is checked against its sources and published under our{" "}
           <Link href="/method" className="underline underline-offset-2">
             house rules
           </Link>
-          , not a person. Afronomics Feed, as publisher, is accountable for everything it publishes.
+          . Afronomics Feed is accountable for everything it publishes.
         </>
       }
     >

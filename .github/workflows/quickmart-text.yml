@@ -1,0 +1,52 @@
+# One-off, side branch only (never merged): save the Quickmart offer documents as page-numbered text so the
+# Receipt's source checks can be done where ipo.quickmart.co.ke cannot be reached. The memorandum is over the
+# 20 MB fixture limit, so only its text is kept.
+name: Quickmart text
+
+on:
+  push:
+    branches: [rebuild/quickmart-sources]
+    paths: [".github/workflows/quickmart-text.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  text:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pdfplumber
+      - name: Download and extract
+        run: |
+          mkdir -p sources/quickmart
+          base=https://ipo.quickmart.co.ke/wp-content/uploads/2026
+          for pair in \
+            im=$base/10/QUICKMART-PLC-INFORMATION-MEMORANDUM_OCT2026_FINAL.pdf \
+            afs2025=$base/10/The-Audited-Financial-Statements-for-the-financial-year-2025.pdf \
+            offer=$base/10/OFFER-ANNOUNCEMENT-FINAL_4OCT.pdf \
+            valuation=$base/10/Quick-Mart-PLC-Offer-Price-Valuation-Parameters_2026.10.04_vCirc.pdf; do
+            name="${pair%%=*}"; url="${pair#*=}"
+            curl -fsSL --retry 3 --max-time 300 -A "Mozilla/5.0 (Afronomics source check)" -o "/tmp/$name.pdf" "$url"
+            sha256sum "/tmp/$name.pdf" | sed "s#/tmp/##" >> sources/quickmart/SHA256SUMS
+            python - "$name" "$url" <<'PY'
+          import sys, pdfplumber
+          name, url = sys.argv[1], sys.argv[2]
+          with pdfplumber.open(f"/tmp/{name}.pdf") as pdf, open(f"sources/quickmart/{name}.txt", "w") as out:
+              out.write(f"# {url}\n# {len(pdf.pages)} pages, text extracted with pdfplumber (layout kept)\n")
+              for n, page in enumerate(pdf.pages, 1):
+                  out.write(f"\n=== page {n}\n{page.extract_text(layout=True) or ''}\n")
+          PY
+          done
+          ls -la sources/quickmart
+      - name: Commit to this branch
+        run: |
+          git config user.name "afronomics-bot"
+          git config user.email "afronomics-bot@users.noreply.github.com"
+          git add sources/quickmart
+          git commit -m "Quickmart offer documents as text"
+          git push origin HEAD:rebuild/quickmart-sources

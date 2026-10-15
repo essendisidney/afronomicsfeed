@@ -21,15 +21,18 @@ def test_every_receipt_passes():
     assert receipt_check.check_all() == []
 
 
-def test_quickmart_stays_a_draft_until_checked():
+def test_quickmart_was_published_with_its_checks_closed():
+    # Published 15 Oct 2026 (decision D-020): disclosure confirmed by the founder, every source check closed.
     data, _ = load()
-    assert data["status"] == "draft"
-    assert data["verify"], "its open checks are listed"
+    assert data["status"] == "published"
+    assert not data.get("verify")
+    assert "[" not in data["disclosure"]
 
 
 def test_publishing_needs_a_confirmed_disclosure_and_no_open_checks():
     data, body = load()
-    found = receipt_check.problems({**data, "status": "published"}, body, QUICKMART.name)
+    unconfirmed = {**data, "disclosure": "[Confirm before publishing] holds no shares", "verify": ["Legal read"]}
+    found = receipt_check.problems(unconfirmed, body, QUICKMART.name)
     assert any("disclosure" in p for p in found)
     assert any("verify" in p for p in found)
 

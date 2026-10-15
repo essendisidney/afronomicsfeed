@@ -2,7 +2,7 @@
 title: "Quickmart's IPO: KES 15 billion changes hands, and Quickmart gets none of it"
 date: "2026-10-14"
 type: verdict
-status: draft
+status: published
 sector: companies
 entities:
   - "Quick Mart PLC"
@@ -17,7 +17,7 @@ labels:
 asOf: "2026-10-14"
 summary: "Quickmart's owners are selling half the chain for KES 15 billion. The company raises nothing. The shop is good; the deal is built for the people leaving it."
 desk: "Afronomics Companies Desk"
-disclosure: "[Confirm before publishing] Afronomics holds no Quickmart shares and earn nothing from this offer."
+disclosure: "Afronomics and its founder hold no Quickmart shares and earn nothing from this offer."
 sources:
   - name: "Quick Mart PLC, offer announcement"
     url: "https://ipo.quickmart.co.ke/wp-content/uploads/2026/10/OFFER-ANNOUNCEMENT-FINAL_4OCT.pdf"
@@ -147,9 +147,6 @@ charts:
       - { label: "2024", value: 13.3 }
       - { label: "2025", value: 8.0 }
     highlight: ["2025"]
-verify:
-  - "The disclosure line"
-  - "Legal read of every Opinion paragraph"
 ---
 
 Quickmart wants KES 15 billion from you by 30 October. Not one shilling of it goes to Quickmart.

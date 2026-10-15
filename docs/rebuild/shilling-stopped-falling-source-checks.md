@@ -84,3 +84,46 @@ so nothing here comes from `data/` except the remittance-cost row. "Unconfirmed"
 ## Disclosure
 
 `[founder to confirm]`: the owner's holdings file was not checked for US-dollar loans, deposits or currency positions.
+
+## Second check (15 October 2026)
+
+Independent re-read by a second checker through the Probe workflow:
+
+- **Job 116667157292** (run 38806075139): Weekly Bulletins of 26 Jan 2024, 19 Jan 2024, 9 Oct 2026 and 20 Dec 2024,
+  pp. 1-3. Re-confirmed `23-Jan-24 161.36` (22 Jan 160.25, 24 Jan 160.19, 25 Jan 160.80), `18-Jan-24 160.79`,
+  usable reserves `18-Jan-24 6,814` / `3.64`, Murban 78.47; `08-Oct-26 129.94`, Table 2 "CBK Foreign Exchange Reserves
+  (USD Million)" `14,736` / `5.9`, Murban 101.67; remittances US$4,872m, +16.7%, from US$4,175m, US 53.4%; `19-Dec-24 129.29`.
+- **Job 116667134611** (run 38806069170): CBK forex-rates page (links, raw). It offers a "Download All Historical Rates"
+  CSV (`/uploads/fx_rates/historical_data.csv`) and yearly CSVs to 2015; the live daily table is loaded by a POST to
+  `admin-ajax.php?action=get_wdtable&table_id=32`, which the Probe (GET only) cannot read.
+- **Jobs 116667467204 and 116667787236** (runs 38806164385, 38806256463): the historical CSV (2.08m chars) has no
+  US-dollar row dated 2023-2026 and no USD rate of 161 or more. **The full daily series was not obtainable.**
+- **Job 116667725731** (run 38806239093): weekly-bulletin listing, links for Oct-Dec 2025.
+- **Job 116667953176** (run 38806302278): Bulletins of 21 Nov, 28 Nov and 5 Dec 2025, pp. 1-2.
+  - 21 Nov 2025 Table 2: "Usable Foreign Exchange Reserves (USD Million)", row "1. CBK Usable Foreign Exchange Reserves
+    (USD Million)*", footnote "*Excludes encumbered reserves": 23 Oct 12,080; 30 Oct 12,194; 6 Nov 12,163; 13 Nov 12,292;
+    20 Nov 12,009.
+  - 28 Nov 2025 Table 2: "Foreign Exchange Reserves (USD Million)", row "1. CBK Foreign Exchange Reserves (USD Million)",
+    no encumbrance footnote: 30 Oct 12,194; 6 Nov 12,163; 13 Nov 12,292; 20 Nov 12,009; 27 Nov 11,951. Same figures for
+    the same dates under both labels: a relabel, not a restatement. No CBK note explaining it was found.
+  - Table 1 rows 7 Nov to 4 Dec 2025: 129.24 to **129.96 (20-Nov-25)**, above the draft's band top of 129.94.
+- Arithmetic re-done: 31.42 gap; 19.47%; 1,613,600 / 1,299,400 / 314,200; 806,800 / 649,700 / 157,100;
+  80,680 / 64,970 / 15,710; 968,160 / 779,640 / 188,520; barrel 12,617.19 -> 13,211.00 (+4.71%); 8.01; 4,872/4,175 = +16.7%.
+
+Changes made to the Receipt:
+
+1. **Stability band corrected.** With the three Nov-Dec 2025 bulletins added (thirteen in all), the highest rate read
+   since June 2024 is KES 129.96 on 20 Nov 2025, not 129.94. Band now KES 128.55 to 129.96; "moved less than KES 1.40"
+   became "no more than KES 1.41" (129.96 - 128.55). "We did not read every week" added.
+2. **Weakest point kept to "the tables we read".** Tile label "Weakest CBK rate" became "CBK rate, 23 Jan 2024" with the
+   qualifier in the note; "than at the low" (tile note, bar-chart title, full-file line) now names 23 January 2024.
+3. **Verdict and line-chart title** qualified with "in every CBK bulletin we read" / "in every bulletin we read since",
+   since the daily series could not be read.
+4. **Reserves paragraph** now gives both figures with their exact table labels and the 21/28 Nov 2025 evidence that only
+   the label changed; the "may not be measured the same way" caution replaced. Bulletins of 21 and 28 Nov 2025 added to
+   sources.
+5. `verify` list cleared: items 1 and 2 by wording (no text claims an all-time low or a full daily series); item 3 by the
+   relabel evidence above.
+
+Not re-probed in this pass (first checker's jobs relied on): bulletins of Dec 2023, 9/16/23 Feb, 8/28 Mar 2024 and the
+other chart points; the 3 Apr 2024 MPC press release quotes.

@@ -8,7 +8,7 @@ entities:
   - "Central Bank of Kenya"
   - "Republic of Kenya"
 series: kenya-shilling
-verdict: "The shilling's recovery was real and it has held for two and a half years, but it was a transfer, not a gift: anyone who owes or pays in dollars now needs about a fifth fewer shillings, and every family living on dollars from abroad gets about a fifth fewer."
+verdict: "The shilling's recovery was real and, in every CBK bulletin we read, it has held for two and a half years, but it was a transfer, not a gift: anyone who owes or pays in dollars now needs about a fifth fewer shillings, and every family living on dollars from abroad gets about a fifth fewer."
 labels:
   - Facts
   - Analysis
@@ -42,6 +42,12 @@ sources:
   - name: "CBK Weekly Bulletin, 9 October 2026"
     url: "https://www.centralbank.go.ke/uploads/weekly_bulletin/321370149_Weekly%20CBK%20Bulletin,%20October%209,%202026.pdf"
     date: "2026-10-09"
+  - name: "CBK Weekly Bulletin, 21 November 2025"
+    url: "https://www.centralbank.go.ke/uploads/weekly_bulletin/199222480_Weekly%20CBK%20Bulletin%20November%2021,%202025.pdf"
+    date: "2025-11-21"
+  - name: "CBK Weekly Bulletin, 28 November 2025"
+    url: "https://www.centralbank.go.ke/uploads/weekly_bulletin/917842649_Weekly%20CBK%20Bulletin%20November%2028%202025.pdf"
+    date: "2025-11-28"
   - name: "CBK, MPC press release, meeting of 3 April 2024"
     url: "https://www.centralbank.go.ke/uploads/mpc_press_release/309290372_MPC%20Press%20Release%20-%20Meeting%20of%20April%203%202024.pdf"
     date: "2024-04-03"
@@ -72,22 +78,18 @@ calls:
     check_date: "2027-03-31"
 followUps:
   - { date: "2027-03-31", what: "Grade the exchange-rate and reserves calls" }
-verify:
-  - "Weakest point: KES 161.36 on 23 Jan 2024 is the weakest rate in the CBK tables we read (daily, 17 Nov 2023 to 7 Mar 2024; then ten two-week samples to 8 Oct 2026). Check it against the CBK's full daily series (centralbank.go.ke/rates/forex-exchange-rates/) before calling it the all-time low; the text does not."
-  - "Stability band KES 128.55 to 129.94 rests on ten two-week samples, not every day since June 2024. Check the full daily series or soften to 'in the bulletins we read' (as now worded)."
-  - "Reserves: the CBK table read 'Usable foreign exchange reserves' (excludes encumbered reserves) up to 26 Sep 2025 and 'Foreign exchange reserves' by 24 Dec 2025. Confirm from a CBK note whether the definition changed before comparing US$6,814m (Jan 2024) with US$14,736m (Oct 2026)."
 tiles:
-  - label: "Weakest CBK rate, 23 Jan 2024"
+  - label: "CBK rate, 23 Jan 2024"
     value: "KES 161.36"
-    note: "Shillings per US dollar, CBK indicative mean rate"
+    note: "Shillings per US dollar; the weakest in the CBK tables we read"
     source: "CBK Weekly Bulletin, 26 January 2024"
   - label: "CBK rate, 8 Oct 2026"
     value: "KES 129.94"
-    note: "About 19.5% fewer shillings for each dollar than at the low"
+    note: "About 19.5% fewer shillings for each dollar than on 23 Jan 2024"
     source: "CBK Weekly Bulletin, 9 October 2026"
 charts:
   - type: line
-    title: "The shilling hit KES 161 in January 2024, was back near 130 by March, and has hardly moved since"
+    title: "The shilling hit KES 161 in January 2024, was back near 130 by March, and has sat near 130 in every bulletin we read since"
     unit: "KES per US dollar, CBK indicative mean rate"
     source: "CBK Weekly Bulletins, 1 December 2023 to 9 October 2026 (Table 1, Kenya Shilling Exchange Rates)"
     data:
@@ -104,7 +106,7 @@ charts:
       - { label: "8 Oct 26", value: 129.94 }
     highlight: ["23 Jan 24"]
   - type: bar
-    title: "The same dollar bill costs a fifth less in shillings than at the low"
+    title: "The same dollar bill costs a fifth less in shillings than in January 2024"
     unit: "KES needed, thousands"
     source: "CBK Weekly Bulletin, 9 October 2026"
     data:
@@ -119,7 +121,7 @@ On 23 January 2024 one US dollar cost KES 161.36 at the Central Bank of Kenya's 
 
 That gap is money. A US$10,000 debt is KES 314,200 smaller in shillings. A US$500 transfer from a relative abroad buys KES 15,710 less, every month.
 
-**The Afronomics verdict: the shilling's recovery was real and it has held for two and a half years, but it was a transfer, not a gift: anyone who owes or pays in dollars now needs about a fifth fewer shillings, and every family living on dollars from abroad gets about a fifth fewer.**
+**The Afronomics verdict: the shilling's recovery was real and, in every CBK bulletin we read, it has held for two and a half years, but it was a transfer, not a gift: anyone who owes or pays in dollars now needs about a fifth fewer shillings, and every family living on dollars from abroad gets about a fifth fewer.**
 
 ## What happened
 
@@ -131,9 +133,9 @@ That gap is money. A US$10,000 debt is KES 314,200 smaller in shillings. A US$50
 
 (Facts) The CBK's own explanation came at its next meeting. Its press release of 3 April 2024 says "its previous measures have lowered inflation, addressed the exchange rate pressures, and anchored inflationary expectations". It also says fuel inflation fell "largely reflecting the impact of the shilling's appreciation which resulted in a decrease in electricity prices and a downward adjustment in pump prices."
 
-(Facts) Since then the rate has barely moved. In every CBK table we read from 14 June 2024 to 8 October 2026, ten weekly bulletins, the daily rate stayed between KES 128.55 (21 June 2024) and KES 129.94 (8 October 2026).
+(Facts) Since then, in the bulletins we read, the rate has barely moved. In every CBK table we read from 14 June 2024 to 8 October 2026, thirteen weekly bulletins, the daily rate stayed between KES 128.55 (21 June 2024) and KES 129.96 (20 November 2025). We did not read every week.
 
-(Facts) The reserves behind it grew. The CBK's usable foreign exchange reserves were US$6,814 million, 3.64 months of import cover, on 18 January 2024, below the four months the CBK must "endeavor to maintain". On 8 October 2026 its foreign exchange reserves were US$14,736 million, 5.9 months of cover. One caution: by December 2025 the CBK's table had dropped the word "usable", so the two figures may not be measured the same way.
+(Facts) The reserves behind it grew. On 18 January 2024 the CBK's table showed "CBK Usable Foreign Exchange Reserves" of US$6,814 million, 3.64 months of import cover, below the four months the CBK must "endeavor to maintain". On 8 October 2026 it showed "CBK Foreign Exchange Reserves" of US$14,736 million, 5.9 months of cover. The label is the only change we found: the bulletin of 21 November 2025 still said "Usable" (with the note "Excludes encumbered reserves"), the bulletin of 28 November dropped the word and the note, and both printed the same figure for 20 November 2025, US$12,009 million. We found no CBK note explaining the change.
 
 ## What the numbers show
 
@@ -156,9 +158,9 @@ That gap is money. A US$10,000 debt is KES 314,200 smaller in shillings. A US$50
 
 ## Our verdict
 
-(Opinion) **The shilling's recovery was real and it has held for two and a half years, but it was a transfer, not a gift: anyone who owes or pays in dollars now needs about a fifth fewer shillings, and every family living on dollars from abroad gets about a fifth fewer.**
+(Opinion) **The shilling's recovery was real and, in every CBK bulletin we read, it has held for two and a half years, but it was a transfer, not a gift: anyone who owes or pays in dollars now needs about a fifth fewer shillings, and every family living on dollars from abroad gets about a fifth fewer.**
 
-The stability is the part worth valuing. A rate that moved less than KES 1.40 across ten bulletins in more than two years lets a school, an importer or a borrower plan. Kenya did not have that between 13 December 2023 and 23 January 2024, when the shilling lost KES 8.01 against the dollar.
+The stability is the part worth valuing. A rate that moved by no more than KES 1.41 across thirteen bulletins in more than two years lets a school, an importer or a borrower plan. Kenya did not have that between 13 December 2023 and 23 January 2024, when the shilling lost KES 8.01 against the dollar.
 
 But a currency's "strength" is not a prize everyone shares. The same move that took KES 157,100 off a family's fee bill took KES 15,710 a month off another family's income from abroad. The headlines in 2024 counted only the first.
 
@@ -175,6 +177,6 @@ A shilling that holds near KES 130 while oil prices rise and the CBK's reserves 
 ## The full file (Pro)
 
 - **The daily series:** every CBK indicative mean rate from 17 November 2023 to 8 October 2026 that we have read, with the bulletin each one came from.
-- **Your own bill:** a calculator for any dollar amount, at the January 2024 low and at today's CBK rate.
+- **Your own bill:** a calculator for any dollar amount, at the 23 January 2024 rate and at today's CBK rate.
 - **Reserves, week by week:** the CBK's reserves and months of import cover from December 2023 to October 2026, with the change in how the CBK labels them.
 - **Follow-ups:** a Receipt when the calls are graded on 31 March 2027.

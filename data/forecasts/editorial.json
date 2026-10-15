@@ -1,6 +1,70 @@
 {
  "about": "Editorial calls from Afronomics Receipts, written when each Receipt is published and graded against the source each call names. Never edited: a correction is a new call. The outcome is the published figure, with its source and quote.",
- "calls": [],
+ "calls": [
+  {
+   "id": "RC-2026-10-14-quickmart-ipo-1",
+   "receipt": "2026-10-14-quickmart-ipo",
+   "written_at": "2026-10-15T07:10:14Z",
+   "statement": "The offer clears its 75% minimum and the shares list on 12 November 2026",
+   "measure": "Shares listed on the NSE on 12 November 2026",
+   "comparator": "is",
+   "threshold": "yes",
+   "unit": null,
+   "check_source": "Results announcement; NSE",
+   "check_date": "2026-11-12"
+  },
+  {
+   "id": "RC-2026-10-14-quickmart-ipo-2",
+   "receipt": "2026-10-14-quickmart-ipo",
+   "written_at": "2026-10-15T07:10:14Z",
+   "statement": "Total demand comes in below 150% of the shares on offer",
+   "measure": "Total demand, % of the shares on offer",
+   "comparator": "<",
+   "threshold": 150,
+   "unit": "%",
+   "check_source": "Results announcement",
+   "check_date": "2026-11-06"
+  },
+  {
+   "id": "RC-2026-10-14-quickmart-ipo-3",
+   "receipt": "2026-10-14-quickmart-ipo",
+   "written_at": "2026-10-15T07:10:14Z",
+   "statement": "The shares close their first trading day within 10% of KES 7.50",
+   "measure": "First-day NSE closing price",
+   "comparator": "between",
+   "threshold": [
+    6.75,
+    8.25
+   ],
+   "unit": "KES",
+   "check_source": "NSE closing price",
+   "check_date": "2026-11-12"
+  },
+  {
+   "id": "RC-2026-10-14-quickmart-ipo-4",
+   "receipt": "2026-10-14-quickmart-ipo",
+   "written_at": "2026-10-15T07:10:14Z",
+   "statement": "Profit for 2026 comes in below the KES 2.1 billion forecast",
+   "measure": "Profit for 2026",
+   "comparator": "<",
+   "threshold": 2.1,
+   "unit": "KES bn",
+   "check_source": "Audited 2026 results",
+   "check_date": "2027-06-30"
+  },
+  {
+   "id": "RC-2026-10-14-quickmart-ipo-5",
+   "receipt": "2026-10-14-quickmart-ipo",
+   "written_at": "2026-10-15T07:10:14Z",
+   "statement": "Trade payable days at 31 December 2026 are above 77",
+   "measure": "Trade payable days at 31 December 2026",
+   "comparator": ">",
+   "threshold": 77,
+   "unit": "days",
+   "check_source": "Audited 2026 results",
+   "check_date": "2027-06-30"
+  }
+ ],
  "outcomes": [],
  "not_recorded": []
 }

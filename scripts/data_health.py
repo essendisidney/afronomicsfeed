@@ -1,8 +1,7 @@
 """
 Data health: is every figure the site shows as fresh as its publisher's own rhythm says it should be?
 
-Reads the datasets in data/ (nothing from the network) and writes data/health.json, one line per market, fund or
-series, each with a status:
+Reads the datasets in data/ and writes data/health.json, one line per market, fund or series, each with a status:
 
     ok       up to date
     late     the publisher's next release is overdue here (a reader, or the publisher, has stalled)
@@ -14,14 +13,20 @@ about a week and a half, one that auctions monthly after about six weeks. Runs a
 (.github/workflows/african-auctions.yml); late and failed lines are printed as warnings on the run, and the site
 shows the file at /status and on the desk.
 
+In GitHub Actions it also records each workflow's latest result on main and how many of its runs in a row have
+failed (GitHub's API, with the job's own token), so the desk can show a broken job before anyone notices. Only
+states are stored (no run times), so a healthy run leaves the file unchanged and triggers no commit.
+
     python scripts/data_health.py
 """
 
 from __future__ import annotations
 
 import json
+import os
 import statistics
 import sys
+import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -217,6 +222,39 @@ def bonds(today: date) -> list[dict]:
     return out
 
 
+def workflows() -> list[dict]:
+    """Latest result per workflow on main, and failures in a row. Empty outside GitHub Actions or if the API fails."""
+    token, repo = os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
+    if not token or not repo:
+        return []
+    req = urllib.request.Request(
+        f"https://api.github.com/repos/{repo}/actions/runs?branch=main&per_page=100",
+        headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=20) as r:
+            runs = json.load(r).get("workflow_runs", [])
+    except Exception as e:  # never fail the data run over this
+        print(f"workflows: GitHub API unavailable ({e})")
+        return []
+    out: dict[str, dict] = {}
+    for run in sorted(runs, key=lambda x: x.get("created_at", ""), reverse=True):  # newest first
+        if run.get("status") != "completed" or run.get("conclusion") in ("cancelled", "skipped"):
+            continue
+        name = run.get("name") or "?"
+        w = out.setdefault(name, {"name": name, "result": run.get("conclusion"), "day": run.get("created_at", "")[:10], "failures_in_row": 0, "open": True})
+        if w["open"]:
+            if run.get("conclusion") == "failure":
+                w["failures_in_row"] += 1
+            else:
+                w["open"] = False
+    for w in out.values():
+        del w["open"]
+        if w["failures_in_row"]:
+            print(f"::warning title=Workflow failing::{w['name']}: {w['failures_in_row']} failed run(s) in a row")
+    return sorted(out.values(), key=lambda w: (-w["failures_in_row"], w["name"]))
+
+
 def main() -> int:
     today = datetime.now(NAIROBI).date()
     items = bills(today) + bonds(today) + funds(today) + policy(today) + others(today)
@@ -227,8 +265,11 @@ def main() -> int:
         if x["status"] in ("late", "failed"):
             print(f"::warning title=Data {x['status']}::{x['area']}: {x['name']}: {x['detail']}")
     print(f"data health: {summary}")
+    flows = workflows()
     previous = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
-    if previous.get("items") == items:
+    if not flows:
+        flows = previous.get("workflows", [])  # outside Actions, or the API failed: keep the last known states
+    if previous.get("items") == items and previous.get("workflows", []) == flows:
         return 0  # unchanged: leave the file (and its date) alone so it does not trigger a commit on its own
     OUT.write_text(json.dumps({
         "dataset": "Afronomics data health",
@@ -236,6 +277,7 @@ def main() -> int:
         "checked_on": today.isoformat(),
         "summary": summary,
         "items": items,
+        "workflows": flows,
     }, ensure_ascii=False, indent=1), encoding="utf-8")
     return 0
 

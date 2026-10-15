@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: african-auctions
@@ -136,6 +137,8 @@ jobs:
       # and data/health.json feeds /status and the desk.
       - run: python scripts/data_health.py
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         timeout-minutes: 2
       # New auction results, policy-rate changes and stories go to the Telegram channel. Before the commit, so the
       # record of what was posted (data/telegram_state.json) is saved with the data. The bot token and channel come

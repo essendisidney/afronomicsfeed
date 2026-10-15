@@ -113,6 +113,7 @@
   --color-surface: var(--surface);
   --color-up: var(--up);
   --color-down: var(--down);
+  --color-warn: var(--warn);
   --color-accent: var(--brand-accent);
   --color-night-ink: var(--night-ink);
   --color-night-soft: var(--night-soft);

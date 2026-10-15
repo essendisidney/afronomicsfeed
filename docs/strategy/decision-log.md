@@ -195,3 +195,23 @@ what we changed. Newest at the bottom. Read this first every week.
   - A call whose check date has passed when its Receipt is published is never written (no credit for hindsight); it
     is listed as not recorded.
   - A void call (the event could not happen) stays visible with its source and is left out of the hit rate.
+
+### D-020 · 15 Oct 2026 · Quickmart Receipt published; legal read waived by the founder
+- **Decided by the founder:** publish the Quickmart IPO Receipt as written, without the Kenyan securities lawyer's
+  read that D-019 requires for a verdict on a live offer. The founder takes responsibility for its Opinion paragraphs.
+  This waiver is for this Receipt only; the D-019 rule stands for later ones.
+- **Disclosure confirmed by the founder:** Afronomics and its founder hold no Quickmart shares and earn nothing from
+  the offer.
+- **Checks done first:** every figure checked against the information memorandum (`docs/rebuild/quickmart-source-checks.md`).
+- **Until R3:** the full file shows as "Coming with Pro", listing what it will hold; nothing is sold as already
+  delivered. (The R3 paywall decision becomes D-021.)
+
+### D-022 · 15 Oct 2026 · Dangote refinery IPO Receipt published; legal read waived by the founder
+- **Decided by the founder:** verdict approved (one tap, D-019) and the Receipt published without the securities
+  lawyer's read. The founder takes responsibility for its Opinion paragraphs. The waiver is for this Receipt only; the
+  D-019 rule stands for later ones. (D-021 stays reserved for the R3 paywall, per D-020.)
+- **Disclosure confirmed by the founder:** Afronomics and its founder hold no Dangote shares and earn nothing from this
+  offer.
+- **Checks done first:** every figure checked against the prospectus and the Kenyan GDR memorandum
+  (`docs/rebuild/dangote-source-checks.md`). The KES 535 minimum and the 27 October close are attributed in the text to
+  Business Today and Capital FM, which say we have not yet seen the amended memorandum; we confirm them when we do.

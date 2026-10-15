@@ -76,6 +76,9 @@ export default function KenyaTbillsPage() {
           .{" "}
           <Link href="/markets/kenya-tbills/auction" className="font-semibold text-forest underline underline-offset-2">
             Bidding this week? Likely rates and “did my bid win?”
+          </Link>{" "}
+          <Link href="/markets/kenya-tbills/calculator" className="font-semibold text-forest underline underline-offset-2">
+            What will my bill pay after tax?
           </Link>
         </p>
       }

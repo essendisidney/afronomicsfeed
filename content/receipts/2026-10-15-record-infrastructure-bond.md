@@ -14,17 +14,12 @@ labels:
   - Analysis
   - Opinion
 asOf: "2026-10-15"
-summary: "In February 2024 Kenya sold KES 241 billion of an infrastructure bond at 18.46%, tax-free. To a saver that is worth 21.72% on a taxed bond. To the taxpayer it costs about KES 44.5 billion a year in interest until the first repayment in 2027, and roughly KES 296 billion over its life."
+summary: "In February 2024 Kenya sold KES 241 billion of an infrastructure bond at 18.46%, tax-free. To a saver that is worth 21.72% on a taxed bond. To the taxpayer it costs about KES 44.5 billion a year in interest until the first repayment in 2027, and about KES 302 billion over its life."
 desk: "Afronomics Public Money Desk"
 disclosure: "[CONFIRM: Afronomics and its founder hold no IFB1/2024/8.5 bonds]"
 verify:
-  - "Amortisation: the search copy of the CBK prospectus gives 20% on 15 Feb 2027, 30% on 11 Feb 2030 and the rest on 9 Aug 2032; the 2030 line reads '30% of unencumbered outstanding principal'. Open the prospectus PDF (sources) and confirm whether the 30% is of the original face value (giving 20/30/50, used here) or of the balance then outstanding (giving 20/24/56, lifetime coupons about KES 302bn instead of KES 296bn)."
-  - "Coupon dates: confirm in the prospectus that coupons are paid twice a year (first on 19 Aug 2024) and that the next one falls on 15 Feb 2027, with the first amortisation."
-  - "Face value or cash: open the CBK results PDF and confirm that KES 240,957.57m accepted is face value. Our file gives the average price as 100.0000, so face and cash are equal at the average; individual bids paid slightly different prices."
-  - "Purpose: confirm the prospectus wording on what the proceeds fund (infrastructure projects in the budget) before quoting it."
   - "Eurobond context: confirm against a National Treasury press release that Kenya sold a new US$1.5bn Eurobond due 2031 at 10.375% in February 2024 to buy back the US$2bn bond due June 2024. Our source is two publications (Mwango Capital, Credendo) read through search results only."
   - "Records: 'highest IFB rate' and 'largest single acceptance' are true of our bond file (390 rows from 2010). Confirm the file is complete for IFBs before publishing either claim as an all-time record."
-  - "KES 1m rule: confirm the prospectus line that holdings up to KES 1m per CSD account are repaid in full at the first amortisation, and what it does to the schedule."
 sources:
   - name: "CBK, results of IFB1/2024/8.5 dated 19 February 2024"
     url: "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/84469011_RESULTS%20FOR%20IFB1-2024-8.5%20DATED%2019-02-2024.pdf"
@@ -81,7 +76,7 @@ calls:
 followUps:
   - { date: "2027-02-15", what: "First repayment of IFB1/2024/8.5 (20% of principal, per the prospectus) and a coupon" }
   - { date: "2027-06-30", what: "Grade the IFB and 364-day bill calls" }
-  - { date: "2030-02-11", what: "Second repayment of IFB1/2024/8.5 (30%, per the prospectus)" }
+  - { date: "2030-02-11", what: "Second repayment of IFB1/2024/8.5 (30% of what is then outstanding)" }
   - { date: "2032-08-09", what: "Final repayment of IFB1/2024/8.5" }
 tiles:
   - label: "Tax-free interest a year"
@@ -139,13 +134,13 @@ For savers it was the best rate a Kenyan infrastructure bond has paid in our rec
 
 (Facts) It is the largest amount accepted for a single bond in our file of 390 CBK bond auctions going back to 2010, ahead of IFB1/2023/007 (KES 213.40 billion, June 2023). Its rate is the highest any infrastructure bond has cleared in the same file.
 
-(Facts) The prospectus says the bond is repaid in three parts: 20% of the principal on 15 February 2027, 30% on 11 February 2030 and the rest on 9 August 2032. Interest is paid twice a year.
+(Facts) The prospectus says the bond is repaid in three parts: 20% of the outstanding principal on 15 February 2027, 30% of the unencumbered outstanding principal on 11 February 2030, and the rest on 9 August 2032. Holdings of up to KES 1 million per account are repaid in full at each repayment. Interest is paid twice a year, 17 times from 19 August 2024. The money was "for funding of infrastructure projects in the FY 2023/2024 budget estimates". The CBK's results show KES 70.49 billion of it went to repay maturing debt and KES 170.47 billion was new borrowing.
 
 (Facts) The sale closed in the same week Kenya returned to the dollar market. It sold a US$1.5 billion Eurobond due 2031 at 10.375% to buy back most of a US$2 billion bond due in June 2024, according to Mwango Capital and Credendo.
 
 ## What the numbers show
 
-(Analysis) The yearly bill is simple. 18.4607% × KES 240.96 billion = KES 44.48 billion a year, paid as two coupons of KES 22.24 billion. Because the bond is repaid in parts, the bill shrinks: on the prospectus schedule it falls to KES 35.59 billion a year after February 2027 (80% left) and KES 22.24 billion after February 2030 (50% left).
+(Analysis) The yearly bill is simple. 18.4607% × KES 240.96 billion = KES 44.48 billion a year, paid as two coupons of KES 22.24 billion. Because the bond is repaid in parts, the bill shrinks: on the prospectus schedule it falls to KES 35.59 billion a year after February 2027 (80% left) and KES 24.91 billion after February 2030 (56% left: 30% of the 80% still owed is repaid).
 
 (Analysis) Over its life, the coupons add up like this:
 
@@ -153,12 +148,12 @@ For savers it was the best rate a Kenyan infrastructure bond has paid in our rec
 | --- | --- | --- | --- |
 | Aug 2024 to Feb 2027 | 6 | 100% | 6 × KES 22.24bn = KES 133.45bn |
 | Aug 2027 to Feb 2030 | 6 | 80% | 6 × KES 17.79bn = KES 106.76bn |
-| Aug 2030 to Aug 2032 | 5 | 50% | 5 × KES 11.12bn = KES 55.60bn |
-| **Total** | **17** | | **about KES 295.8bn** |
+| Aug 2030 to Aug 2032 | 5 | 56% | 5 × KES 12.46bn = KES 62.28bn |
+| **Total** | **17** | | **about KES 302.5bn** |
 
-*Source: CBK results and prospectus for IFB1/2024/8.5; Afronomics arithmetic. Assumes equal half-year coupons and the 20/30/50 repayment schedule.*
+*Source: CBK results and prospectus for IFB1/2024/8.5; Afronomics arithmetic. Assumes equal half-year coupons; ignores the full early repayment of holdings up to KES 1 million, which lowers the total slightly.*
 
-(Analysis) Add back the KES 240.96 billion of principal and the state pays out about KES 536.8 billion in total. Had it been a single repayment in 2032, the coupons alone would have been 8.5 × KES 44.48 billion, about KES 378.1 billion. The amortisation saves the Treasury about KES 82 billion of interest.
+(Analysis) Add back the KES 240.96 billion of principal and the state pays out about KES 543.4 billion in total. Had it been a single repayment in 2032, the coupons alone would have been 8.5 × KES 44.48 billion, about KES 378.1 billion. Repaying in parts saves the Treasury about KES 75.6 billion of interest.
 
 (Analysis) Tax-free matters twice. To a saver, 18.4607% with no tax is the same as 18.4607% ÷ 0.85 = 21.72% on a bond taxed at 15%. To the Treasury, a taxed bond hands 15% of its coupon back as withholding tax; this one hands back nothing. No taxable Treasury bond in our file has cleared above 18.77% since 2012.
 
@@ -187,7 +182,7 @@ What a saver kept from KES 100,000 for a year, after tax:
 
 The Treasury was not careless. In February 2024 a US$2 billion Eurobond was four months from due, the one-year bill was already at 16.92%, and taxed bonds were clearing near 18.4%. Raising KES 241 billion at home, in shillings, bought time.
 
-But it bought that time at a fixed price, for eight and a half years, and took three and a half times what it asked for. Everyone who bid got a rate that no ordinary deposit could match. The taxpayer, who did not bid, gets the KES 296 billion bill and none of the tax back.
+But it bought that time at a fixed price, for eight and a half years, and took three and a half times what it asked for. Everyone who bid got a rate that no ordinary deposit could match. The taxpayer, who did not bid, gets the KES 302 billion bill and none of the tax back.
 
 ### What would change our mind
 

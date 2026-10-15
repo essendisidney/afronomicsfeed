@@ -41,3 +41,16 @@ source URLs. Figures that rest only on web-search copies of a document are **Unc
 | New US$1.5bn Eurobond due 2031 at 10.375%; buyback of US$2bn bond due June 2024 | Mwango Capital (12 Feb 2024) and Credendo, read via search results only | Unconfirmed |
 | Purpose of proceeds | CBK prospectus, not opened | Unconfirmed (not stated in Receipt beyond "infrastructure bond") |
 | Disclosure | `data/owner/holdings.json` | Unconfirmed ([CONFIRM] placeholder) |
+
+## Confirmed against the CBK documents (15 Oct 2026, read through the Probe workflow)
+
+| Item | Source | Result |
+| --- | --- | --- |
+| Offered KES 70,000m; bids KES 288,661.86m (412.37%); accepted KES 240,957.57m (competitive 218,008.42, non-competitive 22,949.15) | CBK results notice, 14 Feb 2024 | Matches |
+| Weighted average rate and coupon 18.4607%; price per KES 100 at average yield 100.00 (face = cash at the average) | CBK results notice | Matches |
+| Application of funds: redemptions KES 70,490.80m; new borrowing KES 170,466.77m | CBK results notice | Added to the text |
+| Purpose "for funding of Infrastructure projects in the FY 2023/2024 budget estimates" | CBK prospectus, p2 | Matches, quoted |
+| 17 coupon dates, 19 Aug 2024 to 9 Aug 2032 | CBK prospectus, p2 | Matches |
+| Redemption: 15 Feb 2027 20% of outstanding principal; 11 Feb 2030 30% of unencumbered outstanding principal; 9 Aug 2032 the rest | CBK prospectus, p2 | Schedule is 20/24/56; draft corrected from 20/30/50: lifetime coupons KES 302.5bn (13.6 × 22,241.23m), saving vs bullet KES 75.6bn |
+| Holdings up to KES 1.0m per CSD account redeemed in full at amortisation | CBK prospectus, p2 | Matches |
+| Tax free as for infrastructure bonds under the Income Tax Act | CBK prospectus, p2 | Matches |

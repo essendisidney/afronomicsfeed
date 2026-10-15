@@ -30,12 +30,9 @@ Page numbers are those of the PDF.
 | NSE trading expected on or about 8 December 2026. | K p54 | Matches |
 | One-year T-bill at 9.04% on 12 October 2026. | CBK results file | From our auction data |
 
-## Still open before publishing
+## Published 15 October 2026 (D-022)
 
-1. **The KES 535 minimum and the 27 October close.** These come from the press: Business Today on the minimum and
-   Capital FM on the extension. They report an amended memorandum dated 9 October, which we do not hold. The draft
-   names the press as the source until we do.
-2. **The disclosure line.** It needs the founder's confirmation.
-3. **The founder's one-tap approval.** This is a named-company verdict (D-019).
-4. **The legal read.** Under D-019 a legal read is normally required. The founder waived it for Quickmart only
-   (D-020).
+- The founder confirmed the disclosure, approved the verdict, and waived the legal read for this Receipt only.
+- The KES 535 minimum and the 27 October close still rest on Business Today and Capital FM. The text attributes them
+  to those papers and says we have not yet seen the amended memorandum dated 9 October. To do: confirm both against
+  that memorandum when we obtain it, and correct the text if it differs.

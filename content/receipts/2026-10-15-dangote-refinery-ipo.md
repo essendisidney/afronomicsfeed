@@ -2,7 +2,7 @@
 title: "Dangote's refinery IPO: Kenyans are offered a slice of Africa's biggest plant, through an expensive wrapper"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: companies
 entities:
   - "Dangote Petroleum Refinery & Petrochemicals FZE"
@@ -17,7 +17,7 @@ labels:
 asOf: "2026-10-15"
 summary: "Dangote's refinery is selling 3.3% of itself for about US$1.6 billion, and Kenyans can buy in through receipts on the NSE. Unlike Quickmart, the money goes to the company. The price leans on one very good half-year."
 desk: "Afronomics Companies Desk"
-disclosure: "[Confirm before publishing] Afronomics and its founder hold no Dangote shares and earn nothing from this offer."
+disclosure: "Afronomics and its founder hold no Dangote shares and earn nothing from this offer."
 sources:
   - name: "Dangote Petroleum Refinery & Petrochemicals FZE, prospectus"
     url: "https://ipo.dangote.com/prospectus.pdf"
@@ -97,11 +97,6 @@ charts:
       - { label: "2025", value: 12330.5 }
       - { label: "H1 2026", value: 13909.5 }
     highlight: ["H1 2026"]
-verify:
-  - "The amended Kenyan information memorandum (reported as dated 9 October 2026): the KES 535 minimum (10 receipts) and any other changed term"
-  - "The extension notice for the Kenyan offer to 27 October 2026, from Renaissance Capital or the CMA, and the revised Kenyan timetable"
-  - "The disclosure line"
-  - "The founder's one-tap approval (named-company verdict, D-019)"
 ---
 
 The Dangote refinery wants about US$1.6 billion, and for the first time Kenyans can buy a piece of it from Nairobi. Unlike Quickmart's offer, the money goes to the company: it is building the refinery to twice its size.
@@ -122,7 +117,7 @@ The catch is not the refinery. It is the price and the route.
 
 (Facts) Kenyans do not buy the shares directly. Renaissance Capital (Kenya) buys the shares in Nigeria and issues one Kenyan receipt, a GDR, for each share, at KES 53.50. The target is KES 39 billion, about 729 million receipts or 17.8% of the offer. The refinery did not set up this programme; it has given its support in principle.
 
-(Facts) The minimum was 2,000 receipts, KES 107,000. Renaissance Capital has since cut it to 10 receipts, KES 535, according to Business Today. The offer was due to close on 13 October; Capital FM reports that Nigeria's SEC extended it to 27 October and that the Kenyan offer follows. The receipts are expected to trade on the NSE in December, a few days after the shares list in Lagos.
+(Facts) The minimum was 2,000 receipts, KES 107,000. Renaissance Capital has since cut it to 10 receipts, KES 535, according to Business Today. The offer was due to close on 13 October; Capital FM reports that Nigeria's SEC extended it to 27 October and that the Kenyan offer follows. We have not yet seen the amended memorandum behind these two changes; we will confirm them against it. The receipts are expected to trade on the NSE in December, a few days after the shares list in Lagos.
 
 (Analysis) The wrapper costs. The memorandum puts the Kenyan offer's costs at KES 698 million, about 1.8% of the target, paid by the holders, plus a custody fee of 0.16% a year. For now, a receipt cannot be swapped for the share underneath. Its value moves with the naira against the shilling as well as with the refinery. And dividends are taxed twice: Nigeria takes 10%, Kenya takes its own 5%, and the two countries have no tax treaty.
 

@@ -215,3 +215,18 @@ what we changed. Newest at the bottom. Read this first every week.
 - **Checks done first:** every figure checked against the prospectus and the Kenyan GDR memorandum
   (`docs/rebuild/dangote-source-checks.md`). The KES 535 minimum and the 27 October close are attributed in the text to
   Business Today and Capital FM, which say we have not yet seen the amended memorandum; we confirm them when we do.
+
+### D-021 · 15 Oct 2026 · What is free and what is paid; growth order; Auto theme
+- **Decided by the founder:** what people share or cite is free; people pay for time saved, being first, and depth.
+  - Free: every verdict, call, chart and latest number; the Morning on the site; the latest 12 months of data (CSV and
+    Excel); calculators, rankings and share cards.
+  - Free with an email address: a Receipt's fact sheet, an alert for its next date, the weekly scorecard of our calls.
+  - Pro: a Receipt's full file; the Morning by email and every auction alert; full history, bulk Excel, the API and
+    PDF packs; team seats.
+- **No hard paywall yet.** Until about 1,000 email sign-ups or 10,000 readers a month, only the full file is Pro.
+  After that, what is read to the end but rarely shared is the next candidate for Pro.
+- **Order:** the Auto theme; share cards (7b-2), then the T-bill vs money market fund vs SACCO calculator and a weekly
+  ranking; My markets, your own alerts and Call it (7b-4); referrals (a month of Pro for three sign-ups). Pro sign-in
+  (R3) applies this line.
+- **Auto theme:** light from 06:00 and dark from 19:00 by the reader's clock, with Auto, Light and Dark in the menu.
+

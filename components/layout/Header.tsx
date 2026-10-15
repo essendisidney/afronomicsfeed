@@ -7,6 +7,7 @@ import { Wordmark } from "@/components/brand/Wordmark";
 import { SearchDialog } from "@/components/search/SearchDialog";
 import { institutionalPilot } from "@/lib/billing/ratecard";
 import { institutionsNav, nav, sectionFor, utilityNav } from "@/lib/site";
+import { readThemeMode, setThemeMode, themeModes, type ThemeMode } from "@/lib/theme";
 import type { SearchHit } from "@/lib/search-core";
 
 /**
@@ -17,12 +18,12 @@ import type { SearchHit } from "@/lib/search-core";
 
 function subscribeTheme(onStoreChange: () => void) {
   const observer = new MutationObserver(onStoreChange);
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme-mode"] });
   return () => observer.disconnect();
 }
 
-function themeSnapshot() {
-  return document.documentElement.classList.contains("dark");
+function themeSnapshot(): ThemeMode {
+  return readThemeMode();
 }
 
 const institutionLinks = [
@@ -53,7 +54,7 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
   const pathname = usePathname();
   const [menuPath, setMenuPath] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
-  const dark = useSyncExternalStore(subscribeTheme, themeSnapshot, () => false);
+  const themeMode = useSyncExternalStore(subscribeTheme, themeSnapshot, (): ThemeMode => "auto");
   const open = menuPath === pathname;
   const activeHref = sectionFor(pathname);
   const toggleMenu = () => setMenuPath((current) => (current === pathname ? null : pathname));
@@ -68,12 +69,6 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
-
-  function toggleTheme() {
-    const next = !document.documentElement.classList.contains("dark");
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("af-theme", next ? "dark" : "light");
-  }
 
   return (
     <>
@@ -165,16 +160,28 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
                       </Link>
                     </li>
                   ))}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={toggleTheme}
-                      className="flex min-h-11 w-full items-center rounded-xl px-3 text-left text-[15px] font-medium text-night-soft hover:bg-night-2 hover:text-night-ink"
-                    >
-                      <span suppressHydrationWarning>{dark ? "Light theme" : "Dark theme"}</span>
-                    </button>
-                  </li>
                 </ul>
+                {/* Auto follows the reader's clock: light from 06:00, dark from 19:00 (lib/theme.ts). */}
+                <div className="mt-3 px-3">
+                  <p id="theme-label" className="text-[12px] font-semibold text-night-muted">
+                    Theme
+                  </p>
+                  <div role="group" aria-labelledby="theme-label" className="mt-1 grid grid-cols-3 gap-1 rounded-xl bg-night-2 p-1">
+                    {themeModes.map(({ mode, label }) => (
+                      <button
+                        key={mode}
+                        type="button"
+                        aria-pressed={themeMode === mode}
+                        onClick={() => setThemeMode(mode)}
+                        className="min-h-11 rounded-lg text-[14px] font-medium text-night-soft hover:text-night-ink aria-pressed:bg-night aria-pressed:text-night-ink"
+                        suppressHydrationWarning
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="mt-1 text-[12px] text-night-muted">Auto: light from 06:00, dark from 19:00, by your clock.</p>
+                </div>
               </nav>
               <nav aria-label="For institutions" className="rounded-2xl border border-night-line bg-night-2 p-4">
                 <p className="text-[12px] font-semibold text-accent">For boards, banks, SACCOs and funds</p>

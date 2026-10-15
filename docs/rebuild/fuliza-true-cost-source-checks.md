@@ -62,3 +62,7 @@ are GitHub Actions run ids in `essendisidney/afronomicsfeed` (job ids in bracket
   the figure, the tile and the chart share one source.
 - Any estimate of total Fuliza fees paid (for example 1% of disbursements): the booklet does not say how draws and
   disbursements relate, so it was cut.
+
+## Editor change (2026-10-15)
+
+The compounded "effective" yearly rates were cut from the Receipt: arithmetically right, but a rate nobody pays reads as sensational. Only the simple yearly rate is shown.

@@ -131,16 +131,16 @@ That sounds small, and it is small in shillings. As a yearly rate it is 271%. Th
 
 ## What the numbers show
 
-(Analysis) We worked out the cost of four common cases from the table, then turned each into a yearly rate two ways. The simple rate multiplies the cost for the period up to a year, the way most loan rates are quoted. The effective rate assumes the same cost repeats and compounds all year. Nobody borrows on Fuliza for a year at a stretch; the yearly rate is there so the price can sit next to a bank's.
+(Analysis) We worked out the cost of four common cases from the table, then turned each into a simple yearly rate: the cost for the period multiplied up to a year, the way most loan rates are quoted, with no compounding. Nobody borrows on Fuliza for a year at a stretch; the yearly rate is there so the price can sit next to a bank's.
 
-| Case | Cost | Share of the amount | Simple yearly rate | Effective yearly rate |
-| --- | --- | --- | --- | --- |
-| KES 1,000 for 1 night | KES 10 + 6 = KES 16 | 1.6% | 584% | about 32,700% |
-| KES 1,000 for 7 nights | KES 10 + 42 = KES 52 | 5.2% | 271% | about 1,306% |
-| KES 1,000 for 30 nights | KES 10 + 180 = KES 190 | 19.0% | 231% | about 730% |
-| KES 100 for 1 night | KES 1 + 0 = KES 1 | 1.0% | 365% | about 3,678% |
+| Case | Cost | Share of the amount | Simple yearly rate |
+| --- | --- | --- | --- |
+| KES 1,000 for 1 night | KES 10 + 6 = KES 16 | 1.6% | 584% |
+| KES 1,000 for 7 nights | KES 10 + 42 = KES 52 | 5.2% | 271% |
+| KES 1,000 for 30 nights | KES 10 + 180 = KES 190 | 19.0% | 231% |
+| KES 100 for 1 night | KES 1 + 0 = KES 1 | 1.0% | 365% |
 
-*Arithmetic: simple = cost ÷ amount × 365 ÷ nights. Effective = (1 + cost ÷ amount) raised to the power (365 ÷ nights), minus 1. Example, 7 nights: 52 ÷ 1,000 = 5.2%; 5.2% × 365 ÷ 7 = 271.1%; 1.052^52.14 − 1 = 1,306%.*
+*Arithmetic: yearly rate = cost ÷ amount × 365 ÷ nights. Example, 7 nights: 52 ÷ 1,000 = 5.2%; 5.2% × 365 ÷ 7 = 271.1%.*
 
 (Analysis) The comparison. KES 1,000 for 30 days at the 14.34% average bank lending rate would cost about KES 11.79 in interest, before any bank fees. On Fuliza it costs KES 190. Lent to the government for 30 days at the latest one-year Treasury bill rate of 9.0383%, the same KES 1,000 would earn about KES 7.43. M-Shwari, the 30-day loan Safaricom offers with NCBA, charges a flat 9% including excise duty: KES 90 on KES 1,000, or 109.5% a year simple.
 

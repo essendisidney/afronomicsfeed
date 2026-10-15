@@ -1,0 +1,39 @@
+{
+  "dataset": "M-PESA consumer charges and Fuliza fees",
+  "publisher": "Safaricom",
+  "checked": "2026-10-15",
+  "sources": {
+    "mpesa": "https://www.safaricom.co.ke/main-mpesa/m-pesa-for-you/tariffs-limits/consumer-tariffs-limits",
+    "fuliza": "https://www.safaricom.co.ke/main-m-pesa/m-pesa-services/credit-and-savings/fuliza-mobile"
+  },
+  "note": "Copied by hand from Safaricom's pages on the checked date. send = transfer to M-PESA users; other = transfer to other networks' registered mobile money users; withdraw = withdrawal from an M-PESA agent (null where not allowed). Fuliza daily fees include the 20% excise duty, as Safaricom's table shows them.",
+  "max_transaction": 250000,
+  "mpesa": [
+    { "min": 1, "max": 49, "send": 0, "other": 0, "withdraw": null },
+    { "min": 50, "max": 100, "send": 0, "other": 0, "withdraw": 11 },
+    { "min": 101, "max": 500, "send": 7, "other": 7, "withdraw": 29 },
+    { "min": 501, "max": 1000, "send": 13, "other": 13, "withdraw": 29 },
+    { "min": 1001, "max": 1500, "send": 23, "other": 23, "withdraw": 29 },
+    { "min": 1501, "max": 2500, "send": 33, "other": 33, "withdraw": 29 },
+    { "min": 2501, "max": 3500, "send": 53, "other": 53, "withdraw": 52 },
+    { "min": 3501, "max": 5000, "send": 57, "other": 57, "withdraw": 69 },
+    { "min": 5001, "max": 7500, "send": 78, "other": 78, "withdraw": 87 },
+    { "min": 7501, "max": 10000, "send": 90, "other": 90, "withdraw": 115 },
+    { "min": 10001, "max": 15000, "send": 100, "other": 100, "withdraw": 167 },
+    { "min": 15001, "max": 20000, "send": 105, "other": 105, "withdraw": 185 },
+    { "min": 20001, "max": 35000, "send": 108, "other": 108, "withdraw": 197 },
+    { "min": 35001, "max": 50000, "send": 108, "other": 108, "withdraw": 278 },
+    { "min": 50001, "max": 250000, "send": 108, "other": 108, "withdraw": 309 }
+  ],
+  "fuliza": {
+    "access_fee_pct": 1,
+    "daily": [
+      { "min": 0, "max": 100, "fee": 0 },
+      { "min": 101, "max": 500, "fee": 3 },
+      { "min": 501, "max": 1000, "fee": 6 },
+      { "min": 1001, "max": 1500, "fee": 21.6 },
+      { "min": 1501, "max": 2500, "fee": 24 },
+      { "min": 2501, "max": 70000, "fee": 30 }
+    ]
+  }
+}

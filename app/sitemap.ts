@@ -75,6 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/rates/kenya/saccos", "monthly", 0.8),
     page("/chama", "daily", 0.9),
     page("/markets/kenya-tbills/calculator", "daily", 0.9),
+    page("/rates/kenya/mpesa-charges", "weekly", 0.9),
     page("/rates/kenya/check", "weekly", 0.8),
     page("/rates/nigeria/check", "weekly", 0.8),
     page("/rates/ghana/check", "weekly", 0.8),

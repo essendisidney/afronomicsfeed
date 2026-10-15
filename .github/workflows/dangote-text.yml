@@ -1,0 +1,66 @@
+# One-off, side branch only (never merged): save the Dangote refinery offer documents and the news on the offer as
+# page-numbered text, so the Receipt's facts can be checked where these sites cannot be reached.
+name: Dangote text
+
+on:
+  push:
+    branches: [rebuild/dangote-sources]
+    paths: [".github/workflows/dangote-text.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  text:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pdfplumber requests beautifulsoup4
+      - name: Download and extract
+        run: |
+          mkdir -p sources/dangote
+          cat > /tmp/get.py <<'PY'
+          import sys, hashlib, requests, pdfplumber, io, re
+          from bs4 import BeautifulSoup
+          name, url = sys.argv[1], sys.argv[2]
+          r = requests.get(url, timeout=300, headers={"User-Agent": "Mozilla/5.0 (Afronomics source check)"})
+          out = open(f"sources/dangote/{name}.txt", "w")
+          out.write(f"# {url}\n# status {r.status_code}, {len(r.content)} bytes, sha256 {hashlib.sha256(r.content).hexdigest()}\n")
+          if r.content[:5] == b"%PDF-":
+              with pdfplumber.open(io.BytesIO(r.content)) as pdf:
+                  out.write(f"# {len(pdf.pages)} pages\n")
+                  for n, page in enumerate(pdf.pages, 1):
+                      out.write(f"\n=== page {n}\n{page.extract_text(layout=True) or ''}\n")
+          else:
+              soup = BeautifulSoup(r.text, "html.parser")
+              for t in soup(["script", "style", "noscript"]):
+                  t.decompose()
+              out.write(re.sub(r"\n\s*\n+", "\n\n", soup.get_text("\n")))
+              links = [(a.get_text(" ", strip=True), a.get("href")) for a in soup.find_all("a") if a.get("href") and (".pdf" in a.get("href").lower() or "prospectus" in a.get_text().lower())]
+              out.write("\n\n# PDF and prospectus links\n" + "\n".join(f"{t} -> {h}" for t, h in links))
+          PY
+          while read -r name url; do
+            [ -z "$name" ] && continue
+            python /tmp/get.py "$name" "$url" || echo "failed $name"
+          done <<'LIST'
+          prospectus https://ipo.dangote.com/prospectus.pdf
+          ipo-site https://ipo.dangote.com/
+          kenya-gdr-im https://www.nse.co.ke/wp-content/uploads/Dangote-Kenya-GDRs-%E2%80%93-Information-Memorandum-for-Initial-Public-Offering.pdf
+          nairametrics-refund https://nairametrics.com/2026/10/08/kenyan-investors-face-refunds-if-dangote-refinery-ipo-misses-key-threshold/
+          kws-extension https://kenyanwallstreet.com/dangote-extends-refinery-ipo-by-2-weeks-as-kenya-cuts-gdr-minimum-to-k-sh535
+          bt-threshold https://businesstoday.co.ke/dangote-ipo-lowers-investment-threshold-for-kenyan-investors/
+          cnbc-size https://www.cnbcafrica.com/2026/nigerias-dangote-refinery-ipo-to-raise-between-1-55-1-8-bln-sources
+          herald-extension https://www.heraldonline.co.zw/more-time-for-investors-to-buy-dangote-refinery-ipo-shares/
+          LIST
+          ls -la sources/dangote
+      - name: Commit to this branch
+        run: |
+          git config user.name "afronomics-bot"
+          git config user.email "afronomics-bot@users.noreply.github.com"
+          git add sources/dangote
+          git commit -m "Dangote offer documents as text"
+          git push origin HEAD:rebuild/dangote-sources

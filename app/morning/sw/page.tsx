@@ -13,8 +13,8 @@ import { fitDescription, fitTitle } from "@/lib/seo";
 export const revalidate = 900;
 
 export const metadata: Metadata = {
-  title: fitTitle("Asubuhi ya Afronomics — masoko ya Afrika kabla ya saa moja"),
-  description: fitDescription("Kila siku ya kazi saa moja asubuhi, Nairobi: sarafu zilizobadilika usiku kucha, matokeo ya minada ya hati za hazina, yanayotarajiwa leo, na hati za siku 364 katika masoko kumi ya Afrika. Kwa Kiswahili."),
+  title: fitTitle("Asubuhi ya Afronomics — masoko ya Afrika kabla ya saa moja na nusu"),
+  description: fitDescription("Kila siku ya kazi kabla ya saa moja na nusu asubuhi, Nairobi: sarafu zilizobadilika usiku kucha, matokeo ya minada ya hati za hazina, yanayotarajiwa leo, na hati za siku 364 katika masoko kumi ya Afrika. Kwa Kiswahili."),
   alternates: { canonical: `${site.url}/morning/sw`, languages: { en: `${site.url}/morning`, sw: `${site.url}/morning/sw` } },
 };
 
@@ -26,7 +26,7 @@ export default async function MorningSwPage() {
     <PageShell
       crumbs={[{ href: "/", label: "Mwanzo" }, { href: "/morning", label: "Morning" }, { label: "Kiswahili" }]}
       kicker={`Asubuhi ya Afronomics · ${swDate(note.day)}`}
-      title="Masoko ya Afrika kabla ya saa moja"
+      title="Masoko ya Afrika kabla ya saa moja na nusu"
       lede={
         lines.length ? (
           <ul className="space-y-2">

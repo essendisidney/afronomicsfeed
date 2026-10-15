@@ -16,7 +16,7 @@ export const revalidate = 900;
 
 export const metadata: Metadata = {
   title: "The Morning — Africa’s markets before 07:30",
-  description: fitDescription("Every weekday at 7am Nairobi: the currencies that moved overnight, the Treasury bill results that landed, what is due today and the headlines that matter, across Africa’s markets."),
+  description: fitDescription("Every weekday by 07:30 Nairobi: the currencies that moved overnight, the Treasury bill results that landed, what is due today and the headlines that matter, across Africa’s markets."),
   // hreflang must be reciprocal: /morning/sw names this page as its English version, so this page names it back.
   alternates: { canonical: `${site.url}/morning`, languages: { en: `${site.url}/morning`, sw: `${site.url}/morning/sw` } },
 };

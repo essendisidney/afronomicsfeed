@@ -63,6 +63,54 @@
    "unit": "days",
    "check_source": "Audited 2026 results",
    "check_date": "2027-06-30"
+  },
+  {
+   "id": "RC-2026-10-15-dangote-refinery-ipo-1",
+   "receipt": "2026-10-15-dangote-refinery-ipo",
+   "written_at": "2026-10-15T08:13:58Z",
+   "statement": "Kenyan applications for the receipts come in below the KES 39 billion target",
+   "measure": "Kenyan GDR applications received",
+   "comparator": "<",
+   "threshold": 39,
+   "unit": "KES bn",
+   "check_source": "Renaissance Capital (Kenya) allotment announcement",
+   "check_date": "2026-11-20"
+  },
+  {
+   "id": "RC-2026-10-15-dangote-refinery-ipo-2",
+   "receipt": "2026-10-15-dangote-refinery-ipo",
+   "written_at": "2026-10-15T08:13:58Z",
+   "statement": "The shares are listed on the Nigerian Exchange by 18 December 2026",
+   "measure": "Shares listed on the NGX by 18 December 2026",
+   "comparator": "is",
+   "threshold": "yes",
+   "unit": null,
+   "check_source": "NGX listing notice",
+   "check_date": "2026-12-18"
+  },
+  {
+   "id": "RC-2026-10-15-dangote-refinery-ipo-3",
+   "receipt": "2026-10-15-dangote-refinery-ipo",
+   "written_at": "2026-10-15T08:13:58Z",
+   "statement": "The receipts start trading on the NSE by 31 December 2026",
+   "measure": "Dangote GDRs trading on the NSE by 31 December 2026",
+   "comparator": "is",
+   "threshold": "yes",
+   "unit": null,
+   "check_source": "NSE listing notice",
+   "check_date": "2026-12-31"
+  },
+  {
+   "id": "RC-2026-10-15-dangote-refinery-ipo-4",
+   "receipt": "2026-10-15-dangote-refinery-ipo",
+   "written_at": "2026-10-15T08:13:58Z",
+   "statement": "Profit for 2026 comes in below US$3.64 billion, twice the first half",
+   "measure": "Profit after tax for 2026",
+   "comparator": "<",
+   "threshold": 3.64,
+   "unit": "US$ bn",
+   "check_source": "Audited 2026 financial statements",
+   "check_date": "2027-04-30"
   }
  ],
  "outcomes": [],

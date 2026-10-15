@@ -25,6 +25,9 @@ sources:
   - name: "Quick Mart PLC, intention to float"
     url: "https://ipo.quickmart.co.ke/wp-content/uploads/2026/09/QUICKMART_INTENTION_TO_FLOAT.pdf"
     date: "2026-09-23"
+  - name: "Quick Mart PLC, information memorandum"
+    url: "https://ipo.quickmart.co.ke/wp-content/uploads/2026/10/QUICKMART-PLC-INFORMATION-MEMORANDUM_OCT2026_FINAL.pdf"
+    date: "2026-10-02"
   - name: "Stanbic, offer-price valuation parameters"
     url: "https://ipo.quickmart.co.ke/wp-content/uploads/2026/10/Quick-Mart-PLC-Offer-Price-Valuation-Parameters_2026.10.04_vCirc.pdf"
     date: "2026-10-04"
@@ -37,15 +40,6 @@ sources:
   - name: "tech-ish, offer costs and IFC lock-up"
     url: "https://tech-ish.com/2026/10/07/quickmart-ipo-opens-at-kes-7-50-a-share-valuing-the-supermarket-chain-at-kes-30-billion/"
     date: "2026-10-07"
-  - name: "Kenya Insights, trade payables and payment days citing the offer documents"
-    url: "https://kenyainsights.com/experts-argue-quickmarts-ipo-could-be-an-exit-plan-question-its-books"
-    date: "2026-10-06"
-  - name: "Legesi, lease and cash-flow figures citing the information memorandum"
-    url: "https://legesi.substack.com/p/quickmart-ipo-what-is-a-share-really"
-    date: "2026-10-12"
-  - name: "Mwango Capital, growth by year and second-half profit needed"
-    url: "https://mwangocapital.substack.com/p/28-09-2026-quickmart-heads-to-the-nse"
-    date: "2026-09-28"
   - name: "Retail Insight Network / Yahoo Finance, chief executive's Bloomberg interview"
     url: "https://finance.yahoo.com/small-business/articles/kenya-quickmart-targets-1bn-revenue-111950605.html"
     date: "2026-10-07"
@@ -124,18 +118,18 @@ charts:
   - type: bar
     title: "In three of the last four years, the owners took out more than the company earned"
     unit: "Dividend paid as % of the year's profit"
-    source: "Legesi, lease and cash-flow figures citing the information memorandum"
+    source: "Quick Mart PLC, information memorandum"
     data:
       - { label: "2022", value: 39 }
       - { label: "2023", value: 174 }
-      - { label: "2024", value: 106 }
+      - { label: "2024", value: 104 }
       - { label: "2025", value: 109 }
     highlight: ["2023", "2024", "2025"]
     reference: { value: 100, label: "100%: the whole year's profit" }
   - type: bar
     title: "Quickmart keeps four times as much of each shilling of sales as it did in 2021"
     unit: "Profit per KES 100 of sales, KES"
-    source: "Mwango Capital, growth by year and second-half profit needed"
+    source: "Quick Mart PLC, information memorandum"
     data:
       - { label: "2021", value: 0.71 }
       - { label: "2022", value: 0.79 }
@@ -146,7 +140,7 @@ charts:
   - type: bar
     title: "Sales growth has slowed every year since 2022"
     unit: "Revenue growth on the year before, %"
-    source: "Mwango Capital, growth by year and second-half profit needed"
+    source: "Quick Mart PLC, information memorandum"
     data:
       - { label: "2022", value: 35.4 }
       - { label: "2023", value: 18.5 }
@@ -154,10 +148,6 @@ charts:
       - { label: "2025", value: 8.0 }
     highlight: ["2025"]
 verify:
-  - "Chart and table sources: revenue, profit and dividends by year against the information memorandum (the charts cite the secondary sources until then)"
-  - "Trade payables and payment days, lease figures, the KES 1.1 billion shareholder advance and the KES 575.6 million offer costs, against the information memorandum and audited 2025 accounts"
-  - "The 5% dividend withholding rate for resident individuals"
-  - "Minimum application: 500 shares per the offer announcement (Capital FM reported 550)"
   - "The disclosure line"
   - "Legal read of every Opinion paragraph"
 ---
@@ -220,29 +210,29 @@ Each owner of Sokoni is selling half of what they hold. If the offer sells out, 
 
 ### Suppliers, mostly
 
-(Facts) At 30 June 2026 Quickmart owed banks just KES 6.8 million and held KES 700 million in cash. Its working capital was negative KES 4.0 billion, and its net assets, what belongs to shareholders, were KES 1.9 billion. Trade payables, the money owed to suppliers, were KES 8.97 billion at the same date, as reported by Kenya Insights from the offer documents.
+(Facts) At 30 June 2026 Quickmart owed banks just KES 6.8 million and held KES 700 million in cash. Its trading working capital (stock plus what it is owed, less what it owes suppliers) was negative KES 4.0 billion, and its net assets, what belongs to shareholders, were KES 1.9 billion. Trade payables, the money owed to suppliers, were KES 8.97 billion at the same date.
 
-(Analysis) Negative working capital is normal for a supermarket: you sell the milk before you pay the dairy. But the scale matters. On those figures, suppliers had about KES 4.70 in the business for every KES 1 the shareholders had. Payment periods reported from the documents were 89 days at the end of 2024, 101 days at the end of 2025 and 77 days at June 2026. The chief executive told Bloomberg suppliers are paid after 60 days.
+(Analysis) Negative working capital is normal for a supermarket: you sell the milk before you pay the dairy. But the scale matters. On those figures, suppliers had about KES 4.65 in the business for every KES 1 the shareholders had. The offer documents put the time Quickmart takes to pay suppliers (trade payables against a year of cost of sales) at 89 days at the end of 2024, 101 days at the end of 2025 and 77 days at June 2026. The chief executive told Bloomberg suppliers are paid after 60 days.
 
 (Opinion) Suppliers are Quickmart's largest financiers. They just don't get a dividend, a board seat or an IPO.
 
 ### The rent
 
-(Facts) Every store is leased, usually for 10 to 12 years. In 2025 the company paid KES 1.61 billion in lease principal, and its net finance costs of KES 1.28 billion were mostly lease-related. Eighteen stores are leased from parties linked to founders or directors; the offer documents call the terms arm's-length. Founder-linked consultancy contracts were ended in July 2026, three months before the offer.
+(Facts) Every store is leased, on terms of 5 to 20 years and about 10.5 years on average when signed. In 2025 the company paid KES 1.61 billion in lease principal, and its net finance costs of KES 1.28 billion were mostly lease-related. Eighteen stores are leased from parties linked to founders or directors; the offer documents call the terms arm's-length. Founder-linked consultancy contracts were ended in July 2026, three months before the offer.
 
 ### Dividends: more out than in
 
 | Year | Profit (KES m) | Dividend paid (KES m) | Paid out |
 | --- | --- | --- | --- |
-| 2022 | 275.0 | 106 | 39% |
-| 2023 | 449.6 | 782 | 174% |
-| 2024 | 1,134.8 | 1,200 | 106% |
-| 2025 | 1,508.6 | 1,650 | 109% |
-| **2022–2025** | **3,368.0** | **3,738** | **111%** |
+| 2022 | 275.0 | 105.9 | 39% |
+| 2023 | 449.6 | 782.4 | 174% |
+| 2024 | 1,134.8 | 1,176.5 | 104% |
+| 2025 | 1,508.6 | 1,647.1 | 109% |
+| **2022–2025** | **3,368.0** | **3,711.8** | **110%** |
 
 (Facts) In the first half of 2026 the company also advanced KES 1.1 billion to its shareholder against future dividends, against KES 872.8 million of profit for the half.
 
-(Analysis) Over four years the owners took out KES 370 million more than the company earned. That is why a business worth KES 30 billion has KES 1.9 billion of equity. It is legal, and common before a sale. It also means the cushion that protects suppliers and new shareholders in a bad year is thin.
+(Analysis) Over four years the owners took out about KES 344 million more than the company earned. That is why a business worth KES 30 billion has KES 1.9 billion of equity. It is legal, and common before a sale. It also means the cushion that protects suppliers and new shareholders in a bad year is thin.
 
 ## The price
 

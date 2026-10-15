@@ -149,6 +149,7 @@ verify:
   - "High Court judgment of 15 September 2026 (grounds: public participation under Articles 10 and 118; order restoring the shares): open the judgment on Kenya Law and record the case number."
   - "Court of Appeal ruling of 13 October 2026 refusing a stay: open the ruling on Kenya Law; confirm no hearing date has been set for the appeal itself."
   - "Use of proceeds (National Infrastructure Fund; not for recurrent spending): confirm in a National Treasury statement and the People Daily article's date."
+  - "Source dates not read from the page itself (our environment could not open these sites; dates are set from the event they report and must be corrected from each page): Mwango Capital (2025-12-04), Business Daily 5291018 and 5292462 (2025-12-12), Nation 5287656 (2025-12-10), Capital FM FY2026 dividend (2026-05-07), Business Daily 5514578 (2026-07-01), People Daily infrastructure (2026-07-01), People Daily conditions explainer (2025-12-05), The Condia (2026-09-15), Vodacom announcement (2025-12-04)."
 ---
 
 The Government of Kenya sold 15% of Safaricom to Vodacom on 30 June 2026 for KES 204.3 billion. That was a price of KES 34 a share, for an asset every Kenyan taxpayer part-owned.

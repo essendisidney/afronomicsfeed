@@ -206,6 +206,20 @@ what we changed. Newest at the bottom. Read this first every week.
 - **Until R3:** the full file shows as "Coming with Pro", listing what it will hold; nothing is sold as already
   delivered. (The R3 paywall decision becomes D-021.)
 
+### D-023 · 15 Oct 2026 · Infrastructure bond and 2024 Eurobond Receipts published; Safaricom held for a legal read
+- **Decided by the founder:** both verdicts approved and published ("approved, disclosure confirmed, publish the bond
+  and eurobond"). Both are verdicts on government borrowing, not on a named company, so the D-019 legal read does not
+  apply.
+- **Disclosures confirmed by the founder:** Afronomics and its founder hold no IFB1/2024/8.5 bonds and no Kenya
+  Eurobonds.
+- **Checks done first:** the bond against the CBK results notice and prospectus; the Eurobond against the offering
+  circular, CBK weekly bulletins and the Republic's tender-result notices (`docs/rebuild/*-source-checks.md`). Claims
+  that could not be confirmed from a source page were removed or attributed, not published as fact: the tendered
+  amount and settlement date of the 2024 tender, the October 2025 coupons, a maturity day, and an "ever" in the bond
+  verdict (now "in more than a decade", which our auction file supports).
+- **Not published:** the Safaricom stake-sale Receipt stays a draft until a legal read, because the sale is in active
+  litigation (High Court ruling of 15 Sep 2026; Court of Appeal refused a stay on 13 Oct 2026).
+
 ### D-022 · 15 Oct 2026 · Dangote refinery IPO Receipt published; legal read waived by the founder
 - **Decided by the founder:** verdict approved (one tap, D-019) and the Receipt published without the securities
   lawyer's read. The founder takes responsibility for its Opinion paragraphs. The waiver is for this Receipt only; the

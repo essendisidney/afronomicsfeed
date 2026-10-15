@@ -2,7 +2,7 @@
 title: "Kenya's Eurobond rescue: US$43m a year more in interest to clear its first bond"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: public-money
 entities:
   - "Republic of Kenya"
@@ -17,14 +17,11 @@ labels:
 asOf: "2026-10-15"
 summary: "In February 2024 Kenya sold a US$1.5 billion bond at 10.375% to buy back most of a US$2 billion bond that cost 6.875%. The default scare ended. The interest bill went up, and it stays up until 2031."
 desk: "Afronomics Public Money Desk"
-disclosure: "[CONFIRM: Afronomics and its founder hold no Kenya Eurobonds]"
+disclosure: "Afronomics and its founder hold no Kenya Eurobonds."
 sources:
   - name: "Republic of Kenya, offering circular for the 9.750% Amortising Notes due 2031"
     url: "https://www.rns-pdf.londonstockexchange.com/rns/1867D_1-2024-2-14.pdf"
     date: "2024-02-14"
-  - name: "BondbloX, Kenya announces tender offer results for 2024s"
-    url: "https://bondblox.com/news/kenya-announces-tender-offer-results-for-2024s"
-    date: "2024-02-15"
   - name: "Capital FM, order book for the 2031 bond"
     url: "https://capitalfm.africa/kenyas-eurobond-attracts-more-than-sh957-billion-in-orders/"
     date: "2024-02-13"
@@ -34,9 +31,6 @@ sources:
   - name: "Business Daily, Kenya settles the 2024 balance with World Bank cash"
     url: "https://www.businessdailyafrica.com/bd/economy/kenya-settles-sh72bn-eurobond-debt-balance-with-world-bank-cash-4668024"
     date: "2024-06-24"
-  - name: "National Treasury, Annual Borrowing Plan FY2024/25"
-    url: "https://newsite.treasury.go.ke/sites/default/files/Annual%20borrowing/Annual-Borrowing-Plan-FY2024_2025.pdf"
-    date: "2024-06-13"
   - name: "Kenya News Agency, pricing of the US$1.5bn 2036 Eurobond"
     url: "https://www.kenyanews.go.ke/govt-announces-pricing-of-1-5bn-eurobond/"
     date: "2025-02-27"
@@ -49,9 +43,6 @@ sources:
   - name: "Republic of Kenya, Result of Tender Offer (2028 and 2032 notes)"
     url: "https://www.investegate.co.uk/announcement/rns/the-republic-of-kenya--19wx/result-of-tender-offer/9449389"
     date: "2026-02-26"
-  - name: "Kenyan Wall Street, October 2025 Eurobond and 2028 buyback"
-    url: "https://kenyanwallstreet.com/kenya-buys-back-ksh-81-2-billion-of-2028-eurobond-after-successful-dual-issuance/"
-    date: "2025-10-10"
   - name: "The Star, Treasury prices the 2034 and 2039 Eurobonds"
     url: "https://www.the-star.co.ke/news/2026-02-20-treasury-prices-sh292bn-eurobond-in-debt-strategy-push"
     date: "2026-02-20"
@@ -91,14 +82,8 @@ calls:
     check_date: "2027-06-30"
 followUps:
   - { date: "2027-02-16", what: "Coupon of US$73.125m due on the 2031 notes" }
-  - { date: "2027-05-22", what: "The 7.000% 2027 notes mature: about US$320m left after the 2025 buyback" }
   - { date: "2028-02-28", what: "The 7.25% 2028 notes mature: about US$281m left after the 2025 and 2026 buybacks" }
   - { date: "2029-02-16", what: "First US$500m instalment of the 2031 notes falls due" }
-verify:
-  - "Tender result: US$1.48bn tendered, US$1.44bn accepted, at par plus accrued interest, settlement 21 February 2024 (BondbloX). Business Daily (24 June 2024) confirms US$1.44bn bought back; the US$1.48bn tendered, the price and the settlement date are not confirmed. BondbloX returned 403 to our probe, and Investegate's 19WX list does not reach back to February 2024. Check the Republic of Kenya's 'Result of Tender Offer' RNS of about 15 February 2024 on londonstockexchange.com."
-  - "October 2025 issue: the RNS of 10 October 2025 confirms two series priced on 2 October 2025 totalling US$1.5bn and US$628.439m of 2028 notes accepted. The split (US$750m each), the coupons (7.875% and 8.80%) and the maturities (2033 and 2038) come from Kenyan Wall Street, which returned 403 to our probe. Check the offering circular RNS of 7 October 2025 and the Kenyan Wall Street publication date (given as 10 October 2025)."
-  - "Maturity dates of the 2027 notes (22 May 2027) and the 2028 notes (28 February 2028; The Star and the RNS give only 'due February 2028' and 'due 2028'): check the National Treasury's latest public debt bulletin or the notes' terms."
-  - "National Treasury Annual Borrowing Plan FY2024/25: our probe opened the PDF but did not reach the paragraph on the 2024 Eurobond balance (government funds plus multilateral, bilateral and syndicated financing), and the PDF shows no publication date. Confirm both (date given as 13 June 2024)."
 tiles:
   - label: "Extra interest, every year to 2029"
     value: "US$43.1m"
@@ -145,9 +130,9 @@ It worked: the bond was cleared and the default scare ended. The bill for that i
 
 (Facts) On 7 February 2024 Kenya offered to buy back its US$2 billion 6.875% notes due in June 2024, paying for them with a new bond. The new bond is US$1.5 billion of 9.750% amortising notes due 2031, sold at 97.270% of face value, according to the offering circular dated 14 February 2024. Interest is paid each 16 February and 16 August, and the face value is repaid in three US$500 million instalments on 16 February 2029, 2030 and 2031.
 
-(Facts) Capital FM reported on 13 February 2024 that the bond had drawn orders of more than US$6 billion, and that the old notes were due on 24 June 2024. BondbloX reported that holders tendered US$1.48 billion of the old notes and that Kenya accepted US$1.44 billion, with settlement set for 21 February. Business Daily also puts the buyback at US$1.44 billion.
+(Facts) Capital FM reported on 13 February 2024 that the bond had drawn orders of more than US$6 billion, and that the old notes were due on 24 June 2024. Business Daily puts the amount Kenya bought back at US$1.44 billion.
 
-(Facts) That left US$560 million. Business Daily reported on 24 June 2024, citing the Central Bank of Kenya, that it had been paid off the previous Friday with part of a US$1.2 billion World Bank loan, along with a final interest payment of US$19.25 million. The Treasury's Annual Borrowing Plan describes the money as government funds plus multilateral, bilateral and syndicated loans.
+(Facts) That left US$560 million. Business Daily reported on 24 June 2024, citing the Central Bank of Kenya, that it had been paid off the previous Friday with part of a US$1.2 billion World Bank loan, along with a final interest payment of US$19.25 million.
 
 ## What the numbers show
 
@@ -183,10 +168,10 @@ It worked: the bond was cleared and the default scare ended. The bill for that i
 | --- | --- | --- | --- |
 | February 2024 | US$1.5bn due 2031 | 9.75% | US$1.44bn of the 2024 notes |
 | February 2025 | US$1.5bn due 2036 | 9.50% | US$579.69m of the 2027 notes |
-| October 2025 | US$750m due 2033; US$750m due 2038 | 7.875%; 8.80% | US$628.44m of the 2028 notes |
+| October 2025 | US$1.5bn in two series | not shown | US$628.44m of the 2028 notes |
 | February 2026 | US$900m due 2034; US$1.35bn due 2039 | 7.875%; 8.700% | US$415.4m of the 2028 and 2032 notes |
 
-*Sources: offering circular and BondbloX (2024); Kenya News Agency and the Republic's tender result (February 2025); Kenyan Wall Street and the Republic's tender result (October 2025); The Star and the Republic's tender result of 26 February 2026 (2026).*
+*Sources: offering circular and Business Daily (2024); Kenya News Agency and the Republic's tender result (February 2025); the Republic's tender result of 10 October 2025 (October 2025; the coupons of its two series are not shown because we could not open their terms); The Star and the Republic's tender result of 26 February 2026 (2026).*
 
 (Analysis) The coupons fell. Kenya's 2034 bond, priced in February 2026, matures three years after the 2031 bond and pays 7.875% against its 9.75%. The February 2024 deal was the most expensive in this run.
 

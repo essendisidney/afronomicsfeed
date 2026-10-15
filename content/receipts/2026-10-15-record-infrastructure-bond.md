@@ -2,13 +2,13 @@
 title: "Kenya's 18.46% tax-free bond: savers' best deal was taxpayers' dearest loan"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: public-money
 entities:
   - "Central Bank of Kenya"
   - "National Treasury of Kenya"
 series: kenya-bonds
-verdict: "The best deal Kenyan savers ever got from their government was bought with taxpayers' money at the worst moment to borrow, and they will be paying for it until 2032."
+verdict: "The best deal Kenyan savers have had from their government in more than a decade was bought with taxpayers' money at the worst moment to borrow, and they will be paying for it until 2032."
 labels:
   - Facts
   - Analysis
@@ -16,11 +16,11 @@ labels:
 asOf: "2026-10-15"
 summary: "In February 2024 Kenya sold KES 241 billion of an infrastructure bond at 18.46%, tax-free. To a saver that is worth 21.72% on a taxed bond. To the taxpayer it costs about KES 44.5 billion a year in interest until the first repayment in 2027, and about KES 302 billion over its life."
 desk: "Afronomics Public Money Desk"
-disclosure: "[CONFIRM: Afronomics and its founder hold no IFB1/2024/8.5 bonds]"
-verify:
-  - "Eurobond context: confirm against a National Treasury press release that Kenya sold a new US$1.5bn Eurobond due 2031 at 10.375% in February 2024 to buy back the US$2bn bond due June 2024. Our source is two publications (Mwango Capital, Credendo) read through search results only."
-  - "Records: 'highest IFB rate' and 'largest single acceptance' are true of our bond file (390 rows from 2010). Confirm the file is complete for IFBs before publishing either claim as an all-time record."
+disclosure: "Afronomics and its founder hold no IFB1/2024/8.5 bonds."
 sources:
+  - name: "Republic of Kenya, offering circular for the 9.750% Amortising Notes due 2031"
+    url: "https://www.rns-pdf.londonstockexchange.com/rns/1867D_1-2024-2-14.pdf"
+    date: "2024-02-14"
   - name: "CBK, results of IFB1/2024/8.5 dated 19 February 2024"
     url: "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/84469011_RESULTS%20FOR%20IFB1-2024-8.5%20DATED%2019-02-2024.pdf"
     date: "2024-02-19"
@@ -45,12 +45,6 @@ sources:
   - name: "CBK, commercial banks' weighted average rates"
     url: "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/"
     date: "2026-08-31"
-  - name: "Mwango Capital, Kenya back in the market"
-    url: "https://mwangocapital.substack.com/p/12-02-2024-kenya-back-in-the-market"
-    date: "2024-02-12"
-  - name: "Credendo, successful Eurobond removes looming repayment threat"
-    url: "https://credendo.com/en/knowledge-hub/kenya-successful-eurobond-removes-looming-repayment-threat-though-longer-term-risks"
-    date: "2024-02-20"
 calls:
   - statement: "No infrastructure bond, new or reopened, clears at a weighted average rate above 15% at any auction before 30 June 2027"
     measure: "Highest weighted average rate accepted at any IFB auction, 16 October 2026 to 30 June 2027"
@@ -120,7 +114,7 @@ In February 2024 the Central Bank of Kenya asked for KES 70 billion for an eight
 
 For savers it was the best rate a Kenyan infrastructure bond has paid in our records. For taxpayers it is about KES 44.5 billion of interest a year, every year, until the first repayment in February 2027.
 
-**The Afronomics verdict: the best deal Kenyan savers ever got from their government was bought with taxpayers' money at the worst moment to borrow, and they will be paying for it until 2032.**
+**The Afronomics verdict: the best deal Kenyan savers have had from their government in more than a decade was bought with taxpayers' money at the worst moment to borrow, and they will be paying for it until 2032.**
 
 ## What happened
 
@@ -132,7 +126,7 @@ For savers it was the best rate a Kenyan infrastructure bond has paid in our rec
 
 (Facts) The prospectus says the bond is repaid in three parts: 20% of the outstanding principal on 15 February 2027, 30% of the unencumbered outstanding principal on 11 February 2030, and the rest on 9 August 2032. Holdings of up to KES 1 million per account are repaid in full at each repayment. Interest is paid twice a year, 17 times from 19 August 2024. The money was "for funding of infrastructure projects in the FY 2023/2024 budget estimates". The CBK's results show KES 70.49 billion of it went to repay maturing debt and KES 170.47 billion was new borrowing.
 
-(Facts) The sale closed in the same week Kenya returned to the dollar market. It sold a US$1.5 billion Eurobond due 2031 at 10.375% to buy back most of a US$2 billion bond due in June 2024, according to Mwango Capital and Credendo.
+(Facts) The sale closed in the same week Kenya returned to the dollar market. It sold a US$1.5 billion Eurobond due 2031, with a 9.75% coupon at a price of 97.27, a yield of about 10.4%, to buy back most of a US$2 billion 6.875% bond due in June 2024, the offering circular shows. Our Receipt on that deal has the detail.
 
 ## What the numbers show
 
@@ -174,7 +168,7 @@ What a saver kept from KES 100,000 for a year, after tax:
 
 ## Our verdict
 
-(Opinion) **The best deal Kenyan savers ever got from their government was bought with taxpayers' money at the worst moment to borrow, and they will be paying for it until 2032.**
+(Opinion) **The best deal Kenyan savers have had from their government in more than a decade was bought with taxpayers' money at the worst moment to borrow, and they will be paying for it until 2032.**
 
 The Treasury was not careless. In February 2024 a US$2 billion Eurobond was four months from due, the one-year bill was already at 16.92%, and taxed bonds were clearing near 18.4%. Raising KES 241 billion at home, in shillings, bought time.
 

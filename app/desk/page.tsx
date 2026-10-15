@@ -29,6 +29,10 @@ import { CasebookPanel } from "./CasebookPanel";
 import { loadCases } from "@/lib/cases";
 import { ContentPanel, type Campaign } from "./ContentPanel";
 import { DecisionsPanel, HealthPanel, RoutinesPanel, type Freshness } from "./OpsPanels";
+import { Cockpit } from "./Cockpit";
+import { contentLane, healthLane, moneyLane, readersLane } from "./cockpit-core";
+import { loadReceipts } from "@/lib/receipts";
+import { editorialRows } from "@/lib/editorial";
 import {
   inboxFallback,
   inboxFromRaw,
@@ -192,6 +196,7 @@ function Ref({ id, title, note, children }: { id: string; title: string; note: s
 }
 
 const NAV: [string, string][] = [
+  ["#cockpit", "At a glance"],
   ["#needs", "Today"],
   ["#pipeline", "Pipeline"],
   ["#inbox", "Inbox"],
@@ -355,6 +360,27 @@ export default async function DeskPage() {
   const downloads = desk.downloads_7d.reduce((n, r) => n + r.views, 0);
   const returningShare = audience && desk.views_7d ? Math.round((audience.returning_7d / desk.views_7d) * 100) : null;
   const linkedin7d = audience ? audience.linkedin.reduce((n, r) => n + (r.views_7d ?? 0), 0) : null;
+  const health = loadHealth();
+  const lanes = [
+    moneyLane({
+      windows,
+      perUsd,
+      deals,
+      keys,
+      failedPayments7d: (payments?.recent ?? []).filter((p) => p.status === "failed" && (!p.paid_at || now - Date.parse(p.paid_at) < 7 * DAY)).length,
+      now,
+    }),
+    readersLane({
+      people7d: people?.people_7d ?? null,
+      peoplePrev7d: people?.people_prev_7d ?? null,
+      views7d: desk.views_7d,
+      viewsPrev7d: desk.views_prev_7d,
+      signups7d: desk.subscribers_7d,
+      topSource: people?.people_sources_7d[0] ? sourceLabel(people.people_sources_7d[0].source) : (desk.referrers[0]?.host ?? null),
+    }),
+    contentLane({ receipts: loadReceipts(), calls: editorialRows(todayNbo), ideas: reports.filter((r) => r.kind === "story" && r.status === "new").length, today: todayNbo }),
+    healthLane({ health, staleFeeds: freshness.filter((f) => f.stale).map((f) => f.name) }),
+  ];
   const moneyNote = `Real payments only (status “success”; tests never counted). Today starts at midnight Nairobi. US dollars at ${fxNote}.${today0040 ? "" : " Before migration 0040, today is read from the 50 latest payments."}`;
 
   return (
@@ -367,6 +393,9 @@ export default async function DeskPage() {
         ))}
       </nav>
 
+      <Cockpit lanes={lanes} />
+
+      <div className="mt-12" />
       <TodayStrip windows={windows} perUsd={perUsd} moneyNote={moneyNote} gate={gate} needs={needs} />
 
       <div className="mt-12 space-y-12">
@@ -384,7 +413,7 @@ export default async function DeskPage() {
               : "LinkedIn only, from af_desk_audience; every campaign and people counts after migration 0040."
           }
         />
-        <HealthPanel health={loadHealth()} latency={loadLatency()} freshness={freshness} />
+        <HealthPanel health={health} latency={loadLatency()} freshness={freshness} />
         <RoutinesPanel />
         <DecisionsPanel />
         <CasebookPanel cases={loadCases()} />

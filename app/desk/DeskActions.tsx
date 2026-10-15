@@ -365,3 +365,30 @@ export function MarkHandled({ kind, id, undo = false }: { kind: string; id: numb
     </form>
   );
 }
+
+/** The founder's story ideas: one line on the subject and the angle; they join the editor's queue on the desk. */
+export function AddIdea() {
+  const { msg, run } = useAction();
+  return (
+    <form
+      onSubmit={(e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        run("idea", e.currentTarget);
+      }}
+      className="flex flex-col gap-2 sm:flex-row sm:items-end"
+    >
+      <label className="block flex-1">
+        <span className={label}>A story idea</span>
+        <input name="note" required minLength={20} maxLength={1000} placeholder="Equity Bank results on Tuesday: compare with KCB" className={field} />
+      </label>
+      <button type="submit" className={`${btn} min-h-11`}>
+        Add to the queue
+      </button>
+      {msg ? (
+        <p className="text-[12px] text-muted" role="status">
+          {msg}
+        </p>
+      ) : null}
+    </form>
+  );
+}

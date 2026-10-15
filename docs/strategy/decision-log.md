@@ -195,3 +195,13 @@ what we changed. Newest at the bottom. Read this first every week.
   - A call whose check date has passed when its Receipt is published is never written (no credit for hindsight); it
     is listed as not recorded.
   - A void call (the event could not happen) stays visible with its source and is left out of the hit rate.
+
+### D-020 · 15 Oct 2026 · Quickmart Receipt published; legal read waived by the founder
+- **Decided by the founder:** publish the Quickmart IPO Receipt as written, without the Kenyan securities lawyer's
+  read that D-019 requires for a verdict on a live offer. The founder takes responsibility for its Opinion paragraphs.
+  This waiver is for this Receipt only; the D-019 rule stands for later ones.
+- **Disclosure confirmed by the founder:** Afronomics and its founder hold no Quickmart shares and earn nothing from
+  the offer.
+- **Checks done first:** every figure checked against the information memorandum (`docs/rebuild/quickmart-source-checks.md`).
+- **Until R3:** the full file shows as "Coming with Pro", listing what it will hold; nothing is sold as already
+  delivered. (The R3 paywall decision becomes D-021.)

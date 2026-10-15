@@ -21,7 +21,8 @@ export const receiptDate = (iso: string) => fmtDay.format(new Date(`${iso}T00:00
 export function ReceiptMeta({ r }: { r: Receipt }) {
   const desk = deskSlug(r.desk);
   return (
-    <p className="t-label flex flex-wrap items-center gap-x-2 gap-y-1 text-muted">
+    // Two lines reserved on phones: the body font can arrive late there and wrap this line (layout shift on /receipts).
+    <p className="t-label flex min-h-8 flex-wrap content-start items-center gap-x-2 gap-y-1 text-muted sm:min-h-0">
       {desk ? (
         <Link href={`/receipts/desks/${desk}`} className="text-forest hover:text-ink">
           {r.desk.replace(/^Afronomics /, "")}
@@ -176,8 +177,11 @@ export function ReceiptView({ r }: { r: Receipt }) {
       {r.full ? (
         <section aria-labelledby="go-deeper" className="on-night mt-6 rounded-2xl bg-night px-5 py-6 text-night-ink sm:px-6">
           <h2 id="go-deeper" className="t-h2">
-            Go deeper: the full file
+            Coming with Pro: the full file
           </h2>
+          {/* Until Pro sign-in and the full files are built (docs/rebuild/phase-7e-r3-plan.md, R3), this lists what the
+              full file will hold; nothing here is sold as already delivered. */}
+          <p className="mt-1 text-[14px] text-night-soft">Being built now. Pro readers get each part the day it is published.</p>
           <div className="receipt-full mt-2 text-[15px] leading-6 text-night-soft">
             <ReceiptBody content={r.full.replace(/^##[^\n]*\n/, "")} />
           </div>

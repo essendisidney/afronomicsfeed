@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-10-14",
+ "checked_on": "2026-10-15",
  "summary": {
   "failed": 0,
   "late": 4,
@@ -175,8 +175,8 @@
    "area": "Money market funds",
    "name": "Kasha Money Market Fund",
    "status": "ok",
-   "detail": "10.35% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "10.35% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -184,8 +184,8 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.37% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "10.37% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -193,8 +193,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "19.0% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "19.0% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -202,8 +202,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "14.0% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -211,8 +211,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "8.75% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -220,8 +220,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "24.0% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +238,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "26.5% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "26.5% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +247,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "7.25% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +256,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "6.25% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -265,8 +265,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 14 Oct",
-   "latest": "2026-10-14",
+   "detail": "10.75% read 15 Oct",
+   "latest": "2026-10-15",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -359,6 +359,56 @@
    "latest": "2026-10-01",
    "due_by": "2026-10-22",
    "link": "/markets/tbills/zambia"
+  }
+ ],
+ "workflows": [
+  {
+   "name": "Pilot smoke",
+   "result": "failure",
+   "day": "2026-10-14",
+   "failures_in_row": 1
+  },
+  {
+   "name": "African auctions",
+   "result": "success",
+   "day": "2026-10-14",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Calls ledger",
+   "result": "success",
+   "day": "2026-10-15",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Documents",
+   "result": "success",
+   "day": "2026-10-15",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Morning note",
+   "result": "success",
+   "day": "2026-10-15",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Probe",
+   "result": "success",
+   "day": "2026-10-15",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Reader tests",
+   "result": "success",
+   "day": "2026-10-15",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Site QA",
+   "result": "success",
+   "day": "2026-10-15",
+   "failures_in_row": 0
   }
  ]
 }

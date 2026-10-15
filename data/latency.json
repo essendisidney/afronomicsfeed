@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 4,
-  "results": 6,
-  "p50_h": null,
-  "p90_h": null
+  "timed": 5,
+  "results": 8,
+  "p50_h": 3.9,
+  "p90_h": 10.8
  },
  "summary": [
   {
@@ -132,12 +132,12 @@
    "kind": "bills",
    "market": "mozambique",
    "name": "Mozambique",
-   "results": 0,
-   "timed": 0,
+   "results": 1,
+   "timed": 1,
    "p50_h": null,
    "p90_h": null,
-   "publisher_time": null,
-   "status": "no new result since measuring began"
+   "publisher_time": "Last-Modified of the publisher's file (this result is the newest in it)",
+   "status": "1 timed result so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -209,7 +209,7 @@
    "kind": "bonds",
    "market": "waemu",
    "name": "WAEMU (UMOA-Titres)",
-   "results": 1,
+   "results": 2,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -239,6 +239,15 @@
    "delay_h": 1.49
   },
   {
+   "key": "bonds:waemu:2026-10-15:cote-divoire",
+   "kind": "bonds",
+   "market": "waemu",
+   "date": "2026-10-15",
+   "first_seen_at": "2026-10-15T20:03:49+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
    "key": "bills:zambia:2026-10-15",
    "kind": "bills",
    "market": "zambia",
@@ -265,6 +274,16 @@
    "first_seen_at": "2026-10-15T14:59:08+00:00",
    "published_at": null,
    "published_how": null
+  },
+  {
+   "key": "bills:mozambique:2026-10-14",
+   "kind": "bills",
+   "market": "mozambique",
+   "date": "2026-10-14",
+   "first_seen_at": "2026-10-15T19:53:09+00:00",
+   "published_at": "2026-10-15T15:58:13+00:00",
+   "published_how": "Last-Modified of the publisher's file (this result is the newest in it)",
+   "delay_h": 3.92
   },
   {
    "key": "bonds:morocco:2026-10-13",
@@ -669,5 +688,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-15T15:13:09+00:00"
+ "updated_at": "2026-10-15T20:07:24+00:00"
 }

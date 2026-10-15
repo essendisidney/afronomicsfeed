@@ -130,9 +130,9 @@
    "area": "Bond auctions",
    "name": "WAEMU (UMOA-Titres)",
    "status": "ok",
-   "detail": "latest result 14 Oct (auctions weekly)",
-   "latest": "2026-10-14",
-   "due_by": "2026-10-21",
+   "detail": "latest result 15 Oct (auctions weekly)",
+   "latest": "2026-10-15",
+   "due_by": "2026-10-22",
    "link": "/markets/bonds/waemu"
   },
   {
@@ -310,9 +310,9 @@
    "area": "T-bill auctions",
    "name": "Mozambique",
    "status": "ok",
-   "detail": "latest auction 07 Oct (auctions weekly)",
-   "latest": "2026-10-07",
-   "due_by": "2026-10-16",
+   "detail": "latest auction 14 Oct (auctions weekly)",
+   "latest": "2026-10-14",
+   "due_by": "2026-10-23",
    "link": "/markets/tbills/mozambique"
   },
   {
@@ -382,6 +382,12 @@
   },
   {
    "name": "Forecast ledger",
+   "result": "success",
+   "day": "2026-10-15",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Kenya quick check",
    "result": "success",
    "day": "2026-10-15",
    "failures_in_row": 0

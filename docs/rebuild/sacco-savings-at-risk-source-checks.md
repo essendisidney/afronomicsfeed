@@ -69,3 +69,77 @@ list, or was cut.
   July 2026); not stated beyond SASRA's "introduced into the National Assembly" and "once enacted".
 - Press figures on losses at other co-operative bodies: not used.
 - The DT average deposit rate: the report gives both 6.41% and 7.02% for 2025 on p35; not used.
+
+## Second check (15 October 2026)
+
+Independent re-check by a second agent. Every probe below was run fresh on 15 October 2026; run ids are the
+Probe workflow's.
+
+| Run id | What it read |
+| --- | --- |
+| 38806090810 | Kenya Law, Sacco Societies Act, versions 2025-06-20 (HTML and `/source` PDF) and 2018-01-01: section 59(1) in full. kenyalaw.org (old site) PDF: 403. sasra.go.ke `/legislation/` and `/sacco-societies-act/`: 404 (no legislation page there) |
+| 38806147424 | SASRA Annual Report 2025, pages 13–22, 33, 38–41, 75–77 (Board message, Table 4, licensing chapter, Table 8, Tables 21–22) |
+| 38806320906, 38806325735, 38806328517, 38806332761 | SASRA Annual Report 2025, the remaining pages except 103–104 and 185–198 (cut from the fetched log), scanned for "Guarantee"; the only Fund passages are pp16, 156 and 158 |
+| 38806095846 | parliament.go.ke bills and bills-tracker pages; Mzalendo Bill page (links to the official PDF; its text is OCR of the scan); kenyalaw.org (old site) 403 |
+| 38806188252 | parliament.go.ke bills page links: the tracker is at `/house-business/bill-tracker` |
+| 38806522553 | parliament.go.ke bill tracker (no Sacco entry in the page text; the table is not in the HTML), Order Paper 15 October 2026 (no Sacco item), Order Paper 1 April 2026 |
+| 38806152366 | Order Paper 1 April 2026; SASRA 2024 licence list (`?wpdmdl=1136`) |
+| 38806561755 | Mzalendo's "original PDF" copy of the Bill: 24 pages, no text layer (same scan). new.kenyalaw.org gazettes and bills listings: 403 |
+| 38806897423 | Kenya Law Act page: "This is the latest version of this Act" (20 June 2025, amended by Act No. 6 of 2025); no section 59A or secondary-Sacco text |
+| 38806961983 | Mzalendo Bill page: masthead "Kenya Gazette Supplement No. 106 (National Assembly Bills No.32) ... NAIROBI, 30th June, 2025" |
+| 38807050987 | SASRA 2024 and 2025 licence lists: signing dates |
+
+### Re-verified (all match)
+
+- 357 SACCOs (179 DT, 178 NWDT); deposits KES 726.50bn + 106.24bn = 832.74bn; microfinance banks KES 44.99bn
+  (832.74 / 44.99 = 18.5); 7,873,095 members: AR 2025 Table 4 p33 and Table 8 p41.
+- Account bands, Table 21 (p76) and Table 22 (p77): every account count, deposit amount and share in the Receipt and
+  chart 1. Recomputed: 16,875 + 526 = 17,401k of 18,953k = 91.8%; 44.61 + 35.64 = 80.25bn, 9.6% of 832.80; 638 + 154
+  = 792k; 298.55 + 319.66 = 618.21bn, 74.2%. 884.83 − 795.78 = 89.05bn, 11.19%.
+- Board message p16–17: Bill No. 32 of 2025 "seeks to operationalize the Deposit Guarantee Fund by addressing the
+  existing legal gaps"; readiness "once enacted"; Nufaika–Fortune merger "for supporting struggling SACCOs". p38: 2026
+  list is Kenya Gazette Notice No. 1146 dated 30 January 2026; public caution. p40: winding-up "as provided in the
+  Cooperative Societies Act".
+- Not re-opened: the June 2026 quarterly figures (884.83 and the chart 2 series) rest on `data/registry/sasra_sector.json`
+  as in the first check; KDIC FAQ (first check run 38804870216).
+
+### Verify items
+
+- **Act s59(1) ceiling: cleared.** Kenya Law 2025-06-20 (latest version) and 2018-01-01: "The Deposit Guarantee Fund
+  shall provide protection for members' deposits, but not shares, up to an amount of one hundred thousand shillings in
+  respect of each member." The Receipt now states KES 100,000 (summary, lede, What happened, analysis, verdict).
+- **Bill wording and stage: cleared by rewording.** No official copy with a text layer exists that the probe can reach:
+  the parliament.go.ke PDF and Mzalendo's original are the same scan; Kenya Law's bills and gazette listings return
+  403. The Receipt no longer quotes the Bill (the 59A quotation from Mzalendo's OCR is cut). It now describes the
+  Bill from SASRA's own report (section 10.1, p158), which states the same substance: the gaps are the "absence of a
+  moratorium to build the fund, thus exposing the government to liability to pay claims immediately it is
+  operationalized" and "ambiguity in the appointment of independent members of the Board of Trustees", and "the Bill
+  establishes a moratorium which allows the fund to make payments only upon accumulation of sufficient money to meet
+  its obligations". Stage: the National Assembly's order paper for 1 April 2026 lists the Bill for First Reading; the
+  15 October 2026 order paper has no Sacco item; the bill tracker's table does not load without a browser. Kenya
+  Law's latest version of the Act (20 June 2025) has no 59A. The Receipt states only the April 2026 order paper.
+  The Bill's date (30 June 2025) is the Gazette Supplement masthead as transcribed by Mzalendo.
+- **2024 licence list date: cleared.** "Dated at Nairobi this 30th day of January 2024", Peter Njuguna, CEO. It is a
+  SASRA public notice; no Gazette notice number appears in its text. Source date changed to 2024-01-30. The 2025
+  list is dated 28 January 2025 (source date corrected from 2025-01-27). The table's lead-in no longer says every list
+  ran in the Gazette; it cites Gazette Notice No. 1146 for 2026 only.
+- **Disclosure: remains** (founder to confirm; not touched).
+
+### Changes made to the Receipt
+
+1. **"Cannot pay" softened.** SASRA never says the Fund cannot pay. It says the Bill would "operationalize" it and
+   that the current Act lacks a moratorium, so claims would be payable "immediately it is operationalized". The
+   problem is that the Fund has not been made operational, not that the law forbids payment; and the Bill SASRA backs
+   would add a wait, not remove one. Title now "a deposit guarantee fund that has yet to be switched on"; verdict
+   (three places) "has yet to be made operational ... a SACCO saver a KES 100,000 promise on paper"; summary and lede
+   reworded to match; Opinion section notes the Bill "would make members wait while the Fund fills up";
+   "would wait on a winding-up" softened to "would most likely".
+2. Section 59 ceiling now quoted. Analysis line ties the account bands to the KES 100,000 ceiling, counted by account.
+3. Bill 59A quotation (Mzalendo OCR) replaced by SASRA's own description; order-paper stage added; Mzalendo source
+   replaced by the 1 April 2026 order paper.
+4. Call 2 reworded so it does not depend on the unconfirmed Gazette mechanism ("a date ... appointed and published").
+5. "What would change our mind": "a Gazette notice opening the Fund" now "a date set for the Fund to start paying
+   claims".
+6. Source dates: 2024 list 2024-01-30, 2025 list 2025-01-28.
+
+`python3 scripts/receipt_check.py`: 12 Receipts, 0 problems. `pytest tests/site -k receipt`: 13 passed.

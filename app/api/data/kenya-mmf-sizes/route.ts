@@ -1,14 +1,9 @@
-import { cmaFundsCsv } from "@/lib/data/cma-mmf";
+import { dataFileResponse, LICENCE_LINE, TERMS_URL } from "@/lib/api";
+import { cmaFundsCsv, loadCmaFunds } from "@/lib/data/cma-mmf";
 
-export const dynamic = "force-static";
-
-/** Free CSV: every Kenyan money market fund and its size, from the CMA's quarterly report. */
-export function GET() {
-  return new Response(cmaFundsCsv(), {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="afronomics-kenya-money-market-fund-sizes.csv"',
-      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-    },
-  });
+/** Free CSV (or ?format=xlsx): every Kenyan money market fund and its size, from the CMA's quarterly report. */
+export function GET(request: Request) {
+  const f = loadCmaFunds();
+  const csv = ["# Kenya money market funds by assets under management", `# Source: ${f ? `${f.publisher}, ${f.report} (${f.source})` : "Capital Markets Authority"}. Compiled by Afronomics (afronomicsfeed.com).`, cmaFundsCsv()].join("\n");
+  return dataFileResponse(request, csv, { dataset: "kenya-money-market-fund-sizes", title: "Kenya money market funds by size", asOf: f?.as_of ?? new Date().toISOString().slice(0, 10), href: "/rates/kenya/money-market-funds" }, `${LICENCE_LINE} Terms: ${TERMS_URL}`);
 }

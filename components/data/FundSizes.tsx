@@ -58,6 +58,10 @@ export function FundSizes({ readDaily }: { readDaily: Set<string> }) {
         , table &ldquo;Money Market Funds&rdquo;. Updated when the CMA publishes the next quarter.{" "}
         <a href="/api/data/kenya-mmf-sizes" download className="underline underline-offset-2">
           Download as CSV
+        </a>{" "}
+        or{" "}
+        <a href="/api/data/kenya-mmf-sizes?format=xlsx" download className="underline underline-offset-2">
+          Excel
         </a>
         . Fund managers: publish your daily yield as text on your fund page and it will be read here every weekday.
       </p>

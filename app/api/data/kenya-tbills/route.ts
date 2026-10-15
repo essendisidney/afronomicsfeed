@@ -13,5 +13,5 @@ export async function GET(request: Request) {
   const file = loadTbills();
   const access = await apiAccess(request, "/data/kenya-tbills", { csv: true });
   const sliced = sliceRows(request, file.rows, (r) => r.value_date, range, access, CSV_KEYED);
-  return apiCsv(tbillsCsv({ ...file, rows: sliced.rows }), "afronomics-kenya-tbill-auctions.csv", access, sliced.free);
+  return apiCsv(tbillsCsv({ ...file, rows: sliced.rows }), "afronomics-kenya-tbill-auctions.csv", access, sliced.free, { request, meta: { dataset: "kenya-tbill-auctions", title: "Kenya Treasury bill auctions", href: "/markets/kenya-tbills" } });
 }

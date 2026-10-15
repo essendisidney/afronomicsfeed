@@ -35,26 +35,31 @@ export default async function PackPage({ searchParams }: { searchParams: Promise
       lede={
         <p>
           Someone on your team spends a day each month pulling rates, curves and currency moves into a document for the investment committee. This is that
-          document, assembled from the published results the moment they land, with the source under every figure. Four pages, A4, your institution’s name on
-          the cover.
+          document, assembled from the published results the moment they land, with the source under every figure. Four sections, A4 or US Letter, your
+          institution’s name on the cover and on every page.
         </p>
       }
       aside={
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <p className="text-[14px] font-semibold text-ink">See this month’s sample</p>
-          <p className="mt-1 text-[13px] leading-5 text-ink-soft">The full pack with live figures. Open it, then print to PDF.</p>
-          <a href="/pack/sample" target="_blank" rel="noopener" className="mt-4 inline-block rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
-            Open the sample pack
+          <p className="mt-1 text-[13px] leading-5 text-ink-soft">The full pack with this month’s figures, as the PDF your committee would receive.</p>
+          <a href="/documents/committee-pack-sample.pdf" className="mt-4 inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
+            Download the sample (PDF, A4)
           </a>
+          <p className="mt-2 text-[13px] text-ink-soft">
+            <a href="/documents/committee-pack-sample-letter.pdf" className="inline-flex min-h-11 items-center underline underline-offset-2">US Letter</a>
+            <span aria-hidden="true"> · </span>
+            <a href="/pack/sample" target="_blank" rel="noopener" className="inline-flex min-h-11 items-center underline underline-offset-2">Read it in the browser</a>
+          </p>
         </div>
       }
     >
       <CheckoutNotice query={query} />
-      <SectionTitle kicker="Inside" title="Four pages, every figure sourced" />
+      <SectionTitle kicker="Inside" title="Four sections, every figure sourced" />
       <ol className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-2">
         {contents.map((c) => (
           <li key={c.n} className="bg-surface px-5 py-5">
-            <p className="text-[13px] font-semibold text-gold">Page {c.n}</p>
+            <p className="text-[13px] font-semibold text-gold">Section {c.n}</p>
             <p className="mt-1 font-serif text-2xl text-ink">{c.t}</p>
             <p className="mt-2 text-sm leading-6 text-ink-soft">{c.d}</p>
           </li>
@@ -65,12 +70,12 @@ export default async function PackPage({ searchParams }: { searchParams: Promise
         <SectionTitle kicker="Every market" title="The same pack for ten markets" />
         <p className="mt-2 max-w-3xl text-sm leading-6 text-ink-soft">
           Kenya’s pack carries the yield curve, bonds and the shilling comparison. Every other market on the monitor has its own: that market’s bills, real
-          yield, demand, currency and next-auction date up front, then the ten-market view and the index. Open a sample and print to PDF.
+          yield, demand, currency and next-auction date up front, then the ten-market view and the index. Each sample is a PDF.
         </p>
         <ul className="mt-4 flex flex-wrap gap-2">
           {billMarkets.map((m) => (
             <li key={m.slug}>
-              <a href={m.slug === "kenya" ? "/pack/sample" : `/pack/${m.slug}/sample`} target="_blank" rel="noopener" className="inline-block rounded-full border border-rule bg-surface px-4 py-1.5 text-[13px] font-medium text-ink hover:border-accent">
+              <a href={m.slug === "kenya" ? "/documents/committee-pack-sample.pdf" : `/documents/committee-pack-${m.slug}-sample.pdf`} className="inline-flex min-h-11 items-center rounded-full border border-rule bg-surface px-4 py-1.5 text-[13px] font-medium text-ink hover:border-accent">
                 {m.country} pack
               </a>
             </li>

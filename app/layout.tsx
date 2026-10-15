@@ -11,8 +11,8 @@ import "./globals.css";
 const sans = localFont({
   variable: "--font-sans",
   src: [
-    { path: "./fonts/archivo-latin-wdth-normal.woff2", weight: "100 900", style: "normal" },
-    { path: "./fonts/archivo-latin-wdth-italic.woff2", weight: "100 900", style: "italic" },
+    { path: "../public/fonts/archivo-latin-wdth-normal.woff2", weight: "100 900", style: "normal" },
+    { path: "../public/fonts/archivo-latin-wdth-italic.woff2", weight: "100 900", style: "italic" },
   ],
   declarations: [{ prop: "font-stretch", value: "62% 125%" }],
   // "optional": the font is preloaded and used when it arrives in time (almost always); on a very slow first visit the
@@ -22,10 +22,10 @@ const sans = localFont({
   adjustFontFallback: "Arial",
 });
 
-/* Headlines and case titles (rebuild brief, section 7): Source Serif 4, SIL Open Font Licence (fonts/SOURCE-SERIF-4-OFL.txt). */
+/* Headlines and case titles (rebuild brief, section 7): Source Serif 4, SIL Open Font Licence (public/fonts/SOURCE-SERIF-4-OFL.txt). */
 const serif = localFont({
   variable: "--font-headline",
-  src: [{ path: "./fonts/source-serif-4-latin-wght-normal.woff2", weight: "200 900", style: "normal" }],
+  src: [{ path: "../public/fonts/source-serif-4-latin-wght-normal.woff2", weight: "200 900", style: "normal" }],
   fallback: ["Georgia", "Times New Roman", "serif"],
   // Headlines wait for their own font (it is preloaded) rather than paint in a fallback and re-wrap when it lands:
   // phones without Times New Roman (Android, Linux) have no size-matched fallback, so a swap changes line counts.

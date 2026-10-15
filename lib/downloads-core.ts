@@ -17,6 +17,11 @@ export function isGatedCsv(path: string) {
   return GATED.test(path);
 }
 
+/** The same dataset as an Excel workbook (lib/documents/data-files.ts): Cover, Data and Notes sheets. */
+export function xlsxHref(csv: string) {
+  return `${csv}${csv.includes("?") ? "&" : "?"}format=xlsx`;
+}
+
 /** The full-history URL of a gated CSV: its own cache key, never stored by the CDN (lib/api.ts). */
 export function fullHistoryHref(csv: string) {
   return `${csv}${csv.includes("?") ? "&" : "?"}full=1`;

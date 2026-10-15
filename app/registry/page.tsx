@@ -94,6 +94,9 @@ export default async function RegistryPage({ searchParams }: { searchParams: Pro
         <a href="/api/registry" className="ml-auto inline-flex min-h-11 items-center font-semibold text-forest underline underline-offset-4" data-track="download_click">
           Download CSV
         </a>
+        <a href="/api/registry?format=xlsx" className="inline-flex min-h-11 items-center font-semibold text-forest underline underline-offset-4" data-track="download_click">
+          Excel
+        </a>
       </form>
 
       <p className="tabular mt-6 text-[13px] text-muted">

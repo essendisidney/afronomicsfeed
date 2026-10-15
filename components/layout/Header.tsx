@@ -32,7 +32,7 @@ const institutionLinks = [
   { href: "/watch/sample", label: "Watch pack sample" },
 ] as const;
 
-const readerLinks = [...utilityNav, { href: "/stories", label: "Stories" }, { href: "/subscribe", label: "Newsletter" }, { href: "/pricing#readers", label: "Pro" }];
+const readerLinks = [...utilityNav, { href: "/stories", label: "Stories" }, { href: "/subscribe", label: "Newsletter" }, { href: "/pricing#readers", label: "Reader plans" }];
 
 function SearchIcon({ className = "h-[18px] w-[18px]" }: { className?: string }) {
   return (
@@ -234,7 +234,7 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
               }}
               aria-expanded={open}
               aria-controls="site-menu"
-              className="flex h-14 w-full flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-night-muted"
+              className="flex h-14 w-full flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-night-muted aria-expanded:text-night-ink"
             >
               <svg viewBox="0 0 20 20" aria-hidden="true" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                 <path d="M4 6h12M4 10h12M4 14h12" />

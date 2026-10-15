@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "The Afronomics Morning and Weekly — free newsletters",
-  description: "Africa’s markets before 7am every weekday, and the week in 54 economies every Monday. Free, every figure linked to its source.",
+  description: "Africa’s markets before 07:30 every weekday, and the week in 54 economies every Monday. Free, every figure linked to its source.",
   alternates: { canonical: `${site.url}/subscribe` },
 };
 
@@ -19,7 +19,7 @@ export default async function SubscribePage({ searchParams }: { searchParams: Pr
       title="The Afronomics Morning and Weekly"
       lede={
         <p>
-          The Morning: Africa’s markets before 7am, every weekday, East Africa time. The Weekly: five minutes on 54 economies, every Monday. One sign-up, both
+          The Morning: Africa’s markets before 07:30, every weekday, East Africa time. The Weekly: five minutes on 54 economies, every Monday. One sign-up, both
           notes.
         </p>
       }

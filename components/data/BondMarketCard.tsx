@@ -85,7 +85,8 @@ export function BondMarketCard({ snap, label }: { snap: BondSnapshot; label?: st
         </tbody>
       </table>
       <Trend points={snap.monthly} />
-      <p className="mt-auto flex flex-wrap items-center gap-x-3 pt-3 text-[12px] [&_a]:inline-flex [&_a]:min-h-6 [&_a]:min-w-6 [&_a]:items-center">
+      {/* Links on one row (44px tall on a phone), then the publisher and the free-tier note as one quiet line. */}
+      <p className="mt-auto flex flex-wrap items-center gap-x-4 pt-3 text-[13px] [&_a]:inline-flex [&_a]:min-h-11 [&_a]:min-w-6 [&_a]:items-center sm:[&_a]:min-h-7">
         {latest[0]?.source ? (
           <a href={latest[0].source} target="_blank" rel="noopener noreferrer" className="text-forest underline underline-offset-2">
             Source notice
@@ -94,12 +95,13 @@ export function BondMarketCard({ snap, label }: { snap: BondSnapshot; label?: st
         <a href={`/api/data/bonds/${market.slug}`} title="Latest 12 months free" className="text-forest underline underline-offset-2">
           CSV
         </a>
-        <FullHistoryLink csv={`/api/data/bonds/${market.slug}`} />
         <a href={`/api/v1/bonds/${market.slug}`} title="Latest 12 months free; full history with a key" className="text-forest underline underline-offset-2">
           API
         </a>
-        <span className="text-muted">CSV and API: latest 12 months free</span>
-        <span className="text-muted">{market.publisher}</span>
+        <FullHistoryLink csv={`/api/data/bonds/${market.slug}`} />
+      </p>
+      <p className="mt-1 text-[12px] leading-5 text-muted">
+        {market.publisher}. CSV and API: latest 12 months free.
       </p>
     </article>
   );

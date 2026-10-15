@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const chip = (on: boolean) =>
-  `inline-flex min-h-9 items-center rounded-full border px-3 text-[13px] font-medium ${on ? "border-ink bg-ink text-paper" : "border-rule bg-surface text-ink-soft hover:border-ink"}`;
+  `inline-flex min-h-11 items-center rounded-full border px-3 text-[13px] font-medium sm:min-h-9 ${on ? "border-ink bg-ink text-paper" : "border-rule bg-surface text-ink-soft hover:border-ink"}`;
 
 export default async function ReceiptsPage({ searchParams }: { searchParams: Promise<{ sector?: string; type?: string }> }) {
   const { sector, type } = await searchParams;

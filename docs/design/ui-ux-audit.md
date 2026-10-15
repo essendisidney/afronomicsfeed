@@ -160,3 +160,97 @@ three essays in one 11,000px column on a phone. The in-page chips help but scrol
 5. Chart axis labels on phones; lazy-load the weekly chart.
 6. `/thank-you` dead end.
 7. Add a Playwright check to CI: `scrollWidth <= 390` and axe on the 16 pages above, so regressions are caught.
+
+---
+
+# Weekly pass 2: 15 October 2026 (ISO week 42, slice m–r)
+
+**Scope.** (a) Header, phone menu and tab bar, footer, Today, `/pricing` (with `#pilot` and the pilot form),
+`/data/frontier-local-debt`, `/markets/bonds`. (b) Pages changed in the last 7 days, led by `/receipts`, the Receipt
+page (`/receipts/2026-10-14-quickmart-ipo`, a draft shown on preview builds), `/record`, `/pack`, `/for-institutions`,
+`/registry`, `/compare`, `/casebook`. (c) This week's slice: `/markets/*`, `/morning`, `/numbers`, `/pack`, `/pricing`,
+`/rates/*`, `/record`, `/receipts`, `/registry`, `/reference`. All at 390px and 1280px, light and dark, on a production
+build (`next build`, `SUPABASE_URL` pointed at a dead port, as in CI), read as an institutional buyer and as a Kenyan
+reader on a phone. (d) `scripts/site-qa.mjs` with its speed pass.
+
+Screenshots: session scratchpad, `…/scratchpad/uiux-2026-10-15/` (`before-<page>-<width>[-dark].png`,
+`after-…`, plus `before-menu-390.png` / `after-menu-390.png`).
+
+## Baseline
+
+| Check | Before | After |
+| --- | --- | --- |
+| Site QA (64 pages × 4 variants, 938–1,079 links) | **FAIL**: `/registry` largest content 2,856 ms on slow 4G (budget 2,500) | **PASS** (`/registry` 1,716 ms, shift 0.016) |
+| `/registry` HTML | 1.39 MB (412 rows, each with an evidence tag) | 0.46 MB (100 rows a page) |
+| `/registry` at 390px | 45,353px tall | 13,498px |
+| `/compare` at 390px | 17,376px (figures broke as "KES 75.27 / bn") | 13,897px |
+| Footer at 390px | fifth column alone on the left, half the width | spans both columns, links in two |
+
+## Findings, ranked (trust and conversion first)
+
+1. **`/registry` failed the speed budget and was a 45,000px scroll on a phone.** Every one of 412 institutions was
+   rendered at once. *Fixed:* 100 rows a page, A to Z, with numbered pages above and below the table (each page's
+   name range in its label); the CSV and Excel downloads still give the full list. On a phone the kind chips sit in
+   one sideways row and the downloads on their own line: wrapped, they re-flowed when the web font arrived late,
+   which alone pushed layout shift to 0.102 once the page got faster.
+2. **Stale and contradictory copy an institution would catch.** The Open reader tier promised "the DFI pipeline,
+   signals" (both removed; `/signals` redirects to `/`); the app manifest still said "DFI pipelines"; `/markets/tbills`
+   said "Every market's full record is a free download" while every download says "latest 12 months free; full
+   history with a key". *Fixed* (removed or corrected; no price or figure changed).
+3. **Timing overclaims.** "The moment they land / it lands" on `/pack`, `/for-institutions` (twice) and the
+   `/markets/tbills` alert box: the data is read by scheduled jobs and `/status` publishes lateness. The Morning was
+   "Africa's markets before 7am" on `/morning`, `/subscribe` and in search, but the job starts at 07:00 Nairobi, and
+   Today and `/pricing` already said "before 07:30". *Fixed:* claims removed or reworded ("Get each result by alert");
+   the Morning says "before 07:30" everywhere.
+4. **Breadcrumbs disagreed with the navigation.** 78 pages began "Home /", 12 "Today /", and on a phone a Receipt's
+   long title wrapped onto its own line behind a stray "/". *Fixed in `components/ui/Breadcrumbs.tsx`:* the first
+   crumb is always "Today"; a current-page crumb over 28 characters (it repeats the h1) is hidden below 640px.
+5. **Figures broke across lines in tables** ("KES 75.27 / bn" on `/compare`, `/registry` and other `.data-table`s on
+   phones). *Fixed:* `td[data-num]` never wraps (`app/globals.css`); the table scrolls sideways as designed.
+6. **Bond market cards on `/data/frontier-local-debt` mixed links and notes in one cramped row** (24px link targets,
+   "CSV and API: latest 12 months free" wedged between links). *Fixed:* links on one row, 44px on phones (Source
+   notice · CSV · API, then the full-history link), publisher and the free-tier note as one quiet line beneath.
+7. **The lead chart's reference label ran through a bar** ("100%: the whole year's profit" over the 2023 bar on Today
+   and the Receipt). *Fixed:* the label has a halo in the card colour (`components/charts/BarChart.tsx`).
+8. **Tap targets under 44px** in this week's pages: `/morning` (Kiswahili, low-data and WhatsApp links, 14px tall),
+   `/receipts` filter chips (36px). *Fixed* (44px on phones, as before from 640px).
+9. **Footer on phones:** the fifth column (Company) sat alone in the left half under four paired columns. *Fixed:* an
+   odd last column spans both phone columns with its links in two (176px shorter on every page).
+10. **Smaller label and hierarchy fixes.** Phone menu "Pro" → "Reader plans"; the tab bar's "More" lights up while the
+    menu is open; `/pricing` "Why this cheap" → "Why the price is low"; `/record` section headings used two weights
+    (`font-serif` 600 and `t-h2`), now all `t-h2`; `/markets/bonds` Kenya card read "19 Oct 2026 / settles" under
+    "Newest settlement", now "still to settle"; `/morning` title shortened to stay under 65 characters.
+
+## Left, and why
+
+- **Body font swaps in late on slow phones (known).** Archivo (`display: optional`) still arrives after first paint
+  under the slow-4G profile and re-flows text: `/receipts` 0.058, `/rates/kenya` 0.078, `/registry` 0.016 after this
+  pass. Font strategy is out of scope for this pass; the registry fix only removes the wrapping that amplified it.
+- **USD approximations disagree:** Team reader plan is "About $49" on `/pricing` (`lib/site.ts`, hard-coded) and
+  "about $45" on `/for-institutions` (computed from `KES_PER_USD = 129` in `lib/billing/ratecard.ts`). Prices and
+  conversions are the founder's call; one source for both is the fix.
+- **Draft Receipt on Today in preview builds.** Production hides drafts (`VERCEL_ENV`), so readers never see it, but
+  every preview and this QA run show "Draft, not public" as Today's lead. Worth a production-like QA run with
+  `AF_HIDE_DRAFTS=1` to see Today's real empty state.
+- **`/reference` promises "Reply within the hour on a working day"**; everywhere else the desk says one working day.
+  A service promise, not a layout defect: for the founder.
+- **Breadcrumb links are 21px tall** (WCAG 2.5.8 spacing exception; QA does not count them). Raising them would add a
+  44px row to every page head on phones; better done in the 7b redesign.
+- **`/pricing` is still one 10,000px column on a phone** (previous pass, finding 10); the Institutions/Readers switch
+  belongs with the 7b template work. `docs/rebuild/phase-7b-plan.md` does not exist yet on `main`.
+- **Pinned first columns are wide on some phone tables** (`/receipts/<slug>` "Who gets the money", `/reference`
+  definitions): the 8rem minimum plus long labels leaves one figure column visible. A per-table `mobile="cards"`
+  (`components/ui/DataTable.tsx`) would read better.
+- **`/data/frontier-local-debt` Kenya card lists two "30y" rows** (two different bonds of the same tenor) with no
+  issue code; a buyer cannot tell them apart. Needs the bond name in the row (data shape), not a style change.
+
+## Changed in code
+
+`app/registry/page.tsx`, `components/ui/Breadcrumbs.tsx`, `app/globals.css`, `components/data/BondMarketCard.tsx`,
+`components/charts/BarChart.tsx`, `components/layout/Footer.tsx`, `components/layout/Header.tsx`,
+`app/morning/page.tsx`, `app/receipts/page.tsx`, `app/record/page.tsx`, `app/markets/bonds/page.tsx`,
+`app/markets/tbills/page.tsx`, `app/pack/page.tsx`, `app/for-institutions/page.tsx`, `app/pricing/page.tsx`,
+`app/subscribe/page.tsx`, `app/manifest.ts`, `lib/site.ts`, `lib/search.ts`.
+
+Checks: `npx tsc --noEmit -p .`, `npx eslint` on changed files, `python3 -m pytest -q tests/site` (98 passed, 2
+skipped), `next build`, `scripts/site-qa.mjs --serve` PASS including the speed pass.

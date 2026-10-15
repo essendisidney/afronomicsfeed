@@ -15,8 +15,8 @@ import { buttonClass } from "@/components/ui/Button";
 export const revalidate = 900;
 
 export const metadata: Metadata = {
-  title: "The Afronomics Morning — Africa’s markets before 7am",
-  description: fitDescription("Every weekday at 7am Nairobi: the currencies that moved overnight, the Treasury bill results that landed, what is due today and the headlines that matter, across Africa’s markets."),
+  title: "The Morning — Africa’s markets before 07:30",
+  description: fitDescription("Every weekday by 07:30 Nairobi: the currencies that moved overnight, the Treasury bill results that landed, what is due today and the headlines that matter, across Africa’s markets."),
   // hreflang must be reciprocal: /morning/sw names this page as its English version, so this page names it back.
   alternates: { canonical: `${site.url}/morning`, languages: { en: `${site.url}/morning`, sw: `${site.url}/morning/sw` } },
 };
@@ -30,7 +30,7 @@ export default async function MorningPage() {
     <PageShell
       crumbs={[{ href: "/", label: "Home" }, { label: "Morning" }]}
       kicker={`The Afronomics Morning · ${morningLongDate.format(new Date(note.day))}`}
-      title="Africa’s markets before 7am"
+      title="Africa’s markets before 07:30"
       lede={
         lines.length ? (
           <ul className="space-y-2">
@@ -49,9 +49,10 @@ export default async function MorningPage() {
           <Link href="/subscribe?list=morning" className={buttonClass({ className: "mt-4" })}>
             Get the Morning
           </Link>
-          <p className="mt-4 text-[13px] leading-5">
-            <Link href="/morning/sw" className="underline underline-offset-2 hover:text-accent">Soma kwa Kiswahili</Link> ·{" "}
-            <a href="/lite" className="underline underline-offset-2 hover:text-accent">Low-data version</a> ·{" "}
+          {/* Three small text links were 14px tall on a phone; each is a 44px row there, inline from sm. */}
+          <p className="mt-3 flex flex-wrap gap-x-4 text-[13px] leading-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:items-center sm:[&>a]:min-h-8">
+            <Link href="/morning/sw" className="underline underline-offset-2 hover:text-accent">Soma kwa Kiswahili</Link>
+            <a href="/lite" className="underline underline-offset-2 hover:text-accent">Low-data version</a>
             <a href="/api/edition/morning?format=whatsapp" className="underline underline-offset-2 hover:text-accent">WhatsApp text</a>
           </p>
         </div>

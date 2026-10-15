@@ -15,7 +15,10 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/registry` },
 };
 
-type Query = { kind?: string; county?: string; status?: string };
+type Query = { kind?: string; county?: string; status?: string; page?: string };
+
+/** Rows per page: the full list (400+ rows) was a 45,000px scroll on a phone and too heavy for a slow connection. */
+const PAGE_SIZE = 100;
 
 const statusLabels: Record<string, string> = {
   licensed: "Licensed",
@@ -41,8 +44,28 @@ export default async function RegistryPage({ searchParams }: { searchParams: Pro
   const statuses = [...new Set(all.map((i) => i.status).filter((s): s is string => Boolean(s)))];
   const status = statuses.includes(q.status ?? "") ? q.status : undefined;
   const list = all.filter((i) => (!kind || i.kind === kind) && (!county || i.county === county) && (!status || i.status === status));
+  const pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+  const page = Math.min(pages, Math.max(1, Number.parseInt(q.page ?? "1", 10) || 1));
+  const first = (page - 1) * PAGE_SIZE;
+  const shown = list.slice(first, first + PAGE_SIZE);
+  const pager = (where: string) =>
+    pages > 1 ? (
+      <nav aria-label={`Registry pages, ${where}`} className="mt-3 flex flex-wrap items-center gap-2 text-[14px]">
+        {Array.from({ length: pages }, (_, n) => n + 1).map((n) => (
+          <Link
+            key={n}
+            href={href({ kind, county, status, page: n > 1 ? String(n) : undefined })}
+            aria-current={n === page ? "page" : undefined}
+            aria-label={`Page ${n}: ${list[(n - 1) * PAGE_SIZE].name} to ${list[Math.min(list.length, n * PAGE_SIZE) - 1].name}`}
+            className={`${chip(n === page)} min-w-11 justify-center`}
+          >
+            {n}
+          </Link>
+        ))}
+      </nav>
+    ) : null;
   const chip = (active: boolean) =>
-    `inline-flex min-h-11 items-center rounded-full border px-4 text-[13px] font-medium ${active ? "border-forest bg-forest text-paper" : "border-rule text-ink-soft hover:border-forest hover:text-ink"}`;
+    `inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border px-4 text-[13px] font-medium ${active ? "border-forest bg-forest text-paper" : "border-rule text-ink-soft hover:border-forest hover:text-ink"}`;
   const counts = Object.fromEntries(kindsInOrder.map((k) => [k, all.filter((i) => i.kind === k).length]));
 
   return (
@@ -52,7 +75,8 @@ export default async function RegistryPage({ searchParams }: { searchParams: Pro
       title="Every licensed SACCO, microfinance bank and bank in Kenya"
       lede="Built only from what the regulators publish: SASRA for SACCOs, the Central Bank of Kenya for banks and microfinance banks. Each figure links to the page it comes from. Per-institution figures are published once a year."
     >
-      <nav aria-label="Filter by kind" className="flex flex-wrap gap-2">
+      {/* One sideways-scrolling row on a phone: wrapped, the chips re-flowed into more rows when the web font arrived. */}
+      <nav aria-label="Filter by kind" className="flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
         <Link href={href({ county, status })} aria-current={!kind ? "page" : undefined} className={chip(!kind)}>
           All ({all.length})
         </Link>
@@ -91,17 +115,22 @@ export default async function RegistryPage({ searchParams }: { searchParams: Pro
         <button type="submit" className="min-h-11 rounded-lg border border-forest px-4 font-semibold text-forest hover:bg-forest hover:text-paper">
           Show
         </button>
-        <a href="/api/registry" className="ml-auto inline-flex min-h-11 items-center font-semibold text-forest underline underline-offset-4" data-track="download_click">
-          Download CSV
-        </a>
-        <a href="/api/registry?format=xlsx" className="inline-flex min-h-11 items-center font-semibold text-forest underline underline-offset-4" data-track="download_click">
-          Excel
-        </a>
+        {/* Own row on a phone: squeezed in beside "Show", the links re-wrapped when the web font arrived (layout shift). */}
+        <span className="flex w-full gap-4 sm:ml-auto sm:w-auto">
+          <a href="/api/registry" className="inline-flex min-h-11 items-center font-semibold text-forest underline underline-offset-4" data-track="download_click">
+            Download CSV
+          </a>
+          <a href="/api/registry?format=xlsx" className="inline-flex min-h-11 items-center font-semibold text-forest underline underline-offset-4" data-track="download_click">
+            Excel
+          </a>
+        </span>
       </form>
 
       <p className="tabular mt-6 text-[13px] text-muted">
         {list.length} {list.length === 1 ? "institution" : "institutions"}
+        {pages > 1 ? `, A to Z; showing ${first + 1}–${first + shown.length}` : ""}
       </p>
+      {pager("top")}
       <div className="table-box mt-2 overflow-x-auto" tabIndex={0} role="region" aria-label="Registry (scrolls sideways)">
         <table className="data-table min-w-[640px]">
           <thead>
@@ -116,7 +145,7 @@ export default async function RegistryPage({ searchParams }: { searchParams: Pro
             </tr>
           </thead>
           <tbody>
-            {list.map((i) => {
+            {shown.map((i) => {
               const assets = latest(i, "assets");
               return (
                 <tr key={i.slug}>
@@ -144,6 +173,7 @@ export default async function RegistryPage({ searchParams }: { searchParams: Pro
           </tbody>
         </table>
       </div>
+      {pager("bottom")}
       <p className="mt-6 max-w-3xl text-[13px] leading-5 text-muted">
         Licence status is from SASRA&rsquo;s list for the current year and CBK&rsquo;s latest directories. Figures are the regulators&rsquo;: SASRA&rsquo;s
         annual report gives assets, deposits and loans for each SACCO; CBK&rsquo;s gives each bank&rsquo;s and microfinance bank&rsquo;s. Names are joined

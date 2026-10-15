@@ -85,12 +85,12 @@ export default function BillMonitorPage() {
       lede={
         <p>
           The latest government bill auctions in ten African markets, side by side, each compiled from the central bank’s own results. Histories run
-          from 2000 in South Africa and 2002 in Egypt and Nigeria; the shortest, Zambia’s, starts in 2018. Every market’s full record is a free download.
+          from 2000 in South Africa and 2002 in Egypt and Nigeria; the shortest, Zambia’s, starts in 2018. Every market’s latest 12 months is a free download; the full record comes with a key.
         </p>
       }
       aside={
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
-          <p className="text-[14px] font-semibold text-ink">Get the result the moment it lands</p>
+          <p className="text-[14px] font-semibold text-ink">Get each result by alert</p>
           <p className="mt-1 text-[13px] leading-5 text-ink-soft">A notification on your phone or computer each time a market publishes a new auction.</p>
           <div className="mt-4">
             <AlertButton label="Alert me on every market" />

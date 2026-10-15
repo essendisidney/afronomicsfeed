@@ -57,7 +57,18 @@ export function BarChart({
         {reference ? (
           <g>
             <line x1={pad.left} x2={width - pad.right} y1={y(reference.value)} y2={y(reference.value)} stroke="var(--ink-soft)" strokeWidth={1} strokeDasharray="4 4" />
-            <text x={pad.left} y={y(reference.value) - 5} textAnchor="start" fontSize={11} fill="var(--ink-soft)">
+            {/* A halo in the card colour keeps the label readable where it crosses a bar. */}
+            <text
+              x={pad.left}
+              y={y(reference.value) - 5}
+              textAnchor="start"
+              fontSize={11}
+              fill="var(--ink-soft)"
+              stroke="var(--surface)"
+              strokeWidth={4}
+              strokeLinejoin="round"
+              paintOrder="stroke"
+            >
               {reference.label}
             </text>
           </g>

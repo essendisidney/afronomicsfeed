@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Afronomics — Africa’s markets, sourced",
     short_name: "Afronomics",
     description:
-      "African government auction rates, currencies, DFI pipelines and headlines for 54 economies — every figure linked to its source.",
+      "African government auction rates, currencies and headlines for 54 economies — every figure linked to its source.",
     start_url: "/?source=app",
     scope: "/",
     display: "standalone",

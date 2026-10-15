@@ -76,3 +76,29 @@ Using `lib/salary-calc.ts` logic and `data/kenya/payroll_rates.json` (re-run in 
   the audit's May 2024 to April 2025 figure (KES 71.80bn) is used instead.
 - Nation (Sh206bn over three years): returned 403.
 - Court of Appeal stay ruling of 26 January 2024 (Civil Application E577 of 2023): secondary sources only; cut.
+
+## Second check (15 October 2026)
+
+Independent re-check by a second agent. Probe runs (GitHub Actions, Probe workflow):
+
+- run 38806349501 / job 116668118838: special audit (2532ce07), pp. 1-4 and 13-17, layout kept;
+- run 38806379205 / job 116668218035: Kenya Law search API (`/search/api/documents/?search=...`);
+- run 38806408181 / job 116668320152: KNBS "Economic Survey 2026 Facts and Figures" PDF;
+- runs 38806477844 / job 116668551527 and 38806533545 / job 116668743465: Kenya Law judgment page and a second search, both
+  returned 403 Forbidden (nginx).
+
+| Item | What the source says | Result |
+| --- | --- | --- |
+| Headline: none of 142 affordable housing projects finished | Special audit para 1.6.13 (PDF p. 15), "Physical verification exercise undertaken in April, 2025": row 1 "Affordable Housing Projects 142 0 60 78 0 [4] 142", remark "Four (4) projects were not visited". Para 1.6.12 (p. 14): the Board presented **842** projects in all, of which 142 were Affordable Housing Projects; the rest were institutional housing (159), social housing (24), ESP markets, market sheds, modern markets, floodlights, infrastructure and access roads. The table's total row shows 6 completed projects across the whole portfolio (markets and infrastructure), and the institutional-housing remark reads "Most of the Institutional Housing Projects had been completed and occupied hence 159 were not visited" (OCR cleaned) | Draft title "no project on the list finished" was wrong for the 842-project list. **Fixed**: title now "none of 142 affordable housing projects finished at audit"; the body adds the 159 institutional projects the auditors skipped as mostly completed and occupied |
+| Report scope and date | Cover: "PROJECT STATUS AS AT 31 MARCH, 2025 / FEBRUARY 2026"; foreword signed "AUDITOR-GENERAL ... 27 February, 2026". Parliament's "Papers laid" stamp on p. 1 is illegible in the OCR | Source date set to 2026-02-27, body says "signed on 27 February 2026". Tabling date not stated anywhere in the Receipt. Verify item removed |
+| Collection period | Para 1.6.6: "Between June, 2023 and April 2025, KRA collected a cumulative total of Kshs.114,522,254,794"; Table 4 labels the first period "August 2023 to April 2024" | The audit is inconsistent on the start month. Lede, summary and tile now say "by April 2025" / "to April 2025"; the table keeps Table 4's own labels |
+| 34.72bn split: 14.51 projects, 20.0 T-bills, 0.19 to Treasury; 2.38 in transit; 0.82 commission | Para 1.6.7-1.6.8 (p. 13) | Matches |
+| Court of Appeal judgment | Kenya Law search index (job 116668218035): "Gikenyi B & 5 others v Cabinet Secretary for Lands, Public Works, Housing, [and Urban] Development & 65 others (Civil Appeal E832 of 2024) [2026] KECA 1821 (KLR) (25 September 2026) (Judgment)", Court of Appeal, judges Muchelule, Odunga, Kiage, Karanja, Korir. The judgment text returned 403, so the outcome could not be read from it | Case and date confirmed on Kenya Law; outcome stays attributed to Citizen Digital and The Kenya Times. Court section cut to one attributed sentence with the citation. **Cut**: the 22 October 2024 High Court sentence (press only; not found) and the CRA process point (Citizen Digital only). Verdict line "the courts have now settled" softened to "The Act has now survived the Court of Appeal". Verify item removed |
+| Business Daily / Economic Survey 2026 (96.3% of KES 79.03bn) | KNBS Facts and Figures 2026 (133 pp.) has almost no text layer: no match for housing levy, 79.0, 96.3 | KNBS table not read. **Cut** the paragraph and the Business Daily source. Verify item removed |
+| Board 2024/25 year levy figure / Fund statements | Not used anywhere in the Receipt | Verify item removed (no claim depends on it) |
+| Take-home arithmetic | `lib/salary-calc.ts` run directly (node --experimental-strip-types) with `data/kenya/payroll_rates.json`, levy on vs off, NSSF 0, 2,160, 4,320, 6,480: KES 50,000 net falls 525.00 (PAYE -225.00); KES 100,000 falls 1,050.00 (PAYE -450.00) at every NSSF value | Matches |
+| Disclosure | `data/owner/holdings.json` does not exist | Left in `verify` for the founder |
+
+Also changed: "The audit traced every shilling ... to an account" became "accounted for every shilling ...: remitted, in transit or kept as KRA's commission" (KES 2.38bn was in transit, not in an account).
+
+`python3 scripts/receipt_check.py`: 12 Receipts, 0 problems. `pytest -q tests/site -k receipt`: 13 passed.

@@ -71,3 +71,13 @@ def test_no_allegation_without_a_finding():
 def test_the_dividend_after_tax_is_worked_out_correctly():
     # 0.50 / 7.50 = 6.67%, less 5% withholding = 6.33%.
     assert "about 6.3%" in QUICKMART.read_text()
+
+
+def test_dangote_was_published_with_its_checks_closed():
+    # Published 15 Oct 2026 (decision D-022): disclosure confirmed and verdict approved by the founder, legal read waived.
+    data, body = receipt_check.split((ROOT / "content" / "receipts" / "2026-10-15-dangote-refinery-ipo.md").read_text())
+    assert data["status"] == "published"
+    assert not data.get("verify")
+    assert "[" not in data["disclosure"]
+    # The KES 535 minimum and the 27 October close rest on press reports until we hold the amended memorandum.
+    assert "We have not yet seen the amended memorandum" in body

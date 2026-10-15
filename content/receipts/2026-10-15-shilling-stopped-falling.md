@@ -93,18 +93,14 @@ charts:
     unit: "KES per US dollar, CBK indicative mean rate"
     source: "CBK Weekly Bulletins, 1 December 2023 to 9 October 2026 (Table 1, Kenya Shilling Exchange Rates)"
     data:
-      - { label: "30 Nov 23", value: 153.15 }
-      - { label: "23 Jan 24", value: 161.36 }
-      - { label: "15 Feb 24", value: 153.20 }
-      - { label: "7 Mar 24", value: 142.07 }
-      - { label: "28 Mar 24", value: 131.80 }
-      - { label: "27 Jun 24", value: 129.15 }
-      - { label: "19 Dec 24", value: 129.29 }
-      - { label: "26 Jun 25", value: 129.29 }
-      - { label: "24 Dec 25", value: 129.00 }
-      - { label: "25 Jun 26", value: 129.63 }
-      - { label: "8 Oct 26", value: 129.94 }
-    highlight: ["23 Jan 24"]
+      - { label: "Nov 23", value: 153.15 }
+      - { label: "Jan 24", value: 161.36 }
+      - { label: "Mar 24", value: 131.80 }
+      - { label: "Jun 24", value: 129.15 }
+      - { label: "Jun 25", value: 129.29 }
+      - { label: "Jun 26", value: 129.63 }
+      - { label: "Oct 26", value: 129.94 }
+    highlight: ["Jan 24"]
   - type: bar
     title: "The same dollar bill costs a fifth less in shillings than in January 2024"
     unit: "KES needed, thousands"

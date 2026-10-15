@@ -108,14 +108,14 @@ charts:
     unit: "364-day bill, weighted average rate of accepted bids, % a year"
     source: "Afronomics auction file, CBK Treasury bill results"
     data:
-      - { label: "Jan 2024", value: 16.1 }
-      - { label: "Apr 2024", value: 16.9899 }
-      - { label: "Aug 2024", value: 16.9206 }
-      - { label: "Dec 2024", value: 12.4903 }
-      - { label: "Jun 2025", value: 10.0 }
-      - { label: "Dec 2025", value: 9.3759 }
-      - { label: "Apr 2026", value: 8.27 }
-      - { label: "Oct 2026", value: 9.0383 }
+      - { label: "Jan 24", value: 16.1 }
+      - { label: "Apr 24", value: 16.9899 }
+      - { label: "Aug 24", value: 16.9206 }
+      - { label: "Dec 24", value: 12.4903 }
+      - { label: "Jun 25", value: 10.0 }
+      - { label: "Dec 25", value: 9.3759 }
+      - { label: "Apr 26", value: 8.27 }
+      - { label: "Oct 26", value: 9.0383 }
     highlight: ["Oct 2026"]
   - type: bar
     title: "KES 500,000 in a one-year bill now keeps about half what it kept in 2024"

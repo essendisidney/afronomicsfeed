@@ -48,6 +48,17 @@ export function HealthPanel({ health, latency, freshness }: { health: Health | n
           <HealthList items={attention} label="Figures late or not read" />
         </div>
       ) : null}
+      {health?.workflows?.some((w) => w.failures_in_row) ? (
+        <ul className="mt-4 space-y-1 text-[13px]" aria-label="Workflows failing">
+          {health.workflows
+            .filter((w) => w.failures_in_row)
+            .map((w) => (
+              <li key={w.name} className={w.failures_in_row >= 2 ? "text-down" : "text-ink-soft"}>
+                <strong>{w.name}</strong>: {w.failures_in_row} failed run{w.failures_in_row === 1 ? "" : "s"} in a row, last {w.day}
+              </li>
+            ))}
+        </ul>
+      ) : null}
       <details className="mt-3">
         <summary className="cursor-pointer text-[13px] font-semibold text-muted">Feed freshness, every market</summary>
         <div className="mt-2 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-4 lg:grid-cols-6">

@@ -21,7 +21,8 @@ export const receiptDate = (iso: string) => fmtDay.format(new Date(`${iso}T00:00
 export function ReceiptMeta({ r }: { r: Receipt }) {
   const desk = deskSlug(r.desk);
   return (
-    <p className="t-label flex flex-wrap items-center gap-x-2 gap-y-1 text-muted">
+    // Two lines reserved on phones: the body font can arrive late there and wrap this line (layout shift on /receipts).
+    <p className="t-label flex min-h-8 flex-wrap content-start items-center gap-x-2 gap-y-1 text-muted sm:min-h-0">
       {desk ? (
         <Link href={`/receipts/desks/${desk}`} className="text-forest hover:text-ink">
           {r.desk.replace(/^Afronomics /, "")}

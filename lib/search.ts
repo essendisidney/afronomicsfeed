@@ -63,6 +63,7 @@ export function buildSearchIndex(): SearchHit[] {
     { href: "/numbers", title: "Numbers", kicker: "Section", summary: "Every number we keep, by question: borrowing, savings, loans, policy rates, currencies, economies." },
     { href: "/compare", title: "Compare", kicker: "Section", summary: "Savers, lenders and governments side by side, in the same units." },
     { href: "/stories", title: "Stories", kicker: "Section", summary: "Every brief, weekly note and explainer, filterable by type and topic." },
+    { href: "/markets/kenya-tbills/calculator", title: "Treasury bill calculator", kicker: "Tool", summary: "What a Kenya T-bill costs, pays back and leaves you after 15% tax, at the latest auction." },
     { href: "/rates/kenya/check", title: "Is my rate fair?", kicker: "Tool", summary: "Check a Kenya savings or loan rate against the bill, the best fund and the bank averages." },
     { href: "/rates/nigeria/savings-bond", title: "FGN Savings Bond: this month’s offer", kicker: "Nigeria", summary: "Rates, dates and the minimum for Nigeria’s monthly savings bond, from the DMO’s offer document." },
     { href: "/learn", title: "Learn money, from the basics", kicker: "Learn", summary: "Plain lessons on saving, loans, rates, inflation and currencies; savings and loan calculators; glossary in English and Kiswahili." },

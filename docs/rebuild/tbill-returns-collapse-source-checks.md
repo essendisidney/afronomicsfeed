@@ -77,3 +77,21 @@ Note on run ids: run 38804179441 is the probe of the Feb 2024 page, the Aug 2024
 
 - `python3 scripts/receipt_check.py`: 7 Receipts checked (including a parallel draft), 0 problems.
 - `python3 -m pytest -q tests/site -k receipt`: 13 passed.
+
+## Second check (15 October 2026)
+
+Independent re-read of the primary documents through the Probe workflow, every calculation redone.
+
+| Item | Source / run | Result |
+| --- | --- | --- |
+| Auction results 25 Mar 2024, 1 Apr 2024, 13 Apr 2026, 19 Oct 2026: rates 16.7306% / 16.9899% / 8.2700% (7.4000% 91-day) / 9.0383% and 8.7500%; prices 95.9958, 85.5115, 92.3810, 91.7317, 97.8651; offers and bids 8,000 / 10,000 and 49,796.45 / 6,643.43 (KES m); signed "October 15, 2026" | Probe run 38806125079 | All match. The 1 Apr 2024 price 85.5115 is now read directly in the PDF ("Price per Kshs 100 at average interest 95.9962 92.2333 85.5115"), not only by formula |
+| Chart 1 points, peak since 2023 (364-day 16.9899% on 1 Apr 2024; 91-day 16.7306% on 25 Mar 2024), low 8.27% on 13 Apr 2026; 2024 and 2026 bid/accepted sums | `data/kenya/tbill_auctions.json` rescanned | Match |
+| 15% withholding tax on bills | CBK, FAQs on Government securities (FAQsGoKSecurities.pdf), Probe run 38806125079: worked 91-day bill example, "(b) For Withholding Tax payer at 15% ... But 15% withholding tax = ... Ksh33,696 ... Then investor pays = Kshs11,775,360 + 33,696 = Kshs11,809,056" | Confirmed from CBK. Also matches `lib/data/kenya-rates.ts` `WHT_INTEREST`. **Verify item cleared** |
+| Tax timing | Same FAQ: the CBK adds the tax to the price paid at the auction | **Correction:** the draft's table read "KES 500,000 paid" with tax deducted later. Reworded to "KES 500,000 at the auction price", tax "paid upfront", and a new row "Total paid at the auction" KES 512,708 (500,000 + 12,707.50) and KES 506,760 (500,000 + 6,760.18). Kept figures (72,009; 38,308; 33,702 gap; 91-day 17,728 and 9,271) unchanged and re-computed; they match `lib/tbill-calc.ts`. Comparison-table footnote now says the bill's tax is paid on top of the KES 500,000 |
+| CBR 13.00% (6 Feb 2024), 12.75% and "gradual easing" (6 Aug 2024), 8.75% (10 Feb 2026), held 8.75% (7 Oct 2026); quotes on fiscal deficit, "anchor inflationary expectations...", "noted the ongoing implementation..."; lending rates 17.2% (Nov 2024) and 14.4% (Sep 2026); next meeting December 2026 | Probe run 38806136202 | All match verbatim |
+| MMF sizes 2024 vs 2026 like for like | CMA CIS report Q2 2026, Table 16 "Growth of money Market Funds v Fixed Income Funds": Jun-24 171,180,569,603; Jun-26 459,874,570,485 (= Table 11 total); total CIS Jun-26 948,701,982,032. Q2 2024 report Table 3: Money Market Fund 171,180,569,603, 67.4%. Probe run 38806130218 | Same series from one CMA table, so comparable. **Verify item cleared.** Body reworded to cite Table 16 and give KES 171.2bn and 67%; 459.87 / 171.18 = 2.69 ("about 2.7 times") |
+| MMF yield 10.35% median of five, bank deposit 6.91%, IFB1/2019/016 12.196% | `mmf_history.json`, `rates.json`, `bond_auctions.json` | Match our files. The Etica row is net of fees (fact sheet), so "before fees" was not true of all five: footnote now says "most are quoted before fees" and the body no longer says the fund yield is before fees. Median unaffected. Arithmetic 43,988; 29,368; 60,980 rechecked |
+
+Remaining in `verify`: the disclosure line only (founder to confirm against `data/owner/holdings.json`; not touched per brief).
+
+Checks after edits: `python3 scripts/receipt_check.py` 12 Receipts, 0 problems; `python3 -m pytest -q tests/site -k receipt` 13 passed.

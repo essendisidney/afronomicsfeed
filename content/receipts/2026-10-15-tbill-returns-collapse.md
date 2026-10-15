@@ -46,13 +46,16 @@ sources:
   - name: "CBK, MPC press release, meeting of 7 October 2026"
     url: "https://www.centralbank.go.ke/uploads/mpc_press_release/224745454_MPC%20Press%20Release%20-%20Meeting%20of%20October%207%202026.pdf"
     date: "2026-10-07"
+  - name: "CBK, Frequently asked questions on Government securities (Treasury bill withholding tax worked example)"
+    url: "https://www.centralbank.go.ke/images/FAQs/FAQsGoKSecurities.pdf"
+    date: "2026-10-15"
   - name: "Income Tax Act (Cap. 470), Third Schedule, resident withholding tax rates"
     url: "https://new.kenyalaw.org/akn/ke/act/1973/16/eng@2026-07-01"
     date: "2026-07-01"
   - name: "CMA, Collective Investment Schemes report, Q2 2024"
     url: "https://www.cmarcp.or.ke/images/Docs/2024/CIS_Report_Q2-2024-3.pdf"
     date: "2024-06-30"
-  - name: "CMA, Collective Investment Schemes report, Q2 2026 (Afronomics money market fund size file)"
+  - name: "CMA, Collective Investment Schemes report, Q2 2026, Table 16 and Table 11 (Afronomics money market fund size file)"
     url: "https://www.cmarcp.or.ke/images/Docs/cisreports/2026/CISReportQ2-2026.pdf"
     date: "2026-06-30"
   - name: "Afronomics money market fund file, yields read from fund managers' websites"
@@ -123,8 +126,6 @@ charts:
       - { label: "Oct 2026, 9.04%", value: 38308 }
     highlight: ["Oct 2026, 9.04%"]
 verify:
-  - "Withholding tax on Treasury bill discount is 15% for residents: the Income Tax Act's Third Schedule, para 5(b)(ii), reads 'Government *** of at least two years duration and other sources, fifteen per cent' in our extraction; confirm bills fall under 'other sources' (KRA's own page returned 403)"
-  - "CMA's June 2024 money market fund figure (KES 171 billion) and our June 2026 total (KES 459.9 billion) are compiled the same way, including dollar funds converted to shillings"
   - "Disclosure line against data/owner/holdings.json"
 ---
 
@@ -146,18 +147,19 @@ On KES 500,000 that is the difference between keeping KES 72,009 a year after ta
 
 ## What the numbers show
 
-(Analysis) A Treasury bill is sold at a discount and repaid at face value. The interest is the gap, and 15% of it goes in withholding tax. Here is what KES 500,000 buys and keeps:
+(Analysis) A Treasury bill is sold at a discount and repaid at face value. The interest is the gap, and 15% of it goes in withholding tax, which the CBK collects upfront with the price, its own guide to Government securities shows. Here is what KES 500,000 at the auction price buys and keeps:
 
-| One 364-day bill, KES 500,000 paid | 1 April 2024 | 19 October 2026 |
+| One 364-day bill, KES 500,000 at the auction price | 1 April 2024 | 19 October 2026 |
 | --- | --- | --- |
 | Rate | 16.9899% | 9.0383% |
 | Price per KES 100 | 85.5115 | 91.7317 |
 | Repaid at maturity | KES 584,717 | KES 545,068 |
 | Interest | KES 84,717 | KES 45,068 |
-| Tax at 15% | KES 12,708 | KES 6,760 |
+| Tax at 15%, paid upfront | KES 12,708 | KES 6,760 |
+| Total paid at the auction | KES 512,708 | KES 506,760 |
 | **Kept** | **KES 72,009** | **KES 38,308** |
 
-*Source: CBK auction results (Afronomics auction file). Arithmetic: 500,000 × 100 ÷ price = face value; face value − 500,000 = interest.*
+*Source: CBK auction results (Afronomics auction file). Arithmetic: 500,000 × 100 ÷ price = face value; face value − 500,000 = interest; tax = 15% of interest.*
 
 (Analysis) The gap is KES 33,702 a year, 47% less. A saver living on that interest has lost about KES 2,800 a month.
 
@@ -173,7 +175,7 @@ On KES 500,000 that is the difference between keeping KES 72,009 a year after ta
 
 ## Where the money went
 
-(Facts) Money market funds held KES 171 billion on 30 June 2024, 67.4% of all unit trust assets, according to the Capital Markets Authority. On 30 June 2026 the CMA's money market fund table added up to KES 459.9 billion, out of KES 948.7 billion in all unit trusts.
+(Facts) Money market funds held KES 171.2 billion on 30 June 2024, 67% of all unit trust assets, according to the Capital Markets Authority. On 30 June 2026 they held KES 459.9 billion, out of KES 948.7 billion in all unit trusts. Both money market fund figures come from one series, the CMA's Table 16 in its June 2026 report.
 
 (Analysis) Money market fund assets grew about 2.7 times in two years, while the bill rate halved. What a saver keeps from KES 500,000 for a year now, after 15% tax:
 
@@ -184,9 +186,9 @@ On KES 500,000 that is the difference between keeping KES 72,009 a year after ta
 | 364-day bill, 19 Oct 2026 | 9.0383% | KES 38,308 |
 | Bank deposits, CBK average, Aug 2026 | 6.91% | KES 29,368 |
 
-*Sources: CBK auction results; Afronomics money market fund file (yields as fund managers publish them, before fees); CBK weighted average commercial bank rates. Not like for like: a fund's yield changes daily and is not guaranteed; a bill's is fixed at purchase; the infrastructure bond locks money up for years.*
+*Sources: CBK auction results; Afronomics money market fund file (yields as fund managers publish them; most are quoted before fees); CBK weighted average commercial bank rates. Not like for like: a fund's yield changes daily and is not guaranteed; a bill's is fixed at purchase, and its tax is paid upfront on top of the KES 500,000; the infrastructure bond locks money up for years.*
 
-(Analysis) The fund yield is quoted before fees and moves every day. The bill's 9.04% is locked in for a year. A saver comparing them is comparing a promise with a forecast. You can run your own numbers on the [Treasury bill calculator](/markets/kenya-tbills/calculator).
+(Analysis) The fund yield is the manager's own published figure, and it moves every day. The bill's 9.04% is locked in for a year. A saver comparing them is comparing a promise with a forecast. You can run your own numbers on the [Treasury bill calculator](/markets/kenya-tbills/calculator).
 
 ## Our verdict
 

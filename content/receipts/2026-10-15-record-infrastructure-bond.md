@@ -94,11 +94,7 @@ charts:
     source: "Afronomics bond auction file, CBK Treasury bond results"
     data:
       - { label: "2016", value: 13.339 }
-      - { label: "2017", value: 13.555 }
-      - { label: "2018", value: 12.505 }
       - { label: "2019", value: 12.655 }
-      - { label: "2020", value: 12.051 }
-      - { label: "2021", value: 12.737 }
       - { label: "2022", value: 13.938 }
       - { label: "2023", value: 17.9327 }
       - { label: "2024", value: 18.4607 }

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -97,3 +98,30 @@ def test_embed_route_exists_for_published_charts():
 def test_embed_pages_may_be_framed_and_the_rest_of_the_site_may_not():
     config = (ROOT / "next.config.ts").read_text()
     assert re.search(r'source: "/\(\(\?!embed/\)\.\*\)", headers: \[\{ key: "X-Frame-Options", value: "SAMEORIGIN" \}\]', config)
+
+
+def test_percent_sign_only_for_percentage_units():
+    """A "%" inside a figure in the unit ("after 15% tax, KES") must not put "%" on every bar (it did on the T-bill chart)."""
+    import shutil
+    import subprocess
+
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("node not installed")
+    script = (
+        'import { isPercentUnit } from "./lib/charts/render.ts";'
+        "const cases = %s;"
+        "const bad = Object.entries(cases).filter(([u, want]) => isPercentUnit(u) !== want);"
+        "if (bad.length) { console.error(JSON.stringify(bad)); process.exit(1); }"
+    ) % json.dumps(
+        {
+            "%": True,
+            "% a year": True,
+            "Growth in 2025, %": True,
+            "Dividend paid as % of the year's profit": True,
+            "Interest kept after 15% tax, KES, one 364-day bill": False,
+            "KES bn": False,
+        }
+    )
+    run = subprocess.run([node, "--input-type=module", "-e", script], cwd=ROOT, capture_output=True, text=True)
+    assert run.returncode == 0, run.stderr

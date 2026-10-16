@@ -147,6 +147,20 @@ charts:
       - { label: "2024", value: 13.3 }
       - { label: "2025", value: 8.0 }
     highlight: ["2025"]
+keyNumbers:
+  - value: "KES 15 billion"
+    label: "Asked for half of Quickmart; every shilling goes to the sellers and the company raises nothing"
+    source: "Quick Mart PLC, offer announcement"
+  - value: "19.9 times"
+    label: "Price against last year's reported profit (2025); the sellers quote 12.9 times an adjusted forecast"
+    source: "Quick Mart PLC, information memorandum"
+  - value: "6.3%"
+    label: "Forecast 2026 dividend at KES 7.50 a share, after 5% withholding tax; the one-year bill pays 7.68% after its tax"
+    source: "Quick Mart PLC, information memorandum"
+forYou:
+  - "If you are weighing the offer: at KES 7.50 the forecast dividend pays less after tax than a government bill. What the share offers instead is growth and a price that can rise, or fall."
+  - "On what the company actually earned last year, the price is almost 20 times profit; the 12.9 the sellers quote uses an adjusted forecast."
+  - "Over four years the owners took out about KES 344 million more than the company earned, so the cushion for suppliers and new shareholders in a bad year is thin."
 ---
 
 Quickmart wants KES 15 billion from you by 30 October. Not one shilling of it goes to Quickmart.

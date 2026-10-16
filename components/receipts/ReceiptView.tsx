@@ -3,14 +3,20 @@ import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { BarChart } from "@/components/charts/BarChart";
 import { ChartFrame } from "@/components/charts/ChartFrame";
 import { ChartTools } from "@/components/charts/ChartTools";
+import { ReadingProgress } from "@/components/article/ReadingProgress";
 import { asOfLabel } from "@/components/evidence/EvidenceTag";
+import type { SectionLink } from "@/components/layout/SectionNav";
 import { statusLabel, statusTone } from "@/components/record/EditorialCalls";
+import { JumpChip, JumpRail } from "@/components/receipts/JumpList";
+import { ForYou, KeyNumbers } from "@/components/receipts/ReadingBoxes";
 import { ReceiptBody } from "@/components/receipts/ReceiptBody";
 import { ShareBar } from "@/components/share/ShareBar";
 import { ShareNumberButton } from "@/components/share/ShareNumberButton";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
-import { chartAnchor, chartExport } from "@/lib/charts/receipt-charts";
 import { editorialRows } from "@/lib/editorial";
+import { extractHeadings } from "@/lib/format";
+import { readingMinutes } from "@/lib/reading";
+import { chartAnchor, chartExport } from "@/lib/charts/receipt-charts";
 import { deskSlug, isPublic, receiptEvidence, sectorNames, type Receipt, type ReceiptChart, type ReceiptTile } from "@/lib/receipts";
 import { isPercentUnit } from "@/lib/charts/render";
 import { shareLink } from "@/lib/share";
@@ -22,14 +28,16 @@ const topNetworks: ShareNetwork[] = ["whatsapp", "linkedin", "x", "facebook", "e
 
 /**
  * One Receipt, in the order RECEIPTS.md sets: the free piece, its calls, "Go deeper" (Pro), and the next-chapter
- * sign-up. The verdict line, the figure tiles and the lead chart sit at the top so the point is made without
- * scrolling. Drafts carry a banner and are never public.
+ * sign-up. The verdict line, "The 3 numbers" (or, before a Receipt has them, the figure tiles), "What it means for
+ * you" and the lead chart sit at the top so the point is made without scrolling. A hairline at the top of the window
+ * shows how far through the reader is; "On this page" jumps to each section (a chip on a phone, a rail on a laptop).
+ * Drafts carry a banner and are never public.
  */
 
 const fmtDay = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 export const receiptDate = (iso: string) => fmtDay.format(new Date(`${iso}T00:00:00Z`));
 
-export function ReceiptMeta({ r }: { r: Receipt }) {
+export function ReceiptMeta({ r, minutes }: { r: Receipt; minutes?: number }) {
   const desk = deskSlug(r.desk);
   return (
     // Two lines reserved on phones: the body font can arrive late there and wrap this line (layout shift on /receipts).
@@ -43,8 +51,25 @@ export function ReceiptMeta({ r }: { r: Receipt }) {
       )}
       <span aria-hidden="true">·</span>
       <span>{r.type === "verdict" ? "Receipt" : "Data Receipt"}</span>
-      <span aria-hidden="true">·</span>
-      <time dateTime={r.date}>{receiptDate(r.date)}</time>
+      {minutes ? (
+        // With the reading time the line is too long for a phone, so it breaks before the date on purpose: a break
+        // the late body font cannot move (it would otherwise wrap mid-line and shift the page).
+        <>
+          <span aria-hidden="true" className="hidden sm:inline">
+            ·
+          </span>
+          <span className="flex basis-full items-center gap-x-2 sm:basis-auto">
+            <time dateTime={r.date}>{receiptDate(r.date)}</time>
+            <span aria-hidden="true">·</span>
+            <span>{minutes} min read</span>
+          </span>
+        </>
+      ) : (
+        <>
+          <span aria-hidden="true">·</span>
+          <time dateTime={r.date}>{receiptDate(r.date)}</time>
+        </>
+      )}
       {r.status !== "published" ? <span className="rounded border border-warn px-1.5 py-0.5 text-warn">Draft, not public</span> : null}
     </p>
   );
@@ -117,163 +142,177 @@ export function ReceiptView({ r }: { r: Receipt }) {
   const [lead, ...rest] = r.charts;
   // The ledger's own rows for this Receipt (ids RC-<slug>-<n>, scripts/calls_ledger.py), so each call shows its status.
   const ledger = new Map(editorialRows().filter((x) => x.receipt === r.slug).map((x) => [x.id, x]));
+  const minutes = readingMinutes(r.free);
+  const sections: SectionLink[] = [
+    ...extractHeadings(r.free).map((h) => ({ id: h.id, label: h.title })),
+    ...(r.calls.length ? [{ id: "calls", label: "Our calls" }] : []),
+    { id: "sources", label: "Sources" },
+  ];
   const url = `${site.url}/receipts/${r.slug}`;
   // The share text carries the verdict where there is one: the line a reader would want to pass on.
   const shareTitle = r.verdict ? `${r.title}: ${r.verdict}` : r.title;
   return (
-    <article className="relative mx-auto max-w-3xl">
-      {r.status !== "published" ? (
-        <div role="note" className="mb-5 rounded-xl border border-warn/60 bg-surface px-4 py-3 text-[14px] leading-6 text-ink">
-          <strong>Draft, shown on preview deployments only.</strong> It publishes when every open check has been done against a primary document.
-          {r.verify.length ? (
-            <details className="mt-1 text-[13px] text-ink-soft">
-              <summary className="cursor-pointer font-semibold text-ink">{r.verify.length} open checks</summary>
-              <ul className="mt-1 list-disc space-y-1 pl-5">
-                {r.verify.map((v) => (
-                  <li key={v}>{v}</li>
-                ))}
-              </ul>
-            </details>
-          ) : null}
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,48rem)_minmax(0,1fr)] lg:gap-x-10">
+      <ReadingProgress targetId="receipt" />
+      <article id="receipt" className="relative mx-auto max-w-3xl lg:col-start-2 lg:mx-0 lg:w-full">
+        {r.status !== "published" ? (
+          <div role="note" className="mb-5 rounded-xl border border-warn/60 bg-surface px-4 py-3 text-[14px] leading-6 text-ink">
+            <strong>Draft, shown on preview deployments only.</strong> It publishes when every open check has been done against a primary document.
+            {r.verify.length ? (
+              <details className="mt-1 text-[13px] text-ink-soft">
+                <summary className="cursor-pointer font-semibold text-ink">{r.verify.length} open checks</summary>
+                <ul className="mt-1 list-disc space-y-1 pl-5">
+                  {r.verify.map((v) => (
+                    <li key={v}>{v}</li>
+                  ))}
+                </ul>
+              </details>
+            ) : null}
+          </div>
+        ) : null}
+        {/* The Laterite stamp (D-026): rubber-stamp ink on every Receipt, top right of the headline block. */}
+        <span aria-hidden="true" className="af-stamp">
+          <span className="af-stamp-word">Receipt</span>
+          <span className="af-stamp-date tabular">{receiptDate(r.date)}</span>
+        </span>
+        <ReceiptMeta r={r} minutes={minutes} />
+        <h1 className="t-display mt-3 text-ink text-balance">{r.title}</h1>
+        <VerdictLine r={r} />
+        {isPublic(r) ? (
+          <ShareBar url={url} title={shareTitle} summary={r.summary} campaign="receipt" label="Share this Receipt" networks={topNetworks} className="mt-4" />
+        ) : null}
+        {r.keyNumbers.length ? <KeyNumbers r={r} /> : <FigureTiles r={r} tiles={r.tiles} />}
+        <ForYou r={r} />
+        <JumpChip sections={sections} />
+        {lead ? (
+          <div className="mt-5">
+            <ReceiptChartView r={r} chart={lead} n={1} />
+          </div>
+        ) : null}
+
+        <div className="mt-8">
+          <ReceiptBody content={r.free} />
         </div>
-      ) : null}
-      {/* Signature-look preview (lib/look.ts): the Laterite look stamps every Receipt; hidden in every other look. */}
-      <span aria-hidden="true" className="af-stamp">
-        <span className="af-stamp-word">Receipt</span>
-        <span className="af-stamp-date tabular">{receiptDate(r.date)}</span>
-      </span>
-      <ReceiptMeta r={r} />
-      <h1 className="t-display mt-3 text-ink text-balance">{r.title}</h1>
-      <VerdictLine r={r} />
-      {isPublic(r) ? (
-        <ShareBar url={url} title={shareTitle} summary={r.summary} campaign="receipt" label="Share this Receipt" networks={topNetworks} className="mt-4" />
-      ) : null}
-      <FigureTiles r={r} tiles={r.tiles} />
-      {lead ? (
-        <div className="mt-5">
-          <ReceiptChartView r={r} chart={lead} n={1} />
-        </div>
-      ) : null}
 
-      <div className="mt-8">
-        <ReceiptBody content={r.free} />
-      </div>
+        {rest.length ? (
+          <div className="mt-8 grid grid-cols-1 gap-4">
+            {rest.map((c, i) => (
+              <ReceiptChartView key={c.title} r={r} chart={c} n={i + 2} />
+            ))}
+          </div>
+        ) : null}
 
-      {rest.length ? (
-        <div className="mt-8 grid grid-cols-1 gap-4">
-          {rest.map((c, i) => (
-            <ReceiptChartView key={c.title} r={r} chart={c} n={i + 2} />
-          ))}
-        </div>
-      ) : null}
+        {r.disclosure ? <p className="mt-6 text-[13px] leading-5 text-muted">Disclosure: {r.disclosure}</p> : null}
+        <p className="mt-2 text-[13px] leading-5 text-muted">
+          By the {r.desk}. Checked against the sources below and published under our{" "}
+          <Link href="/method" className="underline underline-offset-2">
+            house rules
+          </Link>
+          ; Afronomics Feed is accountable for every word.{" "}
+          <Link href="/corrections" className="underline underline-offset-2">
+            Report a correction
+          </Link>
+          .
+        </p>
 
-      {r.disclosure ? <p className="mt-6 text-[13px] leading-5 text-muted">Disclosure: {r.disclosure}</p> : null}
-      <p className="mt-2 text-[13px] leading-5 text-muted">
-        By the {r.desk}. Checked against the sources below and published under our{" "}
-        <Link href="/method" className="underline underline-offset-2">
-          house rules
-        </Link>
-        ; Afronomics Feed is accountable for every word.{" "}
-        <Link href="/corrections" className="underline underline-offset-2">
-          Report a correction
-        </Link>
-        .
-      </p>
+        {r.calls.length ? (
+          <section aria-labelledby="calls" className="mt-10 rounded-2xl border border-rule bg-surface px-5 py-5">
+            <h2 id="calls" className="t-h2 text-ink">
+              Our calls, on the record
+            </h2>
+            <p className="mt-1 text-[14px] text-ink-soft">
+              {r.status === "published"
+                ? "Each is dated and graded against the source named, when it publishes. Win or lose, it stays on the record."
+                : "These go on the public record when this Receipt is published; a call whose date has passed by then is left off."}
+            </p>
+            <ol className="mt-4 divide-y divide-rule">
+              {r.calls.map((c, i) => {
+                const row = ledger.get(`RC-${r.slug}-${i + 1}`);
+                return (
+                  <li key={c.statement} className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                    <p className="min-w-0 text-[15px] leading-6 text-ink sm:flex-1">{c.statement}</p>
+                    {/* A fixed-width column, so a long source name wraps inside it instead of squeezing the call. */}
+                  <p className="tabular text-[12.5px] text-muted sm:w-60 sm:flex-none sm:text-right">
+                      Settled by {c.check_source}, {receiptDate(c.check_date)}
+                      {row ? (
+                        <Link href={`/record#${row.id}`} className={`t-label mt-0.5 block ${statusTone[row.status]}`}>
+                          {statusLabel[row.status]}
+                        </Link>
+                      ) : null}
+                    </p>
+                  </li>
+                );
+              })}
+            </ol>
+            <Link href="/record" className="mt-2 inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-ink">
+              Our record →
+            </Link>
+          </section>
+        ) : null}
 
-      {r.calls.length ? (
-        <section aria-labelledby="calls" className="mt-10 rounded-2xl border border-rule bg-surface px-5 py-5">
-          <h2 id="calls" className="t-h2 text-ink">
-            Our calls, on the record
+        {r.full ? (
+          <section aria-labelledby="go-deeper" className="on-night mt-6 rounded-2xl bg-night px-5 py-6 text-night-ink sm:px-6">
+            <h2 id="go-deeper" className="t-h2">
+              Coming with Pro: the full file
+            </h2>
+            {/* Until Pro sign-in and the full files are built (docs/rebuild/phase-7e-r3-plan.md, R3), this lists what the
+                full file will hold; nothing here is sold as already delivered. */}
+            <p className="mt-1 text-[14px] text-night-soft">Being built now. Pro readers get each part the day it is published.</p>
+            <div className="receipt-full mt-2 text-[15px] leading-6 text-night-soft">
+              <ReceiptBody content={r.full.replace(/^##[^\n]*\n/, "")} />
+            </div>
+            <div className="mt-4 max-w-md">
+              <PaystackCheckout plan="pro" label="Get Pro, KES 1,500 a month" variant="accent" />
+            </div>
+          </section>
+        ) : null}
+
+        <section aria-labelledby="next-chapter" className="mt-6 rounded-2xl border border-rule bg-surface px-5 py-5">
+          <h2 id="next-chapter" className="t-h2 text-ink">
+            Get the next chapter first
           </h2>
           <p className="mt-1 text-[14px] text-ink-soft">
-            {r.status === "published"
-              ? "Each is dated and graded against the source named, when it publishes. Win or lose, it stays on the record."
-              : "These go on the public record when this Receipt is published; a call whose date has passed by then is left off."}
+            {r.followUps.length
+              ? `Next: ${r.followUps.filter((f) => f.date >= r.date).map((f) => `${f.what}, ${receiptDate(f.date)}`).slice(0, 2).join("; ")}.`
+              : "The next Receipt, before 06:00."}
           </p>
-          <ol className="mt-4 divide-y divide-rule">
-            {r.calls.map((c, i) => {
-              const row = ledger.get(`RC-${r.slug}-${i + 1}`);
-              return (
-                <li key={c.statement} className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                  <p className="min-w-0 text-[15px] leading-6 text-ink sm:flex-1">{c.statement}</p>
-                  {/* A fixed-width column, so a long source name wraps inside it instead of squeezing the call. */}
-                  <p className="tabular text-[12.5px] text-muted sm:w-60 sm:flex-none sm:text-right">
-                    Settled by {c.check_source}, {receiptDate(c.check_date)}
-                    {row ? (
-                      <Link href={`/record#${row.id}`} className={`t-label mt-0.5 block ${statusTone[row.status]}`}>
-                        {statusLabel[row.status]}
-                      </Link>
-                    ) : null}
-                  </p>
-                </li>
-              );
-            })}
-          </ol>
-          <Link href="/record" className="mt-2 inline-flex min-h-11 items-center text-[14px] font-semibold text-forest hover:text-ink">
-            Our record →
-          </Link>
+          <div className="mt-3">
+            <SubscribeForm button="Send it to me" />
+          </div>
         </section>
-      ) : null}
 
-      {r.full ? (
-        <section aria-labelledby="go-deeper" className="on-night mt-6 rounded-2xl bg-night px-5 py-6 text-night-ink sm:px-6">
-          <h2 id="go-deeper" className="t-h2">
-            Coming with Pro: the full file
+        <section aria-labelledby="sources" className="mt-10">
+          <h2 id="sources" className="t-h2 text-ink">
+            Sources
           </h2>
-          {/* Until Pro sign-in and the full files are built (docs/rebuild/phase-7e-r3-plan.md, R3), this lists what the
-              full file will hold; nothing here is sold as already delivered. */}
-          <p className="mt-1 text-[14px] text-night-soft">Being built now. Pro readers get each part the day it is published.</p>
-          <div className="receipt-full mt-2 text-[15px] leading-6 text-night-soft">
-            <ReceiptBody content={r.full.replace(/^##[^\n]*\n/, "")} />
-          </div>
-          <div className="mt-4 max-w-md">
-            <PaystackCheckout plan="pro" label="Get Pro, KES 1,500 a month" variant="accent" />
-          </div>
+          <ol className="mt-3 space-y-1.5 text-[14px] leading-6">
+            {r.sources.map((s) => (
+              <li key={s.url}>
+                <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-ink underline underline-offset-2 hover:text-forest">
+                  {s.name}
+                </a>
+                <span className="text-muted">, {receiptDate(s.date)}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-4 text-[13px] text-muted">
+            Sector: {sectorNames[r.sector] ?? r.sector}
+            {r.series ? (
+              <>
+                {" · "}
+                <Link href={`/receipts/series/${r.series}`} className="underline underline-offset-2">
+                  The {r.series} file
+                </Link>
+              </>
+            ) : null}
+          </p>
         </section>
-      ) : null}
 
-      <section aria-labelledby="next-chapter" className="mt-6 rounded-2xl border border-rule bg-surface px-5 py-5">
-        <h2 id="next-chapter" className="t-h2 text-ink">
-          Get the next chapter first
-        </h2>
-        <p className="mt-1 text-[14px] text-ink-soft">
-          {r.followUps.length
-            ? `Next: ${r.followUps.filter((f) => f.date >= r.date).map((f) => `${f.what}, ${receiptDate(f.date)}`).slice(0, 2).join("; ")}.`
-            : "The next Receipt, before 06:00."}
-        </p>
-        <div className="mt-3">
-          <SubscribeForm button="Send it to me" />
-        </div>
-      </section>
-
-      <section aria-labelledby="sources" className="mt-10">
-        <h2 id="sources" className="t-h2 text-ink">
-          Sources
-        </h2>
-        <ol className="mt-3 space-y-1.5 text-[14px] leading-6">
-          {r.sources.map((s) => (
-            <li key={s.url}>
-              <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-ink underline underline-offset-2 hover:text-forest">
-                {s.name}
-              </a>
-              <span className="text-muted">, {receiptDate(s.date)}</span>
-            </li>
-          ))}
-        </ol>
-        <p className="mt-4 text-[13px] text-muted">
-          Sector: {sectorNames[r.sector] ?? r.sector}
-          {r.series ? (
-            <>
-              {" · "}
-              <Link href={`/receipts/series/${r.series}`} className="underline underline-offset-2">
-                The {r.series} file
-              </Link>
-            </>
-          ) : null}
-        </p>
-      </section>
-
-      {isPublic(r) ? <ShareBar url={url} title={shareTitle} summary={r.summary} campaign="receipt" variant="block" className="mt-10" /> : null}
-    </article>
+        {isPublic(r) ? <ShareBar url={url} title={shareTitle} summary={r.summary} campaign="receipt" variant="block" className="mt-10" /> : null}
+      </article>
+      <aside aria-label="Reading aids" className="hidden lg:col-start-3 lg:block">
+        <JumpRail sections={sections} minutes={minutes} />
+      </aside>
+    </div>
   );
 }

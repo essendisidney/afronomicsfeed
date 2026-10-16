@@ -94,6 +94,20 @@ charts:
       - { label: "Govt securities", value: 18.2 }
       - { label: "Net loans", value: 6.6 }
     highlight: ["Govt securities"]
+keyNumbers:
+  - value: "KES 287.2 billion"
+    label: "Banks' interest from government securities in 2025, up from KES 262.3 billion in 2024"
+    source: "CBK, Bank Supervision Annual Report 2025"
+  - value: "KES 500.4 billion"
+    label: "Banks' interest from loans in 2025, down from KES 540.9 billion in 2024"
+    source: "CBK, Bank Supervision Annual Report 2025"
+  - value: "18.2%"
+    label: "Growth in banks' holdings of government securities in 2025, against 6.6% for loans"
+    source: "CBK, Bank Supervision Annual Report 2025"
+forYou:
+  - "If you borrow: banks' average lending rate fell to 14.82% in December 2025 from 16.89% a year earlier, one reason their interest from loans fell."
+  - "For every KES 100 banks had lent to customers at the end of 2025, they held KES 64 of government paper, up from KES 58 a year earlier."
+  - "Government bonds bought when rates were high keep paying their fixed coupons, one reason banks' government income rose in 2025 even as bill rates fell."
 ---
 
 In 2025 Kenya's banks earned KES 287.2 billion in interest from lending to the government. They earned KES 500.4 billion from lending to everyone else.

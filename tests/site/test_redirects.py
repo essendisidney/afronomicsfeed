@@ -17,10 +17,11 @@ SITE = (ROOT / "lib/site.ts").read_text()
 HUBS = (ROOT / "lib/hubs.ts").read_text()
 
 PARKED_IN_BRIEF = [
-    "/tenders", "/radio", "/rent-check", "/pay-check", "/diaspora", "/send-money", "/trade", "/technology",
+    "/tenders", "/radio", "/rent-check", "/pay-check", "/send-money", "/trade", "/technology",
     "/climate", "/capital", "/economy", "/jobs", "/ask",
 ]
-KEPT_FOR_NOW = {"/chama"}
+# /diaspora was parked in the brief; it is live again as the Diaspora Desk (founder-approved preview, 16 Oct 2026).
+KEPT_FOR_NOW = {"/chama", "/diaspora"}
 
 
 def pairs(block: str) -> list[tuple[str, str]]:

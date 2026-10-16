@@ -1,0 +1,1052 @@
+{
+ "dataset": "Kenya consumer price index (CPI), monthly, KNBS",
+ "checked": "2026-10-15",
+ "note": "Copied by hand from KNBS's monthly CPI releases and the CBK's inflation table on the checked date. KNBS rebased the CPI in March 2020 (new basket, February 2019 = 100); the CBK press release of 30 March 2020 announced it. 'rebased' holds the new index as KNBS prints it (later releases revised the first rebased figures: the March 2020 release said 106.53 for March 2020, the September 2020 release 107.475; we use the revised table). February 2019 is 100 by definition; March 2019 to January 2020 are filled from the 12-month rates KNBS printed for March 2020 to January 2021. 'previous' holds the old index (February 2009 = 100) for February 2018 to February 2019 from KNBS's February 2019 release; earlier months are filled from the CBK's table of KNBS's official 12-month inflation (January 2011 to January 2019). The two are spliced at February 2019 (link_month). Note: the CBK table prints June 2024's two columns the wrong way round (12-month 6.22, annual average 4.64); KNBS's release says 4.6 per cent. That month is not used here.",
+ "sources": [
+  {
+   "name": "KNBS: CPI and inflation rates (monthly releases)",
+   "url": "https://www.knbs.or.ke/cpi-and-inflation-rates/"
+  },
+  {
+   "name": "KNBS: CPI release, September 2026 (latest)",
+   "url": "https://www.knbs.or.ke/wp-content/uploads/2026/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2026.pdf"
+  },
+  {
+   "name": "KNBS: CPI release, February 2019 (old base)",
+   "url": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+  },
+  {
+   "name": "CBK: inflation rates (KNBS's 12-month inflation by month)",
+   "url": "https://www.centralbank.go.ke/inflation-rates/"
+  },
+  {
+   "name": "CBK: KNBS rebases CPI and PPI (press release, 30 March 2020)",
+   "url": "https://www.centralbank.go.ke/uploads/press_releases/821025969_Press%20Release%20-%20Kenya%20National%20Bureau%20of%20Statistics%20Rebases%20CPI%20and%20PPI%20and%20Launches%20Quarterly%20Labour%20Force%20Survey.pdf"
+  }
+ ],
+ "link_month": "2019-02",
+ "rebased": {
+  "base": "February 2019 = 100",
+  "levels": [
+   {
+    "month": "2019-02",
+    "index": 100.0,
+    "source": "KNBS base period (February 2019 = 100)"
+   },
+   {
+    "month": "2020-02",
+    "index": 107.174,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-03",
+    "index": 107.475,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-04",
+    "index": 108.495,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-05",
+    "index": 108.602,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-06",
+    "index": 108.266,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-07",
+    "index": 108.354,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-08",
+    "index": 108.573,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-09",
+    "index": 108.571,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-10",
+    "index": 109.604,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2020-11",
+    "index": 110.779,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2020-12",
+    "index": 111.866,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-01",
+    "index": 112.576,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-02",
+    "index": 113.365,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-03",
+    "index": 113.814,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-04",
+    "index": 114.746,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-05",
+    "index": 114.977,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-06",
+    "index": 115.11,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-07",
+    "index": 115.446,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-08",
+    "index": 115.71,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-09",
+    "index": 116.077,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-10",
+    "index": 116.67,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2021-11",
+    "index": 117.2,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2021-12",
+    "index": 118.27,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-01",
+    "index": 118.64,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-02",
+    "index": 119.13,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-03",
+    "index": 120.14,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-04",
+    "index": 122.17,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-05",
+    "index": 123.12,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-06",
+    "index": 124.22,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-07",
+    "index": 125.05,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-08",
+    "index": 125.58,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-09",
+    "index": 126.73,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2022.pdf"
+   },
+   {
+    "month": "2022-10",
+    "index": 127.86,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2023.pdf"
+   },
+   {
+    "month": "2022-11",
+    "index": 128.31,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2023.pdf"
+   },
+   {
+    "month": "2022-12",
+    "index": 128.99,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2023.pdf"
+   },
+   {
+    "month": "2023-01",
+    "index": 129.29,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2023.pdf"
+   },
+   {
+    "month": "2023-02",
+    "index": 130.13,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2023.pdf"
+   },
+   {
+    "month": "2023-03",
+    "index": 131.18,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2023.pdf"
+   },
+   {
+    "month": "2023-04",
+    "index": 131.83,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2023.pdf"
+   },
+   {
+    "month": "2023-05",
+    "index": 133.01,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2023.pdf"
+   },
+   {
+    "month": "2023-06",
+    "index": 134.01,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2023.pdf"
+   },
+   {
+    "month": "2023-07",
+    "index": 134.15,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/06/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2024.pdf"
+   },
+   {
+    "month": "2023-08",
+    "index": 134.02,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/06/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2024.pdf"
+   },
+   {
+    "month": "2023-09",
+    "index": 135.32,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2023-10",
+    "index": 136.71,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2023-11",
+    "index": 137.03,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2023-12",
+    "index": 137.55,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-01",
+    "index": 138.15,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-02",
+    "index": 138.34,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-03",
+    "index": 138.66,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-04",
+    "index": 138.4,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-05",
+    "index": 139.64,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-06",
+    "index": 140.23,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-07",
+    "index": 139.94,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-08",
+    "index": 139.87,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-09",
+    "index": 140.13,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2024.pdf"
+   },
+   {
+    "month": "2024-10",
+    "index": 140.44,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/12/Kenya-Consumer-Price-Indices-and-Inflation-Rates-December-2024.pdf"
+   },
+   {
+    "month": "2024-11",
+    "index": 140.81,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/12/Kenya-Consumer-Price-Indices-and-Inflation-Rates-December-2024.pdf"
+   },
+   {
+    "month": "2024-12",
+    "index": 141.66,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2024/12/Kenya-Consumer-Price-Indices-and-Inflation-Rates-December-2024.pdf"
+   },
+   {
+    "month": "2025-01",
+    "index": 142.68,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/02/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2025.pdf"
+   },
+   {
+    "month": "2025-02",
+    "index": 143.12,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/02/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2025.pdf"
+   },
+   {
+    "month": "2025-03",
+    "index": 143.69,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/04/Kenya-Consumer-Price-Indices-and-Inflation-Rates-April-2025.pdf"
+   },
+   {
+    "month": "2025-04",
+    "index": 144.09,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/04/Kenya-Consumer-Price-Indices-and-Inflation-Rates-April-2025.pdf"
+   },
+   {
+    "month": "2025-05",
+    "index": 144.88,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/06/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2025.pdf"
+   },
+   {
+    "month": "2025-06",
+    "index": 145.58,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/06/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2025.pdf"
+   },
+   {
+    "month": "2025-07",
+    "index": 145.74,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/08/Kenya-Consumer-Price-Indices-and-Inflation-Rates-August-2025.pdf"
+   },
+   {
+    "month": "2025-08",
+    "index": 146.21,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/08/Kenya-Consumer-Price-Indices-and-Inflation-Rates-August-2025.pdf"
+   },
+   {
+    "month": "2025-09",
+    "index": 146.56,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/10/Kenya-Consumer-Price-Indices-and-Inflation-Rates-October-2025_1.pdf"
+   },
+   {
+    "month": "2025-10",
+    "index": 146.84,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/10/Kenya-Consumer-Price-Indices-and-Inflation-Rates-October-2025_1.pdf"
+   },
+   {
+    "month": "2025-11",
+    "index": 147.08,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/12/Kenya-Consumer-Price-Indices-and-Inflation-Rates-December-2025.pdf"
+   },
+   {
+    "month": "2025-12",
+    "index": 148.02,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2025/12/Kenya-Consumer-Price-Indices-and-Inflation-Rates-December-2025.pdf"
+   },
+   {
+    "month": "2026-01",
+    "index": 148.96,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2026/02/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2026.pdf"
+   },
+   {
+    "month": "2026-02",
+    "index": 149.2,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2026/02/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2026.pdf"
+   },
+   {
+    "month": "2026-03",
+    "index": 150.0,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2026/04/Kenya-Consumer-Price-Indices-and-Inflation-Rates-April-2026.pdf"
+   },
+   {
+    "month": "2026-04",
+    "index": 152.15,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2026/04/Kenya-Consumer-Price-Indices-and-Inflation-Rates-April-2026.pdf"
+   },
+   {
+    "month": "2026-05",
+    "index": 154.56,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2026/06/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2026.pdf"
+   },
+   {
+    "month": "2026-06",
+    "index": 154.91,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2026/06/Kenya-Consumer-Price-Indices-and-Inflation-Rates-June-2026.pdf"
+   },
+   {
+    "month": "2026-07",
+    "index": 155.2,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2026/08/Kenya-Consumer-Price-Indices-and-Inflation-Rates-August-2026.pdf"
+   },
+   {
+    "month": "2026-08",
+    "index": 155.85,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2026/08/Kenya-Consumer-Price-Indices-and-Inflation-Rates-August-2026.pdf"
+   },
+   {
+    "month": "2026-09",
+    "index": 156.47,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2026/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2026.pdf"
+   }
+  ],
+  "twelve_month_rates": [
+   {
+    "month": "2020-03",
+    "rate": 5.84,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-04",
+    "rate": 6.01,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-05",
+    "rate": 5.33,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-06",
+    "rate": 4.59,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-07",
+    "rate": 4.36,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-08",
+    "rate": 4.36,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-09",
+    "rate": 4.2,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2020.pdf"
+   },
+   {
+    "month": "2020-10",
+    "rate": 4.84,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2020-11",
+    "rate": 5.33,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2020-12",
+    "rate": 5.62,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   },
+   {
+    "month": "2021-01",
+    "rate": 5.69,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-September-2021.pdf"
+   }
+  ]
+ },
+ "previous": {
+  "base": "February 2009 = 100",
+  "levels": [
+   {
+    "month": "2018-02",
+    "index": 188.0,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-03",
+    "index": 190.62,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-04",
+    "index": 193.18,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-05",
+    "index": 195.05,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-06",
+    "index": 193.31,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-07",
+    "index": 191.59,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-08",
+    "index": 192.18,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-09",
+    "index": 194.14,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-10",
+    "index": 192.6,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-11",
+    "index": 192.25,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2018-12",
+    "index": 193.51,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2019-01",
+    "index": 194.18,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   },
+   {
+    "month": "2019-02",
+    "index": 195.78,
+    "source": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-and-Inflation-Rates-February-2019.pdf"
+   }
+  ],
+  "twelve_month_rates": [
+   {
+    "month": "2011-01",
+    "rate": 5.42,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-02",
+    "rate": 6.54,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-03",
+    "rate": 9.19,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-04",
+    "rate": 12.05,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-05",
+    "rate": 12.95,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-06",
+    "rate": 14.48,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-07",
+    "rate": 15.53,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-08",
+    "rate": 16.67,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-09",
+    "rate": 17.32,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-10",
+    "rate": 18.91,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-11",
+    "rate": 19.72,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2011-12",
+    "rate": 18.93,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-01",
+    "rate": 18.31,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-02",
+    "rate": 16.69,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-03",
+    "rate": 15.61,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-04",
+    "rate": 13.06,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-05",
+    "rate": 12.22,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-06",
+    "rate": 10.05,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-07",
+    "rate": 7.74,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-08",
+    "rate": 6.09,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-09",
+    "rate": 5.32,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-10",
+    "rate": 4.14,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-11",
+    "rate": 3.25,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2012-12",
+    "rate": 3.2,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-01",
+    "rate": 3.67,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-02",
+    "rate": 4.45,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-03",
+    "rate": 4.11,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-04",
+    "rate": 4.14,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-05",
+    "rate": 4.05,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-06",
+    "rate": 4.91,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-07",
+    "rate": 6.03,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-08",
+    "rate": 6.67,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-09",
+    "rate": 8.29,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-10",
+    "rate": 7.76,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-11",
+    "rate": 7.36,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2013-12",
+    "rate": 7.15,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-01",
+    "rate": 7.21,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-02",
+    "rate": 6.86,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-03",
+    "rate": 6.27,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-04",
+    "rate": 6.41,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-05",
+    "rate": 7.3,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-06",
+    "rate": 7.39,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-07",
+    "rate": 7.67,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-08",
+    "rate": 8.36,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-09",
+    "rate": 6.6,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-10",
+    "rate": 6.43,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-11",
+    "rate": 6.09,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2014-12",
+    "rate": 6.02,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-01",
+    "rate": 5.53,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-02",
+    "rate": 5.61,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-03",
+    "rate": 6.31,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-04",
+    "rate": 7.08,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-05",
+    "rate": 6.87,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-06",
+    "rate": 7.03,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-07",
+    "rate": 6.62,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-08",
+    "rate": 5.84,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-09",
+    "rate": 5.97,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-10",
+    "rate": 6.72,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-11",
+    "rate": 7.32,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2015-12",
+    "rate": 8.01,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-01",
+    "rate": 7.78,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-02",
+    "rate": 6.84,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-03",
+    "rate": 6.45,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-04",
+    "rate": 5.27,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-05",
+    "rate": 5.0,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-06",
+    "rate": 5.8,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-07",
+    "rate": 6.4,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-08",
+    "rate": 6.26,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-09",
+    "rate": 6.34,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-10",
+    "rate": 6.47,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-11",
+    "rate": 6.68,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2016-12",
+    "rate": 6.35,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-01",
+    "rate": 6.99,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-02",
+    "rate": 9.04,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-03",
+    "rate": 10.28,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-04",
+    "rate": 11.48,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-05",
+    "rate": 11.7,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-06",
+    "rate": 9.21,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-07",
+    "rate": 7.47,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-08",
+    "rate": 8.04,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-09",
+    "rate": 7.06,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-10",
+    "rate": 5.72,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-11",
+    "rate": 4.73,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2017-12",
+    "rate": 4.5,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-01",
+    "rate": 4.83,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-02",
+    "rate": 4.46,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-03",
+    "rate": 4.18,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-04",
+    "rate": 3.73,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-05",
+    "rate": 3.95,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-06",
+    "rate": 4.28,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-07",
+    "rate": 4.35,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-08",
+    "rate": 4.04,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-09",
+    "rate": 5.7,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-10",
+    "rate": 5.53,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-11",
+    "rate": 5.58,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2018-12",
+    "rate": 5.71,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   },
+   {
+    "month": "2019-01",
+    "rate": 4.7,
+    "source": "https://www.centralbank.go.ke/inflation-rates/"
+   }
+  ]
+ }
+}

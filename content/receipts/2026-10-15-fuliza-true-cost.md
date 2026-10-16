@@ -11,7 +11,7 @@ entities:
   - "Sidian Bank"
   - "Central Bank of Kenya"
 series: mobile-credit-costs
-verdict: "Fuliza is priced in shillings a night, which makes it look cheap; added up, Safaricom's own fees on a KES 1,000 balance work out at 231% to 584% a year, sixteen to forty times the average bank loan."
+verdict: "Fuliza is priced in shillings a night, which is accurate but hard to add up; worked out as simple yearly rates, the published fees on a KES 1,000 balance come to 231% to 584% a year, sixteen to forty times the average bank loan rate."
 labels:
   - Facts
   - Analysis
@@ -104,11 +104,11 @@ charts:
     highlight: ["FY26"]
 ---
 
-Borrow KES 1,000 on Fuliza and keep it for a week, and Safaricom's own price list says you pay KES 52.
+Borrow KES 1,000 on Fuliza and keep it for a week, and by Safaricom's own price list the charges come to KES 52.
 
-That sounds small, and it is small in shillings. As a yearly rate it is 271%. The average bank loan in Kenya cost 14.34% a year in August 2026.
+That sounds small, and it is small in shillings. As a simple yearly rate, by our arithmetic, it is 271%. The average bank loan in Kenya cost 14.34% a year in August 2026.
 
-**The Afronomics verdict: Fuliza is priced in shillings a night, which makes it look cheap; added up, Safaricom's own fees on a KES 1,000 balance work out at 231% to 584% a year, sixteen to forty times the average bank loan.**
+**The Afronomics verdict: Fuliza is priced in shillings a night, which is accurate but hard to add up; worked out as simple yearly rates, the published fees on a KES 1,000 balance come to 231% to 584% a year, sixteen to forty times the average bank loan rate.**
 
 ## What Fuliza charges
 
@@ -168,17 +168,17 @@ That sounds small, and it is small in shillings. As a yearly rate it is 271%. Th
 
 ## Our verdict
 
-(Opinion) **Fuliza is priced in shillings a night, which makes it look cheap; added up, Safaricom's own fees on a KES 1,000 balance work out at 231% to 584% a year, sixteen to forty times the average bank loan.**
+(Opinion) **Fuliza is priced in shillings a night, which is accurate but hard to add up; worked out as simple yearly rates, the published fees on a KES 1,000 balance come to 231% to 584% a year, sixteen to forty times the average bank loan rate.**
 
 The fair case for Fuliza is real. It is there at 11pm with no form, no branch and no security. A balance cleared the same day costs 1%, and very small balances pay no daily fee. For a till short by a few hundred shillings until payday tomorrow, a few shillings is a reasonable price for the convenience.
 
-The trouble is the unit. A price in shillings a night is easy to accept and hard to add up: it does not tell anyone that a month on KES 1,000 costs nineteen percent of the money borrowed. The band steps add a trap of their own: the cheapest place to be is just under a threshold, and a shilling over it can triple the bill.
+The difficulty, in our view, is the unit. A price in shillings a night is easy to accept and hard to add up: on its own it does not show that a month on KES 1,000 costs nineteen percent of the money borrowed. The band steps add a cliff of their own: the cheapest place to be is just under a threshold, and a shilling over it can triple the bill. The highest yearly figure, 584%, is for a single night, where most of the cost is the one-off 1% access fee; held for 30 nights, it is 231%.
 
 The fees are not hidden; they are on Safaricom's own page. What a reader needs is the total, and that takes arithmetic. Our calculator does it, for any amount and any number of nights.
 
 ### What would change our mind
 
-Evidence that Fuliza customers see the total cost and a yearly rate before each draw. A tariff that rises smoothly with the balance instead of in steps. Or results showing most Fuliza balances are cleared within a night, so the yearly figures above rarely apply in practice; the booklet does not publish how long balances stay unpaid.
+Evidence that Fuliza customers are shown the total cost and a yearly rate before each draw; we have not tested what the M-PESA menu shows, and Safaricom is welcome to tell us. A tariff that rises smoothly with the balance instead of in steps. Or results showing most Fuliza balances are cleared within a night, so the yearly figures above rarely apply in practice; the booklet does not publish how long balances stay unpaid.
 
 **Check your own numbers:** the [M-PESA and Fuliza charges calculator](/rates/kenya/mpesa-charges) works out what a Fuliza balance costs by the night, and [mobile loans compared](/rates/kenya/mobile-loans) sets Fuliza beside M-Shwari, Tala and the bank average.
 

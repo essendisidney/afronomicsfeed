@@ -106,6 +106,12 @@ DRAWN_FROM_BRAND = [
     "lib/charts/embed.ts",
     "lib/charts/export.ts",
     "lib/charts/palette.ts",
+    "components/rates/Spark.tsx",
+    "components/rates/SeriesChart.tsx",
+    "components/rates/KeyRates.tsx",
+    "components/rates/SeriesBits.tsx",
+    "components/data/Sparkline.tsx",
+    "components/data/StatTile.tsx",
 ]
 HEX = re.compile(r"#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b(?![0-9a-fA-F])|rgba?\(\s*\d")
 
@@ -208,5 +214,8 @@ def test_receipts_share_under_the_verdict_and_at_the_end_and_per_tile():
 
 
 def test_charts_and_calls_have_share_icons():
-    assert "<ChartShare" in (ROOT / "components" / "charts" / "ChartFrame.tsx").read_text()
+    frame = (ROOT / "components" / "charts" / "ChartFrame.tsx").read_text()
+    # Exactly one share control per chart: the link icon only where the chart has no ChartTools (whose Share sends the PNG).
+    assert "{tools ? null : <ChartShare" in frame
+    assert "share()" in (ROOT / "components" / "charts" / "ChartTools.tsx").read_text()
     assert 'campaign="call"' in (ROOT / "components" / "record" / "EditorialCalls.tsx").read_text()

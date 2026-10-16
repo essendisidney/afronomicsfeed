@@ -37,7 +37,8 @@ export function ChartFrame({
           <p className="t-h3 text-ink text-balance">{title}</p>
           <p className="mt-0.5 text-[12px] text-muted">{unit}</p>
         </div>
-        <ChartShare id={anchor} title={title} />
+        {/* One share control per chart: with ChartTools, its Share button (the PNG); without, this link icon. */}
+        {tools ? null : <ChartShare id={anchor} title={title} />}
       </figcaption>
       <div className="mt-3">{children}</div>
       <div className="mt-3 flex flex-wrap items-center gap-2 text-[12px] text-muted">

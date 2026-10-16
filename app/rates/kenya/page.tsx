@@ -12,6 +12,21 @@ import { FairRate } from "@/components/data/FairRate";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
 import { TableScroll } from "@/components/ui/DataTable";
+import { FollowSheet } from "@/components/rates/FollowSheet";
+import { FollowLink, HeadlineTile, TrendCell } from "@/components/rates/SeriesBits";
+import { fundSlug } from "@/lib/data/fund-links";
+import { getSeries } from "@/lib/data/rate-series";
+import type { RateOption } from "@/lib/data/kenya-rates";
+
+/** The stored series behind a row of the table, if there is one (a bond row is a single issue, not a series). */
+function seriesFor(o: RateOption) {
+  const bill = o.name.match(/^(91|182|364)-day Treasury bill$/);
+  if (bill) return getSeries(`kenya-${bill[1]}d`);
+  if (o.group === "Money market funds") return getSeries(`kenya-mmf-${fundSlug(o.name)}`);
+  if (o.name.startsWith("Bank fixed deposit")) return getSeries("kenya-bank-deposit");
+  if (o.name.startsWith("Bank savings")) return getSeries("kenya-bank-savings");
+  return null;
+}
 
 export const revalidate = 1800;
 
@@ -34,6 +49,7 @@ export default function KenyaRatesPage() {
   const history = bankRateHistory(72).map((r) => ({ date: `${r.month}-01`, values: { deposit: r.deposit, savings: r.savings, lending: r.lending } }));
   const max = Math.max(...options.map((o) => o.gross), 1);
   const groups: RateOptionGroup[] = ["Government", "Money market funds", "Banks"];
+  const headline = getSeries("kenya-91d");
 
   return (
     <PageShell
@@ -44,21 +60,10 @@ export default function KenyaRatesPage() {
         <p>
           Every place to put Kenya shillings, on one scale, after withholding tax. Government paper from the Central Bank’s auction results, fund yields
           from each manager’s own published figure, and the Central Bank’s averages for what banks pay.
-          {best && savings ? ` Right now the gap between the best option and a bank savings account is ${(best.net - savings.net).toFixed(1)} points a year.` : ""}
+          {best && savings ? ` Right now the highest after tax is ${best.name} at ${best.net.toFixed(2)}%, ${(best.net - savings.net).toFixed(1)} points a year more than a bank savings account.` : ""}
         </p>
       }
-      aside={
-        best ? (
-          <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
-            <p className="text-[13px] font-medium text-muted">Highest after tax today</p>
-            <p className="af-figure mt-1 font-serif text-3xl text-ink">{best.net.toFixed(2)}%</p>
-            <p className="mt-1 text-[14px] text-ink">{best.name}</p>
-            <p className="mt-1 text-[12px] text-muted">
-              {best.gross.toFixed(2)}% before {Math.round(best.tax * 100)}% withholding tax · {when(best.asOf)}
-            </p>
-          </div>
-        ) : null
-      }
+      aside={headline ? <HeadlineTile series={headline} kicker="Headline rate" /> : null}
     >
       {bench ? (
         <div className="mb-10">
@@ -79,6 +84,9 @@ export default function KenyaRatesPage() {
                 <th className="text-right">After tax</th>
                 <th>Money tied up</th>
                 <th>As of</th>
+                <th>
+                  Trend <span className="font-normal text-muted">and change since last print</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -87,7 +95,7 @@ export default function KenyaRatesPage() {
                 if (!rows.length) return [];
                 return [
                   <tr key={group}>
-                    <th colSpan={6} scope="rowgroup" className="bg-paper-2 pt-4 text-[13px] font-semibold text-ink">
+                    <th colSpan={7} scope="rowgroup" className="bg-paper-2 pt-4 text-[13px] font-semibold text-ink">
                       {group}
                     </th>
                   </tr>,
@@ -109,6 +117,21 @@ export default function KenyaRatesPage() {
                       <td className="text-right font-semibold">{o.net.toFixed(2)}%</td>
                       <td className="text-xs text-ink-soft">{o.lockIn}</td>
                       <td className="whitespace-nowrap text-xs">{when(o.asOf)}</td>
+                      <td>
+                        {(() => {
+                          const ser = seriesFor(o);
+                          return ser ? (
+                            <span className="flex items-center gap-2">
+                              <TrendCell series={ser} />
+                              <FollowLink series={ser} className="inline-flex min-h-11 items-center px-1 text-[12px] font-semibold text-forest underline underline-offset-2">
+                                Follow<span className="sr-only"> {ser.label}</span>
+                              </FollowLink>
+                            </span>
+                          ) : (
+                            <span className="text-[12px] text-muted">Single issue</span>
+                          );
+                        })()}
+                      </td>
                     </tr>
                   )),
                 ];
@@ -120,7 +143,8 @@ export default function KenyaRatesPage() {
           After-tax figures apply Kenya’s withholding tax on interest for residents: 15% on bills, deposits and fund returns, 10% on bonds of ten years or
           more, none on infrastructure bonds. Bonds shown are the latest auction nearest each point on the curve; every issue is on the bond page. Fund yields are the managers’ effective annual yields before fees shown as
           published; past yield is not a promise of future yield. Bank figures are industry averages from the Central Bank; individual banks pay more or less.
-          This is information, not advice.
+          Trend lines show each series’ stored prints (the last 26 auctions, the last 24 months, or every daily fund reading so far) and appear once three
+          are stored; bond rows are single issues, so they have none. This is information, not advice.
         </p>
         {unread.length ? (
           <p className="mt-2 max-w-3xl text-xs leading-5 text-muted">
@@ -182,6 +206,7 @@ export default function KenyaRatesPage() {
       <ContributeBand compact ask="What does your bank or SACCO actually pay you?" />
       <DebtDataLinks country="Kenya" title="Government paper: auction data" />
       <NewsletterBand />
+      <FollowSheet />
     </PageShell>
   );
 }

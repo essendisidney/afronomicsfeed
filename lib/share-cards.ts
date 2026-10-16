@@ -17,6 +17,8 @@ import { netSalary } from "@/lib/salary-calc";
 import { monthsUntil, plan } from "@/lib/savings-goal";
 import { savingsDates, savingsPlaces } from "@/lib/savings-places";
 import type { ShareSpec } from "@/lib/share";
+import { getSeries } from "@/lib/data/rate-series";
+import { changePeriod, formatValue, pointDate, seriesChange } from "@/lib/rate-series-core";
 import { quoteBill } from "@/lib/tbill-calc";
 import { numbersThatMoved } from "@/lib/today-board";
 import { toolDefaults as D } from "@/lib/tool-defaults";
@@ -282,6 +284,22 @@ export function rateSignature(tileId: string, kicker: string, headline: string):
     figure: { value: tile.value, label: tile.change ? `${tile.label}: ${tile.change}` : tile.label },
     line: null,
     source: `Source: ${tile.evidence.source} · ${tile.evidence.dateKind === "value" ? "value " : ""}${cardDay(tile.evidence.asOf)}`,
+  };
+}
+
+/** One rate series (/rates/series/<id>): its latest figure, the change since the previous print, its source and date. */
+export function seriesSignature(id: string): SignatureCard {
+  const s = getSeries(id);
+  const c = s ? seriesChange(s) : null;
+  if (!s || !c) return sectionSignature("Rates", "Every rate, with its history", "Each series from its publisher, with the change since the last print");
+  return {
+    accent: accentFor("markets"),
+    kicker: `Rates · ${s.group}`,
+    stamp: { word: "RATE", date: cardDay(c.latest.date) },
+    headline: s.label,
+    figure: { value: formatValue(c.latest.value, s.unit), label: c.text ? `${c.text} ${changePeriod(s, c.previous!)}` : s.measure },
+    line: null,
+    source: `Source: ${s.source.name} · ${pointDate(c.latest.date, s.frequency)}`,
   };
 }
 

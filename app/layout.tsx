@@ -7,8 +7,14 @@ import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/schema";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-/* Self-hosted: no build-time or runtime call to Google Fonts. */
-const sans = localFont({
+/*
+ * Self-hosted: no build-time or runtime call to Google Fonts.
+ * next/font names each @font-face family after its const, so these must not be generic words: they were "sans" and
+ * "serif", and while the web font was still loading (or after it gave up), Linux and Android resolved "sans" as the
+ * system's generic sans (DejaVu Sans, wide) instead of moving on to the size-matched fallback. Paragraphs then
+ * gained a line and the page shifted when the font settled (0.226 on /markets/kenya-tbills at 390px, slow 4G).
+ */
+const afBody = localFont({
   variable: "--font-sans",
   src: [
     { path: "../public/fonts/archivo-latin-wdth-normal.woff2", weight: "100 900", style: "normal" },
@@ -18,12 +24,14 @@ const sans = localFont({
   // "optional": the font is preloaded and used when it arrives in time (almost always); on a very slow first visit the
   // size-matched fallback stays for that page instead of the text re-wrapping when the font lands (no layout shift).
   display: "optional",
-  fallback: ["Arial", "Helvetica", "sans-serif"],
-  adjustFontFallback: "Arial",
+  // "Archivo Fallback" (app/globals.css) replaces next/font's generated fallback, which is local("Arial") only and so
+  // matches nothing on phones without Arial (Android, Linux); it also covers Liberation Sans, Arimo and Roboto.
+  fallback: ["Archivo Fallback", "Arial", "Helvetica", "sans-serif"],
+  adjustFontFallback: false,
 });
 
 /* Headlines and case titles (rebuild brief, section 7): Source Serif 4, SIL Open Font Licence (public/fonts/SOURCE-SERIF-4-OFL.txt). */
-const serif = localFont({
+const afHeadline = localFont({
   variable: "--font-headline",
   src: [{ path: "../public/fonts/source-serif-4-latin-wght-normal.woff2", weight: "200 900", style: "normal" }],
   fallback: ["Georgia", "Times New Roman", "serif"],
@@ -77,7 +85,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${sans.variable} ${serif.variable} h-full antialiased`}
+      className={`${afBody.variable} ${afHeadline.variable} h-full antialiased`}
     >
       <head>
         <ThemeScript />

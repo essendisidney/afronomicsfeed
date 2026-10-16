@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/data/PageShell";
 import { HubSections } from "@/components/hub/HubSections";
+import { KeyRates } from "@/components/rates/KeyRates";
+import { FollowSheet } from "@/components/rates/FollowSheet";
 import { numbersSections } from "@/lib/hubs";
 import { fitDescription } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -22,7 +24,9 @@ export default function NumbersPage() {
       title="Every number we keep, by the question you bring"
       lede="Each page shows its source and the date its figures are as of. The latest 12 months are free to download."
     >
+      <KeyRates />
       <HubSections sections={numbersSections} />
+      <FollowSheet />
     </PageShell>
   );
 }

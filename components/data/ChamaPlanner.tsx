@@ -109,11 +109,11 @@ export function ChamaPlanner({ options, asOf }: { options: ChamaOption[]; asOf: 
           href={`https://wa.me/?text=${encodeURIComponent(share)}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full bg-ink px-4 py-2 text-[13px] font-semibold text-paper hover:bg-forest"
+          className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2 text-[13px] font-semibold text-paper hover:bg-forest"
         >
           Send to the chama on WhatsApp
         </a>
-        <button type="button" onClick={() => window.print()} className="rounded-full border border-rule px-4 py-2 text-[13px] font-semibold text-ink hover:border-accent">
+        <button type="button" onClick={() => window.print()} className="inline-flex min-h-11 items-center rounded-full border border-rule px-4 py-2 text-[13px] font-semibold text-ink hover:border-accent">
           Print for the meeting
         </button>
       </div>

@@ -195,6 +195,156 @@
    "unit": "%",
    "check_source": "CBK Treasury bond auction results (Afronomics bond auction file)",
    "check_date": "2027-12-31"
+  },
+  {
+   "id": "RC-2026-10-15-housing-levy-money-trail-1",
+   "receipt": "2026-10-15-housing-levy-money-trail",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "The Affordable Housing Board's 2025/26 annual report counts fewer than 20,000 completed housing units",
+   "measure": "Housing units reported complete in the Affordable Housing Board's annual report and financial statements for the year ended 30 June 2026",
+   "comparator": "<",
+   "threshold": 20000,
+   "unit": "units",
+   "check_source": "Affordable Housing Board, annual report and financial statements 2025/26 (tabled in Parliament with the Auditor-General's report)",
+   "check_date": "2027-03-31"
+  },
+  {
+   "id": "RC-2026-10-15-housing-levy-money-trail-2",
+   "receipt": "2026-10-15-housing-levy-money-trail",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "Housing Levy collected in 2025/26 is below KES 90 billion",
+   "measure": "Affordable Housing Levy revenue for the year ended 30 June 2026, Affordable Housing Fund audited financial statements",
+   "comparator": "<",
+   "threshold": 90,
+   "unit": "KES bn",
+   "check_source": "Affordable Housing Fund, annual report and financial statements 2025/26 (Auditor-General)",
+   "check_date": "2027-03-31"
+  },
+  {
+   "id": "RC-2026-10-15-housing-levy-money-trail-3",
+   "receipt": "2026-10-15-housing-levy-money-trail",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "The levy is still 1.5% of gross salary for the employee, matched by the employer, on 30 June 2027",
+   "measure": "Rate in section 4(2) of the Affordable Housing Act in force on 30 June 2027",
+   "comparator": "is",
+   "threshold": "1.5%",
+   "unit": null,
+   "check_source": "Affordable Housing Act on Kenya Law",
+   "check_date": "2027-06-30"
+  },
+  {
+   "id": "RC-2026-10-15-sacco-savings-at-risk-1",
+   "receipt": "2026-10-15-sacco-savings-at-risk",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "The Sacco Societies (Amendment) Bill, 2025 is still not law on 30 June 2027",
+   "measure": "Bill No. 32 of 2025 assented to and published as an Act on or before 30 June 2027",
+   "comparator": "is",
+   "threshold": "no",
+   "unit": null,
+   "check_source": "Kenya Gazette and Kenya Law, Acts of 2026 and 2027",
+   "check_date": "2027-06-30"
+  },
+  {
+   "id": "RC-2026-10-15-sacco-savings-at-risk-2",
+   "receipt": "2026-10-15-sacco-savings-at-risk",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "No date is set for the SACCO Deposit Guarantee Fund to start paying claims before 31 December 2027",
+   "measure": "A date for the start of payments of claims from the SACCO Deposit Guarantee Fund, appointed and published on or before 31 December 2027",
+   "comparator": "is",
+   "threshold": "no",
+   "unit": null,
+   "check_source": "Kenya Gazette; SASRA notices and annual reports",
+   "check_date": "2027-12-31"
+  },
+  {
+   "id": "RC-2026-10-15-sacco-savings-at-risk-3",
+   "receipt": "2026-10-15-sacco-savings-at-risk",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "Deposits in regulated SACCOs reach at least KES 920 billion at 31 December 2026",
+   "measure": "Total deposits of all regulated SACCOs (DT and NWDT) at 31 December 2026",
+   "comparator": ">=",
+   "threshold": 920,
+   "unit": "KES bn",
+   "check_source": "SASRA Quarterly Statistical and Soundness Report, December 2026 (Afronomics SACCO file)",
+   "check_date": "2027-06-30"
+  },
+  {
+   "id": "RC-2026-10-15-shilling-stopped-falling-1",
+   "receipt": "2026-10-15-shilling-stopped-falling",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "The CBK rate is between KES 125 and KES 135 to the US dollar on 31 March 2027",
+   "measure": "CBK indicative mean rate, KES per US dollar, for 31 March 2027 (or the last working day before it), CBK Weekly Bulletin Table 1",
+   "comparator": "between",
+   "threshold": [
+    125,
+    135
+   ],
+   "unit": "KES per US$",
+   "check_source": "CBK Weekly Bulletin, Table 1, Kenya Shilling Exchange Rates",
+   "check_date": "2027-03-31"
+  },
+  {
+   "id": "RC-2026-10-15-shilling-stopped-falling-2",
+   "receipt": "2026-10-15-shilling-stopped-falling",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "The shilling is weaker on 31 March 2027 than its 8 October 2026 rate of KES 129.94",
+   "measure": "CBK indicative mean rate, KES per US dollar, for 31 March 2027 (or the last working day before it)",
+   "comparator": ">",
+   "threshold": 129.94,
+   "unit": "KES per US$",
+   "check_source": "CBK Weekly Bulletin, Table 1, Kenya Shilling Exchange Rates",
+   "check_date": "2027-03-31"
+  },
+  {
+   "id": "RC-2026-10-15-shilling-stopped-falling-3",
+   "receipt": "2026-10-15-shilling-stopped-falling",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "CBK foreign exchange reserves still cover at least five months of imports in the last Weekly Bulletin of March 2027",
+   "measure": "CBK foreign exchange reserves, months of import cover, latest date in the last Weekly Bulletin published in March 2027 (Table 2)",
+   "comparator": ">=",
+   "threshold": 5,
+   "unit": "months of import cover",
+   "check_source": "CBK Weekly Bulletin, Table 2, Foreign Exchange Reserves",
+   "check_date": "2027-03-31"
+  },
+  {
+   "id": "RC-2026-10-15-tbill-returns-collapse-1",
+   "receipt": "2026-10-15-tbill-returns-collapse",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "The 364-day Treasury bill clears between 8% and 10% at the last auction with a value date in March 2027",
+   "measure": "364-day bill weighted average rate of accepted bids, last auction with a value date in March 2027",
+   "comparator": "between",
+   "threshold": [
+    8,
+    10
+   ],
+   "unit": "%",
+   "check_source": "CBK Treasury bill auction results (Afronomics auction file)",
+   "check_date": "2027-03-31"
+  },
+  {
+   "id": "RC-2026-10-15-tbill-returns-collapse-2",
+   "receipt": "2026-10-15-tbill-returns-collapse",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "The Central Bank Rate is at or below 8.75% after the last MPC meeting held before 30 June 2027",
+   "measure": "Central Bank Rate announced at the last MPC meeting held before 30 June 2027",
+   "comparator": "<=",
+   "threshold": 8.75,
+   "unit": "%",
+   "check_source": "CBK MPC press release",
+   "check_date": "2027-06-30"
+  },
+  {
+   "id": "RC-2026-10-15-tbill-returns-collapse-3",
+   "receipt": "2026-10-15-tbill-returns-collapse",
+   "written_at": "2026-10-16T04:26:30Z",
+   "statement": "Kenyan money market funds hold more than the KES 459.9 billion they held at 30 June 2026 when the CMA reports 31 December 2026",
+   "measure": "Total of the Money Market Funds table, CMA Collective Investment Schemes report for Q4 2026",
+   "comparator": ">",
+   "threshold": 459.9,
+   "unit": "KES bn",
+   "check_source": "CMA Collective Investment Schemes quarterly report, Q4 2026 (Afronomics money market fund size file)",
+   "check_date": "2027-03-31"
   }
  ],
  "outcomes": [],

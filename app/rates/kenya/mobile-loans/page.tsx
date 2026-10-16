@@ -45,7 +45,7 @@ export default function MobileLoansPage() {
         cheapest && bench ? (
           <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
             <p className="text-[13px] font-medium text-muted">Borrow KES 1,000 for 30 days</p>
-            <p className="mt-1 font-serif text-3xl text-ink">
+            <p className="af-figure mt-1 font-serif text-3xl text-ink">
               {kes(cheapest.costPer1000)}
               {cheapest.from ? "+" : ""}
             </p>

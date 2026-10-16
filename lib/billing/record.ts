@@ -217,18 +217,18 @@ export async function notifyPayment(p: PaymentRecord, key: KeyOutcome = { kind: 
     const keyHtml = secretKey && analyst
       ? `<p style="margin-top:18px;font-weight:600">Your download key</p>
       <p style="font-family:monospace;font-size:14px;background:#f3f1ea;padding:10px 12px;word-break:break-all">${esc(secretKey)}</p>
-      <p style="color:#636b7d;font-size:13px">We keep only a fingerprint of it, so this email is your copy. Open <a href="${site.url}/downloads" style="color:#5b3fd6">afronomicsfeed.com/downloads</a>, paste the key once, and every CSV link on the site gives the full history in that browser for 12 hours. In code, send it as a header: <code>Authorization: Bearer YOUR_KEY</code>. Keep it private; if it leaks, reply and we replace it.</p>`
+      <p style="color:#6c5e55;font-size:13px">We keep only a fingerprint of it, so this email is your copy. Open <a href="${site.url}/downloads" style="color:#a33a1c">afronomicsfeed.com/downloads</a>, paste the key once, and every CSV link on the site gives the full history in that browser for 12 hours. In code, send it as a header: <code>Authorization: Bearer YOUR_KEY</code>. Keep it private; if it leaks, reply and we replace it.</p>`
       : secretKey
       ? `<p style="margin-top:18px;font-weight:600">Your API key</p>
       <p style="font-family:monospace;font-size:14px;background:#f3f1ea;padding:10px 12px;word-break:break-all">${esc(secretKey)}</p>
-      <p style="color:#636b7d;font-size:13px">We keep only a fingerprint of it, so this email is your copy. Send it as a header: <code>Authorization: Bearer YOUR_KEY</code>. Endpoints and terms: <a href="${site.url}/data-api" style="color:#5b3fd6">afronomicsfeed.com/data-api</a>. Keep it private; if it leaks, reply and we replace it.</p>`
+      <p style="color:#6c5e55;font-size:13px">We keep only a fingerprint of it, so this email is your copy. Send it as a header: <code>Authorization: Bearer YOUR_KEY</code>. Endpoints and terms: <a href="${site.url}/data-api" style="color:#a33a1c">afronomicsfeed.com/data-api</a>. Keep it private; if it leaks, reply and we replace it.</p>`
       : "";
-    const html = `<div style="font-family:Archivo,Helvetica,Arial,sans-serif;color:#121826;max-width:560px;line-height:1.55">
+    const html = `<div style="font-family:Archivo,Helvetica,Arial,sans-serif;color:#1d1512;max-width:560px;line-height:1.55">
       <p style="font-size:18px;font-weight:600">Payment confirmed</p>
       <p>Thank you — your payment of <strong>${esc(money)}</strong> for <strong>${esc(product)}</strong> is confirmed.</p>
-      <p style="color:#636b7d;font-size:13px">Reference ${esc(p.reference)} · ${esc(when)}</p>
+      <p style="color:#6c5e55;font-size:13px">Reference ${esc(p.reference)} · ${esc(when)}</p>
       <p>${esc(nextStep(p.plan, key))}</p>${keyHtml}
-      <p style="color:#636b7d;font-size:13px">Questions: <a href="mailto:${esc(site.contactEmail)}" style="color:#5b3fd6">${esc(site.contactEmail)}</a> · <a href="${site.url}" style="color:#5b3fd6">afronomicsfeed.com</a></p>
+      <p style="color:#6c5e55;font-size:13px">Questions: <a href="mailto:${esc(site.contactEmail)}" style="color:#a33a1c">${esc(site.contactEmail)}</a> · <a href="${site.url}" style="color:#a33a1c">afronomicsfeed.com</a></p>
     </div>`;
     const subject = secretKey ? `Afronomics: your ${analyst ? "download" : "API"} key and receipt (${money})` : `Afronomics: ${product} confirmed (${money})`;
     const r = await sendEmail(p.email, subject, html, text);

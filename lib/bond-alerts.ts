@@ -73,23 +73,23 @@ export function bondAlertEmail(o: { market: BondMarket; date: string; rows: Bond
     "You get this because an Afronomics API key (pilot or paid) is registered to this address.",
     `Stop these emails: ${stop}`,
   ].join("\n");
-  const cell = "padding:8px 6px;border-top:1px solid #e0e3df;font-family:Archivo,Helvetica,Arial,sans-serif;font-size:13px;line-height:18px;";
+  const cell = "padding:8px 6px;border-top:1px solid #e4dbd3;font-family:Archivo,Helvetica,Arial,sans-serif;font-size:13px;line-height:18px;";
   const table = `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:6px 0 14px;">
-<tr><td style="${cell}color:#636b7d;">Line</td><td style="${cell}color:#636b7d;text-align:right;">Rate</td><td style="${cell}color:#636b7d;text-align:right;">Bid cover</td><td style="${cell}color:#636b7d;text-align:right;">Accepted (${esc(market.currency)}m)</td></tr>
+<tr><td style="${cell}color:#6c5e55;">Line</td><td style="${cell}color:#6c5e55;text-align:right;">Rate</td><td style="${cell}color:#6c5e55;text-align:right;">Bid cover</td><td style="${cell}color:#6c5e55;text-align:right;">Accepted (${esc(market.currency)}m)</td></tr>
 ${sorted
   .map(
     (r) =>
-      `<tr><td style="${cell}color:#121826;">${esc(lineLabel(r))}</td><td style="${cell}text-align:right;font-weight:600;color:#121826;">${fmt(r.rate, 3)}%</td><td style="${cell}text-align:right;">${r.bid_cover == null ? "—" : fmt(r.bid_cover)}</td><td style="${cell}text-align:right;">${r.accepted_m == null ? "—" : fmt(r.accepted_m, 0)}</td></tr>`,
+      `<tr><td style="${cell}color:#1d1512;">${esc(lineLabel(r))}</td><td style="${cell}text-align:right;font-weight:600;color:#1d1512;">${fmt(r.rate, 3)}%</td><td style="${cell}text-align:right;">${r.bid_cover == null ? "—" : fmt(r.bid_cover)}</td><td style="${cell}text-align:right;">${r.accepted_m == null ? "—" : fmt(r.accepted_m, 0)}</td></tr>`,
   )
   .join("\n")}
 </table>`;
-  const links = sources.map((s) => `<a href="${esc(s)}" style="color:#121826;">${esc(s.length > 70 ? `${s.slice(0, 67)}…` : s)}</a>`).join("<br>");
+  const links = sources.map((s) => `<a href="${esc(s)}" style="color:#1d1512;">${esc(s.length > 70 ? `${s.slice(0, 67)}…` : s)}</a>`).join("<br>");
   const html = shell(
     "BONDS",
     `${para(intro)}${table}${para(rateNote)}${sources.length ? `<p style="margin:0 0 12px;font-size:13px;">Source: ${links}</p>` : ""}
-<p style="margin:14px 0 6px;"><a href="${esc(page)}" style="color:#121826;font-weight:600;">All ${esc(place)} bond auctions on Afronomics</a></p>`,
+<p style="margin:14px 0 6px;"><a href="${esc(page)}" style="color:#1d1512;font-weight:600;">All ${esc(place)} bond auctions on Afronomics</a></p>`,
     `<em>Information, not advice.</em> Afronomics compiles and checks; the ${esc(market.publisher)} is the source.<br>
-You get this because an Afronomics API key (pilot or paid) is registered to this address. <a href="${esc(stop)}" style="color:#636b7d;">Stop these emails</a>`,
+You get this because an Afronomics API key (pilot or paid) is registered to this address. <a href="${esc(stop)}" style="color:#6c5e55;">Stop these emails</a>`,
   );
   return { subject, text, html, unsubscribe: stop };
 }

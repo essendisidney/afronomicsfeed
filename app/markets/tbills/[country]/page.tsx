@@ -108,7 +108,7 @@ export default async function BillMarketPage({ params }: Props) {
                     <span className="inline-block h-2 w-2 rounded-full" style={{ background: tenorColor[tenor] }} />
                     {tenorLabel[tenor]} · {dateFmt.format(new Date(item.latest.date))}
                   </p>
-                  <p className="mt-2 font-serif text-4xl tracking-[-0.02em] text-ink">{item.latest.rate.toFixed(3)}%</p>
+                  <p className="af-figure mt-2 font-serif text-4xl tracking-[-0.02em] text-ink">{item.latest.rate.toFixed(3)}%</p>
                   <p className="mt-1 text-xs text-ink-soft">{bps(item.previous?.rate, item.latest.rate)} vs previous auction</p>
                   <dl className="mt-4 grid grid-cols-2 gap-y-1 text-xs">
                     <dt className="text-muted">Bids</dt>

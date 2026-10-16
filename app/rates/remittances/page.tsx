@@ -70,7 +70,7 @@ export default function RemittancesPage() {
         avgAll != null ? (
           <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
             <p className="text-[13px] font-medium text-muted">Sending $200 into Africa costs, on average</p>
-            <p className="mt-1 font-serif text-3xl text-ink">{usd(avgAll)}</p>
+            <p className="af-figure mt-1 font-serif text-3xl text-ink">{usd(avgAll)}</p>
             <p className="mt-1 text-[14px] text-ink">{pct(avgAll)} of the money, against a {SDG_TARGET}% target</p>
             <p className="mt-1 text-[12px] text-muted">
               {all.length} corridors, surveyed {period}
@@ -91,7 +91,7 @@ export default function RemittancesPage() {
               { v: String(dests.length), k: "African countries receiving" },
             ].map((s) => (
               <div key={s.k} className="bg-surface px-4 py-4">
-                <p className="font-serif text-3xl text-ink">{s.v}</p>
+                <p className="af-figure font-serif text-3xl text-ink">{s.v}</p>
                 <p className="mt-1 text-[12px] text-muted">{s.k}</p>
               </div>
             ))}

@@ -54,7 +54,7 @@ export function SalaryCalculator({ rates }: { rates: PayrollRates }) {
               type="button"
               aria-pressed={mode === m}
               onClick={() => setMode(m)}
-              className={`min-h-9 rounded-full px-3 font-semibold ${mode === m ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"}`}
+              className={`min-h-11 rounded-full px-3 font-semibold sm:min-h-9 ${mode === m ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"}`}
             >
               {label}
             </button>
@@ -100,13 +100,13 @@ export function SalaryCalculator({ rates }: { rates: PayrollRates }) {
         {mode === "net" ? (
           <>
             <p className="text-[13px] text-muted">Gross to ask for</p>
-            <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">{kes(r.gross)}</p>
+            <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">{kes(r.gross)}</p>
             <p className="mt-1 text-[13px] text-ink-soft">for a take-home of {kes(r.net)} a month</p>
           </>
         ) : (
           <>
             <p className="text-[13px] text-muted">Take-home a month</p>
-            <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">{kes(r.net)}</p>
+            <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">{kes(r.net)}</p>
             <p className="mt-1 text-[13px] text-ink-soft">
               {r.gross ? `${pct((r.net / r.gross) * 100)} of ${kes(r.gross)} gross · ${kes(r.net * 12)} a year` : "Enter your gross pay"}
             </p>
@@ -136,13 +136,13 @@ export function SalaryCalculator({ rates }: { rates: PayrollRates }) {
         <dl className="mt-4 grid gap-3 text-[13px] sm:grid-cols-2">
           <div className="rounded-xl border border-rule px-3 py-2">
             <dt className="text-muted">Of your next KES 1,000 raise, you keep</dt>
-            <dd data-num className="tabular text-[1.1rem] font-semibold text-ink">
+            <dd data-num className="af-figure tabular text-[1.1rem] font-semibold text-ink">
               {kes(raise)}
             </dd>
           </div>
           <div className="rounded-xl border border-rule px-3 py-2">
             <dt className="text-muted">Your employer also pays</dt>
-            <dd data-num className="tabular text-[1.1rem] font-semibold text-ink">
+            <dd data-num className="af-figure tabular text-[1.1rem] font-semibold text-ink">
               {kes(r.employerHousingLevy)} Housing Levy
             </dd>
             <dd className="text-[11.5px] text-muted">plus its NSSF share, matching yours</dd>

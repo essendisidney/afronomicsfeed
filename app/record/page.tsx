@@ -65,7 +65,7 @@ export default function RecordPage() {
           <h2 id="live" className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">
             Live ledger
           </h2>
-          <p className="tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{share(live.share)}</p>
+          <p className="af-figure tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{share(live.share)}</p>
           <p className="mt-2 text-[14px] leading-6 text-ink-soft">
             {live.graded
               ? `${live.inside} of ${live.graded} graded results fell inside the range.`
@@ -74,12 +74,12 @@ export default function RecordPage() {
         </div>
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <h2 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">What the method aims for</h2>
-          <p className="tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{Math.round(TARGET * 100)}%</p>
+          <p className="af-figure tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{Math.round(TARGET * 100)}%</p>
           <p className="mt-2 text-[14px] leading-6 text-ink-soft">A range from the 10th to the 90th percentile of recent weekly moves should hold about four results in five.</p>
         </div>
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <h2 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">Backtest, since 2011</h2>
-          <p className="tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{share(bt.share)}</p>
+          <p className="af-figure tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{share(bt.share)}</p>
           <p className="mt-2 text-[14px] leading-6 text-ink-soft">
             The same method run over {bt.tested.toLocaleString("en-US")} past auctions: {bt.inside.toLocaleString("en-US")} inside. Not ranges published at the time, and
             never added to the live figure.

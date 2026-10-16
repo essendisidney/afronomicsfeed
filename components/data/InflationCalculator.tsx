@@ -89,7 +89,7 @@ export function InflationCalculator({
         <p className="text-[13px] text-muted">
           {kes(a)} in {monthLabel(f)} is worth, in {monthLabel(t)} prices
         </p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">
           {kes(w.value)}
         </p>
         <p className="mt-1 text-[13px] text-ink-soft">

@@ -71,7 +71,7 @@ export function TbillCalculator({
               <p className="text-[12px] text-muted">{bill.rate.toFixed(2)}% a year</p>
             </div>
             <p className="mt-1 text-[12px] text-muted">You keep, after tax</p>
-            <p data-num className="tabular text-[1.5rem] font-semibold leading-tight text-ink">{kes(q.net)}</p>
+            <p data-num className="af-figure tabular text-[1.5rem] font-semibold leading-tight text-ink">{kes(q.net)}</p>
             <dl className="mt-2 grid grid-cols-3 gap-2 text-[12px]">
               <div>
                 <dt className="text-muted">You pay</dt>

@@ -66,7 +66,7 @@ export function LoanCalculator({ benchmark }: { benchmark: { rate: number; month
               type="button"
               aria-pressed={basis === b}
               onClick={() => setBasis(b)}
-              className={`min-h-9 rounded-full px-3 font-semibold ${basis === b ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"}`}
+              className={`min-h-11 rounded-full px-3 font-semibold sm:min-h-9 ${basis === b ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"}`}
             >
               {label}
             </button>
@@ -98,7 +98,7 @@ export function LoanCalculator({ benchmark }: { benchmark: { rate: number; month
           What it really costs
         </h2>
         <p className="text-[13px] text-muted">True yearly rate, all costs in</p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">
           {pct(r.apr)}
         </p>
         <p className="mt-1 text-[13px] text-ink-soft">

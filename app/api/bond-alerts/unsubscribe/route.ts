@@ -7,9 +7,9 @@ export const dynamic = "force-dynamic";
 const page = (title: string, body: string, status = 200) =>
   new Response(
     `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title></head>
-<body style="margin:0;padding:48px 16px;background:#f5f6f4;color:#121826;font-family:Archivo,Helvetica,Arial,sans-serif;">
-<div style="max-width:520px;margin:0 auto;background:#fff;border:1px solid #e0e3df;padding:24px;"><h1 style="font-size:20px;margin:0 0 12px;">${title}</h1>
-<p style="font-size:15px;line-height:23px;margin:0 0 16px;">${body}</p><p style="font-size:13px;margin:0;"><a href="${site.url}/data/frontier-local-debt" style="color:#121826;">Afronomics frontier local debt</a></p></div></body></html>`,
+<body style="margin:0;padding:48px 16px;background:#f7f3ef;color:#1d1512;font-family:Archivo,Helvetica,Arial,sans-serif;">
+<div style="max-width:520px;margin:0 auto;background:#fff;border:1px solid #e4dbd3;padding:24px;"><h1 style="font-size:20px;margin:0 0 12px;">${title}</h1>
+<p style="font-size:15px;line-height:23px;margin:0 0 16px;">${body}</p><p style="font-size:13px;margin:0;"><a href="${site.url}/data/frontier-local-debt" style="color:#1d1512;">Afronomics frontier local debt</a></p></div></body></html>`,
     { status, headers: { "Content-Type": "text/html; charset=utf-8" } },
   );
 

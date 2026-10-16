@@ -63,7 +63,7 @@ export default async function WeeklyPage() {
         <Link href="/markets/bill-index" className="mb-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-rule bg-surface px-5 py-4 hover:border-gold">
           <span>
             <span className="block text-[13px] font-medium text-muted">Afronomics African Sovereign Bill Index, week of {shortDate.format(new Date(edition.index.date))}</span>
-            <span className="block font-serif text-3xl text-ink">{edition.index.value.toFixed(2)}%</span>
+            <span className="af-figure block font-serif text-3xl text-ink">{edition.index.value.toFixed(2)}%</span>
           </span>
           <span className="text-sm text-ink-soft">
             {bpsText(edition.index.bpsWeek)} on the week · {bpsText(edition.index.bpsYear)} on the year · {edition.index.markets} markets

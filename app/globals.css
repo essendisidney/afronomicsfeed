@@ -4,43 +4,53 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Afronomics design tokens.
- * Concrete: cool, light city-grey paper rather than newsprint cream.
- * Night: the header, footer and hero band, the colour of the city after dark.
- * Jacaranda: the one accent, after the trees that line Nairobi, Harare and Pretoria each October.
- * Up and down moves keep their own green and red, so the accent never reads as a market signal.
+ * Afronomics design tokens: Laterite (founder decision D-026, 16 Oct 2026).
+ * Laterite: the red-earth murram of East Africa's roads, the one signature colour. It fills the masthead, rules the
+ * section heads, frames charts and share cards, and double-rules the key figures (Kente Gold's ledger total).
+ * Paper: warm off-white. Night: the warm near-black of the market strip, footer and phone tab bar.
+ * --sig fills (masthead, rules, badges, frames); --sig-ink is the same hue made dark (light mode) or light (dark mode)
+ * enough to pass WCAG AA as text, and is what --forest, --gold and --brand-accent carry.
+ * Up and down keep their own green and red; down is a cooler crimson so it never reads as the brand (or the brand as
+ * a fall).
  */
 :root {
   --font-serif: var(--font-headline), Georgia, serif;
   --font-mono: var(--font-sans);
-  --paper: #f5f6f4;
-  --paper-2: #ebedea;
-  --paper-3: #e0e3df;
+  --paper: #f7f3ef;
+  --paper-2: #eee7e1;
+  --paper-3: #e4dbd3;
   --surface: #ffffff;
-  --ink: #121826;
-  --ink-soft: #3b4354;
-  --muted: #636b7d;
-  --forest: #26335a;
-  --forest-deep: #0e1524;
-  --forest-mid: #3a4a7a;
-  --gold: #5b3fd6;
-  --gold-soft: #a08cff;
-  --brand-accent: #5b3fd6;
-  --rule: #d9dcd7;
-  --tape: #ebedea;
-  --tape-ink: #3b4354;
+  --ink: #1d1512;
+  --ink-soft: #45372f;
+  --muted: #6c5e55;
+  --forest: #a33a1c;
+  --forest-deep: #7f2c14;
+  --forest-mid: #b3401f;
+  --gold: #a33a1c;
+  --gold-soft: #7f2c14;
+  --brand-accent: #a33a1c;
+  --on-accent: #ffffff;
+  --rule: #e0d6cd;
+  --tape: #eee7e1;
+  --tape-ink: #45372f;
   --facts: #26335a;
   --analysis: #4a5568;
   --opinion: #8a4b1f;
-  --danger: #c2352b;
+  --danger: #c4263e;
   --up: #0f7f57;
-  --down: #c2352b;
-  --night: #0e1524;
-  --night-2: #141d33;
-  --night-ink: #f5f6f4;
-  --night-soft: #c3c8d4;
-  --night-muted: #8b93a7;
-  --night-line: rgba(245, 246, 244, 0.12);
+  --down: #c4263e;
+  --night: #1d1512;
+  --night-2: #2b201b;
+  --night-ink: #fbf6f2;
+  --night-soft: #e2d4cb;
+  --night-muted: #b8a69a;
+  --night-line: rgba(251, 246, 242, 0.14);
+  /* The signature. */
+  --mast: #b3401f;
+  --mast-2: #9a3519;
+  --sig: #b3401f;
+  --sig-ink: #a33a1c;
+  --stamp-paper: #fbefe6;
   /* Chart series: validated categorical slots (light). */
   --series-1: #2a78d6;
   --series-2: #eb6834;
@@ -50,34 +60,40 @@
 }
 
 .dark {
-  --paper: #0b1120;
-  --paper-2: #111a2e;
-  --paper-3: #1a2440;
-  --surface: #111a2e;
-  --ink: #e9ebf0;
-  --ink-soft: #c3c8d4;
-  --muted: #8b93a7;
-  --forest: #c9d2ea;
-  --forest-deep: #e9ebf0;
-  --forest-mid: #a9b5d6;
-  --gold: #a08cff;
-  --gold-soft: #b9a9ff;
-  --brand-accent: #a08cff;
-  --rule: #243049;
-  --tape: #111a2e;
-  --tape-ink: #c3c8d4;
+  --paper: #120d0b;
+  --paper-2: #1c1512;
+  --paper-3: #281e1a;
+  --surface: #1c1512;
+  --ink: #f1e9e4;
+  --ink-soft: #d4c6bd;
+  --muted: #a8988e;
+  --forest: #f2916d;
+  --forest-deep: #f7b39a;
+  --forest-mid: #e0714c;
+  --gold: #f2916d;
+  --gold-soft: #f7b39a;
+  --brand-accent: #f2916d;
+  --on-accent: #1d1512;
+  --rule: #33261f;
+  --tape: #1c1512;
+  --tape-ink: #d4c6bd;
   --facts: #c9d2ea;
   --analysis: #c3c8d4;
   --opinion: #e0a574;
-  --danger: #ff8a7a;
+  --danger: #ff7f98;
   --up: #5cd6a8;
-  --down: #ff8a7a;
-  --night: #070b16;
-  --night-2: #0e1524;
-  --night-ink: #f5f6f4;
-  --night-soft: #c3c8d4;
-  --night-muted: #8b93a7;
-  --night-line: rgba(245, 246, 244, 0.1);
+  --down: #ff7f98;
+  --night: #0b0806;
+  --night-2: #1c1512;
+  --night-ink: #fbf6f2;
+  --night-soft: #e2d4cb;
+  --night-muted: #b8a69a;
+  --night-line: rgba(251, 246, 242, 0.1);
+  --mast: #8f3016;
+  --mast-2: #7a2812;
+  --sig: #e0714c;
+  --sig-ink: #f2916d;
+  --stamp-paper: #fbefe6;
   --series-1: #3987e5;
   --series-2: #d95926;
   --series-3: #199e70;
@@ -85,8 +101,11 @@
   --series-5: #d55181;
 }
 
+/* On night surfaces (masthead, strip, footer, the Pro panel) the accent is sand, with ink on it. */
 .on-night {
-  --brand-accent: #a08cff;
+  --brand-accent: #f6c9a0;
+  --gold-soft: #fbe0c6;
+  --on-accent: #1d1512;
 }
 
 @theme inline {
@@ -115,6 +134,9 @@
   --color-down: var(--down);
   --color-warn: var(--warn);
   --color-accent: var(--brand-accent);
+  --color-on-accent: var(--on-accent);
+  --color-sig: var(--sig);
+  --color-sig-ink: var(--sig-ink);
   --color-night-ink: var(--night-ink);
   --color-night-soft: var(--night-soft);
   --color-night-muted: var(--night-muted);
@@ -763,4 +785,115 @@ table,
 }
 .receipt-full .article-body strong {
   color: var(--night-ink);
+}
+
+/*
+ * The signature (D-026). Every rule here draws inside the box it decorates or is fixed from the first paint, so
+ * nothing moves once the page has rendered (no layout shift).
+ */
+
+/* Wordmark: the stamp-disc badge and the name in Source Serif. */
+.af-wordtext {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 700;
+  font-size: 1.32rem;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+/* Masthead: a laterite bar; the night tones inside it are lightened so every link reads on terracotta. */
+.af-masthead {
+  background-color: var(--mast);
+  --night-2: var(--mast-2);
+  --night-muted: #fdeee5;
+  --night-soft: #fff3ea;
+  --night-line: rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18);
+}
+
+/* Section heads on Today: a laterite rule and the head in the signature. */
+.af-section-head {
+  border-bottom: 2px solid var(--sig);
+}
+.af-section-head h2 {
+  color: var(--sig-ink);
+}
+
+/*
+ * Key figures: the ledger's double rule in laterite (Kente Gold's device, kept by the founder). Two 2px lines with a
+ * 2px gap, clear of descenders, visible in light and dark.
+ */
+.af-figure {
+  text-decoration-line: underline;
+  text-decoration-style: double;
+  text-decoration-color: var(--sig);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.17em;
+  text-decoration-skip-ink: none;
+}
+
+/* The verdict carries the signature at full strength. */
+.af-verdict {
+  border-color: var(--sig);
+}
+
+/* The chart frame: a receipt slip with a laterite head and a torn foot. */
+.chart-frame {
+  border-radius: 0;
+  border-top: 3px solid var(--sig);
+  padding-bottom: 1.5rem;
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+}
+
+/* The stamp on every Receipt: rubber-stamp ink, a few degrees off true, top right of the headline block. */
+.af-stamp {
+  display: flex;
+  position: absolute;
+  top: -0.35rem;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.3rem 0.6rem 0.25rem;
+  border: 2.5px solid var(--sig);
+  outline: 1px solid var(--sig);
+  outline-offset: 2px;
+  border-radius: 0.35rem;
+  color: var(--sig-ink);
+  transform: rotate(-6deg);
+  opacity: 0.92;
+  pointer-events: none;
+}
+.af-stamp-word {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 0.95rem;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.af-stamp-date {
+  margin-top: 0.15rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+/* On phones the stamp sits in the free end of the breadcrumb row, clear of the desk line and the headline. */
+@media (max-width: 639px) {
+  .af-stamp {
+    top: -3.3rem;
+    padding: 0.2rem 0.45rem 0.15rem;
+  }
+  .af-stamp-word {
+    font-size: 0.8rem;
+  }
+}
+@media print {
+  .chart-frame {
+    -webkit-mask: none;
+    mask: none;
+  }
 }

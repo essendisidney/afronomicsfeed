@@ -62,7 +62,7 @@ export default function MoneyMarketFundsPage() {
         best ? (
           <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
             <p className="text-[13px] font-medium text-muted">Highest published yield after tax</p>
-            <p className="mt-1 font-serif text-3xl text-ink">{best.net.toFixed(2)}%</p>
+            <p className="af-figure mt-1 font-serif text-3xl text-ink">{best.net.toFixed(2)}%</p>
             <p className="mt-1 text-[14px] text-ink">{best.name}</p>
             <p className="mt-1 text-[12px] text-muted">
               {best.gross.toFixed(2)}% as published · read {when(best.readOn)}

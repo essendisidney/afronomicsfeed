@@ -5,7 +5,7 @@ import Link from "next/link";
  * relaxes to 40px from the sm breakpoint, where a pointer is the norm.
  *
  * - primary: the main action on a light surface (ink, which flips to light ink in dark mode)
- * - accent: the one jacaranda call to action, for use on night surfaces (header, hero, Pro tile)
+ * - accent: the one laterite call to action, for use on night surfaces (header, hero, Pro tile)
  * - secondary: an outlined alternative next to a primary
  * - night: an outlined button on a night surface
  */
@@ -22,7 +22,7 @@ const sizes: Record<ButtonSize, string> = {
 
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-ink text-paper hover:bg-forest",
-  accent: "bg-accent text-night hover:bg-gold-soft",
+  accent: "bg-accent text-on-accent hover:bg-gold-soft",
   secondary: "border border-ink/20 text-ink hover:border-accent hover:text-forest",
   night: "border border-night-line text-night-ink hover:bg-night-2",
 };

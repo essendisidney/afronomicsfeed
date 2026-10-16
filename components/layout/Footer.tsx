@@ -43,7 +43,7 @@ export function Footer() {
             <Link
               href={institutionalPilot.href}
               data-track="pricing_cta_click"
-              className="inline-flex min-h-11 items-center rounded-full bg-accent px-5 text-[14px] font-semibold text-night hover:bg-gold-soft"
+              className="inline-flex min-h-11 items-center rounded-full bg-accent px-5 text-[14px] font-semibold text-on-accent hover:bg-gold-soft"
             >
               Start a free 30-day pilot
             </Link>

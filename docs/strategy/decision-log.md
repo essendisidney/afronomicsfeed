@@ -246,6 +246,20 @@ what we changed. Newest at the bottom. Read this first every week.
   the three open checks are closed; the Safaricom stake sale until an advocate has reviewed it (the six questions in
   the legal read, section 6). Their wording edits from the legal read are merged; they stay drafts.
 
+### D-026 · 16 Oct 2026 · Signature look: Laterite, with Kente Gold's double-underlined totals
+- **Believed:** the site had no signature look (navy, jacaranda and generic cards), so a screenshot or a WhatsApp or
+  LinkedIn thumbnail was not recognisably Afronomics.
+- **Did:** built three token-level options on a preview branch (`rebuild/signature-look-preview`) with Today, a
+  Receipt, the share card at 1200x630 and at 300px wide, light and dark: A Kente Gold (gold on ink, double-ruled
+  totals), B Laterite (terracotta masthead, "Receipt" stamp, torn-slip frames) and C Malachite (banded green).
+- **Decided by the founder:** **B, Laterite**, with **A's double-underlined totals** on key figures (in laterite,
+  instead of B's highlighter swipe). A and C rejected.
+- **Changed:** Laterite `#B3401F` (text `#A33A1C` on light, `#F2916D` on dark) is the site's only signature: a
+  laterite masthead, laterite section rules, double-ruled key figures, the stamp on every Receipt, torn-slip chart
+  frames, the stamp-disc "Af" mark (favicon and app icons too) and the cream-slip share card. The "down" red moved
+  from `#C2352B` to crimson `#C4263E` (dark mode `#FF8A7A` to `#FF7F98`) so a fall never reads as the brand. Card and
+  email colours live in `lib/brand/card-style.ts`. Built on `rebuild/signature-look`; not merged until approved.
+
 ### D-022 · 15 Oct 2026 · Dangote refinery IPO Receipt published; legal read waived by the founder
 - **Decided by the founder:** verdict approved (one tap, D-019) and the Receipt published without the securities
   lawyer's read. The founder takes responsibility for its Opinion paragraphs. The waiver is for this Receipt only; the

@@ -22,7 +22,7 @@ export function spark(points: { date: string; rate: number }[], w = 160, h = 36)
   const x = (p: { date: string }) => ((Date.parse(p.date) - t0) / Math.max(1, t1 - t0)) * (w - 6) + 3;
   const y = (p: { rate: number }) => 3 + (1 - (p.rate - min) / Math.max(0.3, max - min)) * (h - 6);
   const path = points.map((p, i) => `${i ? "L" : "M"}${x(p).toFixed(1)},${y(p).toFixed(1)}`).join(" ");
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="${path}" fill="none" stroke="#26335a" stroke-width="1.6"/><circle cx="${x(points.at(-1)!).toFixed(1)}" cy="${y(points.at(-1)!).toFixed(1)}" r="2.5" fill="#5b3fd6"/></svg>`;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="${path}" fill="none" stroke="#45372f" stroke-width="1.6"/><circle cx="${x(points.at(-1)!).toFixed(1)}" cy="${y(points.at(-1)!).toFixed(1)}" r="2.5" fill="#b3401f"/></svg>`;
 }
 
 function curveChart(curve: Pack["kenya"]["curve"], w = 700, h = 220) {
@@ -34,10 +34,10 @@ function curveChart(curve: Pack["kenya"]["curve"], w = 700, h = 220) {
   const y = (r: number) => 10 + (1 - (r - lo) / (hi - lo)) * (h - 40);
   const path = curve.map((p, i) => `${i ? "L" : "M"}${x(p.years).toFixed(1)},${y(p.rate).toFixed(1)}`).join(" ");
   const ticks = [];
-  for (let r = lo; r <= hi; r += 1) ticks.push(`<line x1="40" x2="${w - 20}" y1="${y(r)}" y2="${y(r)}" stroke="#e0e3df"/><text x="34" y="${y(r) + 4}" font-size="10" text-anchor="end" fill="#636b7d">${r}%</text>`);
-  const xt = [0, 2, 5, 10, 15, 20, 25, 30].filter((v) => v <= maxY).map((v) => `<text x="${x(v)}" y="${h - 12}" font-size="10" text-anchor="middle" fill="#636b7d">${v}y</text>`);
-  const dots = curve.map((p) => `<circle cx="${x(p.years).toFixed(1)}" cy="${y(p.rate).toFixed(1)}" r="3" fill="${p.kind === "T-bill" ? "#5b3fd6" : "#26335a"}"><title>${esc(p.label)} ${p.rate.toFixed(3)}% (${esc(p.date)})</title></circle>`);
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="max-width:100%">${ticks.join("")}${xt.join("")}<path d="${path}" fill="none" stroke="#26335a" stroke-width="2"/>${dots.join("")}</svg>`;
+  for (let r = lo; r <= hi; r += 1) ticks.push(`<line x1="40" x2="${w - 20}" y1="${y(r)}" y2="${y(r)}" stroke="#e4dbd3"/><text x="34" y="${y(r) + 4}" font-size="10" text-anchor="end" fill="#6c5e55">${r}%</text>`);
+  const xt = [0, 2, 5, 10, 15, 20, 25, 30].filter((v) => v <= maxY).map((v) => `<text x="${x(v)}" y="${h - 12}" font-size="10" text-anchor="middle" fill="#6c5e55">${v}y</text>`);
+  const dots = curve.map((p) => `<circle cx="${x(p.years).toFixed(1)}" cy="${y(p.rate).toFixed(1)}" r="3" fill="${p.kind === "T-bill" ? "#b3401f" : "#45372f"}"><title>${esc(p.label)} ${p.rate.toFixed(3)}% (${esc(p.date)})</title></circle>`);
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="max-width:100%">${ticks.join("")}${xt.join("")}<path d="${path}" fill="none" stroke="#45372f" stroke-width="2"/>${dots.join("")}</svg>`;
 }
 
 export function packHtml(pack: Pack, opts: { client?: string; sample?: boolean } = {}) {

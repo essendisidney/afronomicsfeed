@@ -51,7 +51,7 @@ export default function KenyaRatesPage() {
         best ? (
           <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
             <p className="text-[13px] font-medium text-muted">Highest after tax today</p>
-            <p className="mt-1 font-serif text-3xl text-ink">{best.net.toFixed(2)}%</p>
+            <p className="af-figure mt-1 font-serif text-3xl text-ink">{best.net.toFixed(2)}%</p>
             <p className="mt-1 text-[14px] text-ink">{best.name}</p>
             <p className="mt-1 text-[12px] text-muted">
               {best.gross.toFixed(2)}% before {Math.round(best.tax * 100)}% withholding tax · {when(best.asOf)}
@@ -146,7 +146,7 @@ export default function KenyaRatesPage() {
             { k: "Difference over a year", v: `KES ${(100000 * (bill91.net - savings.net) / 100).toFixed(0)}` },
           ].map((item) => (
             <div key={item.k} className="bg-surface px-5 py-5">
-              <p className="font-serif text-3xl text-ink">{item.v}</p>
+              <p className="af-figure font-serif text-3xl text-ink">{item.v}</p>
               <p className="mt-1 text-[13px] text-ink-soft">{item.k}</p>
             </div>
           ))}

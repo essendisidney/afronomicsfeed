@@ -110,12 +110,19 @@ export function renderChartSvg(
     })
     .filter((n) => n !== null)
     .map((n) => {
-      // Text runs right from the note's left edge when there is room, otherwise left from its right edge.
+      if (n.kind === "line") {
+        // A line note is centred over its pin, slid inward only as far as it must be to stay inside the chart.
+        const lines = wrapText(n.label, Math.max(14, Math.floor(innerW / (NOTE_FONT * 0.55))));
+        const half = (Math.max(...lines.map((l) => l.length)) * NOTE_FONT * 0.55) / 2;
+        const anchorX = Math.min(width - pad.right - half, Math.max(pad.left + half, n.x1));
+        return { ...n, anchor: "middle" as const, anchorX, lines };
+      }
+      // A span's text runs right from its left edge when there is room, otherwise left from its right edge.
       const startAnchor = n.x1 < width * 0.55;
-      const anchorX = startAnchor ? Math.max(pad.left, n.x1 - (n.kind === "line" ? 4 : 0)) : Math.min(width - pad.right, n.x2 + (n.kind === "line" ? 4 : 0));
+      const anchorX = startAnchor ? Math.max(pad.left, n.x1) : Math.min(width - pad.right, n.x2);
       const room = startAnchor ? width - pad.right - anchorX : anchorX - pad.left;
       const lines = wrapText(n.label, Math.max(14, Math.floor(room / (NOTE_FONT * 0.55))));
-      return { ...n, startAnchor, anchorX, lines };
+      return { ...n, anchor: startAnchor ? ("start" as const) : ("end" as const), anchorX, lines };
     });
 
   let bandY = 8;
@@ -186,7 +193,7 @@ export function renderChartSvg(
 
   // Note text last, on top of everything, with the same halo.
   for (const n of placed) {
-    const anchor = n.startAnchor ? "start" : "end";
+    const anchor = n.anchor;
     if (n.kind === "line") out.push(`<circle cx="${r1(n.x1)}" cy="${r1(n.bottom + 3)}" r="2.5" fill="${p.ink}"/>`);
     out.push(`<text x="${r1(n.anchorX)}" y="${r1(n.top + NOTE_FONT - 2)}" text-anchor="${anchor}" font-size="${NOTE_FONT}" font-weight="600" fill="${p.ink}" ${halo}>`);
     n.lines.forEach((line, k) => out.push(`<tspan x="${r1(n.anchorX)}" dy="${k ? NOTE_LINE : 0}">${esc(line)}</tspan>`));

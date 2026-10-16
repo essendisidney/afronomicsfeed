@@ -13,7 +13,7 @@ NO_CARD: dict[str, str] = {}
 
 # The pages people share (docs/rebuild/phase-7b-plan.md, 7b-2): every page under these folders must have a card of its
 # own or one from a parent folder, never only the site-wide app/opengraph-image.tsx.
-SHAREABLE = ["(home)", "receipts", "record", "tools", "stories", "markets", "rates", "brief", "explainers", "weekly", "registry", "chama"]
+SHAREABLE = ["(home)", "receipts", "record", "tools", "stories", "markets", "rates", "brief", "explainers", "weekly", "registry", "chama", "diaspora"]
 
 CALCULATORS = ["SalaryCalculator", "LoanCalculator", "SavingsGoalPlanner", "InflationCalculator", "MpesaCalculator", "IpoCalculator", "TbillCalculator"]
 

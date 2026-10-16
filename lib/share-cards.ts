@@ -111,6 +111,7 @@ export const toolQuestions: Record<string, string> = {
   "/markets/kenya-tbills/auction": "Before and after Kenya’s T-bill auction",
   "/rates/kenya/check": "Is the rate you were offered fair?",
   "/chama": "Where should our chama put its money?",
+  "/diaspora": "Money home, and what it earns there",
 };
 
 type Example = Pick<SignatureCard, "figure" | "line" | "source">;

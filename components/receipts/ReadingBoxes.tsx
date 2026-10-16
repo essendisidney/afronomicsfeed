@@ -38,7 +38,7 @@ export function KeyNumbers({ r }: { r: Receipt }) {
                     <a href={ev.href} target="_blank" rel="noopener noreferrer" className="underline decoration-rule underline-offset-2 hover:text-forest">
                       {ev.source}
                     </a>
-                    , {asOfLabel(ev.asOf)}
+                    {namesDate(ev.source, ev.asOf) ? null : <>, {asOfLabel(ev.asOf)}</>}
                   </p>
                 ) : (
                   <span />
@@ -77,4 +77,11 @@ export function ForYou({ r }: { r: Receipt }) {
       <p className="mt-3 text-[13px] font-semibold text-ink-soft">Information, not advice.</p>
     </section>
   );
+}
+
+/** True when a source's name already gives its date ("…results of 1 April 2024"), so the date is not printed twice. */
+function namesDate(source: string, asOf: string | undefined): boolean {
+  if (!asOf || !/^\d{4}-\d{2}-\d{2}/.test(asOf)) return false;
+  const long = new Date(`${asOf.slice(0, 10)}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+  return source.includes(long);
 }

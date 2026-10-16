@@ -2,7 +2,7 @@
 
 import { useState, useSyncExternalStore } from "react";
 import { track } from "@/lib/track";
-import { shareUi, type ShareLang } from "@/lib/learn-ui";
+import { shareUi, type ShareLang } from "@/lib/share-ui";
 import { shareUrl, type ShareSpec } from "@/lib/share";
 
 /**

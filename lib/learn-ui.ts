@@ -1,11 +1,8 @@
 /** Interface text for Learn in African languages; no server imports, so client components can use it. */
 
-export const learnLangs = ["fr", "pt", "ar", "sw"] as const;
-export type LearnLang = (typeof learnLangs)[number];
+import { isLearnLang, isShareLang, learnLangs, resultTitles, shareUi, type LearnLang, type ShareLang, type ShareUi } from "@/lib/share-ui";
 
-export function isLearnLang(v: string): v is LearnLang {
-  return (learnLangs as readonly string[]).includes(v);
-}
+export { isLearnLang, isShareLang, learnLangs, shareUi, type LearnLang, type ShareLang, type ShareUi };
 
 export const langMeta: Record<LearnLang, { name: string; native: string; dir: "ltr" | "rtl" }> = {
   fr: { name: "French", native: "Français", dir: "ltr" },
@@ -63,9 +60,9 @@ export const ui: Record<LearnLang, Ui> = {
     lessons: "Leçons",
     tryIt: "Essayez",
     minutes: (n) => `${n} min`,
-    savingsTitle: "Combien mon épargne va-t-elle grandir ?",
+    savingsTitle: resultTitles.fr.savingsTitle,
     savingsNote: "Dans n’importe quelle monnaie. Saisissez le taux que vous obtenez, après impôt.",
-    loanTitle: "Combien ce prêt va-t-il me coûter ?",
+    loanTitle: resultTitles.fr.loanTitle,
     loanNote: "Taux fixe sur le capital initial et taux sur le capital restant dû, côte à côte.",
     glossary: "Lexique",
     sources: "Sources",
@@ -114,9 +111,9 @@ export const ui: Record<LearnLang, Ui> = {
     lessons: "Lições",
     tryIt: "Experimente",
     minutes: (n) => `${n} min`,
-    savingsTitle: "Quanto vai crescer a minha poupança?",
+    savingsTitle: resultTitles.pt.savingsTitle,
     savingsNote: "Em qualquer moeda. Escreva a taxa que recebe, depois de impostos.",
-    loanTitle: "Quanto me vai custar este empréstimo?",
+    loanTitle: resultTitles.pt.loanTitle,
     loanNote: "Taxa fixa sobre o valor total e taxa sobre o saldo em dívida, lado a lado.",
     glossary: "Glossário",
     sources: "Fontes",
@@ -165,9 +162,9 @@ export const ui: Record<LearnLang, Ui> = {
     lessons: "الدروس",
     tryIt: "جرّب",
     minutes: (n) => `${n} دقائق`,
-    savingsTitle: "كم ستنمو مدخراتي؟",
+    savingsTitle: resultTitles.ar.savingsTitle,
     savingsNote: "بأي عملة. اكتب العائد الذي تحصل عليه بعد الضريبة.",
-    loanTitle: "كم سيكلفني هذا القرض؟",
+    loanTitle: resultTitles.ar.loanTitle,
     loanNote: "الفائدة الثابتة على كامل المبلغ والفائدة على الرصيد المتبقي، جنبًا إلى جنب.",
     glossary: "مسرد المصطلحات",
     sources: "المصادر",
@@ -216,9 +213,9 @@ export const ui: Record<LearnLang, Ui> = {
     lessons: "Masomo",
     tryIt: "Jaribu",
     minutes: (n) => `dakika ${n}`,
-    savingsTitle: "Akiba yangu itakua kiasi gani?",
+    savingsTitle: resultTitles.sw.savingsTitle,
     savingsNote: "Kwa sarafu yoyote. Andika riba unayopata, baada ya kodi.",
-    loanTitle: "Mkopo huu utanigharimu kiasi gani?",
+    loanTitle: resultTitles.sw.loanTitle,
     loanNote: "Riba ya kiwango bapa na riba kwa salio linalopungua, kando kwa kando.",
     glossary: "Faharasa",
     sources: "Vyanzo",
@@ -284,99 +281,7 @@ export const calcEn: Ui["calc"] = {
   loanFoot: "Fees, insurance and excise duty are extra. Ask the lender for the total you will repay. Information, not advice.",
 };
 
-/** Languages a share can be written in: English plus the Learn languages. */
-export type ShareLang = "en" | LearnLang;
-
-export function isShareLang(v: string): v is ShareLang {
-  return v === "en" || isLearnLang(v);
-}
-
 export function calcUi(lang: ShareLang): Ui["calc"] {
   return lang === "en" ? calcEn : ui[lang].calc;
 }
 
-/**
- * Share buttons and the message that goes with a shared calculator result. Figures arrive already formatted.
- * `tryOwn` ends the message (before the link) and leads into the link on the share card; it carries its own colon.
- */
-export type ShareUi = {
-  heading: string;
-  share: string;
-  copy: string;
-  copied: string;
-  tryOwn: string;
-  savingsTitle: string;
-  loanTitle: string;
-  savingsText: (monthly: string, years: string, rate: string, total: string) => string;
-  loanText: (amount: string, rate: string, months: string, reducingInterest: string, flatInterest: string) => string;
-  savingsCard: (monthly: string, years: string, rate: string) => string;
-  loanCard: (amount: string, rate: string, months: string) => string;
-};
-
-export const shareUi: Record<ShareLang, ShareUi> = {
-  en: {
-    heading: "Share this result",
-    share: "Share",
-    copy: "Copy link",
-    copied: "Link copied",
-    tryOwn: "Try your own numbers:",
-    savingsTitle: "How much will my savings grow?",
-    loanTitle: "What will this loan cost me?",
-    savingsText: (m, y, r, t) => `Saving ${m} a month for ${y} years at ${r}% grows to about ${t}.`,
-    loanText: (a, r, mo, ri, fi) => `Borrowing ${a} at ${r}% for ${mo} months costs about ${ri} in interest on a reducing balance, or ${fi} if the rate is flat.`,
-    savingsCard: (m, y, r) => `Saving ${m} a month for ${y} years at ${r}%`,
-    loanCard: (a, r, mo) => `Borrowing ${a} at ${r}% for ${mo} months`,
-  },
-  fr: {
-    heading: "Partager ce résultat",
-    share: "Partager",
-    copy: "Copier le lien",
-    copied: "Lien copié",
-    tryOwn: "Faites votre propre calcul :",
-    savingsTitle: ui.fr.savingsTitle,
-    loanTitle: ui.fr.loanTitle,
-    savingsText: (m, y, r, t) => `En épargnant ${m} par mois pendant ${y} ans à ${r} %, on arrive à environ ${t}.`,
-    loanText: (a, r, mo, ri, fi) => `Emprunter ${a} à ${r} % sur ${mo} mois coûte environ ${ri} d’intérêts sur le capital restant dû, ou ${fi} à taux fixe.`,
-    savingsCard: (m, y, r) => `Épargner ${m} par mois pendant ${y} ans à ${r} %`,
-    loanCard: (a, r, mo) => `Emprunter ${a} à ${r} % sur ${mo} mois`,
-  },
-  pt: {
-    heading: "Partilhar este resultado",
-    share: "Partilhar",
-    copy: "Copiar link",
-    copied: "Link copiado",
-    tryOwn: "Faça as suas contas:",
-    savingsTitle: ui.pt.savingsTitle,
-    loanTitle: ui.pt.loanTitle,
-    savingsText: (m, y, r, t) => `Poupando ${m} por mês durante ${y} anos a ${r}%, chega a cerca de ${t}.`,
-    loanText: (a, r, mo, ri, fi) => `Pedir ${a} emprestado a ${r}% por ${mo} meses custa cerca de ${ri} em juros sobre o saldo em dívida, ou ${fi} com taxa fixa.`,
-    savingsCard: (m, y, r) => `Poupar ${m} por mês durante ${y} anos a ${r}%`,
-    loanCard: (a, r, mo) => `Pedir ${a} emprestado a ${r}% por ${mo} meses`,
-  },
-  ar: {
-    heading: "شارك هذه النتيجة",
-    share: "مشاركة",
-    copy: "نسخ الرابط",
-    copied: "تم نسخ الرابط",
-    tryOwn: "احسبها بأرقامك:",
-    savingsTitle: ui.ar.savingsTitle,
-    loanTitle: ui.ar.loanTitle,
-    savingsText: (m, y, r, t) => `ادخار ${m} كل شهر لمدة ${y} سنوات بعائد ${r}% يصل إلى نحو ${t}.`,
-    loanText: (a, r, mo, ri, fi) => `اقتراض ${a} بفائدة ${r}% لمدة ${mo} شهرًا يكلّف نحو ${ri} فوائد على الرصيد المتبقي، أو ${fi} إذا كانت الفائدة ثابتة.`,
-    savingsCard: (m, y, r) => `ادخار ${m} كل شهر لمدة ${y} سنوات بعائد ${r}%`,
-    loanCard: (a, r, mo) => `اقتراض ${a} بفائدة ${r}% لمدة ${mo} شهرًا`,
-  },
-  sw: {
-    heading: "Shiriki matokeo haya",
-    share: "Shiriki",
-    copy: "Nakili kiungo",
-    copied: "Kiungo kimenakiliwa",
-    tryOwn: "Jaribu hesabu yako:",
-    savingsTitle: ui.sw.savingsTitle,
-    loanTitle: ui.sw.loanTitle,
-    savingsText: (m, y, r, t) => `Ukiweka akiba ya ${m} kila mwezi kwa miaka ${y} kwa riba ya ${r}%, utakuwa na takriban ${t}.`,
-    loanText: (a, r, mo, ri, fi) => `Kukopa ${a} kwa riba ya ${r}% kwa miezi ${mo} kunagharimu takriban ${ri} za riba kwa salio linalopungua, au ${fi} kwa riba bapa.`,
-    savingsCard: (m, y, r) => `Akiba ya ${m} kila mwezi kwa miaka ${y} kwa riba ya ${r}%`,
-    loanCard: (a, r, mo) => `Mkopo wa ${a} kwa riba ya ${r}% kwa miezi ${mo}`,
-  },
-};

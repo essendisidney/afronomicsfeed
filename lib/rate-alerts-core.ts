@@ -7,21 +7,10 @@
  */
 
 import { changeText, followKey, parseFollowKey, seriesIdPattern, type SeriesPoint, type SeriesUnit } from "@/lib/rate-series-core";
+import { alertKinds, alertTenors, kindLabel, type AlertKind, type AlertTenor } from "@/lib/rate-alert-labels";
 
-export const alertKinds = ["auction", "tbill_above", "tbill_below", "ng_savings_bond", "policy_change", "mmf_month", "series"] as const;
-export type AlertKind = (typeof alertKinds)[number];
-export const alertTenors = [91, 182, 364] as const;
-export type AlertTenor = (typeof alertTenors)[number];
-
-export const kindLabel: Record<AlertKind, string> = {
-  auction: "Every Kenya T-bill auction result",
-  tbill_above: "A Kenya T-bill rate rises above a level",
-  tbill_below: "A Kenya T-bill rate falls below a level",
-  ng_savings_bond: "A new Nigeria FGN Savings Bond offer",
-  policy_change: "Any central bank changes its policy rate",
-  mmf_month: "Each month’s Kenya money market fund ranking",
-  series: "A number I follow changes",
-};
+// The labels live in lib/rate-alert-labels.ts (shipped to the browser by the sign-up form); re-exported for the server.
+export { alertKinds, alertTenors, kindLabel, type AlertKind, type AlertTenor };
 
 /** `series` is set only for kind "series" (a rate series id from lib/data/rate-series.ts). */
 export type AlertInput = { email: string; kind: AlertKind; tenor: AlertTenor | null; threshold: number | null; series?: string | null };

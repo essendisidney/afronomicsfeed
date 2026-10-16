@@ -1,4 +1,4 @@
-import { isShareLang, type ShareLang } from "@/lib/learn-ui";
+import { isShareLang, type ShareLang } from "@/lib/share-ui";
 import { site } from "@/lib/site";
 
 /**

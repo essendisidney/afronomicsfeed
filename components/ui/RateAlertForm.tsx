@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { buttonClass } from "@/components/ui/Button";
 import { track } from "@/lib/track";
-import { alertTenors, kindLabel, type AlertKind } from "@/lib/rate-alerts-core";
+import { alertTenors, kindLabel, type AlertKind } from "@/lib/rate-alert-labels";
 
 type State = "idle" | "pending" | "done" | "error";
 

@@ -37,11 +37,11 @@ export default async function LearnLangPage({ params }: { params: Promise<{ lang
     <div lang={lang} dir={dir} className="overflow-x-clip">
       <PageShell crumbs={[{ href: "/", label: "Afronomics" }, { href: "/learn", label: "Learn" }, { label: langMeta[lang].native }]} kicker={t.kicker} title={t.title} lede={<p>{t.lede}</p>}>
         <nav aria-label={t.otherLangs} className="mb-8 flex flex-wrap gap-2 text-[14px]">
-          <Link href="/learn" lang="en" dir="ltr" className="rounded-full border border-rule px-3 py-1 hover:border-gold">
+          <Link href="/learn" lang="en" dir="ltr" className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 py-1 hover:border-gold">
             English
           </Link>
           {learnLangs.map((l) => (
-            <Link key={l} href={`/learn/${l}`} lang={l} className={`rounded-full border px-3 py-1 ${l === lang ? "border-forest text-forest" : "border-rule hover:border-gold"}`}>
+            <Link key={l} href={`/learn/${l}`} lang={l} className={`inline-flex min-h-11 items-center rounded-full border px-3 py-1 ${l === lang ? "border-forest text-forest" : "border-rule hover:border-gold"}`}>
               {langMeta[l].native}
             </Link>
           ))}

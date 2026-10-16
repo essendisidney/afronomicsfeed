@@ -1,7 +1,7 @@
 {
  "dataset": "African government Eurobond yields",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "read_at": "2026-10-16T09:12:50+00:00",
+ "read_at": "2026-10-16T15:01:38+00:00",
  "countries": {
   "nigeria": {
    "country": "Nigeria",
@@ -503,8 +503,8 @@
    "source_page": "https://www.centralbank.go.ke/releases/weekly-bulletin/",
    "note": "Daily yields from Table 6 of the CBK Weekly Bulletin (its stated sources: the Nairobi Securities Exchange and Thomson Reuters), by year of maturity.",
    "latest": {
-    "date": "2026-10-08",
-    "source": "https://www.centralbank.go.ke/uploads/weekly_bulletin/321370149_Weekly CBK Bulletin, October 9, 2026.pdf",
+    "date": "2026-10-15",
+    "source": "https://www.centralbank.go.ke/uploads/weekly_bulletin/1082633218_Weekly CBK Bulletin October 16 2026.pdf",
     "bonds": [
      {
       "id": "2028",
@@ -512,7 +512,7 @@
       "maturity": "2028",
       "size": null,
       "price": null,
-      "yield": 7.3377
+      "yield": 7.327
      },
      {
       "id": "2031",
@@ -520,7 +520,7 @@
       "maturity": "2031",
       "size": null,
       "price": null,
-      "yield": 8.0999
+      "yield": 7.97
      },
      {
       "id": "2032",
@@ -528,7 +528,7 @@
       "maturity": "2032",
       "size": null,
       "price": null,
-      "yield": 8.7222
+      "yield": 8.676
      },
      {
       "id": "2034",
@@ -536,7 +536,7 @@
       "maturity": "2034",
       "size": null,
       "price": null,
-      "yield": 9.3053
+      "yield": 9.182
      },
      {
       "id": "2036",
@@ -544,7 +544,7 @@
       "maturity": "2036",
       "size": null,
       "price": null,
-      "yield": 9.6665
+      "yield": 9.596
      },
      {
       "id": "2038",
@@ -552,7 +552,7 @@
       "maturity": "2038",
       "size": null,
       "price": null,
-      "yield": 10.0021
+      "yield": 9.925
      },
      {
       "id": "2039",
@@ -560,7 +560,7 @@
       "maturity": "2039",
       "size": null,
       "price": null,
-      "yield": 10.0349
+      "yield": 9.931
      },
      {
       "id": "2048",
@@ -568,11 +568,76 @@
       "maturity": "2048",
       "size": null,
       "price": null,
-      "yield": 9.8329
+      "yield": 9.931
      }
     ]
    },
    "history": [
+    {
+     "date": "2026-10-15",
+     "yields": {
+      "2028": 7.327,
+      "2031": 7.97,
+      "2032": 8.676,
+      "2034": 9.182,
+      "2036": 9.596,
+      "2038": 9.925,
+      "2039": 9.931,
+      "2048": 9.931
+     }
+    },
+    {
+     "date": "2026-10-14",
+     "yields": {
+      "2028": 7.197,
+      "2031": 7.887,
+      "2032": 8.572,
+      "2034": 9.1,
+      "2036": 9.48,
+      "2038": 9.829,
+      "2039": 9.861,
+      "2048": 9.861
+     }
+    },
+    {
+     "date": "2026-10-13",
+     "yields": {
+      "2028": 7.156,
+      "2031": 7.833,
+      "2032": 8.487,
+      "2034": 9.003,
+      "2036": 9.412,
+      "2038": 9.746,
+      "2039": 9.754,
+      "2048": 9.754
+     }
+    },
+    {
+     "date": "2026-10-12",
+     "yields": {
+      "2028": 7.143,
+      "2031": 7.911,
+      "2032": 8.567,
+      "2034": 9.087,
+      "2036": 9.541,
+      "2038": 9.819,
+      "2039": 9.847,
+      "2048": 9.847
+     }
+    },
+    {
+     "date": "2026-10-09",
+     "yields": {
+      "2028": 7.257,
+      "2031": 7.91,
+      "2032": 8.59,
+      "2034": 9.151,
+      "2036": 9.545,
+      "2038": 9.836,
+      "2039": 9.868,
+      "2048": 9.868
+     }
+    },
     {
      "date": "2026-10-08",
      "yields": {
@@ -1095,6 +1160,7 @@
     }
    ],
    "bulletins": [
+    "2026-10-16",
     "2026-10-09",
     "2026-10-02",
     "2026-09-25",

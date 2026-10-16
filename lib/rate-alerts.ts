@@ -4,6 +4,7 @@ import { auctionWeeks, loadTbills } from "@/lib/data/kenya-tbills";
 import { loadHealth } from "@/lib/data/health";
 import { mmfMonths } from "@/lib/data/mmf-months";
 import { loadSavingsBond } from "@/lib/data/nigeria-savings-bond";
+import { allSeries, getSeries, seriesPath } from "@/lib/data/rate-series";
 import { billMarkets } from "@/lib/data/sovereign-bills";
 import { kindLabel, policyChanges, type AlertInput, type AlertMessage, type AlertSnapshot, type AlertTenor } from "@/lib/rate-alerts-core";
 import { site } from "@/lib/site";
@@ -41,11 +42,18 @@ export function alertSnapshot(): AlertSnapshot {
         .filter((m) => m.complete && m.rows.length)
         .map((m) => ({ month: m.month, label: m.label, rows: m.rows.map((r) => ({ name: r.name, gross: r.gross, net: r.net, monthly: r.days == null, stale: stale.has(r.name) })), pending: m.pending })),
     },
+    series: Object.fromEntries(
+      allSeries().map((x) => [x.id, { label: x.label, unit: x.unit, measure: x.measure, link: seriesPath(x.id), source: x.source.href, points: x.points.slice(-2) }]),
+    ),
   };
 }
 
 /** Plain words for an alert, for the confirmation email and the confirmed page. */
-export function describeAlert(a: Pick<AlertInput, "kind" | "tenor" | "threshold">) {
+export function describeAlert(a: Pick<AlertInput, "kind" | "tenor" | "threshold" | "series">) {
+  if (a.kind === "series") {
+    const s = a.series ? getSeries(a.series) : null;
+    return s ? `a new figure for ${s.label} differs from the last one we told you about` : "a number you follow changes";
+  }
   if (a.kind === "tbill_above") return `the Kenya ${a.tenor}-day T-bill rate rises above ${Number(a.threshold).toFixed(2)}%`;
   if (a.kind === "tbill_below") return `the Kenya ${a.tenor}-day T-bill rate falls below ${Number(a.threshold).toFixed(2)}%`;
   if (a.kind === "auction") return "each new Kenya T-bill auction result is published";

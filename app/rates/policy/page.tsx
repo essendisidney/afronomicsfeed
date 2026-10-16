@@ -13,6 +13,9 @@ import { policyBoard } from "@/lib/data/policy-rates";
 import { policyAnswers } from "@/lib/seo/answers";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
+import { FollowSheet } from "@/components/rates/FollowSheet";
+import { FollowLink, HeadlineTile, TrendCell } from "@/components/rates/SeriesBits";
+import { getSeries } from "@/lib/data/rate-series";
 
 export const revalidate = 1800;
 
@@ -31,6 +34,7 @@ export default function PolicyRatesPage() {
   const mpc = loadMpc();
   const nameOf = new Map<string, string>(rows.map((r) => [r.market, r.market_name]));
   const upcoming = [...next.entries()].sort((a, b) => a[1].date.localeCompare(b[1].date));
+  const cbr = getSeries("kenya-cbr");
   const days = (d: string) => Math.round((Date.parse(d) - Date.parse(today)) / 86_400_000);
 
   return (
@@ -38,6 +42,7 @@ export default function PolicyRatesPage() {
       crumbs={[{ href: "/", label: "Home" }, { href: "/markets", label: "Markets" }, { label: "Policy rates" }]}
       kicker="Afronomics dataset · Africa"
       title="Central-bank policy rates"
+      aside={cbr ? <HeadlineTile series={cbr} kicker="Kenya’s Central Bank Rate" /> : null}
       lede={
         <p>
           The rate each central bank sets, read from the bank’s own website in its own words, beside what the same government paid at its latest one-year
@@ -61,6 +66,7 @@ export default function PolicyRatesPage() {
                   <th className="text-right">One-year bill</th>
                   <th className="text-right">Gap</th>
                   <th>Next decision</th>
+                  <th>Stored readings</th>
                 </tr>
               </thead>
               <tbody>
@@ -99,6 +105,21 @@ export default function PolicyRatesPage() {
                         <span className="text-muted">not published</span>
                       )}
                     </td>
+                    <td>
+                      {(() => {
+                        const ser = getSeries(r.market === "kenya" ? "kenya-cbr" : `${r.market}-policy`);
+                        return ser ? (
+                          <span className="flex items-center gap-2">
+                            <TrendCell series={ser} />
+                            <FollowLink series={ser} className="inline-flex min-h-11 items-center px-1 text-[12px] font-semibold text-forest underline underline-offset-2">
+                              Follow<span className="sr-only"> {ser.label}</span>
+                            </FollowLink>
+                          </span>
+                        ) : (
+                          <span className="text-[12px] text-muted">—</span>
+                        );
+                      })()}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -107,7 +128,8 @@ export default function PolicyRatesPage() {
           <p className="mt-3 max-w-3xl text-xs leading-5 text-muted">
             Each policy rate is the figure on the central bank’s website when Afronomics read it{updatedAt ? ` (last read ${dateFmt.format(new Date(updatedAt))})` : ""};
             the bank’s date is the one it prints beside the rate, in its own format. Egypt sets a corridor: the overnight deposit rate is shown, with the
-            lending rate beneath. One-year bill rates are each market’s latest 364-day auction from the{" "}
+            lending rate beneath. Afronomics stores a reading each time a rate or the bank’s printed date changes, from 6 October 2026; a trend line appears once
+            three are stored, so most markets have none yet. One-year bill rates are each market’s latest 364-day auction from the{" "}
             <Link href="/markets/tbills" className="underline underline-offset-2">
               T-bill monitor
             </Link>
@@ -161,6 +183,7 @@ export default function PolicyRatesPage() {
       <Questions items={policyAnswers().items} />
       <DebtDataLinks title="What governments pay to borrow" />
       <NewsletterBand />
+      <FollowSheet />
     </PageShell>
   );
 }

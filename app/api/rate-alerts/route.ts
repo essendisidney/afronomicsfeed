@@ -2,6 +2,7 @@ import { redactEmails } from "@/lib/security";
 import { sendEmail } from "@/lib/mail";
 import { alertSnapshot, confirmationEmail } from "@/lib/rate-alerts";
 import { currentKey, parseAlertInput } from "@/lib/rate-alerts-core";
+import { getSeries } from "@/lib/data/rate-series";
 import { rpc } from "@/lib/store";
 
 export const runtime = "nodejs";
@@ -31,11 +32,14 @@ export async function POST(request: Request) {
   const parsed = parseAlertInput(await request.json().catch(() => null));
   if (!parsed.ok) return Response.json({ ok: false, reason: parsed.reason }, { status: 400 });
   const alert = parsed.value;
+  if (alert.kind === "series" && !getSeries(alert.series ?? "")) return Response.json({ ok: false, reason: "That number can’t be followed yet." }, { status: 400 });
 
   const secret = process.env.AF_CRON_SECRET;
   if (!secret) return Response.json({ ok: false, reason: "Alerts are not available right now. Please try again later." }, { status: 503 });
 
-  const baseline = currentKey(alert.kind, alert.tenor, alertSnapshot());
+  const baseline = currentKey(alert.kind, alert.tenor, alertSnapshot(), alert.series);
+  // p_series is sent only for "follow this number" alerts, so the other kinds keep working against a database that
+  // does not have migration 0042 yet.
   const result = await rpc("af_rate_alert_create", {
     p_email: alert.email,
     p_kind: alert.kind,
@@ -43,6 +47,7 @@ export async function POST(request: Request) {
     p_threshold: alert.threshold,
     p_baseline: baseline,
     p_secret: secret,
+    ...(alert.kind === "series" ? { p_series: alert.series } : {}),
   });
   const value = result.ok ? (result.value as { status?: string; token?: string; resend?: boolean } | null) : null;
   if (!value?.status) {

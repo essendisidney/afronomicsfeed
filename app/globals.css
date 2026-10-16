@@ -650,6 +650,55 @@ table,
   --chart-quiet-ink: #8b93a7;
 }
 
+/*
+ * Desk colours (redesign preview): one quiet hue per desk, used only as a thin bar and the desk's name on a story card,
+ * never for a figure, so they never read as up or down. Each passes 5.5:1 as text on paper and surface, light and dark.
+ * A card sets `desk-<slug>`; its parts read `--desk`.
+ */
+:root {
+  --desk-markets: #1f5fae;
+  --desk-banking: #0a6d73;
+  --desk-companies: #8a3a80;
+  --desk-public-money: #8c5400;
+  --desk-cost-of-living: #b0365a;
+  --desk-africa: #3f6a1e;
+}
+.dark {
+  --desk-markets: #7fb0f0;
+  --desk-banking: #5cc8c4;
+  --desk-companies: #e08acb;
+  --desk-public-money: #e6ad5c;
+  --desk-cost-of-living: #f08aa6;
+  --desk-africa: #a6cf6e;
+}
+.desk-markets { --desk: var(--desk-markets); }
+.desk-banking { --desk: var(--desk-banking); }
+.desk-companies { --desk: var(--desk-companies); }
+.desk-public-money { --desk: var(--desk-public-money); }
+.desk-cost-of-living { --desk: var(--desk-cost-of-living); }
+.desk-africa { --desk: var(--desk-africa); }
+
+/* Rows that swipe sideways on a phone: snap to each card, no scrollbar drawn over the cards. */
+.swipe-row {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.swipe-row::-webkit-scrollbar {
+  display: none;
+}
+.swipe-row > * {
+  scroll-snap-align: start;
+}
+
+/* Jumps from the section bar on Today land without animation for readers who ask for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 @layer components {
   .t-display {
     font-family: var(--font-serif), Georgia, serif;

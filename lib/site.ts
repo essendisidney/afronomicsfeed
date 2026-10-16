@@ -1,3 +1,5 @@
+import { toolPaths } from "./tools";
+
 export const site = {
   name: "Afronomics",
   legalName: "Afronomics Feed",
@@ -19,24 +21,31 @@ export const site = {
 } as const;
 
 /**
- * Main navigation (RECEIPTS.md, "One site, one journey"; docs/rebuild/receipts-r1-plan.md): five sections. Receipts
- * gathers the older story pages too. Each section also lights up on the pages it gathers: `match` lists the path
- * prefixes it owns. For institutions sits beside the navigation as a quiet link (`institutionsNav`).
+ * Main navigation (RECEIPTS.md, "One site, one journey"; redesign preview): five sections, named in readers' words.
+ * Stories gathers the Receipts, briefs, explainers and the Casebook; Rates & data the numbers; Tools the calculators
+ * and checkers (lib/tools.ts). The hrefs are the ones the old labels (Receipts, Numbers) had, so every URL keeps
+ * working. Each section also lights up on the pages it gathers: `match` lists the path prefixes it owns and the most
+ * specific prefix wins (/rates/kenya/net-salary is Tools, /rates/kenya is Rates & data). For institutions sits beside
+ * the navigation as a quiet link (`institutionsNav`).
  */
 export const nav = [
-  { href: "/", label: "Today", match: [] },
+  { href: "/", label: "Today", short: "Today", hint: "The day in 30 seconds", match: [] },
   {
     href: "/receipts",
-    label: "Receipts",
-    match: ["/receipts", "/stories", "/brief", "/weekly", "/explainers", "/news", "/archive", "/topics", "/institutions"],
+    label: "Stories",
+    short: "Stories",
+    hint: "Verdicts, briefs, explainers, the Casebook",
+    match: ["/receipts", "/stories", "/brief", "/weekly", "/explainers", "/news", "/archive", "/topics", "/institutions", "/casebook"],
   },
   {
     href: "/numbers",
-    label: "Numbers",
+    label: "Rates & data",
+    short: "Rates",
+    hint: "Bills, bonds, currencies, savings rates",
     match: ["/numbers", "/markets", "/rates", "/data", "/countries", "/prices", "/east-africa", "/charts"],
   },
-  { href: "/compare", label: "Compare", match: ["/compare", "/registry"] },
-  { href: "/casebook", label: "Casebook", match: ["/casebook"] },
+  { href: "/tools", label: "Tools", short: "Tools", hint: "Calculators and checkers", match: ["/tools", ...toolPaths] },
+  { href: "/compare", label: "Compare", short: "Compare", hint: "Funds, SACCOs, lenders side by side", match: ["/compare", "/registry"] },
 ] as const;
 
 export const institutionsNav = {
@@ -69,11 +78,12 @@ export const footerGroups = [
     title: "Sections",
     links: [
       { href: "/", label: "Today" },
-      { href: "/receipts", label: "Receipts" },
-      { href: "/numbers", label: "Numbers" },
+      { href: "/receipts", label: "Stories: the Receipts" },
+      { href: "/numbers", label: "Rates & data" },
+      { href: "/tools", label: "Tools and calculators" },
       { href: "/compare", label: "Compare" },
       { href: "/casebook", label: "Casebook" },
-      { href: "/stories", label: "Stories" },
+      { href: "/stories", label: "Briefs and explainers" },
     ],
   },
   {
@@ -159,9 +169,9 @@ export const footerNav = footerGroups.flatMap((group) => [...group.links]);
 /** The footer: five balanced columns of short labels (rebuild brief, section 6). Full page list stays in footerGroups for search. */
 export const footerColumns = [
   {
-    title: "Numbers",
+    title: "Rates & data",
     links: [
-      { href: "/numbers", label: "All numbers" },
+      { href: "/numbers", label: "All rates & data" },
       { href: "/markets/tbills", label: "T-bills" },
       { href: "/markets/bonds", label: "Bond auctions" },
       { href: "/markets/kenya-bonds", label: "Kenya bonds" },
@@ -187,13 +197,14 @@ export const footerColumns = [
   {
     title: "Stories",
     links: [
-      { href: "/stories", label: "All stories" },
-      { href: "/brief", label: "Briefs" },
+      { href: "/receipts", label: "All stories" },
+      { href: "/stories", label: "Briefs & explainers" },
       { href: "/weekly", label: "Weekly" },
-      { href: "/explainers", label: "Explainers" },
+      { href: "/casebook", label: "Casebook" },
       { href: "/morning", label: "The Morning" },
       { href: "/morning/sw", label: "Asubuhi" },
       { href: "/alerts", label: "Alerts" },
+      { href: "/tools", label: "Tools & calculators" },
       { href: "/chama", label: "Chama hub" },
     ],
   },

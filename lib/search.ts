@@ -60,8 +60,8 @@ export function buildSearchIndex(): SearchHit[] {
 
   const toolHits = [
     { href: "/", title: "Today", kicker: "Section", summary: "What changed in African money today, who it touches, and our forecast record." },
-    { href: "/numbers", title: "Numbers", kicker: "Section", summary: "Every number we keep, by question: borrowing, savings, loans, policy rates, currencies, economies." },
-    { href: "/compare", title: "Compare", kicker: "Section", summary: "Savers, lenders and governments side by side, in the same units." },
+    { href: "/numbers", title: "Rates & data (Numbers)", kicker: "Section", summary: "Every number we keep, by question: borrowing, savings, loans, policy rates, currencies, economies." },
+    { href: "/tools", title: "Tools and calculators", kicker: "Section", summary: "Every calculator and checker in one place: T-bills, M-PESA and Fuliza, net salary, loan cost, IPOs, savings goals, inflation, fair rates, chamas, licensed lenders." },    { href: "/compare", title: "Compare", kicker: "Section", summary: "Savers, lenders and governments side by side, in the same units." },
     { href: "/stories", title: "Stories", kicker: "Section", summary: "Every brief, weekly note and explainer, filterable by type and topic." },
     { href: "/rates/kenya/mpesa-charges", title: "M-PESA and Fuliza charges calculator", kicker: "Tool", summary: "What sending, withdrawing and Fuliza cost you, by transaction or by month, from Safaricom's published charges." },
     { href: "/rates/kenya/net-salary", title: "Net salary calculator Kenya (PAYE, SHIF, Housing Levy)", kicker: "Tool", summary: "Gross pay to take-home with KRA's PAYE bands, SHIF, the Housing Levy and your NSSF; or the gross to ask for a take-home you want." },

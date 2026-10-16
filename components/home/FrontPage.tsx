@@ -141,6 +141,7 @@ function LeadChart({ r, chart }: { r: Receipt; chart: ReceiptChart }) {
           unit={chart.unit}
           highlight={chart.highlight}
           reference={chart.reference}
+          annotations={chart.annotations}
           label={`${chart.title}. ${chart.data.map((d) => `${d.label}: ${d.value}${pct ? "%" : ""}`).join("; ")}`}
           format={(v) => `${v.toLocaleString("en-US", { maximumFractionDigits: 2 })}${pct ? "%" : ""}`}
         />

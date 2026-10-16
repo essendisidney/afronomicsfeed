@@ -95,6 +95,8 @@ charts:
       - { label: "2025", value: 14.2806 }
       - { label: "2026", value: 13.052 }
     highlight: ["2024"]
+    annotations:
+      - { x: "2024", label: "IFB1/2024/8.5: KES 241bn taken, most in our file" }
   - type: bar
     title: "Two and a half years on, the same kind of bond sells about six points cheaper"
     unit: "Weighted average rate accepted, % a year, tax-free"

@@ -2,10 +2,12 @@ import Link from "next/link";
 import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { BarChart } from "@/components/charts/BarChart";
 import { ChartFrame } from "@/components/charts/ChartFrame";
+import { ChartTools } from "@/components/charts/ChartTools";
 import { asOfLabel } from "@/components/evidence/EvidenceTag";
 import { statusLabel, statusTone } from "@/components/record/EditorialCalls";
 import { ReceiptBody } from "@/components/receipts/ReceiptBody";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
+import { chartAnchor, chartExport } from "@/lib/charts/receipt-charts";
 import { editorialRows } from "@/lib/editorial";
 import { deskSlug, receiptEvidence, sectorNames, type Receipt, type ReceiptChart, type ReceiptTile } from "@/lib/receipts";
 
@@ -68,15 +70,23 @@ export function FigureTiles({ r, tiles }: { r: Receipt; tiles: ReceiptTile[] }) 
   );
 }
 
-export function ReceiptChartView({ r, chart }: { r: Receipt; chart: ReceiptChart }) {
+/** One Receipt chart; `n` is its place in the Receipt, from 1, which names its anchor and its embed. */
+export function ReceiptChartView({ r, chart, n }: { r: Receipt; chart: ReceiptChart; n: number }) {
   const pct = chart.unit.includes("%");
   return (
-    <ChartFrame title={chart.title} unit={chart.unit} evidence={receiptEvidence(r, chart.source)}>
+    <ChartFrame
+      id={chartAnchor(n)}
+      title={chart.title}
+      unit={chart.unit}
+      evidence={receiptEvidence(r, chart.source)}
+      tools={<ChartTools chart={chartExport(r, chart, n)} />}
+    >
       <BarChart
         data={chart.data}
         unit={chart.unit}
         highlight={chart.highlight}
         reference={chart.reference}
+        annotations={chart.annotations}
         label={`${chart.title}. ${chart.data.map((d) => `${d.label}: ${d.value}${pct ? "%" : ""}`).join("; ")}`}
         format={(v) => `${v.toLocaleString("en-US", { maximumFractionDigits: 2 })}${pct ? "%" : ""}`}
       />
@@ -111,7 +121,7 @@ export function ReceiptView({ r }: { r: Receipt }) {
       <FigureTiles r={r} tiles={r.tiles} />
       {lead ? (
         <div className="mt-5">
-          <ReceiptChartView r={r} chart={lead} />
+          <ReceiptChartView r={r} chart={lead} n={1} />
         </div>
       ) : null}
 
@@ -121,8 +131,8 @@ export function ReceiptView({ r }: { r: Receipt }) {
 
       {rest.length ? (
         <div className="mt-8 grid grid-cols-1 gap-4">
-          {rest.map((c) => (
-            <ReceiptChartView key={c.title} r={r} chart={c} />
+          {rest.map((c, i) => (
+            <ReceiptChartView key={c.title} r={r} chart={c} n={i + 2} />
           ))}
         </div>
       ) : null}
@@ -155,8 +165,9 @@ export function ReceiptView({ r }: { r: Receipt }) {
               const row = ledger.get(`RC-${r.slug}-${i + 1}`);
               return (
                 <li key={c.statement} className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                  <p className="text-[15px] leading-6 text-ink">{c.statement}</p>
-                  <p className="tabular shrink-0 text-[12.5px] text-muted sm:text-right">
+                  <p className="min-w-0 text-[15px] leading-6 text-ink sm:flex-1">{c.statement}</p>
+                  {/* A fixed-width column, so a long source name wraps inside it instead of squeezing the call. */}
+                  <p className="tabular text-[12.5px] text-muted sm:w-60 sm:flex-none sm:text-right">
                     Settled by {c.check_source}, {receiptDate(c.check_date)}
                     {row ? (
                       <Link href={`/record#${row.id}`} className={`t-label mt-0.5 block ${statusTone[row.status]}`}>

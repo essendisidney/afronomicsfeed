@@ -1,11 +1,11 @@
-import { MARK, WORDMARK } from "@/components/brand/logo-paths";
+import { brand } from "@/lib/brand/card-style";
 import { lightPalette } from "@/lib/charts/palette";
 import { chartCsv, renderChartSvg, type ChartSpec } from "@/lib/charts/render";
 
 /**
  * Chart downloads, run in the reader's browser and loaded only when a button asks for them (components/charts/
  * ChartTools.tsx). The PNG is drawn on a canvas with no library: the chart's own SVG (lib/charts/render.ts, light
- * colours), with its title and unit above and its source, date, address and the Afronomics wordmark below, so the
+ * * colours), with its title and unit above and its source, date, address and the Afronomics stamp and name below, so the
  * image carries its provenance wherever it is posted.
  */
 
@@ -57,27 +57,45 @@ function loadImage(svg: string): Promise<HTMLImageElement> {
   });
 }
 
-function drawLogo(ctx: CanvasRenderingContext2D, x: number, y: number, height: number, ink: string, accent: string) {
-  // The same geometry as components/brand/Wordmark.tsx (Logo): the mark, a gap, then the wordmark paths.
-  const s = height / 76;
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.scale(s, s);
-  MARK.bars.forEach((b, i) => {
-    ctx.fillStyle = i === MARK.accentIndex ? accent : ink;
-    ctx.beginPath();
-    ctx.roundRect(b.x, b.y + 4, b.w, b.h, b.w / 2);
-    ctx.fill();
-  });
-  ctx.translate(MARK.width + 20, 18);
-  ctx.fillStyle = ink;
-  ctx.fill(new Path2D(WORDMARK.name));
-  ctx.fillStyle = accent;
-  ctx.fill(new Path2D(WORDMARK.sub));
-  ctx.restore();
+const LOGO_GAP = 8;
+const logoFont = (height: number, serif: string) => `700 ${Math.round(height * 0.72)}px ${serif}`;
+
+/** The wordmark's width at `height`: the stamp disc, a gap, then "Afronomics" in the headline face. */
+function logoWidth(ctx: CanvasRenderingContext2D, height: number, serif: string) {
+  ctx.font = logoFont(height, serif);
+  return height + LOGO_GAP + ctx.measureText("Afronomics").width;
 }
 
-export const logoWidth = (height: number) => ((MARK.width + 20 + WORDMARK.width) * height) / 76;
+/**
+ * The Afronomics mark and name (components/brand/Wordmark.tsx, D-026): a cream stamp disc with a dashed laterite ring
+ * around "Af", turned 9 degrees off true, then the name in the headline face.
+ */
+function drawLogo(ctx: CanvasRenderingContext2D, x: number, y: number, height: number, ink: string, serif: string) {
+  const r = height / 2;
+  ctx.save();
+  ctx.translate(x + r, y + r);
+  ctx.rotate((-9 * Math.PI) / 180);
+  ctx.fillStyle = brand.stampPaper;
+  ctx.beginPath();
+  ctx.arc(0, 0, r, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = brand.laterite;
+  ctx.lineWidth = Math.max(1, height * 0.04);
+  ctx.setLineDash([height * 0.055, height * 0.035]);
+  ctx.beginPath();
+  ctx.arc(0, 0, r * 0.83, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.fillStyle = brand.laterite;
+  ctx.font = `700 ${Math.round(height * 0.5)}px ${serif}`;
+  ctx.textAlign = "center";
+  ctx.fillText("Af", 0, height * 0.17);
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = ink;
+  ctx.font = logoFont(height, serif);
+  ctx.fillText("Afronomics", x + height + LOGO_GAP, y + height * 0.76);
+  ctx.restore();
+}
 
 export async function chartPng(c: ChartExport): Promise<Blob> {
   if (document.fonts?.ready) await document.fonts.ready;
@@ -96,9 +114,10 @@ export async function chartPng(c: ChartExport): Promise<Blob> {
   const titleLines = wrap(probe, c.title, inner);
   probe.font = `400 14px ${sans}`;
   const unitLines = wrap(probe, c.unit, inner);
-  probe.font = `400 12.5px ${sans}`;
   // Every footer line wraps short of the wordmark, which sits at the right of the footer.
-  const footW = inner - logoWidth(24) - 20;
+  const logoW = logoWidth(probe, 24, serif);
+  probe.font = `400 12.5px ${sans}`;
+  const footW = inner - logoW - 20;
   const address = c.pageUrl.replace(/^https?:\/\/(www\.)?/, "").replace(/#.*$/, "");
   const footLines = [`Source: ${c.source}, ${c.asOf}`, `Published ${c.published}`, address, "Information, not advice."].flatMap((t) => wrap(probe, t, footW));
 
@@ -144,7 +163,7 @@ export async function chartPng(c: ChartExport): Promise<Blob> {
     ctx.fillText(line, PAD, y + 12);
     y += 18;
   }
-  drawLogo(ctx, W - PAD - logoWidth(24), footTop, 24, p.ink, p.accent);
+  drawLogo(ctx, W - PAD - logoW, footTop, 24, p.ink, serif);
 
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("canvas export failed"))), "image/png"));
 }

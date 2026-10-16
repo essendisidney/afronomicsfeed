@@ -95,11 +95,13 @@ export default async function TodayPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-7">
       <h1 className="sr-only">Afronomics Today: Africa&rsquo;s dated record of what money did, why it happened, and what happened next</h1>
-      <p className="t-label flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
+      {/* On phones the link always takes its own line, so the height is the same before and after the web font loads
+          (a wrap that came and went with the font shifted the whole page past the layout-shift budget). */}
+      <p className="t-label flex flex-col gap-y-1 text-muted sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
         <span>
           Today · <time dateTime={new Date().toISOString().slice(0, 10)}>{todayFmt.format(new Date())}</time>
         </span>
-        <Link href="/sw" lang="sw" hrefLang="sw" className="normal-case tracking-normal text-forest underline underline-offset-2">
+        <Link href="/sw" lang="sw" hrefLang="sw" className="self-start normal-case tracking-normal text-forest underline underline-offset-2">
           Soma kwa Kiswahili
         </Link>
       </p>

@@ -45,9 +45,17 @@ export const lightPalette: ChartPalette = {
   quiet: "#8b93a3",
 };
 
+/**
+ * Whether a chart's values are percentages: the unit has a "%" that is not part of a figure. "% a year" and
+ * "Growth in 2025, %" are; "Interest kept after 15% tax, KES" is not, because its "%" belongs to the 15.
+ */
+export function isPercentUnit(unit: string): boolean {
+  return /(^|[^\d.])%/.test(unit);
+}
+
 /** A value as the chart prints it: up to two decimals, and a % sign when the unit is a percentage. */
 export function formatChartValue(v: number, unit: string): string {
-  return `${v.toLocaleString("en-US", { maximumFractionDigits: 2 })}${unit.includes("%") ? "%" : ""}`;
+  return `${v.toLocaleString("en-US", { maximumFractionDigits: 2 })}${isPercentUnit(unit) ? "%" : ""}`;
 }
 
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);

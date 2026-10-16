@@ -1,6 +1,15 @@
--- Ships with the data-pages release (16 Oct 2026) but is NOT YET APPLIED to the database. It must be applied before
--- "Follow this number" can save anything; until then the other alert kinds keep working unchanged, and a follow
--- request answers "Following isn't switched on yet. Please try again soon." (app/api/rate-alerts logs "create failed").
+-- Ships with the data-pages release. PARTLY APPLIED to production on 16 Oct 2026:
+--   applied:     the series column; rate_alerts_kind_check with 'series'; rate_alerts_series_check; the unique index
+--                rate_alerts_live_uniq_series; the new af_rate_alert_confirm (returns series).
+--   still to run (founder, SQL editor): drop the old index rate_alerts_live_uniq; the 7-argument
+--                af_rate_alert_create (and the drop of the 6-argument one, plus its revoke/grant); the new
+--                af_rate_alerts_live that returns series (and its revoke/grant).
+-- Every statement below is safe to re-run, so running the whole file completes it.
+-- Until the rest runs, "Follow this number" cannot save anything: PostgREST has no af_rate_alert_create taking
+-- p_series, so app/api/rate-alerts answers "Following isn't switched on yet. Please try again soon." (and logs
+-- "create failed"). Every other alert kind keeps working (they call create without p_series), and the sender accepts
+-- af_rate_alerts_live rows without a series field. Note: while the old index stands, one address could follow only
+-- one series (it ignores the series column), so drop it before or with the new create function.
 --
 -- "Follow this number": a reader follows one rate series (a Kenya T-bill tenor, the CBK rate, a money market fund,
 -- a bank average, another market's bill...) and gets an email when a new print differs from the last one they were
@@ -22,11 +31,12 @@ alter table public.rate_alerts add constraint rate_alerts_kind_check
 alter table public.rate_alerts drop constraint if exists rate_alerts_series_check;
 alter table public.rate_alerts add constraint rate_alerts_series_check check ((kind = 'series') = (series is not null));
 
--- One live alert per address and setting, now including the series.
-drop index if exists public.rate_alerts_live_uniq;
-create unique index if not exists rate_alerts_live_uniq
+-- One live alert per address and setting, now including the series. The new index takes a new name (as applied on
+-- 16 Oct), then the old one from 0017, which ignores the series, is dropped.
+create unique index if not exists rate_alerts_live_uniq_series
   on public.rate_alerts (lower(email), kind, coalesce(tenor, 0), coalesce(threshold, -1), coalesce(series, ''))
   where unsubscribed_at is null;
+drop index if exists public.rate_alerts_live_uniq;
 
 -- The create function gains p_series (default null, so a call without it behaves exactly as before). The old
 -- six-argument version is dropped so the two cannot be ambiguous to PostgREST.

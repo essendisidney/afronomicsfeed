@@ -22,7 +22,11 @@ export async function POST(request: Request) {
 
   const list = await rpc("af_rate_alerts_live", { p_secret: secret });
   if (!list.ok || !Array.isArray(list.value)) return Response.json({ sent: 0, reason: `alerts: ${list.ok ? "bad shape" : list.reason}` }, { status: 502 });
-  const alerts = (list.value as LiveAlert[]).filter((a) => (alertKinds as readonly string[]).includes(a.kind));
+  // Rows from an af_rate_alerts_live that predates migration 0042 carry no `series` field: default it to null, so
+  // every other kind is checked as before and a "series" row without one is simply never due (dueCheck).
+  const alerts = (list.value as LiveAlert[])
+    .filter((a) => (alertKinds as readonly string[]).includes(a.kind))
+    .map((a) => ({ ...a, series: a.series ?? null }));
 
   const snapshot = alertSnapshot();
   let sent = 0;

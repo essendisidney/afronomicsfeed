@@ -54,7 +54,7 @@ export function HeadlineTile({ series, kicker, extra, className = "" }: { series
     <div className={`rounded-2xl border border-rule bg-surface px-5 py-5 ${className}`}>
       <p className="text-[13px] font-medium text-muted">{kicker ?? series.label}</p>
       <div className="mt-1 flex items-end justify-between gap-3">
-        <p className="font-serif text-4xl leading-none tracking-[-0.02em] text-ink">{formatValue(latest.value, series.unit, series.unit === "pct" && series.frequency === "auction" ? 3 : undefined)}</p>
+        <p className="font-serif text-4xl leading-none tracking-[-0.02em] text-ink">{formatValue(latest.value, series.unit)}</p>
         <span className="inline-block h-9 w-[120px]">
           <Spark series={series} width={120} height={36} />
         </span>

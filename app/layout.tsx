@@ -18,8 +18,11 @@ const sans = localFont({
   // "optional": the font is preloaded and used when it arrives in time (almost always); on a very slow first visit the
   // size-matched fallback stays for that page instead of the text re-wrapping when the font lands (no layout shift).
   display: "optional",
-  fallback: ["Arial", "Helvetica", "sans-serif"],
-  adjustFontFallback: "Arial",
+  // "Archivo Fallback" (app/globals.css) replaces next/font's generated fallback, which is local("Arial") only: phones
+  // without Arial (Android, Linux) skipped it and set text in an unadjusted, wider face, so paragraphs gained a line
+  // and the page shifted (0.226 on /markets/kenya-tbills at 390px on slow 4G).
+  fallback: ["Archivo Fallback", "Arial", "Helvetica", "sans-serif"],
+  adjustFontFallback: false,
 });
 
 /* Headlines and case titles (rebuild brief, section 7): Source Serif 4, SIL Open Font Licence (public/fonts/SOURCE-SERIF-4-OFL.txt). */

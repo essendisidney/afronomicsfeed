@@ -1,6 +1,6 @@
--- NOT YET APPLIED (written on branch rebuild/data-pages-upgrade, 16 Oct 2026). Apply before the "Follow this number"
--- button can save anything; until then the other alert kinds keep working unchanged and a follow request answers
--- with an error (app/api/rate-alerts logs "create failed").
+-- Ships with the data-pages release (16 Oct 2026) but is NOT YET APPLIED to the database. It must be applied before
+-- "Follow this number" can save anything; until then the other alert kinds keep working unchanged, and a follow
+-- request answers "Following isn't switched on yet. Please try again soon." (app/api/rate-alerts logs "create failed").
 --
 -- "Follow this number": a reader follows one rate series (a Kenya T-bill tenor, the CBK rate, a money market fund,
 -- a bank average, another market's bill...) and gets an email when a new print differs from the last one they were

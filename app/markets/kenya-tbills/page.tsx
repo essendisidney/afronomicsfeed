@@ -118,7 +118,7 @@ export default function KenyaTbillsPage() {
                     {tenorLabel[tenor]} · {dateFmt.format(new Date(row.value_date))}
                   </p>
                   <div className="mt-2 flex items-end justify-between gap-3">
-                    <p className="font-serif text-4xl leading-none tracking-[-0.02em] text-ink">{pct(row.weighted_avg_rate, 3)}</p>
+                    <p className="font-serif text-4xl leading-none tracking-[-0.02em] text-ink">{pct(row.weighted_avg_rate)}</p>
                     {ser ? (
                       <span className="inline-block h-9 w-[120px]">
                         <Spark series={ser} width={120} height={36} />

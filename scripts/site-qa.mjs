@@ -86,7 +86,7 @@ export const LIMITS = {
 };
 
 /** The page templates the speed budget is measured on, one at a time so the timing is not skewed by parallel work. */
-const SPEED_PAGES = ["/", "/receipts", "/numbers", "/markets/tbills", "/rates/kenya", "/rates/compare?a=kenya-91d&b=kenya-cbr", "/registry", "/compare", "/casebook", "/record", "/for-institutions"];
+const SPEED_PAGES = ["/", "/receipts", "/numbers", "/markets/tbills", "/markets/kenya-tbills", "/rates/kenya", "/rates/compare?a=kenya-91d&b=kenya-cbr", "/registry", "/compare", "/casebook", "/record", "/for-institutions"];
 
 async function checkSpeed(browser, base, target) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, extraHTTPHeaders: INTERNAL_HEADERS });

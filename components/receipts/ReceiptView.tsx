@@ -165,8 +165,9 @@ export function ReceiptView({ r }: { r: Receipt }) {
               const row = ledger.get(`RC-${r.slug}-${i + 1}`);
               return (
                 <li key={c.statement} className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                  <p className="text-[15px] leading-6 text-ink">{c.statement}</p>
-                  <p className="tabular shrink-0 text-[12.5px] text-muted sm:text-right">
+                  <p className="min-w-0 text-[15px] leading-6 text-ink sm:flex-1">{c.statement}</p>
+                  {/* A fixed-width column, so a long source name wraps inside it instead of squeezing the call. */}
+                  <p className="tabular text-[12.5px] text-muted sm:w-60 sm:flex-none sm:text-right">
                     Settled by {c.check_source}, {receiptDate(c.check_date)}
                     {row ? (
                       <Link href={`/record#${row.id}`} className={`t-label mt-0.5 block ${statusTone[row.status]}`}>

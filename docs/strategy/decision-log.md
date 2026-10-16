@@ -236,6 +236,16 @@ what we changed. Newest at the bottom. Read this first every week.
   Kenya Airways stay drafts until a legal read; Kenya Airways also has three open checks and should carry KQ's dispute
   of the Treasury's default figures.
 
+### D-025 · 16 Oct 2026 · Banks and government securities Receipt published after the in-house legal read
+- **Decided by the founder:** verdict approved and published ("approved, disclosure confirmed, publish the banks
+  story"). It names KCB, Equity and Co-operative Bank, so D-019 applied; the in-house legal read
+  (`docs/legal/read-2026-10-16-held-receipts.md`) rated it low risk once its wording edits were made.
+- **Disclosure confirmed by the founder:** Afronomics and its founder hold no shares in KCB Group, Equity Group
+  Holdings or the Co-operative Bank of Kenya, and no Kenya government securities.
+- **Still held:** Fuliza until Safaricom has had a right of reply; Kenya Airways until KQ has had a right of reply and
+  the three open checks are closed; the Safaricom stake sale until an advocate has reviewed it (the six questions in
+  the legal read, section 6). Their wording edits from the legal read are merged; they stay drafts.
+
 ### D-022 · 15 Oct 2026 · Dangote refinery IPO Receipt published; legal read waived by the founder
 - **Decided by the founder:** verdict approved (one tap, D-019) and the Receipt published without the securities
   lawyer's read. The founder takes responsibility for its Opinion paragraphs. The waiver is for this Receipt only; the

@@ -2,7 +2,7 @@
 title: "Kenya's banks earn more from the government than from you? Not yet, but the gap is closing"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: banking
 entities:
   - "Central Bank of Kenya"
@@ -18,7 +18,7 @@ labels:
 asOf: "2026-10-15"
 summary: "In 2025 Kenya's banks earned KES 287.2 billion in interest from government securities and KES 500.4 billion from loans, according to the CBK. Government income rose while loan income fell, and holdings of government paper grew 18.2% against 6.6% for loans. At Equity Bank's Kenyan bank, 42% of interest income came from the government."
 desk: "Afronomics Banking Desk"
-disclosure: "[founder to confirm] Afronomics and its founder hold no shares in KCB Group, Equity Group Holdings or the Co-operative Bank of Kenya, and no Kenya government securities."
+disclosure: "Afronomics and its founder hold no shares in KCB Group, Equity Group Holdings or the Co-operative Bank of Kenya, and no Kenya government securities."
 sources:
   - name: "CBK, Bank Supervision Annual Report 2025"
     url: "https://www.centralbank.go.ke/uploads/banking_sector_annual_reports/1241268828_ANNUAL%20REPORT%202025.pdf"
@@ -142,9 +142,9 @@ So no, the government is not yet the bigger customer. But it is the faster-growi
 
 (Opinion) **Kenya's banks still earn more from lending to you than to the government, but in 2025 they grew their government holdings almost three times as fast as their loans: sensible for a bank while the state pays this well, and costly for an economy that needs credit.**
 
-This is not a story about greedy bankers. A bank that can earn a steady return from the state, with almost no credit-loss provisions and no collateral to chase, will lend to the state. With gross bad loans at 16.0% of the sector's book at the end of 2025, the CBK's own figure, the private borrower looks expensive to serve.
+This is not a story about bad bankers. A bank that can earn a steady return from the state, with far less credit risk to provide for and no collateral to chase, will lend to the state. With gross bad loans at 16.0% of the sector's book at the end of 2025, the CBK's own figure, the private borrower looks expensive to serve.
 
-The question is structural. Every shilling the Treasury borrows from a bank is a shilling that bank does not need to lend to a farmer, a shop or a family. The state sets the price of that alternative. While the government borrows this much at home, banks will keep close to a third of their balance sheet in its paper, and the rest of us compete with the Treasury for credit.
+The question is structural. Every shilling the Treasury borrows from a bank is a shilling that bank does not need to lend to a farmer, a shop or a family. The state sets the price of that alternative. While the government borrows this much at home, we expect banks to keep about 30% of their assets in its paper, and the rest of us compete with the Treasury for credit.
 
 The better news is in the 2026 numbers. Private credit grew 10.6% in the year to September, up from minus 2.9% in January 2025. If that holds as rates fall, the gap can stop closing.
 

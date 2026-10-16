@@ -24,6 +24,8 @@ const types = [
 ] as const;
 
 const more = [
+  { href: "/receipts", label: "Receipts", note: "Our daily verdict on one money event, with the figures from the source" },
+  { href: "/casebook", label: "Casebook", note: "What happened before, who lost, and what to ask now" },
   { href: "/news", label: "The Wire", note: "Headlines from African business media, linked to the publisher" },
   { href: "/morning", label: "The Morning", note: "The day's rates and currencies, every weekday" },
   { href: "/morning/sw", label: "Asubuhi", note: "The Morning in Kiswahili" },

@@ -38,6 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/compare", "daily", 0.9),
     page("/numbers", "daily", 0.9),
     page("/stories", "daily", 0.9),
+    page("/tools", "weekly", 0.9),
     page("/", "hourly", 1),
     page("/news", "hourly", 0.9),
     page("/markets", "hourly", 0.9),

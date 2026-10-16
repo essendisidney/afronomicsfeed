@@ -36,6 +36,22 @@ export function fitDescription(text: string, max = DESCRIPTION_MAX): string {
 }
 
 /**
+ * Fills a page's share-preview tags from its own title and description where the page set none: og:title,
+ * og:description, og:url and the X card (summary_large_image). The image itself comes from the route's
+ * opengraph-image, so it is not set here. Fields the page did set are kept.
+ */
+export function withSocial(meta: Metadata, path: string): Metadata {
+  const t = meta.title;
+  const title = typeof t === "string" ? t : t && "absolute" in t ? t.absolute : t && "default" in t ? t.default : site.name;
+  const description = typeof meta.description === "string" ? meta.description : undefined;
+  return {
+    ...meta,
+    openGraph: { title, description, url: `${site.url}${path}`, siteName: site.name, locale: "en_KE", type: "website", ...meta.openGraph },
+    twitter: { card: "summary_large_image", title, description, ...meta.twitter },
+  };
+}
+
+/**
  * A story's metadata. The search title and description are fitted to a results page; the share preview (Open
  * Graph, X) keeps the whole headline, which cards show in full, and a description fitted to the ~200 characters
  * LinkedIn, WhatsApp and X show. The image comes from the route's opengraph-image (lib/og-article.tsx).

@@ -28,6 +28,8 @@ export const metadata: Metadata = {
   description: fitDescription(homeDescription),
   alternates: { canonical: site.url, languages: { en: site.url, sw: `${site.url}/sw` }, types: { "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} RSS` }] } },
   openGraph: { title: homeTitle, description: homeDescription, url: site.url, siteName: site.name, locale: "en_KE", type: "website" },
+  // The image is ./opengraph-image.tsx: today's lead story and its number (this route group keeps it off other pages).
+  twitter: { card: "summary_large_image", title: homeTitle, description: fitDescription(homeDescription, 200) },
 };
 
 const todayFmt = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" });

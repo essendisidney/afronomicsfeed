@@ -15,6 +15,7 @@ export default function SearchPage() {
 
   return (
     <PageShell
+      share={false}
       crumbs={[{ href: "/", label: "Home" }, { label: "Search" }]}
       kicker="Search"
       title="Find a country, an indicator, a brief"

@@ -8,18 +8,21 @@ import { FollowUp } from "@/components/ui/FollowUp";
 import { loadMpesaTariffs } from "@/lib/data/mpesa-tariffs";
 import { charge, fulizaCost } from "@/lib/mpesa-calc";
 import { site } from "@/lib/site";
-import { fitDescription, fitTitle } from "@/lib/seo";
+import { fitDescription, fitTitle, withSocial } from "@/lib/seo";
 
 const kes = (n: number) => `KES ${n.toLocaleString("en-US")}`;
 const longDate = (iso: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
-export const metadata: Metadata = {
-  title: fitTitle("M-PESA charges and Fuliza fees calculator: what you really pay"),
-  description: fitDescription(
-    "Safaricom's M-PESA charges for sending and withdrawing, and Fuliza's access and daily fees, in one calculator: one transaction, a Fuliza balance, or a whole month of your habits. Free, no sign-up.",
-  ),
-  alternates: { canonical: `${site.url}/rates/kenya/mpesa-charges` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: fitTitle("M-PESA charges and Fuliza fees calculator: what you really pay"),
+    description: fitDescription(
+      "Safaricom's M-PESA charges for sending and withdrawing, and Fuliza's access and daily fees, in one calculator: one transaction, a Fuliza balance, or a whole month of your habits. Free, no sign-up.",
+    ),
+    alternates: { canonical: `${site.url}/rates/kenya/mpesa-charges` },
+  },
+  "/rates/kenya/mpesa-charges",
+);
 
 export default function MpesaChargesPage() {
   const t = loadMpesaTariffs();
@@ -41,6 +44,7 @@ export default function MpesaChargesPage() {
 
   return (
     <PageShell
+      share={{ path: "/rates/kenya/mpesa-charges", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Today" }, { href: "/rates/kenya", label: "Kenya rates" }, { label: "M-PESA and Fuliza charges" }]}
       kicker="M-PESA and Fuliza · Kenya"
       title="What do M-PESA and Fuliza really cost you?"

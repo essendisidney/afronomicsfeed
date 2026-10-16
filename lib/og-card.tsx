@@ -19,6 +19,8 @@ const RED_SOFT = "#B9A9FF";
 const UP = "#FF8A7A"; // rates up = tighter money
 const DOWN = "#5CD6A8";
 
+// The card fonts carry no GPOS (kerning) table: the card renderer applied some kerning pairs across word spaces,
+// which drew a double-width space after words like "Kenya's" and "Tax-free". Removed with fontTools (del font["GPOS"]).
 const fontDir = path.join(process.cwd(), "assets", "og-fonts");
 let fontsPromise: Promise<{ name: string; data: Buffer; weight: 400 | 500 | 600; style: "normal" }[]> | null = null;
 export function fonts() {
@@ -27,6 +29,9 @@ export function fonts() {
     readFile(path.join(fontDir, "Archivo-Regular.ttf")).then((data) => ({ name: "Sans", data, weight: 400 as const, style: "normal" as const })),
     readFile(path.join(fontDir, "Archivo-SemiBold.ttf")).then((data) => ({ name: "Sans", data, weight: 600 as const, style: "normal" as const })),
     readFile(path.join(fontDir, "ArchivoExpanded-Bold.ttf")).then((data) => ({ name: "Mono", data, weight: 500 as const, style: "normal" as const })),
+    // Source Serif 4 SemiBold (SIL OFL, public/fonts/SOURCE-SERIF-4-OFL.txt): the site's headline face, for the share
+    // cards' headlines. A TrueType copy of public/fonts/doc/source-serif-4-600.woff2, because ImageResponse reads no woff2.
+    readFile(path.join(fontDir, "SourceSerif4-Semibold.ttf")).then((data) => ({ name: "Headline", data, weight: 600 as const, style: "normal" as const })),
   ]);
   return fontsPromise;
 }

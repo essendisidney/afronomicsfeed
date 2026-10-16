@@ -9,20 +9,23 @@ import { loadIpoOffers } from "@/lib/data/ipo-offers";
 import { latestByTenor, loadTbills } from "@/lib/data/kenya-tbills";
 import { apply, scenario } from "@/lib/ipo-calc";
 import { site } from "@/lib/site";
-import { fitDescription, fitTitle } from "@/lib/seo";
+import { fitDescription, fitTitle, withSocial } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const longDate = (iso: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
-export const metadata: Metadata = {
-  title: fitTitle("IPO calculator Kenya: Quickmart and Dangote shares, what your money buys"),
-  description: fitDescription(
-    "How many Quickmart shares or Dangote receipts your money buys, what you get if the offer is scaled back, and what they are worth if the price opens higher or lower, next to a Treasury bill. Free, no sign-up.",
-  ),
-  alternates: { canonical: `${site.url}/markets/ipo-calculator` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: fitTitle("IPO calculator Kenya: Quickmart and Dangote shares, what your money buys"),
+    description: fitDescription(
+      "How many Quickmart shares or Dangote receipts your money buys, what you get if the offer is scaled back, and what they are worth if the price opens higher or lower, next to a Treasury bill. Free, no sign-up.",
+    ),
+    alternates: { canonical: `${site.url}/markets/ipo-calculator` },
+  },
+  "/markets/ipo-calculator",
+);
 
 export default function IpoCalculatorPage() {
   const offers = loadIpoOffers();
@@ -57,6 +60,7 @@ export default function IpoCalculatorPage() {
 
   return (
     <PageShell
+      share={{ path: "/markets/ipo-calculator", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Today" }, { href: "/markets", label: "Markets" }, { label: "IPO calculator" }]}
       kicker="Share offers · Kenya"
       title="What does your money buy in the IPO?"

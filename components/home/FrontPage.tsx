@@ -2,7 +2,9 @@ import Link from "next/link";
 import { asOfLabel, EvidenceTag } from "@/components/evidence/EvidenceTag";
 import { BarChart } from "@/components/charts/BarChart";
 import { VerdictLine } from "@/components/receipts/ReceiptView";
+import { ShareNumberButton } from "@/components/share/ShareNumberButton";
 import { ButtonLink } from "@/components/ui/Button";
+import { shareLink, todayTileIds } from "@/lib/share";
 import { freshness, type StoryCard } from "@/lib/front-page";
 import { deskSlug, receiptEvidence, sectorNames, type Receipt, type ReceiptChart } from "@/lib/receipts";
 import type { TodayMove } from "@/lib/today";
@@ -43,7 +45,15 @@ export function TodayStrip({ tiles }: { tiles: BoardTile[] }) {
         return (
           <li key={t.id} className="w-[44%] min-w-[10.5rem] shrink-0 sm:w-auto sm:min-w-0">
             <div className="relative flex h-full flex-col rounded-xl border border-rule bg-surface px-3 py-2.5">
-              <p className="line-clamp-2 h-8 text-[12px] font-medium leading-4 text-muted">
+              {(todayTileIds as readonly string[]).includes(t.id) ? (
+                <ShareNumberButton
+                  url={shareLink({ kind: "number", receipt: null, tile: t.id })}
+                  text={`${t.label}: ${t.value}${t.change ? ` (${t.change})` : ""}. ${t.evidence.source}.`}
+                  label={t.label}
+                  className="right-0 top-0"
+                />
+              ) : null}
+              <p className="line-clamp-2 h-8 pr-6 text-[12px] font-medium leading-4 text-muted">
                 <Link href={t.href} className="after:absolute after:inset-0 hover:text-ink">
                   {t.label}
                 </Link>

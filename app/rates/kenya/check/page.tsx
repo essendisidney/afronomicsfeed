@@ -5,20 +5,24 @@ import { FairRate } from "@/components/data/FairRate";
 import { PageShell } from "@/components/data/PageShell";
 import { fairBench } from "@/lib/data/kenya-rates";
 import { site } from "@/lib/site";
-import { fitDescription } from "@/lib/seo";
+import { fitDescription, withSocial } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Is my rate fair? Check a Kenya savings or loan rate",
-  description: fitDescription("Type the interest rate a bank, SACCO, fund or lender offered you and see how it compares with the Treasury bill, the best published money market fund after tax, and the Central Bank's averages for what banks pay and charge — with the gap in shillings."),
-  alternates: { canonical: `${site.url}/rates/kenya/check` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: "Is my rate fair? Check a Kenya savings or loan rate",
+    description: fitDescription("Type the interest rate a bank, SACCO, fund or lender offered you and see how it compares with the Treasury bill, the best published money market fund after tax, and the Central Bank's averages for what banks pay and charge — with the gap in shillings."),
+    alternates: { canonical: `${site.url}/rates/kenya/check` },
+  },
+  "/rates/kenya/check",
+);
 
 export default function FairRatePage() {
   const bench = fairBench();
   return (
     <PageShell
+      share={{ path: "/rates/kenya/check", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Home" }, { href: "/rates/kenya", label: "Kenya rates" }, { label: "Is my rate fair?" }]}
       kicker="Fair-rate check · Kenya"
       title="Is the rate you were offered fair?"

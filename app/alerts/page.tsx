@@ -29,6 +29,7 @@ export default function AlertsPage() {
   const k364 = kenya.get(364)?.latest;
   return (
     <PageShell
+      share={false}
       crumbs={[{ href: "/", label: "Home" }, { label: "Alerts" }]}
       kicker="Follow your markets"
       title="The result on your phone, the minute it lands"

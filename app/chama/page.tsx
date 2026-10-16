@@ -9,15 +9,18 @@ import { loadHealth } from "@/lib/data/health";
 import { fundLeague, loadKenyaRates } from "@/lib/data/kenya-rates";
 import { loadTbills, type Tenor } from "@/lib/data/kenya-tbills";
 import { site } from "@/lib/site";
-import { fitDescription, fitTitle } from "@/lib/seo";
+import { fitDescription, fitTitle, withSocial } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: fitTitle("Chama Money Hub — where should our chama put its money?"),
-  description: fitDescription("For chamas and investment groups in Kenya: what your group's money earns after tax in a money market fund, Treasury bills, a bank deposit or a savings account, for when you need it. Today's rates, from the CBK and the fund managers; share it to the group on WhatsApp."),
-  alternates: { canonical: `${site.url}/chama` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: fitTitle("Chama Money Hub — where should our chama put its money?"),
+    description: fitDescription("For chamas and investment groups in Kenya: what your group's money earns after tax in a money market fund, Treasury bills, a bank deposit or a savings account, for when you need it. Today's rates, from the CBK and the fund managers; share it to the group on WhatsApp."),
+    alternates: { canonical: `${site.url}/chama` },
+  },
+  "/chama",
+);
 
 export default function ChamaPage() {
   const bills = loadTbills().rows;
@@ -58,6 +61,7 @@ export default function ChamaPage() {
 
   return (
     <PageShell
+      share={{ path: "/chama", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Home" }, { href: "/rates/kenya", label: "Kenya rates" }, { label: "Chama Money Hub" }]}
       kicker="Chama Money Hub · Kenya"
       title="Where should our chama put its money?"

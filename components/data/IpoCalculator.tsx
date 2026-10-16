@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { allot, apply, billAlternative, dividend, scenario, type Offer } from "@/lib/ipo-calc";
+import { toolDefaults } from "@/lib/tool-defaults";
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const kes2 = (n: number) => `KES ${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -17,7 +18,7 @@ const moves = [-30, -20, -10, 0, 10, 20, 30];
  */
 export function IpoCalculator({ offers, bill }: { offers: Offer[]; bill: { rate: number; date: string } | null }) {
   const [id, setId] = useState(offers[0]?.id ?? "");
-  const [amount, setAmount] = useState("20000");
+  const [amount, setAmount] = useState(String(toolDefaults.ipo.amount));
   const [pct, setPct] = useState(100);
   const offer = offers.find((o) => o.id === id) ?? offers[0];
   if (!offer) return null;

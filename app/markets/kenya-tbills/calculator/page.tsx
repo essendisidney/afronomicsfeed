@@ -10,7 +10,7 @@ import { loadHealth } from "@/lib/data/health";
 import { fundLeague, loadKenyaRates } from "@/lib/data/kenya-rates";
 import { latestByTenor, loadTbills, tenors } from "@/lib/data/kenya-tbills";
 import { site } from "@/lib/site";
-import { fitDescription, fitTitle } from "@/lib/seo";
+import { fitDescription, fitTitle, withSocial } from "@/lib/seo";
 import { quoteBill } from "@/lib/tbill-calc";
 
 export const revalidate = 3600;
@@ -21,11 +21,14 @@ export function generateMetadata(): Metadata {
   const description = `What a Kenya Treasury bill costs, what you get back and what you keep after 15% tax, at the latest CBK auction${
     q ? `: KES 100,000 in the 364-day bill keeps about KES ${Math.round(q.net).toLocaleString("en-US")}` : ""
   }. Compare with a money market fund and a bank savings account. Free, no sign-up.`;
-  return {
-    title: fitTitle("Treasury bill calculator Kenya: what you pay, get back and keep after tax"),
-    description: fitDescription(description),
-    alternates: { canonical: `${site.url}/markets/kenya-tbills/calculator` },
-  };
+  return withSocial(
+    {
+      title: fitTitle("Treasury bill calculator Kenya: what you pay, get back and keep after tax"),
+      description: fitDescription(description),
+      alternates: { canonical: `${site.url}/markets/kenya-tbills/calculator` },
+    },
+    "/markets/kenya-tbills/calculator",
+  );
 }
 
 export default function TbillCalculatorPage() {
@@ -69,6 +72,7 @@ export default function TbillCalculatorPage() {
 
   return (
     <PageShell
+      share={{ path: "/markets/kenya-tbills/calculator", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Today" }, { href: "/markets/kenya-tbills", label: "Kenya T-bills" }, { label: "Calculator" }]}
       kicker="Treasury bill calculator · Kenya"
       title="What will my Treasury bill pay?"

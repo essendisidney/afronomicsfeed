@@ -19,7 +19,17 @@ export type ShareSpec =
   | { kind: "mmf" }
   /** The monthly money market fund ranking; month (YYYY-MM) for a finished month, absent for the month in progress. */
   | { kind: "mmf_month"; month: string | null }
-  | { kind: "mobile" };
+  | { kind: "mobile" }
+  /**
+   * "Share this number": one published figure, by reference only. A Today tile by its id (receipt null), or a Receipt's
+   * figure tile by the Receipt's slug and the tile's place (1-based). The value, label, source and date are read from
+   * the data when the card is drawn, never from the link.
+   */
+  | { kind: "number"; receipt: string | null; tile: string };
+
+/** The Today tiles that can be shared as a number (ids from lib/today-board.ts). */
+export const todayTileIds = ["bill-91", "bill-364", "cbr", "mmf"] as const;
+const RECEIPT_SLUG = /^20\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])-[a-z0-9]+(?:-[a-z0-9]+){0,12}$/;
 
 export const shareSources = ["whatsapp", "linkedin", "x", "copy", "native"] as const;
 export type ShareSource = (typeof shareSources)[number];
@@ -65,6 +75,13 @@ export function parseShare(q: URLSearchParams): ShareSpec | null {
     return { kind, amount, rate, months, lang: shareLang };
   }
   if (kind === "mmf" || kind === "mobile") return { kind };
+  if (kind === "number") {
+    const tile = q.get("tile");
+    const receipt = q.get("receipt");
+    if (receipt == null) return tile != null && (todayTileIds as readonly string[]).includes(tile) ? { kind, receipt: null, tile } : null;
+    if (receipt.length > 100 || !RECEIPT_SLUG.test(receipt) || tile == null || !/^(?:[1-9]|1[0-2])$/.test(tile)) return null;
+    return { kind, receipt, tile };
+  }
   if (kind === "mmf_month") {
     const month = q.get("month");
     if (month != null && !/^20\d\d-(0[1-9]|1[0-2])$/.test(month)) return null;
@@ -90,6 +107,9 @@ export function shareQuery(spec: ShareSpec): URLSearchParams {
     q.set("rate", String(spec.rate));
     q.set("months", String(spec.months));
     if (spec.lang !== "en") q.set("lang", spec.lang);
+  } else if (spec.kind === "number") {
+    if (spec.receipt) q.set("receipt", spec.receipt);
+    q.set("tile", spec.tile);
   } else if (spec.kind === "mmf_month" && spec.month) {
     q.set("month", spec.month);
   }
@@ -111,6 +131,8 @@ export function sharePath(spec: ShareSpec): { path: string; hash: string } {
       return { path: `/rates/kenya/best-money-market-fund${spec.month ? `/${spec.month}` : ""}`, hash: "" };
     case "mobile":
       return { path: "/rates/kenya/mobile-loans", hash: "" };
+    case "number":
+      return spec.receipt ? { path: `/receipts/${spec.receipt}`, hash: "" } : { path: "/", hash: "#today" };
   }
 }
 
@@ -120,6 +142,11 @@ export function shareUrl(spec: ShareSpec, source: ShareSource): string {
   q.set("utm_source", source);
   q.set("utm_campaign", "share");
   return `${site.url}/share?${q.toString()}`;
+}
+
+/** The untagged /share link for a spec; the share buttons add the network and campaign tags. */
+export function shareLink(spec: ShareSpec): string {
+  return `${site.url}/share?${shareQuery(spec).toString()}`;
 }
 
 export function cardUrl(spec: ShareSpec, base: string = site.url): string {

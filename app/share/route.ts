@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { cardUrl, parseShare, shareQuery, sharePath, shareSources, type ShareSource } from "@/lib/share";
 import { shareView } from "@/lib/share-card";
+import { shareNetworks } from "@/lib/share-links";
 import { site } from "@/lib/site";
 
 /**
@@ -17,8 +18,12 @@ export function GET(request: NextRequest) {
   const spec = parseShare(q);
   const view = spec ? shareView(spec) : null;
   const rawSource = q.get("utm_source");
-  const source: ShareSource | null = rawSource && (shareSources as readonly string[]).includes(rawSource) ? (rawSource as ShareSource) : null;
-  const tags = new URLSearchParams(source ? { utm_source: source, utm_campaign: "share" } : {}).toString();
+  const sources: readonly string[] = [...shareSources, ...shareNetworks];
+  const source: ShareSource | null = rawSource && sources.includes(rawSource) ? (rawSource as ShareSource) : null;
+  // A shared number is tagged like the share bars (utm_medium=social, utm_campaign=share-<page kind>).
+  const tags = new URLSearchParams(
+    source ? (spec?.kind === "number" ? { utm_source: source, utm_medium: "social", utm_campaign: "share-number" } : { utm_source: source, utm_campaign: "share" }) : {},
+  ).toString();
 
   if (!spec || !view) {
     return NextResponse.redirect(new URL(`/rates/kenya/check${tags ? `?${tags}` : ""}`, request.nextUrl.origin), 307);
@@ -31,6 +36,7 @@ export function GET(request: NextRequest) {
   const image = cardUrl(spec, origin);
   const lang = "lang" in spec ? spec.lang : "en";
   const title = `${view.title} · ${site.name}`;
+  const alt = view.signature ? `${view.signature.figure ? `${view.signature.figure.value}: ${view.signature.figure.label}` : view.signature.headline}` : view.card.title;
 
   const html = `<!doctype html>
 <html lang="${esc(lang)}"${lang === "ar" ? ' dir="rtl"' : ""}>
@@ -49,7 +55,7 @@ export function GET(request: NextRequest) {
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${esc(view.card.title)}">
+<meta property="og:image:alt" content="${esc(alt)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(view.title)}">
 <meta name="twitter:description" content="${esc(view.description)}">

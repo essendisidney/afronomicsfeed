@@ -18,11 +18,17 @@ export const networkLabel: Record<ShareNetwork | "copy" | "native", string> = {
   native: "Share…",
 };
 
-/** The page address tagged with where the share came from. Keeps any query the address already has. */
-export function taggedUrl(url: string, source: string): string {
+/**
+ * The page address tagged with where the share came from. Keeps any query the address already has. With a
+ * `campaign` (the kind of page: receipt, record, tool, number), the link is tagged
+ * utm_source=<network>&utm_medium=social&utm_campaign=share-<kind> (docs/rebuild/phase-7b-plan.md, 7b-2), so the desk's
+ * readers lane can tell which kind of page a share brought readers to; without one, as the story bars always have.
+ */
+export function taggedUrl(url: string, source: string, campaign?: string): string {
   const u = new URL(url);
   u.searchParams.set("utm_source", source);
-  u.searchParams.set("utm_medium", "share");
+  u.searchParams.set("utm_medium", campaign ? "social" : "share");
+  if (campaign) u.searchParams.set("utm_campaign", `share-${campaign}`);
   return u.toString();
 }
 
@@ -32,8 +38,8 @@ const enc = encodeURIComponent;
  * The intent URL for one network. `text` is the headline (or a quote); `summary` is used where a network shows a
  * body (email). X and Telegram take the address separately, so it is not repeated inside the text.
  */
-export function shareHref(network: ShareNetwork, { url, text, summary }: { url: string; text: string; summary?: string }): string {
-  const link = taggedUrl(url, network);
+export function shareHref(network: ShareNetwork, { url, text, summary, campaign }: { url: string; text: string; summary?: string; campaign?: string }): string {
+  const link = taggedUrl(url, network, campaign);
   switch (network) {
     case "whatsapp":
       return `https://wa.me/?text=${enc(`${text}\n\n${link}`)}`;

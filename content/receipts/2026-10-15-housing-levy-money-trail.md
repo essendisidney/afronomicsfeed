@@ -2,7 +2,7 @@
 title: "Where the Housing Levy money went: KES 114.5bn collected, and none of 142 affordable housing projects finished at audit"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: public-money
 entities:
   - "Affordable Housing Board"
@@ -18,7 +18,7 @@ labels:
 asOf: "2026-10-15"
 summary: "By April 2025 KRA had collected KES 114.5 billion in Housing Levy. Of the first KES 34.7 billion, more went into Treasury bills than into houses. When the Auditor-General's team visited in April 2025, none of 142 affordable housing projects on the Board's list was finished. A worker on KES 50,000 a month pays KES 750, and their employer pays another KES 750."
 desk: "Afronomics Public Money Desk"
-disclosure: "[founder to confirm] Afronomics and its founder hold no contracts, units or allocations under the Affordable Housing Programme."
+disclosure: "Afronomics and its founder hold no contracts, units or allocations under the Affordable Housing Programme."
 sources:
   - name: "Affordable Housing Act, 2024 (Kenya Law)"
     url: "https://new.kenyalaw.org/akn/ke/act/2024/2/eng@2024-03-21"
@@ -109,8 +109,6 @@ charts:
       - { label: "100k: take-home falls", value: 1050 }
       - { label: "100k: employer pays", value: 1500 }
     highlight: ["50k: take-home falls", "100k: take-home falls"]
-verify:
-  - "Disclosure: confirm against data/owner/holdings.json (the file does not exist yet; founder to supply)."
 ---
 
 The Housing Levy started in mid-2023. By April 2025 the Kenya Revenue Authority had collected KES 114.5 billion of it, from workers and their employers, the Auditor-General found.

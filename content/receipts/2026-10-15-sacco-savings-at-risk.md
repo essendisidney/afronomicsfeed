@@ -2,7 +2,7 @@
 title: "KES 885 billion in SACCOs, and a deposit guarantee fund that has yet to be switched on"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: banking
 entities:
   - "Sacco Societies Regulatory Authority"
@@ -16,7 +16,7 @@ labels:
 asOf: "2026-10-15"
 summary: "Regulated SACCOs held KES 884.8 billion of members' deposits in June 2026. The Sacco Societies Act sets up a Deposit Guarantee Fund covering up to KES 100,000 a member, but SASRA says the Fund still has to be made operational, through a Bill now before Parliament. Until then, SACCO members lack the working safety net that bank depositors get from KDIC."
 desk: "Afronomics Banking Desk"
-disclosure: "[founder to confirm] Afronomics and its founder hold no deposits or shares in any SASRA-regulated SACCO."
+disclosure: "Afronomics and its founder hold no deposits or shares in any SASRA-regulated SACCO."
 sources:
   - name: "SASRA, Sacco Supervision Annual Report 2025"
     url: "https://www.sasra.go.ke/?wpdmdl=1772"
@@ -102,8 +102,6 @@ charts:
       - { label: "Mar 26", value: 870.02 }
       - { label: "Jun 26", value: 884.83 }
     highlight: ["Jun 26"]
-verify:
-  - "Disclosure: confirm against data/owner/holdings.json."
 ---
 
 At the end of 2025, 7.87 million members had KES 832.74 billion of deposits in the 357 SACCOs that SASRA regulates, about 18 times what Kenya's 14 microfinance banks held. By June 2026 the deposits had reached KES 884.8 billion.

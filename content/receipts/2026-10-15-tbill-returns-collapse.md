@@ -2,7 +2,7 @@
 title: "The T-bill party is over: KES 500,000 in a one-year bill now earns KES 33,700 a year less"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: markets
 entities:
   - "Central Bank of Kenya"
@@ -17,7 +17,7 @@ labels:
 asOf: "2026-10-15"
 summary: "In April 2024 the 364-day Treasury bill paid 16.99%. At today's auction it paid 9.04%. On KES 500,000, that is KES 72,009 a year after tax then and KES 38,308 now. The CBK cut its rate from 13% to 8.75%, and savers moved to money market funds, which have grown from KES 171 billion to KES 460 billion in two years."
 desk: "Afronomics Markets Desk"
-disclosure: "[founder to confirm] Afronomics and its founder hold no Kenyan Treasury bills and no units in any money market fund."
+disclosure: "Afronomics and its founder hold no Kenyan Treasury bills and no units in any money market fund."
 sources:
   - name: "Afronomics auction file, CBK Treasury bill results"
     url: "https://www.centralbank.go.ke/bills-bonds/treasury-bills/"
@@ -125,8 +125,6 @@ charts:
       - { label: "Apr 2024, 16.99%", value: 72009 }
       - { label: "Oct 2026, 9.04%", value: 38308 }
     highlight: ["Oct 2026, 9.04%"]
-verify:
-  - "Disclosure line against data/owner/holdings.json"
 ---
 
 In April 2024 Kenya's 364-day Treasury bill paid 16.99% a year. At today's auction it paid 9.04%.

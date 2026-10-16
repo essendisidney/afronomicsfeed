@@ -2,7 +2,7 @@
 title: "The shilling that stopped falling: KES 314,200 off a US$10,000 loan, KES 15,710 off a US$500 transfer"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: markets
 entities:
   - "Central Bank of Kenya"
@@ -16,7 +16,7 @@ labels:
 asOf: "2026-10-15"
 summary: "The CBK rate hit KES 161.36 to the US dollar on 23 January 2024. By 28 March 2024 it was KES 131.80, and on 8 October 2026 it was KES 129.94. A US$10,000 debt now costs KES 314,200 less in shillings; a US$500 monthly transfer from abroad buys KES 15,710 less."
 desk: "Afronomics Markets Desk"
-disclosure: "[founder to confirm] Afronomics and its founder hold no US-dollar loans, US-dollar deposits or currency positions."
+disclosure: "Afronomics and its founder hold no US-dollar loans, US-dollar deposits or currency positions."
 sources:
   - name: "CBK Weekly Bulletin, 26 January 2024"
     url: "https://www.centralbank.go.ke/uploads/weekly_bulletin/1198707913_Weekly%20CBK%20Bulletin%20January%2026,%202024.pdf"

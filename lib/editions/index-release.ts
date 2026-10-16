@@ -77,8 +77,8 @@ export function indexReleaseHtml(r: IndexRelease) {
 <tr><td style="padding:24px 28px 8px;${base}"><p style="margin:0;font-size:13px;color:#a33a1c;font-weight:700;">${esc(indexName)} — week of ${esc(r.week)}</p>
 <p style="margin:10px 0 0;font-size:40px;line-height:1;font-weight:700;">${r.index.latest.value.toFixed(2)}%</p>
 <p style="margin:14px 0 0;font-size:16px;line-height:25px;">${esc(r.lead)}</p>
-<p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#3b4254;">${esc(r.moversText)}</p>
-<p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#3b4254;">${esc(r.range)}</p></td></tr>
+<p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#45372f;">${esc(r.moversText)}</p>
+<p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#45372f;">${esc(r.range)}</p></td></tr>
 <tr><td style="padding:12px 28px 4px;${base}"><p style="margin:0 0 6px;font-size:13px;color:#a33a1c;font-weight:700;">By market, 364-day, latest</p><table role="presentation" cellpadding="0" cellspacing="0" width="100%">${rows}</table></td></tr>
 <tr><td style="padding:18px 28px 26px;"><a href="${r.url}?utm_source=email&utm_medium=release&utm_campaign=asbi" style="display:inline-block;background:#1d1512;${base}color:#f7f3ef;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;text-decoration:none;">Chart, series and contributions</a></td></tr>
 <tr><td style="background:#eee7e1;padding:16px 28px;${base}font-size:12px;line-height:18px;color:#6c5e55;">${esc(r.boiler)} Press: ${esc(site.contactEmail)}.</td></tr>

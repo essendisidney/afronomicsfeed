@@ -1,3 +1,4 @@
+import { brand, brandDark } from "@/lib/brand/card-style";
 import { currencyName, formatFx, loadFxQuote, pairHref, tapeCodes } from "@/lib/data/fx";
 import { latestByTenor, loadTbills, tenorLabel, tenors } from "@/lib/data/kenya-tbills";
 import { loadWire } from "@/lib/data/wire";
@@ -21,8 +22,9 @@ export type WidgetSlug = (typeof widgets)[number]["slug"];
 const esc = (value: string) => value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 const utm = (path: string, widget: string) => `${site.url}${path}${path.includes("?") ? "&" : "?"}utm_source=embed&utm_medium=widget&utm_campaign=${widget}`;
 
-const light = "--bg:#ffffff;--bg2:#f4f1ea;--ink:#1c2433;--soft:#3d4656;--muted:#6a7384;--rule:#e2ddd2;--accent:#1e3a5f;--up:#1b7a55;--down:#a51d32;";
-const dark = "--bg:#141820;--bg2:#1b202a;--ink:#e8e4db;--soft:#c4bfb4;--muted:#8e887c;--rule:#2f3542;--accent:#b8c4d4;--up:#3cc28e;--down:#e0707c;";
+// Laterite (D-026), from the brand palette in lib/brand/card-style.ts, light and dark.
+const light = `--bg:${brand.surface};--bg2:${brand.paper};--ink:${brand.ink};--soft:${brand.inkSoft};--muted:${brand.muted};--rule:${brand.rule};--accent:${brand.lateriteInk};--up:${brand.up};--down:${brand.down};`;
+const dark = `--bg:${brandDark.surface};--bg2:${brandDark.paper};--ink:${brandDark.ink};--soft:${brandDark.inkSoft};--muted:${brandDark.muted};--rule:${brandDark.rule};--accent:${brandDark.lateriteInk};--up:${brand.upOnNight};--down:${brand.downOnNight};`;
 
 function page(title: string, body: string, theme: Theme, widget: string, sourceNote: string, sourcePath: string) {
   const vars = theme === "dark" ? `:root{${dark}}` : theme === "light" ? `:root{${light}}` : `:root{${light}}@media (prefers-color-scheme:dark){:root{${dark}}}`;

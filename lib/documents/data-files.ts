@@ -144,10 +144,10 @@ export function parseCsv(text: string): { comments: string[]; header: string[]; 
 const NUMBER = /^-?\d+(\.\d+)?$/;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
-const INK = "FF121826";
-const ACCENT = "FF5B3FD6";
-const MUTED = "FF636B7D";
-const RULE = "FFD9DCD7";
+const INK = "FF1D1512";
+const ACCENT = "FFB3401F";
+const MUTED = "FF6C5E55";
+const RULE = "FFE0D6CD";
 
 /** The workbook: Cover, Data and Notes sheets, made from the dataset's CSV text. */
 export async function workbook(csv: string, f: DataFile, licence: string): Promise<Buffer> {

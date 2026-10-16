@@ -17,7 +17,7 @@ export const metadata: Metadata = { title: "Design system", robots: { index: fal
  * below are specimens to show the parts, labelled as such, and are never shown to readers.
  */
 
-const TOKENS = ["paper", "surface", "ink", "ink-soft", "muted", "rule", "forest", "brand-accent", "up", "down", "warn", "chart-quiet", "facts", "analysis", "opinion"];
+const TOKENS = ["paper", "surface", "ink", "ink-soft", "muted", "rule", "forest", "brand-accent", "up", "down", "warn", "chart-accent", "chart-quiet", "facts", "analysis", "opinion"];
 const SPECIMEN = { source: "Specimen source", href: "https://www.afronomicsfeed.com/method", asOf: "2026-10-14" };
 
 export default async function DesignPage() {

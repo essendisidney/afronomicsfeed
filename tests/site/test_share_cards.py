@@ -32,7 +32,8 @@ def test_every_receipt_page_declares_its_own_card():
     card = APP / "receipts" / "[slug]" / "opengraph-image.tsx"
     assert card.exists(), "Receipts would share the site-wide card"
     src = card.read_text()
-    assert "receiptSignature" in src
+    # The Receipt card is the cream slip (lib/brand/receipt-card.tsx).
+    assert "receiptCard(" in src
     # A draft never gets a card in production: the card reads the Receipt through getReceipt (showDrafts) and 404s.
     assert "getReceipt(" in src and "notFound()" in src
     assert list((ROOT / "content" / "receipts").glob("*.md")), "no Receipts to check"
@@ -90,14 +91,89 @@ def test_no_shareable_page_falls_back_to_the_site_card():
     assert not bare, f"pages that would share the site-wide card: {sorted(bare)}"
 
 
-def test_card_colours_come_from_the_design_tokens():
-    # One module knows colours (lib/og-tokens.ts, read from app/globals.css); the signature card draws with it.
+BRAND = ROOT / "lib" / "brand" / "card-style.ts"
+# Everything that draws a share card or a chart outside the site's stylesheet: colours come only from BRAND.
+DRAWN_FROM_BRAND = [
+    "lib/og-signature.tsx",
+    "lib/og-tokens.ts",
+    "lib/share-cards.ts",
+    "lib/og-card.tsx",
+    "lib/og-article.tsx",
+    "lib/og-builders.tsx",
+    "lib/brand/receipt-card.tsx",
+    "lib/brand/stamp-badge.tsx",
+    "lib/charts/render.ts",
+    "lib/charts/embed.ts",
+    "lib/charts/export.ts",
+    "lib/charts/palette.ts",
+]
+HEX = re.compile(r"#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b(?![0-9a-fA-F])|rgba?\(\s*\d")
+
+
+def brand_hexes(name: str) -> dict[str, str]:
+    """The `name` object of lib/brand/card-style.ts as {key: lowercase hex}."""
+    src = BRAND.read_text()
+    block = src.split(f"export const {name} = {{", 1)[1].split("} as const;", 1)[0]
+    return {k: v.lower() for k, v in re.findall(r'"?([\w-]+)"?: "(#[0-9A-Fa-f]{6})"', block)}
+
+
+def css_tokens(selector: str) -> dict[str, str]:
+    """Every `--name: #hex;` set in app/globals.css blocks that open with exactly `selector {`, later blocks winning."""
+    css = (APP / "globals.css").read_text()
+    out: dict[str, str] = {}
+    for body in re.findall(rf"(?m)^{re.escape(selector)} \{{([^{{}}]*)\}}", css):
+        out.update({k: v.lower() for k, v in re.findall(r"--([\w-]+):\s*(#[0-9a-fA-F]{6})\s*;", body)})
+    return out
+
+
+def test_card_and_chart_colours_come_from_the_brand_palette():
+    # One module knows colours (lib/brand/card-style.ts); the cards and the charts draw with it.
     sig = (ROOT / "lib" / "og-signature.tsx").read_text()
-    cards = (ROOT / "lib" / "share-cards.ts").read_text()
     assert "ogTokens()" in sig
-    assert not re.search(r"#[0-9a-fA-F]{6}", sig + cards), "hard-coded colour in the share cards"
-    tokens = (ROOT / "lib" / "og-tokens.ts").read_text()
-    assert "globals.css" in tokens
+    assert "@/lib/brand/card-style" in (ROOT / "lib" / "og-tokens.ts").read_text()
+    for rel in DRAWN_FROM_BRAND:
+        src = (ROOT / rel).read_text()
+        assert not HEX.search(src), f"hard-coded colour in {rel}: {HEX.search(src).group(0)}"
+
+
+def test_brand_palette_matches_the_site_tokens():
+    # The cards and the site share one palette: the brand module and app/globals.css never drift apart.
+    light, dark = css_tokens(":root"), css_tokens(".dark")
+    brand, brand_dark, desks = brand_hexes("brand"), brand_hexes("brandDark"), brand_hexes("deskColors")
+    pairs_light = {"sig": "laterite", "sig-ink": "lateriteInk", "stamp-paper": "stampPaper", "ink": "ink", "ink-soft": "inkSoft",
+                   "muted": "muted", "paper": "paper", "paper-2": "paper2", "rule": "rule", "surface": "surface", "night": "night",
+                   "night-2": "night2", "night-ink": "nightInk", "night-soft": "nightSoft", "night-muted": "nightMuted", "up": "up", "down": "down"}
+    for css, key in pairs_light.items():
+        assert light[css] == brand[key], f"--{css} {light[css]} != brand.{key} {brand[key]}"
+    pairs_dark = {"sig": "laterite", "sig-ink": "lateriteInk", "paper": "paper", "surface": "surface", "ink": "ink", "ink-soft": "inkSoft",
+                  "muted": "muted", "rule": "rule"}
+    for css, key in pairs_dark.items():
+        assert dark[css] == brand_dark[key], f".dark --{css} {dark[css]} != brandDark.{key} {brand_dark[key]}"
+    assert dark["up"] == brand["upOnNight"] and dark["down"] == brand["downOnNight"]
+    for desk, hex_ in desks.items():
+        assert light[f"desk-{desk}"] == hex_, desk
+
+
+def test_chart_colours_match_the_site_tokens():
+    # The page draws charts with CSS variables; the PNG export and the embed use the same colours as hex.
+    src = BRAND.read_text()
+    block = src.split("export const chartColors = {", 1)[1].split("} as const;", 1)[0]
+    resolved = {**{f"brand.{k}": v for k, v in brand_hexes("brand").items()}, **{f"brandDark.{k}": v for k, v in brand_hexes("brandDark").items()}}
+
+    def mode(name: str) -> dict[str, str]:
+        body = re.search(rf"{name}: \{{([^}}]*)\}}", block).group(1)
+        return {k: (resolved[v] if v in resolved else v.strip('"').lower()) for k, v in re.findall(r"(\w+): (\"#[0-9A-Fa-f]{6}\"|brand(?:Dark)?\.\w+)", body)}
+
+    light, dark = css_tokens(":root"), css_tokens(".dark")
+    for css_vars, chart in ((light, mode("light")), (dark, mode("dark"))):
+        assert css_vars["chart-accent"] == chart["accent"]
+        assert css_vars["chart-quiet"] == chart["quiet"]
+        assert css_vars["chart-quiet-ink"] == chart["quietInk"]
+        assert css_vars["surface"] == chart["surface"] and css_vars["ink"] == chart["ink"] and css_vars["rule"] == chart["rule"]
+    render = (ROOT / "lib" / "charts" / "render.ts").read_text()
+    assert 'accent: "var(--chart-accent)"' in render
+    # The highlight is never the "down" crimson.
+    assert mode("light")["accent"] != light["down"] and mode("dark")["accent"] != dark["down"]
 
 
 # What counts as a visible share control: the share bar (directly, through PageShell or PageShare, or in an article

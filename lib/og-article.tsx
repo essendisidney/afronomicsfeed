@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { brand } from "@/lib/brand/card-style";
+import { alpha, brand } from "@/lib/brand/card-style";
 import { StampBadge } from "@/lib/brand/stamp-badge";
 import { categoryLabel, formatDate } from "@/lib/format";
 import { cardSize, fonts } from "@/lib/og-card";
@@ -61,7 +61,7 @@ export async function articleCard(article: Article | null | undefined, fallbackK
             width: 620,
             height: 620,
             borderRadius: 620,
-            background: "radial-gradient(circle, rgba(242,145,109,0.22) 0%, rgba(242,145,109,0) 70%)",
+            background: `radial-gradient(circle, ${alpha(ACCENT, 0.22)} 0%, ${alpha(ACCENT, 0)} 70%)`,
           }}
         />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -79,7 +79,7 @@ export async function articleCard(article: Article | null | undefined, fallbackK
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: "1px solid rgba(245,246,244,0.14)",
+            borderTop: `1px solid ${alpha(INK, 0.14)}`,
             paddingTop: 20,
           }}
         >

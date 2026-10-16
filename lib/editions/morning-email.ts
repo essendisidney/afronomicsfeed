@@ -21,7 +21,7 @@ export function morningEmailHtml(note: MorningNote, unsubscribeUrl = `${site.url
     <tr><td style="background:#b3401f;padding:22px 28px;">
       <table role="presentation" cellpadding="0" cellspacing="0" width="100%"><tr>
         <td style="${base}color:#f7f3ef;font-size:18px;font-weight:700;letter-spacing:1px;">AFRONOMICS <span style="color:#f6c9a0;font-size:11px;letter-spacing:3px;">MORNING</span></td>
-        <td align="right" style="${base}color:#8b93a7;font-size:12px;">${esc(morningLongDate.format(new Date(note.day)))}</td>
+        <td align="right" style="${base}color:#fbe3d6;font-size:12px;">${esc(morningLongDate.format(new Date(note.day)))}</td>
       </tr></table>
     </td></tr>`;
   const standfirst = lines.length

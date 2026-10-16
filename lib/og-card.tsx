@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
-import { brand } from "@/lib/brand/card-style";
+import { alpha, brand } from "@/lib/brand/card-style";
 import { StampBadge } from "@/lib/brand/stamp-badge";
 
 /**
@@ -135,7 +135,7 @@ export async function renderCard(card: Card, headers?: Record<string, string>) {
           {card.bars?.length ? barChart(card.bars, 1072, chartH + 40) : card.line ? lineChart(card.line.values, 1072, chartH) : null}
         </div>
         {card.cta ? <div style={{ display: "flex", fontFamily: "Sans", fontWeight: 600, fontSize: 26, color: RED_SOFT, marginTop: 18 }}>{card.cta}</div> : null}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 18, borderTop: "1px solid rgba(255,255,255,0.14)", paddingTop: 16 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 18, borderTop: `1px solid ${alpha(brand.white, 0.14)}`, paddingTop: 16 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <StampBadge size={34} />
             <div style={{ fontFamily: "Headline", fontSize: 24, color: INK }}>Afronomics</div>

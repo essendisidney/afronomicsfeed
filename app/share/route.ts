@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { brand } from "@/lib/brand/card-style";
 import { cardUrl, parseShare, shareQuery, sharePath, shareSources, type ShareSource } from "@/lib/share";
 import { shareView } from "@/lib/share-card";
 import { shareNetworks } from "@/lib/share-links";
@@ -61,7 +62,7 @@ export function GET(request: NextRequest) {
 <meta name="twitter:description" content="${esc(view.description)}">
 <meta name="twitter:image" content="${esc(image)}">
 <script>location.replace(${JSON.stringify(target).replace(/</g, "\\u003c")});</script>
-<style>body{margin:0;padding:48px 16px;background:#1D1512;color:#FBF6F2;font:16px/1.5 system-ui,sans-serif;text-align:center}a{color:#F6C9A0}</style>
+<style>body{margin:0;padding:48px 16px;background:${brand.night};color:${brand.nightInk};font:16px/1.5 system-ui,sans-serif;text-align:center}a{color:${brand.sand}}</style>
 </head>
 <body>
 <p>${esc(view.title)}</p>

@@ -1,5 +1,6 @@
 import { MARK, WORDMARK } from "@/components/brand/logo-paths";
-import { chartCsv, lightPalette, renderChartSvg, type ChartSpec } from "@/lib/charts/render";
+import { lightPalette } from "@/lib/charts/palette";
+import { chartCsv, renderChartSvg, type ChartSpec } from "@/lib/charts/render";
 
 /**
  * Chart downloads, run in the reader's browser and loaded only when a button asks for them (components/charts/

@@ -659,17 +659,21 @@ table,
 
 /*
  * Design system v2 (docs/rebuild/phase-7-plan.md, 7a). A fixed type scale so no size is set by hand, a warning amber,
- * and the quiet grey that every chart uses for everything except the point being made.
+ * and the chart colours: laterite for the point being made, a warm grey for everything else. The same values, as hex,
+ * draw the chart PNG and the embed (chartColors in lib/brand/card-style.ts; tests/site/test_share_cards.py keeps them in
+ * step). The laterite highlight stays clear of the "down" crimson (dE2000 13 light, 20 dark) and passes 5.7:1 in both.
  */
 :root {
   --warn: #a15c00;
-  --chart-quiet: #8b93a3;
-  --chart-quiet-ink: #636b7d;
+  --chart-accent: #b3401f;
+  --chart-quiet: #8f8178;
+  --chart-quiet-ink: #6c5e55;
 }
 .dark {
   --warn: #f0b35a;
-  --chart-quiet: #6b7590;
-  --chart-quiet-ink: #8b93a7;
+  --chart-accent: #e0714c;
+  --chart-quiet: #7d6e65;
+  --chart-quiet-ink: #a8988e;
 }
 
 /*

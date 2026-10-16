@@ -30,20 +30,11 @@ export const cssPalette: ChartPalette = {
   inkSoft: "var(--ink-soft)",
   muted: "var(--muted)",
   rule: "var(--rule)",
-  accent: "var(--brand-accent)",
+  accent: "var(--chart-accent)",
   quiet: "var(--chart-quiet)",
 };
 
-/** The light-mode values of the same tokens (app/globals.css), for an image that has no stylesheet. */
-export const lightPalette: ChartPalette = {
-  surface: "#ffffff",
-  ink: "#121826",
-  inkSoft: "#3b4354",
-  muted: "#636b7d",
-  rule: "#d9dcd7",
-  accent: "#5b3fd6",
-  quiet: "#8b93a3",
-};
+// The same tokens as hex, for the PNG export, are lightPalette in lib/charts/palette.ts (from lib/brand/card-style.ts).
 
 /**
  * Whether a chart's values are percentages: the unit has a "%" that is not part of a figure. "% a year" and

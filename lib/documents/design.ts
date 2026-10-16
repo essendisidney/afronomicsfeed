@@ -187,9 +187,9 @@ h3 { font-size: 11.5pt; margin: 6mm 0 2mm; }
 table { width: 100%; border-collapse: collapse; font-size: 8.6pt; }
 thead th { text-align: left; font-size: 7.4pt; letter-spacing: 0.4pt; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 1.6mm 2mm; border-bottom: 0.9pt solid var(--ink); }
 tbody td { padding: 1.7mm 2mm; border-bottom: 0.5pt solid var(--hair); vertical-align: top; }
-tbody tr:nth-child(even) td { background: #fafbfa; }
+tbody tr:nth-child(even) td { background: #fbf6f2; }
 td.num, th.num { text-align: right; white-space: nowrap; }
-tbody tr.me td { background: #f1edff; font-weight: 600; }
+tbody tr.me td { background: #fbe3d6; font-weight: 600; }
 td.strong { font-weight: 700; }
 .small { font-size: 7.6pt; } .muted { color: var(--muted); } .up { color: var(--up); } .down { color: var(--down); }
 .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3mm; margin: 0 0 6mm; }
@@ -203,7 +203,7 @@ svg { max-width: 100%; height: auto; }
 .end-mark { margin-top: 10mm; font-size: 8pt; color: var(--muted); }
 .doc-bar { display: none; }
 @media screen {
-  body { background: #e6e8e4; padding: 0 0 8mm; }
+  body { background: #eee7e1; padding: 0 0 8mm; }
   .doc-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 1; background: #1d1512; color: #f7f3ef; padding: 10px 16px; margin-bottom: 8mm; font-size: 14px; }
   .doc-bar a { color: #f7f3ef; display: inline-flex; min-height: 44px; align-items: center; }
   .doc-bar span a { text-decoration: underline; text-underline-offset: 3px; }

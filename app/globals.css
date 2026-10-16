@@ -764,3 +764,345 @@ table,
 .receipt-full .article-body strong {
   color: var(--night-ink);
 }
+
+/*
+ * Signature-look preview (lib/look.ts). Three identity skins over the same
+ * tokens, chosen by data-look on <html>. Nothing below applies without data-look, so the site on main is unchanged.
+ * Each look sets one signature colour in two strengths: --sig fills rules, badges and frames; --sig-ink is the same
+ * hue dark enough (light mode) or light enough (dark mode) to pass WCAG AA as text. The masthead is --night.
+ */
+.af-look-mark,
+.af-badge,
+.af-stamp {
+  display: none;
+}
+
+/* A, Kente Gold: a gold rule over an ink masthead, gold double-ruled totals, like a ledger. */
+html[data-look="a"] {
+  --paper: #f6f4ef;
+  --paper-2: #ece8df;
+  --paper-3: #e1dccf;
+  --surface: #ffffff;
+  --ink: #15120d;
+  --ink-soft: #3d372d;
+  --muted: #655d50;
+  --rule: #dcd6c8;
+  --tape: #ece8df;
+  --forest: #6f4600;
+  --forest-mid: #8a5700;
+  --gold: #8a5700;
+  --gold-soft: #e3a72f;
+  --brand-accent: #8a5700;
+  --night: #15120d;
+  --night-2: #241f17;
+  --night-ink: #f6f4ef;
+  --night-soft: #d6cfc0;
+  --night-muted: #a39a88;
+  --night-line: rgba(246, 244, 239, 0.13);
+  --sig: #e3a72f;
+  --sig-ink: #8a5700;
+  --sig-on: #15120d;
+}
+html.dark[data-look="a"] {
+  --paper: #0f0d0a;
+  --paper-2: #1a1712;
+  --paper-3: #25201a;
+  --surface: #1a1712;
+  --ink: #efeae0;
+  --ink-soft: #d0c8b8;
+  --muted: #a0978a;
+  --rule: #2e281f;
+  --tape: #1a1712;
+  --forest: #f0bd55;
+  --forest-mid: #e3a72f;
+  --gold: #f0bd55;
+  --gold-soft: #f5cf7f;
+  --brand-accent: #f0bd55;
+  --night: #0a0907;
+  --night-2: #1a1712;
+  --sig-ink: #f0bd55;
+}
+
+/* B, Laterite: the red-earth road. A terracotta masthead, a rubber "Receipt" stamp and a torn receipt edge. */
+html[data-look="b"] {
+  --paper: #f7f3ef;
+  --paper-2: #eee7e1;
+  --paper-3: #e4dbd3;
+  --surface: #ffffff;
+  --ink: #1d1512;
+  --ink-soft: #45372f;
+  --muted: #6c5e55;
+  --rule: #e0d6cd;
+  --tape: #eee7e1;
+  --forest: #a33a1c;
+  --forest-mid: #b3401f;
+  --gold: #a33a1c;
+  --gold-soft: #f6c9a0;
+  --brand-accent: #a33a1c;
+  --night: #1d1512;
+  --night-2: #2b201b;
+  --night-ink: #fbf6f2;
+  --night-soft: #e2d4cb;
+  --night-muted: #b8a69a;
+  --night-line: rgba(251, 246, 242, 0.14);
+  --mast: #b3401f;
+  --mast-2: #9a3519;
+  --sig: #b3401f;
+  --sig-ink: #a33a1c;
+  --sig-on: #ffffff;
+  --stamp-paper: #fbefe6;
+}
+html.dark[data-look="b"] {
+  --paper: #120d0b;
+  --paper-2: #1c1512;
+  --paper-3: #281e1a;
+  --surface: #1c1512;
+  --ink: #f1e9e4;
+  --ink-soft: #d4c6bd;
+  --muted: #a8988e;
+  --rule: #33261f;
+  --tape: #1c1512;
+  --forest: #f2916d;
+  --forest-mid: #e0714c;
+  --gold: #f2916d;
+  --brand-accent: #f2916d;
+  --night: #0b0806;
+  --night-2: #1c1512;
+  --mast: #8f3016;
+  --mast-2: #7a2812;
+  --sig: #e0714c;
+  --sig-ink: #f2916d;
+  --sig-on: #1d1512;
+  --stamp-paper: #fbefe6;
+}
+
+/* C, Malachite: the banded green stone of the Copperbelt. A banded rule, tabbed figures and a banded chart frame. */
+html[data-look="c"] {
+  --paper: #f3f6f4;
+  --paper-2: #e7ede9;
+  --paper-3: #dbe3de;
+  --surface: #ffffff;
+  --ink: #0f1a16;
+  --ink-soft: #34433d;
+  --muted: #5a6761;
+  --rule: #d4ddd8;
+  --tape: #e7ede9;
+  --forest: #0a6e4f;
+  --forest-mid: #0b7a57;
+  --gold: #0a6e4f;
+  --gold-soft: #4fd1a1;
+  --brand-accent: #0a6e4f;
+  --night: #063a2c;
+  --night-2: #0a4a38;
+  --night-ink: #f3f6f4;
+  --night-soft: #cfe0d8;
+  --night-muted: #9dbcaf;
+  --night-line: rgba(243, 246, 244, 0.14);
+  /* Green is the signature here, so a rise moves to blue and never reads as the brand (or the brand as a rise). */
+  --up: #1f5fae;
+  --sig: #0b7a57;
+  --sig-ink: #0a6e4f;
+  --sig-on: #ffffff;
+  --band-1: #063a2c;
+  --band-2: #0b7a57;
+  --band-3: #2fbf8a;
+  --bands: repeating-linear-gradient(90deg, #063a2c 0 7px, #0b7a57 7px 11px, #2fbf8a 11px 14px, #0b7a57 14px 18px, #0a5c43 18px 24px);
+}
+html.dark[data-look="c"] {
+  --paper: #08120f;
+  --paper-2: #0f1d18;
+  --paper-3: #172a23;
+  --surface: #0f1d18;
+  --ink: #e6efeb;
+  --ink-soft: #c2d1ca;
+  --muted: #8ea39a;
+  --rule: #1f3329;
+  --tape: #0f1d18;
+  --forest: #5fd6a8;
+  --forest-mid: #2fbf8a;
+  --gold: #5fd6a8;
+  --brand-accent: #5fd6a8;
+  --night: #04261d;
+  --night-2: #073228;
+  --up: #7fb0f0;
+  --sig: #2fbf8a;
+  --sig-ink: #5fd6a8;
+  --sig-on: #04261d;
+}
+
+/* The night surfaces (masthead, market strip, footer) take the signature as their accent. */
+html[data-look="a"] .on-night {
+  --brand-accent: #e3a72f;
+}
+html[data-look="b"] .on-night {
+  --brand-accent: #f6c9a0;
+}
+html[data-look="c"] .on-night {
+  --brand-accent: #4fd1a1;
+}
+
+/* Wordmark: the badge and a typeset name replace the bar mark. */
+html[data-look] .af-logo {
+  display: none;
+}
+html[data-look] .af-look-mark {
+  display: inline-flex;
+}
+html[data-look="a"] .af-badge-a,
+html[data-look="b"] .af-badge-b,
+html[data-look="c"] .af-badge-c {
+  display: block;
+  flex-shrink: 0;
+}
+.af-wordtext {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 700;
+  font-size: 1.32rem;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+html[data-look="a"] .af-wordtext {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-stretch: 125%;
+  font-weight: 760;
+  font-size: 0.98rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+html[data-look="c"] .af-wordtext {
+  font-size: 1.36rem;
+  letter-spacing: -0.025em;
+}
+
+/* Masthead: the signature over the top edge, drawn inside the bar so nothing below it moves. */
+html[data-look="a"] .af-masthead {
+  box-shadow: inset 0 5px 0 var(--sig);
+}
+html[data-look="b"] .af-masthead {
+  background-color: var(--mast);
+  --night-2: var(--mast-2);
+  --night-muted: #fdeee5;
+  --night-soft: #fff3ea;
+  --night-line: rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18);
+}
+html[data-look="c"] .af-masthead {
+  background-image: var(--bands);
+  background-size: 100% 6px;
+  background-repeat: no-repeat;
+}
+
+/* Section heads on Today: the signature under every head. */
+html[data-look="a"] .af-section-head {
+  border-bottom: 3px solid var(--sig);
+}
+html[data-look="b"] .af-section-head {
+  border-bottom: 2px solid var(--sig);
+}
+html[data-look="b"] .af-section-head h2 {
+  color: var(--sig-ink);
+}
+html[data-look="c"] .af-section-head {
+  border-bottom: 0;
+  background-image: var(--bands);
+  background-size: 100% 4px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  padding-bottom: calc(0.375rem + 4px);
+}
+
+/* Key figures. A: the accountant's double rule. B: a terracotta marker swipe. C: a malachite tab. */
+html[data-look="a"] .af-figure {
+  text-decoration-line: underline;
+  text-decoration-style: double;
+  text-decoration-color: var(--sig);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.16em;
+  text-decoration-skip-ink: none;
+}
+html[data-look="b"] .af-figure {
+  background-image: linear-gradient(transparent 58%, color-mix(in srgb, var(--sig) 30%, transparent) 58%);
+  box-decoration-break: clone;
+  width: fit-content;
+  padding-inline: 0.08em;
+}
+html[data-look="c"] .af-figure {
+  border-left: 4px solid var(--sig);
+  padding-left: 0.4rem;
+}
+
+/* The verdict carries the signature at full strength. */
+html[data-look] .af-verdict {
+  border-color: var(--sig);
+}
+html[data-look="c"] .af-verdict {
+  border-image: linear-gradient(180deg, #2fbf8a, #0b7a57 50%, #063a2c) 1;
+}
+
+/* The chart frame. A: a gold cap. B: a receipt slip with a torn foot. C: a banded cap. */
+html[data-look="a"] .chart-frame {
+  border-top: 4px solid var(--sig);
+  border-radius: 0 0 1rem 1rem;
+}
+html[data-look="b"] .chart-frame {
+  border-radius: 0;
+  border-top: 3px solid var(--sig);
+  padding-bottom: 1.5rem;
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+}
+html[data-look="c"] .chart-frame {
+  border-radius: 0 0 1rem 1rem;
+  border-top: 0;
+  background-image: var(--bands);
+  background-size: 100% 6px;
+  background-repeat: no-repeat;
+  padding-top: calc(1rem + 6px);
+}
+
+/* B's stamp on every Receipt: rubber-stamp ink, a few degrees off true, top right of the headline block. */
+html[data-look="b"] .af-stamp {
+  display: flex;
+  position: absolute;
+  top: -0.35rem;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.3rem 0.6rem 0.25rem;
+  border: 2.5px solid var(--sig);
+  outline: 1px solid var(--sig);
+  outline-offset: 2px;
+  border-radius: 0.35rem;
+  color: var(--sig-ink);
+  transform: rotate(-6deg);
+  opacity: 0.92;
+  pointer-events: none;
+}
+html[data-look="b"] .af-stamp-word {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 0.95rem;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+html[data-look="b"] .af-stamp-date {
+  margin-top: 0.15rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* On phones the stamp sits in the free end of the breadcrumb row, clear of the desk line and the headline. */
+@media (max-width: 639px) {
+  html[data-look="b"] .af-stamp {
+    top: -3.3rem;
+    padding: 0.2rem 0.45rem 0.15rem;
+  }
+  html[data-look="b"] .af-stamp-word {
+    font-size: 0.8rem;
+  }
+}

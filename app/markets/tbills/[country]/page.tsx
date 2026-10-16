@@ -4,6 +4,12 @@ import { FullHistoryLink } from "@/components/data/FullHistoryLink";
 import { xlsxHref } from "@/lib/downloads-core";
 import { AlertButton } from "@/components/ui/AlertButton";
 import { CiteBlock } from "@/components/ui/CiteBlock";
+import { Change } from "@/components/rates/Change";
+import { FollowSheet } from "@/components/rates/FollowSheet";
+import { Spark } from "@/components/rates/Spark";
+import { FollowLink, defaultPartner } from "@/components/rates/SeriesBits";
+import { getSeries } from "@/lib/data/rate-series";
+import { compareHref } from "@/lib/rate-series-core";
 import { notFound, redirect } from "next/navigation";
 import { LineChart } from "@/components/data/LineChart";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
@@ -102,20 +108,46 @@ export default async function BillMarketPage({ params }: Props) {
             {billTenors.map((tenor) => {
               const item = latest.get(tenor);
               if (!item) return <div key={tenor} className="bg-paper-2 px-5 py-5 text-sm text-muted">No {tenorLabel[tenor]} result</div>;
+              const ser = getSeries(`${market.slug}-${tenor}d`);
               return (
                 <div key={tenor} className="bg-paper-2 px-5 py-5">
                   <p className="flex items-center gap-2 font-medium text-[12px] text-muted">
                     <span className="inline-block h-2 w-2 rounded-full" style={{ background: tenorColor[tenor] }} />
                     {tenorLabel[tenor]} · {dateFmt.format(new Date(item.latest.date))}
                   </p>
-                  <p className="mt-2 font-serif text-4xl tracking-[-0.02em] text-ink">{item.latest.rate.toFixed(3)}%</p>
-                  <p className="mt-1 text-xs text-ink-soft">{bps(item.previous?.rate, item.latest.rate)} vs previous auction</p>
+                  <div className="mt-2 flex items-end justify-between gap-3">
+                    <p className="font-serif text-4xl leading-none tracking-[-0.02em] text-ink">{item.latest.rate.toFixed(2)}%</p>
+                    {ser ? (
+                      <span className="inline-block h-9 w-[120px]">
+                        <Spark series={ser} width={120} height={36} />
+                      </span>
+                    ) : null}
+                  </div>
+                  {ser ? (
+                    <p className="mt-1.5">
+                      <Change series={ser} />
+                    </p>
+                  ) : (
+                    <p className="mt-1 text-xs text-ink-soft">{bps(item.previous?.rate, item.latest.rate)} vs previous auction</p>
+                  )}
+                  <p className="mt-1 text-[11px] text-muted">Source: {market.publisher}</p>
                   <dl className="mt-4 grid grid-cols-2 gap-y-1 text-xs">
                     <dt className="text-muted">Bids</dt>
                     <dd className="text-right font-mono">{money(item.latest.received)}</dd>
                     <dt className="text-muted">Accepted</dt>
                     <dd className="text-right font-mono">{money(item.latest.accepted)}</dd>
                   </dl>
+                  {ser ? (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <FollowLink series={ser} />
+                      <Link
+                        href={compareHref(ser.id, defaultPartner(ser.id))}
+                        className="inline-flex min-h-11 items-center rounded-full border border-rule px-3 text-[13px] font-semibold text-ink hover:border-forest hover:text-forest"
+                      >
+                        Compare with…<span className="sr-only"> ({ser.label})</span>
+                      </Link>
+                    </div>
+                  ) : null}
                 </div>
               );
             })}
@@ -190,6 +222,7 @@ export default async function BillMarketPage({ params }: Props) {
       ) : null}
       <DebtDataLinks country={market.country} current={`/markets/tbills/${market.slug}`} />
       <NewsletterBand />
+      <FollowSheet />
     </PageShell>
   );
 }

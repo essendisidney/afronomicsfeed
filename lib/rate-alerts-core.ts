@@ -6,7 +6,9 @@
  * was already published when it was set). An alert is due only when the data has moved past that key.
  */
 
-export const alertKinds = ["auction", "tbill_above", "tbill_below", "ng_savings_bond", "policy_change", "mmf_month"] as const;
+import { changeText, followKey, parseFollowKey, seriesIdPattern, type SeriesPoint, type SeriesUnit } from "@/lib/rate-series-core";
+
+export const alertKinds = ["auction", "tbill_above", "tbill_below", "ng_savings_bond", "policy_change", "mmf_month", "series"] as const;
 export type AlertKind = (typeof alertKinds)[number];
 export const alertTenors = [91, 182, 364] as const;
 export type AlertTenor = (typeof alertTenors)[number];
@@ -18,9 +20,11 @@ export const kindLabel: Record<AlertKind, string> = {
   ng_savings_bond: "A new Nigeria FGN Savings Bond offer",
   policy_change: "Any central bank changes its policy rate",
   mmf_month: "Each month’s Kenya money market fund ranking",
+  series: "A number I follow changes",
 };
 
-export type AlertInput = { email: string; kind: AlertKind; tenor: AlertTenor | null; threshold: number | null };
+/** `series` is set only for kind "series" (a rate series id from lib/data/rate-series.ts). */
+export type AlertInput = { email: string; kind: AlertKind; tenor: AlertTenor | null; threshold: number | null; series?: string | null };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -31,6 +35,11 @@ export function parseAlertInput(body: unknown): { ok: true; value: AlertInput } 
   if (!emailPattern.test(email) || email.length > 200) return { ok: false, reason: "Please enter a valid email address." };
   const kind = alertKinds.find((k) => k === b.kind);
   if (!kind) return { ok: false, reason: "Choose what you want to hear about." };
+  if (kind === "series") {
+    const series = typeof b.series === "string" ? b.series.trim().toLowerCase() : "";
+    if (!seriesIdPattern.test(series) || series.length > 60) return { ok: false, reason: "Choose a number to follow." };
+    return { ok: true, value: { email, kind, tenor: null, threshold: null, series } };
+  }
   if (kind !== "tbill_above" && kind !== "tbill_below") return { ok: true, value: { email, kind, tenor: null, threshold: null } };
   const tenor = alertTenors.find((t) => t === Number(b.tenor));
   if (!tenor) return { ok: false, reason: "Choose the 91-, 182- or 364-day bill." };
@@ -53,15 +62,21 @@ export type AlertSnapshot = {
   };
   /** Finished months of the Kenya money market fund ranking, newest first (optional: older snapshots lack it). */
   mmf?: { months: { month: string; label: string; rows: { name: string; gross: number; net: number; monthly: boolean; stale?: boolean }[]; pending: string[] }[] };
+  /** Followable rate series by id: the latest prints only (optional: older snapshots lack it). */
+  series?: Record<string, { label: string; unit: SeriesUnit; measure: string; link: string; source: string; points: SeriesPoint[] }>;
 };
 
-export type LiveAlert = { id: string; email: string; kind: AlertKind; tenor: number | null; threshold: number | null; token: string; last_sent_key: string | null };
+export type LiveAlert = { id: string; email: string; kind: AlertKind; tenor: number | null; threshold: number | null; series?: string | null; token: string; last_sent_key: string | null };
 
 export type AlertMessage = { subject: string; lines: string[]; link: string; source: string | null };
 
 /** What this kind of alert would be keyed on right now: stored when an alert is created, so it only reports what comes after. */
-export function currentKey(kind: AlertKind, tenor: number | null, s: AlertSnapshot): string | null {
+export function currentKey(kind: AlertKind, tenor: number | null, s: AlertSnapshot, series?: string | null): string | null {
   switch (kind) {
+    case "series": {
+      const last = series ? s.series?.[series]?.points.at(-1) : undefined;
+      return last ? followKey(last) : null;
+    }
     case "auction":
       return s.kenya.auctions[0]?.date ?? null;
     case "tbill_above":
@@ -100,8 +115,8 @@ export type DueResult =
   | { action: "send"; key: string; message: AlertMessage };
 
 /** Decide whether one alert has something new to say. Pure: the same alert and snapshot always give the same answer. */
-export function dueCheck(alert: Pick<LiveAlert, "kind" | "tenor" | "threshold" | "last_sent_key">, s: AlertSnapshot, siteUrl: string): DueResult {
-  const key = currentKey(alert.kind, alert.tenor, s);
+export function dueCheck(alert: Pick<LiveAlert, "kind" | "tenor" | "threshold" | "last_sent_key" | "series">, s: AlertSnapshot, siteUrl: string): DueResult {
+  const key = currentKey(alert.kind, alert.tenor, s, alert.series);
   if (key == null) return { action: "none" };
   const last = alert.last_sent_key;
   if (last == null) return { action: "baseline", key };
@@ -195,12 +210,36 @@ export function dueCheck(alert: Pick<LiveAlert, "kind" | "tenor" | "threshold" |
         },
       };
     }
+    case "series": {
+      const info = alert.series ? s.series?.[alert.series] : undefined;
+      const latest = info?.points.at(-1);
+      const told = parseFollowKey(last);
+      // Due when a print newer than the one last reported carries a different value; a repeat of the same figure is not news.
+      if (!info || !latest || !told || latest.date <= told.date || latest.value === told.value) return { action: "none" };
+      return { action: "send", key: followKey(latest), message: followMessage(info, latest, told, siteUrl) };
+    }
     case "mmf_month": {
       const latest = s.mmf?.months[0];
       if (!latest || latest.month <= last || !latest.rows.length) return { action: "none" };
       return { action: "send", key: latest.month, message: mmfMessage(latest, siteUrl) };
     }
   }
+}
+
+function followMessage(info: NonNullable<AlertSnapshot["series"]>[string], latest: SeriesPoint, told: SeriesPoint, siteUrl: string): AlertMessage {
+  const fmtV = (v: number) => (info.unit === "pct" ? `${Number(v.toFixed(3))}%` : fmt(v, 1));
+  const delta = info.unit === "pct" ? Math.round((latest.value - told.value) * 100) : told.value ? Math.round(((latest.value - told.value) / told.value) * 1000) / 10 : 0;
+  const word = delta > 0 ? "up" : delta < 0 ? "down" : "unchanged";
+  return {
+    subject: `${info.label}: ${fmtV(latest.value)} (${changeText(delta, info.unit)})`,
+    lines: [
+      `${info.label} is now ${fmtV(latest.value)} as of ${day(latest.date)}, ${word} from ${fmtV(told.value)} on ${day(told.date)}, the figure we last told you about (${changeText(delta, info.unit)}).`,
+      "",
+      `What it is: the ${info.measure}.`,
+    ],
+    link: `${siteUrl}${info.link}`,
+    source: info.source.startsWith("/") ? `${siteUrl}${info.source}` : info.source,
+  };
 }
 
 function mmfMessage(m: NonNullable<AlertSnapshot["mmf"]>["months"][number], siteUrl: string): AlertMessage {

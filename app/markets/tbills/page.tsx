@@ -13,6 +13,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { billPagePath, dataCatalogJsonLd } from "@/lib/seo/schema";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
+import { FollowSheet } from "@/components/rates/FollowSheet";
+import { FollowLink, TrendCell } from "@/components/rates/SeriesBits";
+import { getSeries } from "@/lib/data/rate-series";
 
 export const revalidate = 3600;
 
@@ -118,6 +121,7 @@ export default function BillMonitorPage() {
               ))}
               <th className="text-right">Change (bps)</th>
               <th>Latest auction</th>
+              <th>Trend, longest bill</th>
               <th>Rate measure</th>
             </tr>
           </thead>
@@ -127,7 +131,7 @@ export default function BillMonitorPage() {
               if (!group.length) return [];
               return [
                 <tr key={region.key}>
-                  <th colSpan={billTenors.length + 4} className="bg-paper-2 pt-4 text-[13px] font-semibold text-ink">
+                  <th colSpan={billTenors.length + 5} className="bg-paper-2 pt-4 text-[13px] font-semibold text-ink">
                     {region.label}
                   </th>
                 </tr>,
@@ -152,6 +156,22 @@ export default function BillMonitorPage() {
                       })}
                       <td className="text-right text-xs">{lead ? bps(lead.previous?.rate, lead.latest.rate) : "—"}</td>
                       <td className="whitespace-nowrap text-xs">{rows[0] ? dateFmt.format(new Date(rows[0].date)) : "Compiling"}</td>
+                      <td>
+                        {(() => {
+                          const ser = getSeries(`${market.slug}-364d`) ?? getSeries(`${market.slug}-182d`) ?? getSeries(`${market.slug}-91d`);
+                          return ser ? (
+                            <span className="flex items-center gap-2">
+                              <TrendCell series={ser} />
+                              <span className="text-[11px] text-muted">{ser.short.replace(`${market.country} `, "")}</span>
+                              <FollowLink series={ser} className="inline-flex min-h-11 items-center px-1 text-[12px] font-semibold text-forest underline underline-offset-2">
+                                Follow<span className="sr-only"> {ser.label}</span>
+                              </FollowLink>
+                            </span>
+                          ) : (
+                            <span className="text-[12px] text-muted">—</span>
+                          );
+                        })()}
+                      </td>
                       <td className="min-w-[14rem] text-xs text-ink-soft">{market.rateNote}</td>
                     </tr>
                   );
@@ -162,7 +182,7 @@ export default function BillMonitorPage() {
         </table>
       </div>
       <p className="mt-2 text-xs text-muted">
-        Change is against each tenor’s previous auction. Rate measures differ by central bank and are shown as published; compare levels with that in mind.
+        Change is against each tenor’s previous auction. Trend lines are the last 26 auctions of the longest bill each market sells. Rate measures differ by central bank and are shown as published; compare levels with that in mind.
       </p>
       <SourceNote sources={billMarkets.map((m) => ({ name: m.publisher, href: m.sourcePage }))} className="mt-2" />
 
@@ -198,6 +218,7 @@ export default function BillMonitorPage() {
         .
       </p>
       <CiteBlock title="Africa Treasury bill monitor" path="/markets/tbills" publisher="ten African central banks" />
+      <FollowSheet />
       <DebtDataLinks current="/markets/tbills" />
       <NewsletterBand />
     </PageShell>

@@ -15,6 +15,9 @@ import { fundAnswers } from "@/lib/seo/answers";
 import { mmfSentence } from "@/lib/share-card";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
+import { FollowSheet } from "@/components/rates/FollowSheet";
+import { FollowLink, HeadlineTile, TrendCell } from "@/components/rates/SeriesBits";
+import { getSeries } from "@/lib/data/rate-series";
 
 export const revalidate = 1800;
 
@@ -59,15 +62,12 @@ export default function MoneyMarketFundsPage() {
         </p>
       }
       aside={
-        best ? (
-          <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
-            <p className="text-[13px] font-medium text-muted">Highest published yield after tax</p>
-            <p className="mt-1 font-serif text-3xl text-ink">{best.net.toFixed(2)}%</p>
-            <p className="mt-1 text-[14px] text-ink">{best.name}</p>
-            <p className="mt-1 text-[12px] text-muted">
-              {best.gross.toFixed(2)}% as published · read {when(best.readOn)}
-            </p>
-          </div>
+        best && getSeries(`kenya-mmf-${fundSlug(best.name)}`) ? (
+          <HeadlineTile
+            series={getSeries(`kenya-mmf-${fundSlug(best.name)}`)!}
+            kicker="Highest published yield"
+            extra={`${best.net.toFixed(2)}% after 15% withholding tax`}
+          />
         ) : null
       }
     >
@@ -90,6 +90,7 @@ export default function MoneyMarketFundsPage() {
                   <th className="text-right">After tax</th>
                   <th className="text-right">KES 100,000, one year</th>
                   <th>Yield last changed</th>
+                  <th>Trend</th>
                 </tr>
               </thead>
               <tbody>
@@ -118,6 +119,19 @@ export default function MoneyMarketFundsPage() {
                       {f.unchangedSince === f.firstRead ? `not since first read, ${when(f.firstRead)}` : when(f.unchangedSince)}
                       {stale(f) ? <span className="block text-[11px] text-danger">Unchanged for a week or more: the manager’s page may not be current</span> : null}
                     </td>
+                    <td>
+                      {(() => {
+                        const ser = getSeries(`kenya-mmf-${fundSlug(f.name)}`);
+                        return ser ? (
+                          <span className="flex items-center gap-2">
+                            <TrendCell series={ser} />
+                            <FollowLink series={ser} className="inline-flex min-h-11 items-center px-1 text-[12px] font-semibold text-forest underline underline-offset-2">
+                              Follow<span className="sr-only"> {ser.label}</span>
+                            </FollowLink>
+                          </span>
+                        ) : null;
+                      })()}
+                    </td>
                   </tr>
                 ))}
                 {bill ? (
@@ -133,6 +147,9 @@ export default function MoneyMarketFundsPage() {
                     <td className="text-right font-semibold">{bill.net.toFixed(2)}%</td>
                     <td className="text-right">{kes(1000 * bill.net)}</td>
                     <td className="text-xs text-muted">money tied up a year</td>
+                    <td>
+                      <TrendCell series={getSeries("kenya-364d")} />
+                    </td>
                   </tr>
                 ) : null}
                 {savings ? (
@@ -146,6 +163,9 @@ export default function MoneyMarketFundsPage() {
                     <td className="text-right font-semibold">{savings.net.toFixed(2)}%</td>
                     <td className="text-right">{kes(1000 * savings.net)}</td>
                     <td />
+                    <td>
+                      <TrendCell series={getSeries("kenya-bank-savings")} />
+                    </td>
                   </tr>
                 ) : null}
               </tbody>
@@ -223,6 +243,7 @@ export default function MoneyMarketFundsPage() {
       <Questions items={fundAnswers().items} />
       <DebtDataLinks country="Kenya" title="What the funds hold: government paper" />
       <NewsletterBand />
+      <FollowSheet />
     </PageShell>
   );
 }

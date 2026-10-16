@@ -4,6 +4,23 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
+ * Size-matched fallback for Archivo (the body font, app/layout.tsx), used until the web font arrives and kept for the
+ * page when it arrives late (font-display: optional). Arial, Liberation Sans, Arimo, Helvetica and Roboto have
+ * near-identical average widths (0.446 and 0.445 of the em), so one set of overrides covers iOS, macOS, Windows,
+ * Linux and Android: size-adjust 100% already lands their width on Archivo's (0.440) within a percent, and the ascent
+ * and descent overrides are Archivo's own (878 and 210 per 1000) so line boxes match too.
+ */
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("LiberationSans"), local("Arimo"),
+    local("Arimo-Regular"), local("Helvetica"), local("Roboto"), local("Roboto-Regular");
+  size-adjust: 100%;
+  ascent-override: 87.8%;
+  descent-override: 21%;
+  line-gap-override: 0%;
+}
+
+/*
  * Afronomics design tokens.
  * Concrete: cool, light city-grey paper rather than newsprint cream.
  * Night: the header, footer and hero band, the colour of the city after dark.

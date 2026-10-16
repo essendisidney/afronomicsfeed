@@ -101,6 +101,9 @@ charts:
       - { label: "Jun 26", value: 129.63 }
       - { label: "Oct 26", value: 129.94 }
     highlight: ["Jan 24"]
+    annotations:
+      - { from: "Jan 24", to: "Mar 24", label: "Feb 2024: CBK rate to 13%, US$1.5bn Eurobond" }
+      - { from: "Jun 24", to: "Oct 26", label: "KES 128.55 to 129.96 in every bulletin we read" }
   - type: bar
     title: "The same dollar bill costs a fifth less in shillings than in January 2024"
     unit: "KES needed, thousands"

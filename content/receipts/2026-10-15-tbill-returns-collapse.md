@@ -116,7 +116,10 @@ charts:
       - { label: "Dec 25", value: 9.3759 }
       - { label: "Apr 26", value: 8.27 }
       - { label: "Oct 26", value: 9.0383 }
-    highlight: ["Oct 2026"]
+    highlight: ["Oct 26"]
+    annotations:
+      - { x: "Aug 24", label: "6 Aug 2024: CBK cuts, 13% to 12.75%" }
+      - { x: "Apr 26", label: "Low: 8.27% on 13 April 2026" }
   - type: bar
     title: "KES 500,000 in a one-year bill now keeps about half what it kept in 2024"
     unit: "Interest kept after 15% tax, KES, one 364-day bill"

@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { cache } from "react";
 import type { Evidence } from "@/components/evidence/EvidenceTag";
 import { showDrafts } from "@/lib/cases";
+import type { ChartAnnotation } from "@/lib/charts/render";
 
 /**
  * Receipts (docs/rebuild/RECEIPTS.md; docs/rebuild/receipts-r1-plan.md): Afronomics' daily verdict on one money event.
@@ -65,6 +66,8 @@ export type ReceiptChart = {
   data: { label: string; value: number }[];
   highlight?: string[];
   reference?: { value: number; label: string };
+  /** Notes on the chart: a line at one bar or a shaded span between two (lib/charts/render.ts). */
+  annotations?: ChartAnnotation[];
 };
 
 export type Receipt = {
@@ -140,6 +143,40 @@ function readingProblems(data: Record<string, unknown>, free: string, names: unk
   }
 }
 
+const ANNOTATION_MAX = 3;
+const ANNOTATION_LABEL_MAX = 48;
+
+/**
+ * Notes on a chart (lib/charts/render.ts): {x, label} marks one bar, {from, to, label} shades the span between two
+ * bars. They must name bars the chart has and stay short enough to read on a phone. Mirrors annotation_problems in
+ * scripts/receipt_check.py. A note states only what the Receipt's text or sources already say; that is the desk's check.
+ */
+function annotationProblems(notes: unknown, labels: string[]): { where: string; what: string }[] {
+  if (notes == null) return [];
+  if (!Array.isArray(notes)) return [{ where: "", what: "a list of notes" }];
+  const out: { where: string; what: string }[] = [];
+  if (notes.length > ANNOTATION_MAX) out.push({ where: "", what: `at most ${ANNOTATION_MAX} notes on one chart` });
+  notes.forEach((a: Record<string, unknown>, k) => {
+    const where = `[${k}]`;
+    if (!a || typeof a !== "object") return out.push({ where, what: "needs {x, label} or {from, to, label}" });
+    if (!str(a.label)) out.push({ where, what: "needs a label" });
+    else if (String(a.label).length > ANNOTATION_LABEL_MAX) out.push({ where, what: `label over ${ANNOTATION_LABEL_MAX} characters, too long to read on a phone` });
+    const unknown = Object.keys(a).filter((key) => !["x", "from", "to", "label"].includes(key));
+    if (unknown.length) out.push({ where, what: `unknown field(s) ${unknown.sort().join(", ")}` });
+    if ("x" in a && ("from" in a || "to" in a)) out.push({ where, what: "either x, or from and to, not both" });
+    else if ("x" in a) {
+      if (!labels.includes(String(a.x))) out.push({ where: `${where}.x`, what: `'${a.x}' is not one of the chart's labels` });
+    } else if ("from" in a && "to" in a) {
+      const f = labels.indexOf(String(a.from));
+      const t = labels.indexOf(String(a.to));
+      if (f < 0) out.push({ where: `${where}.from`, what: `'${a.from}' is not one of the chart's labels` });
+      if (t < 0) out.push({ where: `${where}.to`, what: `'${a.to}' is not one of the chart's labels` });
+      if (f >= 0 && t >= 0 && f >= t) out.push({ where, what: "from must come before to" });
+    } else out.push({ where, what: "needs x, or from and to" });
+  });
+  return out;
+}
+
 /** Every problem with one Receipt; an empty list means it is valid. Mirrors scripts/receipt_check.py. */
 export function receiptProblems(data: Record<string, unknown>, body: string, file: string): string[] {
   const out: string[] = [];
@@ -192,6 +229,9 @@ export function receiptProblems(data: Record<string, unknown>, body: string, fil
     if (!str(c.source) || !sources.some((s) => s.name === c.source)) at(`charts[${i}].source`, "must be one of the Receipt's sources");
     const d = Array.isArray(c.data) ? (c.data as Record<string, unknown>[]) : [];
     if (d.length < 2 || d.some((p) => !str(String(p.label ?? "")) || typeof p.value !== "number")) at(`charts[${i}].data`, "at least two {label, value} points");
+    const names = d.map((p) => String(p.label ?? ""));
+    for (const h of Array.isArray(c.highlight) ? (c.highlight as unknown[]) : []) if (!names.includes(String(h))) at(`charts[${i}].highlight`, `'${h}' is not one of the chart's labels`);
+    for (const p of annotationProblems(c.annotations, names)) at(`charts[${i}].annotations${p.where}`, p.what);
   });
 
   if (!body.includes(SPLIT)) at("body", `needs the ${SPLIT} marker between the free piece and the full file`);

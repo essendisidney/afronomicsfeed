@@ -37,6 +37,55 @@ KEY_NUMBERS = 3
 ADVICE = re.compile(r"\b(you should|we recommend|our advice is to)\s+(buy|sell|hold|subscribe|switch|apply)\b", re.I)
 
 
+ANNOTATION_MAX = 3
+ANNOTATION_LABEL_MAX = 48
+
+
+def annotation_problems(notes, labels: list[str], where: str) -> list[str]:
+    """
+    Notes on a chart (lib/charts/render.ts): {x, label} marks one bar; {from, to, label} shades the span between two
+    bars, left to right. Each must name bars the chart has, and the label must be short enough to stay legible on a
+    phone. A note states only what the Receipt's own text or sources already say (RECEIPTS.md): this checks the
+    shape, the desk checks the fact.
+    """
+    if notes is None:
+        return []
+    if not isinstance(notes, list):
+        return [f"{where}: a list of notes"]
+    out: list[str] = []
+    if len(notes) > ANNOTATION_MAX:
+        out.append(f"{where}: at most {ANNOTATION_MAX} notes on one chart")
+    for k, a in enumerate(notes):
+        at = f"{where}[{k}]"
+        if not isinstance(a, dict):
+            out.append(f"{at}: needs {{x, label}} or {{from, to, label}}")
+            continue
+        label = a.get("label")
+        if not isinstance(label, str) or not label.strip():
+            out.append(f"{at}: needs a label")
+        elif len(label) > ANNOTATION_LABEL_MAX:
+            out.append(f"{at}: label over {ANNOTATION_LABEL_MAX} characters, too long to read on a phone")
+        unknown = set(a) - {"x", "from", "to", "label"}
+        if unknown:
+            out.append(f"{at}: unknown field(s) {', '.join(sorted(unknown))}")
+        if "x" in a and ("from" in a or "to" in a):
+            out.append(f"{at}: either x, or from and to, not both")
+        elif "x" in a:
+            if str(a["x"]) not in labels:
+                out.append(f"{at}.x: '{a['x']}' is not one of the chart's labels")
+        elif "from" in a and "to" in a:
+            f, t = str(a["from"]), str(a["to"])
+            if f not in labels:
+                out.append(f"{at}.from: '{f}' is not one of the chart's labels")
+            if t not in labels:
+                out.append(f"{at}.to: '{t}' is not one of the chart's labels")
+            if f in labels and t in labels and labels.index(f) >= labels.index(t):
+                out.append(f"{at}: from must come before to")
+        else:
+            out.append(f"{at}: needs x, or from and to")
+    return out
+
+
 def split(text: str) -> tuple[dict, str]:
     m = re.match(r"^---\n(.*?)\n---\n?(.*)$", text, re.S)
     if not m:
@@ -114,6 +163,11 @@ def problems(data: dict, body: str, file: str) -> list[str]:
         points = c.get("data") or []
         if len(points) < 2 or any(not isinstance(p.get("value"), (int, float)) for p in points):
             at(f"charts[{i}].data", "at least two {label, value} points")
+        labels_in_chart = [str(p.get("label")) for p in points if isinstance(p, dict)]
+        for h in c.get("highlight") or []:
+            if str(h) not in labels_in_chart:
+                at(f"charts[{i}].highlight", f"'{h}' is not one of the chart's labels")
+        out += [f"{file}: {p}" for p in annotation_problems(c.get("annotations"), labels_in_chart, f"charts[{i}].annotations")]
 
     if SPLIT not in body:
         at("body", f"needs the {SPLIT} marker between the free piece and the full file")

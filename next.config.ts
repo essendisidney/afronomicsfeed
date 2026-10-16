@@ -118,6 +118,8 @@ const nextConfig: NextConfig = {
       // Widgets are framed by other sites (the route itself enforces frame-ancestors *), so the report-only policy
       // agrees there. Listed after the catch-all so this value replaces it for /embed/*.
       { source: "/embed/:path*", headers: [{ key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy("*") }] },
+      // Embedded charts (app/embed/chart) copy a Receipt's chart: never indexed, even where the route answers 404.
+      { source: "/embed/chart/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex" }] },
       {
         source: "/sw.js",
         headers: [

@@ -1,15 +1,42 @@
 {
  "note": "Tool launches for the Telegram channel. scripts/telegram_post.py posts each once, on or after its date (Nairobi time). No figures here: the pages carry the live, sourced numbers.",
  "launches": [
-  {"key": "loan-apps", "date": "2026-10-13", "path": "/rates/kenya/loan-apps", "title": "Is this loan app licensed?",
-   "text": "Type the app or company name and see whether the Central Bank of Kenya lists it as a licensed digital credit provider, straight from the CBK's own directory.\n\nBorrowed from one? Add what it really cost you, anonymously. Once five borrowers have reported, each lender shows what it costs per KES 1,000 for 30 days, and how often it contacted friends or family."},
-  {"key": "chama", "date": "2026-10-14", "path": "/chama", "title": "Where should our chama put its money?",
-   "text": "Enter what the group has and when it will need it. You get every option side by side, Treasury bills, money market funds and bank savings, with what each earns after the 15% withholding tax over the same period.\n\nSend the table to the group on WhatsApp, or print it for the next meeting."},
-  {"key": "auction", "date": "2026-10-15", "path": "/markets/kenya-tbills/auction", "title": "Before and after Kenya's T-bill auction",
-   "text": "Before you bid: the likely range for the next average rate, from the last 26 weekly moves.\n\nAfter the results: enter your bid and see whether it likely won, what you pay per KES 100 and what you take home after tax. From the CBK's published results."},
-  {"key": "diaspora", "date": "2026-10-16", "path": "/diaspora", "title": "Kenyans abroad: money home, and what it earns there",
-   "text": "The cheapest way to send $200 home from each country, from the World Bank's survey. Today's shilling against the dollar, pound and euro. And what KES 100,000 earns at home in a year after tax, in Treasury bills, a money market fund and a savings account.\n\nPlus how investing from abroad works, and what to check before you send money to any investment."},
-  {"key": "pay-rent", "date": "2026-10-19", "path": "/pay-check", "title": "Is my salary fair? Is my rent fair?",
-   "text": "Compare your monthly pay with what people in the same job in your town report, and your rent with what tenants of the same kind of home pay. Anonymous: we publish only the middle of at least five reports, never one person's figure.\n\nAdd yours: every report makes the figure better for the next person.\nRent: https://afronomicsfeed.com/rent-check?utm_source=telegram&utm_medium=social&utm_campaign=launch-rent-check"}
+  {
+   "key": "loan-apps",
+   "date": "2026-10-13",
+   "path": "/rates/kenya/loan-apps",
+   "title": "Is this loan app licensed?",
+   "text": "Type the app or company name and see whether the Central Bank of Kenya lists it as a licensed digital credit provider, straight from the CBK's own directory.\n\nBorrowed from one? Add what it really cost you, anonymously. Once five borrowers have reported, each lender shows what it costs per KES 1,000 for 30 days, and how often it contacted friends or family."
+  },
+  {
+   "key": "chama",
+   "date": "2026-10-14",
+   "path": "/chama",
+   "title": "Where should our chama put its money?",
+   "text": "Enter what the group has and when it will need it. You get every option side by side, Treasury bills, money market funds and bank savings, with what each earns after the 15% withholding tax over the same period.\n\nSend the table to the group on WhatsApp, or print it for the next meeting."
+  },
+  {
+   "key": "auction",
+   "date": "2026-10-15",
+   "path": "/markets/kenya-tbills/auction",
+   "title": "Before and after Kenya's T-bill auction",
+   "text": "Before you bid: the likely range for the next average rate, from the last 26 weekly moves.\n\nAfter the results: enter your bid and see whether it likely won, what you pay per KES 100 and what you take home after tax. From the CBK's published results."
+  },
+  {
+   "key": "diaspora",
+   "date": "9999-12-31",
+   "path": "/diaspora",
+   "title": "Kenyans abroad: money home, and what it earns there",
+   "text": "The cheapest way to send $200 home from each country, from the World Bank's survey. Today's shilling against the dollar, pound and euro. And what KES 100,000 earns at home in a year after tax, in Treasury bills, a money market fund and a savings account.\n\nPlus how investing from abroad works, and what to check before you send money to any investment.",
+   "held": "page /diaspora is not on the site yet (16 Oct 2026); was due 2026-10-16. Set a real date when the page ships."
+  },
+  {
+   "key": "pay-rent",
+   "date": "9999-12-31",
+   "path": "/pay-check",
+   "title": "Is my salary fair? Is my rent fair?",
+   "text": "Compare your monthly pay with what people in the same job in your town report, and your rent with what tenants of the same kind of home pay. Anonymous: we publish only the middle of at least five reports, never one person's figure.\n\nAdd yours: every report makes the figure better for the next person.\nRent: https://afronomicsfeed.com/rent-check?utm_source=telegram&utm_medium=social&utm_campaign=launch-rent-check",
+   "held": "page /pay-check is not on the site yet (16 Oct 2026); was due 2026-10-19. Set a real date when the page ships."
+  }
  ]
 }

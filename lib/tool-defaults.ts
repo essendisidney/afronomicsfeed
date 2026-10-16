@@ -1,0 +1,15 @@
+/**
+ * The figures each calculator opens with. The calculators (components/data/*) start from these, and the tool's share
+ * card (lib/share-cards.tsx) works its one example from the same values with the same lib functions, so the preview a
+ * reader sees on WhatsApp or LinkedIn is exactly what the page shows before anything is typed. No server imports:
+ * the calculators are client components.
+ */
+export const toolDefaults = {
+  salary: { gross: 100_000 },
+  loan: { amount: 100_000, rate: 14, unit: "year", basis: "flat", months: 12 },
+  savingsGoal: { goal: 60_000, label: "School fees" },
+  inflation: { amount: 1000, from: "2015-01" },
+  mpesa: { amount: 2000, kind: "send" },
+  ipo: { amount: 20_000 },
+  tbill: { amount: 100_000, mode: "pay" },
+} as const;

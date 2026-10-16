@@ -5,13 +5,15 @@ import { mobileLoanBoard } from "@/lib/data/mobile-loans";
 import { flat, reducing, savingsGrowth } from "@/lib/learn-calc";
 import { calcUi, shareUi, ui, type ShareLang } from "@/lib/learn-ui";
 import { pct, type Card } from "@/lib/og-card";
+import type { SignatureCard } from "@/lib/og-signature";
+import { numberSignature } from "@/lib/share-cards";
 import { fairSentence, fairWho, rateText, sharePath, whole, type ShareSpec } from "@/lib/share";
 
 /**
  * What a share shows: the card (drawn by /share/card) and the title and description link previews print
  * (served by /share). Reader inputs come from the validated spec; every published figure is read here.
  */
-export type ShareView = { card: Card; title: string; description: string };
+export type ShareView = { card: Card; title: string; description: string; signature?: undefined } | { signature: SignatureCard; title: string; description: string; card?: undefined };
 
 const host = "afronomicsfeed.com";
 const notAdvice = (lang: ShareLang) => (lang === "en" ? "Information, not advice." : ui[lang].notAdvice);
@@ -34,6 +36,11 @@ export function mobileSentence(cheapest: { product: string; costPer1000: number;
 
 export function shareView(spec: ShareSpec): ShareView | null {
   const { path } = sharePath(spec);
+
+  if (spec.kind === "number") {
+    const n = numberSignature(spec);
+    return n ? { signature: n.card, title: n.title, description: n.description } : null;
+  }
 
   if (spec.kind === "fair") {
     const bench = fairBench();

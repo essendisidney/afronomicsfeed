@@ -5,7 +5,7 @@ import { EditorialCalls } from "@/components/record/EditorialCalls";
 import { EvidenceTag, asOfLabel } from "@/components/evidence/EvidenceTag";
 import { editorialRows, loadEditorial } from "@/lib/editorial";
 import { LEDGER_FILE, LEDGER_HISTORY, TARGET, backtest, loadLedger, score, type LedgerRow } from "@/lib/ledger";
-import { fitDescription } from "@/lib/seo";
+import { fitDescription, withSocial } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -13,11 +13,14 @@ export const revalidate = 3600;
 const description =
   "Every Kenya Treasury bill range and every editorial call Afronomics publishes, written down first and graded by code against the published result. Two records, two hit rates, free CSVs.";
 
-export const metadata: Metadata = {
-  title: "Our record: forecasts graded against results",
-  description: fitDescription(description),
-  alternates: { canonical: `${site.url}/record` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: "Our record: forecasts graded against results",
+    description: fitDescription(description),
+    alternates: { canonical: `${site.url}/record` },
+  },
+  "/record",
+);
 
 const pct = (n: number) => `${n.toFixed(2)}%`;
 const share = (n: number | null) => (n == null ? "—" : `${Math.round(n * 100)}%`);
@@ -47,6 +50,7 @@ export default function RecordPage() {
 
   return (
     <PageShell
+      share={{ path: "/record", campaign: "record" }}
       crumbs={[{ href: "/", label: "Today" }, { label: "Our record" }]}
       kicker="Our record"
       title="Forecasts written down first, graded against the result"

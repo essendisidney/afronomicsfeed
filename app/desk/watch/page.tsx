@@ -23,7 +23,7 @@ export default async function DeskWatchPage({ searchParams }: { searchParams: Pr
   const link = chosen ? watchUrl(chosen.slug) : null;
 
   return (
-    <PageShell crumbs={[{ href: "/desk", label: "Desk" }, { label: "Watch packs" }]} kicker="Private" title="Watch packs">
+    <PageShell share={false} crumbs={[{ href: "/desk", label: "Desk" }, { label: "Watch packs" }]} kicker="Private" title="Watch packs">
       <p className="max-w-2xl text-[15px] leading-7 text-ink-soft">
         A private pack about one SACCO for its board. Included in Pack with alerts for SACCO subscribers. Choose the SACCO, copy its link and send it to the
         named contacts; the link works for {LINK_DAYS} days and can be withdrawn in <code>data/watch/revoked.json</code>.{" "}

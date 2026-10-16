@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { charge, fulizaCost, monthly, type Kind, type Tariffs } from "@/lib/mpesa-calc";
+import { toolDefaults } from "@/lib/tool-defaults";
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const num = (s: string) => Math.max(0, Number(s.replace(/[^\d.]/g, "")) || 0);
@@ -13,8 +14,8 @@ const kinds: { kind: Kind; label: string }[] = [
 
 /** Three questions on Safaricom's own charges: one transaction, a Fuliza balance, and a month of habits. */
 export function MpesaCalculator({ tariffs }: { tariffs: Tariffs }) {
-  const [amount, setAmount] = useState("2000");
-  const [kind, setKind] = useState<Kind>("send");
+  const [amount, setAmount] = useState(String(toolDefaults.mpesa.amount));
+  const [kind, setKind] = useState<Kind>(toolDefaults.mpesa.kind);
   const [fAmount, setFAmount] = useState("1000");
   const [fDays, setFDays] = useState("7");
   const [h, setH] = useState({ sends: "20", sendAmount: "1000", withdrawals: "4", withdrawAmount: "3000", fulizaTimes: "2", fulizaAmount: "500", fulizaDays: "5" });

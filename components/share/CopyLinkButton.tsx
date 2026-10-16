@@ -9,7 +9,7 @@ import { copyText } from "./clipboard";
  * Copies the story's address (tagged utm_source=copy) and says so: the label flips to "Copied" and a polite live
  * region announces it to screen readers. `showLabel` false keeps the button icon-only, with the name in aria-label.
  */
-export function CopyLinkButton({ url, className, showLabel = true }: { url: string; className?: string; showLabel?: boolean }) {
+export function CopyLinkButton({ url, className, showLabel = true, campaign }: { url: string; className?: string; showLabel?: boolean; campaign?: string }) {
   const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(
@@ -20,7 +20,7 @@ export function CopyLinkButton({ url, className, showLabel = true }: { url: stri
   );
 
   async function onClick() {
-    const ok = await copyText(taggedUrl(url, "copy"));
+    const ok = await copyText(taggedUrl(url, "copy", campaign));
     setState(ok ? "copied" : "failed");
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => setState("idle"), 2400);

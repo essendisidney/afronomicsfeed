@@ -20,7 +20,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: fitTitle(r.title),
     description: fitDescription(r.verdict ? `${r.verdict} ${r.summary}` : r.summary),
     alternates: { canonical: url },
-    openGraph: { title: r.title, description: r.summary, url, type: "article", publishedTime: r.date },
+    // The share preview: the whole headline, and the verdict where there is one (the image is ./opengraph-image.tsx).
+    openGraph: { title: r.title, description: fitDescription(r.verdict ?? r.summary, 200), url, type: "article", publishedTime: r.date, siteName: site.name, locale: "en_KE" },
+    twitter: { card: "summary_large_image", title: r.title, description: fitDescription(r.verdict ?? r.summary, 200) },
     robots: isPublic(r) ? undefined : { index: false, follow: false },
   };
 }

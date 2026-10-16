@@ -6,11 +6,19 @@ import { ChartTools } from "@/components/charts/ChartTools";
 import { asOfLabel } from "@/components/evidence/EvidenceTag";
 import { statusLabel, statusTone } from "@/components/record/EditorialCalls";
 import { ReceiptBody } from "@/components/receipts/ReceiptBody";
+import { ShareBar } from "@/components/share/ShareBar";
+import { ShareNumberButton } from "@/components/share/ShareNumberButton";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
 import { chartAnchor, chartExport } from "@/lib/charts/receipt-charts";
 import { editorialRows } from "@/lib/editorial";
-import { deskSlug, receiptEvidence, sectorNames, type Receipt, type ReceiptChart, type ReceiptTile } from "@/lib/receipts";
+import { deskSlug, isPublic, receiptEvidence, sectorNames, type Receipt, type ReceiptChart, type ReceiptTile } from "@/lib/receipts";
 import { isPercentUnit } from "@/lib/charts/render";
+import { shareLink } from "@/lib/share";
+import type { ShareNetwork } from "@/lib/share-links";
+import { site } from "@/lib/site";
+
+/** Under the verdict, one row that fits a phone: the phone's share sheet first, then these, then copy link. */
+const topNetworks: ShareNetwork[] = ["whatsapp", "linkedin", "x", "facebook", "email"];
 
 /**
  * One Receipt, in the order RECEIPTS.md sets: the free piece, its calls, "Go deeper" (Pro), and the next-chapter
@@ -54,13 +62,23 @@ export function VerdictLine({ r, size = "lg" }: { r: Receipt; size?: "lg" | "md"
 
 export function FigureTiles({ r, tiles }: { r: Receipt; tiles: ReceiptTile[] }) {
   if (!tiles.length) return null;
+  // "Share this number" on published Receipts only: a draft's number card does not exist in production.
+  const shareable = isPublic(r);
   return (
     <ul className="mt-5 grid grid-cols-2 gap-3">
-      {tiles.map((t) => {
+      {tiles.map((t, i) => {
         const ev = receiptEvidence(r, t.source);
         return (
-          <li key={t.label} className="rounded-xl border border-rule bg-surface px-4 py-3">
-            <p className="t-label text-muted">{t.label}</p>
+          <li key={t.label} className="relative rounded-xl border border-rule bg-surface px-4 py-3">
+            {shareable && i < 12 ? (
+              <ShareNumberButton
+                url={shareLink({ kind: "number", receipt: r.slug, tile: String(i + 1) })}
+                text={`${t.label}: ${t.value}. ${r.title}`}
+                label={t.label}
+                className="right-0 top-0"
+              />
+            ) : null}
+            <p className={`t-label text-muted ${shareable ? "pr-6" : ""}`}>{t.label}</p>
             <p className="af-figure tabular mt-1 text-[1.6rem] font-semibold leading-none text-ink sm:text-[1.9rem]">{t.value}</p>
             {t.note ? <p className="mt-1.5 text-[12.5px] leading-5 text-ink-soft">{t.note}</p> : null}
             {ev ? <p className="mt-1.5 text-[11.5px] text-muted">{ev.source}, {asOfLabel(ev.asOf)}</p> : null}
@@ -99,6 +117,9 @@ export function ReceiptView({ r }: { r: Receipt }) {
   const [lead, ...rest] = r.charts;
   // The ledger's own rows for this Receipt (ids RC-<slug>-<n>, scripts/calls_ledger.py), so each call shows its status.
   const ledger = new Map(editorialRows().filter((x) => x.receipt === r.slug).map((x) => [x.id, x]));
+  const url = `${site.url}/receipts/${r.slug}`;
+  // The share text carries the verdict where there is one: the line a reader would want to pass on.
+  const shareTitle = r.verdict ? `${r.title}: ${r.verdict}` : r.title;
   return (
     <article className="relative mx-auto max-w-3xl">
       {r.status !== "published" ? (
@@ -124,6 +145,9 @@ export function ReceiptView({ r }: { r: Receipt }) {
       <ReceiptMeta r={r} />
       <h1 className="t-display mt-3 text-ink text-balance">{r.title}</h1>
       <VerdictLine r={r} />
+      {isPublic(r) ? (
+        <ShareBar url={url} title={shareTitle} summary={r.summary} campaign="receipt" label="Share this Receipt" networks={topNetworks} className="mt-4" />
+      ) : null}
       <FigureTiles r={r} tiles={r.tiles} />
       {lead ? (
         <div className="mt-5">
@@ -248,6 +272,8 @@ export function ReceiptView({ r }: { r: Receipt }) {
           ) : null}
         </p>
       </section>
+
+      {isPublic(r) ? <ShareBar url={url} title={shareTitle} summary={r.summary} campaign="receipt" variant="block" className="mt-10" /> : null}
     </article>
   );
 }

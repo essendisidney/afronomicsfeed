@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { grossForNet, keepOfRaise, netSalary, type PayrollRates } from "@/lib/salary-calc";
+import { toolDefaults } from "@/lib/tool-defaults";
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const num = (s: string) => Math.max(0, Number(s.replace(/[^\d.]/g, "")) || 0);
@@ -13,7 +14,7 @@ const pct = (n: number) => `${n.toFixed(1).replace(/\.0$/, "")}%`;
  */
 export function SalaryCalculator({ rates }: { rates: PayrollRates }) {
   const [mode, setMode] = useState<"gross" | "net">("gross");
-  const [amount, setAmount] = useState("100000");
+  const [amount, setAmount] = useState(String(toolDefaults.salary.gross));
   const [nssf, setNssf] = useState("");
   const [more, setMore] = useState({ pension: "", mortgage: "", medical: "" });
 
@@ -54,7 +55,7 @@ export function SalaryCalculator({ rates }: { rates: PayrollRates }) {
               type="button"
               aria-pressed={mode === m}
               onClick={() => setMode(m)}
-              className={`min-h-11 rounded-full px-3 font-semibold sm:min-h-9 ${mode === m ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"}`}
+              className={`min-h-11 rounded-full px-3 font-semibold ${mode === m ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"}`}
             >
               {label}
             </button>

@@ -26,7 +26,7 @@ export default async function DesignPage() {
   if (!check?.ok || check.value == null) notFound();
 
   return (
-    <PageShell crumbs={[{ href: "/desk", label: "Desk" }, { label: "Design system" }]} kicker="Private" title="Design system v2">
+    <PageShell share={false} crumbs={[{ href: "/desk", label: "Desk" }, { label: "Design system" }]} kicker="Private" title="Design system v2">
       <p className="max-w-2xl text-[15px] leading-7 text-ink-soft">
         Every page is built from these parts. Sizes come from the scale, never set by hand; colour carries meaning only (rise, fall, warning, the one
         highlight). The figures here are specimens.

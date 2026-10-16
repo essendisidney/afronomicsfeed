@@ -14,6 +14,7 @@ export default async function SubscribePage({ searchParams }: { searchParams: Pr
   const { unsubscribed } = await searchParams;
   return (
     <PageShell
+      share={false}
       crumbs={[{ href: "/", label: "Home" }, { label: "Newsletter" }]}
       kicker="Free · every weekday at 7:00 and every Monday"
       title="The Afronomics Morning and Weekly"

@@ -3,18 +3,21 @@ import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { getAllArticles } from "@/lib/content";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
-import { fitDescription } from "@/lib/seo";
+import { fitDescription, withSocial } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { topics } from "@/lib/taxonomy";
 
 const description =
   "Every Afronomics brief, weekly note and explainer, filterable by type and topic, plus the Wire, the Morning and the archive.";
 
-export const metadata: Metadata = {
-  title: "Stories: briefs, weekly notes and explainers",
-  description: fitDescription(description),
-  alternates: { canonical: `${site.url}/stories` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: "Stories: briefs, weekly notes and explainers",
+    description: fitDescription(description),
+    alternates: { canonical: `${site.url}/stories` },
+  },
+  "/stories",
+);
 
 const types = [
   { id: "all", label: "All" },

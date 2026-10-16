@@ -17,16 +17,16 @@ They pay list price and belong in a later wave.
 
 | # | Deal id | Organisation | Country | Address (where found) | Route quality | Draft opens with |
 |---|---|---|---|---|---|---|
-| 1 | 38 | CIC Asset Management | Kenya | info@cic.co.ke (CIC group contact page) | general group inbox | unit trust and fixed income funds |
+| 1 | 38 | CIC Asset Management | Kenya | [contact in private file] (CIC group contact page) | general group inbox | unit trust and fixed income funds |
 | 2 | 39 | Britam Asset Managers | Kenya | **none published** (contact pages 404) | founder: web form or a contact | fixed income and money market funds |
-| 3 | 40 | ICEA LION Asset Management | Kenya | contactcentre@icealion.com (icealion.co.ke footer) | group contact centre | fixed income and money market funds |
-| 4 | 23 | NSSF Kenya | Kenya | info@nssfkenya.co.ke (nssf.or.ke/contact) | listed against the Central/Eastern region office; may be slow | government securities portfolio |
-| 5 | 24 | NSSF Uganda | Uganda | customerservice@nssfug.org (nssfug.org contact) | customer service | Treasury bond and bill portfolio |
-| 6 | 25 | SSNIT | Ghana | contactcentre@ssnit.org.gh (ssnit.org.gh footer) | contact centre | fixed income portfolio |
-| 7 | 35 | ARM Investment Managers | Nigeria | enquiries@arm.com.ng (arm.com.ng/contact-us) | general enquiries | ARM Fixed Income Fund |
-| 8 | 36 | Afrinvest | Nigeria | connect@afrinvest.com (afrinvest.com footer) | customer support | fixed income funds, FGN bonds |
-| 9 | 37 | Databank Group | Ghana | info@databankgroup.com (databankgroup.com header) | general inbox | fixed income funds, weekly update |
-| 10 | 43 | EFG Holding (EFG Hermes) | Egypt | HermesContactCenter@efg-hermes.com (efgholding.com contact) | brokerage contact centre: weakest route | Egyptian debt research, MMFs |
+| 3 | 40 | ICEA LION Asset Management | Kenya | [contact in private file] (icealion.co.ke footer) | group contact centre | fixed income and money market funds |
+| 4 | 23 | NSSF Kenya | Kenya | [contact in private file] (nssf.or.ke/contact) | listed against the Central/Eastern region office; may be slow | government securities portfolio |
+| 5 | 24 | NSSF Uganda | Uganda | [contact in private file] (nssfug.org contact) | customer service | Treasury bond and bill portfolio |
+| 6 | 25 | SSNIT | Ghana | [contact in private file] (ssnit.org.gh footer) | contact centre | fixed income portfolio |
+| 7 | 35 | ARM Investment Managers | Nigeria | [contact in private file] (arm.com.ng/contact-us) | general enquiries | ARM Fixed Income Fund |
+| 8 | 36 | Afrinvest | Nigeria | [contact in private file] (afrinvest.com footer) | customer support | fixed income funds, FGN bonds |
+| 9 | 37 | Databank Group | Ghana | [contact in private file] (databankgroup.com header) | general inbox | fixed income funds, weekly update |
+| 10 | 43 | EFG Holding (EFG Hermes) | Egypt | [contact in private file] (efgholding.com contact) | brokerage contact centre: weakest route | Egyptian debt research, MMFs |
 
 Reserve: Access ARM Pensions (deal 45). The site timed out twice, so no address was found.
 

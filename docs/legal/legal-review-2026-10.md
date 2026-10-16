@@ -208,7 +208,7 @@ shows the CMA regulates third-party promotion, not only managers.
    advocate's view. This changes conversion tracking (`partner_click`), so I have not done it.
 4. **Advocate:** a written opinion on (a) whether the table plus a neutral link is an "advertisement", (b) whether a
    referral fee makes us an intermediary needing a CMA licence or approval, (c) the exact warning text required.
-   Option: a short letter to the CMA (corporate@cma.or.ke, partners doc row 28) asking for a no-objection view. Cost:
+   Option: a short letter to the CMA ([contact in private file], partners doc row 28) asking for a no-objection view. Cost:
    ESTIMATE KES 30,000-80,000 for an opinion from a capital-markets advocate (no public fee schedule found).
 
 ### 2.2 Investment advice and the licence boundary (Kenya)

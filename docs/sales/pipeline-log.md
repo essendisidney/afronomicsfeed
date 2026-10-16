@@ -13,4 +13,4 @@ Notes for the `deals` table that could not be saved because writes from the agen
 | 14 Oct 2026 | 40 | ICEA LION Asset Management | Auto-ack only: ticket 1457727; no human reply. Follow-up 22 Oct. | pending |
 | 14 Oct 2026 | 36 | Afrinvest | Auto-invite to the Afrinvest Connect helpdesk portal; no human reply. Follow-up 22 Oct. | pending |
 
-Applied directly on 14 Oct 2026: deals 3 (William Blair, to soutarsingh@williamblair.com, listed as Sales and Client Service Manager on im.williamblair.com/contact-us) and 4 (Ashmore, to ashmail@ashmoregroup.com, the general inbox on its contact page) moved to contacted, pilot offer emailed (campaign pilot-wave3), follow-up 22 Oct.
+Applied directly on 14 Oct 2026: deals 3 (William Blair, to [contact in private file], listed as Sales and Client Service Manager on im.williamblair.com/contact-us) and 4 (Ashmore, to [contact in private file], the general inbox on its contact page) moved to contacted, pilot offer emailed (campaign pilot-wave3), follow-up 22 Oct.

@@ -11,6 +11,7 @@ export const tools: Tool[] = [
   { href: "/rates/kenya/mpesa-charges", title: "M-PESA & Fuliza", answers: "What sending, withdrawing and Fuliza cost you", group: "Everyday money", home: true },
   { href: "/rates/kenya/net-salary", title: "Net salary", answers: "Your take-home after PAYE, SHIF and the Housing Levy", group: "Everyday money", home: true },
   { href: "/rates/kenya/inflation", title: "Inflation calculator", answers: "What your shillings from any month are worth today", group: "Everyday money", home: true },
+  { href: "/diaspora", title: "Diaspora Desk", answers: "Sending money home from abroad, and what it earns there", group: "Everyday money" },
   { href: "/markets/kenya-tbills/calculator", title: "T-bill calculator", answers: "What a Treasury bill costs and pays after tax", group: "Saving and investing", home: true },
   { href: "/markets/kenya-tbills/auction", title: "Did my bid win?", answers: "The likely rates at this week's T-bill auction", group: "Saving and investing" },
   { href: "/markets/ipo-calculator", title: "IPO calculator", answers: "How many shares your money buys in an offer", group: "Saving and investing", home: true },

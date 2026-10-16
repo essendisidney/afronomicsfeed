@@ -1,23 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
-import { fitDescription } from "@/lib/seo";
+import { fitDescription, withSocial } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { toolGroups, tools } from "@/lib/tools";
 
 const description =
   "Afronomics' free calculators and checkers in one place: T-bills, M-PESA and Fuliza charges, net salary, loan cost, IPOs, savings goals, inflation, fair rates, chamas and licensed lenders.";
 
-export const metadata: Metadata = {
-  title: "Tools: money calculators and checkers",
-  description: fitDescription(description),
-  alternates: { canonical: `${site.url}/tools` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: "Tools: money calculators and checkers",
+    description: fitDescription(description),
+    alternates: { canonical: `${site.url}/tools` },
+  },
+  "/tools",
+);
 
 /** The tools hub (redesign preview): every calculator and checker, grouped by the question a reader brings (lib/tools.ts). */
 export default function ToolsPage() {
   return (
     <PageShell
+      share={{ path: "/tools", campaign: "tools" }}
       crumbs={[{ href: "/", label: "Today" }, { label: "Tools" }]}
       kicker="Tools"
       title="Calculators and checkers, one question each"

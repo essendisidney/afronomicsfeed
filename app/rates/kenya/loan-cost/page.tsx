@@ -8,18 +8,21 @@ import { FollowUp } from "@/components/ui/FollowUp";
 import { loadKenyaRates } from "@/lib/data/kenya-rates";
 import { loanCost } from "@/lib/loan-calc";
 import { site } from "@/lib/site";
-import { fitDescription, fitTitle } from "@/lib/seo";
+import { fitDescription, fitTitle, withSocial } from "@/lib/seo";
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const monthName = (ym: string) => new Intl.DateTimeFormat("en-GB", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${ym}-01T00:00:00Z`));
 
-export const metadata: Metadata = {
-  title: fitTitle("Loan true-cost calculator Kenya: flat vs reducing rate, fees and the real APR"),
-  description: fitDescription(
-    "Turn any loan quote into its true yearly rate: flat or reducing balance, processing and insurance fees included, set against the banks' average lending rate from the CBK. Free, no sign-up.",
-  ),
-  alternates: { canonical: `${site.url}/rates/kenya/loan-cost` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: fitTitle("Loan true-cost calculator Kenya: flat vs reducing rate, fees and the real APR"),
+    description: fitDescription(
+      "Turn any loan quote into its true yearly rate: flat or reducing balance, processing and insurance fees included, set against the banks' average lending rate from the CBK. Free, no sign-up.",
+    ),
+    alternates: { canonical: `${site.url}/rates/kenya/loan-cost` },
+  },
+  "/rates/kenya/loan-cost",
+);
 
 export default function LoanCostPage() {
   const rows = loadKenyaRates().bank_rates?.rows ?? [];
@@ -48,6 +51,7 @@ export default function LoanCostPage() {
 
   return (
     <PageShell
+      share={{ path: "/rates/kenya/loan-cost", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Today" }, { href: "/rates/kenya", label: "Kenya rates" }, { label: "Loan true-cost calculator" }]}
       kicker="Borrowing · Kenya"
       title="What does this loan really cost?"

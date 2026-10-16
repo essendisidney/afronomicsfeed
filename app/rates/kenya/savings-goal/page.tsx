@@ -5,46 +5,29 @@ import { SavingsGoalPlanner } from "@/components/data/SavingsGoalPlanner";
 import { SectionTitle } from "@/components/data/parts";
 import { Questions } from "@/components/seo/Questions";
 import { FollowUp } from "@/components/ui/FollowUp";
-import { rateOptions } from "@/lib/data/kenya-rates";
-import { plan, type Place } from "@/lib/savings-goal";
+import { savingsDates, savingsPlaces } from "@/lib/savings-places";
+import { plan } from "@/lib/savings-goal";
 import { site } from "@/lib/site";
-import { fitDescription, fitTitle } from "@/lib/seo";
+import { fitDescription, fitTitle, withSocial } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 
-export const metadata: Metadata = {
-  title: fitTitle("Savings goal planner Kenya: how much to save each month, and where"),
-  description: fitDescription(
-    "School fees, rent, a plot or an emergency fund: put in the goal and the date, and see what to save each month in a money market fund, a bank deposit or a savings account, at today's after-tax rates. Free, no sign-up.",
-  ),
-  alternates: { canonical: `${site.url}/rates/kenya/savings-goal` },
-};
-
-/** The places a monthly saver can use, from the same sources as the Kenya rates table. */
-function places(): Place[] {
-  const { options } = rateOptions();
-  const funds = options.filter((o) => o.group === "Money market funds").sort((a, b) => b.net - a.net);
-  const out: Place[] = [];
-  if (funds.length) {
-    out.push({ name: `Best money market fund we track (${funds[0].name})`, short: "the best money market fund we track", net: funds[0].net, effective: true, note: "withdraw in 2 to 3 days", href: "/rates/kenya/money-market-funds" });
-    const mid = funds[Math.floor(funds.length / 2)];
-    if (funds.length > 2) out.push({ name: `A typical money market fund (${mid.name})`, short: "a typical money market fund", net: mid.net, effective: true, note: "the middle of the funds we track", href: "/rates/kenya/money-market-funds" });
-  }
-  const fd = options.find((o) => o.name === "Bank fixed deposit, industry average");
-  if (fd) out.push({ name: "Bank fixed deposit, average", short: "an average bank fixed deposit", net: fd.net, effective: false, note: `CBK average, ${fd.asOf}; money locked for the term` });
-  const sav = options.find((o) => o.name === "Bank savings account, industry average");
-  if (sav) out.push({ name: "Bank savings account, average", short: "an average bank savings account", net: sav.net, effective: false, note: `CBK average, ${sav.asOf}` });
-  out.push({ name: "Cash or M-PESA", short: "cash or M-PESA", net: 0, effective: false, note: "no interest" });
-  return out;
-}
+export const metadata: Metadata = withSocial(
+  {
+    title: fitTitle("Savings goal planner Kenya: how much to save each month, and where"),
+    description: fitDescription(
+      "School fees, rent, a plot or an emergency fund: put in the goal and the date, and see what to save each month in a money market fund, a bank deposit or a savings account, at today's after-tax rates. Free, no sign-up.",
+    ),
+    alternates: { canonical: `${site.url}/rates/kenya/savings-goal` },
+  },
+  "/rates/kenya/savings-goal",
+);
 
 export default function SavingsGoalPage() {
-  const p = places();
-  const today = new Date().toISOString().slice(0, 10);
-  const [y, m] = today.split("-").map(Number);
-  const defaultBy = `${m >= 10 ? y + 1 : y}-${m >= 10 ? "01" : String(Math.min(12, m + 3)).padStart(2, "0")}`;
+  const p = savingsPlaces();
+  const { today, defaultBy } = savingsDates();
   const year = plan(100000, 0, 12, p);
 
   const items = [
@@ -64,6 +47,7 @@ export default function SavingsGoalPage() {
 
   return (
     <PageShell
+      share={{ path: "/rates/kenya/savings-goal", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Today" }, { href: "/rates/kenya", label: "Kenya rates" }, { label: "Savings goal planner" }]}
       kicker="Saving · Kenya"
       title="How much do you need to save each month?"

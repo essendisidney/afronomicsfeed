@@ -1,21 +1,22 @@
 import { ImageResponse } from "next/og";
-import { MARK } from "@/components/brand/logo-paths";
+import { alpha, brand } from "@/lib/brand/card-style";
+import { StampBadge } from "@/lib/brand/stamp-badge";
 import { categoryLabel, formatDate } from "@/lib/format";
 import { cardSize, fonts } from "@/lib/og-card";
 import type { Article } from "@/lib/types";
 
 /**
- * The share card for a story (1200×630): night background, the jacaranda accent, the section, the headline, the
+ * The share card for a story (1200×630): night background under a laterite bar (D-026), the section, the headline, the
  * date and where the figures come from, with the Afronomics mark. Text only — no photograph stands in for the news.
  */
 
-const NIGHT = "#0E1524";
-const NIGHT_2 = "#141D33";
-const INK = "#F5F6F4";
-const SOFT = "#C3C8D4";
-const MUTED = "#8B93A7";
-const ACCENT = "#A08CFF";
-const ACCENT_SOFT = "#B9A9FF";
+const NIGHT = brand.night;
+const NIGHT_2 = brand.night2;
+const INK = brand.nightInk;
+const SOFT = brand.nightSoft;
+const MUTED = brand.nightMuted;
+const ACCENT = brand.lateriteLight;
+const ACCENT_SOFT = brand.sand;
 
 /** "Central Bank of Kenya — Treasury bill results" → "Central Bank of Kenya"; publishers once each, at most two. */
 export function sourceLine(sources: Article["sources"]): string {
@@ -45,6 +46,7 @@ export async function articleCard(article: Article | null | undefined, fallbackK
           display: "flex",
           flexDirection: "column",
           background: `linear-gradient(160deg, ${NIGHT_2} 0%, ${NIGHT} 65%)`,
+          borderTop: `14px solid ${brand.laterite}`,
           color: INK,
           padding: "56px 72px 44px",
           fontFamily: "Sans",
@@ -59,7 +61,7 @@ export async function articleCard(article: Article | null | undefined, fallbackK
             width: 620,
             height: 620,
             borderRadius: 620,
-            background: "radial-gradient(circle, rgba(160,140,255,0.28) 0%, rgba(160,140,255,0) 70%)",
+            background: `radial-gradient(circle, ${alpha(ACCENT, 0.22)} 0%, ${alpha(ACCENT, 0)} 70%)`,
           }}
         />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -77,28 +79,13 @@ export async function articleCard(article: Article | null | undefined, fallbackK
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: "1px solid rgba(245,246,244,0.14)",
+            borderTop: `1px solid ${alpha(INK, 0.14)}`,
             paddingTop: 20,
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <div style={{ display: "flex", position: "relative", width: 30, height: 30 }}>
-              {MARK.bars.map((b, i) => (
-                <div
-                  key={i}
-                  style={{
-                    position: "absolute",
-                    left: b.x * 0.48,
-                    top: b.y * 0.48,
-                    width: b.w * 0.48,
-                    height: b.h * 0.48,
-                    borderRadius: 3,
-                    background: i === MARK.accentIndex ? ACCENT : INK,
-                  }}
-                />
-              ))}
-            </div>
-            <div style={{ fontFamily: "Mono", fontSize: 20, letterSpacing: 2, color: INK }}>AFRONOMICS</div>
+            <StampBadge size={36} />
+            <div style={{ fontFamily: "Headline", fontSize: 26, color: INK }}>Afronomics</div>
           </div>
           {source ? <div style={{ display: "flex", fontSize: 19, color: MUTED, maxWidth: 700 }}>{`Source: ${source}`}</div> : null}
         </div>

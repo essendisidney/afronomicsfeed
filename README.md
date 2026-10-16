@@ -55,7 +55,7 @@ wide, in light and dark. The full release routine is in `OPERATIONS.md`.
 
 | Section | Route | Where |
 | --- | --- | --- |
-| Today (home) | `/`, Kiswahili at `/sw` | `app/page.tsx`, `app/sw/` |
+| Today (home) | `/`, Kiswahili at `/sw` | `app/(home)/page.tsx`, `app/sw/` |
 | Numbers | `/numbers`, gathering `/markets/*`, `/rates/*`, `/data/*`, `/countries/*` | `app/numbers/`, `lib/hubs.ts` |
 | Stories | `/stories`, gathering `/brief`, `/weekly`, `/explainers` | `app/stories/`, `content/` |
 | Learn | `/learn`, with Kiswahili and other languages | `app/learn/`, `content/learn/` |

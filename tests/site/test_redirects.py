@@ -40,8 +40,9 @@ def route_patterns() -> list[re.Pattern[str]]:
     # Pages, and route handlers that serve a document (e.g. the print-ready /pack/sample and /watch/sample).
     files = list((ROOT / "app").rglob("page.tsx")) + [p for p in (ROOT / "app").rglob("route.ts") if "/api/" not in p.as_posix()]
     for page in files:
-        rel = page.parent.relative_to(ROOT / "app").as_posix()
-        path = "/" if rel == "." else "/" + rel
+        # Route groups, "(home)", are folders only: they are not part of the address.
+        rel = "/".join(s for s in page.parent.relative_to(ROOT / "app").parts if not (s.startswith("(") and s.endswith(")")))
+        path = "/" + rel
         out.append(re.compile("^" + re.sub(r"\\\[[^\]]+\\\]", "[^/]+", re.escape(path)) + "$"))
     return out
 

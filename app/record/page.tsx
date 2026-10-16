@@ -5,7 +5,7 @@ import { EditorialCalls } from "@/components/record/EditorialCalls";
 import { EvidenceTag, asOfLabel } from "@/components/evidence/EvidenceTag";
 import { editorialRows, loadEditorial } from "@/lib/editorial";
 import { LEDGER_FILE, LEDGER_HISTORY, TARGET, backtest, loadLedger, score, type LedgerRow } from "@/lib/ledger";
-import { fitDescription } from "@/lib/seo";
+import { fitDescription, withSocial } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -13,11 +13,14 @@ export const revalidate = 3600;
 const description =
   "Every Kenya Treasury bill range and every editorial call Afronomics publishes, written down first and graded by code against the published result. Two records, two hit rates, free CSVs.";
 
-export const metadata: Metadata = {
-  title: "Our record: forecasts graded against results",
-  description: fitDescription(description),
-  alternates: { canonical: `${site.url}/record` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: "Our record: forecasts graded against results",
+    description: fitDescription(description),
+    alternates: { canonical: `${site.url}/record` },
+  },
+  "/record",
+);
 
 const pct = (n: number) => `${n.toFixed(2)}%`;
 const share = (n: number | null) => (n == null ? "—" : `${Math.round(n * 100)}%`);
@@ -47,6 +50,7 @@ export default function RecordPage() {
 
   return (
     <PageShell
+      share={{ path: "/record", campaign: "record" }}
       crumbs={[{ href: "/", label: "Today" }, { label: "Our record" }]}
       kicker="Our record"
       title="Forecasts written down first, graded against the result"
@@ -65,7 +69,7 @@ export default function RecordPage() {
           <h2 id="live" className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">
             Live ledger
           </h2>
-          <p className="tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{share(live.share)}</p>
+          <p className="af-figure tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{share(live.share)}</p>
           <p className="mt-2 text-[14px] leading-6 text-ink-soft">
             {live.graded
               ? `${live.inside} of ${live.graded} graded results fell inside the range.`
@@ -74,12 +78,12 @@ export default function RecordPage() {
         </div>
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <h2 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">What the method aims for</h2>
-          <p className="tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{Math.round(TARGET * 100)}%</p>
+          <p className="af-figure tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{Math.round(TARGET * 100)}%</p>
           <p className="mt-2 text-[14px] leading-6 text-ink-soft">A range from the 10th to the 90th percentile of recent weekly moves should hold about four results in five.</p>
         </div>
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <h2 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted">Backtest, since 2011</h2>
-          <p className="tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{share(bt.share)}</p>
+          <p className="af-figure tabular mt-2 font-serif text-[2.4rem] leading-none text-ink">{share(bt.share)}</p>
           <p className="mt-2 text-[14px] leading-6 text-ink-soft">
             The same method run over {bt.tested.toLocaleString("en-US")} past auctions: {bt.inside.toLocaleString("en-US")} inside. Not ranges published at the time, and
             never added to the live figure.

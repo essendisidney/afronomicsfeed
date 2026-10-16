@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ArticleCard } from "@/components/ui/ArticleCard";
+import { PageShare } from "@/components/share/PageShare";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getArticlesByCategory, toIndexItem } from "@/lib/content";
 
@@ -18,6 +19,7 @@ export default function ExplainersIndexPage() {
         title="The map, without the noise"
         lede="Open-access primers on mandates and perimeters. Use them to cite the right primary — not to time a market."
       />
+      <PageShare title="Afronomics explainers: the map, without the noise" campaign="page" className="mt-6" />
       <div className="mt-12 space-y-12">
         {articles.map((article) => (
           <ArticleCard key={article.slug} article={article} />

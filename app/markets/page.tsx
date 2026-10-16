@@ -67,7 +67,7 @@ export default async function MarketsPage() {
                     {tenorLabel[tenor]}
                     {item ? ` · ${item.latest.value_date}` : ""}
                   </p>
-                  <p className="mt-1 font-serif text-3xl text-ink">{item ? `${item.latest.weighted_avg_rate.toFixed(3)}%` : "—"}</p>
+                  <p className="af-figure mt-1 font-serif text-3xl text-ink">{item ? `${item.latest.weighted_avg_rate.toFixed(3)}%` : "—"}</p>
                 </Link>
               );
             })}

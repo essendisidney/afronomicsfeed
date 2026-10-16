@@ -30,7 +30,7 @@ export function KeyNumbers({ r }: { r: Receipt }) {
               className="flex scroll-mt-20 flex-col rounded-xl border border-rule bg-surface px-4 py-3 target:border-accent target:ring-2 target:ring-accent/40"
             >
               {/* One line on a phone whichever font is showing, so a late font cannot re-wrap the figure. */}
-              <p className="tabular whitespace-nowrap text-[1.6rem] font-semibold leading-tight text-ink sm:whitespace-normal sm:text-[1.45rem]">{k.value}</p>
+              <p className="af-figure tabular whitespace-nowrap text-[1.6rem] font-semibold leading-tight text-ink sm:whitespace-normal sm:text-[1.45rem]">{k.value}</p>
               <p className="mt-1 text-[14px] leading-5 text-ink-soft">{k.label}</p>
               <div className="mt-auto flex items-end justify-between gap-2 pt-2">
                 {ev ? (

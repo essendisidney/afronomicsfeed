@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { loanCost, type RateBasis, type RateUnit } from "@/lib/loan-calc";
+import { toolDefaults } from "@/lib/tool-defaults";
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const num = (s: string) => Math.max(0, Number(s.replace(/[^\d.]/g, "")) || 0);
@@ -12,11 +13,11 @@ const pct = (n: number) => `${n.toFixed(1)}%`;
  * rate, and set against the same loan at the banks' average lending rate published by the CBK.
  */
 export function LoanCalculator({ benchmark }: { benchmark: { rate: number; month: string; source: string } | null }) {
-  const [amount, setAmount] = useState("100000");
-  const [rate, setRate] = useState("14");
-  const [unit, setUnit] = useState<RateUnit>("year");
-  const [basis, setBasis] = useState<RateBasis>("flat");
-  const [months, setMonths] = useState("12");
+  const [amount, setAmount] = useState(String(toolDefaults.loan.amount));
+  const [rate, setRate] = useState(String(toolDefaults.loan.rate));
+  const [unit, setUnit] = useState<RateUnit>(toolDefaults.loan.unit);
+  const [basis, setBasis] = useState<RateBasis>(toolDefaults.loan.basis);
+  const [months, setMonths] = useState(String(toolDefaults.loan.months));
   const [upfront, setUpfront] = useState("");
   const [monthlyFees, setMonthlyFees] = useState("");
 
@@ -66,7 +67,7 @@ export function LoanCalculator({ benchmark }: { benchmark: { rate: number; month
               type="button"
               aria-pressed={basis === b}
               onClick={() => setBasis(b)}
-              className={`min-h-9 rounded-full px-3 font-semibold ${basis === b ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"}`}
+              className={`min-h-11 rounded-full px-3 font-semibold ${basis === b ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"}`}
             >
               {label}
             </button>
@@ -98,7 +99,7 @@ export function LoanCalculator({ benchmark }: { benchmark: { rate: number; month
           What it really costs
         </h2>
         <p className="text-[13px] text-muted">True yearly rate, all costs in</p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">
           {pct(r.apr)}
         </p>
         <p className="mt-1 text-[13px] text-ink-soft">

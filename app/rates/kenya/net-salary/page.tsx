@@ -8,18 +8,21 @@ import { FollowUp } from "@/components/ui/FollowUp";
 import { loadPayrollRates } from "@/lib/data/payroll-rates";
 import { netSalary } from "@/lib/salary-calc";
 import { site } from "@/lib/site";
-import { fitDescription, fitTitle } from "@/lib/seo";
+import { fitDescription, fitTitle, withSocial } from "@/lib/seo";
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const longDate = (iso: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
-export const metadata: Metadata = {
-  title: fitTitle("Net salary calculator Kenya: PAYE, SHIF, Housing Levy and take-home pay"),
-  description: fitDescription(
-    "From gross pay to take-home in Kenya, with KRA's PAYE bands, SHIF at 2.75%, the 1.5% Housing Levy and your NSSF. Or enter the take-home you want and see the gross to ask for. Free, no sign-up.",
-  ),
-  alternates: { canonical: `${site.url}/rates/kenya/net-salary` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: fitTitle("Net salary calculator Kenya: PAYE, SHIF, Housing Levy and take-home pay"),
+    description: fitDescription(
+      "From gross pay to take-home in Kenya, with KRA's PAYE bands, SHIF at 2.75%, the 1.5% Housing Levy and your NSSF. Or enter the take-home you want and see the gross to ask for. Free, no sign-up.",
+    ),
+    alternates: { canonical: `${site.url}/rates/kenya/net-salary` },
+  },
+  "/rates/kenya/net-salary",
+);
 
 export default function NetSalaryPage() {
   const r = loadPayrollRates();
@@ -42,6 +45,7 @@ export default function NetSalaryPage() {
 
   return (
     <PageShell
+      share={{ path: "/rates/kenya/net-salary", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Today" }, { href: "/rates/kenya", label: "Kenya rates" }, { label: "Net salary calculator" }]}
       kicker="Pay and tax · Kenya"
       title="What will you actually take home?"

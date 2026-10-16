@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { charge, fulizaCost, monthly, type Kind, type Tariffs } from "@/lib/mpesa-calc";
+import { toolDefaults } from "@/lib/tool-defaults";
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const num = (s: string) => Math.max(0, Number(s.replace(/[^\d.]/g, "")) || 0);
@@ -13,8 +14,8 @@ const kinds: { kind: Kind; label: string }[] = [
 
 /** Three questions on Safaricom's own charges: one transaction, a Fuliza balance, and a month of habits. */
 export function MpesaCalculator({ tariffs }: { tariffs: Tariffs }) {
-  const [amount, setAmount] = useState("2000");
-  const [kind, setKind] = useState<Kind>("send");
+  const [amount, setAmount] = useState(String(toolDefaults.mpesa.amount));
+  const [kind, setKind] = useState<Kind>(toolDefaults.mpesa.kind);
   const [fAmount, setFAmount] = useState("1000");
   const [fDays, setFDays] = useState("7");
   const [h, setH] = useState({ sends: "20", sendAmount: "1000", withdrawals: "4", withdrawAmount: "3000", fulizaTimes: "2", fulizaAmount: "500", fulizaDays: "5" });
@@ -61,7 +62,7 @@ export function MpesaCalculator({ tariffs }: { tariffs: Tariffs }) {
           </label>
         </div>
         <p className="mt-4 text-[13px] text-muted">Safaricom charges you</p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">
           {one == null ? "Not allowed" : one === 0 ? "Free" : kes(one)}
         </p>
         <p className="mt-1 text-[12.5px] text-muted">
@@ -90,7 +91,7 @@ export function MpesaCalculator({ tariffs }: { tariffs: Tariffs }) {
           </label>
         </div>
         <p className="mt-4 text-[13px] text-muted">Total charges</p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">{kes(f.total)}</p>
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">{kes(f.total)}</p>
         <p className="mt-1 text-[12.5px] text-muted">
           Access fee {kes(f.access)} once, then {kes(f.daily)} a day.
           {f.yearly > 0 ? ` As a yearly rate, about ${Math.round(f.yearly).toLocaleString("en-US")}%.` : ""}
@@ -134,7 +135,7 @@ export function MpesaCalculator({ tariffs }: { tariffs: Tariffs }) {
         <div className="mt-5 grid gap-4 sm:grid-cols-[auto_1fr] sm:items-end">
           <div>
             <p className="text-[13px] text-muted">You pay about</p>
-            <p data-num className="tabular text-[2.2rem] font-semibold leading-tight text-ink">{kes(m.total)} a month</p>
+            <p data-num className="af-figure tabular text-[2.2rem] font-semibold leading-tight text-ink">{kes(m.total)} a month</p>
             <p className="text-[13px] text-ink-soft">{kes(m.total * 12)} a year</p>
           </div>
           <dl className="grid grid-cols-3 gap-2 text-[12.5px] sm:justify-self-end">

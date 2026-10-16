@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Change } from "@/components/rates/Change";
 import { Spark } from "@/components/rates/Spark";
+import { ShareNumberButton } from "@/components/share/ShareNumberButton";
 import { seriesPath } from "@/lib/data/rate-series";
 import { compareHref, defaultPairs, formatValue, pointDate, seriesChange, type RateSeries } from "@/lib/rate-series-core";
+import { site } from "@/lib/site";
 
 /** Opens the page's FollowSheet; without script, goes to the series page's follow section. */
 export function FollowLink({ series, className = "", children }: { series: RateSeries; className?: string; children?: React.ReactNode }) {
@@ -50,11 +52,19 @@ export function HeadlineTile({ series, kicker, extra, className = "" }: { series
   const c = seriesChange(series);
   if (!c) return null;
   const latest = c.latest;
+  const value = formatValue(latest.value, series.unit);
   return (
-    <div className={`rounded-2xl border border-rule bg-surface px-5 py-5 ${className}`}>
-      <p className="text-[13px] font-medium text-muted">{kicker ?? series.label}</p>
+    <div className={`relative rounded-2xl border border-rule bg-surface px-5 py-5 ${className}`}>
+      {/* Share this number: a link to the series page (its card shows the latest figure), in the tile's corner. */}
+      <ShareNumberButton
+        url={`${site.url}${seriesPath(series.id)}`}
+        text={`${series.label}: ${value}, ${pointDate(latest.date, series.frequency)}. Source: ${series.source.name}.`}
+        label={series.label}
+        className="right-2 top-2"
+      />
+      <p className="pr-8 text-[13px] font-medium text-muted">{kicker ?? series.label}</p>
       <div className="mt-1 flex items-end justify-between gap-3">
-        <p className="font-serif text-4xl leading-none tracking-[-0.02em] text-ink">{formatValue(latest.value, series.unit)}</p>
+        <p className="af-figure font-serif text-4xl leading-none tracking-[-0.02em] text-ink">{value}</p>
         <span className="inline-block h-9 w-[120px]">
           <Spark series={series} width={120} height={36} />
         </span>

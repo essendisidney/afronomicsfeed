@@ -10,7 +10,8 @@ import { loadKenyaRates } from "@/lib/data/kenya-rates";
 import { loadTbills } from "@/lib/data/kenya-tbills";
 import { billGrowth, worth, type BillRate, type DepositRate } from "@/lib/inflation";
 import { site } from "@/lib/site";
-import { fitDescription, fitTitle } from "@/lib/seo";
+import { toolDefaults } from "@/lib/tool-defaults";
+import { fitDescription, fitTitle, withSocial } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -18,13 +19,16 @@ const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const monthLabel = (ym: string) => new Intl.DateTimeFormat("en-GB", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${ym}-01T00:00:00Z`));
 const link = "font-semibold text-forest underline underline-offset-2";
 
-export const metadata: Metadata = {
-  title: fitTitle("Kenya inflation calculator: what your shilling has lost since 2010"),
-  description: fitDescription(
-    "What KES 1,000 from any month since 2010 is worth in today's prices, how much prices rose in all and a year, and what the same money would have made in Treasury bills or a bank deposit. From KNBS's official CPI. Free, no sign-up.",
-  ),
-  alternates: { canonical: `${site.url}/rates/kenya/inflation` },
-};
+export const metadata: Metadata = withSocial(
+  {
+    title: fitTitle("Kenya inflation calculator: what your shilling has lost since 2010"),
+    description: fitDescription(
+      "What KES 1,000 from any month since 2010 is worth in today's prices, how much prices rose in all and a year, and what the same money would have made in Treasury bills or a bank deposit. From KNBS's official CPI. Free, no sign-up.",
+    ),
+    alternates: { canonical: `${site.url}/rates/kenya/inflation` },
+  },
+  "/rates/kenya/inflation",
+);
 
 export default function InflationPage() {
   const file = loadCpi();
@@ -35,7 +39,7 @@ export default function InflationPage() {
     .map((r) => ({ date: r.value_date, rate: r.weighted_avg_rate }));
   const deposits: DepositRate[] = (loadKenyaRates().bank_rates?.rows ?? []).map((r) => ({ month: r.month, rate: r.deposit }));
 
-  const from = "2015-01";
+  const from: string = toolDefaults.inflation.from;
   const ex = worth(1000, from, latest, index)!;
   const decade = worth(1000, `${Number(latest.slice(0, 4)) - 10}${latest.slice(4)}`, latest, index)!;
   const exBill = billGrowth(1000, from, latest, bills);
@@ -59,6 +63,7 @@ export default function InflationPage() {
 
   return (
     <PageShell
+      share={{ path: "/rates/kenya/inflation", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Today" }, { href: "/rates/kenya", label: "Kenya rates" }, { label: "Inflation calculator" }]}
       kicker="Prices · Kenya"
       title="What your shilling has lost"

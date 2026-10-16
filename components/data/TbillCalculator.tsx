@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { addDays, quoteBill, rolledOver, simpleEarnings, TBILL_MIN_FACE } from "@/lib/tbill-calc";
+import { toolDefaults } from "@/lib/tool-defaults";
 
 export type CalcBill = { tenor: 91 | 182 | 364; rate: number; price: number | null; auctionDate: string; source: string };
 export type CalcCompare = { label: string; rate: number; source: string; href: string };
@@ -25,8 +26,8 @@ export function TbillCalculator({
   bidsClose: string | null;
   compare: CalcCompare[];
 }) {
-  const [amount, setAmount] = useState("100000");
-  const [mode, setMode] = useState<"pay" | "face">("pay");
+  const [amount, setAmount] = useState(String(toolDefaults.tbill.amount));
+  const [mode, setMode] = useState<"pay" | "face">(toolDefaults.tbill.mode);
   const value = Math.max(0, Number(amount.replace(/[^\d.]/g, "")) || 0);
 
   const quotes = useMemo(() => bills.map((b) => ({ bill: b, q: quoteBill(b.rate, b.tenor, value, mode, b.price) })), [bills, value, mode]);
@@ -71,7 +72,7 @@ export function TbillCalculator({
               <p className="text-[12px] text-muted">{bill.rate.toFixed(2)}% a year</p>
             </div>
             <p className="mt-1 text-[12px] text-muted">You keep, after tax</p>
-            <p data-num className="tabular text-[1.5rem] font-semibold leading-tight text-ink">{kes(q.net)}</p>
+            <p data-num className="af-figure tabular text-[1.5rem] font-semibold leading-tight text-ink">{kes(q.net)}</p>
             <dl className="mt-2 grid grid-cols-3 gap-2 text-[12px]">
               <div>
                 <dt className="text-muted">You pay</dt>

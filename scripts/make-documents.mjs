@@ -85,13 +85,13 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 
 /* Chromium draws these in the page margins with system fonts; sizes must be set explicitly. */
 function header(series, privateFor) {
-  return `<div style="width:100%;margin:0 18mm;display:flex;justify-content:space-between;font:7.5px Arial,Helvetica,sans-serif;color:#636b7d;letter-spacing:.4px;">
-<span><b style="color:#121826;letter-spacing:1.6px;">AFRONOMICS</b>&nbsp;&nbsp;${esc(series)}</span>
+  return `<div style="width:100%;margin:0 18mm;display:flex;justify-content:space-between;font:7.5px Arial,Helvetica,sans-serif;color:#6c5e55;letter-spacing:.4px;">
+<span><b style="color:#1d1512;letter-spacing:1.6px;">AFRONOMICS</b>&nbsp;&nbsp;${esc(series)}</span>
 <span>${privateFor ? `Prepared for ${esc(privateFor)}. Private.` : ""}</span></div>`;
 }
 
 function footer(number) {
-  return `<div style="width:100%;margin:0 18mm;display:flex;justify-content:space-between;font:7.5px Arial,Helvetica,sans-serif;color:#636b7d;border-top:.5px solid #d9dcd7;padding-top:2mm;">
+  return `<div style="width:100%;margin:0 18mm;display:flex;justify-content:space-between;font:7.5px Arial,Helvetica,sans-serif;color:#6c5e55;border-top:.5px solid #e0d6cd;padding-top:2mm;">
 <span>Information, not advice.</span><span>${esc(number)}</span>
 <span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span></div>`;
 }

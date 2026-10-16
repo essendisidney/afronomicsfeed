@@ -102,7 +102,7 @@ export default function ForInstitutionsPage() {
           { v: String(policy), k: "central-bank policy rates read daily" },
         ].map((s) => (
           <div key={s.k} className="bg-surface px-4 py-4">
-            <p className="font-serif text-3xl text-ink">{s.v}</p>
+            <p className="af-figure font-serif text-3xl text-ink">{s.v}</p>
             <p className="mt-1 text-[12px] text-muted">{s.k}</p>
           </div>
         ))}

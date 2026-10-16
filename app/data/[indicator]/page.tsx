@@ -73,9 +73,9 @@ export default async function IndicatorPage({ params }: { params: Promise<{ indi
             <p className="text-[11px] text-muted">{total ? `${total.reporting} countries reporting` : `${rows.length} countries`}</p>
           </div>
           <a href={`/api/data/${def.slug}`} className="bg-gold px-4 py-4 text-paper hover:bg-gold-soft">
-            <p className="font-medium text-[12px] text-paper/80">Download</p>
+            <p className="font-medium text-[12px] text-paper">Download</p>
             <p className="mt-1 font-serif text-2xl">CSV</p>
-            <p className="text-[11px] text-paper/80">54 countries × every year</p>
+            <p className="text-[11px] text-paper">54 countries × every year</p>
           </a>
         </div>
       }

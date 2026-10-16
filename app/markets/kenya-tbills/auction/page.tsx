@@ -9,7 +9,7 @@ import { latestAuctions, nextAuction, outlook } from "@/lib/data/auction-intel";
 import { loadTbills, tenorLabel } from "@/lib/data/kenya-tbills";
 import { publishedFor } from "@/lib/ledger";
 import { site } from "@/lib/site";
-import { fitDescription, fitTitle } from "@/lib/seo";
+import { fitDescription, fitTitle, withSocial } from "@/lib/seo";
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const short = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
@@ -20,7 +20,7 @@ export function generateMetadata(): Metadata {
   const next = nextAuction();
   const title = "Kenya T-bill auction: likely rates and “did my bid win?”";
   const description = `Before Kenya's next Treasury bill auction${next ? ` (bids close ${d(next.bidsClose, short)})` : ""}: the likely range for each bill's rate, tested on every auction since 2011. After it: did your bid win, and what does the bill pay after tax?`;
-  return { title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/markets/kenya-tbills/auction` } };
+  return withSocial({ title: fitTitle(title), description: fitDescription(description), alternates: { canonical: `${site.url}/markets/kenya-tbills/auction` } }, "/markets/kenya-tbills/auction");
 }
 
 export default function AuctionPage() {
@@ -53,6 +53,7 @@ export default function AuctionPage() {
 
   return (
     <PageShell
+      share={{ path: "/markets/kenya-tbills/auction", campaign: "tool" }}
       crumbs={[{ href: "/", label: "Home" }, { href: "/markets", label: "Markets" }, { href: "/markets/kenya-tbills", label: "Kenya T-bills" }, { label: "Auction" }]}
       kicker="Auction intelligence · Kenya"
       title="Before and after Kenya’s T-bill auction"

@@ -25,7 +25,7 @@ const pill =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-rule bg-surface px-4 text-[14px] font-semibold text-ink transition-colors hover:border-accent hover:text-accent";
 
 const primary =
-  "col-span-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-5 text-[14px] font-semibold text-white hover:opacity-90 dark:text-night";
+  "col-span-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-5 text-[14px] font-semibold text-white hover:opacity-90 dark:text-on-accent";
 
 export function ShareBar({
   url,
@@ -34,6 +34,8 @@ export function ShareBar({
   variant = "inline",
   networks = shareNetworks,
   className = "",
+  campaign,
+  label = "Share this story",
 }: {
   /** The canonical absolute address of the story. */
   url: string;
@@ -42,11 +44,15 @@ export function ShareBar({
   variant?: Variant;
   networks?: readonly ShareNetwork[];
   className?: string;
+  /** The kind of page (receipt, record, tool): tags links utm_medium=social, utm_campaign=share-<kind>, and keeps the phone share button in place from first paint. */
+  campaign?: string;
+  /** The accessible name of the group. */
+  label?: string;
 }) {
   const links = networks.map((network) => (
     <a
       key={network}
-      href={shareHref(network, { url, text: title, summary })}
+      href={shareHref(network, { url, text: title, summary, campaign })}
       {...(network === "email" ? {} : { target: "_blank", rel: "noopener noreferrer" })}
       data-track="share"
       data-network={network}
@@ -61,10 +67,10 @@ export function ShareBar({
 
   if (variant === "rail") {
     return (
-      <nav aria-label="Share this story" className={`no-print hidden lg:flex lg:flex-col lg:items-center lg:gap-2 ${className}`}>
+      <nav aria-label={label} className={`no-print hidden lg:flex lg:flex-col lg:items-center lg:gap-2 ${className}`}>
         <span className="mb-1 text-[10.5px] font-semibold uppercase tracking-[0.16em] text-muted">Share</span>
         {links.filter((_, i) => ["whatsapp", "linkedin", "x", "facebook"].includes(networks[i]))}
-        <CopyLinkButton url={url} className={iconButton} showLabel={false} />
+        <CopyLinkButton url={url} campaign={campaign} className={iconButton} showLabel={false} />
       </nav>
     );
   }
@@ -84,20 +90,20 @@ export function ShareBar({
           Send it to a colleague, a client or the group chat. Every link goes straight to this story, with its sources.
         </p>
         <div className="mt-5 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
-          <NativeShareButton url={url} title={title} text={summary} className={primary} />
+          <NativeShareButton url={url} title={title} text={summary} campaign={campaign} stable={Boolean(campaign)} className={primary} />
           {links}
-          <CopyLinkButton url={url} className={`${pill} col-span-2 sm:col-span-1`} />
+          <CopyLinkButton url={url} campaign={campaign} className={`${pill} col-span-2 sm:col-span-1`} />
         </div>
       </section>
     );
   }
 
   return (
-    <div role="group" aria-label="Share this story" className={`no-print flex flex-wrap items-center gap-1.5 sm:gap-2 ${className}`}>
+    <div role="group" aria-label={label} className={`no-print flex flex-wrap items-center gap-1.5 sm:gap-2 ${className}`}>
       <span className="mr-1 hidden text-[11.5px] font-semibold uppercase tracking-[0.16em] text-muted sm:inline">Share</span>
-      <NativeShareButton url={url} title={title} text={summary} className={iconButton} showLabel={false} />
+      <NativeShareButton url={url} title={title} text={summary} campaign={campaign} stable={Boolean(campaign)} className={iconButton} showLabel={false} />
       {links}
-      <CopyLinkButton url={url} className={iconButton} showLabel={false} />
+      <CopyLinkButton url={url} campaign={campaign} className={iconButton} showLabel={false} />
     </div>
   );
 }

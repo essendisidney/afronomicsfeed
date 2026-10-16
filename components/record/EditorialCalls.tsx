@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ShareNumberButton } from "@/components/share/ShareNumberButton";
+import { site } from "@/lib/site";
 import { asOfLabel } from "@/components/evidence/EvidenceTag";
 import { EDITORIAL_HISTORY, editorialScore, thresholdText, type CallRow, type CallStatus } from "@/lib/editorial";
 
@@ -67,7 +69,18 @@ export function EditorialCalls({ rows, notRecorded }: { rows: CallRow[]; notReco
                   </p>
                 ) : null}
               </div>
-              <p className={`t-label sm:pt-1 ${statusTone[r.status]}`}>{statusLabel[r.status]}</p>
+              <div className="flex items-start gap-1 sm:flex-col sm:items-end">
+                <p className={`t-label sm:pt-1 ${statusTone[r.status]}`}>{statusLabel[r.status]}</p>
+                <ShareNumberButton
+                  url={`${site.url}/record#${r.id}`}
+                  text={`${r.statement} Due ${asOfLabel(r.check_date)}, settled by ${r.check_source}.`}
+                  label={r.statement}
+                  campaign="call"
+                  what="this call"
+                  placement="inline"
+                  className="-mt-2.5 ml-auto sm:mt-0"
+                />
+              </div>
             </li>
           ))}
         </ol>

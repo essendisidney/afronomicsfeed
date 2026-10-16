@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { billGrowth, depositGrowth, worth, type BillRate, type CpiPoint, type DepositRate } from "@/lib/inflation";
+import { toolDefaults } from "@/lib/tool-defaults";
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const pct = (n: number) => `${n.toFixed(1)}%`;
@@ -35,7 +36,7 @@ export function InflationCalculator({
   const first = index[0].month;
   const latest = index[index.length - 1].month;
   const firstBill = bills.length ? bills.reduce((a, b) => (a.date < b.date ? a : b)).date.slice(0, 7) : null;
-  const [amount, setAmount] = useState("1000");
+  const [amount, setAmount] = useState(String(toolDefaults.inflation.amount));
   const [from, setFrom] = useState(defaultFrom);
   const [to, setTo] = useState(latest);
 
@@ -89,7 +90,7 @@ export function InflationCalculator({
         <p className="text-[13px] text-muted">
           {kes(a)} in {monthLabel(f)} is worth, in {monthLabel(t)} prices
         </p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">
           {kes(w.value)}
         </p>
         <p className="mt-1 text-[13px] text-ink-soft">

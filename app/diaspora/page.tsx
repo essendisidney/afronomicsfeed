@@ -155,7 +155,7 @@ export default async function DiasporaPage() {
         kesPerUsd ? (
           <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
             <p className="text-[13px] font-medium text-muted">Today&rsquo;s shilling</p>
-            <p data-num className="tabular mt-1 font-serif text-3xl text-ink">
+            <p data-num className="af-figure tabular mt-1 font-serif text-3xl text-ink">
               KES {kesPerUsd.toFixed(2)} <span className="text-[15px] text-ink-soft">per $1</span>
             </p>
             <p data-num className="tabular mt-1 text-[14px] text-ink">

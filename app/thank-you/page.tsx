@@ -131,7 +131,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
 
   if (!payment || payment.status !== "success") {
     return (
-      <PageShell crumbs={[{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }, { label: "Payment" }]} kicker="Payment" title={reference ? "We couldn’t confirm this payment yet" : "No payment was taken"}>
+      <PageShell share={false} crumbs={[{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }, { label: "Payment" }]} kicker="Payment" title={reference ? "We couldn’t confirm this payment yet" : "No payment was taken"}>
         <div className="max-w-2xl space-y-4 text-[15px] leading-7 text-ink-soft">
           {reference ? (
             <p>
@@ -172,7 +172,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
   ];
 
   return (
-    <PageShell crumbs={[{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }, { label: "Thank you" }]} kicker="Payment confirmed" title="Thank you. You’re in.">
+    <PageShell share={false} crumbs={[{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }, { label: "Thank you" }]} kicker="Payment confirmed" title="Thank you. You’re in.">
       <div className="grid max-w-4xl gap-8 lg:grid-cols-[1fr_18rem]">
         <div>
           <KeyPanel keyOutcome={key} email={shownEmail} plan={payment.plan} />

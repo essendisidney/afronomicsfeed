@@ -2,7 +2,9 @@ import Link from "next/link";
 import { asOfLabel, EvidenceTag } from "@/components/evidence/EvidenceTag";
 import { BarChart } from "@/components/charts/BarChart";
 import { VerdictLine } from "@/components/receipts/ReceiptView";
+import { ShareNumberButton } from "@/components/share/ShareNumberButton";
 import { ButtonLink } from "@/components/ui/Button";
+import { shareLink, todayTileIds } from "@/lib/share";
 import { freshness, type StoryCard } from "@/lib/front-page";
 import { deskSlug, receiptEvidence, sectorNames, type Receipt, type ReceiptChart } from "@/lib/receipts";
 import type { TodayMove } from "@/lib/today";
@@ -18,7 +20,7 @@ import { isPercentUnit } from "@/lib/charts/render";
 
 export function SectionHead({ id, title, blurb, more, moreLabel }: { id: string; title: string; blurb?: string; more?: string; moreLabel?: string }) {
   return (
-    <div className="flex items-end justify-between gap-3 border-b border-rule pb-1.5">
+    <div className="af-section-head flex items-end justify-between gap-3 border-b border-rule pb-1.5">
       <div className="min-w-0">
         <h2 id={id} className="t-h2 text-ink">
           {title}
@@ -44,12 +46,20 @@ export function TodayStrip({ tiles }: { tiles: BoardTile[] }) {
         return (
           <li key={t.id} className="w-[44%] min-w-[10.5rem] shrink-0 sm:w-auto sm:min-w-0">
             <div className="relative flex h-full flex-col rounded-xl border border-rule bg-surface px-3 py-2.5">
-              <p className="line-clamp-2 h-8 text-[12px] font-medium leading-4 text-muted">
+              {(todayTileIds as readonly string[]).includes(t.id) ? (
+                <ShareNumberButton
+                  url={shareLink({ kind: "number", receipt: null, tile: t.id })}
+                  text={`${t.label}: ${t.value}${t.change ? ` (${t.change})` : ""}. ${t.evidence.source}.`}
+                  label={t.label}
+                  className="right-0 top-0"
+                />
+              ) : null}
+              <p className="line-clamp-2 h-8 pr-6 text-[12px] font-medium leading-4 text-muted">
                 <Link href={t.href} className="after:absolute after:inset-0 hover:text-ink">
                   {t.label}
                 </Link>
               </p>
-              <p className="tabular mt-1 text-[1.45rem] font-semibold leading-none tracking-tight text-ink">{t.value}</p>
+              <p className="af-figure tabular mt-1 text-[1.45rem] font-semibold leading-none tracking-tight text-ink">{t.value}</p>
               <p className={`tabular mt-1 line-clamp-2 h-8 text-[12px] font-medium leading-4 ${tone}`}>
                 {t.change ? (
                   <>
@@ -180,7 +190,7 @@ export function LeadStory({ r, now }: { r: Receipt; now: number }) {
           <VerdictLine r={r} size="md" />
           {tile ? (
             <div className="mt-4 flex items-baseline gap-3">
-              <p className="tabular shrink-0 text-[1.9rem] font-semibold leading-none tracking-tight text-ink">{tile.value}</p>
+              <p className="af-figure tabular shrink-0 text-[1.9rem] font-semibold leading-none tracking-tight text-ink">{tile.value}</p>
               <p className="text-[13px] leading-5 text-ink-soft">
                 {tile.label}
                 {ev ? <span className="block truncate text-[11.5px] text-muted">{asOfLabel(ev.asOf)} · {ev.source}</span> : null}
@@ -220,7 +230,7 @@ export function StoryCardView({ c, now, figures }: { c: StoryCard; now: number; 
         <div className={figures ? "mt-2 h-11" : "hidden"}>
           {c.figure ? (
             <>
-              <p className="tabular text-[1.3rem] font-semibold leading-6 tracking-tight text-ink">{c.figure.value}</p>
+              <p className="af-figure tabular text-[1.3rem] font-semibold leading-6 tracking-tight text-ink">{c.figure.value}</p>
               {c.figure.label ? <p className="line-clamp-1 text-[12px] leading-5 text-muted">{c.figure.label}</p> : null}
             </>
           ) : null}

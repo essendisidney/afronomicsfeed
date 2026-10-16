@@ -57,6 +57,7 @@ export default async function DownloadsPage({ searchParams }: { searchParams: Pr
 
   return (
     <PageShell
+      share={false}
       crumbs={[{ href: "/", label: "Home" }, { href: "/data-api", label: "Data API" }, { label: "Full-history downloads" }]}
       kicker="Afronomics data · key holders"
       title="Full-history downloads"

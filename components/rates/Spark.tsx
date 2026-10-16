@@ -2,7 +2,7 @@ import { MIN_SPARK_POINTS, formatValue, pointDate, sparkPoints, sparkSpan, type 
 
 /**
  * A small trend line for one rate series, drawn on the server as inline SVG at a fixed size (no layout shift, no
- * script). Only the stored history: the series' latest `sparkPoints` prints. With fewer than three points it draws
+ * script), in the Laterite chart colour (--chart-accent, app/globals.css). Only the stored history: the series' latest `sparkPoints` prints. With fewer than three points it draws
  * nothing. The line is spaced by date, so a gap in the record shows as a longer segment rather than being hidden.
  */
 export function Spark({ series, width = 88, height = 28, className = "" }: { series: RateSeries; width?: number; height?: number; className?: string }) {
@@ -22,10 +22,10 @@ export function Spark({ series, width = 88, height = 28, className = "" }: { ser
   const last = pts.at(-1)!;
   const label = `${series.label}, ${sparkSpan(series, pts.length)}: ${formatValue(first.value, series.unit)} on ${pointDate(first.date, series.frequency)} to ${formatValue(last.value, series.unit)} on ${pointDate(last.date, series.frequency)}; low ${formatValue(min, series.unit)}, high ${formatValue(max, series.unit)}`;
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label} data-spark={series.id} data-points={pts.length} className={`inline-block shrink-0 overflow-visible align-middle text-forest ${className}`}>
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label} data-spark={series.id} data-points={pts.length} className={`inline-block shrink-0 overflow-visible align-middle ${className}`}>
       <title>{label}</title>
-      <path d={d} fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx={x(last.date)} cy={y(last.value)} r={2.5} className="fill-accent" />
+      <path d={d} fill="none" stroke="var(--chart-accent)" strokeWidth={1.5} strokeLinejoin="round" strokeLinecap="round" />
+      <circle cx={x(last.date)} cy={y(last.value)} r={2.5} fill="var(--chart-accent)" stroke="var(--surface)" strokeWidth={1} />
     </svg>
   );
 }

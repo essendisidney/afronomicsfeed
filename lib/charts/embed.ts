@@ -1,3 +1,4 @@
+import { alpha, brand, brandDark, chartColors } from "@/lib/brand/card-style";
 import { chartAnchor } from "@/lib/charts/receipt-charts";
 import { formatChartValue, renderChartSvg } from "@/lib/charts/render";
 import { receiptEvidence, type Receipt } from "@/lib/receipts";
@@ -13,8 +14,11 @@ import { site } from "@/lib/site";
 
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
-const light = "--surface:#ffffff;--ink:#121826;--ink-soft:#3b4354;--muted:#636b7d;--rule:#d9dcd7;--brand-accent:#5b3fd6;--chart-quiet:#8b93a3;";
-const dark = "--surface:#111a2e;--ink:#e9ebf0;--ink-soft:#c3c8d4;--muted:#8b93a7;--rule:#243049;--brand-accent:#a08cff;--chart-quiet:#6b7590;";
+/** The site's chart tokens as CSS variables, light and dark, from the brand palette (lib/brand/card-style.ts). */
+const vars = (c: (typeof chartColors)["light" | "dark"], link: string) =>
+  `--surface:${c.surface};--ink:${c.ink};--ink-soft:${c.inkSoft};--muted:${c.muted};--rule:${c.rule};--chart-accent:${c.accent};--chart-quiet:${c.quiet};--brand-accent:${link};`;
+const light = vars(chartColors.light, brand.lateriteInk);
+const dark = vars(chartColors.dark, brandDark.lateriteInk);
 
 /** Tooltip for the embed: the same behaviour as components/charts/ChartTips.tsx, without React. */
 const SCRIPT = `(function(){var b=document.querySelector('.c'),s=b.querySelector('svg'),t=document.getElementById('tip'),a=null,pts=[].slice.call(s.querySelectorAll('.chart-pt'));
@@ -49,7 +53,7 @@ export function chartEmbedHtml(r: Receipt, n: number): string | null {
 h1{margin:0;font:700 17px/1.3 Georgia,"Times New Roman",serif;letter-spacing:-.01em;text-wrap:balance}.u{margin:3px 0 0;font-size:12px;color:var(--muted)}
 .c{position:relative;margin-top:10px}.chart-svg .chart-pt{cursor:pointer;outline:none}.chart-svg .chart-pt:focus-visible .chart-bar,.chart-svg .chart-pt.is-active .chart-bar{stroke:var(--ink);stroke-width:2}
 .tabular{font-variant-numeric:tabular-nums}
-#tip{position:absolute;pointer-events:none;max-width:14rem;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:5px 9px;box-shadow:0 4px 12px rgba(0,0,0,.15);font-size:12px;line-height:1.35}
+#tip{position:absolute;pointer-events:none;max-width:14rem;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:5px 9px;box-shadow:0 4px 12px ${alpha(brand.ink, 0.15)};font-size:12px;line-height:1.35}
 #tip b{display:block;font-size:15px;font-variant-numeric:tabular-nums}#tip .tl{display:block;color:var(--muted)}#tip .tu{display:block;color:var(--ink-soft)}
 .f{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 10px;margin-top:8px;padding-top:8px;border-top:1px solid var(--rule);font-size:11px;color:var(--muted)}
 .f a{color:var(--brand-accent);font-weight:600;text-decoration:none}.f a:hover{text-decoration:underline}.f .s a{color:inherit;font-weight:400;text-decoration:underline}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { monthsUntil, plan, type Place } from "@/lib/savings-goal";
+import { toolDefaults } from "@/lib/tool-defaults";
 
 const kes = (n: number) => `KES ${Math.round(n).toLocaleString("en-US")}`;
 const num = (s: string) => Math.max(0, Number(s.replace(/[^\d.]/g, "")) || 0);
@@ -14,10 +15,10 @@ const monthLabel = (ym: string) => new Intl.DateTimeFormat("en-GB", { month: "lo
  * after-tax rates. `today` comes from the server so the month count matches on both sides.
  */
 export function SavingsGoalPlanner({ places, today, defaultBy }: { places: Place[]; today: string; defaultBy: string }) {
-  const [goal, setGoal] = useState("60000");
+  const [goal, setGoal] = useState(String(toolDefaults.savingsGoal.goal));
   const [by, setBy] = useState(defaultBy);
   const [start, setStart] = useState("");
-  const [label, setLabel] = useState("School fees");
+  const [label, setLabel] = useState<string>(toolDefaults.savingsGoal.label);
 
   const months = monthsUntil(today, by || defaultBy);
   const rows = plan(num(goal), num(start), months, places);
@@ -61,7 +62,7 @@ export function SavingsGoalPlanner({ places, today, defaultBy }: { places: Place
           What to save each month
         </h2>
         <p className="text-[13px] text-muted">Save each month, in {short(best.place)}</p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">
           {kes(best.monthly)}
         </p>
         <p className="mt-1 text-[13px] text-ink-soft">

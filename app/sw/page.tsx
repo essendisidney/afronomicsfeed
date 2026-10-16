@@ -96,7 +96,7 @@ export default async function TodaySwPage() {
             <h2 id="rekodi" className="font-serif text-2xl text-ink sm:text-3xl">
               Jinsi mbinu ilivyofanya
             </h2>
-            <p className="tabular mt-3 font-serif text-[2.6rem] leading-none text-ink">{Math.round(record.share * 100)}%</p>
+            <p className="af-figure tabular mt-3 font-serif text-[2.6rem] leading-none text-ink">{Math.round(record.share * 100)}%</p>
           </div>
           <div>
             <p className="tabular text-[16px] leading-7 text-ink">

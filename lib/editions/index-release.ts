@@ -63,25 +63,25 @@ export function indexReleaseLinkedIn(r: IndexRelease) {
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 export function indexReleaseHtml(r: IndexRelease) {
-  const base = "font-family:Archivo,Helvetica,Arial,sans-serif;color:#121826;";
+  const base = "font-family:Archivo,Helvetica,Arial,sans-serif;color:#1d1512;";
   const rows = r.table
     .map(
       (t) =>
-        `<tr><td style="padding:6px 0;border-bottom:1px solid #e0e3df;font-size:14px;"><a href="${t.href}?utm_source=email&utm_medium=release&utm_campaign=asbi" style="color:#121826;text-decoration:none;">${esc(t.country)}</a></td><td align="right" style="padding:6px 0;border-bottom:1px solid #e0e3df;font-size:14px;">${t.rate.toFixed(2)}%</td><td align="right" style="padding:6px 0;border-bottom:1px solid #e0e3df;font-size:13px;color:${t.bps == null || t.bps === 0 ? "#636b7d" : t.bps > 0 ? "#c2352b" : "#0f7f57"};">${t.bps == null ? "—" : `${signed(t.bps)} bps`}</td><td align="right" style="padding:6px 0;border-bottom:1px solid #e0e3df;font-size:12px;color:#636b7d;">${t.date}</td></tr>`,
+        `<tr><td style="padding:6px 0;border-bottom:1px solid #e4dbd3;font-size:14px;"><a href="${t.href}?utm_source=email&utm_medium=release&utm_campaign=asbi" style="color:#1d1512;text-decoration:none;">${esc(t.country)}</a></td><td align="right" style="padding:6px 0;border-bottom:1px solid #e4dbd3;font-size:14px;">${t.rate.toFixed(2)}%</td><td align="right" style="padding:6px 0;border-bottom:1px solid #e4dbd3;font-size:13px;color:${t.bps == null || t.bps === 0 ? "#6c5e55" : t.bps > 0 ? "#c4263e" : "#0f7f57"};">${t.bps == null ? "—" : `${signed(t.bps)} bps`}</td><td align="right" style="padding:6px 0;border-bottom:1px solid #e4dbd3;font-size:12px;color:#6c5e55;">${t.date}</td></tr>`,
     )
     .join("");
-  return `<!doctype html><html><head><meta charset="utf-8"><title>${esc(r.headline)}</title></head><body style="margin:0;background:#f5f6f4;">
+  return `<!doctype html><html><head><meta charset="utf-8"><title>${esc(r.headline)}</title></head><body style="margin:0;background:#f7f3ef;">
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="padding:16px 0;"><tr><td align="center">
 <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;width:100%;background:#fff;border-radius:16px;overflow:hidden;">
-<tr><td style="background:#0e1524;padding:22px 28px;${base}color:#f5f6f4;font-size:18px;font-weight:700;letter-spacing:1px;">AFRONOMICS <span style="color:#a08cff;font-size:11px;letter-spacing:3px;">${esc(indexShort)} · WEEKLY RELEASE</span></td></tr>
-<tr><td style="padding:24px 28px 8px;${base}"><p style="margin:0;font-size:13px;color:#5b3fd6;font-weight:700;">${esc(indexName)} — week of ${esc(r.week)}</p>
+<tr><td style="background:#b3401f;padding:22px 28px;${base}color:#f7f3ef;font-size:18px;font-weight:700;letter-spacing:1px;">AFRONOMICS <span style="color:#f6c9a0;font-size:11px;letter-spacing:3px;">${esc(indexShort)} · WEEKLY RELEASE</span></td></tr>
+<tr><td style="padding:24px 28px 8px;${base}"><p style="margin:0;font-size:13px;color:#a33a1c;font-weight:700;">${esc(indexName)} — week of ${esc(r.week)}</p>
 <p style="margin:10px 0 0;font-size:40px;line-height:1;font-weight:700;">${r.index.latest.value.toFixed(2)}%</p>
 <p style="margin:14px 0 0;font-size:16px;line-height:25px;">${esc(r.lead)}</p>
-<p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#3b4254;">${esc(r.moversText)}</p>
-<p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#3b4254;">${esc(r.range)}</p></td></tr>
-<tr><td style="padding:12px 28px 4px;${base}"><p style="margin:0 0 6px;font-size:13px;color:#5b3fd6;font-weight:700;">By market, 364-day, latest</p><table role="presentation" cellpadding="0" cellspacing="0" width="100%">${rows}</table></td></tr>
-<tr><td style="padding:18px 28px 26px;"><a href="${r.url}?utm_source=email&utm_medium=release&utm_campaign=asbi" style="display:inline-block;background:#121826;${base}color:#f5f6f4;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;text-decoration:none;">Chart, series and contributions</a></td></tr>
-<tr><td style="background:#ebedea;padding:16px 28px;${base}font-size:12px;line-height:18px;color:#636b7d;">${esc(r.boiler)} Press: ${esc(site.contactEmail)}.</td></tr>
+<p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#45372f;">${esc(r.moversText)}</p>
+<p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#45372f;">${esc(r.range)}</p></td></tr>
+<tr><td style="padding:12px 28px 4px;${base}"><p style="margin:0 0 6px;font-size:13px;color:#a33a1c;font-weight:700;">By market, 364-day, latest</p><table role="presentation" cellpadding="0" cellspacing="0" width="100%">${rows}</table></td></tr>
+<tr><td style="padding:18px 28px 26px;"><a href="${r.url}?utm_source=email&utm_medium=release&utm_campaign=asbi" style="display:inline-block;background:#1d1512;${base}color:#f7f3ef;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;text-decoration:none;">Chart, series and contributions</a></td></tr>
+<tr><td style="background:#eee7e1;padding:16px 28px;${base}font-size:12px;line-height:18px;color:#6c5e55;">${esc(r.boiler)} Press: ${esc(site.contactEmail)}.</td></tr>
 </table></td></tr></table></body></html>`;
 }
 
@@ -93,15 +93,15 @@ function indexChart(points: { date: string; value: number }[], w = 640, h = 220)
   const x = (i: number) => 44 + (i / (points.length - 1)) * (w - 64);
   const y = (v: number) => 12 + (1 - (v - lo) / Math.max(0.5, hi - lo)) * (h - 44);
   const ticks = [];
-  for (let v = lo; v <= hi; v += 1) ticks.push(`<line x1="44" x2="${w - 20}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" stroke="#e0e3df"/><text x="38" y="${(y(v) + 3).toFixed(1)}" font-size="10" text-anchor="end" fill="#636b7d">${v}%</text>`);
+  for (let v = lo; v <= hi; v += 1) ticks.push(`<line x1="44" x2="${w - 20}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" stroke="#e4dbd3"/><text x="38" y="${(y(v) + 3).toFixed(1)}" font-size="10" text-anchor="end" fill="#6c5e55">${v}%</text>`);
   const months = points
     .map((p, i) => ({ p, i }))
     .filter(({ p, i }) => i === 0 || p.date.slice(5, 7) !== points[i - 1].date.slice(5, 7))
     .filter((_, k, all) => k % 2 === 0 || k === all.length - 1)
-    .map(({ p, i }) => `<text x="${x(i).toFixed(1)}" y="${h - 10}" font-size="9.5" text-anchor="middle" fill="#636b7d">${new Intl.DateTimeFormat("en-GB", { month: "short", year: "2-digit", timeZone: "UTC" }).format(new Date(`${p.date}T00:00:00Z`))}</text>`);
+    .map(({ p, i }) => `<text x="${x(i).toFixed(1)}" y="${h - 10}" font-size="9.5" text-anchor="middle" fill="#6c5e55">${new Intl.DateTimeFormat("en-GB", { month: "short", year: "2-digit", timeZone: "UTC" }).format(new Date(`${p.date}T00:00:00Z`))}</text>`);
   const path = points.map((p, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join(" ");
   const last = points.at(-1)!;
-  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${indexShort}, weekly, last 52 weeks">${ticks.join("")}${months.join("")}<path d="${path}" fill="none" stroke="#5b3fd6" stroke-width="2"/><circle cx="${x(points.length - 1).toFixed(1)}" cy="${y(last.value).toFixed(1)}" r="3.5" fill="#5b3fd6"/></svg>`;
+  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${indexShort}, weekly, last 52 weeks">${ticks.join("")}${months.join("")}<path d="${path}" fill="none" stroke="#a33a1c" stroke-width="2"/><circle cx="${x(points.length - 1).toFixed(1)}" cy="${y(last.value).toFixed(1)}" r="3.5" fill="#a33a1c"/></svg>`;
 }
 
 /** The weekly release as a document in the house design (lib/documents/design.ts), printed to PDF each Monday. */

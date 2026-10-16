@@ -17,7 +17,7 @@ export const metadata: Metadata = { title: "Design system", robots: { index: fal
  * below are specimens to show the parts, labelled as such, and are never shown to readers.
  */
 
-const TOKENS = ["paper", "surface", "ink", "ink-soft", "muted", "rule", "forest", "brand-accent", "up", "down", "warn", "chart-quiet", "facts", "analysis", "opinion"];
+const TOKENS = ["paper", "surface", "ink", "ink-soft", "muted", "rule", "forest", "brand-accent", "up", "down", "warn", "chart-accent", "chart-quiet", "facts", "analysis", "opinion"];
 const SPECIMEN = { source: "Specimen source", href: "https://www.afronomicsfeed.com/method", asOf: "2026-10-14" };
 
 export default async function DesignPage() {
@@ -26,7 +26,7 @@ export default async function DesignPage() {
   if (!check?.ok || check.value == null) notFound();
 
   return (
-    <PageShell crumbs={[{ href: "/desk", label: "Desk" }, { label: "Design system" }]} kicker="Private" title="Design system v2">
+    <PageShell share={false} crumbs={[{ href: "/desk", label: "Desk" }, { label: "Design system" }]} kicker="Private" title="Design system v2">
       <p className="max-w-2xl text-[15px] leading-7 text-ink-soft">
         Every page is built from these parts. Sizes come from the scale, never set by hand; colour carries meaning only (rise, fall, warning, the one
         highlight). The figures here are specimens.

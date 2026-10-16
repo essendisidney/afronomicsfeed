@@ -170,7 +170,7 @@ export default function KenyaRatesPage() {
             { k: "Difference over a year", v: `KES ${(100000 * (bill91.net - savings.net) / 100).toFixed(0)}` },
           ].map((item) => (
             <div key={item.k} className="bg-surface px-5 py-5">
-              <p className="font-serif text-3xl text-ink">{item.v}</p>
+              <p className="af-figure font-serif text-3xl text-ink">{item.v}</p>
               <p className="mt-1 text-[13px] text-ink-soft">{item.k}</p>
             </div>
           ))}

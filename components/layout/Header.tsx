@@ -81,9 +81,9 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
 
   return (
     <>
-      <header className="no-print on-night sticky top-0 z-40 bg-night text-night-ink" aria-label="Site">
+      <header className="af-masthead no-print on-night sticky top-0 z-40 bg-night text-night-ink" aria-label="Site">
         <div className="mx-auto flex h-14 max-w-7xl items-center gap-3 px-4 sm:px-6">
-          <Wordmark compact night logoClassName="h-7 w-auto" />
+          <Wordmark compact night />
           <nav aria-label="Sections" className="ml-4 hidden h-full items-stretch lg:flex">
             {nav.map((item) => {
               const active = item.href === activeHref;
@@ -207,7 +207,7 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
                 <Link
                   href={institutionalPilot.href}
                   data-track="pricing_cta_click"
-                  className="mt-3 flex min-h-11 items-center justify-center rounded-full bg-accent px-4 text-[14px] font-semibold text-night hover:bg-gold-soft"
+                  className="mt-3 flex min-h-11 items-center justify-center rounded-full bg-accent px-4 text-[14px] font-semibold text-on-accent hover:bg-gold-soft"
                 >
                   Start a free {institutionalPilot.days}-day pilot
                 </Link>

@@ -36,7 +36,7 @@ export function Sparkline({
       preserveAspectRatio="none"
       role="img"
       aria-label={`${label}: ${format(first.value)} in ${first.year} to ${format(last.value)} in ${last.year}`}
-      className={`block h-9 w-full overflow-visible text-forest ${className}`}
+      className={`block h-9 w-full overflow-visible text-[var(--chart-accent)] ${className}`}
     >
       <path d={path} fill="none" stroke="currentColor" strokeWidth={2} vectorEffect="non-scaling-stroke" strokeLinejoin="round" strokeLinecap="round" />
       {points.map((point, index) => (
@@ -44,7 +44,7 @@ export function Sparkline({
           <title>{`${point.year}: ${format(point.value)}`}</title>
         </circle>
       ))}
-      <circle cx={x(points.length - 1)} cy={y(last.value)} r={2.5} fill="currentColor" className="text-gold" />
+      <circle cx={x(points.length - 1)} cy={y(last.value)} r={2.5} fill="var(--chart-accent)" />
     </svg>
   );
 }

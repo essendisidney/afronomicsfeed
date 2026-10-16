@@ -219,7 +219,7 @@ export default async function DeskPage() {
 
   if (!desk) {
     return (
-      <PageShell crumbs={[{ href: "/", label: "Home" }, { label: "Desk" }]} kicker="Private" title="The desk">
+      <PageShell share={false} crumbs={[{ href: "/", label: "Home" }, { label: "Desk" }]} kicker="Private" title="The desk">
         <p className="max-w-xl text-sm text-ink-soft">The owner’s view of Afronomics: money, the pipeline, the inbox, pilots, content and data health. Enter the desk key.</p>
         <div className="mt-6 max-w-sm">
           <DeskKey wrong={Boolean(key)} />
@@ -384,7 +384,7 @@ export default async function DeskPage() {
   const moneyNote = `Real payments only (status “success”; tests never counted). Today starts at midnight Nairobi. US dollars at ${fxNote}.${today0040 ? "" : " Before migration 0040, today is read from the 50 latest payments."}`;
 
   return (
-    <PageShell crumbs={[{ href: "/", label: "Home" }, { label: "Desk" }]} kicker={`Private · ${new Date(now + NAIROBI).toUTCString().replace(" GMT", "").slice(0, -3)} Nairobi`} title="The desk">
+    <PageShell share={false} crumbs={[{ href: "/", label: "Home" }, { label: "Desk" }]} kicker={`Private · ${new Date(now + NAIROBI).toUTCString().replace(" GMT", "").slice(0, -3)} Nairobi`} title="The desk">
       <nav aria-label="Desk sections" className="-mt-2 mb-5 flex flex-wrap gap-1.5">
         {NAV.map(([href, label]) => (
           <a key={href} href={href} className="inline-flex min-h-9 items-center rounded-full border border-rule px-3 text-[12px] font-medium text-ink-soft hover:border-accent hover:text-forest">

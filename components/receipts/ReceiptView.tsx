@@ -10,13 +10,21 @@ import { statusLabel, statusTone } from "@/components/record/EditorialCalls";
 import { JumpChip, JumpRail } from "@/components/receipts/JumpList";
 import { ForYou, KeyNumbers } from "@/components/receipts/ReadingBoxes";
 import { ReceiptBody } from "@/components/receipts/ReceiptBody";
+import { ShareBar } from "@/components/share/ShareBar";
+import { ShareNumberButton } from "@/components/share/ShareNumberButton";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
 import { editorialRows } from "@/lib/editorial";
 import { extractHeadings } from "@/lib/format";
 import { readingMinutes } from "@/lib/reading";
 import { chartAnchor, chartExport } from "@/lib/charts/receipt-charts";
-import { deskSlug, receiptEvidence, sectorNames, type Receipt, type ReceiptChart, type ReceiptTile } from "@/lib/receipts";
+import { deskSlug, isPublic, receiptEvidence, sectorNames, type Receipt, type ReceiptChart, type ReceiptTile } from "@/lib/receipts";
 import { isPercentUnit } from "@/lib/charts/render";
+import { shareLink } from "@/lib/share";
+import type { ShareNetwork } from "@/lib/share-links";
+import { site } from "@/lib/site";
+
+/** Under the verdict, one row that fits a phone: the phone's share sheet first, then these, then copy link. */
+const topNetworks: ShareNetwork[] = ["whatsapp", "linkedin", "x", "facebook", "email"];
 
 /**
  * One Receipt, in the order RECEIPTS.md sets: the free piece, its calls, "Go deeper" (Pro), and the next-chapter
@@ -70,7 +78,7 @@ export function ReceiptMeta({ r, minutes }: { r: Receipt; minutes?: number }) {
 export function VerdictLine({ r, size = "lg" }: { r: Receipt; size?: "lg" | "md" }) {
   if (!r.verdict) return null;
   return (
-    <div className={`border-l-4 border-accent ${size === "lg" ? "mt-5 pl-4" : "mt-3 pl-3"}`}>
+    <div className={`af-verdict border-l-4 border-accent ${size === "lg" ? "mt-5 pl-4" : "mt-3 pl-3"}`}>
       <p className="t-label text-opinion">Our verdict · Opinion</p>
       <p className={`mt-1 font-semibold text-ink text-balance ${size === "lg" ? "text-[1.15rem] leading-7 sm:text-[1.3rem]" : "text-[1rem] leading-6"}`}>{r.verdict}</p>
     </div>
@@ -79,14 +87,24 @@ export function VerdictLine({ r, size = "lg" }: { r: Receipt; size?: "lg" | "md"
 
 export function FigureTiles({ r, tiles }: { r: Receipt; tiles: ReceiptTile[] }) {
   if (!tiles.length) return null;
+  // "Share this number" on published Receipts only: a draft's number card does not exist in production.
+  const shareable = isPublic(r);
   return (
     <ul className="mt-5 grid grid-cols-2 gap-3">
-      {tiles.map((t) => {
+      {tiles.map((t, i) => {
         const ev = receiptEvidence(r, t.source);
         return (
-          <li key={t.label} className="rounded-xl border border-rule bg-surface px-4 py-3">
-            <p className="t-label text-muted">{t.label}</p>
-            <p className="tabular mt-1 text-[1.6rem] font-semibold leading-none text-ink sm:text-[1.9rem]">{t.value}</p>
+          <li key={t.label} className="relative rounded-xl border border-rule bg-surface px-4 py-3">
+            {shareable && i < 12 ? (
+              <ShareNumberButton
+                url={shareLink({ kind: "number", receipt: r.slug, tile: String(i + 1) })}
+                text={`${t.label}: ${t.value}. ${r.title}`}
+                label={t.label}
+                className="right-0 top-0"
+              />
+            ) : null}
+            <p className={`t-label text-muted ${shareable ? "pr-6" : ""}`}>{t.label}</p>
+            <p className="af-figure tabular mt-1 text-[1.6rem] font-semibold leading-none text-ink sm:text-[1.9rem]">{t.value}</p>
             {t.note ? <p className="mt-1.5 text-[12.5px] leading-5 text-ink-soft">{t.note}</p> : null}
             {ev ? <p className="mt-1.5 text-[11.5px] text-muted">{ev.source}, {asOfLabel(ev.asOf)}</p> : null}
           </li>
@@ -130,10 +148,13 @@ export function ReceiptView({ r }: { r: Receipt }) {
     ...(r.calls.length ? [{ id: "calls", label: "Our calls" }] : []),
     { id: "sources", label: "Sources" },
   ];
+  const url = `${site.url}/receipts/${r.slug}`;
+  // The share text carries the verdict where there is one: the line a reader would want to pass on.
+  const shareTitle = r.verdict ? `${r.title}: ${r.verdict}` : r.title;
   return (
     <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,48rem)_minmax(0,1fr)] lg:gap-x-10">
       <ReadingProgress targetId="receipt" />
-      <article id="receipt" className="mx-auto max-w-3xl lg:col-start-2 lg:mx-0 lg:w-full">
+      <article id="receipt" className="relative mx-auto max-w-3xl lg:col-start-2 lg:mx-0 lg:w-full">
         {r.status !== "published" ? (
           <div role="note" className="mb-5 rounded-xl border border-warn/60 bg-surface px-4 py-3 text-[14px] leading-6 text-ink">
             <strong>Draft, shown on preview deployments only.</strong> It publishes when every open check has been done against a primary document.
@@ -149,9 +170,17 @@ export function ReceiptView({ r }: { r: Receipt }) {
             ) : null}
           </div>
         ) : null}
+        {/* The Laterite stamp (D-026): rubber-stamp ink on every Receipt, top right of the headline block. */}
+        <span aria-hidden="true" className="af-stamp">
+          <span className="af-stamp-word">Receipt</span>
+          <span className="af-stamp-date tabular">{receiptDate(r.date)}</span>
+        </span>
         <ReceiptMeta r={r} minutes={minutes} />
         <h1 className="t-display mt-3 text-ink text-balance">{r.title}</h1>
         <VerdictLine r={r} />
+        {isPublic(r) ? (
+          <ShareBar url={url} title={shareTitle} summary={r.summary} campaign="receipt" label="Share this Receipt" networks={topNetworks} className="mt-4" />
+        ) : null}
         {r.keyNumbers.length ? <KeyNumbers r={r} /> : <FigureTiles r={r} tiles={r.tiles} />}
         <ForYou r={r} />
         <JumpChip sections={sections} />
@@ -278,6 +307,8 @@ export function ReceiptView({ r }: { r: Receipt }) {
             ) : null}
           </p>
         </section>
+
+        {isPublic(r) ? <ShareBar url={url} title={shareTitle} summary={r.summary} campaign="receipt" variant="block" className="mt-10" /> : null}
       </article>
       <aside aria-label="Reading aids" className="hidden lg:col-start-3 lg:block">
         <JumpRail sections={sections} minutes={minutes} />

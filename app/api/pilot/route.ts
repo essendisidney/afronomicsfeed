@@ -123,7 +123,7 @@ async function notify(result: PilotResult, issuedKey: string | null, p: { name: 
   if (lines.length) {
     const text = [`Hello ${p.name},`, ``, ...lines, ``, `Markets: ${p.marketText}`, ``, `Questions: reply to this email or write to ${site.contactEmail}.`, `Information, not advice.`, `Afronomics · ${site.url}`].join("\n");
     const key = result.status === "issued" ? issuedKey : null;
-    const html = `<div style="font-family:Archivo,Helvetica,Arial,sans-serif;color:#121826;max-width:560px;line-height:1.55">${text
+    const html = `<div style="font-family:Archivo,Helvetica,Arial,sans-serif;color:#1d1512;max-width:560px;line-height:1.55">${text
       .split("\n")
       .filter(Boolean)
       .map((l) => (l === key ? `<p style="font-family:monospace;font-size:14px;background:#f3f1ea;padding:10px 12px;word-break:break-all">${esc(l)}</p>` : `<p style="margin:0 0 8px">${esc(l)}</p>`))

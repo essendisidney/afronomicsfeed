@@ -64,7 +64,7 @@ export function SubscribeForm({ tone = "paper", button = "Get it free" }: { tone
         <button
           type="submit"
           disabled={state === "pending"}
-          className={`rounded-full px-6 py-3 text-[15px] font-semibold disabled:opacity-60 ${night ? "bg-accent text-night hover:bg-gold-soft" : "bg-ink text-paper hover:bg-forest"}`}
+          className={`rounded-full px-6 py-3 text-[15px] font-semibold disabled:opacity-60 ${night ? "bg-accent text-on-accent hover:bg-gold-soft" : "bg-ink text-paper hover:bg-forest"}`}
         >
           {state === "pending" ? "Adding you" : button}
         </button>

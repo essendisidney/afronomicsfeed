@@ -108,6 +108,20 @@ charts:
       - { label: "IFB1/2021/21 reopened, Aug 2026", value: 13.052 }
       - { label: "IFB1/2019/16 reopened, Aug 2026", value: 12.196 }
     highlight: ["IFB1/2024/8.5, Feb 2024"]
+keyNumbers:
+  - value: "18.4607%"
+    label: "Tax-free rate on IFB1/2024/8.5, February 2024, the highest any infrastructure bond has cleared in our file"
+    source: "CBK, results of IFB1/2024/8.5 dated 19 February 2024"
+  - value: "21.72%"
+    label: "What a bond taxed at 15% would need to pay a saver the same"
+    source: "CBK, results of IFB1/2024/8.5 dated 19 February 2024"
+  - value: "KES 44.48 billion"
+    label: "Interest a year on the KES 240.96 billion accepted, until the first repayment in February 2027"
+    source: "CBK, results of IFB1/2024/8.5 dated 19 February 2024"
+forYou:
+  - "KES 100,000 in this bond kept KES 18,461 in its first year; today's one-year bill keeps KES 7,683, less than half."
+  - "The coupon is fixed until 2032. At August 2026's 12.196%, the same sum would cost about KES 15.10 billion a year less, but that is a comparison, not a saving anyone can collect."
+  - "As a taxpayer: a taxed bond hands 15% of its coupon back to the Treasury as withholding tax; this one hands back nothing."
 ---
 
 In February 2024 the Central Bank of Kenya asked for KES 70 billion for an eight-and-a-half-year infrastructure bond. Investors offered KES 288.66 billion. The government took KES 240.96 billion, at 18.4607% a year, free of tax.

@@ -97,6 +97,20 @@ charts:
       - { label: "2025", value: 12330.5 }
       - { label: "H1 2026", value: 13909.5 }
     highlight: ["H1 2026"]
+keyNumbers:
+  - value: "US$1.58 billion"
+    label: "Raised if the offer sells out (₦2.15 trillion); no existing owner sells, so the money goes to the expansion"
+    source: "Dangote Petroleum Refinery & Petrochemicals FZE, prospectus"
+  - value: "29 times"
+    label: "Roughly the price against the last 12 months' profit of US$1.63 billion"
+    source: "Dangote Petroleum Refinery & Petrochemicals FZE, prospectus"
+  - value: "1.8%"
+    label: "Roughly what the Kenyan receipt offer costs, paid by the holders, plus a custody fee of 0.16% a year"
+    source: "Renaissance Capital (Kenya), Dangote Kenya GDRs information memorandum"
+forYou:
+  - "The price only looks reasonable if every half-year is as good as the first half of 2026, and the two halves before it lost money."
+  - "A Kenyan receipt moves with the naira against the shilling as well as with the refinery, and for now it cannot be swapped for the share underneath."
+  - "Dividends would be taxed twice: Nigeria takes 10% and Kenya its own 5%, with no tax treaty between them."
 ---
 
 The Dangote refinery wants about US$1.6 billion, and for the first time Kenyans can buy a piece of it from Nairobi. Unlike Quickmart's offer, the money goes to the company: it is building the refinery to twice its size.

@@ -109,6 +109,20 @@ charts:
       - { label: "100k: take-home falls", value: 1050 }
       - { label: "100k: employer pays", value: 1500 }
     highlight: ["50k: take-home falls", "100k: take-home falls"]
+keyNumbers:
+  - value: "KES 114.5 billion"
+    label: "Housing Levy collected by KRA from mid-2023 to April 2025"
+    source: "Auditor-General, special audit of the Affordable Housing Programme (status at 31 March 2025)"
+  - value: "KES 20 billion"
+    label: "Of the first KES 34.72 billion, put into Treasury bills on 17 May 2024; KES 14.51 billion went on projects"
+    source: "Auditor-General, special audit of the Affordable Housing Programme (status at 31 March 2025)"
+  - value: "142"
+    label: "Affordable housing projects on the Board's list when the auditors visited in April 2025: none was finished"
+    source: "Auditor-General, special audit of the Affordable Housing Programme (status at 31 March 2025)"
+forYou:
+  - "On KES 50,000 a month the levy takes KES 750, but because it lowers PAYE your take-home falls by KES 525."
+  - "The levy is 1.5% of gross pay with no cap, and your employer pays the same again: KES 36,000 a year between you on KES 100,000 a month."
+  - "Even on the Board's own figure, 3,171 completed units is about 1% of one year's 250,000 target."
 ---
 
 The Housing Levy started in mid-2023. By April 2025 the Kenya Revenue Authority had collected KES 114.5 billion of it, from workers and their employers, the Auditor-General found.

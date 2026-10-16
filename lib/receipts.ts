@@ -53,6 +53,9 @@ export type ReceiptCall = {
 };
 const COMPARATORS = ["<", "<=", ">", ">=", "between", "is"];
 export type ReceiptTile = { label: string; value: string; note?: string; source: string };
+/** One of "The 3 numbers" at the top of a Receipt: a figure quoted exactly as the free piece prints it. */
+export type KeyNumber = { value: string; label: string; source: string };
+export const KEY_NUMBERS = 3;
 /** A chart drawn from the Receipt's own figures (RECEIPTS.md "Charts and graphics"). */
 export type ReceiptChart = {
   type: "bar" | "line";
@@ -86,6 +89,10 @@ export type Receipt = {
   verify: string[];
   tiles: ReceiptTile[];
   charts: ReceiptChart[];
+  /** "The 3 numbers" (optional): each value appears verbatim in the free piece. */
+  keyNumbers: KeyNumber[];
+  /** "What it means for you" (optional): 2 or 3 lines restating the Receipt's own Analysis. */
+  forYou: string[];
   free: string;
   full: string;
 };
@@ -98,6 +105,40 @@ function iso(v: unknown): unknown {
   return v instanceof Date ? v.toISOString().slice(0, 10) : v;
 }
 const str = (v: unknown) => typeof v === "string" && v.trim().length > 0;
+
+const escRx = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+/** True when the text prints this figure whole: 21 is not found inside 2021 or 21.5. Mirrors receipt_check.prints. */
+const prints = (text: string, fig: string) => new RegExp(`(?<![\\d.,])${escRx(fig)}(?![\\d]|[.,]\\d)`).test(text);
+const figures = (text: string) => text.match(/\d+(?:[.,]\d+)*/g) ?? [];
+
+/** The reading boxes (keyNumbers, forYou). Mirrors reading_problems in scripts/receipt_check.py. */
+function readingProblems(data: Record<string, unknown>, free: string, names: unknown[], at: (where: string, what: string) => void) {
+  if ("keyNumbers" in data) {
+    const nums = Array.isArray(data.keyNumbers) ? (data.keyNumbers as Record<string, unknown>[]) : [];
+    if (nums.length !== KEY_NUMBERS) at("keyNumbers", `exactly ${KEY_NUMBERS} items when present`);
+    nums.forEach((k, i) => {
+      if (!k || !str(k.value) || !str(k.label) || !str(k.source)) return at(`keyNumbers[${i}]`, "needs a value, a label and a source");
+      const value = String(k.value);
+      const label = String(k.label);
+      if (!prints(free, value)) at(`keyNumbers[${i}]`, `value '${value}' does not appear verbatim in the Receipt's text`);
+      if (!names.includes(k.source)) at(`keyNumbers[${i}].source`, "must be one of the Receipt's sources");
+      for (const fig of figures(label)) if (!prints(free, fig)) at(`keyNumbers[${i}].label`, `the figure ${fig} does not appear in the Receipt's text`);
+      if (label.length > 140) at(`keyNumbers[${i}].label`, "at most 140 characters");
+    });
+  }
+  if ("forYou" in data) {
+    const lines = Array.isArray(data.forYou) ? (data.forYou as unknown[]) : [];
+    if (lines.length < 2 || lines.length > 3) at("forYou", "2 or 3 lines when present");
+    if (lines.length && !(Array.isArray(data.labels) && data.labels.includes("Analysis"))) at("forYou", "these lines are Analysis, so labels must list Analysis");
+    lines.forEach((line, i) => {
+      const text = typeof line === "string" ? line.trim() : "";
+      if (!text) return at(`forYou[${i}]`, "empty");
+      if (text.length > 220) at(`forYou[${i}]`, "at most 220 characters");
+      if (ADVICE.test(text)) at(`forYou[${i}]`, "advice language");
+      for (const fig of figures(text)) if (!prints(free, fig)) at(`forYou[${i}]`, `the figure ${fig} does not appear in the Receipt's text`);
+    });
+  }
+}
 
 /** Every problem with one Receipt; an empty list means it is valid. Mirrors scripts/receipt_check.py. */
 export function receiptProblems(data: Record<string, unknown>, body: string, file: string): string[] {
@@ -155,6 +196,7 @@ export function receiptProblems(data: Record<string, unknown>, body: string, fil
 
   if (!body.includes(SPLIT)) at("body", `needs the ${SPLIT} marker between the free piece and the full file`);
   const free = body.split(SPLIT)[0];
+  readingProblems(data, free, sources.map((s) => s.name), at);
   if (!/Information, not advice\./.test(free)) at("body", "the free piece must say \"Information, not advice.\"");
   for (const used of new Set([...free.matchAll(/\((Facts|Analysis|Opinion)\)/g)].map((x) => x[1]))) {
     if (!labels.includes(used)) at("labels", `the body uses (${used}) but labels does not list it`);
@@ -202,6 +244,8 @@ export const loadReceipts = cache((): Receipt[] => {
       verify: data.verify ?? [],
       tiles: data.tiles ?? [],
       charts: data.charts ?? [],
+      keyNumbers: data.keyNumbers ?? [],
+      forYou: data.forYou ?? [],
       free: free.trim(),
       full: full.trim(),
     });

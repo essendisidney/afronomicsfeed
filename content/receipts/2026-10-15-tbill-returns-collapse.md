@@ -125,6 +125,20 @@ charts:
       - { label: "Apr 2024, 16.99%", value: 72009 }
       - { label: "Oct 2026, 9.04%", value: 38308 }
     highlight: ["Oct 2026, 9.04%"]
+keyNumbers:
+  - value: "16.99%"
+    label: "364-day Treasury bill rate, April 2024"
+    source: "Afronomics auction file, CBK Treasury bill results of 1 April 2024"
+  - value: "9.04%"
+    label: "The same bill at today's auction, for bills dated 19 October 2026"
+    source: "Afronomics auction file, CBK Treasury bill results of 19 October 2026"
+  - value: "KES 33,702"
+    label: "Less kept a year after tax on KES 500,000 in one 364-day bill, April 2024 against October 2026"
+    source: "Afronomics auction file, CBK Treasury bill results of 19 October 2026"
+forYou:
+  - "If you save in bills: KES 500,000 in a one-year bill now keeps KES 38,308 a year after tax, about KES 2,800 a month less than in April 2024."
+  - "A money market fund's yield is the manager's own published figure and moves every day; a bill's rate is fixed for the year when you buy it."
+  - "If you borrow: average bank lending rates fell from 17.2% in November 2024 to 14.4% in September 2026, as the CBK cut its rate."
 ---
 
 In April 2024 Kenya's 364-day Treasury bill paid 16.99% a year. At today's auction it paid 9.04%.

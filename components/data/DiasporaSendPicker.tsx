@@ -48,7 +48,7 @@ export function DiasporaSendPicker({ rows, period }: { rows: SendRow[]; period: 
       <div className="mt-5 grid gap-px overflow-hidden rounded-xl border border-rule bg-rule sm:grid-cols-2" aria-live="polite">
         <div className="bg-surface px-4 py-4">
           <p className="text-[13px] text-muted">Cheapest service surveyed</p>
-          <p data-num className="tabular mt-1 font-serif text-3xl text-ink">
+          <p data-num className="af-figure tabular mt-1 font-serif text-3xl text-ink">
             {usd(row.cheapest.pct)}
           </p>
           <p className="mt-1 text-[13px] leading-5 text-ink-soft">
@@ -58,7 +58,7 @@ export function DiasporaSendPicker({ rows, period }: { rows: SendRow[]; period: 
         </div>
         <div className="bg-surface px-4 py-4">
           <p className="text-[13px] text-muted">Average of {row.services} services</p>
-          <p data-num className="tabular mt-1 font-serif text-3xl text-ink">
+          <p data-num className="af-figure tabular mt-1 font-serif text-3xl text-ink">
             {usd(row.avgPct)}
           </p>
           <p className="mt-1 text-[13px] leading-5 text-ink-soft">

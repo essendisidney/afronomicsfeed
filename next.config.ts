@@ -132,6 +132,9 @@ const nextConfig: NextConfig = {
     return [
       // Short addresses for sharing by word of mouth and on WhatsApp.
       { source: "/pay", destination: "/rates/what-readers-paid", permanent: false },
+      // Temporary (16 Oct 2026): the Telegram launch post already links to /diaspora before the page exists. Remove
+      // this line when app/diaspora ships, or the redirect will hide the page.
+      { source: "/diaspora", destination: "/rates/remittances", permanent: false },
       ...legacy.map(([source, destination]) => ({ source, destination, permanent: true })),
       ...parked.map(([source, destination]) => ({ source, destination, permanent: true })),
     ];

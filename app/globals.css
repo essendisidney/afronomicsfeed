@@ -764,3 +764,20 @@ table,
 .receipt-full .article-body strong {
   color: var(--night-ink);
 }
+
+/*
+ * Chart points (lib/charts/render.ts, components/charts/ChartTips.tsx): each bar takes focus and taps, and the one
+ * being read gets an ink outline, so the tooltip always points at a visible bar.
+ */
+.chart-svg .chart-pt {
+  cursor: pointer;
+  outline: none;
+}
+.chart-svg .chart-pt:focus-visible .chart-bar,
+.chart-svg .chart-pt.is-active .chart-bar {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.chart-frame {
+  scroll-margin-top: 6rem;
+}

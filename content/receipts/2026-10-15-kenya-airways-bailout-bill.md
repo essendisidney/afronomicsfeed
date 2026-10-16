@@ -9,7 +9,7 @@ entities:
   - "The National Treasury"
   - "Government of Kenya"
 series: kenya-airways
-verdict: "The state is no longer just Kenya Airways' biggest shareholder but its lender of last resort: it pays the airline's aircraft loan, has approved US$350 million more and plans to turn KES 122 billion of loans into shares, before KQ has shown it can follow its 2024 profit with another."
+verdict: "In our view the state is no longer just Kenya Airways' biggest shareholder but its lender of last resort: it has taken over the airline's guaranteed aircraft loan, has approved US$350 million more and plans to turn KES 122 billion of loans into shares, before KQ has shown it can follow its 2024 profit with another."
 labels:
   - Facts
   - Analysis
@@ -22,6 +22,7 @@ verify:
   - "Half-year 2026 figures (revenue KES 81.2bn, loss after tax KES 16.1bn vs KES 12.2bn, operating loss KES 10.6bn): the filed PDF on the USE site is a scanned image and could not be read; figures rest on tech-ish and Kenyans.co.ke, which agree. Check against the KQ or NSE filing."
   - "Government shareholding of 48.90%: from KQ's 8 April 2026 statement as reported by The Star (tech-ish also gives 48.9%). Business Daily reported a CMA filing showing 50.1%, which KQ disputes. Check against KQ's 2025 annual report share register."
   - "Publication dates of the Kenyans.co.ke article (taken as 25 August 2026, the briefing date) and of the FY2024/25 Annual Public Debt Management Report (taken as 7 October 2025, the Parliament library issue date)."
+  - "ch-aviation, KQ's dispute of the Treasury's default figures: the page (read through the Probe workflow on 16 October 2026, run 38879132028) shows '01Nov' but no year in the text we captured; 2022 is assumed from the FY2021/22 report it discusses. Confirm the year, and read The East African interview it quotes (blocked, HTTP 403)."
 sources:
   - name: "Kenya Airways PLC, announcement of material information and cautionary notice, 9 October 2026"
     url: "https://www.use.or.ug/uploads/be05c9dd-301b-4de8-8a03-4cc354511ef2.pdf"
@@ -44,6 +45,9 @@ sources:
   - name: "tech-ish, Kenya Airways loss widens to KES 16.1 billion"
     url: "https://tech-ish.com/2026/09/01/kenya-airways-loss-widens-to-kes-16-1-billion-as-fuel-costs-jump-66/"
     date: "2026-09-01"
+  - name: "ch-aviation, Kenya Airways disputes Treasury's EXIM Bank default claim"
+    url: "https://www.ch-aviation.com/news/120924-kenya-airways-disputes-treasurys-exim-bank-default-claim"
+    date: "2022-11-01"
   - name: "Kenyans.co.ke, KQ revenue rises 9% to Ksh81 billion"
     url: "https://www.kenyans.co.ke/news/126491-kq-revenue-rises-9-ksh81-billion-despite-rising-fuel-maintenance-costs"
     date: "2026-08-25"
@@ -83,7 +87,7 @@ tiles:
     source: "Kenya Airways PLC, announcement of material information and cautionary notice, 9 October 2026"
 charts:
   - type: bar
-    title: "Kenya Airways owes KES 132bn more than it owns"
+    title: "Kenya Airways' liabilities exceed its assets by KES 132bn"
     unit: "Group total equity, KES bn"
     source: "Kenya Airways PLC, summary audited group results for the year ended 31 December 2025"
     data:
@@ -101,11 +105,11 @@ charts:
     highlight: ["2025"]
 ---
 
-Kenya Airways owes KES 132 billion more than it owns. On 9 October 2026 it told the market the government had agreed to lend it another US$350 million, about KES 45.15 billion, and to turn about KES 122 billion of old government loans into an equity-type instrument.
+Kenya Airways' liabilities exceed its assets by KES 132 billion. On 9 October 2026 it told the market the government had agreed to lend it another US$350 million, about KES 45.15 billion, and to turn about KES 122 billion of old government loans into an equity-type instrument.
 
-Taxpayers are the lender in both cases. Together that is KES 167 billion of public money, already lent or about to be: more than the airline's whole revenue for 2025.
+Taxpayers are the lender in both cases. Together that is KES 167 billion of public money, already lent or approved, subject to agreements and approvals: more than the airline's whole income for 2025.
 
-**The Afronomics verdict: The state is no longer just Kenya Airways' biggest shareholder but its lender of last resort: it pays the airline's aircraft loan, has approved US$350 million more and plans to turn KES 122 billion of loans into shares, before KQ has shown it can follow its 2024 profit with another.**
+**The Afronomics verdict: In our view the state is no longer just Kenya Airways' biggest shareholder but its lender of last resort: it has taken over the airline's guaranteed aircraft loan, has approved US$350 million more and plans to turn KES 122 billion of loans into shares, before KQ has shown it can follow its 2024 profit with another.**
 
 ## What happened
 
@@ -145,27 +149,29 @@ Taxpayers are the lender in both cases. Together that is KES 167 billion of publ
 
 (Facts) The Treasury says the guarantee was called in FY2021/22 "as a result of loan payment defaults". The Cabinet approved paying the arrears and moving the loan balance onto the government's books, and the report says that process has been concluded.
 
+(Facts) Kenya Airways has disputed the Treasury's account of this loan before. When the Treasury's FY2021/22 debt report said the airline had "defaulted on both the guaranteed portion of the loan amount as well as the non-guaranteed portion" of a US$841 million loan, its chief executive at the time, Allan Kilavuka, said: "The value you quote for the US EXIM facility is not correct. USD485 million is what relates to the US EXIM guaranteed debt," ch-aviation reported. He said the airline had asked the government for support on the guaranteed loan "to avert the possibility of the loan going into default". The figures in the table below are the Treasury's.
+
 | Year to June | Paid by the government on KQ's guaranteed loan | Source |
 | --- | --- | --- |
 | FY2022/23 | KES 12.3bn (KES 10.6bn principal, KES 1.7bn interest) | Debt report FY2022/23 |
 | FY2023/24 | Not in the reports we read | |
 | FY2024/25 | KES 19.7bn principal | Debt report FY2024/25 |
 
-(Analysis) That is at least KES 32.0 billion in two years (12.3 + 19.7), not counting FY2023/24 or the interest in FY2024/25. A separate government guarantee on Kenya Airways' local bank loans still stood at KES 9.7 billion in June 2025, according to the same report.
+(Analysis) On the Treasury's figures, that is at least KES 32.0 billion in two years (12.3 + 19.7), not counting FY2023/24 or the interest in FY2024/25. A separate government guarantee on Kenya Airways' local bank loans still stood at KES 9.7 billion in June 2025, according to the same report.
 
 ## Who owns the airline
 
 (Facts) Kenya Airways said on 8 April 2026, as reported by The Star, that the National Treasury holds 48.90%, KQ Lenders Company 2017 Limited 36.30%, KLM 7.76%, the staff share scheme 2.44% and other investors 4.60%. It was responding to a report that the state's stake had passed 50%, which it called "not factual".
 
-(Analysis) So the taxpayer is the largest shareholder, the lender of the KES 122 billion and of the new US$350 million, and the payer of the aircraft loan. Turning loans into shares changes the label on that money. It does not, by itself, bring any of it back.
+(Analysis) So the taxpayer is the largest shareholder, the lender of the KES 122 billion and of the new US$350 million, and, on the Treasury's account, the payer of the guaranteed aircraft loan. Turning loans into shares changes the label on that money. It does not, by itself, bring any of it back.
 
 ## Our verdict
 
-(Opinion) **The state is no longer just Kenya Airways' biggest shareholder but its lender of last resort: it pays the airline's aircraft loan, has approved US$350 million more and plans to turn KES 122 billion of loans into shares, before KQ has shown it can follow its 2024 profit with another.**
+(Opinion) **In our view the state is no longer just Kenya Airways' biggest shareholder but its lender of last resort: it has taken over the airline's guaranteed aircraft loan, has approved US$350 million more and plans to turn KES 122 billion of loans into shares, before KQ has shown it can follow its 2024 profit with another.**
 
 The case for the deal is real. An airline with negative equity cannot easily raise money from anyone else, and grounded Dreamliners earn nothing. Fixing the balance sheet first is the obvious step before asking private investors in.
 
-But the order matters. Kenya Airways made KES 5.4 billion in 2024 and lost KES 17.2 billion in 2025, and its half-year loss for 2026 was larger than a year earlier. The government is being asked to commit fresh cash and give up its claim as a lender before the airline has shown what it earns with its full fleet flying.
+But the order matters. Kenya Airways made KES 5.4 billion in 2024 and lost KES 17.2 billion in 2025, and press reports of its unaudited results put its half-year loss for 2026 above the year before. The airline puts 2025 down mainly to the grounding of three Dreamliners, which it says was driven by global supply chain constraints and limited engine availability. The government is being asked to commit fresh cash and give up its claim as a lender before the airline has shown what it earns with its full fleet flying.
 
 The price of the conversion, the value of the new instrument and what other shareholders give up are not yet public. Until they are, nobody outside can say what the taxpayer is getting for KES 167 billion. The Treasury could publish one number that would settle a lot: the total it has put into Kenya Airways, every year, in one table.
 

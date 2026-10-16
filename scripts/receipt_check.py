@@ -33,6 +33,7 @@ DESKS = {
     "Afronomics Africa Desk",
 }
 SECTORS = {"markets", "banking", "companies", "public-money", "cost-of-living", "africa"}
+KEY_NUMBERS = 3
 ADVICE = re.compile(r"\b(you should|we recommend|our advice is to)\s+(buy|sell|hold|subscribe|switch|apply)\b", re.I)
 
 
@@ -171,6 +172,7 @@ def problems(data: dict, body: str, file: str) -> list[str]:
     if SPLIT not in body:
         at("body", f"needs the {SPLIT} marker between the free piece and the full file")
     free = body.split(SPLIT)[0]
+    out += [f"{file}: {p}" for p in reading_problems(data, free, names)]
     if "Information, not advice." not in free:
         at("body", 'the free piece must say "Information, not advice."')
     for used in set(re.findall(r"\((Facts|Analysis|Opinion)\)", free)):
@@ -184,6 +186,65 @@ def problems(data: dict, body: str, file: str) -> list[str]:
             at("disclosure", "must be confirmed before publishing")
         if data.get("verify"):
             at("verify", "every item must be checked (and removed) before publishing")
+    return out
+
+
+def figures(text: str) -> list[str]:
+    """The numbers in a line ("KES 33,702", "9.04%", "2026" give 33,702, 9.04 and 2026)."""
+    return re.findall(r"\d+(?:[.,]\d+)*", text)
+
+
+def prints(free: str, fig: str) -> bool:
+    """True when the text prints this figure whole: 21 is not found inside 2021 or 21.5, nor KES 20 in KES 20.5."""
+    return re.search(rf"(?<![\d.,]){re.escape(fig)}(?![\d]|[.,]\d)", free) is not None
+
+
+def reading_problems(data: dict, free: str, names: set) -> list[str]:
+    """
+    The reading boxes at the top of a Receipt (keyNumbers, "The 3 numbers"; forYou, "What it means for you").
+    Both are optional. A key number is quoted, never worked out: its value must appear verbatim in the free piece,
+    so it carries the same unit and period as the text, and every figure in its label must appear there too. The
+    "for you" lines restate the Receipt's own Analysis: no figure the free piece does not print, and no advice.
+    """
+    out: list[str] = []
+    if "keyNumbers" in data:
+        nums = data.get("keyNumbers")
+        if not isinstance(nums, list) or len(nums) != KEY_NUMBERS:
+            out.append(f"keyNumbers: exactly {KEY_NUMBERS} items when present")
+            nums = nums if isinstance(nums, list) else []
+        for i, k in enumerate(nums):
+            if not isinstance(k, dict) or not all(str(k.get(f) or "").strip() for f in ("value", "label", "source")):
+                out.append(f"keyNumbers[{i}]: needs a value, a label and a source")
+                continue
+            value, label = str(k["value"]), str(k["label"])
+            if not prints(free, value):
+                out.append(f"keyNumbers[{i}]: value {value!r} does not appear verbatim in the Receipt's text")
+            if k["source"] not in names:
+                out.append(f"keyNumbers[{i}].source: must be one of the Receipt's sources")
+            for fig in figures(label):
+                if not prints(free, fig):
+                    out.append(f"keyNumbers[{i}].label: the figure {fig} does not appear in the Receipt's text")
+            if len(label) > 140:
+                out.append(f"keyNumbers[{i}].label: at most 140 characters")
+    if "forYou" in data:
+        lines = data.get("forYou")
+        if not isinstance(lines, list) or not 2 <= len(lines) <= 3:
+            out.append("forYou: 2 or 3 lines when present")
+            lines = lines if isinstance(lines, list) else []
+        if lines and "Analysis" not in (data.get("labels") or []):
+            out.append("forYou: these lines are Analysis, so labels must list Analysis")
+        for i, line in enumerate(lines):
+            text = str(line or "").strip()
+            if not text:
+                out.append(f"forYou[{i}]: empty")
+                continue
+            if len(text) > 220:
+                out.append(f"forYou[{i}]: at most 220 characters")
+            if ADVICE.search(text):
+                out.append(f"forYou[{i}]: advice language")
+            for fig in figures(text):
+                if not prints(free, fig):
+                    out.append(f"forYou[{i}]: the figure {fig} does not appear in the Receipt's text")
     return out
 
 

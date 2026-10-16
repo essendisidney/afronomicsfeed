@@ -81,3 +81,67 @@ def test_dangote_was_published_with_its_checks_closed():
     assert "[" not in data["disclosure"]
     # The KES 535 minimum and the 27 October close rest on press reports until we hold the amended memorandum.
     assert "We have not yet seen the amended memorandum" in body
+
+
+# The reading boxes at the top of a Receipt (keyNumbers, "The 3 numbers"; forYou, "What it means for you").
+
+
+def published():
+    for path in sorted((ROOT / "content" / "receipts").glob("*.md")):
+        data, body = receipt_check.split(path.read_text())
+        if data.get("status") == "published":
+            yield path, data, body
+
+
+def test_every_published_receipt_has_three_key_numbers_quoted_from_its_text():
+    found = list(published())
+    assert found
+    for path, data, body in found:
+        nums = data.get("keyNumbers")
+        assert isinstance(nums, list) and len(nums) == 3, path.name
+        free = body.split(receipt_check.SPLIT)[0]
+        names = {s["name"] for s in data["sources"]}
+        for k in nums:
+            assert k["value"] in body, f"{path.name}: {k['value']!r} is not in the body"
+            assert k["value"] in free, f"{path.name}: {k['value']!r} is not in the free piece"
+            assert k["source"] in names, f"{path.name}: {k['source']!r} is not one of its sources"
+
+
+def test_every_published_receipt_says_what_it_means_for_you():
+    for path, data, _ in published():
+        lines = data.get("forYou")
+        assert isinstance(lines, list) and 2 <= len(lines) <= 3, path.name
+        assert "Analysis" in data["labels"], path.name
+
+
+def test_a_key_number_not_in_the_text_is_refused():
+    data, body = load()
+    nums = [{**data["keyNumbers"][0], "value": "KES 99 billion"}, *data["keyNumbers"][1:]]
+    found = receipt_check.problems({**data, "keyNumbers": nums}, body, QUICKMART.name)
+    assert any("keyNumbers[0]" in p and "verbatim" in p for p in found)
+
+
+def test_a_key_number_label_cannot_add_a_figure():
+    data, body = load()
+    nums = [{**data["keyNumbers"][0], "label": "Up 73.1% on the year"}, *data["keyNumbers"][1:]]
+    found = receipt_check.problems({**data, "keyNumbers": nums}, body, QUICKMART.name)
+    assert any("keyNumbers[0].label" in p for p in found)
+
+
+def test_key_numbers_come_in_threes_and_cite_the_receipts_own_sources():
+    data, body = load()
+    found = receipt_check.problems({**data, "keyNumbers": data["keyNumbers"][:2]}, body, QUICKMART.name)
+    assert any("exactly 3" in p for p in found)
+    nums = [{**data["keyNumbers"][0], "source": "A blog nobody listed"}, *data["keyNumbers"][1:]]
+    found = receipt_check.problems({**data, "keyNumbers": nums}, body, QUICKMART.name)
+    assert any("keyNumbers[0].source" in p for p in found)
+
+
+def test_for_you_lines_add_no_figures_and_give_no_advice():
+    data, body = load()
+    found = receipt_check.problems({**data, "forYou": [data["forYou"][0], "Rates will reach 21% next year."]}, body, QUICKMART.name)
+    assert any("forYou[1]" in p and "figure 21 " in p for p in found)
+    found = receipt_check.problems({**data, "forYou": [data["forYou"][0], "You should buy the shares now."]}, body, QUICKMART.name)
+    assert any("forYou[1]: advice" in p for p in found)
+    found = receipt_check.problems({**data, "forYou": data["forYou"][:1]}, body, QUICKMART.name)
+    assert any("2 or 3" in p for p in found)

@@ -114,6 +114,20 @@ charts:
       - { label: "US$10,000 loan, Jan 2024", value: 1613.6 }
       - { label: "US$10,000 loan, Oct 2026", value: 1299.4 }
     highlight: ["US$5,000 fees, Oct 2026", "US$10,000 loan, Oct 2026"]
+keyNumbers:
+  - value: "KES 161.36"
+    label: "CBK rate for one US dollar, 23 January 2024, the weakest in every CBK table we read"
+    source: "CBK Weekly Bulletin, 26 January 2024"
+  - value: "KES 129.94"
+    label: "CBK rate for one US dollar, 8 October 2026"
+    source: "CBK Weekly Bulletin, 9 October 2026"
+  - value: "KES 15,710"
+    label: "Less a month from US$500 sent home, at the October 2026 rate against January 2024's"
+    source: "CBK Weekly Bulletin, 9 October 2026"
+forYou:
+  - "If you owe or pay in dollars, each dollar now takes 19.5% fewer shillings: a US$10,000 loan is KES 314,200 smaller."
+  - "If your family lives on dollars from abroad, US$500 a month buys KES 188,520 less a year than at the January 2024 rate."
+  - "A steady shilling has not meant cheap fuel: a barrel of Murban crude cost about 4.7% more in shillings in October 2026 than in January 2024."
 ---
 
 On 23 January 2024 one US dollar cost KES 161.36 at the Central Bank of Kenya's rate. On 8 October 2026 it cost KES 129.94.

@@ -118,6 +118,20 @@ charts:
       - { label: "8 Oct", value: 8.0999 }
     highlight: ["8 Oct"]
     reference: { value: 10.375, label: "Yield at issue, February 2024" }
+keyNumbers:
+  - value: "10.375%"
+    label: "The yield Kenya paid on its US$1.5 billion 2031 bond in February 2024, to retire a bond that cost 6.875%"
+    source: "Republic of Kenya, offering circular for the 9.750% Amortising Notes due 2031"
+  - value: "KES 5.60bn"
+    label: "Extra interest a year on US$1.5 billion (US$43.125m), at KES 129.94 to the dollar on 8 October 2026"
+    source: "Afronomics Eurobond file, CBK Weekly Bulletin of 9 October 2026"
+  - value: "8.10%"
+    label: "Where the 2031 bond yielded on 8 October 2026; Kenya still pays its fixed 9.75% coupon"
+    source: "Afronomics Eurobond file, CBK Weekly Bulletin of 9 October 2026"
+forYou:
+  - "As a taxpayer: Kenya now pays US$146.25 million a year in interest on US$1.5 billion, more than the US$137.5 million it paid on the whole US$2 billion of the old bond."
+  - "The stronger shilling has cut the cost in shillings, from KES 6.61 billion a year at the February 2024 rate to KES 5.60 billion at October 2026's."
+  - "The market now charges Kenya less to borrow to 2031, but the 9.75% coupon is fixed whatever the bond trades at."
 ---
 
 Kenya's first Eurobond, US$2 billion borrowed in 2014, cost 6.875% a year. To pay most of it off in February 2024, Kenya borrowed US$1.5 billion at 10.375%.

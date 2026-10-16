@@ -102,6 +102,20 @@ charts:
       - { label: "Mar 26", value: 870.02 }
       - { label: "Jun 26", value: 884.83 }
     highlight: ["Jun 26"]
+keyNumbers:
+  - value: "KES 884.8 billion"
+    label: "Members' deposits in the SACCOs SASRA regulates, June 2026"
+    source: "Afronomics SACCO file, SASRA Quarterly Statistical and Soundness Report, June 2026"
+  - value: "KES 100,000"
+    label: "The Sacco Societies Act's ceiling a member, in a fund the regulator says has yet to be made operational"
+    source: "Sacco Societies Act (Cap. 490B), Kenya Law"
+  - value: "KES 500,000"
+    label: "A bank saver's cover from KDIC, per person per bank, paid when a bank is liquidated"
+    source: "Kenya Deposit Insurance Corporation, FAQs"
+forYou:
+  - "About nine SACCO accounts in ten hold KES 100,000 or less, so the Act's ceiling would cover them in full, but together they hold only a tenth of the money."
+  - "Accounts above KES 300,000 hold 74.2% of SACCO deposits; a ceiling like KDIC's KES 500,000 would reach much further."
+  - "Members kept adding: deposits rose 11.2% in the year to June 2026."
 ---
 
 At the end of 2025, 7.87 million members had KES 832.74 billion of deposits in the 357 SACCOs that SASRA regulates, about 18 times what Kenya's 14 microfinance banks held. By June 2026 the deposits had reached KES 884.8 billion.

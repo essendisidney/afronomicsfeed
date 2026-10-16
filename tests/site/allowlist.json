@@ -1,4 +1,17 @@
 {
   "$comment": "Intentional exceptions to the site QA (scripts/site-qa.mjs). Each entry silences findings whose check equals 'check', whose page matches 'page' (exact path, a prefix ending in '*', or '*' for all) and whose message or detail contains 'match' (case-insensitive). 'reason' is required: say why this use is correct. Entries that stop matching are listed in the report so they can be removed. See docs/qa.md.",
-  "entries": []
+  "entries": [
+    {
+      "check": "copy",
+      "page": "*",
+      "match": "deposit guarantee fund",
+      "reason": "The legal name of the SACCO Deposit Guarantee Fund under the Sacco Societies Act (s55), quoted in the SACCO savings Receipt; it reports that the fund is not yet operational, not a promise."
+    },
+    {
+      "check": "copy",
+      "page": "*",
+      "match": "US-guaranteed aircraft loan",
+      "reason": "Factual: the Kenya Airways aircraft loan carries a US Exim Bank guarantee backed by the Government of Kenya, per the Treasury's debt report (Kenya Airways Receipt, a draft)."
+    }
+  ]
 }

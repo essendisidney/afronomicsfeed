@@ -220,6 +220,22 @@ what we changed. Newest at the bottom. Read this first every week.
 - **Not published:** the Safaricom stake-sale Receipt stays a draft until a legal read, because the sale is in active
   litigation (High Court ruling of 15 Sep 2026; Court of Appeal refused a stay on 13 Oct 2026).
 
+### D-024 · 16 Oct 2026 · Four data-led Receipts published; three named-company Receipts held for a legal read
+- **Decided by the founder:** four verdicts approved and published ("Approved"; disclosures confirmed one by one):
+  the T-bill party is over, the shilling that stopped falling, SACCO savings and the deposit guarantee fund, and where
+  the Housing Levy money went. None is a verdict on a named company, so the D-019 legal read does not apply.
+- **Disclosures confirmed by the founder:** Afronomics and its founder hold no Kenyan Treasury bills or money market
+  fund units; no US-dollar loans, deposits or currency positions; no deposits or shares in any SASRA-regulated SACCO;
+  and no contracts, units or allocations under the Affordable Housing Programme.
+- **Checks done first:** each Receipt was drafted against primary documents and then re-checked independently
+  (`docs/rebuild/*-source-checks.md`, "Second check"). The second check corrected: T-bill withholding tax paid upfront;
+  the shilling's stability band (KES 128.55 to 129.96); "cannot pay" softened to SASRA's "yet to be operationalised";
+  and the Housing Levy headline narrowed to the 142 affordable housing projects the Auditor-General site-checked.
+  Claims resting on press reports alone were cut or attributed.
+- **Not published:** Fuliza (Safaricom, NCBA, KCB, Sidian), banks and government securities (KCB, Equity, Co-op) and
+  Kenya Airways stay drafts until a legal read; Kenya Airways also has three open checks and should carry KQ's dispute
+  of the Treasury's default figures.
+
 ### D-022 · 15 Oct 2026 · Dangote refinery IPO Receipt published; legal read waived by the founder
 - **Decided by the founder:** verdict approved (one tap, D-019) and the Receipt published without the securities
   lawyer's read. The founder takes responsibility for its Opinion paragraphs. The waiver is for this Receipt only; the

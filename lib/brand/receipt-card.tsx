@@ -27,7 +27,8 @@ export async function receiptCard(r: Receipt): Promise<Response> {
   const figSize = figureSize(figures.map((f) => f.value));
   // "Afronomics auction file, CBK Treasury bill results of 1 April 2024" → "CBK Treasury bill results", once each.
   const source = sourceLine(r.sources.map((s) => ({ ...s, name: s.name.replace(/^Afronomics [^,]+, /, "").replace(/ of \d{1,2} \w+ \d{4}$/, "") })));
-  const size = (title.length > 90 ? 50 : title.length > 64 ? 56 : 64) - 4;
+  // The headline keeps clear of the stamp (top right), so it wraps at 680px.
+  const size = title.length > 90 ? 44 : title.length > 64 ? 50 : 58;
 
   const { field, slipHeight, tooth, stamp } = cardFrame;
   const W = cardFrame.width - field.side * 2;
@@ -39,7 +40,7 @@ export async function receiptCard(r: Receipt): Promise<Response> {
       <div style={{ display: "flex", flexDirection: "column", position: "relative" }}>
         <div style={{ display: "flex", flexDirection: "column", width: W, height: slipHeight, background: brand.slip, color: brand.ink, padding: "34px 44px 20px" }}>
           <div style={{ display: "flex", fontWeight: 600, fontSize: 22, letterSpacing: 3, color: brand.lateriteInk, textTransform: "uppercase" }}>{`${kicker} · ${date}`}</div>
-          <div style={{ display: "flex", fontFamily: "Headline", fontSize: size, lineHeight: 1.08, letterSpacing: -0.5, marginTop: 18, maxWidth: 840 }}>{title}</div>
+          <div style={{ display: "flex", fontFamily: "Headline", fontSize: size, lineHeight: 1.08, letterSpacing: -0.5, marginTop: 18, maxWidth: 680 }}>{title}</div>
           <div style={{ display: "flex", flexGrow: 1, alignItems: "flex-end", gap: 56 }}>
             {figures.map((f) => (
               <div key={f.label} style={{ display: "flex", flexDirection: "column" }}>

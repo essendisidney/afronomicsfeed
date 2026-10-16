@@ -16,6 +16,7 @@ import { extractHeadings } from "@/lib/format";
 import { readingMinutes } from "@/lib/reading";
 import { chartAnchor, chartExport } from "@/lib/charts/receipt-charts";
 import { deskSlug, receiptEvidence, sectorNames, type Receipt, type ReceiptChart, type ReceiptTile } from "@/lib/receipts";
+import { isPercentUnit } from "@/lib/charts/render";
 
 /**
  * One Receipt, in the order RECEIPTS.md sets: the free piece, its calls, "Go deeper" (Pro), and the next-chapter
@@ -97,7 +98,7 @@ export function FigureTiles({ r, tiles }: { r: Receipt; tiles: ReceiptTile[] }) 
 
 /** One Receipt chart; `n` is its place in the Receipt, from 1, which names its anchor and its embed. */
 export function ReceiptChartView({ r, chart, n }: { r: Receipt; chart: ReceiptChart; n: number }) {
-  const pct = chart.unit.includes("%");
+  const pct = isPercentUnit(chart.unit);
   return (
     <ChartFrame
       id={chartAnchor(n)}

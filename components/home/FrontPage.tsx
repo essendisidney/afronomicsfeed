@@ -8,6 +8,7 @@ import { deskSlug, receiptEvidence, sectorNames, type Receipt, type ReceiptChart
 import type { TodayMove } from "@/lib/today";
 import type { BoardTile } from "@/lib/today-board";
 import type { Tool } from "@/lib/tools";
+import { isPercentUnit } from "@/lib/charts/render";
 
 /**
  * The parts of the front page (redesign preview). Every section is a landmark with an id the section bar on Today
@@ -128,7 +129,7 @@ function DeskChip({ label, kind, date, now }: { label: string; kind: string; dat
 
 /** The lead story's chart, framed lightly (it already sits in the story's card): the finding, the bars, the source. */
 function LeadChart({ r, chart }: { r: Receipt; chart: ReceiptChart }) {
-  const pct = chart.unit.includes("%");
+  const pct = isPercentUnit(chart.unit);
   const ev = receiptEvidence(r, chart.source);
   return (
     <figure className="min-w-0 border-t border-rule pt-3 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">

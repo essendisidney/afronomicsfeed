@@ -76,7 +76,7 @@ export function IpoCalculator({ offers, bill }: { offers: Offer[]; bill: { rate:
         ) : (
           <>
             <p className="text-[13px] text-muted">You apply for</p>
-            <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">
+            <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">
               {a.units.toLocaleString("en-US")} {offer.units}
             </p>
             <p className="mt-1 text-[13px] text-ink-soft">
@@ -117,7 +117,7 @@ export function IpoCalculator({ offers, bill }: { offers: Offer[]; bill: { rate:
             <dl className="mt-4 grid gap-3 text-[13px] sm:grid-cols-2">
               <div className="rounded-xl border border-rule px-3 py-2">
                 <dt className="text-muted">A year’s dividend, after tax</dt>
-                <dd data-num className="tabular text-[1.1rem] font-semibold text-ink">
+                <dd data-num className="af-figure tabular text-[1.1rem] font-semibold text-ink">
                   {div ? kes(div.net) : "None set"}
                 </dd>
                 <dd className="text-[11.5px] text-muted">{div ? `${offer.dividend_note}, less ${offer.dividend_tax_pct}% tax: ${div.yieldNet.toFixed(1)}% a year` : offer.dividend_note}</dd>
@@ -125,7 +125,7 @@ export function IpoCalculator({ offers, bill }: { offers: Offer[]; bill: { rate:
               {billNet != null && bill ? (
                 <div className="rounded-xl border border-rule px-3 py-2">
                   <dt className="text-muted">The same {kes(got.paid)} in a one-year T-bill</dt>
-                  <dd data-num className="tabular text-[1.1rem] font-semibold text-ink">
+                  <dd data-num className="af-figure tabular text-[1.1rem] font-semibold text-ink">
                     {kes(billNet)}
                   </dd>
                   <dd className="text-[11.5px] text-muted">

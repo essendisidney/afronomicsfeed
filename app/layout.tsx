@@ -35,8 +35,8 @@ const serif = localFont({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0e1524" },
-    { media: "(prefers-color-scheme: dark)", color: "#070b16" },
+    { media: "(prefers-color-scheme: light)", color: "#b3401f" },
+    { media: "(prefers-color-scheme: dark)", color: "#8f3016" },
   ],
 };
 

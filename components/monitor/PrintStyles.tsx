@@ -7,8 +7,8 @@ const css = `
 @media print {
   html:has(.mon-page) {
     --paper: #ffffff; --paper-2: #f1f2f0; --paper-3: #e4e6e2; --surface: #ffffff;
-    --ink: #121826; --ink-soft: #3b4354; --muted: #5a6273; --forest: #26335a;
-    --gold: #5b3fd6; --rule: #cfd3cd; --brand-accent: #5b3fd6;
+    --ink: #1d1512; --ink-soft: #45372f; --muted: #645750; --forest: #a33a1c;
+    --gold: #a33a1c; --rule: #ddd3ca; --brand-accent: #a33a1c; --sig: #b3401f; --sig-ink: #a33a1c;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   html:has(.mon-page) body { background: #fff; }

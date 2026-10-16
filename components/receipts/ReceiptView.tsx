@@ -45,7 +45,7 @@ export function ReceiptMeta({ r }: { r: Receipt }) {
 export function VerdictLine({ r, size = "lg" }: { r: Receipt; size?: "lg" | "md" }) {
   if (!r.verdict) return null;
   return (
-    <div className={`border-l-4 border-accent ${size === "lg" ? "mt-5 pl-4" : "mt-3 pl-3"}`}>
+    <div className={`af-verdict border-l-4 border-accent ${size === "lg" ? "mt-5 pl-4" : "mt-3 pl-3"}`}>
       <p className="t-label text-opinion">Our verdict · Opinion</p>
       <p className={`mt-1 font-semibold text-ink text-balance ${size === "lg" ? "text-[1.15rem] leading-7 sm:text-[1.3rem]" : "text-[1rem] leading-6"}`}>{r.verdict}</p>
     </div>
@@ -61,7 +61,7 @@ export function FigureTiles({ r, tiles }: { r: Receipt; tiles: ReceiptTile[] }) 
         return (
           <li key={t.label} className="rounded-xl border border-rule bg-surface px-4 py-3">
             <p className="t-label text-muted">{t.label}</p>
-            <p className="tabular mt-1 text-[1.6rem] font-semibold leading-none text-ink sm:text-[1.9rem]">{t.value}</p>
+            <p className="af-figure tabular mt-1 text-[1.6rem] font-semibold leading-none text-ink sm:text-[1.9rem]">{t.value}</p>
             {t.note ? <p className="mt-1.5 text-[12.5px] leading-5 text-ink-soft">{t.note}</p> : null}
             {ev ? <p className="mt-1.5 text-[11.5px] text-muted">{ev.source}, {asOfLabel(ev.asOf)}</p> : null}
           </li>
@@ -100,7 +100,7 @@ export function ReceiptView({ r }: { r: Receipt }) {
   // The ledger's own rows for this Receipt (ids RC-<slug>-<n>, scripts/calls_ledger.py), so each call shows its status.
   const ledger = new Map(editorialRows().filter((x) => x.receipt === r.slug).map((x) => [x.id, x]));
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       {r.status !== "published" ? (
         <div role="note" className="mb-5 rounded-xl border border-warn/60 bg-surface px-4 py-3 text-[14px] leading-6 text-ink">
           <strong>Draft, shown on preview deployments only.</strong> It publishes when every open check has been done against a primary document.
@@ -116,6 +116,11 @@ export function ReceiptView({ r }: { r: Receipt }) {
           ) : null}
         </div>
       ) : null}
+      {/* Signature-look preview (lib/look.ts): the Laterite look stamps every Receipt; hidden in every other look. */}
+      <span aria-hidden="true" className="af-stamp">
+        <span className="af-stamp-word">Receipt</span>
+        <span className="af-stamp-date tabular">{receiptDate(r.date)}</span>
+      </span>
       <ReceiptMeta r={r} />
       <h1 className="t-display mt-3 text-ink text-balance">{r.title}</h1>
       <VerdictLine r={r} />

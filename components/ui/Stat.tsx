@@ -20,7 +20,7 @@ export function Stat({
   return (
     <div className={className}>
       <p className="text-[12px] font-medium leading-5 text-muted">{label}</p>
-      <p className={`mt-1 font-serif tabular-nums tracking-[-0.02em] text-ink ${size === "lg" ? "text-4xl" : "text-3xl"}`}>{value}</p>
+      <p className={`af-figure mt-1 font-serif tabular-nums tracking-[-0.02em] text-ink ${size === "lg" ? "text-4xl" : "text-3xl"}`}>{value}</p>
       {detail ? <p className="mt-1 text-xs leading-5 text-ink-soft">{detail}</p> : null}
       {source ? <p className="mt-2 text-[11px] leading-4 text-muted">{source}</p> : null}
     </div>

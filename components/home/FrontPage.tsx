@@ -18,7 +18,7 @@ import { isPercentUnit } from "@/lib/charts/render";
 
 export function SectionHead({ id, title, blurb, more, moreLabel }: { id: string; title: string; blurb?: string; more?: string; moreLabel?: string }) {
   return (
-    <div className="flex items-end justify-between gap-3 border-b border-rule pb-1.5">
+    <div className="af-section-head flex items-end justify-between gap-3 border-b border-rule pb-1.5">
       <div className="min-w-0">
         <h2 id={id} className="t-h2 text-ink">
           {title}
@@ -49,7 +49,7 @@ export function TodayStrip({ tiles }: { tiles: BoardTile[] }) {
                   {t.label}
                 </Link>
               </p>
-              <p className="tabular mt-1 text-[1.45rem] font-semibold leading-none tracking-tight text-ink">{t.value}</p>
+              <p className="af-figure tabular mt-1 text-[1.45rem] font-semibold leading-none tracking-tight text-ink">{t.value}</p>
               <p className={`tabular mt-1 line-clamp-2 h-8 text-[12px] font-medium leading-4 ${tone}`}>
                 {t.change ? (
                   <>
@@ -180,7 +180,7 @@ export function LeadStory({ r, now }: { r: Receipt; now: number }) {
           <VerdictLine r={r} size="md" />
           {tile ? (
             <div className="mt-4 flex items-baseline gap-3">
-              <p className="tabular shrink-0 text-[1.9rem] font-semibold leading-none tracking-tight text-ink">{tile.value}</p>
+              <p className="af-figure tabular shrink-0 text-[1.9rem] font-semibold leading-none tracking-tight text-ink">{tile.value}</p>
               <p className="text-[13px] leading-5 text-ink-soft">
                 {tile.label}
                 {ev ? <span className="block truncate text-[11.5px] text-muted">{asOfLabel(ev.asOf)} · {ev.source}</span> : null}
@@ -220,7 +220,7 @@ export function StoryCardView({ c, now, figures }: { c: StoryCard; now: number; 
         <div className={figures ? "mt-2 h-11" : "hidden"}>
           {c.figure ? (
             <>
-              <p className="tabular text-[1.3rem] font-semibold leading-6 tracking-tight text-ink">{c.figure.value}</p>
+              <p className="af-figure tabular text-[1.3rem] font-semibold leading-6 tracking-tight text-ink">{c.figure.value}</p>
               {c.figure.label ? <p className="line-clamp-1 text-[12px] leading-5 text-muted">{c.figure.label}</p> : null}
             </>
           ) : null}

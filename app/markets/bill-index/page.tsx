@@ -47,7 +47,7 @@ export default function BillIndexPage() {
       aside={
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <p className="text-[13px] font-medium text-muted">{indexShort}, 364-day</p>
-          <p className="mt-1 font-serif text-5xl text-ink">{idx.latest.value.toFixed(2)}%</p>
+          <p className="af-figure mt-1 font-serif text-5xl text-ink">{idx.latest.value.toFixed(2)}%</p>
           <dl className="mt-3 grid grid-cols-3 gap-2 text-[12px]">
             {[
               ["Week", idx.bpsWeek],

@@ -1,7 +1,8 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
-import { MARK } from "@/components/brand/logo-paths";
+import { brand } from "@/lib/brand/card-style";
+import { StampBadge } from "@/lib/brand/stamp-badge";
 
 /**
  * Branded share cards (1200×630): the image LinkedIn, WhatsApp and X show when an Afronomics link is shared,
@@ -10,23 +11,26 @@ import { MARK } from "@/components/brand/logo-paths";
 
 export const cardSize = { width: 1200, height: 630 };
 
-const NAVY = "#0E1524";
-const INK = "#F5F6F4";
-const SOFT = "#B7BDCC";
-const MUTED = "#8189A0";
-const RED = "#A08CFF"; // jacaranda, the brand accent
-const RED_SOFT = "#B9A9FF";
-const UP = "#FF8A7A"; // rates up = tighter money
-const DOWN = "#5CD6A8";
+// Laterite (D-026; lib/brand/card-style.ts): a night card under a laterite bar, the accent in light laterite.
+const NAVY = brand.night;
+const INK = brand.nightInk;
+const SOFT = brand.nightSoft;
+const MUTED = brand.nightMuted;
+const RED = brand.lateriteLight;
+const RED_SOFT = brand.sand;
+const UP = brand.downOnNight; // rates up = tighter money, in the fall colour
+const DOWN = brand.upOnNight;
 
 const fontDir = path.join(process.cwd(), "assets", "og-fonts");
 let fontsPromise: Promise<{ name: string; data: Buffer; weight: 400 | 500 | 600; style: "normal" }[]> | null = null;
+/** "Headline" is Source Serif 4 at weight 640, a static instance cut from the site's own font file (SIL OFL). */
 export function fonts() {
   fontsPromise ??= Promise.all([
     readFile(path.join(fontDir, "ArchivoCondensed-Bold.ttf")).then((data) => ({ name: "Serif", data, weight: 600 as const, style: "normal" as const })),
     readFile(path.join(fontDir, "Archivo-Regular.ttf")).then((data) => ({ name: "Sans", data, weight: 400 as const, style: "normal" as const })),
     readFile(path.join(fontDir, "Archivo-SemiBold.ttf")).then((data) => ({ name: "Sans", data, weight: 600 as const, style: "normal" as const })),
     readFile(path.join(fontDir, "ArchivoExpanded-Bold.ttf")).then((data) => ({ name: "Mono", data, weight: 500 as const, style: "normal" as const })),
+    readFile(path.join(fontDir, "SourceSerif4-Semibold.ttf")).then((data) => ({ name: "Headline", data, weight: 600 as const, style: "normal" as const })),
   ]);
   return fontsPromise;
 }
@@ -69,7 +73,7 @@ function lineChart(values: number[], width: number, height: number) {
       <path d={area} fill="url(#a)" />
       <path d={d} fill="none" stroke={RED} strokeWidth="3" strokeLinejoin="round" />
       <circle cx={lx} cy={ly} r="12" fill={RED} fillOpacity="0.25" />
-      <circle cx={lx} cy={ly} r="6" fill="#D4CAFF" />
+      <circle cx={lx} cy={ly} r="6" fill={RED_SOFT} />
     </svg>
   );
 }
@@ -101,9 +105,10 @@ export async function renderCard(card: Card, headers?: Record<string, string>) {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          background: `linear-gradient(160deg, #141D33 0%, ${NAVY} 70%)`,
+          background: `linear-gradient(160deg, ${brand.night2} 0%, ${NAVY} 70%)`,
+          borderTop: `14px solid ${brand.laterite}`,
           color: INK,
-          padding: "52px 64px 40px",
+          padding: "40px 64px 38px",
           fontFamily: "Sans",
         }}
       >
@@ -128,15 +133,8 @@ export async function renderCard(card: Card, headers?: Record<string, string>) {
         {card.cta ? <div style={{ display: "flex", fontFamily: "Sans", fontWeight: 600, fontSize: 26, color: RED_SOFT, marginTop: 18 }}>{card.cta}</div> : null}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 18, borderTop: "1px solid rgba(255,255,255,0.14)", paddingTop: 16 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <div style={{ display: "flex", position: "relative", width: 30, height: 30 }}>
-              {MARK.bars.map((b, i) => (
-                <div
-                  key={i}
-                  style={{ position: "absolute", left: b.x * 0.48, top: b.y * 0.48, width: b.w * 0.48, height: b.h * 0.48, borderRadius: 3, background: i === MARK.accentIndex ? RED : INK }}
-                />
-              ))}
-            </div>
-            <div style={{ fontFamily: "Mono", fontSize: 19, letterSpacing: 2, color: INK }}>AFRONOMICS</div>
+            <StampBadge size={34} />
+            <div style={{ fontFamily: "Headline", fontSize: 24, color: INK }}>Afronomics</div>
             <div style={{ fontSize: 18, color: MUTED }}>afronomicsfeed.com</div>
           </div>
           <div style={{ fontSize: 18, color: MUTED }}>{card.line?.caption ?? card.barsCaption ?? card.source}</div>

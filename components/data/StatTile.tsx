@@ -36,7 +36,7 @@ export function StatTile({
       </p>
       <div className="mt-1 flex items-end justify-between gap-3">
         <div>
-          <p className="tabular text-[1.75rem] font-semibold leading-none tracking-tight text-ink">{value}</p>
+          <p className="af-figure tabular text-[1.75rem] font-semibold leading-none tracking-tight text-ink">{value}</p>
           {change ? (
             <p className={`tabular mt-1.5 text-[13px] font-medium ${tone}`}>
               <span aria-hidden="true">{direction === "up" ? "▲ " : direction === "down" ? "▼ " : ""}</span>

@@ -24,7 +24,7 @@ export function PaystackCheckout({
 
   const styles = {
     primary: "bg-ink text-paper hover:bg-ink/90",
-    accent: "bg-accent text-night hover:bg-gold-soft",
+    accent: "bg-accent text-on-accent hover:bg-gold-soft",
     ghost: "border border-ink/20 text-ink hover:border-accent",
   }[variant];
   const field = variant === "accent" ? "border-night-line bg-night-2 text-night-ink placeholder:text-night-soft" : "border-rule bg-surface text-ink";

@@ -115,7 +115,7 @@ export default function KenyaTbillsPage() {
                     <span className="inline-block h-2 w-2 rounded-full" style={{ background: tenorColor[tenor] }} />
                     {tenorLabel[tenor]} · {dateFmt.format(new Date(row.value_date))}
                   </p>
-                  <p className="mt-2 font-serif text-4xl tracking-[-0.02em] text-ink">{pct(row.weighted_avg_rate, 3)}</p>
+                  <p className="af-figure mt-2 font-serif text-4xl tracking-[-0.02em] text-ink">{pct(row.weighted_avg_rate, 3)}</p>
                   <p className="mt-1 text-xs text-ink-soft">
                     {bps(previous?.weighted_avg_rate, row.weighted_avg_rate) ?? "—"} vs previous auction
                   </p>

@@ -61,7 +61,7 @@ export function MpesaCalculator({ tariffs }: { tariffs: Tariffs }) {
           </label>
         </div>
         <p className="mt-4 text-[13px] text-muted">Safaricom charges you</p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">
           {one == null ? "Not allowed" : one === 0 ? "Free" : kes(one)}
         </p>
         <p className="mt-1 text-[12.5px] text-muted">
@@ -90,7 +90,7 @@ export function MpesaCalculator({ tariffs }: { tariffs: Tariffs }) {
           </label>
         </div>
         <p className="mt-4 text-[13px] text-muted">Total charges</p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">{kes(f.total)}</p>
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">{kes(f.total)}</p>
         <p className="mt-1 text-[12.5px] text-muted">
           Access fee {kes(f.access)} once, then {kes(f.daily)} a day.
           {f.yearly > 0 ? ` As a yearly rate, about ${Math.round(f.yearly).toLocaleString("en-US")}%.` : ""}
@@ -134,7 +134,7 @@ export function MpesaCalculator({ tariffs }: { tariffs: Tariffs }) {
         <div className="mt-5 grid gap-4 sm:grid-cols-[auto_1fr] sm:items-end">
           <div>
             <p className="text-[13px] text-muted">You pay about</p>
-            <p data-num className="tabular text-[2.2rem] font-semibold leading-tight text-ink">{kes(m.total)} a month</p>
+            <p data-num className="af-figure tabular text-[2.2rem] font-semibold leading-tight text-ink">{kes(m.total)} a month</p>
             <p className="text-[13px] text-ink-soft">{kes(m.total * 12)} a year</p>
           </div>
           <dl className="grid grid-cols-3 gap-2 text-[12.5px] sm:justify-self-end">

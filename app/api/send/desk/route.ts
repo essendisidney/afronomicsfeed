@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     `${site.url}/desk`,
   ];
   const text = lines.join("\n");
-  const html = `<pre style="font-family:Archivo,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;white-space:pre-wrap;color:#121826">${text.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</pre>`;
+  const html = `<pre style="font-family:Archivo,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;white-space:pre-wrap;color:#1d1512">${text.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</pre>`;
   const to = process.env.PAYMENTS_NOTIFY_EMAIL ?? site.contactEmail;
   const r = await sendEmail(to, `Afronomics week: ${desk.views_7d} views, ${desk.subscribers} subscribers${pending.length ? `, ${pending.length} to grant` : ""}`, html, text);
   return Response.json({ to: redactEmails(to), sent: r.ok ? 1 : 0, reason: r.ok ? undefined : redactEmails(r.reason) });

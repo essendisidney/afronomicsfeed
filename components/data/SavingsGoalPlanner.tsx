@@ -61,7 +61,7 @@ export function SavingsGoalPlanner({ places, today, defaultBy }: { places: Place
           What to save each month
         </h2>
         <p className="text-[13px] text-muted">Save each month, in {short(best.place)}</p>
-        <p data-num className="tabular text-[2rem] font-semibold leading-tight text-ink">
+        <p data-num className="af-figure tabular text-[2rem] font-semibold leading-tight text-ink">
           {kes(best.monthly)}
         </p>
         <p className="mt-1 text-[13px] text-ink-soft">

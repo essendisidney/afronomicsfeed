@@ -137,8 +137,8 @@ ${closing(meta)}
 </body></html>`;
 }
 
-/* Same type and colours as the site (app/globals.css): Source Serif 4 for headings, Archivo for text, the jacaranda
-   accent, tabular figures. Print first; on screen the pages sit on a grey desk so the HTML reads like the PDF. */
+/* Same type and colours as the site (app/globals.css): Source Serif 4 for headings, Archivo for text, the laterite
+   accent (D-026), tabular figures. Print first; on screen the pages sit on a grey desk so the HTML reads like the PDF. */
 const documentCss = `
 /* Fixed-weight copies (scripts/document_fonts.py): Chromium embeds these as compact subsets, not drawn glyphs. */
 @font-face { font-family: "AF Serif"; src: url("/fonts/doc/source-serif-4-600.woff2") format("woff2"); font-weight: 500 900; font-display: block; }
@@ -147,7 +147,7 @@ const documentCss = `
 @font-face { font-family: "AF Sans"; src: url("/fonts/doc/archivo-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
 @font-face { font-family: "AF Sans"; src: url("/fonts/doc/archivo-800.woff2") format("woff2"); font-weight: 800 900; font-display: block; }
 @page { size: A4; margin: 22mm 18mm 20mm; }
-:root { --ink: #121826; --soft: #3b4354; --muted: #636b7d; --rule: #d9dcd7; --hair: #e8eae6; --accent: #5b3fd6; --navy: #26335a; --up: #0f7f57; --down: #c2352b; --wash: #f5f6f4; }
+:root { --ink: #1d1512; --soft: #45372f; --muted: #6c5e55; --rule: #e0d6cd; --hair: #eee7e1; --accent: #b3401f; --navy: #a33a1c; --up: #0f7f57; --down: #c4263e; --wash: #f7f3ef; }
 * { box-sizing: border-box; }
 html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 body { margin: 0; color: var(--ink); background: #fff; font: 400 10pt/1.5 "AF Sans", Arial, sans-serif; font-variant-numeric: tabular-nums; counter-reset: exhibit; }
@@ -204,8 +204,8 @@ svg { max-width: 100%; height: auto; }
 .doc-bar { display: none; }
 @media screen {
   body { background: #e6e8e4; padding: 0 0 8mm; }
-  .doc-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 1; background: #121826; color: #f5f6f4; padding: 10px 16px; margin-bottom: 8mm; font-size: 14px; }
-  .doc-bar a { color: #f5f6f4; display: inline-flex; min-height: 44px; align-items: center; }
+  .doc-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 1; background: #1d1512; color: #f7f3ef; padding: 10px 16px; margin-bottom: 8mm; font-size: 14px; }
+  .doc-bar a { color: #f7f3ef; display: inline-flex; min-height: 44px; align-items: center; }
   .doc-bar span a { text-decoration: underline; text-underline-offset: 3px; }
   .cover, .contents, .doc-section { background: #fff; width: 210mm; max-width: calc(100% - 16px); margin: 0 auto 8mm; padding: 18mm; box-shadow: 0 10px 40px -24px rgba(0,0,0,.4); }
   .cover { padding-left: 24mm; min-height: 297mm; }

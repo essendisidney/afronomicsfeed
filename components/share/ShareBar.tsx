@@ -25,7 +25,7 @@ const pill =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-rule bg-surface px-4 text-[14px] font-semibold text-ink transition-colors hover:border-accent hover:text-accent";
 
 const primary =
-  "col-span-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-5 text-[14px] font-semibold text-white hover:opacity-90 dark:text-night";
+  "col-span-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-5 text-[14px] font-semibold text-white hover:opacity-90 dark:text-on-accent";
 
 export function ShareBar({
   url,

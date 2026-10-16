@@ -81,6 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/rates/kenya/net-salary", "monthly", 0.9),
     page("/rates/kenya/loan-cost", "monthly", 0.9),
     page("/rates/kenya/savings-goal", "weekly", 0.9),
+    page("/diaspora", "weekly", 0.9),
     page("/rates/kenya/inflation", "monthly", 0.9),
     page("/rates/kenya/check", "weekly", 0.8),
     page("/rates/nigeria/check", "weekly", 0.8),

@@ -14,7 +14,6 @@ export const parked: Array<[string, string]> = [
   ["/radio", "/morning"],
   ["/rent-check", "/numbers"],
   ["/pay-check", "/numbers"],
-  ["/diaspora", "/rates/remittances"],
   ["/send-money", "/rates/remittances"],
   ["/send-money/:path*", "/rates/remittances"],
   ["/trade", "/numbers"],

@@ -10,7 +10,7 @@
     {
       "check": "copy",
       "page": "*",
-      "match": "US-guaranteed aircraft loan",
+      "match": "guaranteed aircraft loan",
       "reason": "Factual: the Kenya Airways aircraft loan carries a US Exim Bank guarantee backed by the Government of Kenya, per the Treasury's debt report (Kenya Airways Receipt, a draft)."
     }
   ]

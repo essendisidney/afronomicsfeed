@@ -345,6 +345,42 @@
    "unit": "KES bn",
    "check_source": "CMA Collective Investment Schemes quarterly report, Q4 2026 (Afronomics money market fund size file)",
    "check_date": "2027-03-31"
+  },
+  {
+   "id": "RC-2026-10-15-banks-lend-to-government-1",
+   "receipt": "2026-10-15-banks-lend-to-government",
+   "written_at": "2026-10-16T09:43:53Z",
+   "statement": "Interest on government securities is still at least a quarter of Kenyan banks' total income in 2026",
+   "measure": "Interest on government securities as a share of total income, banking sector, year to December 2026 (CBK Bank Supervision Annual Report 2026, income table)",
+   "comparator": ">=",
+   "threshold": 25,
+   "unit": "%",
+   "check_source": "CBK, Bank Supervision Annual Report 2026",
+   "check_date": "2027-10-31"
+  },
+  {
+   "id": "RC-2026-10-15-banks-lend-to-government-2",
+   "receipt": "2026-10-15-banks-lend-to-government",
+   "written_at": "2026-10-16T09:43:53Z",
+   "statement": "Growth in bank lending to the private sector is at least 8% in December 2026",
+   "measure": "Growth in commercial banks' lending to the private sector, December 2026, year on year, as reported by the CBK",
+   "comparator": ">=",
+   "threshold": 8,
+   "unit": "%",
+   "check_source": "CBK, Monetary Policy Committee press release or Monthly Economic Indicators covering December 2026",
+   "check_date": "2027-02-28"
+  },
+  {
+   "id": "RC-2026-10-15-banks-lend-to-government-3",
+   "receipt": "2026-10-15-banks-lend-to-government",
+   "written_at": "2026-10-16T09:43:53Z",
+   "statement": "Banks' average lending rate is still above 13% in December 2026",
+   "measure": "Commercial banks' weighted average lending rate, December 2026",
+   "comparator": ">",
+   "threshold": 13,
+   "unit": "%",
+   "check_source": "CBK, commercial banks' weighted average rates (Afronomics rates file)",
+   "check_date": "2027-02-28"
   }
  ],
  "outcomes": [],

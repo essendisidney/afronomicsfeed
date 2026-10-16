@@ -2,7 +2,9 @@
 # public/documents, so every reader downloads the same file: the committee pack and its market samples, the Watch pack
 # sample and the weekly index release, each in A4 and US Letter, with an A4 copy of the main series archived under its
 # document number. Each run checks the files with tests/site/test_documents.py before committing.
-# Private packs: run by hand with `url` and `name`; the PDF is kept as a private artifact for 7 days, never committed.
+# Private packs are never printed here: this repository is public, so a workflow input (the signed pack link) shows in
+# the run's log and an uploaded artifact can be downloaded by any signed-in GitHub user (security review 2026-10-16,
+# M-1). Print a private pack on your own machine: node scripts/make-documents.mjs --url <link> --name <name> --out <dir>.
 name: Documents
 
 on:
@@ -12,13 +14,6 @@ on:
     # The 1st of each month, 08:15 Nairobi: the new month's committee pack.
     - cron: "15 5 1 * *"
   workflow_dispatch:
-    inputs:
-      url:
-        description: "A private document's URL (leave empty for the public documents)"
-        default: ""
-      name:
-        description: "File name for a private document (letters, digits, -)"
-        default: ""
 
 permissions:
   contents: write
@@ -43,26 +38,11 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: pip install pypdf openpyxl pytest pyyaml
-      - name: Private document
-        if: inputs.url != ''
-        env:
-          URL: ${{ inputs.url }}
-          NAME: ${{ inputs.name }}
-        run: node scripts/make-documents.mjs --url "$URL" --name "$NAME" --out private-docs
-      - name: Keep the private document for 7 days
-        if: inputs.url != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: private-document
-          path: private-docs/
-          retention-days: 7
       - name: Public documents
-        if: inputs.url == ''
         run: |
           node scripts/make-documents.mjs
           python -m pytest tests/site/test_documents.py -q
       - name: Commit the documents
-        if: inputs.url == ''
         run: |
           if git diff --quiet -- public/documents && [ -z "$(git ls-files --others --exclude-standard public/documents)" ]; then
             echo "No document changed."

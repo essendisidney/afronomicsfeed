@@ -42,8 +42,9 @@ jobs:
             FOLDER=$(basename "$req" .request)
             FILES=$(grep -v '^#' "$req" | tr '\n' ' ')
           fi
-          echo "FOLDER=$FOLDER" >> "$GITHUB_ENV"
+          # Validate before writing to $GITHUB_ENV, so a crafted folder name cannot add environment lines.
           if ! [[ "$FOLDER" =~ ^[a-z0-9_-]+$ ]]; then echo "bad folder"; exit 1; fi
+          echo "FOLDER=$FOLDER" >> "$GITHUB_ENV"
           dir="tests/readers/fixtures/$FOLDER"
           mkdir -p "$dir"
           for pair in $FILES; do

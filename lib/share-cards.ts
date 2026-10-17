@@ -1,5 +1,6 @@
 import { getAllArticles } from "@/lib/content";
 import { cpiIndex, loadCpi } from "@/lib/data/cpi";
+import { renderTime } from "@/lib/data/fetcher";
 import { mobileLoanBoard } from "@/lib/data/mobile-loans";
 import { editorialRows, editorialScore } from "@/lib/editorial";
 import { loadIpoOffers } from "@/lib/data/ipo-offers";
@@ -13,6 +14,7 @@ import { charge } from "@/lib/mpesa-calc";
 import { clampText, type SignatureCard } from "@/lib/og-signature";
 import { accentFor } from "@/lib/og-tokens";
 import { deskSlug, getReceipt, sourceFor, visibleReceipts, type Receipt } from "@/lib/receipts";
+import { pickLead } from "@/lib/rotation";
 import { netSalary } from "@/lib/salary-calc";
 import { monthsUntil, plan } from "@/lib/savings-goal";
 import { savingsDates, savingsPlaces } from "@/lib/savings-places";
@@ -64,9 +66,9 @@ export function receiptSignature(r: Receipt, kicker?: string): SignatureCard {
   };
 }
 
-/** The front page: today's lead story (the newest public Receipt) and its number. */
+/** The front page: the lead story Today shows in this window (lib/rotation.ts) and its number. */
 export function homeSignature(): SignatureCard {
-  const lead = visibleReceipts()[0];
+  const lead = pickLead(visibleReceipts(), renderTime());
   if (lead) return receiptSignature(lead, `Today's lead · ${deskName(lead)}`);
   return {
     accent: accentFor(null),

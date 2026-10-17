@@ -11,6 +11,7 @@ import { formatDate } from "@/lib/format";
 import { frontPageRows } from "@/lib/front-page";
 import { loadLedger, score } from "@/lib/ledger";
 import { visibleReceipts } from "@/lib/receipts";
+import { pickLead, rotate, slotOf } from "@/lib/rotation";
 import { fitDescription } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { whatChanged } from "@/lib/today";
@@ -38,16 +39,18 @@ const todayFmt = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numer
  * Today, laid out as a front page (redesign preview): the figures that moved, the lead story, a row per reader topic,
  * the tools, then the Morning, our record and the institutional offer. A section bar under the header jumps between
  * the parts and marks the one in view. Freshness ("Yesterday", "New") is worked out here, on the server, from each
- * item's date and the time of this render (renderTime), so the browser prints exactly what the server sent.
+ * item's date and the time of this render (renderTime), so the browser prints exactly what the server sent. The lead,
+ * the rows and the tools rotate every 3 hours from the same time (lib/rotation.ts).
  */
 export default async function TodayPage() {
   const now = renderTime();
   const moves = await whatChanged();
   const tiles = numbersThatMoved();
   const receipts = visibleReceipts();
-  const lead = receipts[0] ?? null;
-  const rows = frontPageRows(lead?.slug ?? null, receipts);
-  const homeTools = tools.filter((t) => t.home);
+  // Rotation (lib/rotation.ts): the lead, the rows and the tools take turns every 3 hours, Nairobi time.
+  const lead = pickLead(receipts, now);
+  const rows = frontPageRows(lead?.slug ?? null, receipts, now);
+  const homeTools = rotate(tools.filter((t) => t.home), slotOf(now));
   const ledger = loadLedger();
   const live = score(ledger.rows);
   const calls = editorialScore(editorialRows());

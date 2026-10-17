@@ -284,3 +284,20 @@ what we changed. Newest at the bottom. Read this first every week.
   (R3) applies this line.
 - **Auto theme:** light from 06:00 and dark from 19:00 by the reader's clock, with Auto, Light and Dark in the menu.
 
+
+### D-027 · 17 Oct 2026 · Fuliza and Kenya Airways Receipts published without waiting for a right of reply
+
+- **Decided by the founder:** "post the stories, nothing we waiting for". Both go live today and are posted to the
+  company page. The legal read (`docs/legal/read-2026-10-16-held-receipts.md`) had recommended a 3-working-day right of
+  reply to Safaricom and Kenya Airways first; the founder chose not to wait. Its wording edits were already applied.
+- **Disclosure confirmed by the founder:** Afronomics and its founder hold no shares in Safaricom, NCBA, KCB, Sidian
+  Bank or Kenya Airways.
+- **Kenya Airways check list closed as follows:** the ch-aviation date is confirmed as 1 November 2022 (`datePublished`,
+  Probe run 39054162190). Not checked against primary documents, and said so in the text: the half-year 2026 figures
+  (attributed to tech-ish and Kenyans.co.ke, unaudited, "we have not checked these figures against the filing"), and the
+  48.90% shareholding (attributed to KQ's statement as reported by The Star, with the 50.1% report it disputed). The two
+  publication dates stay as recorded in the sources.
+- **If either company writes:** under the Defamation Act s.7A a correction or reply runs in the next edition with similar
+  prominence. Quote any reply on the Receipt the same day.
+- **Still held:** the Safaricom stake sale, until the judgment is read and an advocate has reviewed it (the founder gave no
+  instruction to release it).

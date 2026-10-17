@@ -2,7 +2,7 @@
 title: "What Fuliza really costs: KES 52 to borrow KES 1,000 for a week, 271% a year"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: cost-of-living
 entities:
   - "Safaricom PLC"
@@ -17,9 +17,9 @@ labels:
   - Analysis
   - Opinion
 asOf: "2026-10-15"
-summary: "Using Safaricom's own published Fuliza charges, KES 1,000 kept for seven nights costs KES 52. As a yearly rate that is 271%, against a 14.34% bank average and a 9.04% one-year Treasury bill. Kenyans drew KES 1.47 trillion on Fuliza in the year to March 2026."
+summary: "Using Safaricom's own published Fuliza charges, KES 1,000 kept for seven nights costs KES 52. As a simple yearly rate, by our arithmetic, that is 271%, against a 14.34% bank average and a 9.04% one-year Treasury bill. Kenyans drew KES 1.47 trillion on Fuliza in the year to March 2026."
 desk: "Afronomics Cost of Living Desk"
-disclosure: "[founder to confirm] Afronomics and its founder hold no shares in Safaricom, NCBA, KCB or Sidian Bank, and are not paid by any of them."
+disclosure: "Afronomics and its founder hold no shares in Safaricom, NCBA, KCB or Sidian Bank, and are not paid by any of them."
 sources:
   - name: "Safaricom, Fuliza page (charges and tariff table)"
     url: "https://www.safaricom.co.ke/main-mpesa/m-pesa-services/credit-and-savings/fuliza"

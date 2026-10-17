@@ -3,6 +3,8 @@
 One post each weekday at about 07:25 Nairobi, from the data on main the same morning. Thursday is the T-bill result
 (18:13, its own routine). Weekends: nothing.
 
+Before picking a topic, read docs/editorial/hot-stories-calendar.md: a dated hook in the next 3 days goes first.
+
 | Day | Theme | Rotate through (pick the one not used most recently in the log) |
 | --- | --- | --- |
 | Mon | Africa's money this week | policy rates (data/policy_rates.json → /rates/policy); the Sovereign Bill Index, if the Monday release is out (/markets/bill-index); decisions due in the next 14 days (data/mpc_calendar.json → /rates/policy#calendar) |

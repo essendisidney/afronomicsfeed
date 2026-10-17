@@ -12,6 +12,8 @@ about their own money, in their own currency, with a number in the headline. The
 
 ## The run (Monday, Wednesday, Friday morning)
 
+0. Read `docs/editorial/hot-stories-calendar.md`. If a dated hook there falls in the next 3 days and every figure it
+   needs is on main, write that story in this slot (steps 2–9 still apply). Otherwise go on.
 1. `python scripts/story_finder.py`: writes `data/story_leads.json`, candidate stories best first. Take the top
    lead whose `published` is false. If the top score is under 3, nothing moved enough to be news: stop and say so.
    Never write a weak story to fill the slot.

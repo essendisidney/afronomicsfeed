@@ -2,6 +2,7 @@ import { getArticlesByCategory } from "@/lib/content";
 import { countries } from "@/lib/data/countries";
 import { articleHref } from "@/lib/format";
 import { deskSlug, sectorNames, visibleReceipts, type DeskSlug, type Receipt } from "@/lib/receipts";
+import { rotateRow } from "@/lib/rotation";
 import type { Article } from "@/lib/types";
 
 /**
@@ -128,19 +129,22 @@ function briefCard(a: Article): StoryCard | null {
 
 const PER_ROW = 4;
 
-/** The four rows, newest first, without the lead story; empty rows are dropped. */
-export function frontPageRows(leadSlug: string | null, receipts: Receipt[] = visibleReceipts()) {
+/**
+ * The four rows without the lead story; empty rows are dropped. Each row's newest card stays first; with `now`, the
+ * other places take turns among the next cards (lib/rotation.ts), so the page changes every few hours.
+ */
+export function frontPageRows(leadSlug: string | null, receipts: Receipt[] = visibleReceipts(), now?: number) {
   const cards = [
     ...receipts.filter((r) => r.slug !== leadSlug).map(receiptCard),
     ...getArticlesByCategory("brief").map(briefCard).filter((c): c is StoryCard => c != null),
   ].sort((a, b) => b.date.localeCompare(a.date) || a.order - b.order || a.key.localeCompare(b.key));
   return topicRows
-    .map((row) => {
+    .map((row, i) => {
       const items = cards.filter((c) => c.topic === row.id);
       // "See all": the Receipts filtered to the row's most common sector, or the stories list when the row has no Receipts.
       const sectors = receipts.filter((r) => sectorTopic[r.sector] === row.id).map((r) => r.sector);
       const top = sectors.sort((a, b) => sectors.filter((s) => s === b).length - sectors.filter((s) => s === a).length)[0];
-      return { ...row, items: items.slice(0, PER_ROW), more: top ? `/receipts?sector=${top}` : "/stories" };
+      return { ...row, items: now == null ? items.slice(0, PER_ROW) : rotateRow(items, PER_ROW, now, i), more: top ? `/receipts?sector=${top}` : "/stories" };
     })
     .filter((row) => row.items.length > 0);
 }

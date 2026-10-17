@@ -48,6 +48,9 @@ def rate_range(value: str | None) -> tuple[float | None, float | None]:
     return None, None
 
 
+MAX_TENOR_NGN_M = 20_000_000  # NGN 20 trillion, in millions
+
+
 def normalise(item: dict) -> dict | None:
     if "primary" not in str(item.get("auction", "")).lower():
         return None
@@ -61,6 +64,12 @@ def normalise(item: dict) -> dict | None:
     accepted = num(item.get("totalSuccessful"))
     # The CBN feed has occasional unit slips (an allotment keyed in naira, not millions); drop what cannot be true.
     if accepted is not None and received is not None and accepted > received * 1.01:
+        accepted = None
+    # A whole auction keyed in smaller units (12 Aug 2026: NGN 4,188 trillion "received" for one tenor) is just as
+    # impossible. No single bill tenor has drawn anywhere near NGN 20 trillion, so amounts above that are dropped.
+    if received is not None and received > MAX_TENOR_NGN_M:
+        received = accepted = None
+    if accepted is not None and accepted > MAX_TENOR_NGN_M:
         accepted = None
     low, high = rate_range(item.get("rangeBid"))
     return {

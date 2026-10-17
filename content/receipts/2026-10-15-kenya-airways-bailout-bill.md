@@ -2,7 +2,7 @@
 title: "Kenya Airways' bailout bill: KES 122bn of state loans to become shares, and US$350m more on the way"
 date: "2026-10-15"
 type: verdict
-status: draft
+status: published
 sector: companies
 entities:
   - "Kenya Airways PLC"
@@ -17,12 +17,21 @@ labels:
 asOf: "2026-10-15"
 summary: "On 9 October 2026 Kenya Airways said the government had approved a US$350 million loan, about KES 45.15 billion, and in principle the conversion of about KES 122 billion of existing government loans into an equity-type instrument. At the end of 2025 the airline's liabilities exceeded its assets by KES 132.1 billion. Treasury reports show taxpayers also servicing the airline's US-guaranteed aircraft loan."
 desk: "Afronomics Companies Desk"
-disclosure: "[founder to confirm] Afronomics and its founder hold no Kenya Airways shares."
-verify:
-  - "Half-year 2026 figures (revenue KES 81.2bn, loss after tax KES 16.1bn vs KES 12.2bn, operating loss KES 10.6bn): the filed PDF on the USE site is a scanned image and could not be read; figures rest on tech-ish and Kenyans.co.ke, which agree. Check against the KQ or NSE filing."
-  - "Government shareholding of 48.90%: from KQ's 8 April 2026 statement as reported by The Star (tech-ish also gives 48.9%). Business Daily reported a CMA filing showing 50.1%, which KQ disputes. Check against KQ's 2025 annual report share register."
-  - "Publication dates of the Kenyans.co.ke article (taken as 25 August 2026, the briefing date) and of the FY2024/25 Annual Public Debt Management Report (taken as 7 October 2025, the Parliament library issue date)."
-  - "ch-aviation, KQ's dispute of the Treasury's default figures: the page (read through the Probe workflow on 16 October 2026, run 38879132028) shows '01Nov' but no year in the text we captured; 2022 is assumed from the FY2021/22 report it discusses. Confirm the year, and read The East African interview it quotes (blocked, HTTP 403)."
+disclosure: "Afronomics and its founder hold no Kenya Airways shares."
+keyNumbers:
+  - value: "KES 132.1 billion"
+    label: "How far Kenya Airways' liabilities exceeded its assets at the end of 2025"
+    source: "Kenya Airways PLC, summary audited group results for the year ended 31 December 2025"
+  - value: "KES 167.15 billion"
+    label: "The new US$350 million loan plus KES 122 billion of loans to become shares, both still subject to approvals"
+    source: "Kenya Airways PLC, announcement of material information and cautionary notice, 9 October 2026"
+  - value: "KES 32.0 billion"
+    label: "Paid by the government on the guaranteed aircraft loan in two years, on the Treasury's figures"
+    source: "National Treasury, Annual Public Debt Management Report FY2024/25"
+forYou:
+  - "As a taxpayer: the two measures come to KES 167.15 billion, more than Kenya Airways' whole income of KES 161.5 billion for 2025."
+  - "Converting KES 122 billion of loans would cover about 92% of the airline's negative equity at the end of 2025, before accrued interest and this year's losses."
+  - "The conversion price and what other shareholders give up are not yet public, so nobody outside can yet say what the taxpayer gets."
 sources:
   - name: "Kenya Airways PLC, announcement of material information and cautionary notice, 9 October 2026"
     url: "https://www.use.or.ug/uploads/be05c9dd-301b-4de8-8a03-4cc354511ef2.pdf"
@@ -137,7 +146,7 @@ Taxpayers are the lender in both cases. Together that is KES 167 billion of publ
 
 (Facts) The company's own explanation: 2025 was "severely impacted primarily by the temporary grounding of three of the wide body fleet, Boeing 787-8 Dreamliner aircraft", which it says was "driven by the global supply chain constraints and limited engine availability". Capacity fell 18% and passenger numbers 13%; revenue fell 14%, or KES 27 billion.
 
-(Facts) For the first half of 2026 the airline reported revenue of about KES 81.2 billion and a loss after tax of about KES 16.1 billion, against KES 12.2 billion a year earlier, according to tech-ish and Kenyans.co.ke. The figures are unaudited. The filed copy we found is a scanned image we could not read, so these figures are on our check list.
+(Facts) For the first half of 2026 the airline reported revenue of about KES 81.2 billion and a loss after tax of about KES 16.1 billion, against KES 12.2 billion a year earlier, according to tech-ish and Kenyans.co.ke. The figures are unaudited. The filed copy we found is a scanned image we could not read, so we have not checked these figures against the filing.
 
 (Analysis) Negative equity means the airline's liabilities are bigger than its assets. At the end of 2025 the gap was KES 132.1 billion. If booked at face value, converting KES 122 billion of loans would cover about 92% of that gap as it stood in December 2025, before the accrued interest the notice mentions but does not put a number on, and before this year's losses.
 

@@ -64,20 +64,19 @@ Re-check each date against its source the day before.
 | Thu 19 Nov | South Africa rate decision | Line in the T-bill post | /rates/policy | Check calendar |
 | Fri 20 Nov | **Dangote Kenyan allotment** | **Scoreboard**: Kenyan applications against the KES 39 billion target | /record | Grade on the day |
 | Wed 25 Nov | Payday week | "What your November payslip paid for" (only if a rate changed; otherwise skip) | /rates/kenya/net-salary | Story engine |
-| Fri 27 Nov | Black Friday | **What it costs you**: Fuliza and mobile loans as a true yearly rate | /rates/kenya/mpesa-charges, /rates/kenya/loan-cost | Data post only; the Fuliza Receipt stays held |
+| Fri 27 Nov | Black Friday | **What it costs you**: Fuliza and mobile loans as a true yearly rate | /rates/kenya/mpesa-charges, /rates/kenya/loan-cost | Ready (Fuliza Receipt published) |
 | Early Dec | CBK rate decision | "What the CBK decision means for KES 100,000 saved and KES 1m borrowed" | /rates/policy | Date per CBK |
 | Mon 7 Dec | School fees in January | "Saving KES {fees} by January: what to put away each week" | /rates/kenya/savings-goal | Ready |
+| Tue 8 Dec | KQ cautionary notice deadline | "Renewed or withdrawn?" follow-up on the Kenya Airways Receipt | /receipts/2026-10-15-kenya-airways-bailout-bill | Check KQ's notice on the day |
 | Sat 12 Dec | Jamhuri Day | No post | | |
 | Fri 18 Dec | **Dangote listing** | **Scoreboard**: listed on the Nigerian Exchange by today, as called? | /record | Grade on the day |
 
 ## Held, publish only when cleared
 
-These are among our hottest stories and are **not** scheduled until legal clears them. When one is cleared, it takes
-the next Wednesday slot.
+Fuliza's true cost and the Kenya Airways bailout bill were published and posted on 17 October 2026 (D-027).
 
-- Fuliza's true cost: waiting on right of reply.
-- Kenya Airways bailout bill: waiting on right of reply (its cautionary notice deadline is 8 December).
-- Safaricom stake sale: waiting on the advocate's review.
+- Safaricom stake sale: waiting on the judgment and an advocate's review. When it is cleared, it takes the next
+  Wednesday slot.
 
 ## Receipts still to post on LinkedIn
 

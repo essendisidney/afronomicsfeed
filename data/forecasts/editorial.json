@@ -381,6 +381,78 @@
    "unit": "%",
    "check_source": "CBK, commercial banks' weighted average rates (Afronomics rates file)",
    "check_date": "2027-02-28"
+  },
+  {
+   "id": "RC-2026-10-15-fuliza-true-cost-1",
+   "receipt": "2026-10-15-fuliza-true-cost",
+   "written_at": "2026-10-17T17:50:53Z",
+   "statement": "Fuliza disbursements grow again in Safaricom's year to March 2027, above the KES 1,465.8 billion of FY26",
+   "measure": "Fuliza value of disbursements (KShs Bn), FY27, Safaricom FY27 results booklet",
+   "comparator": ">",
+   "threshold": 1465.8,
+   "unit": "KES bn",
+   "check_source": "Safaricom PLC, FY27 Results Booklet, Financial Services: Lending table",
+   "check_date": "2027-05-31"
+  },
+  {
+   "id": "RC-2026-10-15-fuliza-true-cost-2",
+   "receipt": "2026-10-15-fuliza-true-cost",
+   "written_at": "2026-10-17T17:50:53Z",
+   "statement": "The average Fuliza draw keeps shrinking: below KES 217.9 in the year to March 2027",
+   "measure": "Fuliza Average Ticket Size (KShs), FY27, Safaricom FY27 results booklet",
+   "comparator": "<",
+   "threshold": 217.9,
+   "unit": "KES",
+   "check_source": "Safaricom PLC, FY27 Results Booklet, Financial Services: Lending table",
+   "check_date": "2027-05-31"
+  },
+  {
+   "id": "RC-2026-10-15-fuliza-true-cost-3",
+   "receipt": "2026-10-15-fuliza-true-cost",
+   "written_at": "2026-10-17T17:50:53Z",
+   "statement": "Safaricom's published total daily Fuliza charge on a KES 501 to 1,000 balance is still KES 6 on 31 March 2027",
+   "measure": "Total Charges for the 501-1000 band in the Fuliza tariff table on Safaricom's Fuliza page, 31 March 2027",
+   "comparator": "is",
+   "threshold": "6",
+   "unit": null,
+   "check_source": "Safaricom, Fuliza page (charges and tariff table)",
+   "check_date": "2027-03-31"
+  },
+  {
+   "id": "RC-2026-10-15-kenya-airways-bailout-bill-1",
+   "receipt": "2026-10-15-kenya-airways-bailout-bill",
+   "written_at": "2026-10-17T17:50:53Z",
+   "statement": "Kenya Airways still reports negative total equity at 31 December 2026",
+   "measure": "Group total equity at 31 December 2026, Kenya Airways audited results for 2026",
+   "comparator": "<",
+   "threshold": 0,
+   "unit": "KES bn",
+   "check_source": "Kenya Airways PLC, summary audited group results for the year ended 31 December 2026",
+   "check_date": "2027-04-30"
+  },
+  {
+   "id": "RC-2026-10-15-kenya-airways-bailout-bill-2",
+   "receipt": "2026-10-15-kenya-airways-bailout-bill",
+   "written_at": "2026-10-17T17:50:53Z",
+   "statement": "Kenya Airways' loss after tax for 2026 is bigger than 2025's KES 17.2 billion",
+   "measure": "Group loss after tax for the year ended 31 December 2026, as a positive number",
+   "comparator": ">",
+   "threshold": 17.163,
+   "unit": "KES bn",
+   "check_source": "Kenya Airways PLC, summary audited group results for the year ended 31 December 2026",
+   "check_date": "2027-04-30"
+  },
+  {
+   "id": "RC-2026-10-15-kenya-airways-bailout-bill-3",
+   "receipt": "2026-10-15-kenya-airways-bailout-bill",
+   "written_at": "2026-10-17T17:50:53Z",
+   "statement": "The conversion of about KES 122 billion of government loans is not completed by 30 June 2027",
+   "measure": "Kenya Airways announcement, through the NSE, that the conversion of existing government loans has been completed, published by 30 June 2027",
+   "comparator": "is",
+   "threshold": "no",
+   "unit": null,
+   "check_source": "Kenya Airways PLC announcements on the NSE and USE",
+   "check_date": "2027-06-30"
   }
  ],
  "outcomes": [],

@@ -5,9 +5,11 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { getAllArticles, toIndexItem } from "@/lib/content";
 import { topics } from "@/lib/taxonomy";
 import type { Category, ContentLabel } from "@/lib/types";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Archive",
+  alternates: { canonical: `${site.url}/archive` },
   description: "Every Afronomics Feed brief, weekly note, and explainer in one file.",
 };
 

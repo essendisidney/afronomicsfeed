@@ -9,6 +9,7 @@ import { TableScroll } from "@/components/ui/DataTable";
 import { KES_PER_USD, institutionalLadder, institutionalPilot, institutionalPriceText } from "@/lib/billing/ratecard";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
+import { SITE_CARD_ALT, shareImage } from "@/lib/share-image";
 
 const title = "Buying Afronomics data for an institution";
 const description =
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   title: fitTitle(title),
   description: fitDescription(description),
   alternates: { canonical: `${site.url}/buying` },
-  openGraph: { title, description, url: `${site.url}/buying` },
+  openGraph: { title, description, url: `${site.url}/buying`, images: shareImage("", SITE_CARD_ALT) },
 };
 
 const steps: [string, React.ReactNode][] = [

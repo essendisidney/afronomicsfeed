@@ -11,6 +11,7 @@ import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
 import { bondMarkets, loadBondMarket } from "@/lib/data/sovereign-bonds";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
+import { SITE_CARD_ALT, shareImage } from "@/lib/share-image";
 
 export const revalidate = 3600;
 
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   title: fitTitle(title),
   description: fitDescription(description),
   alternates: { canonical: `${site.url}/trust` },
-  openGraph: { title, description, url: `${site.url}/trust` },
+  openGraph: { title, description, url: `${site.url}/trust`, images: shareImage("", SITE_CARD_ALT) },
 };
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });

@@ -5,6 +5,7 @@ import { swDate } from "@/lib/editions/morning-sw";
 import { fitDescription } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { ourRecord, whatChanged, type TodayMove } from "@/lib/today";
+import { SITE_CARD_ALT, shareImage } from "@/lib/share-image";
 
 export const revalidate = 900;
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   title: { absolute: title },
   description: fitDescription(description),
   alternates: { canonical: `${site.url}/sw`, languages: { en: site.url, sw: `${site.url}/sw` } },
-  openGraph: { title, description, url: `${site.url}/sw`, siteName: site.name, locale: "sw_KE", type: "website" },
+  openGraph: { title, description, url: `${site.url}/sw`, siteName: site.name, locale: "sw_KE", type: "website", images: shareImage("", SITE_CARD_ALT) },
 };
 
 function MoveCard({ move }: { move: TodayMove }) {

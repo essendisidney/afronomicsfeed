@@ -39,7 +39,8 @@ export async function POST(request: Request) {
   if (!result.ok) {
     // Logged without the address (no emails in logs): only the domain, so a failure can be seen and fixed.
     console.log(`[subscribe] not stored ${JSON.stringify({ domain: email.split("@")[1], role, source, at: new Date().toISOString(), reason: redactEmails(result.reason) })}`);
-    return Response.json({ ok: true, stored: false });
+    // Say so rather than promise a guide that will not come: the reader can try again or write to the desk.
+    return Response.json({ ok: false, reason: `We could not save your sign-up just now. Please try again in a minute, or write to ${site.contactEmail}.` }, { status: 503 });
   }
   if (result.value === "welcome") {
     const unsub = `${site.url}/api/unsubscribe?e=${encodeURIComponent(email)}&t=${await unsubscribeToken(email)}`;

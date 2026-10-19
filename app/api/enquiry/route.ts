@@ -1,3 +1,4 @@
+import { site } from "@/lib/site";
 import { rpc } from "@/lib/store";
 
 export const runtime = "nodejs";
@@ -26,6 +27,8 @@ export async function POST(request: Request) {
   if (!result.ok) {
     // No emails, names or messages in logs: enough to see that an enquiry from an organisation was not stored.
     console.log(`[enquiry] not stored ${JSON.stringify({ org: args.p_org, interest: args.p_interest, source: args.p_source, domain: email.split("@")[1], at: new Date().toISOString(), reason: result.reason })}`);
+    // Not "received" when it was not: the form shows this, with the address to write to instead.
+    return Response.json({ ok: false, reason: `We could not save your message just now. Please try again in a minute, or write to ${site.contactEmail}.` }, { status: 503 });
   }
   return Response.json({ ok: true });
 }

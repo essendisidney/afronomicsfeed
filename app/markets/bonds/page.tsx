@@ -11,6 +11,7 @@ import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
 import { ActionTile } from "@/components/ui/Card";
 import { SourceNote } from "@/components/ui/SourceNote";
+import { MARKETS_CARD_ALT, shareImage } from "@/lib/share-image";
 
 export const revalidate = 3600;
 
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   title: fitTitle(title),
   description: fitDescription(description),
   alternates: { canonical: `${site.url}/markets/bonds` },
-  openGraph: { title, description, url: `${site.url}/markets/bonds` },
+  openGraph: { title, description, url: `${site.url}/markets/bonds`, images: shareImage("/markets", MARKETS_CARD_ALT) },
 };
 
 export default function BondAuctionsIndex() {

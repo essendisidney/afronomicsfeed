@@ -5,6 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms of use",
+  alternates: { canonical: `${site.url}/legal/terms` },
   description: "The terms for using Afronomics: reuse of data with attribution, subscriptions and cancellation, no advice, and liability.",
 };
 

@@ -20,6 +20,7 @@ import { loadCountryWire, loadWire } from "@/lib/data/wire";
 import { articleHref, categoryLabel, formatDate } from "@/lib/format";
 import { fitDescription, fitTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { SITE_CARD_ALT, shareImage } from "@/lib/share-image";
 
 export const revalidate = 3600;
 
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: fitTitle(title),
     description: fitDescription(description),
     alternates: { canonical: `${site.url}/countries/${country.slug}` },
-    openGraph: { title: `${country.name} — Afronomics`, description },
+    openGraph: { title: `${country.name} — Afronomics`, description, images: shareImage("", SITE_CARD_ALT) },
   };
 }
 

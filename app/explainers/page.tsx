@@ -3,9 +3,11 @@ import { ArticleCard } from "@/components/ui/ArticleCard";
 import { PageShare } from "@/components/share/PageShare";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getArticlesByCategory, toIndexItem } from "@/lib/content";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Explainers",
+  alternates: { canonical: `${site.url}/explainers` },
   description: "Open intelligence on who sets what in Kenya’s banking and capital-markets system.",
 };
 

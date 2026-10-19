@@ -5,7 +5,7 @@
 "currency": "MAD",
 "rate_note": "weighted average rate (TMP) of accepted bids, percent per annum; amounts in MAD millions; accepted 0 = the Treasury took nothing on that line",
 "updated": "2026-10-13",
-"read_at": "2026-10-19T09:55:40+00:00",
+"read_at": "2026-10-19T17:03:16+00:00",
 "compiled_by": "Afronomics (afronomicsfeed.com)",
 "documents_read": [
 "http://www.finances.gov.ma/CommuniquesEtAnnonces/dtfe/2025/communiqué du résultat de l'adjudication  02-12-25.pdf",

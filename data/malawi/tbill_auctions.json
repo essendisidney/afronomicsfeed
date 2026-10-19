@@ -3,12 +3,110 @@
  "publisher": "Reserve Bank of Malawi",
  "source_page": "https://www.rbm.mw/FinancialMarkets/TreasuryBills/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-12T13:22:56+00:00",
+ "updated_at": "2026-10-19T17:01:58+00:00",
  "units": {
   "amounts": "MWK millions",
   "rates": "average yield of allotted bids, percent per annum"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "auction_date": "2026-10-13",
+   "value_date": "2026-10-13",
+   "kind": "primary",
+   "offered_mwk_m": null,
+   "received_mwk_m": 46854.53,
+   "accepted_mwk_m": 46854.53,
+   "accepted_cost_mwk_m": 40422.39,
+   "lowest_yield": 16.0,
+   "highest_yield": 16.0,
+   "weighted_avg_rate": 16.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63820"
+  },
+  {
+   "tenor": 91,
+   "auction_date": "2026-10-13",
+   "value_date": "2026-10-13",
+   "kind": "primary",
+   "offered_mwk_m": null,
+   "received_mwk_m": 4.5,
+   "accepted_mwk_m": 4.5,
+   "accepted_cost_mwk_m": 4.37,
+   "lowest_yield": 12.0,
+   "highest_yield": 12.0,
+   "weighted_avg_rate": 12.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63820"
+  },
+  {
+   "tenor": 364,
+   "auction_date": "2026-10-09",
+   "value_date": "2026-10-09",
+   "kind": "reopening",
+   "offered_mwk_m": null,
+   "received_mwk_m": 32178.27,
+   "accepted_mwk_m": 32178.27,
+   "accepted_cost_mwk_m": 27760.87,
+   "lowest_yield": 16.0,
+   "highest_yield": 16.0,
+   "weighted_avg_rate": 16.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63802"
+  },
+  {
+   "tenor": 364,
+   "auction_date": "2026-10-08",
+   "value_date": "2026-10-08",
+   "kind": "reopening",
+   "offered_mwk_m": null,
+   "received_mwk_m": 4578.0,
+   "accepted_mwk_m": 4578.0,
+   "accepted_cost_mwk_m": 3948.04,
+   "lowest_yield": 16.0,
+   "highest_yield": 16.0,
+   "weighted_avg_rate": 16.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63799"
+  },
+  {
+   "tenor": 182,
+   "auction_date": "2026-10-08",
+   "value_date": "2026-10-08",
+   "kind": "reopening",
+   "offered_mwk_m": null,
+   "received_mwk_m": 327.05,
+   "accepted_mwk_m": 327.05,
+   "accepted_cost_mwk_m": 305.0,
+   "lowest_yield": 14.5,
+   "highest_yield": 14.5,
+   "weighted_avg_rate": 14.5,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63799"
+  },
+  {
+   "tenor": 91,
+   "auction_date": "2026-10-08",
+   "value_date": "2026-10-08",
+   "kind": "reopening",
+   "offered_mwk_m": null,
+   "received_mwk_m": 6.18,
+   "accepted_mwk_m": 6.18,
+   "accepted_cost_mwk_m": 6.0,
+   "lowest_yield": 12.0,
+   "highest_yield": 12.0,
+   "weighted_avg_rate": 12.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63799"
+  },
+  {
+   "tenor": 364,
+   "auction_date": "2026-10-06",
+   "value_date": "2026-10-06",
+   "kind": "primary",
+   "offered_mwk_m": null,
+   "received_mwk_m": 11621.0,
+   "accepted_mwk_m": 11621.0,
+   "accepted_cost_mwk_m": 10021.89,
+   "lowest_yield": 16.0,
+   "highest_yield": 16.0,
+   "weighted_avg_rate": 16.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63793"
+  },
   {
    "tenor": 364,
    "auction_date": "2026-09-29",
@@ -25820,6 +25918,39 @@
    "tenors": [
     91,
     182,
+    364
+   ]
+  },
+  "https://www.rbm.mw/Home/GetContentFile/?ContentID=63818": {
+   "status": "no sale"
+  },
+  "https://www.rbm.mw/Home/GetContentFile/?ContentID=63821": {
+   "status": "no sale"
+  },
+  "https://www.rbm.mw/Home/GetContentFile/?ContentID=63820": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    364
+   ]
+  },
+  "https://www.rbm.mw/Home/GetContentFile/?ContentID=63802": {
+   "status": "parsed",
+   "tenors": [
+    364
+   ]
+  },
+  "https://www.rbm.mw/Home/GetContentFile/?ContentID=63799": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.rbm.mw/Home/GetContentFile/?ContentID=63793": {
+   "status": "parsed",
+   "tenors": [
     364
    ]
   }

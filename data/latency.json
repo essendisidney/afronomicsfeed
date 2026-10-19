@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 6,
-  "results": 9,
+  "results": 14,
   "p50_h": 4.2,
   "p90_h": 13.2
  },
@@ -121,12 +121,12 @@
    "kind": "bills",
    "market": "malawi",
    "name": "Malawi",
-   "results": 0,
+   "results": 4,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": null,
-   "status": "no new result since measuring began"
+   "status": "publisher time unknown"
   },
   {
    "kind": "bills",
@@ -165,12 +165,12 @@
    "kind": "bonds",
    "market": "egypt",
    "name": "Egypt",
-   "results": 0,
+   "results": 1,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": null,
-   "status": "no new result since measuring began"
+   "status": "publisher time unknown"
   },
   {
    "kind": "bonds",
@@ -218,6 +218,15 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:egypt:2026-10-20",
+   "kind": "bonds",
+   "market": "egypt",
+   "date": "2026-10-20",
+   "first_seen_at": "2026-10-19T17:02:23+00:00",
+   "published_at": null,
+   "published_how": null
+  },
   {
    "key": "bonds:kenya:2026-10-19",
    "kind": "bonds",
@@ -314,6 +323,15 @@
    "first_seen_at": null
   },
   {
+   "key": "bills:malawi:2026-10-13",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-10-13",
+   "first_seen_at": "2026-10-19T17:01:58+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
    "key": "bills:egypt:2026-10-13",
    "kind": "bills",
    "market": "egypt",
@@ -346,12 +364,30 @@
    "first_seen_at": null
   },
   {
+   "key": "bills:malawi:2026-10-09",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-10-09",
+   "first_seen_at": "2026-10-19T17:01:58+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
    "key": "bills:ghana:2026-10-09",
    "kind": "bills",
    "market": "ghana",
    "date": "2026-10-09",
    "baseline": true,
    "first_seen_at": null
+  },
+  {
+   "key": "bills:malawi:2026-10-08",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-10-08",
+   "first_seen_at": "2026-10-19T17:01:58+00:00",
+   "published_at": null,
+   "published_how": null
   },
   {
    "key": "bonds:waemu:2026-10-07:burkina-faso",
@@ -424,6 +460,15 @@
    "date": "2026-10-06",
    "baseline": true,
    "first_seen_at": null
+  },
+  {
+   "key": "bills:malawi:2026-10-06",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-10-06",
+   "first_seen_at": "2026-10-19T17:01:58+00:00",
+   "published_at": null,
+   "published_how": null
   },
   {
    "key": "bills:egypt:2026-10-06",
@@ -698,5 +743,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-17T09:45:09+00:00"
+ "updated_at": "2026-10-19T17:13:10+00:00"
 }

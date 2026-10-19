@@ -32,6 +32,7 @@
     "/rates/kenya",
     "/rates/kenya/money-market-funds",
     "/rates/kenya/loan-apps",
+    "/rates/kenya/debt-plan",
     "/diaspora",
     "/brief",
     { "discover": "/brief", "match": "^/brief/[a-z0-9-]+$", "take": 3, "label": "Newest briefs" },

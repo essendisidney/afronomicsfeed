@@ -18,6 +18,7 @@ export const tools: Tool[] = [
   { href: "/rates/kenya/savings-goal", title: "Savings goal planner", answers: "How much to save each month to reach a goal", group: "Saving and investing", home: true },
   { href: "/chama", title: "Chama planner", answers: "Where your chama's money earns most, after tax", group: "Saving and investing" },
   { href: "/rates/kenya/loan-cost", title: "Loan true cost", answers: "Any loan quote as its true yearly rate, with fees", group: "Borrowing", home: true },
+  { href: "/rates/kenya/debt-plan", title: "Debt payoff plan", answers: "Which debt to clear first, and when you are debt-free", group: "Borrowing", home: true },
   { href: "/rates/kenya/check", title: "Is my rate fair?", answers: "A Kenya savings or loan rate against the market", group: "Borrowing", home: true },
   { href: "/rates/nigeria/check", title: "Is my rate fair? Nigeria", answers: "A naira savings or loan rate against the market", group: "Borrowing" },
   { href: "/rates/ghana/check", title: "Is my rate fair? Ghana", answers: "A cedi savings or loan rate against the market", group: "Borrowing" },

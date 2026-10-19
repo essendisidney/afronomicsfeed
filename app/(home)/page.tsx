@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadStory, MoveRow, movesRule, SectionHead, StoryRow, TodayStrip, ToolTiles } from "@/components/home/FrontPage";
+import { SinceLastVisit } from "@/components/home/SinceLastVisit";
 import { SectionNav, type SectionLink } from "@/components/layout/SectionNav";
 import { ButtonLink } from "@/components/ui/Button";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
@@ -57,6 +58,9 @@ export default async function TodayPage() {
   const nextGrade = ledger.rows.filter((r) => !r.outcome).map((r) => r.auction_value_date).sort()[0];
   const kenya = localInstitutionPrices.find((p) => p.id === "kenya");
   const today = new Date(now);
+  // "Since your last visit": the same four figures as numbers (percent), and the newest Receipts.
+  const marks = tiles.map((t) => ({ id: t.id, label: t.label.replace(/ by yield, after tax$/, ""), value: Number.parseFloat(t.value) })).filter((m) => Number.isFinite(m.value));
+  const newest = [...receipts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 8).map((r) => ({ slug: r.slug, title: r.title }));
 
   const sections: SectionLink[] = [
     { id: "today", label: "Today" },
@@ -98,6 +102,7 @@ export default async function TodayPage() {
         <section id="today" aria-labelledby="today-h" className="mt-1 scroll-mt-28">
           <SectionHead id="today-h" title="Today in 30 seconds" more="/numbers" moreLabel="rates and data" />
           <TodayStrip tiles={tiles} />
+          <SinceLastVisit marks={marks} stories={newest} now={today.toISOString()} />
           {changed && lead ? (
             <details className="mt-2 rounded-xl border border-rule bg-surface px-4 lg:hidden">
               <summary className="flex min-h-11 cursor-pointer items-center text-[14px] font-semibold text-ink">What changed this week ({moves.length})</summary>

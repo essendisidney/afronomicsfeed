@@ -23,7 +23,9 @@ export function LineChart({
   label: string;
 }) {
   const width = 820;
-  const pad = { top: 16, right: 88, bottom: 28, left: 44 };
+  // The right margin holds each line's end label ("ASBI 364d 12.37%"): about 6.5 units a character at 11px.
+  const labelChars = Math.max(0, ...series.map((s) => endLabel(s.label).length + 1 + `00.00${unit}`.length));
+  const pad = { top: 16, right: Math.max(88, Math.ceil(labelChars * 6.5) + 14), bottom: 28, left: 44 };
   const ref = useRef<SVGSVGElement>(null);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -160,7 +162,7 @@ export function LineChart({
           <g key={s.key}>
             <circle cx={x(p.i)} cy={y(p.v)} r={3} fill={s.color} stroke="var(--paper)" strokeWidth={2} />
             <text x={x(p.i) + 8} y={ly + 4} className="fill-ink text-[11px]">
-              {s.label.replace("-day", "d")} {fmt(p.v)}
+              {endLabel(s.label)} {fmt(p.v)}
             </text>
           </g>
         ))}
@@ -196,4 +198,13 @@ export function LineChart({
       ) : null}
     </figure>
   );
+}
+
+/**
+ * The name beside a line's last point. The right margin fits about a dozen characters before the value, so a long
+ * name ("Zimele Fixed Income Fund (Savings Plan)") is cut to its first word; the legend above keeps the full name.
+ */
+function endLabel(label: string) {
+  const short = label.replace("-day", "d");
+  return short.length <= 12 ? short : short.split(/\s+/)[0];
 }

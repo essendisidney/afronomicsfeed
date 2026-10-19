@@ -15,6 +15,7 @@ import { site } from "@/lib/site";
 import { auctionTitle, bondAuctionPath, pct2, signedBps, tenorLabel, type AuctionLine, type BondAuction } from "./auction";
 import { shortDate } from "@/lib/data/auction-week";
 import { millions, shortName, todayIso } from "./stats";
+import { MARKETS_CARD_ALT, shareImage } from "@/lib/share-image";
 
 /**
  * The dated page of one bond auction. Every figure comes from the auction file; a change is shown only where the
@@ -80,6 +81,7 @@ export function bondAuctionMetadata(a: BondAuction): Metadata {
       description: fitDescription(n.description, 200),
       url,
       type: "article",
+      images: shareImage("/markets", MARKETS_CARD_ALT),
     },
   };
 }

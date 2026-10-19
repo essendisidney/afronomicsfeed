@@ -15,6 +15,7 @@ import { bondAuctionPath } from "./auction";
 import { bondFacts, longDate, millions, shortName, tableOrder, tenorText, todayIso, type Issuer } from "./stats";
 import { ActionTile } from "@/components/ui/Card";
 import { FullHistoryLink } from "@/components/data/FullHistoryLink";
+import { MARKETS_CARD_ALT, shareImage } from "@/lib/share-image";
 
 const TABLE_LIMIT = 100;
 
@@ -43,7 +44,7 @@ export function bondMetadata(scope: Scope): Metadata {
     title: fitTitle(n.title),
     description: fitDescription(n.description),
     alternates: { canonical: `${site.url}${n.path}` },
-    openGraph: { title: n.title, description: fitDescription(n.description, 200), url: `${site.url}${n.path}` },
+    openGraph: { title: n.title, description: fitDescription(n.description, 200), url: `${site.url}${n.path}`, images: shareImage("/markets", MARKETS_CARD_ALT) },
   };
 }
 

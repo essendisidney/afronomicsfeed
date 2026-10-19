@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { TopicChips } from "@/components/ui/TopicChips";
 import { getArticlesByTopic, toIndexItem } from "@/lib/content";
 import { getTopic, topics } from "@/lib/taxonomy";
+import { site } from "@/lib/site";
 
 export function generateStaticParams() {
   return topics.map((topic) => ({ slug: topic.slug }));
@@ -19,7 +20,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const topic = getTopic(slug);
   if (!topic) return {};
-  return { title: topic.name, description: topic.summary };
+  return { title: topic.name, description: topic.summary, alternates: { canonical: `${site.url}/topics/${topic.slug}` } };
 }
 
 export default async function TopicPage({

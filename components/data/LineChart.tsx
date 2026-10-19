@@ -110,6 +110,15 @@ export function LineChart({
   const active = hover != null ? rows[hover] : null;
   const fmt = (v: number) => `${v.toFixed(2)}${unit}`;
 
+  // No points to draw (a source that returned no history): say so instead of an empty, broken frame.
+  if (!rows.some((row) => series.some((s) => row.values[s.key] != null))) {
+    return (
+      <p className="rounded-2xl border border-rule bg-paper-2 px-5 py-8 text-center text-[14px] text-ink-soft">
+        No history to chart yet.
+      </p>
+    );
+  }
+
   return (
     <figure className="relative">
       <div className="mb-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-ink-soft" aria-hidden>

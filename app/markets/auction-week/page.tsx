@@ -8,6 +8,7 @@ import { SectionTitle } from "@/components/data/parts";
 import { loadAuctionWeek, longDate, rangeLabel, shortDate } from "@/lib/data/auction-week";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
+import { MARKETS_CARD_ALT, shareImage } from "@/lib/share-image";
 
 export const revalidate = 3600;
 
@@ -25,7 +26,7 @@ export function generateMetadata(): Metadata {
     title: fitTitle(title),
     description: fitDescription(description),
     alternates: { canonical: `${site.url}${PATH}` },
-    openGraph: { title, description, url: `${site.url}${PATH}`, type: "article" },
+    openGraph: { title, description, url: `${site.url}${PATH}`, type: "article", images: shareImage("/markets", MARKETS_CARD_ALT) },
     twitter: { card: "summary_large_image", title, description },
   };
 }

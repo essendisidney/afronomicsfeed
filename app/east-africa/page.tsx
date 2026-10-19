@@ -12,6 +12,7 @@ import { EmailAlertBox } from "@/components/ui/RateAlertForm";
 import { eaDate, eastAfricaCountries, kenyaSavings, monthChanges, newestDate } from "@/lib/data/east-africa";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
+import { SITE_CARD_ALT, shareImage } from "@/lib/share-image";
 
 export const revalidate = 3600;
 
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   title: fitTitle(title),
   description: fitDescription(description),
   alternates: { canonical: `${site.url}/east-africa` },
-  openGraph: { title, description, url: `${site.url}/east-africa` },
+  openGraph: { title, description, url: `${site.url}/east-africa`, images: shareImage("", SITE_CARD_ALT) },
 };
 
 export default function EastAfricaPage() {

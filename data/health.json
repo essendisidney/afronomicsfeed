@@ -365,13 +365,7 @@
   {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-10-19",
-   "failures_in_row": 0
-  },
-  {
-   "name": "Calls ledger",
-   "result": "success",
-   "day": "2026-10-17",
+   "day": "2026-10-20",
    "failures_in_row": 0
   },
   {
@@ -383,13 +377,19 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-10-19",
+   "day": "2026-10-20",
    "failures_in_row": 0
   },
   {
    "name": "Index release",
    "result": "success",
    "day": "2026-10-19",
+   "failures_in_row": 0
+  },
+  {
+   "name": "IndexNow",
+   "result": "success",
+   "day": "2026-10-20",
    "failures_in_row": 0
   },
   {

@@ -1,8 +1,5 @@
-import { redactEmails } from "@/lib/security";
-import { sendEmail, unsubscribeToken } from "@/lib/mail";
+import { joinMorning } from "@/lib/morning-signup";
 import { site } from "@/lib/site";
-import { rpc } from "@/lib/store";
-import { welcomeEmail } from "@/lib/welcome-email";
 
 export const runtime = "nodejs";
 
@@ -35,18 +32,10 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, reason: "Please enter a valid email address." }, { status: 400 });
   }
 
-  const result = await rpc("af_subscribe_v2", { p_email: email, p_role: role, p_source: source });
-  if (!result.ok) {
-    // Logged without the address (no emails in logs): only the domain, so a failure can be seen and fixed.
-    console.log(`[subscribe] not stored ${JSON.stringify({ domain: email.split("@")[1], role, source, at: new Date().toISOString(), reason: redactEmails(result.reason) })}`);
+  const joined = await joinMorning(email, role, source);
+  if (!joined.ok) {
     // Say so rather than promise a guide that will not come: the reader can try again or write to the desk.
     return Response.json({ ok: false, reason: `We could not save your sign-up just now. Please try again in a minute, or write to ${site.contactEmail}.` }, { status: 503 });
-  }
-  if (result.value === "welcome") {
-    const unsub = `${site.url}/api/unsubscribe?e=${encodeURIComponent(email)}&t=${await unsubscribeToken(email)}`;
-    const mail = welcomeEmail(unsub);
-    const sent = await sendEmail(email, mail.subject, mail.html, mail.text, unsub);
-    if (!sent.ok) console.log(`[subscribe] welcome not sent: ${redactEmails(sent.reason)}`);
   }
   return Response.json({ ok: true, stored: true });
 }

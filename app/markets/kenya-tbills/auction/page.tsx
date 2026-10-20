@@ -72,6 +72,11 @@ export default function AuctionPage() {
             For bills dated {d(next.valueDate)}. Bid through DhowCSD or Treasury Mobile Direct. Minimum KES 50,000 non-competitive, KES 2 million competitive.
             The CBK confirms the date and amounts in each week’s notice.
           </p>
+          <p className="mt-3">
+            <Link href="/markets/kenya-tbills/call-it" className="inline-flex min-h-11 items-center font-semibold text-forest underline underline-offset-2">
+              Call it: guess this week’s rates and see how close you get
+            </Link>
+          </p>
         </section>
       ) : null}
 

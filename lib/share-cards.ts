@@ -116,6 +116,7 @@ export const toolQuestions: Record<string, string> = {
   "/markets/ipo-calculator": "What does your money buy in the IPO?",
   "/markets/kenya-tbills/calculator": "What will my Treasury bill pay?",
   "/markets/kenya-tbills/auction": "Before and after Kenya’s T-bill auction",
+  "/markets/kenya-tbills/call-it": "Call this week’s T-bill rates",
   "/rates/kenya/check": "Is the rate you were offered fair?",
   "/chama": "Where should our chama put its money?",
   "/diaspora": "Money home, and what it earns there",

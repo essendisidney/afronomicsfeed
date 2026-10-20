@@ -72,3 +72,106 @@ export function scoreBoard(guesses: (Guess & { handle: string })[], actual: Part
     .filter((s) => s.tenors > 0)
     .sort((a, b) => a.missBps - b.missBps || b.tenors - a.tenors || a.handle.localeCompare(b.handle));
 }
+
+/** A stored guess as the score emails read it (supabase/migrations/0045_call_it_scores.sql, af_call_it_entries). */
+export type Entry = Guess & { id: string; email: string; handle: string | null; show: boolean; scored_at: string | null };
+export type Placed = { id: string; place: number; missBps: number; perTenor: Partial<Record<Tenor, number>> };
+
+/** Every entry's place, named or not, best first; entries with the same mean miss share a place. */
+export function placeAll(entries: (Guess & { id: string })[], actual: Partial<Record<Tenor, number>>): Placed[] {
+  const scored = scoreBoard(
+    entries.map((e) => ({ handle: e.id, g91: e.g91, g182: e.g182, g364: e.g364 })),
+    actual,
+  );
+  return scored.map((s) => ({
+    id: s.handle,
+    missBps: s.missBps,
+    perTenor: s.perTenor,
+    place: 1 + scored.filter((o) => o.missBps < s.missBps).length,
+  }));
+}
+
+const ordinal = (n: number) => {
+  const t = n % 100;
+  return `${n}${t >= 11 && t <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" } as Record<number, string>)[n % 10] ?? "th"}`;
+};
+const bps = (n: number) => `${Math.round(n * 10) / 10} bp${Math.round(n * 10) === 10 ? "" : "s"}`;
+const pct = (n: number) => `${n.toFixed(2)}%`;
+const dayLabel = (iso: string) =>
+  new Date(`${iso.slice(0, 10)}T12:00:00Z`).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
+const closeLabel = (iso: string) => {
+  const d = new Date(iso);
+  const day = d.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "Africa/Nairobi" });
+  const time = d.toLocaleTimeString("en-GB", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Africa/Nairobi" }).replace(":00", "").replace(" pm", " p.m.").replace(" am", " a.m.");
+  return `${day} at ${time} Nairobi time`;
+};
+
+export type ScoreNote = {
+  subject: string;
+  lead: string[];
+  rows: { tenor: Tenor; call: string; result: string; miss: string; ours: string }[];
+  after: string[];
+};
+
+/**
+ * One player's score email, as text: their calls against the CBK result, their place, how our own published range
+ * did on the same bills, the named leaders, and the round now open. The words only; lib/call-it-mail.ts lays them out.
+ */
+export function scoreNote(input: {
+  entry: Guess;
+  placed: Placed;
+  players: number;
+  actual: Partial<Record<Tenor, number>>;
+  range: Partial<Record<Tenor, { low: number; high: number }>>;
+  /** How many callers share this player's place, the player included. */
+  atPlace: number;
+  /** Named callers (they chose to show a name), best first, with their place among all callers. */
+  leaders: { handle: string; missBps: number; place: number }[];
+  valueDate: string;
+  next: Round;
+}): ScoreNote {
+  const { entry, placed, players, actual, range, atPlace, leaders, valueDate, next } = input;
+  const rows = TENORS.filter((t) => entry[`g${t}` as keyof Guess] != null).map((t) => {
+    const call = entry[`g${t}` as keyof Guess] as number;
+    const a = actual[t];
+    const r = range[t];
+    return {
+      tenor: t,
+      call: pct(call),
+      result: a == null ? "no result" : pct(a),
+      miss: placed.perTenor[t] == null ? "–" : bps(placed.perTenor[t]!),
+      ours: r ? `${pct(r.low)} to ${pct(r.high)}` : "–",
+    };
+  });
+
+  // Our call on the same bills: the middle of our published range, scored the same way as the reader's.
+  const ourMisses = TENORS.filter((t) => placed.perTenor[t] != null && range[t] && actual[t] != null).map((t) =>
+    Math.round(Math.abs((range[t]!.low + range[t]!.high) / 2 - actual[t]!) * 100),
+  );
+  const ourMiss = ourMisses.length ? ourMisses.reduce((x, y) => x + y, 0) / ourMisses.length : null;
+  const won = placed.place === 1;
+  const shared = won && atPlace > 1;
+
+  const subject = won
+    ? `Call it: you ${shared ? "shared" : "won"} this week's round`
+    : `Call it: ${bps(placed.missBps)} off, ${ordinal(placed.place)} of ${players}`;
+  const lead = [
+    `The Central Bank of Kenya has published the Treasury bill results for ${dayLabel(valueDate)}.`,
+    players === 1
+      ? `You were the only caller this round, and you missed by ${bps(placed.missBps)} on average (100 bps is one percentage point).`
+      : `You missed by ${bps(placed.missBps)} on average (100 bps is one percentage point), ${won ? (shared ? "level first" : "the closest call") : `${atPlace > 1 ? "joint " : ""}${ordinal(placed.place)}`} of ${players} callers.`,
+  ];
+  const after: string[] = [];
+  if (ourMiss != null)
+    after.push(
+      placed.missBps < ourMiss
+        ? `You beat us. The middle of our published range missed the same bills by ${bps(ourMiss)}.`
+        : placed.missBps === ourMiss
+          ? `You matched us: the middle of our published range also missed by ${bps(ourMiss)}.`
+          : `The middle of our published range missed the same bills by ${bps(ourMiss)}, so we were closer this time.`,
+    );
+  const named = leaders.slice(0, 3);
+  if (named.length) after.push(`Top of the board: ${named.map((l) => `${ordinal(l.place)} ${l.handle} (${bps(l.missBps)})`).join(", ")}.`);
+  after.push(`The next round is open until ${closeLabel(next.closesAt)}, for the bills dated ${dayLabel(next.valueDate)}.`);
+  return { subject, lead, rows, after };
+}

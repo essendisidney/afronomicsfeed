@@ -17,6 +17,7 @@
     "/markets/tbills",
     { "discover": "/markets/tbills", "match": "^/markets/tbills/[a-z-]+$", "take": 3, "label": "T-bill market pages" },
     "/markets/bonds",
+    "/markets/waemu-demand",
     { "discover": "/markets/bonds", "match": "^/markets/bonds/[a-z-]+$", "take": 1, "label": "Bond market page" },
     {
       "discover": "/markets/bonds",

@@ -30,6 +30,9 @@ import { loadCases } from "@/lib/cases";
 import { ContentPanel, type Campaign } from "./ContentPanel";
 import { DecisionsPanel, HealthPanel, RoutinesPanel, type Freshness } from "./OpsPanels";
 import { Cockpit } from "./Cockpit";
+import { MwananchiPanel } from "./MwananchiPanel";
+import { loadPains } from "@/lib/data/mwananchi";
+import { nextMoves } from "@/lib/mwananchi-core";
 import { Glance } from "./Glance";
 import { contentLane, healthLane, moneyLane, readersLane } from "./cockpit-core";
 import { loadReceipts } from "@/lib/receipts";
@@ -203,6 +206,7 @@ const NAV: [string, string][] = [
   ["#inbox", "Inbox"],
   ["#pilots", "Pilots"],
   ["#content", "Content"],
+  ["#mwananchi", "Build next"],
   ["#health", "Data"],
   ["#routines", "Routines"],
   ["#decisions", "Decisions"],
@@ -382,6 +386,8 @@ export default async function DeskPage() {
     contentLane({ receipts: loadReceipts(), calls: editorialRows(todayNbo), ideas: reports.filter((r) => r.kind === "story" && r.status === "new").length, today: todayNbo }),
     healthLane({ health, staleFeeds: freshness.filter((f) => f.stale).map((f) => f.name) }),
   ];
+  // The Mwananchi engine: this month (Nairobi) and the 7-day page views the desk already has.
+  const moves = nextMoves(loadPains(), { month: Number(todayNbo.slice(5, 7)), views: desk.top_pages });
   // The first screen (Glance): people per UTC day from af_desk_people; today is so far, yesterday and the 7-day mean are full days.
   const utcDay = (d: number) => new Date(now - d * DAY).toISOString().slice(0, 10);
   const peopleOn = (day: string) => people?.people_by_day.find((r) => r.day === day)?.people ?? 0;
@@ -433,6 +439,10 @@ export default async function DeskPage() {
               ? "Every tagged link (utm source/campaign): LinkedIn posts, email alerts, Telegram, widgets, shares. People = one browser a day."
               : "LinkedIn only, from af_desk_audience; every campaign and people counts after migration 0040."
           }
+        />
+        <MwananchiPanel
+          {...moves}
+          signalsNote="Scored on reach, harm, season, data we hold, ways to earn and this week's page views (lib/mwananchi-core.ts). Readers' empty searches join once migration 0043 is applied."
         />
         <HealthPanel health={health} latency={loadLatency()} freshness={freshness} />
         <RoutinesPanel />

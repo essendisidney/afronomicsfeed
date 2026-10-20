@@ -9,6 +9,8 @@ import { loadMpesaTariffs } from "@/lib/data/mpesa-tariffs";
 import { loadPayrollRates } from "@/lib/data/payroll-rates";
 import { worth } from "@/lib/inflation";
 import { apply, scenario } from "@/lib/ipo-calc";
+import { comparePlans } from "@/lib/debt-plan";
+import { debtPresets } from "@/lib/debt-presets";
 import { loanCost } from "@/lib/loan-calc";
 import { charge } from "@/lib/mpesa-calc";
 import { clampText, type SignatureCard } from "@/lib/og-signature";
@@ -107,6 +109,7 @@ export function toolsSignature(): SignatureCard {
 export const toolQuestions: Record<string, string> = {
   "/rates/kenya/net-salary": "What will you actually take home?",
   "/rates/kenya/loan-cost": "What does this loan really cost?",
+  "/rates/kenya/debt-plan": "Which debt should you pay first?",
   "/rates/kenya/savings-goal": "How much do you need to save each month?",
   "/rates/kenya/inflation": "What your shilling has lost",
   "/rates/kenya/mpesa-charges": "What do M-PESA and Fuliza really cost you?",
@@ -139,6 +142,23 @@ const examples: Record<string, () => Example | null> = {
       figure: { value: `${pct1(r.apr)} a year`, label: `the true cost of ${kes(L.amount)} at ${L.rate}% a ${L.unit} ${L.basis}, over ${L.months} months` },
       line: { text: `${kes(r.payment)} a month, ${kes(r.totalCost)} in total. Information, not advice.` },
       source: `Afronomics calculation from the quoted terms · ${cardDay(today())}`,
+    };
+  },
+  "/rates/kenya/debt-plan": () => {
+    const presets = debtPresets();
+    const debts = D.debtPlan.debts
+      .map((d) => ({ d, p: presets.find((x) => x.id === d.preset) }))
+      .filter((x) => x.p?.charge)
+      .map(({ d, p }) => ({ name: p!.label, balance: d.balance, minimum: d.minimum, charge: p!.charge! }));
+    const best = comparePlans(debts, D.debtPlan.budget).find((r) => r.feasible);
+    if (!best || best.months == null) return null;
+    return {
+      figure: {
+        value: `${best.months} months`,
+        label: `to clear ${kes(debts.reduce((n, x) => n + x.balance, 0))} of Fuliza, M-Shwari and a bank loan on ${kes(D.debtPlan.budget)} a month`,
+      },
+      line: { text: `costliest first · ${kes(best.totalCharges)} in charges. Information, not advice.` },
+      source: `Published Safaricom, lender and CBK rates · ${cardDay(today())}`,
     };
   },
   "/rates/kenya/savings-goal": () => {

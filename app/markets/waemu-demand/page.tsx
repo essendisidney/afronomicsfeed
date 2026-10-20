@@ -14,7 +14,7 @@ import { fitDescription } from "@/lib/seo";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "WAEMU auction demand tracker: how heavily West African governments' auctions are bid",
+  title: "WAEMU auction demand: bid cover by government",
   description: fitDescription(
     "Bid cover at every UMOA-Titres auction for Benin, Burkina Faso, Côte d’Ivoire, Mali, Niger, Senegal and Togo: bids divided by the amount sought, the median of the last eight auctions, and each government's one-year bill yield.",
   ),

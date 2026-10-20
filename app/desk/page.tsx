@@ -28,6 +28,7 @@ import { PilotsPanel } from "./PilotsPanel";
 import { CasebookPanel } from "./CasebookPanel";
 import { loadCases } from "@/lib/cases";
 import { ContentPanel, type Campaign } from "./ContentPanel";
+import { SignalsPanel, type Signals } from "./SignalsPanel";
 import { DecisionsPanel, HealthPanel, RoutinesPanel, type Freshness } from "./OpsPanels";
 import { Cockpit } from "./Cockpit";
 import { MwananchiPanel } from "./MwananchiPanel";
@@ -206,6 +207,7 @@ const NAV: [string, string][] = [
   ["#inbox", "Inbox"],
   ["#pilots", "Pilots"],
   ["#content", "Content"],
+  ["#signals", "Readers"],
   ["#mwananchi", "Build next"],
   ["#health", "Data"],
   ["#routines", "Routines"],
@@ -235,7 +237,7 @@ export default async function DeskPage() {
 
   // Every desk function at once (each re-checks the key); the page waits for the slowest, not the sum.
   const call = (fn: string, args: Record<string, unknown> = {}) => (preview ? Promise.resolve(null) : rpc(fn, { p_secret: key, ...args }));
-  const [pay, aud, ppl, mon, ref, keyList, dl, fun, rep, tod, inb, fx] = await Promise.all([
+  const [pay, aud, ppl, mon, ref, keyList, dl, fun, rep, tod, inb, sig, fx] = await Promise.all([
     call("af_payments"),
     call("af_desk_audience"),
     call("af_desk_people"),
@@ -247,6 +249,7 @@ export default async function DeskPage() {
     call("af_reader_report_list", { p_limit: 60 }),
     call("af_desk_today"),
     call("af_desk_inbox", { p_days: 30 }),
+    call("af_desk_signals"),
     preview ? Promise.resolve(null) : loadFxQuote(),
   ]);
   const payments = value<Payments>(pay);
@@ -260,6 +263,7 @@ export default async function DeskPage() {
   const reports = value<ReaderReport[]>(rep, Array.isArray) ?? [];
   const today0040 = value<TodayData>(tod);
   const rawInbox = value<RawInbox>(inb, Array.isArray);
+  const signals = value<Signals>(sig);
   // Units of each currency per US dollar; a fixed fallback for KES only if the live rate is unavailable.
   const perUsd: Record<string, number> = { USD: 1, ...(fx?.rates ?? { KES: 129 }) };
   const fxNote = fx ? `${fx.sourceName} rates of ${fx.updated.slice(5, 16)}` : "a fixed KES 129 to the dollar (live rate unavailable)";
@@ -387,7 +391,7 @@ export default async function DeskPage() {
     healthLane({ health, staleFeeds: freshness.filter((f) => f.stale).map((f) => f.name) }),
   ];
   // The Mwananchi engine: this month (Nairobi) and the 7-day page views the desk already has.
-  const moves = nextMoves(loadPains(), { month: Number(todayNbo.slice(5, 7)), views: desk.top_pages });
+  const moves = nextMoves(loadPains(), { month: Number(todayNbo.slice(5, 7)), views: desk.top_pages, misses: signals?.search_misses ?? [] });
   // The first screen (Glance): people per UTC day from af_desk_people; today is so far, yesterday and the 7-day mean are full days.
   const utcDay = (d: number) => new Date(now - d * DAY).toISOString().slice(0, 10);
   const peopleOn = (day: string) => people?.people_by_day.find((r) => r.day === day)?.people ?? 0;
@@ -440,9 +444,10 @@ export default async function DeskPage() {
               : "LinkedIn only, from af_desk_audience; every campaign and people counts after migration 0040."
           }
         />
+        <SignalsPanel signals={signals} />
         <MwananchiPanel
           {...moves}
-          signalsNote="Scored on reach, harm, season, data we hold, ways to earn and this week's page views (lib/mwananchi-core.ts). Readers' empty searches join once migration 0043 is applied."
+          signalsNote="Scored on reach, harm, season, data we hold, ways to earn, this week's page views and readers' searches that found nothing (lib/mwananchi-core.ts)."
         />
         <HealthPanel health={health} latency={loadLatency()} freshness={freshness} />
         <RoutinesPanel />

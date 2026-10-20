@@ -64,6 +64,13 @@ export default function PrivacyPage() {
         buttons, on pricing and pilot buttons and on links to a central bank’s own notice, the start and sending of a pilot request form, and
         survey answers. Nothing identifies who clicked.
       </p>
+      <p>
+        On stories, we count how far each page is read (a quarter, half, three quarters, the end) and whether it held someone’s attention for 30
+        seconds or two minutes. To learn whether readers come back, your browser notes in its local storage the week of your first visit and
+        sends one count the first time you return within a week, a month and three months. When a search on the site finds nothing, we keep the
+        words searched, lowercased and stripped of punctuation; a search containing an email address or a long run of digits (such as a phone or
+        ID number) is never sent. These too are only daily totals, with nothing that identifies you.
+      </p>
       <h2>Why, and on what basis</h2>
       <ul>
         <li>Newsletter, alerts and surveys: your consent, which you can withdraw at any time (every email has a stop link).</li>

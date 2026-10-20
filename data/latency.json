@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 6,
-  "results": 16,
+  "results": 17,
   "p50_h": 4.2,
   "p90_h": 13.2
  },
@@ -209,7 +209,7 @@
    "kind": "bonds",
    "market": "waemu",
    "name": "WAEMU (UMOA-Titres)",
-   "results": 2,
+   "results": 3,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -218,6 +218,15 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:waemu:2026-10-20:cote-divoire",
+   "kind": "bonds",
+   "market": "waemu",
+   "date": "2026-10-20",
+   "first_seen_at": "2026-10-20T20:11:52+00:00",
+   "published_at": null,
+   "published_how": null
+  },
   {
    "key": "bonds:egypt:2026-10-20",
    "kind": "bonds",
@@ -761,5 +770,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-20T09:37:23+00:00"
+ "updated_at": "2026-10-20T20:14:32+00:00"
 }

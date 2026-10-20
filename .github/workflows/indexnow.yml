@@ -1,0 +1,29 @@
+# Tell the IndexNow search engines (Bing, Yandex, Seznam, Naver) about new and changed pages (scripts/indexnow.py).
+# Daily: pages with their own date from the last 3 days. Mondays and on demand: the whole sitemap. Commits nothing.
+name: IndexNow
+
+on:
+  schedule:
+    - cron: "40 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Submit
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] || [ "$(date -u +%u)" = "1" ]; then
+            python scripts/indexnow.py --all
+          else
+            python scripts/indexnow.py
+          fi

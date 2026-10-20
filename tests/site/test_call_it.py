@@ -39,6 +39,23 @@ console.log(JSON.stringify({
     ],
     { 91: 8.75, 182: 8.86, 364: 9.04 },
   ),
+  ...(() => {
+    const actual = { 91: 8.75, 182: 8.86, 364: 9.04 };
+    const range = { 91: { low: 8.74, high: 8.90 }, 182: { low: 8.85, high: 9.01 }, 364: { low: 9.03, high: 9.14 } };
+    const entries = [
+      { id: "a", g91: 8.76, g182: 8.86, g364: 9.10 },
+      { id: "b", g91: 9.0, g182: null, g364: null },
+      { id: "c", g91: 8.76, g182: 8.86, g364: 9.10 },
+      { id: "d", g91: null, g182: null, g364: 9.0 },
+    ];
+    const placed = c.placeAll(entries, actual);
+    const next = { valueDate: "2026-11-02", closesAt: "2026-10-29T11:00:00.000Z" };
+    const note = (id, atPlace) => c.scoreNote({
+      entry: entries.find((e) => e.id === id), placed: placed.find((p) => p.id === id), players: 4, atPlace,
+      actual, range, leaders: [{ handle: "Wanjiku", missBps: placed.find((p) => p.id === "c").missBps, place: 1 }], valueDate: "2026-10-26", next,
+    });
+    return { placed, joint: note("a", 2), last: note("b", 1) };
+  })(),
 }));
 """
 
@@ -88,3 +105,33 @@ def test_migration_keeps_emails_private():
     board_fn = sql.split("create or replace function public.af_call_it_board", 1)[1].split("$$;", 1)[0]
     assert "email" not in board_fn.split("as $$", 1)[1]
     assert "enable row level security" in sql and "now() >= p_closes" in sql
+
+
+def test_every_entry_gets_a_place_and_ties_share_it():
+    placed = {p["id"]: p for p in run()["placed"]}
+    assert placed["a"]["place"] == placed["c"]["place"] == 1
+    assert placed["d"]["place"] == 3 and placed["d"]["missBps"] == 4
+    assert placed["b"]["place"] == 4 and placed["b"]["missBps"] == 25
+
+
+def test_score_email_says_the_miss_the_place_and_how_we_did():
+    out = run()
+    joint, last = out["joint"], out["last"]
+    assert joint["subject"] == "Call it: you shared this week's round"
+    assert "level first of 4 callers" in joint["lead"][1]
+    # Our midpoints (8.82, 8.93, 9.085) miss by 7, 7 and 5 bps: 6.3 on average over the same three bills.
+    assert any("You beat us" in line and "6.3 bps" in line for line in joint["after"])
+    assert [r["tenor"] for r in joint["rows"]] == [91, 182, 364] and joint["rows"][0]["miss"] == "1 bp"
+    assert last["subject"] == "Call it: 25 bps off, 4th of 4"
+    assert any("we were closer" in line for line in last["after"])  # our 91-day midpoint missed by 7
+    assert any("1st Wanjiku" in line for line in last["after"])
+    assert "Thursday 29 October at 2 p.m. Nairobi time" in last["after"][-1] and "Monday 2 November" in last["after"][-1]
+
+
+def test_score_migration_keeps_the_board_private_and_claims_before_sending():
+    sql = (ROOT / "supabase" / "migrations" / "0045_call_it_scores.sql").read_text()
+    assert "af_call_it_board" not in sql.split("--", 1)[0]  # the public board is untouched
+    assert sql.count("k.name = 'cron' and k.value = p_secret") == 2
+    assert "scored_at is null" in sql
+    route = (ROOT / "app" / "api" / "send" / "call-it" / "route.ts").read_text()
+    assert route.index("af_call_it_mark_scored") < route.index("sendEmail(")

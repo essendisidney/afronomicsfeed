@@ -65,6 +65,17 @@ jobs:
             done
           fi
           curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" "$url"
+      # Call it score emails: one to each reader who called the latest Kenya T-bill auction, after the rate-alert step
+      # has waited for this run's data to deploy. Each guess is claimed before its email goes, so nothing goes twice;
+      # before migration 0045 is applied it sends nothing.
+      - name: Send Call it scores
+        if: ${{ !cancelled() }}
+        env:
+          AF_CRON_SECRET: ${{ secrets.AF_CRON_SECRET }}
+        run: |
+          if [ -z "$AF_CRON_SECRET" ]; then echo "AF_CRON_SECRET not set; skipping"; exit 0; fi
+          curl -fsS --retry 2 --retry-delay 30 -m 300 -X POST -H "Authorization: Bearer $AF_CRON_SECRET" https://www.afronomicsfeed.com/api/send/call-it
+        continue-on-error: true
       # Bond-result emails to API key holders, for a Kenya bond result this run added (see african-auctions.yml).
       - name: Send bond-result alerts
         if: ${{ !cancelled() }}

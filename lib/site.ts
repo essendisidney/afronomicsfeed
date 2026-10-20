@@ -97,6 +97,7 @@ export const footerGroups = [
       { href: "/markets/kenya-bonds", label: "Kenya bonds and yield curve" },
       { href: "/markets/tbills", label: "T-bill monitor" },
       { href: "/markets/kenya-tbills/auction", label: "Kenya auction: likely rates, did my bid win?" },
+      { href: "/markets/kenya-tbills/call-it", label: "Call it: guess this week's T-bill rates" },
       { href: "/markets/kenya-tbills/calculator", label: "Treasury bill calculator" },
       { href: "/markets/ipo-calculator", label: "IPO calculator" },
       { href: "/markets/bill-index", label: "Sovereign Bill Index" },

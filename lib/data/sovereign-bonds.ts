@@ -242,6 +242,9 @@ export const loadBondMarket = cache((slug: BondMarket["slug"]): { updatedAt: str
       // Bonds of a stated tenor of a year or more only: short or untenored OAT lines are buybacks, exchanges or
       // residual reopenings priced near par at money-market yields, not new issuance (they stay in the raw file).
       if (r.instrument !== "OAT" || rate === null || !date || months === null || months < 12) return [];
+      // UMOA-Titres prints the lines a treasury buys back ("rachat") with negative amounts, on the same pages as new
+      // issues; whatever their tenor, they are not auctions of new debt (they stay in the raw file).
+      if ([r.sought_xof_m, r.bids_xof_m, r.accepted_xof_m].some((v) => (n(v) ?? 0) < 0)) return [];
       return [
         {
           date,

@@ -57,12 +57,12 @@
   {
    "market": "nigeria",
    "publisher": "Central Bank of Nigeria",
-   "source": "https://www.cbn.gov.ng/rates/mnymktind.html",
+   "source": "https://www.cbn.gov.ng/MonetaryPolicy/Decisions.html",
    "label": "Monetary Policy Rate",
-   "rate": 26.5,
+   "rate": 23.0,
    "upper": null,
-   "date_as_printed": "August 2026",
-   "read_at": "2026-10-19T22:31:03+00:00"
+   "date_as_printed": "21st and 22nd September 2026",
+   "read_at": "2026-10-20T08:11:22+00:00"
   },
   {
    "market": "southafrica",

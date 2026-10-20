@@ -72,6 +72,11 @@ def main() -> int:
                 t = re.sub(r"\s+", " ", " ".join((page.extract_text() or "") for page in pdf.pages[:12]))
         else:
             t = text_of(r.text)
+            if os.environ.get("PROBE_FULL"):  # the whole page's text, from the first match on, in lines
+                m = pattern.search(t)
+                body = t[m.start() if m else 0 :][:20000]
+                for i in range(0, len(body), 400):
+                    print(f"  | {body[i:i + 400]}")
             if os.environ.get("PROBE_RAW"):  # search the raw HTML too: where a page loads its figures from
                 for m in list(pattern.finditer(r.text))[:25]:
                     print(f"  raw: {r.text[max(0, m.start() - 160):m.end() + 160]!r}")

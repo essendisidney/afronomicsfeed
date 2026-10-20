@@ -3,9 +3,11 @@ import Link from "next/link";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getArticlesByInstitution } from "@/lib/content";
 import { institutions } from "@/lib/taxonomy";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Institutions",
+  alternates: { canonical: `${site.url}/institutions` },
   description: "The primaries this desk cites: CBK, CMA, NSE, Treasury, SASRA, and IRA.",
 };
 

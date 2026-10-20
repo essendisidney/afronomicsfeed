@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProsePage } from "@/components/data/ProsePage";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Cookies",
+  alternates: { canonical: `${site.url}/legal/cookies` },
   description: "How Afronomics uses cookies and local storage.",
 };
 

@@ -31,6 +31,10 @@ import { ContentPanel, type Campaign } from "./ContentPanel";
 import { SignalsPanel, type Signals } from "./SignalsPanel";
 import { DecisionsPanel, HealthPanel, RoutinesPanel, type Freshness } from "./OpsPanels";
 import { Cockpit } from "./Cockpit";
+import { MwananchiPanel } from "./MwananchiPanel";
+import { loadPains } from "@/lib/data/mwananchi";
+import { nextMoves } from "@/lib/mwananchi-core";
+import { Glance } from "./Glance";
 import { contentLane, healthLane, moneyLane, readersLane } from "./cockpit-core";
 import { loadReceipts } from "@/lib/receipts";
 import { editorialRows } from "@/lib/editorial";
@@ -204,6 +208,7 @@ const NAV: [string, string][] = [
   ["#pilots", "Pilots"],
   ["#content", "Content"],
   ["#signals", "Readers"],
+  ["#mwananchi", "Build next"],
   ["#health", "Data"],
   ["#routines", "Routines"],
   ["#decisions", "Decisions"],
@@ -385,18 +390,40 @@ export default async function DeskPage() {
     contentLane({ receipts: loadReceipts(), calls: editorialRows(todayNbo), ideas: reports.filter((r) => r.kind === "story" && r.status === "new").length, today: todayNbo }),
     healthLane({ health, staleFeeds: freshness.filter((f) => f.stale).map((f) => f.name) }),
   ];
+  // The Mwananchi engine: this month (Nairobi) and the 7-day page views the desk already has.
+  const moves = nextMoves(loadPains(), { month: Number(todayNbo.slice(5, 7)), views: desk.top_pages, misses: signals?.search_misses ?? [] });
+  // The first screen (Glance): people per UTC day from af_desk_people; today is so far, yesterday and the 7-day mean are full days.
+  const utcDay = (d: number) => new Date(now - d * DAY).toISOString().slice(0, 10);
+  const peopleOn = (day: string) => people?.people_by_day.find((r) => r.day === day)?.people ?? 0;
+  const glance = {
+    peopleToday: people ? peopleOn(utcDay(0)) : null,
+    peopleYesterday: people ? peopleOn(utcDay(1)) : null,
+    peopleAvg7: people ? Math.round([1, 2, 3, 4, 5, 6, 7].reduce((n, d) => n + peopleOn(utcDay(d)), 0) / 7) : null,
+    collectedToday: (() => {
+      const t = toUsd(windows[0].rows, perUsd).total;
+      return `$${t < 10 && t > 0 ? t.toFixed(2) : Math.round(t).toLocaleString("en-US")}`;
+    })(),
+    paymentsToday: windows[0].count ?? 0,
+    signups7d: desk.subscribers_7d,
+    returningShare7d: returningShare,
+    topSource7d: people?.people_sources_7d[0] ? sourceLabel(people.people_sources_7d[0].source) : (desk.referrers[0]?.host ?? null),
+  };
   const moneyNote = `Real payments only (status “success”; tests never counted). Today starts at midnight Nairobi. US dollars at ${fxNote}.${today0040 ? "" : " Before migration 0040, today is read from the 50 latest payments."}`;
 
   return (
     <PageShell share={false} crumbs={[{ href: "/", label: "Home" }, { label: "Desk" }]} kicker={`Private · ${new Date(now + NAIROBI).toUTCString().replace(" GMT", "").slice(0, -3)} Nairobi`} title="The desk">
-      <nav aria-label="Desk sections" className="-mt-2 mb-5 flex flex-wrap gap-1.5">
+      {/* One scrolling row on a phone, so the glance below stays on the first screen. */}
+      <nav aria-label="Desk sections" className="-mx-4 -mt-2 mb-4 flex gap-1.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:mb-5 sm:flex-wrap sm:overflow-visible sm:px-0">
         {NAV.map(([href, label]) => (
-          <a key={href} href={href} className="inline-flex min-h-9 items-center rounded-full border border-rule px-3 text-[12px] font-medium text-ink-soft hover:border-accent hover:text-forest">
+          <a key={href} href={href} className="inline-flex min-h-9 shrink-0 items-center rounded-full border border-rule px-3 text-[12px] font-medium text-ink-soft hover:border-accent hover:text-forest">
             {label}
           </a>
         ))}
       </nav>
 
+      <Glance lanes={lanes} figures={glance} needs={needs} />
+
+      <div className="mt-10" />
       <Cockpit lanes={lanes} />
 
       <div className="mt-12" />
@@ -418,6 +445,10 @@ export default async function DeskPage() {
           }
         />
         <SignalsPanel signals={signals} />
+        <MwananchiPanel
+          {...moves}
+          signalsNote="Scored on reach, harm, season, data we hold, ways to earn, this week's page views and readers' searches that found nothing (lib/mwananchi-core.ts)."
+        />
         <HealthPanel health={health} latency={loadLatency()} freshness={freshness} />
         <RoutinesPanel />
         <DecisionsPanel />

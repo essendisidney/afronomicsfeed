@@ -7,6 +7,10 @@
  * Notes on the chart (`annotations`) are either a line at one bar (`x`) or a shaded span between two bars, centre to
  * centre (`from`, `to`). Their text sits in a band above the plot, one note per row, wrapped so it stays readable
  * when the chart is scaled down to a 390px phone.
+ *
+ * Bar names wrap onto two lines under their bar. When a name still will not fit its bar's width (long names, or many
+ * bars), the chart is drawn as rows instead: each name on its own line, its bar underneath, so no two names can
+ * overlap. A chart with notes stays in columns, since its notes point at columns.
  */
 
 export type ChartPoint = { label: string; value: number };
@@ -57,6 +61,11 @@ const BASE_HEIGHT = 240;
 const NOTE_FONT = 14; // ~10.8px at 390px, no smaller than the value labels
 const NOTE_LINE = 16;
 const NOTE_GAP = 7;
+const LABEL_FONT = 12;
+const LABEL_LINE = 14;
+const CHAR_W = 0.56; // average character width as a share of the font size, for fitting text
+const ROW_LABEL_FONT = 13;
+const ROW_BAR = 16;
 
 /** Splits a note into lines of at most `max` characters, at spaces. */
 export function wrapText(text: string, max: number): string[] {
@@ -95,6 +104,15 @@ export function renderChartSvg(
   const innerW = width - pad.left - pad.right;
   const slot = innerW / data.length;
   const centre = (i: number) => pad.left + slot * i + slot / 2;
+
+  // Bar names under the bars, wrapped to the bar's width; if any needs more than two lines or has a word wider than
+  // the bar, the chart is drawn in rows instead.
+  const fit = Math.max(1, Math.floor((slot - 4) / (LABEL_FONT * CHAR_W)));
+  const names = data.map((d) => wrapText(d.label, fit));
+  const crowded = names.some((l) => l.length > 2 || l.some((line) => line.length > fit));
+  if (crowded && !annotations.length) return renderRows(spec, opts, p, format);
+  const nameLines = Math.max(1, ...names.map((l) => l.length));
+  pad.bottom += (nameLines - 1) * LABEL_LINE;
 
   // Notes that name a bar the chart does not have are dropped here; the Receipt checks refuse them before a build.
   const notes = annotations
@@ -179,7 +197,10 @@ export function renderChartSvg(
     out.push(
       `<text x="${r1(cx)}" y="${r1(top - 7)}" text-anchor="middle" class="tabular" font-size="13" font-weight="${on ? 700 : 500}" fill="${on ? p.ink : p.inkSoft}" ${halo}>${esc(text)}</text>`,
     );
-    out.push(`<text x="${r1(cx)}" y="${height - 10}" text-anchor="middle" font-size="12" fill="${p.muted}">${esc(d.label)}</text>`);
+    const lines = names[i].length <= 2 ? names[i] : [d.label];
+    out.push(`<text x="${r1(cx)}" y="${r1(height - 10 - (lines.length - 1) * LABEL_LINE)}" text-anchor="middle" font-size="${LABEL_FONT}" fill="${p.muted}">`);
+    lines.forEach((line, k) => out.push(`<tspan x="${r1(cx)}" dy="${k ? LABEL_LINE : 0}">${esc(line)}</tspan>`));
+    out.push(`</text>`);
     out.push(`</g>`);
   });
 
@@ -197,6 +218,83 @@ export function renderChartSvg(
     out.push(`<text x="${r1(n.anchorX)}" y="${r1(n.top + NOTE_FONT - 2)}" text-anchor="${anchor}" font-size="${NOTE_FONT}" font-weight="600" fill="${p.ink}" ${halo}>`);
     n.lines.forEach((line, k) => out.push(`<tspan x="${r1(n.anchorX)}" dy="${k ? NOTE_LINE : 0}">${esc(line)}</tspan>`));
     out.push(`</text>`);
+  }
+
+  out.push(`</svg>`);
+  return { svg: out.join(""), geometry: { width, height, points } };
+}
+
+/**
+ * The chart in rows: each bar's name on its own line, the bar under it from a shared zero, and its value at the bar's
+ * end. Used when the names cannot fit under columns. A reference value is a dashed line down through the rows.
+ */
+function renderRows(
+  spec: ChartSpec,
+  opts: { label: string; font?: string; interactive?: boolean; standalone?: boolean },
+  p: ChartPalette,
+  format: (v: number) => string,
+): { svg: string; geometry: ChartGeometry } {
+  const { data, unit, highlight = [], reference } = spec;
+  const width = CHART_WIDTH;
+  const pad = { top: 8, right: 8, bottom: 8, left: 8 };
+  const innerW = width - pad.left - pad.right;
+  const texts = data.map((d) => format(d.value));
+  // Room at the end of the longest bar for its value.
+  const valueW = Math.max(...texts.map((t) => t.length)) * 13 * CHAR_W + 8;
+  const scaleW = innerW - valueW;
+  const max = Math.max(...data.map((d) => d.value), reference?.value ?? 0, 0) || 1;
+  const min = Math.min(...data.map((d) => d.value), 0);
+  const span = max - min || 1;
+  const x = (v: number) => pad.left + ((v - min) / span) * scaleW;
+  const zero = x(0);
+  const names = data.map((d) => wrapText(d.label, Math.max(14, Math.floor(innerW / (ROW_LABEL_FONT * CHAR_W)))));
+  const refLabelH = reference ? 18 : 0;
+
+  let rowY = pad.top + refLabelH;
+  const rows = data.map((d, i) => {
+    const labelTop = rowY;
+    const barY = labelTop + names[i].length * 16 + 3;
+    rowY = barY + ROW_BAR + 12;
+    return { d, i, labelTop, barY };
+  });
+  const height = rowY - 12 + pad.bottom;
+  const font = opts.font ? ` font-family="${esc(opts.font)}"` : "";
+  const halo = `stroke="${p.surface}" stroke-width="4" stroke-linejoin="round" paint-order="stroke"`;
+
+  const out: string[] = [];
+  out.push(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${r1(height)}" width="${width}" height="${r1(height)}" role="group" aria-label="${esc(opts.label)}"${font}${opts.standalone ? "" : ' class="chart-svg" style="display:block;width:100%;height:auto;max-width:36rem"'}>`,
+  );
+  out.push(`<line x1="${r1(zero)}" x2="${r1(zero)}" y1="${r1(pad.top + refLabelH)}" y2="${r1(height - pad.bottom)}" stroke="${p.rule}" stroke-width="1"/>`);
+
+  const points: ChartGeometry["points"] = [];
+  for (const { d, i, labelTop, barY } of rows) {
+    const on = highlight.includes(d.label);
+    const text = texts[i];
+    const end = x(d.value);
+    const left = Math.min(end, zero);
+    const w = Math.max(1, Math.abs(end - zero));
+    points.push({ label: d.label, value: d.value, cx: left + w, top: barY, text, on });
+    const attrs = opts.interactive
+      ? ` class="chart-pt" tabindex="0" role="img" aria-label="${esc(`${d.label}: ${text} (${unit})`)}" data-i="${i}" data-label="${esc(d.label)}" data-value="${esc(text)}" data-cx="${r1(left + w)}" data-top="${r1(barY)}"`
+      : "";
+    out.push(`<g${attrs}>`);
+    if (opts.interactive) out.push(`<rect x="0" y="${r1(labelTop - 4)}" width="${width}" height="${r1(barY + ROW_BAR + 8 - labelTop)}" fill="transparent"/>`);
+    out.push(`<text x="${pad.left}" y="${r1(labelTop + ROW_LABEL_FONT - 1)}" font-size="${ROW_LABEL_FONT}" fill="${on ? p.ink : p.inkSoft}" font-weight="${on ? 700 : 400}">`);
+    names[i].forEach((line, k) => out.push(`<tspan x="${pad.left}" dy="${k ? 16 : 0}">${esc(line)}</tspan>`));
+    out.push(`</text>`);
+    out.push(`<rect class="chart-bar" x="${r1(left)}" y="${r1(barY)}" width="${r1(w)}" height="${ROW_BAR}" rx="2" fill="${on ? p.accent : p.quiet}"/>`);
+    out.push(
+      `<text x="${r1(left + w + 6)}" y="${r1(barY + ROW_BAR - 3)}" text-anchor="start" class="tabular" font-size="13" font-weight="${on ? 700 : 500}" fill="${on ? p.ink : p.inkSoft}">${esc(text)}</text>`,
+    );
+    out.push(`</g>`);
+  }
+
+  if (reference) {
+    const rx = x(reference.value);
+    out.push(`<line x1="${r1(rx)}" x2="${r1(rx)}" y1="${r1(pad.top + refLabelH - 2)}" y2="${r1(height - pad.bottom)}" stroke="${p.inkSoft}" stroke-width="1" stroke-dasharray="4 4"/>`);
+    const anchor = rx > width * 0.6 ? "end" : "start";
+    out.push(`<text x="${r1(rx)}" y="${r1(pad.top + 11)}" text-anchor="${anchor}" font-size="11" fill="${p.inkSoft}" ${halo}>${esc(reference.label)}</text>`);
   }
 
   out.push(`</svg>`);

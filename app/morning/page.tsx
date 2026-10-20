@@ -59,7 +59,7 @@ export default async function MorningPage() {
       }
     >
       <div className="grid gap-12 lg:grid-cols-12">
-        <section className="lg:col-span-5">
+        <section className="min-w-0 lg:col-span-5">
           <SectionTitle kicker="Overnight" title="Against the dollar" href="/markets" hrefLabel="All rates" />
           {note.fx.moves.length ? (
             <>
@@ -89,67 +89,71 @@ export default async function MorningPage() {
           )}
         </section>
 
-        <section className="lg:col-span-7">
+        <section className="min-w-0 lg:col-span-7">
           <SectionTitle kicker="Auctions" title={note.auctions.length ? "Results in since the last note" : "No new results since the last note"} href="/markets/tbills" hrefLabel="T-bill monitor" />
           {note.auctions.length ? (
-            <table className="data-table mt-2">
-              <thead>
-                <tr>
-                  <th>Market</th>
-                  <th>Tenor</th>
-                  <th className="text-right">Rate</th>
-                  <th className="text-right">Change</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {note.auctions.map((a) => (
-                  <tr key={`${a.market.slug}-${a.tenor}`}>
-                    <td>
-                      <Link href={a.market.href} className="font-medium hover:text-forest">
-                        {a.market.country}
-                      </Link>
-                    </td>
-                    <td>{a.tenor}-day</td>
-                    <td className="text-right text-sm">{a.rate.toFixed(2)}%</td>
-                    <td className={`text-right text-sm ${a.bps == null || a.bps === 0 ? "text-muted" : a.bps > 0 ? "text-down" : "text-up"}`}>{a.bps == null ? "—" : `${morningSigned(a.bps, 0)} bps`}</td>
-                    <td className="text-xs">
-                      <a href={a.source} target="_blank" rel="noopener noreferrer" className="hover:text-forest">
-                        {morningShortDate.format(new Date(a.date))}
-                      </a>
-                    </td>
+            <div className="mt-2 overflow-x-auto">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Market</th>
+                    <th>Tenor</th>
+                    <th className="text-right">Rate</th>
+                    <th className="text-right">Change</th>
+                    <th>Date</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {note.auctions.map((a) => (
+                    <tr key={`${a.market.slug}-${a.tenor}`}>
+                      <td>
+                        <Link href={a.market.href} className="font-medium hover:text-forest">
+                          {a.market.country}
+                        </Link>
+                      </td>
+                      <td>{a.tenor}-day</td>
+                      <td className="text-right text-sm">{a.rate.toFixed(2)}%</td>
+                      <td className={`text-right text-sm ${a.bps == null || a.bps === 0 ? "text-muted" : a.bps > 0 ? "text-down" : "text-up"}`}>{a.bps == null ? "—" : `${morningSigned(a.bps, 0)} bps`}</td>
+                      <td className="text-xs">
+                        <a href={a.source} target="_blank" rel="noopener noreferrer" className="hover:text-forest">
+                          {morningShortDate.format(new Date(a.date))}
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : null}
           {note.bonds.length ? (
-            <table className="data-table mt-4">
-              <thead>
-                <tr>
-                  <th>Kenya bond</th>
-                  <th className="text-right">Years</th>
-                  <th className="text-right">Yield</th>
-                  <th className="text-right">Coupon</th>
-                  <th className="text-right">Cover</th>
-                </tr>
-              </thead>
-              <tbody>
-                {note.bonds.map((b) => (
-                  <tr key={`${b.date}-${b.issue}`}>
-                    <td>
-                      <Link href={`/markets/kenya-bonds/${b.date}`} className="font-medium hover:text-forest">
-                        {b.issue}
-                      </Link>
-                    </td>
-                    <td className="text-right text-sm">{b.years.toFixed(1)}</td>
-                    <td className="text-right text-sm">{b.rate.toFixed(2)}%</td>
-                    <td className="text-right text-sm">{b.coupon == null ? "—" : `${b.coupon.toFixed(2)}%`}</td>
-                    <td className="text-right text-sm">{b.bidToCover == null ? "—" : `${b.bidToCover.toFixed(2)}×`}</td>
+            <div className="mt-4 overflow-x-auto">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Kenya bond</th>
+                    <th className="text-right">Years</th>
+                    <th className="text-right">Yield</th>
+                    <th className="text-right">Coupon</th>
+                    <th className="text-right">Cover</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {note.bonds.map((b) => (
+                    <tr key={`${b.date}-${b.issue}`}>
+                      <td>
+                        <Link href={`/markets/kenya-bonds/${b.date}`} className="font-medium hover:text-forest">
+                          {b.issue}
+                        </Link>
+                      </td>
+                      <td className="text-right text-sm">{b.years.toFixed(1)}</td>
+                      <td className="text-right text-sm">{b.rate.toFixed(2)}%</td>
+                      <td className="text-right text-sm">{b.coupon == null ? "—" : `${b.coupon.toFixed(2)}%`}</td>
+                      <td className="text-right text-sm">{b.bidToCover == null ? "—" : `${b.bidToCover.toFixed(2)}×`}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : null}
           {note.due.length ? (
             <p className="mt-4 text-sm text-ink-soft">

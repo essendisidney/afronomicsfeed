@@ -5,6 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy",
+  alternates: { canonical: `${site.url}/legal/privacy` },
   description: "What Afronomics collects and why, under Kenya’s Data Protection Act, 2019: no data sold, no advertising trackers, page counts without cookies.",
 };
 

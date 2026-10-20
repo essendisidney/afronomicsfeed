@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { TopicChips } from "@/components/ui/TopicChips";
 import { getArticlesByInstitution, toIndexItem } from "@/lib/content";
 import { getInstitution, institutions } from "@/lib/taxonomy";
+import { site } from "@/lib/site";
 
 export function generateStaticParams() {
   return institutions.map((institution) => ({ slug: institution.slug }));
@@ -19,7 +20,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const institution = getInstitution(slug);
   if (!institution) return {};
-  return { title: institution.short, description: institution.mandate };
+  return { title: institution.short, description: institution.mandate, alternates: { canonical: `${site.url}/institutions/${institution.slug}` } };
 }
 
 export default async function InstitutionPage({

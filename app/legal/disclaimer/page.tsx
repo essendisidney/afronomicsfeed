@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { ProsePage } from "@/components/data/ProsePage";
 import { disclaimer } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Disclaimer",
+  alternates: { canonical: `${site.url}/legal/disclaimer` },
   description: "Afronomics publishes information, not investment, legal or tax advice. How the data is sourced and the limits of relying on it.",
 };
 

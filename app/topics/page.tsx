@@ -3,9 +3,11 @@ import Link from "next/link";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getArticlesByTopic } from "@/lib/content";
 import { topics } from "@/lib/taxonomy";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Topics",
+  alternates: { canonical: `${site.url}/topics` },
   description: "Desk topics for Kenya banking, markets, and financial regulation.",
 };
 

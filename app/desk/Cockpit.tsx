@@ -2,8 +2,8 @@ import { AddIdea } from "./DeskActions";
 import type { Lane, Light } from "./cockpit-core";
 
 /**
- * The top of the desk (docs/rebuild/phase-7b-plan.md, 7b-1): four lanes, each with a light, the reason for it, three
- * numbers and the next action, linking down to the full panel. On a phone the four lights come first, in one screen.
+ * The four lanes of the desk (docs/rebuild/phase-7b-plan.md, 7b-1), each with a light, the reason for it, three numbers
+ * and the next action, linking down to the full panel. Their lights head the first screen (Glance.tsx).
  */
 
 const LIGHT: Record<Light, { dot: string; ring: string; label: string }> = {
@@ -14,25 +14,12 @@ const LIGHT: Record<Light, { dot: string; ring: string; label: string }> = {
 
 export function Cockpit({ lanes }: { lanes: Lane[] }) {
   return (
-    <section id="cockpit" aria-labelledby="cockpit-h" className="scroll-mt-20">
+    <section id="lanes" aria-labelledby="cockpit-h" className="scroll-mt-20">
       <h2 id="cockpit-h" className="sr-only">
-        The business at a glance
+        The four lanes
       </h2>
-      <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4" aria-label="Lights">
-        {lanes.map((l) => (
-          <li key={l.id}>
-            <a href={`#lane-${l.id}`} className={`flex min-h-14 items-center gap-2.5 rounded-xl border bg-surface px-3 py-2 hover:border-ink ${LIGHT[l.light].ring}`}>
-              <span aria-hidden="true" className={`h-3 w-3 shrink-0 rounded-full ${LIGHT[l.light].dot}`} />
-              <span className="min-w-0">
-                <span className="block text-[13px] font-semibold leading-4 text-ink">{l.title}</span>
-                <span className="block text-[12px] leading-4 text-muted">{LIGHT[l.light].label}</span>
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2">
         {lanes.map((l) => (
           <article key={l.id} id={`lane-${l.id}`} className={`scroll-mt-20 rounded-2xl border bg-surface px-5 py-5 ${LIGHT[l.light].ring}`}>
             <header className="flex items-start justify-between gap-3">

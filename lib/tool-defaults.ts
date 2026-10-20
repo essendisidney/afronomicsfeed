@@ -12,4 +12,13 @@ export const toolDefaults = {
   mpesa: { amount: 2000, kind: "send" },
   ipo: { amount: 20_000 },
   tbill: { amount: 100_000, mode: "pay" },
+  // Preset ids are built in lib/debt-presets.ts from our data (Fuliza bands, M-Shwari, the CBK lending rate).
+  debtPlan: {
+    budget: 6000,
+    debts: [
+      { preset: "fuliza", balance: 2000, minimum: 0 },
+      { preset: "mshwari", balance: 5000, minimum: 500 },
+      { preset: "bank", balance: 50_000, minimum: 2500 },
+    ],
+  },
 } as const;

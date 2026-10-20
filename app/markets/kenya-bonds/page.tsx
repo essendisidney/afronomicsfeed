@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Fragment } from "react";
 import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -110,9 +111,18 @@ export default function KenyaBondsPage() {
               { label: `Accepted, ${year}`, value: kes(ytdAccepted) },
               { label: `Infrastructure bonds, ${year}`, value: ifbShare == null ? "—" : `${ifbShare.toFixed(0)}% of accepted` },
             ].map((stat) => (
-              <div key={stat.label} className="bg-paper-2 px-4 py-4">
+              <div key={stat.label} className="min-w-0 bg-paper-2 px-4 py-4">
                 <p className="font-medium text-[12px] text-muted">{stat.label}</p>
-                <p className="mt-1 font-serif text-xl text-ink">{stat.value}</p>
+                {/* Bond names ("FXD1/2026/030") are wider than a phone tile: let them break after a slash. */}
+                <p className="mt-1 font-serif text-xl text-ink">
+                  {stat.value.split("/").map((part, i) => (
+                    <Fragment key={i}>
+                      {i ? "/" : null}
+                      {i ? <wbr /> : null}
+                      {part}
+                    </Fragment>
+                  ))}
+                </p>
               </div>
             ))}
           </section>

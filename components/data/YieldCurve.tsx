@@ -65,7 +65,13 @@ export function YieldCurve({ points, height = 300 }: { points: CurvePoint[]; hei
               <title>{`${p.label} · ${p.rate.toFixed(3)}% · ${p.years.toFixed(1)} years to maturity · auction ${p.date}`}</title>
             </circle>
             {labelled.has(p) ? (
-              <text x={x(p.years) + 7} y={y(p.rate) - 8} className="fill-ink text-[11px]">
+              // Points in the right third label leftwards, so the longest bond's name is not cut off at the edge.
+              <text
+                x={x(p.years) > width * 0.67 ? x(p.years) - 7 : x(p.years) + 7}
+                y={y(p.rate) - 8}
+                textAnchor={x(p.years) > width * 0.67 ? "end" : "start"}
+                className="fill-ink text-[11px]"
+              >
                 {p.label} {p.rate.toFixed(2)}%
               </text>
             ) : null}

@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 7,
-  "results": 18,
-  "p50_h": 3.9,
-  "p90_h": 12.8
+  "timed": 8,
+  "results": 20,
+  "p50_h": 3.4,
+  "p90_h": 12.5
  },
  "summary": [
   {
@@ -66,23 +66,23 @@
    "kind": "bills",
    "market": "uganda",
    "name": "Uganda",
-   "results": 0,
-   "timed": 0,
+   "results": 1,
+   "timed": 1,
    "p50_h": null,
    "p90_h": null,
-   "publisher_time": null,
-   "status": "no new result since measuring began"
+   "publisher_time": "Last-Modified of the result's own document",
+   "status": "1 timed result so far; figures from 5"
   },
   {
    "kind": "bills",
    "market": "tanzania",
    "name": "Tanzania",
-   "results": 0,
+   "results": 1,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": null,
-   "status": "no new result since measuring began"
+   "status": "publisher time unknown"
   },
   {
    "kind": "bills",
@@ -218,6 +218,25 @@
   }
  ],
  "results": [
+  {
+   "key": "bills:uganda:2026-10-21",
+   "kind": "bills",
+   "market": "uganda",
+   "date": "2026-10-21",
+   "first_seen_at": "2026-10-21T15:26:28+00:00",
+   "published_at": "2026-10-21T12:39:50+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 2.78
+  },
+  {
+   "key": "bills:tanzania:2026-10-21",
+   "kind": "bills",
+   "market": "tanzania",
+   "date": "2026-10-21",
+   "first_seen_at": "2026-10-21T15:13:18+00:00",
+   "published_at": null,
+   "published_how": null
+  },
   {
    "key": "bonds:waemu:2026-10-20:cote-divoire",
    "kind": "bonds",
@@ -780,5 +799,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-21T09:34:22+00:00"
+ "updated_at": "2026-10-21T15:27:12+00:00"
 }

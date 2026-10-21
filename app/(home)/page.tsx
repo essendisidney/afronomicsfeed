@@ -121,7 +121,7 @@ export default async function TodayPage() {
           </Link>
         </section>
 
-        <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
           <section id="top-story" aria-label="Top story" className="min-w-0 scroll-mt-28 lg:col-span-8">
             {lead ? (
               <LeadStory r={lead} now={now} />
@@ -143,42 +143,43 @@ export default async function TodayPage() {
         </div>
 
         {rows.map((row) => (
-          <section key={row.id} id={row.anchor} aria-labelledby={`${row.anchor}-h`} className="mt-6 scroll-mt-28 sm:mt-8">
+          <section key={row.id} id={row.anchor} aria-labelledby={`${row.anchor}-h`} className="mt-8 scroll-mt-28 sm:mt-12">
             <SectionHead id={`${row.anchor}-h`} title={row.title} blurb={row.blurb} more={row.more} moreLabel={`${row.title} stories`} />
             <StoryRow items={row.items} now={now} />
           </section>
         ))}
 
-        <section id="tools" aria-labelledby="tools-h" className="mt-6 scroll-mt-28 sm:mt-8">
+        <section id="tools" aria-labelledby="tools-h" className="mt-8 scroll-mt-28 sm:mt-12">
           <SectionHead id="tools-h" title="Tools" blurb="Calculators and checkers that answer one question each" more="/tools" moreLabel="tools" />
           <ToolTiles items={homeTools} />
         </section>
 
-        <div className="mt-6 grid gap-3 sm:mt-8 lg:grid-cols-2">
-          <section id="morning" aria-labelledby="signup" className="scroll-mt-28 rounded-2xl border border-rule bg-surface px-4 py-4">
-            <h2 id="signup" className="t-h3 text-ink">
+        <div className="mt-8 grid gap-3 sm:mt-10 lg:grid-cols-2">
+          <section id="morning" aria-labelledby="signup" className="scroll-mt-28 rounded-2xl border border-rule bg-paper-2 px-5 py-5 sm:px-6">
+            <p className="t-label text-forest">Free, every weekday</p>
+            <h2 id="signup" className="mt-1.5 font-serif text-[1.45rem] leading-tight text-ink">
               The Morning, before 07:30
             </h2>
-            <p className="mt-1 text-[13.5px] leading-5 text-ink-soft">Every weekday: what moved overnight, and what it means for your money. Free.</p>
+            <p className="mt-1 text-[14px] leading-6 text-ink-soft">Every weekday: what moved overnight, and what it means for your money. Free.</p>
             <div className="mt-2">
               <SubscribeForm button="Send it to me" />
             </div>
           </section>
 
-          <section aria-labelledby="for-institutions-band" className="rounded-2xl border border-rule bg-surface px-4 py-4">
-            <p className="t-label text-forest">For institutions</p>
-            <h2 id="for-institutions-band" className="t-h3 mt-1 text-ink text-balance">
+          <section aria-labelledby="for-institutions-band" className="on-night rounded-2xl bg-night px-5 py-5 text-night-ink sm:px-6">
+            <p className="t-label text-accent">For institutions</p>
+            <h2 id="for-institutions-band" className="mt-1.5 font-serif text-[1.45rem] leading-tight text-night-ink text-balance">
               Boards, banks, SACCOs and funds: the full dated record, by API, pack or CSV.
             </h2>
-            <p className="tabular mt-1 hidden text-[13px] leading-5 text-ink-soft sm:block">
+            <p className="tabular mt-1.5 hidden text-[14px] leading-6 text-night-soft sm:block">
               {institutionalTier("analyst").name} from USD {institutionalTier("analyst").monthlyUsd} a month
               {kenya ? `; Kenyan institutions from ${localPriceText(kenya, "analyst")}` : ""}. Free {institutionalPilot.days}-day pilot.
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-x-3">
-              <ButtonLink href={institutionalPilot.href} size="sm" data-track="pricing_cta_click">
+              <ButtonLink href={institutionalPilot.href} size="sm" variant="accent" data-track="pricing_cta_click">
                 Start a pilot
               </ButtonLink>
-              <Link href="/for-institutions" className="inline-flex min-h-11 items-center px-1 text-[13px] font-semibold text-forest underline underline-offset-4">
+              <Link href="/for-institutions" className="inline-flex min-h-11 items-center px-1 text-[13px] font-semibold text-night-ink underline decoration-night-muted underline-offset-4 hover:decoration-night-ink">
                 What institutions get
               </Link>
             </div>

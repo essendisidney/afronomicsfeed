@@ -849,25 +849,112 @@ table,
   box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18);
 }
 
-/* Section heads on Today: a laterite rule and the head in the signature. */
+/*
+ * Section heads (redesign v3): the head in ink, led by a laterite tick, over an ink hairline. The signature marks where
+ * a section starts without painting every head red.
+ */
 .af-section-head {
-  border-bottom: 2px solid var(--sig);
+  border-bottom: 1px solid var(--ink);
 }
-.af-section-head h2 {
-  color: var(--sig-ink);
+.af-tick {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 2px;
+  background: var(--sig);
 }
 
 /*
- * Key figures: the ledger's double rule in laterite (Kente Gold's device, kept by the founder). Two 2px lines with a
- * 2px gap, clear of descenders, visible in light and dark.
+ * Key figures: the ledger's rule in laterite, kept from D-026 but drawn once and short, under the start of the figure,
+ * so it reads as a mark of a checked number rather than as a link or a spelling underline. Painted as a background
+ * inside the figure's own box: nothing moves when it draws.
  */
 .af-figure {
-  text-decoration-line: underline;
-  text-decoration-style: double;
-  text-decoration-color: var(--sig);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.17em;
-  text-decoration-skip-ink: none;
+  text-decoration: none;
+  background-image: linear-gradient(var(--sig), var(--sig));
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 1.4em 3px;
+  padding-bottom: 0.2em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Today's board: one panel of figures split by hairlines (columns on a desktop, a grid of two on a tablet). */
+.af-board-cell + .af-board-cell {
+  border-left: 1px solid var(--rule);
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .af-board-cell:nth-child(odd) {
+    border-left: 0;
+  }
+  .af-board-cell:nth-child(n + 3) {
+    border-top: 1px solid var(--rule);
+  }
+}
+
+/* Story rows: newspaper columns. Desk colour as a short bar over each column, hairlines between columns. */
+.af-col {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .af-col::before {
+    content: "";
+    position: absolute;
+    top: -0.75rem;
+    left: 1.25rem;
+    width: 2rem;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--desk, var(--sig));
+  }
+  .af-col:not(:nth-child(2n + 1))::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-left: 1px solid var(--rule);
+  }
+  .af-cols {
+    margin-inline: -1.25rem;
+  }
+}
+@media (min-width: 1024px) {
+  .af-col:nth-child(2n + 1):not(:first-child)::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-left: 1px solid var(--rule);
+  }
+  .af-col:nth-child(4n + 1)::after {
+    content: none;
+  }
+}
+
+/* The lead story sits on the page under a laterite head rule, its chart in a light frame beside it. */
+.af-lead {
+  border-top: 3px solid var(--sig);
+}
+
+/* Tool tiles: the icon on a laterite wash; the tile lifts to ink on hover. */
+.af-tool-icon {
+  color: var(--sig-ink);
+  background: color-mix(in srgb, var(--sig) 11%, var(--surface));
+}
+.af-tool {
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.af-tool:hover {
+  border-color: var(--ink);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .af-tool:hover {
+    transform: translateY(-1px);
+  }
 }
 
 /* The verdict carries the signature at full strength. */

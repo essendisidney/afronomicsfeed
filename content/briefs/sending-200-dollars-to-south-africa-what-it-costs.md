@@ -1,6 +1,6 @@
 ---
 title: "Sending $200 home to South Africa: from the UK the cheapest service costs $4.18, the average $14.08"
-date: "2026-10-29"
+date: "2026-10-21"
 authors:
   - "Afronomics Desk"
 category: brief
@@ -11,7 +11,7 @@ sources:
   - name: "World Bank — Remittance Prices Worldwide, survey of January to March 2025"
     url: "https://remittanceprices.worldbank.org/data-download"
     date: "2025-03-31"
-asOf: "2026-10-29"
+asOf: "2026-10-21"
 summary: "The World Bank priced 25 ways to send $200 from the United Kingdom to South Africa. The cheapest cost $4.18, the average $14.08. From the United States, 18 services: $3.84 against $13.68."
 teaser:
   - "From the UK, the cheapest service cost $4.18 to send $200; the average cost $14.08."

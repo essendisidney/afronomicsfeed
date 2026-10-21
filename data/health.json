@@ -247,8 +247,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 20 Oct",
-   "latest": "2026-10-20",
+   "detail": "6.25% read 21 Oct",
+   "latest": "2026-10-21",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -369,21 +369,9 @@
    "failures_in_row": 0
   },
   {
-   "name": "Documents",
-   "result": "success",
-   "day": "2026-10-19",
-   "failures_in_row": 0
-  },
-  {
    "name": "Forecast ledger",
    "result": "success",
    "day": "2026-10-21",
-   "failures_in_row": 0
-  },
-  {
-   "name": "Index release",
-   "result": "success",
-   "day": "2026-10-19",
    "failures_in_row": 0
   },
   {
@@ -414,12 +402,6 @@
    "name": "Site QA",
    "result": "success",
    "day": "2026-10-21",
-   "failures_in_row": 0
-  },
-  {
-   "name": "Weekly edition snapshot",
-   "result": "success",
-   "day": "2026-10-19",
    "failures_in_row": 0
   }
  ]

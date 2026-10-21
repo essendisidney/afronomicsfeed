@@ -49,3 +49,10 @@ jobs:
           PROBE_RAW: ${{ inputs.raw }}
           PROBE_PAGES: ${{ inputs.pages }}
           PROBE_LAYOUT: ${{ inputs.layout }}
+      - name: OCR (layout = ocr)
+        if: inputs.layout == 'ocr'
+        run: |
+          sudo apt-get install -y -qq tesseract-ocr >/dev/null && pip install -q pytesseract
+          python -c "import sys,requests; sys.path.insert(0,'scripts'); import uganda_tbills as u; [print('=== OCR', x, chr(10) + u.ocr_text(requests.get(x, timeout=60).content)) for x in sys.argv[1:]]" $URLS
+        env:
+          URLS: ${{ inputs.urls }}

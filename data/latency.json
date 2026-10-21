@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 6,
-  "results": 17,
-  "p50_h": 4.2,
-  "p90_h": 13.2
+  "timed": 7,
+  "results": 18,
+  "p50_h": 3.9,
+  "p90_h": 12.8
  },
  "summary": [
   {
@@ -198,12 +198,12 @@
    "kind": "bonds",
    "market": "morocco",
    "name": "Morocco",
-   "results": 1,
-   "timed": 1,
+   "results": 2,
+   "timed": 2,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the result's own document",
-   "status": "1 timed result so far; figures from 5"
+   "status": "2 timed results so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -226,6 +226,16 @@
    "first_seen_at": "2026-10-20T20:11:52+00:00",
    "published_at": null,
    "published_how": null
+  },
+  {
+   "key": "bonds:morocco:2026-10-20",
+   "kind": "bonds",
+   "market": "morocco",
+   "date": "2026-10-20",
+   "first_seen_at": "2026-10-21T09:24:20+00:00",
+   "published_at": "2026-10-21T08:05:19+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 1.32
   },
   {
    "key": "bonds:egypt:2026-10-20",
@@ -770,5 +780,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-20T20:14:32+00:00"
+ "updated_at": "2026-10-21T09:34:22+00:00"
 }

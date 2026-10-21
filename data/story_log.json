@@ -4,6 +4,7 @@
   {"date": "2026-10-12", "lead": "send_money:KEN:2025_1Q", "market": "kenya", "slug": "sending-200-dollars-to-kenya-what-it-costs"},
   {"date": "2026-10-16", "lead": "send_money:NGA:2025_1Q", "market": "nigeria", "slug": "sending-200-dollars-to-nigeria-what-it-costs"},
   {"date": "2026-10-19", "lead": "send_money:UGA:2025_1Q", "market": "uganda", "slug": "sending-200-dollars-to-uganda-what-it-costs"},
-  {"date": "2026-10-21", "lead": "send_money:GHA:2025_1Q", "market": "ghana", "slug": "sending-200-dollars-to-ghana-what-it-costs"}
+  {"date": "2026-10-21", "lead": "send_money:GHA:2025_1Q", "market": "ghana", "slug": "sending-200-dollars-to-ghana-what-it-costs"},
+  {"date": "2026-10-21", "lead": "send_money:ZAF:2025_1Q", "market": "south-africa", "slug": "sending-200-dollars-to-south-africa-what-it-costs"}
  ]
 }

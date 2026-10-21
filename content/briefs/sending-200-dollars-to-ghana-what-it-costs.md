@@ -1,6 +1,6 @@
 ---
 title: "Sending $200 home to Ghana: from Germany the cheapest service costs $3.56, the average $19.76"
-date: "2026-10-27"
+date: "2026-10-21"
 authors:
   - "Afronomics Desk"
 category: brief
@@ -11,7 +11,7 @@ sources:
   - name: "World Bank — Remittance Prices Worldwide, survey of January to March 2025"
     url: "https://remittanceprices.worldbank.org/data-download"
     date: "2025-03-31"
-asOf: "2026-10-27"
+asOf: "2026-10-21"
 summary: "The World Bank priced 33 ways to send $200 from Germany to Ghana. The cheapest cost $3.56, the average $19.76. From the United Kingdom, 38 services: $1.42 against $13.72. From the United States, $0.64 against $10.00."
 teaser:
   - "From Germany, the cheapest service cost $3.56 to send $200; the average cost $19.76."

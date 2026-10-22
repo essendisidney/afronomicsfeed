@@ -322,3 +322,19 @@ what we changed. Newest at the bottom. Read this first every week.
   ship the line and counter in Kiswahili too; "Shillings found" on Kenya pages, "Money found" elsewhere.
 - **Next:** one pull request for the phase; migration 0046 is applied only after the founder approves that pull
   request.
+
+### D-030 · 22 Oct 2026 · No follow-up emails to the wave 2–4 contacts
+- **Decided by the founder:** "dont send the follow ups". The one follow-up planned for 21–22 Oct (D-013, D-017) is
+  cancelled for every contacted organisation that has not replied (27 in wave 2–4, plus Ashmore and William Blair).
+  None was sent. No routine sends one later; a contact who writes to us is answered as usual.
+- **Replies on file:** Meristem and ICEA Lion (customer service, passed to their teams); NSSF Uganda, ARM and
+  Afrinvest (automatic receipts only).
+
+### D-031 · 22 Oct 2026 · Stories for 27, 29 and 30 Oct approved
+- **Decided by the founder:** "approve all three stories": Uganda's one-year bill (#227, Tue 27 Oct), Kenya's 2025/26
+  budget review (#228, Thu 29 Oct) and Quickmart's offer closing (#229, Fri 30 Oct).
+- Each is released by its scheduled task at 06:45 Nairobi on its day (merge, check live, company-page post, log),
+  not before: the Quickmart brief says "closes today".
+- The Quickmart brief is facts only, from the company's offer announcement, with no verdict. D-028 rule 4 (advocate's
+  read for live offers) is read as covering verdicts; the founder's approval of this facts-only brief is logged here.
+- The budget brief does not repeat the Treasury's remark on the Safaricom divestiture (held topic, in litigation).

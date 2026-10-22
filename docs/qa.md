@@ -9,6 +9,9 @@ point them out.
 ## What is checked
 
 Every page in `tests/site/pages.json` is loaded at **390px and 1280px wide, in light and dark** (four runs per page).
+The site picks its theme by the reader's clock, not by `prefers-color-scheme` (`lib/theme.ts`), so each run sets the
+theme the way a reader does in the menu (`localStorage` `af-theme` = `light` or `dark`); before 22 Oct 2026 the
+"dark" runs rendered light whenever the check ran in the daytime.
 
 | Check | Fails when | Where |
 | --- | --- | --- |

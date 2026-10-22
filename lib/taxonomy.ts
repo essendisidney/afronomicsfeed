@@ -117,7 +117,7 @@ export const topics: Topic[] = [
   },
   {
     slug: "saccos",
-    name: "Saccos",
+    name: "SACCOs",
     summary: "The SASRA perimeter beyond commercial-bank licences.",
     institutions: ["sasra"],
   },

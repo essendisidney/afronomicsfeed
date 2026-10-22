@@ -168,12 +168,12 @@ export default async function TodayPage() {
             </div>
           </section>
 
-          <section aria-labelledby="for-institutions-band" className="on-night rounded-2xl bg-night px-5 py-5 text-night-ink sm:px-6">
+          <section aria-labelledby="for-institutions-band" className="on-night rounded-2xl bg-night px-5 py-5 text-night-ink ring-1 ring-night-line sm:px-6">
             <p className="t-label text-accent">For institutions</p>
             <h2 id="for-institutions-band" className="mt-1.5 font-serif text-[1.45rem] leading-tight text-night-ink text-balance">
               Boards, banks, SACCOs and funds: the full dated record, by API, pack or CSV.
             </h2>
-            <p className="tabular mt-1.5 hidden text-[14px] leading-6 text-night-soft sm:block">
+            <p className="tabular mt-1.5 text-[14px] leading-6 text-night-soft">
               {institutionalTier("analyst").name} from USD {institutionalTier("analyst").monthlyUsd} a month
               {kenya ? `; Kenyan institutions from ${localPriceText(kenya, "analyst")}` : ""}. Free {institutionalPilot.days}-day pilot.
             </p>

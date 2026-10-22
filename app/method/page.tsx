@@ -109,6 +109,18 @@ export default function MethodPage() {
         <a href={`mailto:${site.contactEmail}?subject=Wire`}>{site.contactEmail}</a>.
       </p>
 
+      <h2 id="poverty-premium">Kenya Poverty Premium</h2>
+      <p>
+        A monthly file of what the same everyday need costs a Kenyan on the options open to small amounts, against the option a better-off
+        saver or borrower can reach: a short overdraft, a mobile loan, a year&rsquo;s saving and money sent home. Every figure is worked out by
+        code from data files we hold, each with its publisher and date; lines with no data are shown as gaps, never filled, and the lines are
+        never added into one total. The full method, the gaps and every month&rsquo;s file are on{" "}
+        <Link href="/data/poverty-premium#method" className="font-semibold text-forest underline underline-offset-2">
+          the Poverty Premium page
+        </Link>
+        .
+      </p>
+
       <h2>Analysis</h2>
       <p>
         Briefs are labelled Facts, Analysis or Opinion, cite their primary documents with dates, and carry an as-of stamp. We do not give

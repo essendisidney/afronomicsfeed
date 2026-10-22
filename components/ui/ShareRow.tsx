@@ -1,6 +1,7 @@
 import { ShareIcon } from "@/components/share/ShareIcon";
 import { shareHref } from "@/lib/share-links";
 import { site } from "@/lib/site";
+import { whatsappChannelUrl } from "@/lib/channels";
 
 /**
  * Share to WhatsApp (where Kenya actually forwards things), LinkedIn and X, and join the channels when they are
@@ -9,7 +10,7 @@ import { site } from "@/lib/site";
  */
 export function ShareRow({ text, path, label = "Share" }: { text: string; path: string; label?: string }) {
   const url = `${site.url}${path}`;
-  const channel = process.env.WHATSAPP_CHANNEL_URL;
+  const channel = whatsappChannelUrl();
   const tg = process.env.TELEGRAM_CHANNEL_URL;
   const pill =
     "inline-flex min-h-11 items-center gap-2 rounded-full border border-rule bg-surface px-4 text-[13.5px] font-semibold text-ink transition-colors hover:border-accent hover:text-accent";

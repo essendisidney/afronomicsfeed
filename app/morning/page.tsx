@@ -11,6 +11,7 @@ import { ShareRow } from "@/components/ui/ShareRow";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
 import { buttonClass } from "@/components/ui/Button";
+import { WhatsAppChannel } from "@/components/ui/WhatsAppChannel";
 
 export const revalidate = 900;
 
@@ -49,6 +50,7 @@ export default async function MorningPage() {
           <Link href="/subscribe?list=morning" className={buttonClass({ className: "mt-4" })}>
             Get the Morning
           </Link>
+          <WhatsAppChannel className="mt-3" />
           {/* Three small text links were 14px tall on a phone; each is a 44px row there, inline from sm. */}
           <p className="mt-3 flex flex-wrap gap-x-4 text-[13px] leading-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:items-center sm:[&>a]:min-h-8">
             <Link href="/morning/sw" className="underline underline-offset-2 hover:text-accent">Soma kwa Kiswahili</Link>

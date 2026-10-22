@@ -5,6 +5,7 @@ import { SinceLastVisit } from "@/components/home/SinceLastVisit";
 import { SectionNav, type SectionLink } from "@/components/layout/SectionNav";
 import { ButtonLink } from "@/components/ui/Button";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
+import { WhatsAppChannel } from "@/components/ui/WhatsAppChannel";
 import { institutionalPilot, institutionalTier, localInstitutionPrices, localPriceText } from "@/lib/billing/ratecard";
 import { renderTime } from "@/lib/data/fetcher";
 import { editorialRows, editorialScore } from "@/lib/editorial";
@@ -164,6 +165,7 @@ export default async function TodayPage() {
             <div className="mt-2">
               <SubscribeForm button="Send it to me" />
             </div>
+            <WhatsAppChannel variant="link" className="mt-1" />
           </section>
 
           <section aria-labelledby="for-institutions-band" className="on-night rounded-2xl bg-night px-5 py-5 text-night-ink ring-1 ring-night-line sm:px-6">

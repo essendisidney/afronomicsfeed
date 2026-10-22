@@ -120,6 +120,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/institutions", "monthly", 0.3),
     page("/topics", "monthly", 0.3),
     page("/about", "monthly", 0.5),
+    page("/press", "weekly", 0.6, debt),
     page("/method", "monthly", 0.6),
     page("/editorial-standards", "monthly", 0.5),
     page("/trust", "weekly", 0.6),

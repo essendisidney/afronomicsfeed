@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EvidenceTag } from "@/components/evidence/EvidenceTag";
+import { WhatsAppChannel } from "@/components/ui/WhatsAppChannel";
 import { swDate } from "@/lib/editions/morning-sw";
 import { fitDescription } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -73,6 +74,7 @@ export default async function TodaySwPage() {
             Asubuhi ya Afronomics →
           </Link>
         </div>
+        <WhatsAppChannel lang="sw" variant="link" />
         {moves.length ? (
           <ul className="mt-4 grid gap-4 md:grid-cols-3">
             {moves.map((move) => (

@@ -2,16 +2,20 @@ import { renderTime } from "@/lib/data/fetcher";
 import { buildMorningNote, morningLines, morningSubject, morningText, morningWhatsApp } from "@/lib/editions/morning";
 import { morningEmailHtml } from "@/lib/editions/morning-email";
 import { morningLinesSw, morningTextSw } from "@/lib/editions/morning-sw";
+import { morningChannelText } from "@/lib/editions/morning-channel";
 
 export const revalidate = 900;
 
-/** The Morning as data: ?format=linkedin|text, ?format=whatsapp (short, bold markers), ?format=html (the email), ?lang=sw for Kiswahili; otherwise JSON. */
+/** The Morning as data: ?format=linkedin|text, ?format=whatsapp (short, bold markers), ?format=channel (the WhatsApp Channel post, with sources), ?format=html (the email), ?lang=sw for Kiswahili; otherwise JSON. */
 export async function GET(request: Request) {
   const note = await buildMorningNote(renderTime());
   const url = new URL(request.url);
   const format = url.searchParams.get("format");
   const sw = url.searchParams.get("lang") === "sw";
   const plain = { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, s-maxage=900" } };
+  if (format === "channel") {
+    return new Response(await morningChannelText(note, sw ? "sw" : "en"), plain);
+  }
   if (format === "whatsapp") {
     return new Response(sw ? morningTextSw(note) : morningWhatsApp(note), plain);
   }

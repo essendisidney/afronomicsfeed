@@ -87,6 +87,10 @@ export default function MethodPage() {
         which at least 90% of the best-covered year’s countries reported, and the number of reporting countries is printed next to the total.
         “Movers” compare a country’s latest annual value with the year immediately before it.
       </p>
+      <p>
+        How a SACCO is set beside its SASRA tier in the private Watch pack (tier medians, the middle half, the change on the year), and why no
+        score, grade or rank of a named SACCO is published: <Link href="/method/peer-comparison">peer comparison</Link>.
+      </p>
 
       <h2>Currencies</h2>
       <p>

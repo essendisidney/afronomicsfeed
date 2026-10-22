@@ -163,6 +163,13 @@ export default function ForInstitutionsPage() {
           </Link>
           .
         </p>
+        <p className="mt-3 text-sm text-ink-soft">
+          A SACCO? See{" "}
+          <Link href="/for-institutions/saccos" className="font-semibold text-forest underline underline-offset-2">
+            the Watch pack for your board and the free member widget
+          </Link>
+          .
+        </p>
       </section>
 
       <section className="mt-14">

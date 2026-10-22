@@ -106,6 +106,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/data-api", "monthly", 0.7, bills),
     page("/data/frontier-local-debt", "weekly", 0.9, debt),
     page("/data/frontier-local-debt/monitor", "daily", 0.8, debt),
+    page("/data/poverty-premium", "monthly", 0.8),
     // From the market list, so a new bill market is in the sitemap the day it ships (Kenya has its own page above).
     ...billMarkets.filter((m) => m.slug !== "kenya").map((m) => page(`/markets/tbills/${m.slug}`, "daily", 0.8, billUpdated(m.slug))),
     page("/east-africa", "daily", 0.8, debt),

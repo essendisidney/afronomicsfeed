@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-DIRS = ["docs/sales", "docs/strategy", "docs/legal", "docs/rebuild", "editions/social"]
+DIRS = ["docs/sales", "docs/strategy", "docs/legal", "docs/rebuild", "docs/desks", "editions/social"]
 # An address not inside a URL path (Kenya Law links contain "eng@2023-12-15").
 EMAIL = re.compile(r"(?<![/\w.-])[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}(?![\w/-])")
 PHONE = re.compile(r"\+\d{3}[ \d]{7,14}\d")

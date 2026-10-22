@@ -346,3 +346,28 @@ what we changed. Newest at the bottom. Read this first every week.
 - The counter shows once the first result is counted; "since" is the first counted day (no back-filling, D-029 B).
 - Differences from the plan, accepted with the pull request: Ghana and Nigeria compared before tax on both sides (no
   tax rule held); "from" prices never used as the cheapest option; the default share card carries no personal figures.
+
+### D-033 · 22 Oct 2026 · U3, U4, U6 and U7 approved as recommended
+- **Decided by the founder:** "approve U3, U4, U6 and U7 as recommended". Each pull request (#235, #234, #236, #233)
+  is merged with every decision taken at its plan's recommended option.
+- **U3 Kenya Poverty Premium** (`upgrade-U3-plan.md` §7): name "The Kenya Poverty Premium"; household examples as
+  built; published now with the SACCO-loan and deposit-cover gaps marked and the remittance line marked old; the
+  364-day T-bill as the saving comparator; no headline total; English first, `/sw` summary the following month; lives
+  at `/data/poverty-premium` with `/method#poverty-premium` and links from `/data` and `/rates/kenya` to follow; the
+  monthly workflow runs from the merge.
+- **U4 reference rates** (`upgrade-U4-plan.md` §5): loan-app reports stay out of the KCCI; the frozen Monday release is
+  the ASBI value of record, later results listed as revisions; no benchmark licences offered until an oversight panel
+  exists (terms text stays, no price set); names ASBI and "Afronomics Kenya Cost of Credit Index (KCCI)"; KCCI monthly
+  on the first working day; "from" prices shown, not counted; panel shape as in the governance file (names only once
+  people agree in writing, any fee the founder's). **Still the founder's:** the method owner's conflicts declaration.
+- **U6 Get found** (`upgrade-U6-plan.md` §4): desk@ stays the press contact; mark files offered one by one; outside
+  citations listed on `/press` once logged; one WhatsApp Channel in English, Kiswahili text on the desk; the weekly
+  press email stays held. **Still the founder's:** create the channel and set `WHATSAPP_CHANNEL_URL` (Vercel, needs
+  his yes to the setting); submit the sitemap in Google Search Console and Bing; whether to withdraw the old navy and
+  red `public/brand/logo-*` files (no recommendation was made).
+- **U7 desks** (`upgrade-U7-plan.md` §7): mandates in `docs/desks/` approved; log only runs that did something, and a
+  desk may merge its own docs-only log pull request; quiet lines "No story today.", "No post today.", "Data quiet.";
+  escalations at the top of each routine's own report while outgoing email is on hold (sales-operator urgent email
+  and D-017 A1 sends stay paused); right-of-reply emails drafted in Gmail and sent only on the founder's yes per
+  message; `lib/desk/reference.ts` updated (A1, A3, A4 decided; outreach follow-ups cancelled); compliance stays as
+  standing rules. **Still the founder's:** pointing each routine's prompt at its mandate file.

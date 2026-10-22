@@ -1,6 +1,6 @@
 import { SectionTitle } from "@/components/data/parts";
 import { moneyLabel } from "@/lib/billing/plans";
-import type { PilotKey } from "./CommandCentre";
+import type { PilotKey } from "./money-core";
 
 /**
  * How visitors become paying institutions, from real counts only (af_desk_funnel, migration 0034): no estimate or

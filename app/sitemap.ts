@@ -52,6 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/markets/eurobonds", "daily", 0.9),
     page("/markets/bill-index", "weekly", 0.9, bills),
     page("/markets/bill-index/release", "weekly", 0.7, bills),
+    page("/markets/bill-index/method", "monthly", 0.7),
     page("/markets/bonds", "daily", 0.9, bonds),
     // Only markets whose page exists (dynamicParams is off, so an empty market's URL would 404).
     ...marketsWithRows().map(({ market: m }) => page(`/markets/bonds/${m.slug}`, "daily", 0.8, bondUpdated(m.slug))),
@@ -95,6 +96,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/rates/nigeria/savings-bond", "weekly", 0.9),
     ...learnLangs.flatMap((l) => [page(`/learn/${l}`, "weekly", 0.8), ...loadLessons(l).map((x) => page(`/learn/${l}/${x.slug}`, "monthly", 0.7))]),
     page("/rates/kenya/mobile-loans", "weekly", 0.9),
+    page("/rates/kenya/cost-of-credit", "monthly", 0.8),
+    page("/rates/kenya/cost-of-credit/method", "monthly", 0.6),
     page("/rates/kenya/loan-apps", "weekly", 0.9),
     ...[...(loadLenders()?.lenders ?? []), ...(loadLenders()?.removed ?? [])].map((l) => page(lenderHref(l.name), "monthly", 0.6)),
     page("/for-institutions", "monthly", 0.7),

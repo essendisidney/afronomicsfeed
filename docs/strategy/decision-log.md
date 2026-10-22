@@ -315,3 +315,17 @@ what we changed. Newest at the bottom. Read this first every week.
   with the method public first.
 - **Not changed:** the Safaricom stake-sale Receipt stays held. No retroactive right-of-reply emails for Fuliza or
   Kenya Airways (outgoing email is on hold).
+### D-029 · 22 Oct 2026 · U2 "Shillings found" plan approved
+- **Decided by the founder:** "approve U2 plan" (`docs/rebuild/upgrade-U2-plan.md`), with decisions A to E as
+  recommended: count only options a reader can take (never the gap to an average); start the public counter on
+  release day with no back-filling; cap each result (KES 500,000 a year; USD 2,000 a year on sending money home);
+  ship the line and counter in Kiswahili too; "Shillings found" on Kenya pages, "Money found" elsewhere.
+- **Next:** one pull request for the phase; migration 0046 is applied only after the founder approves that pull
+  request.
+
+### D-030 · 22 Oct 2026 · No follow-up emails to the wave 2–4 contacts
+- **Decided by the founder:** "dont send the follow ups". The one follow-up planned for 21–22 Oct (D-013, D-017) is
+  cancelled for every contacted organisation that has not replied (27 in wave 2–4, plus Ashmore and William Blair).
+  None was sent. No routine sends one later; a contact who writes to us is answered as usual.
+- **Replies on file:** Meristem and ICEA Lion (customer service, passed to their teams); NSSF Uganda, ARM and
+  Afrinvest (automatic receipts only).

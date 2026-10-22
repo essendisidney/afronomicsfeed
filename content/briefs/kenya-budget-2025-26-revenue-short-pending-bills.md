@@ -49,7 +49,7 @@ The figure is in the Treasury's 2026 Budget Review and Outlook Paper, its review
 
 *Source: The National Treasury, 2026 Budget Review and Outlook Paper. Figures are provisional.*
 
-**Facts.** Ordinary revenue missed its target by KES 52.2bn. Pay-as-you-earn tax beat its target by KES 7.7bn. Investment revenue fell KES 65.4bn short, which the Treasury says was "mainly on account of reduced dividend receipts following the divestiture of the Government's share in Safaricom." External grants came to KES 20.7bn against KES 39.9bn planned.
+**Facts.** Ordinary revenue missed its target by KES 52.2bn. Pay-as-you-earn tax beat its target by KES 7.7bn. Investment revenue fell KES 65.4bn short, which the Treasury puts mainly down to reduced dividend receipts. External grants came to KES 20.7bn against KES 39.9bn planned.
 
 **Facts.** Spending came in KES 172.4bn under plan. Recurrent spending was KES 115.4bn below target, "mainly attributed to below-target expenditure in domestic interest and pensions payments." Development spending was KES 39.5bn below target, and transfers to counties KES 17.5bn below.
 

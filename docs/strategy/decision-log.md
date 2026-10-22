@@ -301,3 +301,17 @@ what we changed. Newest at the bottom. Read this first every week.
   prominence. Quote any reply on the Receipt the same day.
 - **Still held:** the Safaricom stake sale, until the judgment is read and an advocate has reviewed it (the founder gave no
   instruction to release it).
+
+### D-028 · 22 Oct 2026 · One rule for named companies, institutions and people
+- **Believed:** the repository said two things: `README.md`, `AFRONOMICS_BUILD_PLAN.md` and `BRIEF.md` forbade a
+  public verdict on a named institution, while `RECEIPTS.md`, D-019 to D-027 and five live Receipts published them.
+  `RECEIPTS.md` also said no human approves a Receipt; D-019 required the founder's tap for the first 30.
+- **Decided by the founder:** "approve the rule". `docs/editorial/named-institutions.md` is the one rule, and the four
+  files now point to it. Data, sector and government-borrowing Receipts are autonomous behind the confirming agent. A
+  verdict naming a company, institution or person needs the confirming agent and the founder's one-tap approval on
+  `/desk` until 30 have run with no correction (the count starts at 5), a 3-working-day right of reply through
+  `desk@` (facts-only may publish first for breaking events), and an advocate's read for a live offer or anything in
+  litigation; a waiver is logged as its own decision. Ratings or scores of named institutions follow the same gate,
+  with the method public first.
+- **Not changed:** the Safaricom stake-sale Receipt stays held. No retroactive right-of-reply emails for Fuliza or
+  Kenya Airways (outgoing email is on hold).

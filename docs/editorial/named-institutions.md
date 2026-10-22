@@ -1,7 +1,8 @@
-# Named institutions: one rule (PROPOSAL, awaiting the founder)
+# Named institutions: one rule
 
-Written 22 Oct 2026 for `docs/rebuild/UPGRADE.md` section 2. **Status: proposal.** Nothing here is in force until the
-founder approves it and it is logged in `docs/strategy/decision-log.md`. Until then, D-019 to D-027 stand as written.
+Written 22 Oct 2026 for `docs/rebuild/UPGRADE.md` section 2. **Status: in force since 22 Oct 2026 (D-028).** This
+file is the one rule; `README.md`, `AFRONOMICS_BUILD_PLAN.md`, `docs/rebuild/BRIEF.md` and `docs/rebuild/RECEIPTS.md`
+point here. Section 1 records the conflict it resolved.
 
 ## 1. The conflict today
 
@@ -69,18 +70,14 @@ restating it.
 - The desk needs two small additions: the named-verdict count (5 of 30) and a right-of-reply log. Both are UPGRADE
   U7 items; until they exist, the count and log live in this file's section 1 table.
 
-## 3. Questions for the founder
+## 3. Decided (22 Oct 2026, D-028)
 
-1. Approve the rule as written, or change it (for example the 3-day window, or whether a correction restarts the
-   30)?
-2. Does the count start at 5, counting the Receipts already published with your approval?
-3. Fuliza and Kenya Airways went out without a right of reply (D-027). Should we send both companies the factual
-   paragraphs now, as a courtesy, under rule 3? (No email goes out until you say so.)
-4. The Safaricom stake-sale Receipt stays held until an advocate reads it (rule 4). Confirm.
+1. **Rule approved as written** by the founder ("approve the rule").
+2. **The count starts at 5**, as section 2 rule 2 says: the five named-company Receipts already published with the
+   founder's approval. 5 of 30, 0 corrections.
+3. **No courtesy right-of-reply emails** to Safaricom or Kenya Airways for the Receipts already published: the founder
+   has not asked for them, and outgoing email is on hold. Rule 3 applies to new named-company Receipts.
+4. **The Safaricom stake-sale Receipt stays held** until an advocate has read it (rule 4).
 
-## 4. Once approved
-
-- Add the decision to `docs/strategy/decision-log.md` (next number D-028).
-- Replace the named-institution lines in `README.md`, `AFRONOMICS_BUILD_PLAN.md`, `docs/rebuild/BRIEF.md` section 2
-  and `docs/rebuild/RECEIPTS.md` section 2 with one line pointing here.
-- Change this file's status line from "proposal" to "in force since <date>, D-028".
+Until the desk shows the named-verdict count and a right-of-reply log (UPGRADE U7), keep them in the section 1 table
+above.

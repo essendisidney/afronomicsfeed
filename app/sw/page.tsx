@@ -7,6 +7,9 @@ import { fitDescription } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { ourRecord, whatChanged, type TodayMove } from "@/lib/today";
 import { SITE_CARD_ALT, shareImage } from "@/lib/share-image";
+import { FundFound } from "@/components/data/FundFound";
+import { FoundCounter } from "@/components/home/FoundCounter";
+import { fundOptions } from "@/lib/found-data";
 
 export const revalidate = 900;
 
@@ -91,6 +94,24 @@ export default async function TodaySwPage() {
           mabadiliko makubwa zaidi ya usiku kucha kati ya sarafu za Afrika, na mabadiliko makubwa zaidi ya Kenya (au yanayofuata mahali pengine). Hesabu za
           shilingi zinafanywa na programu kutoka kwa riba zilizochapishwa; hakuna kinachokadiriwa na modeli.
         </p>
+      </section>
+
+      <section aria-labelledby="shilingi" className="mt-12">
+        <h2 id="shilingi" className="font-serif text-2xl text-ink sm:text-3xl">
+          Shilingi zilizopatikana
+        </h2>
+        <p className="mt-2 max-w-3xl text-[15px] leading-7 text-ink-soft">
+          Zana zetu za pesa zinaonyesha unacholipa au unachopata dhidi ya chaguo bora tunalofuatilia, na tofauti kwa mwaka, kwa chanzo na tarehe ya
+          pande zote mbili. Hesabu inafanywa na programu. Tofauti inayoonyeshwa si pesa iliyohamishwa, na msomaji mmoja anaweza kuhesabiwa zaidi ya mara
+          moja.{" "}
+          <Link href="/method#shillings-found" lang="en" hrefLang="en" className="underline underline-offset-2">
+            Jinsi tunavyohesabu (kwa Kiingereza)
+          </Link>
+        </p>
+        <div className="mt-4 space-y-4">
+          <FoundCounter lang="sw" variant="panel" />
+          <FundFound funds={fundOptions()} lang="sw" />
+        </div>
       </section>
 
       {record ? (

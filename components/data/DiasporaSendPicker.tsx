@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { RemitFound } from "@/components/data/RemitFound";
+import type { FxRef, RemitCorridor, RemitSurvey } from "@/lib/found";
 
 /** One sending country into Kenya, from the World Bank's survey (prepared on the server in app/diaspora/page.tsx). */
 export type SendRow = {
@@ -19,7 +21,20 @@ const pct = (n: number) => `${n.toFixed(2)}%`;
  * sending $200 to Kenya from the one chosen. Every country's figures are in the server HTML; the picker only shows one,
  * so nothing moves when it changes (the card keeps the same lines whatever is chosen).
  */
-export function DiasporaSendPicker({ rows, period }: { rows: SendRow[]; period: string }) {
+export function DiasporaSendPicker({
+  rows,
+  period,
+  corridors = [],
+  survey = null,
+  fx = null,
+}: {
+  rows: SendRow[];
+  period: string;
+  /** The same corridors with every service surveyed, for the "money found" line (lib/found.ts). */
+  corridors?: RemitCorridor[];
+  survey?: RemitSurvey | null;
+  fx?: FxRef;
+}) {
   const [src, setSrc] = useState(rows[0]?.src ?? "");
   const row = rows.find((r) => r.src === src) ?? rows[0];
   if (!row) return null;
@@ -70,6 +85,11 @@ export function DiasporaSendPicker({ rows, period }: { rows: SendRow[]; period: 
       <p className="mt-3 text-[12px] leading-5 text-muted">
         Sending the equivalent of $200 from {row.name} to Kenya: fee plus exchange-rate margin. World Bank, Remittance Prices Worldwide, survey of {period}.
       </p>
+      {survey && corridors.some((c) => c.src === row.src) ? (
+        <div className="mt-4">
+          <RemitFound key={row.src} corridors={corridors} survey={survey} fx={fx} corridor={`${row.src}-KEN`} />
+        </div>
+      ) : null}
     </div>
   );
 }

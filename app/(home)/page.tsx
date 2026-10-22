@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadStory, MoveRow, movesRule, SectionHead, StoryRow, TodayStrip, ToolTiles } from "@/components/home/FrontPage";
 import { SinceLastVisit } from "@/components/home/SinceLastVisit";
+import { FoundCounter } from "@/components/home/FoundCounter";
 import { SectionNav, type SectionLink } from "@/components/layout/SectionNav";
 import { ButtonLink } from "@/components/ui/Button";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
@@ -120,6 +121,7 @@ export default async function TodayPage() {
               <span className="text-forest group-hover:text-ink"> →</span>
             </span>
           </Link>
+          <FoundCounter />
         </section>
 
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">

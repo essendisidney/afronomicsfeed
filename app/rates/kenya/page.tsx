@@ -160,6 +160,10 @@ export default function KenyaRatesPage() {
           <Link href="/rates/kenya/saccos" className="font-medium text-forest underline underline-offset-2">
             What SACCOs pay →
           </Link>
+          <span className="mx-2 text-muted">·</span>
+          <Link href="/data/poverty-premium" className="font-medium text-forest underline underline-offset-2">
+            Kenya Poverty Premium →
+          </Link>
         </p>
       </section>
 

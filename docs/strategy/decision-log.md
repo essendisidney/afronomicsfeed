@@ -371,3 +371,19 @@ what we changed. Newest at the bottom. Read this first every week.
   and D-017 A1 sends stay paused); right-of-reply emails drafted in Gmail and sent only on the founder's yes per
   message; `lib/desk/reference.ts` updated (A1, A3, A4 decided; outreach follow-ups cancelled); compliance stays as
   standing rules. **Still the founder's:** pointing each routine's prompt at its mandate file.
+
+### D-034 · 22 Oct 2026 · No follow-ups; the desk keeps the analytics
+- **Decided by the founder:** "no follow ups actually remove this communications also clean up the desk and leave the
+  relevant analytics we need". Extends D-030 from the wave 2–4 contacts to everyone.
+- **Follow-ups:** none, to anyone. No follow-up emails, no nudges to idle pilots, no asking pilots for payment, no
+  deal next steps or next dates. A deal changes only when someone writes to us. Unsent outreach drafts in Gmail
+  (Britam, Standard Bank CIB, Global Evolution, Cbonds) deleted.
+- **Routines:** the sales operator is switched off. The desk operator and the sale watch never send email: replies
+  to people who wrote, and a welcome email on a payment, are left as Gmail drafts for the founder (outgoing email
+  is still on hold, D-030, D-033).
+- **The desk (`/desk`):** keeps the analytics: readers today, money collected, what needs the founder (access to
+  send, inbox items, setup gaps), content and campaigns, reader signals, API key usage, inbound inbox, data health,
+  audience, traffic, the funnel, money by product, payments, reader reports and the admin forms. Removed: the
+  pipeline board, the four lanes, the D-004 gate, the command centre and strategy board, "Build next", the desks,
+  routines, decisions and casebook panels (`lib/desk/reference.ts` and `lib/strategy/board.ts` removed with them;
+  the mandates in `docs/desks/` and the case files are unchanged, and cases still open at `/desk/cases/<id>`).

@@ -16,7 +16,7 @@ export const MANDATE_BASE = "https://github.com/essendisidney/afronomicsfeed/blo
 export type DeskSource = "log" | "social-receipts" | "social-posts" | "story-log" | "uiux-audit" | "health";
 export type Desk = { slug: string; name: string; when: string; quiet: string | null; sources: DeskSource[] };
 
-/** Times are Nairobi (UTC+3), as recorded in lib/desk/reference.ts and the mandate files. */
+/** Times are Nairobi (UTC+3), as recorded in the mandate files. */
 export const DESKS: Desk[] = [
   { slug: "sale-watch", name: "Sale watch", when: "Every 2 h, 07:07–21:07", quiet: "No new payments.", sources: ["log"] },
   { slug: "desk-operator", name: "Desk operator and support", when: "Weekdays 08:41, 13:41, 17:41", quiet: "Desk quiet.", sources: ["log"] },

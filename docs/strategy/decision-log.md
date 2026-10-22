@@ -338,3 +338,11 @@ what we changed. Newest at the bottom. Read this first every week.
 - The Quickmart brief is facts only, from the company's offer announcement, with no verdict. D-028 rule 4 (advocate's
   read for live offers) is read as covering verdicts; the founder's approval of this facts-only brief is logged here.
 - The budget brief does not repeat the Treasury's remark on the Safaricom divestiture (held topic, in litigation).
+
+### D-032 · 22 Oct 2026 · U2 "Shillings found" approved and migration 0046 applied
+- **Decided by the founder:** "approve U2 and apply migration 0046". The U2 pull request (#232) is merged and
+  `supabase/migrations/0046_shillings_found.sql` is applied to production (new table `found_daily` and the functions
+  `af_found_add` and `af_found_total`; nothing existing changed).
+- The counter shows once the first result is counted; "since" is the first counted day (no back-filling, D-029 B).
+- Differences from the plan, accepted with the pull request: Ghana and Nigeria compared before tax on both sides (no
+  tax rule held); "from" prices never used as the cheapest option; the default share card carries no personal figures.

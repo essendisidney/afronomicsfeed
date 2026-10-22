@@ -1,5 +1,7 @@
 # U6 plan: Get found (for the founder's approval)
 
+**Approved by the founder on 22 Oct 2026 ("approve U3, U4, U6 and U7 as recommended"; D-033): every decision at its recommended option.**
+
 Written 22 Oct 2026 for `docs/rebuild/UPGRADE.md` U6, after the U0 audit (`upgrade-audit.md`, sections 4 and 6).
 The founder asked for U6 to run alongside U7 ("run U6 and U7 alongside now"). Everything below that needs no
 founder decision is built on branch `claude/upgrade-u6`; nothing is merged, deployed or sent. One pull request for

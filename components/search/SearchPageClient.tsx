@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { searchIndex, type SearchHit } from "@/lib/search-core";
+import { useSearchMiss } from "./useSearchMiss";
 
 export function SearchPageClient({ index }: { index: SearchHit[] }) {
   const [query, setQuery] = useState("");
 
   const results = useMemo(() => searchIndex(query, index, 40), [index, query]);
+  useSearchMiss(query, results.length);
 
   return (
     <div>

@@ -50,9 +50,10 @@ BANKS = [
     # The Bank of Zambia's own content feed (JSON:API), newest entry first.
     ("zambia", "Bank of Zambia", "https://www.boz.zm/jsonapi/node/monetary_policy_rate?sort=-created&page[limit]=1", "Monetary Policy Rate",
      r'"field_monetary_policy_rate":"(?P<rate>\d+(?:\.\d+)?)","field_monetary_policy_rate_dat":"(?P<date>\d{4}-\d{2}-\d{2})"'),
-    # The Central Bank of Nigeria's Money Market Indicators feed (the JSON its own page loads), newest month first.
-    ("nigeria", "Central Bank of Nigeria", "https://www.cbn.gov.ng/api/GetAllMoneyMarketIndicators", "Monetary Policy Rate",
-     r'"period":"(?P<date>[A-Za-z]+ \d{4})","interBankCallRate":"[^"]*","mrr":"[^"]*","mpr":"(?P<rate>\d+(?:\.\d+)?)"'),
+    # The Central Bank of Nigeria's Monetary Policy Committee decisions page, newest meeting first. (Its Money Market
+    # Indicators feed is monthly and runs a month or more behind, so it missed the September 2026 cut for weeks.)
+    ("nigeria", "Central Bank of Nigeria", "https://www.cbn.gov.ng/MonetaryPolicy/Decisions.html", "Monetary Policy Rate",
+     r"meeting of the MPC held on (?P<date>[0-9a-z ]+? [A-Z][a-z]+ \d{4}), to: \w+ the Monetary Policy Rate(?: \(MPR\))?(?: by \d+ basis points)? (?:at|to) (?P<rate>\d+(?:\.\d+)?) per cent"),
     ("tanzania", "Bank of Tanzania", "https://www.bot.go.tz/?lang=en", "Central Bank Rate",
      r"Central Bank Rate (?P<rate>\d+(?:\.\d+)?)% (?P<date>\d(?:st|nd|rd|th) Quarter \d{4})"),
 ]
@@ -61,7 +62,6 @@ BANKS = [
 SOURCE_PAGE = {
     "southafrica": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates",
     "zambia": "https://www.boz.zm/",
-    "nigeria": "https://www.cbn.gov.ng/rates/mnymktind.html",
 }
 
 # Read on the central bank's page but loaded by script, so not yet readable as text.

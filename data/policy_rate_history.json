@@ -169,6 +169,30 @@
    "upper": null,
    "date_as_printed": "2026-10-19",
    "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
+  {
+   "first_seen": "2026-10-20",
+   "market": "nigeria",
+   "rate": 23.0,
+   "upper": null,
+   "date_as_printed": "21st and 22nd September 2026",
+   "source": "https://www.cbn.gov.ng/MonetaryPolicy/Decisions.html"
+  },
+  {
+   "first_seen": "2026-10-20",
+   "market": "southafrica",
+   "rate": 7.25,
+   "upper": null,
+   "date_as_printed": "2026-10-20",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
+  {
+   "first_seen": "2026-10-21",
+   "market": "southafrica",
+   "rate": 7.25,
+   "upper": null,
+   "date_as_printed": "2026-10-21",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
   }
  ]
 }

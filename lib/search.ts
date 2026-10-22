@@ -87,6 +87,7 @@ export function buildSearchIndex(): SearchHit[] {
     { href: "/rates/kenya/money-market-funds", title: "Kenya money market fund yields", kicker: "League table", summary: "Yields read from each manager, ranked after tax, with daily history; and all 59 licensed funds by size from the CMA." },
     { href: "/guides/where-your-shilling-earns-most", title: "Free guide: where your shilling earns most", kicker: "Guide", summary: "T-bills, bonds, money market funds, SACCOs and bank accounts side by side: the rate after tax and what KES 100,000 earns in a year." },
     { href: "/rates/kenya", title: "Where the shilling earns most", kicker: "Comparison", summary: "Bills, bonds, money market funds and bank rates after tax." },
+    { href: "/markets/waemu-demand", title: "WAEMU auction demand tracker (UMOA-Titres bid cover)", kicker: "Tracker", summary: "How heavily Senegal, Côte d’Ivoire, Mali, Niger, Burkina Faso, Benin and Togo auctions are bid: latest bid cover, eight-auction median and one-year bill yield." },
     { href: "/markets/bill-index", title: "African Sovereign Bill Index (ASBI)", kicker: "Index", summary: "Weekly average one-year rate across ten markets, since 2016." },
     { href: "/markets/bill-index/release", title: "ASBI weekly release", kicker: "Index", summary: "The Monday release in a fixed format for editors." },
     { href: "/alerts", title: "Alerts", kicker: "Tool", summary: "The auction result on your phone the minute it lands." },

@@ -102,6 +102,7 @@ export const footerGroups = [
       { href: "/markets/ipo-calculator", label: "IPO calculator" },
       { href: "/markets/bill-index", label: "Sovereign Bill Index" },
       { href: "/markets/borrowing-costs", label: "Borrowing costs" },
+      { href: "/markets/waemu-demand", label: "WAEMU auction demand" },
       { href: "/markets/eurobonds", label: "Eurobond yields" },
       { href: "/rates/policy", label: "Policy rates" },
       { href: "/rates/kenya", label: "Kenya rates compared" },

@@ -69,11 +69,11 @@ export function SectionNav({ sections, label = "On this page" }: { sections: Sec
                 data-section={s.id}
                 aria-current={on ? "location" : undefined}
                 onClick={() => setActive(s.id)}
-                className="group flex min-h-11 items-center px-1 text-[13px] font-medium whitespace-nowrap"
+                className="group flex min-h-11 items-center px-1.5 text-[13.5px] whitespace-nowrap"
               >
                 <span
-                  className={`inline-flex h-8 items-center rounded-full border px-3 transition-colors ${
-                    on ? "border-ink bg-ink text-paper" : "border-rule bg-surface text-ink-soft group-hover:border-ink group-hover:text-ink"
+                  className={`inline-flex h-11 items-center border-b-2 px-1 transition-colors ${
+                    on ? "border-sig font-semibold text-ink" : "border-transparent font-medium text-muted group-hover:border-rule group-hover:text-ink"
                   }`}
                 >
                   {s.label}

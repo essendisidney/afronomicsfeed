@@ -41,9 +41,12 @@ All rules in `BRIEF.md` section 2 still apply. In addition:
   - At most one dry line per section. Facts carry the piece.
   - Every sarcastic line must still be literally true.
   - No humour about losses suffered by ordinary people (depositors, workers, suppliers).
-- **Fully autonomous.** No human approves a Receipt. The Afronomics name is on every one, so the confirming agent
-  (Phase 9, step 6) is the gate, and it is stricter than a human editor would be. If it is not sure, nothing about a
-  named company or person is published that day; the pipeline publishes a data Receipt instead.
+- **Who approves what:** `docs/editorial/named-institutions.md` (D-028). Data, sector and government-borrowing
+  Receipts are fully autonomous behind the confirming agent (Phase 9, step 6). A verdict naming a company,
+  institution or person also needs the founder's one-tap approval on `/desk` until 30 have run with no correction,
+  a 3-working-day right of reply, and an advocate's read for a live offer or anything in litigation. If the
+  confirming agent is not sure, nothing about a named company or person is published that day; the pipeline
+  publishes a data Receipt instead.
 - **Rules for anything that names a company, institution or person:**
   - Facts about them come from primary documents (filings, offer documents, court or regulator records), or from two
     independent publications that agree.

@@ -84,8 +84,9 @@ it ships (see `docs/story-engine.md`). The house voice is in `docs/editorial/voi
 - Every figure shows its source, a link and an as-of date.
 - Code does the arithmetic. A model never produces a number a reader sees.
 - No demo or invented figures in production.
-- No verdict on a named institution in public. Public pages show the regulators' figures and sector-level patterns;
-  a SACCO is set against SASRA's minimums only in its own private Watch pack.
+- Verdicts on named companies, institutions and people follow one rule: `docs/editorial/named-institutions.md`
+  (D-028). The registry and Compare show regulators' figures with no grades; a SACCO is set against SASRA's minimums
+  only in its own private Watch pack.
 - Information, not advice: no buy, sell or hold; no promised returns.
 - Historical data is appended, never overwritten. Corrections are logged in `lib/corrections.ts` and shown at
   `/corrections`.

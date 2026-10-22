@@ -1,5 +1,7 @@
 # U4 plan: Reference rates others can cite and license (for the founder's approval)
 
+**Approved by the founder on 22 Oct 2026 ("approve U3, U4, U6 and U7 as recommended"; D-033): every decision at its recommended option.**
+
 Written 22 Oct 2026 for `docs/rebuild/UPGRADE.md` U4, after the U0 audit (`upgrade-audit.md` §3, §4 and §6). The
 founder asked for U4 to run alongside U2, U3, U6 and U7 ("run U4 alongside too"). One pull request for the whole
 phase, from branch `claude/upgrade-u4`. **Not yet approved.** A first build is on the branch so the founder can see

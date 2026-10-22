@@ -226,7 +226,7 @@ def test_route_and_migration_guard_the_count():
     for needed in ("parseFoundInput", "recomputeFound", "isAutomated", "isInternalCall", "AF_CRON_SECRET", "af_found_add"):
         assert needed in route, needed
     sql = (ROOT / "supabase" / "migrations" / "0046_shillings_found.sql").read_text()
-    assert sql.startswith("-- NOT YET APPLIED")
+    assert sql.startswith("-- Applied to production on 22 Oct 2026")
     assert "enable row level security" in sql and "create policy" not in sql.lower()
     assert sql.count("security definer") == 2 and "k.name = 'cron'" in sql
     # Nothing that could identify a reader is a column.

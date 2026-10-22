@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProsePage } from "@/components/data/ProsePage";
+import { FoundCounter } from "@/components/home/FoundCounter";
 import { deskLabels, indicatorDefs } from "@/lib/data/indicators";
 import { projectsSource } from "@/lib/data/projects";
 import { feeds } from "@/lib/data/wire";
@@ -113,6 +114,35 @@ export default function MethodPage() {
         Briefs are labelled Facts, Analysis or Opinion, cite their primary documents with dates, and carry an as-of stamp. We do not give
         buy, sell or hold recommendations.
       </p>
+
+      <h2 id="shillings-found">Shillings found</h2>
+      <FoundCounter variant="panel" />
+      <p>
+        Five tools end with one line worked out by code: what the reader&rsquo;s option costs or earns, the cheapest or best-earning option we hold
+        for the same use, and the difference over a year, with the source and date of both sides. Is my rate fair? (saving, in Kenya, Ghana and
+        Nigeria) compares with the best money market fund or Treasury bill; mobile loans and Fuliza with the cheapest mobile loan whose charge is
+        published as a fixed figure, for the same amount and days; money market funds with the best fund after 15% withholding tax; sending money
+        home with the cheapest service the World Bank surveyed on the same corridor. Only options a reader can take are compared: a gap to an
+        average, such as the Central Bank&rsquo;s bank lending average, is shown on the page but never counted. If we hold no comparable option,
+        the tool says nothing new. If the reader&rsquo;s option is already the best we hold, it says so and nothing is counted.
+      </p>
+      <p>
+        When a line shows a positive difference, it is added to a public total: &ldquo;shillings found&rdquo; on Kenya pages, &ldquo;money
+        found&rdquo; in other currencies, and currencies are never added together. Our server works the difference out again from the
+        reader&rsquo;s figures and our own data before counting it, then drops the figures; only the tool, the market, the currency and the
+        amount are kept, as a daily total. The count started on the day the feature was released, with nothing added for earlier days.
+      </p>
+      <p>Its limits, plainly:</p>
+      <ul>
+        <li>A difference shown is not money moved. We do not know what any reader did next.</li>
+        <li>One reader can be counted more than once (once per tool each time they open a page).</li>
+        <li>Amounts are what readers typed. One result counts at most KES 500,000 a year on savings and loans (the same converted into cedis or
+          naira at the day&rsquo;s reference rate, or not counted when we show none) and USD 2,000 a year on sending money home; a larger
+          difference is not counted at all.</li>
+        <li>The comparable is the published price on its date: a fund&rsquo;s yield can change, and a provider&rsquo;s &ldquo;from&rdquo; rate
+          is never used as the cheapest option.</li>
+        <li>Our own visits are not counted. Information, not advice.</li>
+      </ul>
 
       <h2>Corrections</h2>
       <p>

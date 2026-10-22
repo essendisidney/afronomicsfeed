@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MpesaCalculator } from "@/components/data/MpesaCalculator";
+import { fulizaTariff, loanProducts } from "@/lib/found-data";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { Questions } from "@/components/seo/Questions";
@@ -55,7 +56,7 @@ export default function MpesaChargesPage() {
         </p>
       }
     >
-      <MpesaCalculator tariffs={t} />
+      <MpesaCalculator tariffs={t} loans={{ products: loanProducts(), fuliza: fulizaTariff() }} />
 
       <section aria-labelledby="table" className="mt-12">
         <SectionTitle kicker="Safaricom’s published charges" title="Every band" />

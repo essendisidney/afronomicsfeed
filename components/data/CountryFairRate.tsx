@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { track } from "@/lib/track";
 import { FollowUp } from "@/components/ui/FollowUp";
 import type { CountryBench } from "@/lib/data/west-africa-rates";
+import { FoundLine } from "@/components/data/FoundLine";
+import { foundSave, type SaveOption } from "@/lib/found";
 
 /**
  * "Is my rate fair?" for Nigeria and Ghana: the rate a saver or borrower was offered, against the government's
@@ -13,13 +15,16 @@ import type { CountryBench } from "@/lib/data/west-africa-rates";
 const fmt = (n: number) => new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(Math.round(n));
 const pts = (n: number) => `${Math.abs(n).toFixed(1)} point${Math.abs(n).toFixed(1) === "1.0" ? "" : "s"}`;
 
-export function CountryFairRate({ bench }: { bench: CountryBench }) {
+export function CountryFairRate({ bench, options }: { bench: CountryBench; options?: SaveOption[] }) {
   const [mode, setMode] = useState<"save" | "borrow">("save");
   const [rate, setRate] = useState("");
   const [amount, setAmount] = useState(bench.currency === "NGN" ? "500000" : "10000");
   const r = parseFloat(rate);
   const a = parseFloat(amount.replace(/[^\d.]/g, ""));
   const ok = Number.isFinite(r) && r >= 0 && r < 300 && Number.isFinite(a) && a > 0;
+  const market = bench.country === "Ghana" ? "ghana" : "nigeria";
+  // Money found (lib/found.ts): saving only, against the government bill, both before tax as on this page.
+  const found = ok && mode === "save" && options?.length ? foundSave({ market, currency: bench.currency, rate: r, amount: a, tax: 0, options }) : null;
   const money = (x: number) => `${bench.money}${fmt(x)}`;
   const best = bench.save[0];
   const shortBill = [...bench.save].filter((b) => b.label.includes("Treasury bill")).sort((x, y) => x.rate - y.rate)[0];
@@ -39,9 +44,13 @@ export function CountryFairRate({ bench }: { bench: CountryBench }) {
         lines: [
           `The best published option here is the ${best.label} at ${best.rate.toFixed(2)}% (${best.note}); your ${r.toFixed(2)}% is ${pts(r - best.rate)} ${r >= best.rate ? "above" : "below"} it.`,
           `Banks paid ${bench.savingsAvg.toFixed(2)}% on savings deposits on average (${bench.bankSource.publisher}, ${bench.asOf}); you are ${pts(vsAvg)} ${vsAvg >= 0 ? "above" : "below"} that.`,
-          gap > 0
-            ? `On ${money(a)} for a year, ${best.rate.toFixed(2)}% would earn about ${money(gap)} more than ${r.toFixed(2)}%, before tax.`
-            : `On ${money(a)} for a year, your rate earns about ${money(-gap)} more than the best published option, before tax.`,
+          ...(found && found.status !== "none"
+            ? []
+            : [
+                gap > 0
+                  ? `On ${money(a)} for a year, ${best.rate.toFixed(2)}% would earn about ${money(gap)} more than ${r.toFixed(2)}%, before tax.`
+                  : `On ${money(a)} for a year, your rate earns about ${money(-gap)} more than the best published option, before tax.`,
+              ]),
         ],
       };
     }
@@ -103,7 +112,7 @@ export function CountryFairRate({ bench }: { bench: CountryBench }) {
         </label>
         <label className="block">
           <span className="text-[12px] font-medium text-muted">Amount, {bench.currency}</span>
-          <input inputMode="numeric" value={amount} onChange={(e) => setAmount(e.target.value)} className={`mt-1 w-full ${field}`} />
+          <input inputMode="numeric" data-found-amount value={amount} onChange={(e) => setAmount(e.target.value)} className={`mt-1 w-full ${field}`} />
         </label>
       </div>
       {v ? (
@@ -115,6 +124,7 @@ export function CountryFairRate({ bench }: { bench: CountryBench }) {
               <p key={l}>{l}</p>
             ))}
           </div>
+          {found ? <FoundLine result={found} payload={{ tool: "save_check", market, rate: r, amount: a }} figures={{ rate: Math.round(r * 100) / 100, amount: Math.round(a) }} /> : null}
           </div>
           {bench.currency === "NGN" ? (
             <FollowUp

@@ -35,7 +35,13 @@ export function billIndexSeries(tenor: BillTenor = 364, weeks = 600): IndexPoint
   for (let i = 0; i < weeks; i += 1) {
     const date = new Date(Date.parse(start) - i * 7 * DAY).toISOString().slice(0, 10);
     const rates = data.map((d) => rateOn(d.rows, tenor, date)?.rate).filter((r): r is number => r != null);
-    if (rates.length < MIN_MARKETS) break;
+    // Data insufficiency (method, content/methods/asbi.md): a week with fewer than MIN_MARKETS prints no reading.
+    // While no week has printed yet (the current week is short), skip it so the latest valid reading stays the
+    // latest, dated as such; once the series has started, the first short week going back is where it began.
+    if (rates.length < MIN_MARKETS) {
+      if (points.length === 0 && i < 8) continue;
+      break;
+    }
     points.push({ date, value: Math.round((rates.reduce((a, b) => a + b, 0) / rates.length) * 1000) / 1000, markets: rates.length });
   }
   return points.reverse();
@@ -72,6 +78,16 @@ export function billIndexLatest(tenor: BillTenor = 364) {
     bpsYear: yearAgo ? Math.round((latest.value - yearAgo.value) * 100) : null,
   };
 }
+
+/** Each market's input to the reading for one week (the same rule as the series), for the revision log. */
+export function billIndexInputsOn(date: string, tenor: BillTenor = 364) {
+  return billMarkets.flatMap((market) => {
+    const row = rateOn(loadBillMarket(market.slug).rows, tenor, date);
+    return row ? [{ country: market.country, rate: row.rate, date: row.date }] : [];
+  });
+}
+
+export { MIN_MARKETS, STALE_DAYS };
 
 export const indexName = "Afronomics African Sovereign Bill Index";
 export const indexShort = "ASBI";

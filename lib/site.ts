@@ -111,6 +111,7 @@ export const footerGroups = [
       { href: "/rates/kenya/saccos", label: "SACCO rates" },
       { href: "/chama", label: "Chama Money Hub" },
       { href: "/rates/kenya/mobile-loans", label: "Mobile loan costs" },
+      { href: "/rates/kenya/cost-of-credit", label: "Kenya Cost of Credit Index" },
       { href: "/rates/kenya/mpesa-charges", label: "M-PESA and Fuliza charges" },
       { href: "/rates/kenya/net-salary", label: "Net salary calculator" },
       { href: "/rates/kenya/loan-cost", label: "Loan true-cost calculator" },

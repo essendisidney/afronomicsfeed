@@ -429,6 +429,15 @@ async function checkPage(browser, { base, axe, target, variant, primary, screens
     deviceScaleFactor: 1,
     extraHTTPHeaders: INTERNAL_HEADERS,
   });
+  // The site's theme follows the reader's clock, not prefers-color-scheme (lib/theme.ts), so emulating the scheme
+  // alone left every "dark" run light in the daytime. Choose the theme the way a reader does, in the menu (localStorage).
+  await context.addInitScript((mode) => {
+    try {
+      localStorage.setItem("af-theme", mode);
+    } catch {
+      // Storage blocked: the page falls back to Auto.
+    }
+  }, variant.colorScheme);
   const page = await context.newPage();
   const consoleErrors = [];
   page.on("console", (msg) => {

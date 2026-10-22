@@ -44,7 +44,7 @@ export default async function MorningPage() {
       }
       aside={
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5 text-sm text-ink-soft">
-          <p className="text-[14px] font-semibold text-ink">In your inbox at 7:00</p>
+          <p className="text-[14px] font-semibold text-ink">In your inbox before 07:30</p>
           <p className="mt-1 leading-6">This note, every weekday morning, East Africa time. Free, and every figure linked to its source.</p>
           <Link href="/subscribe?list=morning" className={buttonClass({ className: "mt-4" })}>
             Get the Morning
@@ -111,10 +111,10 @@ export default async function MorningPage() {
                           {a.market.country}
                         </Link>
                       </td>
-                      <td>{a.tenor}-day</td>
+                      <td className="whitespace-nowrap">{a.tenor}-day</td>
                       <td className="text-right text-sm">{a.rate.toFixed(2)}%</td>
-                      <td className={`text-right text-sm ${a.bps == null || a.bps === 0 ? "text-muted" : a.bps > 0 ? "text-down" : "text-up"}`}>{a.bps == null ? "—" : `${morningSigned(a.bps, 0)} bps`}</td>
-                      <td className="text-xs">
+                      <td className={`whitespace-nowrap text-right text-sm ${a.bps == null || a.bps === 0 ? "text-muted" : a.bps > 0 ? "text-down" : "text-up"}`}>{a.bps == null ? "—" : `${morningSigned(a.bps, 0)} bps`}</td>
+                      <td className="whitespace-nowrap text-xs">
                         <a href={a.source} target="_blank" rel="noopener noreferrer" className="hover:text-forest">
                           {morningShortDate.format(new Date(a.date))}
                         </a>
@@ -181,7 +181,7 @@ export default async function MorningPage() {
         <WireList items={note.stories} now={now} />
       </section>
 
-      <NewsletterBand title="The Afronomics Morning" lede="The same note in your inbox at 7:00 every weekday, East Africa time. Free." />
+      <NewsletterBand title="The Afronomics Morning" lede="The same note in your inbox before 07:30 every weekday, East Africa time. Free." />
     </PageShell>
   );
 }

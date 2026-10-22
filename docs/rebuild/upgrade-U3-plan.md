@@ -1,5 +1,7 @@
 # U3 plan: the Kenya Poverty Premium (for the founder's approval)
 
+**Approved by the founder on 22 Oct 2026 ("approve U3, U4, U6 and U7 as recommended"; D-033): every decision at its recommended option.**
+
 Written 22 Oct 2026 for `docs/rebuild/UPGRADE.md` U3, after the U0 audit (`upgrade-audit.md` §3, §4, §6). The
 founder said "run U3 alongside too". A first version is built on branch `claude/upgrade-u3` (no pull request yet), so
 the decisions in §7 can be made against a working page. Nothing is published until the founder approves.

@@ -9,6 +9,7 @@ import { CiteBlock } from "@/components/ui/CiteBlock";
 import { DebtDataLinks } from "@/components/seo/DebtDataLinks";
 import { bankRateHistory, fairBench, rateOptions } from "@/lib/data/kenya-rates";
 import { FairRate } from "@/components/data/FairRate";
+import { kenyaSaveOptions } from "@/lib/found-data";
 import { site } from "@/lib/site";
 import { fitDescription } from "@/lib/seo";
 import { TableScroll } from "@/components/ui/DataTable";
@@ -67,7 +68,7 @@ export default function KenyaRatesPage() {
     >
       {bench ? (
         <div className="mb-10">
-          <FairRate bench={bench} />
+          <FairRate bench={bench} options={kenyaSaveOptions()} />
         </div>
       ) : null}
       <section>

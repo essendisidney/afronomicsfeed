@@ -5,6 +5,8 @@ import { track } from "@/lib/track";
 import { FollowUp } from "@/components/ui/FollowUp";
 import { ShareResult } from "@/components/ui/ShareResult";
 import { fairSentence, type ShareSpec } from "@/lib/share";
+import { FoundLine } from "@/components/data/FoundLine";
+import { foundSave, type SaveOption } from "@/lib/found";
 
 /**
  * "Is my rate fair?" A saver or borrower types the rate they were offered and the amount; the verdict compares it
@@ -28,7 +30,7 @@ export type FairBench = {
 const fmt = (n: number) => new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(Math.round(n));
 const pts = (n: number) => `${Math.abs(n).toFixed(1)} point${Math.abs(n).toFixed(1) === "1.0" ? "" : "s"}`;
 
-export function FairRate({ bench, compact = false }: { bench: FairBench; compact?: boolean }) {
+export function FairRate({ bench, compact = false, options }: { bench: FairBench; compact?: boolean; options?: SaveOption[] }) {
   const [mode, setMode] = useState<"save" | "borrow">("save");
   const [rate, setRate] = useState("");
   const [amount, setAmount] = useState("100000");
@@ -36,6 +38,8 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
   const r = parseFloat(rate);
   const a = parseFloat(amount.replace(/[^\d.]/g, ""));
   const ok = Number.isFinite(r) && r >= 0 && r < 200 && Number.isFinite(a) && a > 0;
+  // Shillings found (lib/found.ts): saving only; the borrow side compares with an average, which is never counted.
+  const found = ok && mode === "save" && options?.length ? foundSave({ market: "kenya", currency: "KES", rate: r, amount: a, tax: 0.15, options }) : null;
 
   function verdict() {
     if (!ok) return null;
@@ -64,9 +68,13 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
         lines: [
           `${r.toFixed(2)}% is ${net.toFixed(2)}% after 15% withholding tax. The 364-day Treasury bill keeps ${bench.bill364Net.toFixed(2)}% (${vsBill >= 0 ? "you are" : "you are"} ${pts(vsBill)} ${vsBill >= 0 ? "above" : "below"} it); the best published fund, ${bench.bestFundName}, keeps ${bench.bestFundNet.toFixed(2)}% (${pts(vsFund)} ${vsFund >= 0 ? "above" : "below"}).`,
           `Banks on average pay ${bench.depositAvg.toFixed(2)}% on deposits and ${bench.savingsAvg.toFixed(2)}% on savings (Central Bank of Kenya, ${bench.asOf}); your rate is ${pts(vsAvg)} ${vsAvg >= 0 ? "above" : "below"} the deposit average.`,
-          yearGap > 0
-            ? `On KES ${fmt(a)} for a year, the best published option would leave you KES ${fmt(yearGap)} better off than this rate.`
-            : `On KES ${fmt(a)} for a year, this rate beats the best published option by about KES ${fmt(-yearGap)}.`,
+          ...(found && found.status !== "none"
+            ? []
+            : [
+                yearGap > 0
+                  ? `On KES ${fmt(a)} for a year, the best published option would leave you KES ${fmt(yearGap)} better off than this rate.`
+                  : `On KES ${fmt(a)} for a year, this rate beats the best published option by about KES ${fmt(-yearGap)}.`,
+              ]),
         ],
       };
     }
@@ -142,7 +150,7 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
         </label>
         <label className="block">
           <span className="text-[12px] font-medium text-muted">Amount, KES</span>
-          <input inputMode="numeric" value={amount} onChange={(e) => setAmount(e.target.value)} className={`mt-1 w-full ${field}`} />
+          <input inputMode="numeric" data-found-amount value={amount} onChange={(e) => setAmount(e.target.value)} className={`mt-1 w-full ${field}`} />
         </label>
         <label className="block">
           <span className="text-[12px] font-medium text-muted">{mode === "save" ? "Where" : "From"}</span>
@@ -162,7 +170,11 @@ export function FairRate({ bench, compact = false }: { bench: FairBench; compact
               <p key={l}>{l}</p>
             ))}
           </div>
-          <ShareResult spec={shareSpec} text={`${fairSentence(shareSpec, bench)} Is your rate fair? Check yours:`} />
+          {found ? (
+            <FoundLine result={found} payload={{ tool: "save_check", market: "kenya", rate: r, amount: a }} figures={{ rate: Math.round(r * 100) / 100, amount: Math.round(a) }} />
+          ) : null}
+          {/* One row of share buttons: the found line carries its own when it shows. */}
+          {found && found.status !== "none" ? null : <ShareResult spec={shareSpec} text={`${fairSentence(shareSpec, bench)} Is your rate fair? Check yours:`} />}
           </div>
           <FollowUp heading="Rates move every week. Keep up" />
         </>

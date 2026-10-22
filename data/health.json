@@ -4,9 +4,9 @@
  "checked_on": "2026-10-22",
  "summary": {
   "failed": 0,
-  "late": 5,
+  "late": 4,
   "gap": 1,
-  "ok": 33
+  "ok": 34
  },
  "items": [
   {
@@ -15,15 +15,6 @@
    "status": "late",
    "detail": "published yield unchanged at 8.43% since 06 Oct: the page may not be current",
    "latest": "2026-10-06",
-   "due_by": null,
-   "link": "/rates/kenya/money-market-funds"
-  },
-  {
-   "area": "Money market funds",
-   "name": "Kasha Money Market Fund",
-   "status": "late",
-   "detail": "published yield unchanged at 10.35% since 14 Oct: the page may not be current",
-   "latest": "2026-10-14",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -182,6 +173,15 @@
   },
   {
    "area": "Money market funds",
+   "name": "Kasha Money Market Fund",
+   "status": "ok",
+   "detail": "10.42% read 22 Oct",
+   "latest": "2026-10-22",
+   "due_by": null,
+   "link": "/rates/kenya/money-market-funds"
+  },
+  {
+   "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
    "detail": "10.38% read 22 Oct",
@@ -292,9 +292,9 @@
    "area": "T-bill auctions",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest auction 19 Oct (auctions weekly)",
-   "latest": "2026-10-19",
-   "due_by": "2026-10-30",
+   "detail": "latest auction 26 Oct (auctions weekly)",
+   "latest": "2026-10-26",
+   "due_by": "2026-11-06",
    "link": "/markets/kenya-tbills"
   },
   {
@@ -310,9 +310,9 @@
    "area": "T-bill auctions",
    "name": "Mozambique",
    "status": "ok",
-   "detail": "latest auction 14 Oct (auctions weekly)",
-   "latest": "2026-10-14",
-   "due_by": "2026-10-23",
+   "detail": "latest auction 21 Oct (auctions weekly)",
+   "latest": "2026-10-21",
+   "due_by": "2026-10-30",
    "link": "/markets/tbills/mozambique"
   },
   {
@@ -365,19 +365,19 @@
   {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-10-21",
+   "day": "2026-10-22",
    "failures_in_row": 0
   },
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-10-21",
+   "day": "2026-10-22",
    "failures_in_row": 0
   },
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-10-21",
+   "day": "2026-10-22",
    "failures_in_row": 0
   },
   {

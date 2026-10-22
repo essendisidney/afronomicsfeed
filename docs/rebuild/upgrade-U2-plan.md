@@ -1,7 +1,8 @@
 # U2 plan: Shillings found (for the founder's approval)
 
-Written 22 Oct 2026 for `docs/rebuild/UPGRADE.md` U2, after the U0 audit (`upgrade-audit.md`). Nothing below is
-built until the founder approves it. One pull request for the whole phase.
+Written 22 Oct 2026 for `docs/rebuild/UPGRADE.md` U2, after the U0 audit (`upgrade-audit.md`). **Approved by the
+founder on 22 Oct 2026 ("approve U2 plan"), with decisions A to E as recommended; logged as D-029.** One pull
+request for the whole phase.
 
 ## 1. What U2 is
 
@@ -100,3 +101,10 @@ Size: medium (about 2–3 days of agent work). No new data sources, no paid serv
 - **D. Kiswahili:** ship the line and counter in Kiswahili on `/sw` at the same time (recommended), or English first.
 - **E. Name:** "Shillings found" on Kenya pages, and "Money found" where the currency is not the shilling (cedis,
   naira, dollars)? Recommended.
+
+### Decided (22 Oct 2026, D-029)
+
+A. Only real options are counted; the gap to an average is shown as today and never counted. B. The counter starts
+on release day, no back-filling. C. Caps: KES 500,000 a year (savings, loans; the same in GHS and NGN converted at
+the day's rate we show, or left uncounted if we show none) and USD 2,000 a year (sending money home). D. Kiswahili
+ships with it on `/sw`. E. "Shillings found" on Kenya pages; "Money found" elsewhere.

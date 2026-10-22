@@ -301,3 +301,11 @@ what we changed. Newest at the bottom. Read this first every week.
   prominence. Quote any reply on the Receipt the same day.
 - **Still held:** the Safaricom stake sale, until the judgment is read and an advocate has reviewed it (the founder gave no
   instruction to release it).
+
+### D-029 · 22 Oct 2026 · U2 "Shillings found" plan approved
+- **Decided by the founder:** "approve U2 plan" (`docs/rebuild/upgrade-U2-plan.md`), with decisions A to E as
+  recommended: count only options a reader can take (never the gap to an average); start the public counter on
+  release day with no back-filling; cap each result (KES 500,000 a year; USD 2,000 a year on sending money home);
+  ship the line and counter in Kiswahili too; "Shillings found" on Kenya pages, "Money found" elsewhere.
+- **Next:** one pull request for the phase; migration 0046 is applied only after the founder approves that pull
+  request.

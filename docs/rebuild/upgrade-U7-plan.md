@@ -2,7 +2,7 @@
 
 Written 22 Oct 2026 for `docs/rebuild/UPGRADE.md` U7, after the U0 audit (`upgrade-audit.md` §4–6) and the
 named-institutions rule (D-028). Run alongside U6 ("run U6 and U7 alongside now"). One pull request for the phase,
-on branch `claude/upgrade-u7`. **Not yet approved.**
+on branch `claude/upgrade-u7`. **Approved by the founder on 22 Oct 2026 ("approve U3, U4, U6 and U7 as recommended"; D-033), decisions A to G as recommended.**
 
 ## 1. What U7 is
 

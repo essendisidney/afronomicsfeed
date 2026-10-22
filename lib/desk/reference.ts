@@ -4,7 +4,7 @@
  * to run, not what did.
  */
 
-export const REFERENCE_UPDATED = "2026-10-13";
+export const REFERENCE_UPDATED = "2026-10-22";
 
 export type DecisionStatus = "open" | "decided" | "standing";
 export type FounderDecision = { id: string; ask: string; status: DecisionStatus; note: string; source: string };
@@ -22,10 +22,10 @@ export const FOUNDER_DECISIONS: FounderDecision[] = [
   { id: "F9", ask: "Approve the sponsor-and-grant independence clause", status: "open", note: "Before any sponsor conversation", source: "partners-and-revenue §3.4" },
   { id: "F10", ask: "Approve “Afronomics–Strathmore” as the index co-brand, or name another university", status: "open", note: "For the index pitch", source: "partners-and-revenue §3.4" },
   { id: "F11", ask: "Publish subscriber and open-rate figures on /advertise", status: "open", note: "Needed for sponsorship sales", source: "partners-and-revenue §3.4" },
-  { id: "A1", ask: "Approve the sequences.md texts (the sales operator may send them)", status: "open", note: "Until then every sales message is a Gmail draft", source: "sales-operator §0" },
+  { id: "A1", ask: "Approve the sequences.md texts (the sales operator may send them)", status: "decided", note: "13 Oct (D-017); sends paused while outgoing email is on hold (D-030, D-033)", source: "decision-log D-017" },
   { id: "A2", ask: "Approve the playbook §6.1 guardrails", status: "open", note: "Until then only the 30-day pilot and rate-card prices; the rest escalates", source: "sales-operator §0" },
-  { id: "A3", ask: "Approve the pilot extension rule (one 15 days for keys used on 5+ days)", status: "open", note: "Until then no extensions; requests escalate to you", source: "sales-operator §0" },
-  { id: "A4", ask: "Let the operator mark checkout purchases “won”", status: "open", note: "Until then you set won", source: "sales-operator §0" },
+  { id: "A3", ask: "Approve the pilot extension rule (one 15 days for keys used on 5+ days)", status: "decided", note: "13 Oct (D-017)", source: "decision-log D-017" },
+  { id: "A4", ask: "Let the operator mark checkout purchases “won”", status: "decided", note: "13 Oct (D-017): set automatically on a real payment", source: "decision-log D-017" },
 ];
 
 export type Routine = { name: string; when: string; does: string; where: string };
@@ -35,7 +35,7 @@ export const ROUTINES: Routine[] = [
   { name: "Sale watch", when: "Every 2 h, 07:07–21:07", does: "Real payments; FIRST SALE alert", where: "Claude routine" },
   { name: "Desk operator and support", when: "Weekdays 08:41, 13:41, 17:41", does: "Inbox, leads, pilots, deals, drafts; report to you", where: "Claude routine · docs/desk-operator.md" },
   { name: "Sales operator", when: "Weekdays 09:23; pipeline report Fri 15:47", does: "Moves each live deal one step; escalates (ESC) to you", where: "Claude routine · docs/sales/sales-operator.md" },
-  { name: "Outreach follow-ups", when: "21–22 Oct, once", does: "One follow-up to each contacted institution", where: "Claude routine" },
+  { name: "Outreach follow-ups", when: "Cancelled (D-030)", does: "Not sent; no follow-up goes to contacts who have not replied", where: "None" },
   { name: "Story engine", when: "Mon, Wed, Fri 07:47", does: "One checked brief and a company post", where: "Claude routine · docs/story-engine.md" },
   { name: "LinkedIn company posts", when: "Daily, Mon–Fri slots", does: "Posts; Thursday T-bill result", where: "Claude routine · editions/social" },
   { name: "Site health check and repair", when: "Daily 07:47", does: "Writes data/health.json", where: "Claude routine" },

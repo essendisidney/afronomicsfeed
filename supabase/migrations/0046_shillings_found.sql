@@ -1,6 +1,5 @@
--- NOT YET APPLIED. Apply only after the founder approves the U2 pull request ("Shillings found",
--- docs/rebuild/upgrade-U2-plan.md, decided as D-029). Until it is applied, POST /api/found counts nothing and fails
--- quietly, and the counter on Today, /method and /sw stays hidden.
+-- Applied to production on 22 Oct 2026 after the founder approved the U2 pull request ("approve U2 and apply
+-- migration 0046"; D-032).
 --
 -- Shillings found: an anonymous daily total of the differences readers were shown at the end of the money tools
 -- (lib/found.ts): what the reader's option costs or earns against the cheapest or best-earning option we hold.

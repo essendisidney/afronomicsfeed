@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 8,
-  "results": 20,
+  "results": 21,
   "p50_h": 3.4,
   "p90_h": 12.5
  },
@@ -154,12 +154,12 @@
    "kind": "bonds",
    "market": "nigeria",
    "name": "Nigeria",
-   "results": 0,
+   "results": 1,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": null,
-   "status": "no new result since measuring began"
+   "status": "publisher time unknown"
   },
   {
    "kind": "bonds",
@@ -271,6 +271,15 @@
    "market": "egypt",
    "date": "2026-10-20",
    "first_seen_at": "2026-10-20T09:24:17+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bonds:nigeria:2026-10-19",
+   "kind": "bonds",
+   "market": "nigeria",
+   "date": "2026-10-19",
+   "first_seen_at": "2026-10-22T09:27:18+00:00",
    "published_at": null,
    "published_how": null
   },
@@ -799,5 +808,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-21T15:27:12+00:00"
+ "updated_at": "2026-10-22T09:37:39+00:00"
 }

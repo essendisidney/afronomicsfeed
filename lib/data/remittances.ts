@@ -23,7 +23,7 @@ export type Corridor = {
   firms?: { firm: string; type: string; cost_pct: number }[];
 };
 
-type File = { publisher: string; source: string; source_page: string; period: string; previous_period: string | null; corridors: Corridor[] };
+type File = { publisher: string; source: string; source_page: string; period: string; previous_period: string | null; read_at?: string; corridors: Corridor[] };
 
 const FILE = path.join(process.cwd(), "data", "remittances", "corridors.json");
 

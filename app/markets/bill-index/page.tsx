@@ -129,10 +129,19 @@ export default function BillIndexPage() {
           <p>
             Equal weighting makes the index a measure of the typical African market rather than of its largest borrowers; weighting by debt outstanding would
             make it a reading of Egypt and Nigeria. The per-market table above lets anyone re-weight it. The 91-day version follows the same method on
-            three-month bills. The index is revised when a central bank restates a result; revisions are rare and noted on the market’s page.
+            three-month bills. The Monday release is the value of record. The chart is recomputed from the auctions held today, so a result that
+            arrived after the release, or a restated one, can move a past week; every difference is listed in the revision log.
           </p>
           <p>
             Quote it as: “{quote}”
+          </p>
+          <p>
+            The full method (inputs, cut-off, data sufficiency, errors and revisions, governance, an IOSCO checklist), the revision log and the
+            licence terms:{" "}
+            <Link href="/markets/bill-index/method" className="underline underline-offset-2">
+              {indexShort} method and governance
+            </Link>
+            .
           </p>
         </div>
       </section>

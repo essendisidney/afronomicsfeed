@@ -31,6 +31,8 @@ import { ContentPanel, type Campaign } from "./ContentPanel";
 import { SignalsPanel, type Signals } from "./SignalsPanel";
 import { DecisionsPanel, HealthPanel, RoutinesPanel, type Freshness } from "./OpsPanels";
 import { Cockpit } from "./Cockpit";
+import { DesksPanel } from "./DesksPanel";
+import { deskStatus, loadNamedVerdicts } from "@/lib/desk/desks";
 import { MwananchiPanel } from "./MwananchiPanel";
 import { loadPains } from "@/lib/data/mwananchi";
 import { nextMoves } from "@/lib/mwananchi-core";
@@ -210,6 +212,7 @@ const NAV: [string, string][] = [
   ["#signals", "Readers"],
   ["#mwananchi", "Build next"],
   ["#health", "Data"],
+  ["#desks", "Desks"],
   ["#routines", "Routines"],
   ["#decisions", "Decisions"],
   ["#casebook", "Casebook"],
@@ -450,6 +453,7 @@ export default async function DeskPage() {
           signalsNote="Scored on reach, harm, season, data we hold, ways to earn, this week's page views and readers' searches that found nothing (lib/mwananchi-core.ts)."
         />
         <HealthPanel health={health} latency={loadLatency()} freshness={freshness} />
+        <DesksPanel desks={deskStatus(todayNbo)} named={loadNamedVerdicts()} />
         <RoutinesPanel />
         <DecisionsPanel />
         <CasebookPanel cases={loadCases()} />

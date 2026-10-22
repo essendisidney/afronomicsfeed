@@ -89,7 +89,7 @@ function LineCard({ line }: { line: Ok }) {
         </div>
       </div>
       {line.context?.length ? (
-        <div className="mt-3 overflow-x-auto">
+        <div className="mt-3 overflow-x-auto" tabIndex={0} role="region" aria-label="Money market funds beside this line (scrolls sideways)">
           <table className="data-table">
             <caption className="sr-only">Shown beside this line, not part of the premium</caption>
             <thead>
@@ -148,7 +148,7 @@ function Sending({ lines }: { lines: Ok[] }) {
     <div className="mt-6">
       <h3 className="font-serif text-xl text-ink">Sending money home to Kenya</h3>
       <p className="text-[13px] text-muted">{lines[0].example}, by the country it is sent from</p>
-      <div className="mt-3 overflow-x-auto">
+      <div className="mt-3 overflow-x-auto" tabIndex={0} role="region" aria-label="Cost of sending USD 200 to Kenya by corridor (scrolls sideways)">
         <table className="data-table">
           <thead>
             <tr>

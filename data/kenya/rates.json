@@ -1,12 +1,19 @@
 {
  "dataset": "Kenya savings and lending rates",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-22T20:17:53+00:00",
+ "updated_at": "2026-10-23T09:30:32+00:00",
  "bank_rates": {
   "publisher": "Central Bank of Kenya",
   "source": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
   "unit": "percent per annum, weighted average across commercial banks",
   "rows": [
+   {
+    "month": "2026-09",
+    "deposit": 6.94,
+    "savings": 3.53,
+    "lending": 14.4,
+    "overdraft": 13.0
+   },
    {
     "month": "2026-08",
     "deposit": 6.91,
@@ -51,8 +58,8 @@
    },
    {
     "month": "2026-02",
-    "deposit": 6.82,
-    "savings": 2.41,
+    "deposit": 6.92,
+    "savings": 3.17,
     "lending": 14.78,
     "overdraft": 13.31
    },
@@ -2244,7 +2251,7 @@
  },
  "money_market_funds": {
   "note": "Each yield is read from the fund manager's own website at the time shown; funds publishing yields only as images or PDFs are not yet included.",
-  "as_of": "2026-10-22T20:17:53+00:00",
+  "as_of": "2026-10-23T09:30:32+00:00",
   "rows": [
    {
     "name": "Zimele Fixed Income Fund (Savings Plan)",
@@ -2255,20 +2262,20 @@
     "effective_annual_yield": 13.41
    },
    {
+    "name": "Madison Money Market Fund",
+    "manager": "Madison Investment Managers",
+    "source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
+    "status": "ok",
+    "daily_yield": 10.0,
+    "effective_annual_yield": 10.52
+   },
+   {
     "name": "Kasha Money Market Fund",
     "manager": "Orient Asset Managers",
     "source": "https://www.orientasset.co.ke/",
     "status": "ok",
     "daily_yield": 9.91,
     "effective_annual_yield": 10.42
-   },
-   {
-    "name": "Madison Money Market Fund",
-    "manager": "Madison Investment Managers",
-    "source": "https://www.madison.co.ke/investmentmanagers/madison-money-market-fund/",
-    "status": "ok",
-    "daily_yield": 9.88,
-    "effective_annual_yield": 10.38
    },
    {
     "name": "Etica Money Market Fund (KES)",

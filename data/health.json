@@ -1,12 +1,12 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-10-22",
+ "checked_on": "2026-10-23",
  "summary": {
   "failed": 0,
-  "late": 4,
+  "late": 5,
   "gap": 1,
-  "ok": 34
+  "ok": 33
  },
  "items": [
   {
@@ -46,6 +46,15 @@
    "link": "/rates/policy"
   },
   {
+   "area": "T-bill auctions",
+   "name": "Malawi",
+   "status": "late",
+   "detail": "latest auction 13 Oct; it usually auctions weekly",
+   "latest": "2026-10-13",
+   "due_by": "2026-10-22",
+   "link": "/markets/tbills/malawi"
+  },
+  {
    "area": "Policy rates",
    "name": "Uganda",
    "status": "gap",
@@ -67,9 +76,9 @@
    "area": "Bank rates",
    "name": "Kenya bank averages (CBK)",
    "status": "ok",
-   "detail": "latest month August 2026",
-   "latest": "2026-08-01",
-   "due_by": "2026-11-15",
+   "detail": "latest month September 2026",
+   "latest": "2026-09-01",
+   "due_by": "2026-12-15",
    "link": "/rates/kenya"
   },
   {
@@ -157,9 +166,9 @@
    "area": "Eurobond yields",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "latest prices 21 Oct",
-   "latest": "2026-10-21",
-   "due_by": "2026-10-25",
+   "detail": "latest prices 22 Oct",
+   "latest": "2026-10-22",
+   "due_by": "2026-10-26",
    "link": "/markets/eurobonds"
   },
   {
@@ -175,8 +184,8 @@
    "area": "Money market funds",
    "name": "Kasha Money Market Fund",
    "status": "ok",
-   "detail": "10.42% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "10.42% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -184,8 +193,8 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.38% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "10.52% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -193,8 +202,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "19.0% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "19.0% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -211,8 +220,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "8.75% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -220,8 +229,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "24.0% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -229,8 +238,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "23.0% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "23.0% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +247,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "7.25% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +256,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "6.25% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +265,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "10.75% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -296,15 +305,6 @@
    "latest": "2026-10-26",
    "due_by": "2026-11-06",
    "link": "/markets/kenya-tbills"
-  },
-  {
-   "area": "T-bill auctions",
-   "name": "Malawi",
-   "status": "ok",
-   "detail": "latest auction 13 Oct (auctions weekly)",
-   "latest": "2026-10-13",
-   "due_by": "2026-10-22",
-   "link": "/markets/tbills/malawi"
   },
   {
    "area": "T-bill auctions",
@@ -389,7 +389,7 @@
   {
    "name": "Morning note",
    "result": "success",
-   "day": "2026-10-22",
+   "day": "2026-10-23",
    "failures_in_row": 0
   },
   {
@@ -401,13 +401,13 @@
   {
    "name": "Reader tests",
    "result": "success",
-   "day": "2026-10-22",
+   "day": "2026-10-23",
    "failures_in_row": 0
   },
   {
    "name": "Site QA",
    "result": "success",
-   "day": "2026-10-22",
+   "day": "2026-10-23",
    "failures_in_row": 0
   }
  ]

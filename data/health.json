@@ -292,9 +292,9 @@
    "area": "T-bill auctions",
    "name": "Ghana",
    "status": "ok",
-   "detail": "latest auction 16 Oct (auctions weekly)",
-   "latest": "2026-10-16",
-   "due_by": "2026-10-27",
+   "detail": "latest auction 23 Oct (auctions weekly)",
+   "latest": "2026-10-23",
+   "due_by": "2026-11-03",
    "link": "/markets/tbills/ghana"
   },
   {

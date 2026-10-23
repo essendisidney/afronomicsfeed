@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 10,
-  "results": 24,
-  "p50_h": 3.4,
-  "p90_h": 11.7
+  "timed": 11,
+  "results": 25,
+  "p50_h": 2.8,
+  "p90_h": 11.4
  },
  "summary": [
   {
@@ -55,12 +55,12 @@
    "kind": "bills",
    "market": "ghana",
    "name": "Ghana",
-   "results": 1,
-   "timed": 1,
+   "results": 2,
+   "timed": 2,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "upload time in the Bank of Ghana's media index",
-   "status": "1 timed result so far; figures from 5"
+   "status": "2 timed results so far; figures from 5"
   },
   {
    "kind": "bills",
@@ -236,6 +236,16 @@
    "first_seen_at": "2026-10-23T15:14:40+00:00",
    "published_at": null,
    "published_how": null
+  },
+  {
+   "key": "bills:ghana:2026-10-23",
+   "kind": "bills",
+   "market": "ghana",
+   "date": "2026-10-23",
+   "first_seen_at": "2026-10-23T19:57:26+00:00",
+   "published_at": "2026-10-23T18:31:48+00:00",
+   "published_how": "upload time in the Bank of Ghana's media index",
+   "delay_h": 1.43
   },
   {
    "key": "bills:uganda:2026-10-21",
@@ -837,5 +847,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-23T15:20:33+00:00"
+ "updated_at": "2026-10-23T20:13:48+00:00"
 }

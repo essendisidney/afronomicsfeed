@@ -33,7 +33,8 @@ def test_standards_are_sasra_s_printed_levels():
 
 def test_sample_describes_no_sacco():
     assert "buildWatch(null" in SAMPLE
-    assert 'name: inst ? inst.name : "Median large-tier deposit-taking SACCO"' in WATCH
+    assert 'name: inst ? inst.name : "Demo SACCO (sample)"' in WATCH
+    assert 'const tier = inst ? inst.tier : "large"' in WATCH
     # In the sample the SACCO column is the tier median, and no per-SACCO source is printed.
     assert "const own = sample ? l.median" in HTML
 

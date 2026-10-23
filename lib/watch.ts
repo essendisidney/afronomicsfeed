@@ -11,7 +11,19 @@ import { inYear, institutions, latest, type Figure, type Institution, type Kind 
  * with SASRA's prescribed minimums here and nowhere public; the figures sit beside the minimum, with no verdict.
  */
 
-export type Line = { metric: string; label: string; value: Figure | null; median: number | null; peers: number; unit: string };
+export type Line = {
+  metric: string;
+  label: string;
+  value: Figure | null;
+  /** Change on the year before: per cent for amounts, percentage points for ratios. In the sample, the tier's median change. */
+  change: number | null;
+  median: number | null;
+  /** The middle half of the tier: its 25th and 75th percentiles. A spread, never a position. */
+  q1: number | null;
+  q3: number | null;
+  peers: number;
+  unit: string;
+};
 export type Soundness = Line & { standard: string };
 
 export type Watch = {
@@ -66,13 +78,44 @@ export function median(values: number[]): number | null {
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
 }
 
+/** A percentile with linear interpolation between the two nearest values (the spreadsheet PERCENTILE rule). */
+export function quantile(values: number[], q: number): number | null {
+  if (!values.length) return null;
+  const s = [...values].sort((a, b) => a - b);
+  const at = (s.length - 1) * q;
+  const lo = Math.floor(at);
+  const hi = Math.ceil(at);
+  return s[lo] + (s[hi] - s[lo]) * (at - lo);
+}
+
+/** Change from one published figure to the next: per cent for amounts, percentage points for ratios. */
+export function changeOf(from: number | null | undefined, to: number | null | undefined, unit: string): number | null {
+  if (from == null || to == null) return null;
+  if (unit === "%") return to - from;
+  return from > 0 ? ((to - from) / from) * 100 : null;
+}
+
+const peersOf = (kind: Kind, tier: string | null) => institutions().filter((i) => i.kind === kind && i.tier === tier);
+
 /** The tier median of a metric for a year, over every SACCO of the same kind and SASRA tier that has a figure. */
 export function tierMedian(kind: Kind, tier: string | null, metric: string, year: number): { value: number | null; peers: number } {
-  const values = institutions()
-    .filter((i) => i.kind === kind && i.tier === tier)
+  const values = peersOf(kind, tier)
     .map((i) => inYear(i, metric, year)?.value)
     .filter((v): v is number => v != null);
   return { value: median(values), peers: values.length };
+}
+
+/**
+ * Median, middle half (25th to 75th percentile) and median change on the year before, over one tier. Worked out by
+ * code from SASRA's figures; the method is public at /method/peer-comparison. No rank or score is derived from it.
+ */
+export function tierStats(kind: Kind, tier: string | null, metric: string, year: number, unit: string) {
+  const peers = peersOf(kind, tier);
+  const values = peers.map((i) => inYear(i, metric, year)?.value).filter((v): v is number => v != null);
+  const changes = peers
+    .map((i) => changeOf(inYear(i, metric, year - 1)?.value, inYear(i, metric, year)?.value, unit))
+    .filter((v): v is number => v != null);
+  return { median: median(values), q1: quantile(values, 0.25), q3: quantile(values, 0.75), peers: values.length, change: median(changes) };
 }
 
 function latestYear(inst: Institution | null, kind: Kind): number {
@@ -117,10 +160,11 @@ export async function buildWatch(slug: string | null, now: number): Promise<Watc
   const year = latestYear(inst, kind);
 
   const line = (metric: string, label: string): Line => {
-    const m = tierMedian(kind, tier, metric, year);
     const own = inst ? inYear(inst, metric, year) : null;
     const unit = own?.unit ?? (metric.includes("_to_") || metric === "npl_ratio" ? "%" : "KES bn");
-    return { metric, label, value: own, median: m.value, peers: m.peers, unit };
+    const t = tierStats(kind, tier, metric, year, unit);
+    const change = inst ? changeOf(inYear(inst, metric, year - 1)?.value, own?.value, unit) : t.change;
+    return { metric, label, value: own, change, median: t.median, q1: t.q1, q3: t.q3, peers: t.peers, unit };
   };
   const size = SIZE.map(([m, l]) => line(m, l)).filter((l) => l.median != null || l.value);
   const soundness = STANDARDS[kind].map(([m, l, standard]) => ({ ...line(m, l), standard })).filter((l) => l.median != null || l.value);
@@ -145,7 +189,7 @@ export async function buildWatch(slug: string | null, now: number): Promise<Watc
 
   return {
     subject: {
-      name: inst ? inst.name : "Median large-tier deposit-taking SACCO",
+      name: inst ? inst.name : "Demo SACCO (sample)",
       kind,
       tier,
       county: inst?.county ?? null,

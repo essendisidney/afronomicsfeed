@@ -43,6 +43,11 @@ export default function PrivacyPage() {
           personal details in the free-text box.
         </li>
         <li>
+          <strong>Shillings found</strong> &mdash; when a money tool shows you a yearly difference against the best option we track, our server
+          works it out again from the figures you typed and adds only the tool, the market, the currency and the difference to an anonymous daily
+          total; your figures are not stored, and no cookie, IP address or device id is kept with it.
+        </li>
+        <li>
           <strong>Payments</strong> — if you subscribe, Paystack processes your payment. We receive your email, plan and payment status, never
           your full card details.
         </li>
@@ -63,6 +68,13 @@ export default function PrivacyPage() {
         We also count a few actions the same way, one total per action, page, day and country: sign-ups, data downloads, clicks on share
         buttons, on pricing and pilot buttons and on links to a central bank’s own notice, the start and sending of a pilot request form, and
         survey answers. Nothing identifies who clicked.
+      </p>
+      <p>
+        On stories, we count how far each page is read (a quarter, half, three quarters, the end) and whether it held someone’s attention for 30
+        seconds or two minutes. To learn whether readers come back, your browser notes in its local storage the week of your first visit and
+        sends one count the first time you return within a week, a month and three months. When a search on the site finds nothing, we keep the
+        words searched, lowercased and stripped of punctuation; a search containing an email address or a long run of digits (such as a phone or
+        ID number) is never sent. These too are only daily totals, with nothing that identifies you.
       </p>
       <h2>Why, and on what basis</h2>
       <ul>

@@ -1,0 +1,49 @@
+# Once a month: build the Kenya Poverty Premium file (docs/rebuild/upgrade-U3-plan.md) from the data already in the
+# repository and commit data/kenya/poverty_premium/YYYY-MM.json and .csv. No network reads: every input is a data
+# file other workflows keep current. A month's file, once written, is kept (the script skips an existing month).
+name: Poverty Premium
+
+on:
+  schedule:
+    # The 1st of each month, 07:41 Nairobi: after the month turns, before the Morning.
+    - cron: "41 4 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: node --experimental-strip-types --no-warnings scripts/poverty_premium.mjs
+      - run: pip install pytest && python -m pytest tests/site/test_poverty_premium.py -q
+      - name: Commit if a new month was written
+        run: |
+          if [ -z "$(git ls-files --others --exclude-standard data/kenya/poverty_premium)" ] && git diff --quiet -- data/kenya/poverty_premium; then
+            echo "No new month."
+            exit 0
+          fi
+          git config user.name "afronomics-bot"
+          git config user.email "afronomics-bot@users.noreply.github.com"
+          git add data/kenya/poverty_premium
+          git commit -m "Poverty Premium: new monthly file"
+          for attempt in 1 2 3; do
+            # Another run may have committed the same files meanwhile: this run read them last, so its copy of
+            # any file both changed wins; files only one run changed merge as usual.
+            if ! git pull --rebase origin main; then
+              for f in $(git diff --name-only --diff-filter=U); do git checkout --theirs -- "$f" && git add "$f"; done
+              GIT_EDITOR=true git rebase --continue || { git rebase --abort 2>/dev/null; false; }
+            fi && git push && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 10))
+          done
+          exit 1

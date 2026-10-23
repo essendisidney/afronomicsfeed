@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { ShareRow } from "@/components/ui/ShareRow";
+import { WhatsAppChannel } from "@/components/ui/WhatsAppChannel";
 import { renderTime } from "@/lib/data/fetcher";
 import { pairHref } from "@/lib/data/fx";
 import { buildMorningNote, morningSigned } from "@/lib/editions/morning";
@@ -45,6 +46,7 @@ export default async function MorningSwPage() {
           <Link href="/subscribe?list=morning" className="mt-4 inline-block rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
             Jisajili
           </Link>
+          <WhatsAppChannel lang="sw" className="mt-3" />
           <p className="mt-4 text-[13px] leading-5">
             <Link href="/morning" className="underline underline-offset-2 hover:text-accent">Read in English</Link> ·{" "}
             <a href="/api/edition/morning?format=whatsapp&lang=sw" className="underline underline-offset-2 hover:text-accent">Maandishi ya WhatsApp</a>

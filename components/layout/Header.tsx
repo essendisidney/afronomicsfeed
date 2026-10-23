@@ -15,7 +15,8 @@ import type { SearchHit } from "@/lib/search-core";
  * with the five sections in readers' words (Today, Stories, Rates & data, Tools, Compare), search and a quiet For
  * institutions link; everything else (theme, Kiswahili, the Morning, alerts) is in the menu, where each section says
  * in a few words what it holds. On phones a bottom bar keeps the first four sections and the menu under the thumb;
- * search is the magnifier in the top bar.
+ * search is the magnifier in the top bar. In the menu the institutional block comes straight after the sections, so on a
+ * phone the pilot is on the first screen of the menu; on a desktop it sits in the right-hand column.
  */
 
 function subscribeTheme(onStoreChange: () => void) {
@@ -160,6 +161,25 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
                   ))}
                 </ul>
               </nav>
+              <nav aria-label="For institutions" className="rounded-2xl border border-night-line bg-night-2 p-4 lg:order-last lg:self-start">
+                <p className="text-[12px] font-semibold text-accent">For boards, banks, SACCOs and funds</p>
+                <ul className="mt-2 grid grid-cols-2 gap-1">
+                  {institutionLinks.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="flex min-h-11 items-center rounded-xl px-3 text-[15px] font-medium text-night-ink hover:bg-night">
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={institutionalPilot.href}
+                  data-track="pricing_cta_click"
+                  className="mt-3 flex min-h-11 items-center justify-center rounded-full bg-accent px-4 text-[14px] font-semibold text-on-accent hover:bg-gold-soft"
+                >
+                  Start a free {institutionalPilot.days}-day pilot
+                </Link>
+              </nav>
               <nav aria-label="Reader tools">
                 <p className="px-3 text-[12px] font-semibold text-night-muted">For readers</p>
                 <ul className="mt-1 grid grid-cols-2 gap-1">
@@ -192,25 +212,6 @@ export function Header({ searchIndex }: { searchIndex: SearchHit[] }) {
                   </div>
                   <p className="mt-1 text-[12px] text-night-muted">Auto: light from 06:00, dark from 19:00, by your clock.</p>
                 </div>
-              </nav>
-              <nav aria-label="For institutions" className="rounded-2xl border border-night-line bg-night-2 p-4">
-                <p className="text-[12px] font-semibold text-accent">For boards, banks, SACCOs and funds</p>
-                <ul className="mt-2 grid grid-cols-2 gap-1">
-                  {institutionLinks.map((item) => (
-                    <li key={item.href}>
-                      <Link href={item.href} className="flex min-h-11 items-center rounded-xl px-3 text-[15px] font-medium text-night-ink hover:bg-night">
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={institutionalPilot.href}
-                  data-track="pricing_cta_click"
-                  className="mt-3 flex min-h-11 items-center justify-center rounded-full bg-accent px-4 text-[14px] font-semibold text-on-accent hover:bg-gold-soft"
-                >
-                  Start a free {institutionalPilot.days}-day pilot
-                </Link>
               </nav>
             </div>
           </div>

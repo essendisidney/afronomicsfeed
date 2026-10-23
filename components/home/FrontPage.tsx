@@ -4,6 +4,7 @@ import { BarChart } from "@/components/charts/BarChart";
 import { VerdictLine } from "@/components/receipts/ReceiptView";
 import { ShareNumberButton } from "@/components/share/ShareNumberButton";
 import { ButtonLink } from "@/components/ui/Button";
+import { ToolIcon } from "@/components/ui/ToolIcon";
 import { shareLink, todayTileIds } from "@/lib/share";
 import { freshness, type StoryCard } from "@/lib/front-page";
 import { deskSlug, receiptEvidence, sectorNames, type Receipt, type ReceiptChart } from "@/lib/receipts";
@@ -20,15 +21,16 @@ import { isPercentUnit } from "@/lib/charts/render";
 
 export function SectionHead({ id, title, blurb, more, moreLabel }: { id: string; title: string; blurb?: string; more?: string; moreLabel?: string }) {
   return (
-    <div className="af-section-head flex items-end justify-between gap-3 border-b border-rule pb-1.5">
+    <div className="af-section-head flex items-end justify-between gap-3 pb-2">
       <div className="min-w-0">
-        <h2 id={id} className="t-h2 text-ink">
+        <h2 id={id} className="t-h2 flex items-center gap-2.5 text-ink">
+          <span aria-hidden="true" className="af-tick" />
           {title}
         </h2>
-        {blurb ? <p className="hidden text-[13px] leading-5 text-muted sm:block">{blurb}</p> : null}
+        {blurb ? <p className="mt-0.5 hidden pl-[1.15rem] text-[13px] leading-5 text-muted sm:block">{blurb}</p> : null}
       </div>
       {more ? (
-        <Link href={more} className="inline-flex min-h-11 shrink-0 items-center text-[14px] font-semibold text-forest hover:text-ink">
+        <Link href={more} className="inline-flex min-h-11 shrink-0 items-end pb-0.5 text-[14px] font-semibold text-forest hover:text-ink">
           See all<span className="sr-only"> {moreLabel ?? title}</span>
           <span aria-hidden="true">&nbsp;→</span>
         </Link>
@@ -37,15 +39,15 @@ export function SectionHead({ id, title, blurb, more, moreLabel }: { id: string;
   );
 }
 
-/** "Today in 30 seconds": the figures that moved, one compact tile each; a sideways row on a phone. */
+/** "Today in 30 seconds": one board of the figures that moved, split by hairlines; a sideways row on a phone. */
 export function TodayStrip({ tiles }: { tiles: BoardTile[] }) {
   return (
-    <ul className="swipe-row -mx-4 mt-3 flex gap-2.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+    <ul className="af-board swipe-row -mx-4 mt-3 flex overflow-x-auto border-y border-rule bg-surface sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:rounded-2xl sm:border lg:grid-cols-4">
       {tiles.map((t) => {
         const tone = t.direction === "up" ? "text-up" : t.direction === "down" ? "text-down" : "text-muted";
         return (
-          <li key={t.id} className="w-[44%] min-w-[10.5rem] shrink-0 sm:w-auto sm:min-w-0">
-            <div className="relative flex h-full flex-col rounded-xl border border-rule bg-surface px-3 py-2.5">
+          <li key={t.id} className="af-board-cell w-[46%] min-w-[10.5rem] shrink-0 sm:w-auto sm:min-w-0">
+            <div className="relative flex h-full flex-col px-4 py-3.5 sm:px-5 sm:py-4">
               {(todayTileIds as readonly string[]).includes(t.id) ? (
                 <ShareNumberButton
                   url={shareLink({ kind: "number", receipt: null, tile: t.id })}
@@ -59,8 +61,8 @@ export function TodayStrip({ tiles }: { tiles: BoardTile[] }) {
                   {t.label}
                 </Link>
               </p>
-              <p className="af-figure tabular mt-1 text-[1.45rem] font-semibold leading-none tracking-tight text-ink">{t.value}</p>
-              <p className={`tabular mt-1 line-clamp-2 h-8 text-[12px] font-medium leading-4 ${tone}`}>
+              <p className="af-figure tabular mt-2 text-[1.75rem] font-semibold leading-none tracking-tight text-ink sm:text-[2rem]">{t.value}</p>
+              <p className={`tabular mt-2 line-clamp-2 h-8 text-[12px] font-semibold leading-4 ${tone}`}>
                 {t.change ? (
                   <>
                     <span aria-hidden="true">{t.direction === "up" ? "▲ " : t.direction === "down" ? "▼ " : ""}</span>
@@ -75,13 +77,13 @@ export function TodayStrip({ tiles }: { tiles: BoardTile[] }) {
                 rel="noopener noreferrer"
                 data-track="source_click"
                 aria-label={`Source: ${t.evidence.source}, ${t.evidence.dateKind === "value" ? "for value" : "as of"} ${asOfLabel(t.evidence.asOf)} (opens the source)`}
-                className="relative z-10 mt-1.5 block truncate text-[11px] leading-5 text-muted underline decoration-rule underline-offset-2 hover:text-ink"
+                className="relative z-10 mt-1.5 block text-[11px] leading-4 text-muted underline decoration-rule underline-offset-2 hover:text-ink"
               >
-                <time dateTime={t.evidence.asOf} className="tabular">
+                <time dateTime={t.evidence.asOf} className="tabular block truncate">
                   {t.evidence.dateKind === "value" ? "Value " : ""}
                   {asOfLabel(t.evidence.asOf)}
-                </time>{" "}
-                · {t.evidence.source}
+                </time>
+                <span className="block truncate">{t.evidence.source}</span>
               </a>
             </div>
           </li>
@@ -142,7 +144,7 @@ function LeadChart({ r, chart }: { r: Receipt; chart: ReceiptChart }) {
   const pct = isPercentUnit(chart.unit);
   const ev = receiptEvidence(r, chart.source);
   return (
-    <figure className="min-w-0 border-t border-rule pt-3 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+    <figure className="min-w-0 rounded-2xl border border-rule bg-surface px-4 pb-3 pt-4">
       <figcaption className="text-[14px] font-semibold leading-5 text-ink text-balance">
         {chart.title} <span className="text-[12px] font-normal text-muted">({chart.unit})</span>
       </figcaption>
@@ -177,12 +179,11 @@ export function LeadStory({ r, now }: { r: Receipt; now: number }) {
   const ev = tile ? receiptEvidence(r, tile.source) : null;
   const chart = r.charts[0];
   return (
-    <article aria-labelledby="lead-story" className={`desk-${desk} relative overflow-hidden rounded-2xl border border-rule bg-surface px-5 pb-5 pt-5 sm:px-6`}>
-      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-[var(--desk)]" />
+    <article aria-labelledby="lead-story" className={`desk-${desk} af-lead relative min-w-0 pb-2 pt-4`}>
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-6">
         <div className="min-w-0">
           <DeskChip label={sectorNames[desk] ?? desk} kind={r.type === "verdict" ? "Verdict" : "Data"} date={r.date} now={now} />
-          <h2 id="lead-story" className="mt-2.5 font-serif text-[1.5rem] leading-[1.18] text-ink text-balance sm:text-[2rem]">
+          <h2 id="lead-story" className="mt-3 font-serif text-[1.65rem] leading-[1.12] tracking-[-0.012em] text-ink text-balance sm:text-[2.1rem]">
             <Link href={`/receipts/${r.slug}`} className="hover:text-forest">
               {r.title}
             </Link>
@@ -190,8 +191,8 @@ export function LeadStory({ r, now }: { r: Receipt; now: number }) {
           <VerdictLine r={r} size="md" />
           {tile ? (
             <div className="mt-4 flex items-baseline gap-3">
-              <p className="af-figure tabular shrink-0 text-[1.9rem] font-semibold leading-none tracking-tight text-ink">{tile.value}</p>
-              <p className="text-[13px] leading-5 text-ink-soft">
+              <p className="af-figure tabular shrink-0 text-[2.1rem] font-semibold leading-none tracking-tight text-ink">{tile.value}</p>
+              <p className="min-w-0 text-[13px] leading-5 text-ink-soft">
                 {tile.label}
                 {ev ? <span className="block truncate text-[11.5px] text-muted">{asOfLabel(ev.asOf)} · {ev.source}</span> : null}
               </p>
@@ -218,16 +219,15 @@ export function LeadStory({ r, now }: { r: Receipt; now: number }) {
 
 export function StoryCardView({ c, now, figures }: { c: StoryCard; now: number; figures: boolean }) {
   return (
-    <li className={`desk-${c.desk} w-[80%] max-w-[20rem] shrink-0 md:w-auto md:max-w-none`}>
-      <article className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-rule bg-surface px-4 pb-3.5 pt-3.5 hover:border-ink">
-        <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-[var(--desk)]" />
+    <li className={`desk-${c.desk} af-col min-w-0`}>
+      <article className="group relative flex h-full flex-col py-3.5 md:px-5 md:py-1">
         <DeskChip label={c.deskLabel} kind={c.kind} date={c.date} now={now} />
-        <h3 className="mt-2 line-clamp-3 h-[4.05rem] font-serif text-[1.02rem] leading-[1.35rem] text-ink">
-          <Link href={c.href} className="after:absolute after:inset-0 hover:underline hover:decoration-1 hover:underline-offset-2">
+        <h3 className="mt-2 line-clamp-3 font-serif text-[1.08rem] leading-[1.4rem] text-ink md:h-[4.2rem]">
+          <Link href={c.href} className="after:absolute after:inset-0 group-hover:text-forest">
             {c.title}
           </Link>
         </h3>
-        <div className={figures ? "mt-2 h-11" : "hidden"}>
+        <div className={figures ? (c.figure ? "mt-2 md:h-11" : "hidden md:mt-2 md:block md:h-11") : "hidden"}>
           {c.figure ? (
             <>
               <p className="af-figure tabular text-[1.3rem] font-semibold leading-6 tracking-tight text-ink">{c.figure.value}</p>
@@ -242,7 +242,7 @@ export function StoryCardView({ c, now, figures }: { c: StoryCard; now: number; 
 
 export function StoryRow({ items, now }: { items: StoryCard[]; now: number }) {
   return (
-    <ul className="swipe-row -mx-4 mt-3 flex gap-3 overflow-x-auto px-4 pb-1 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-4">
+    <ul className="af-cols mt-2 divide-y divide-rule md:mt-4 md:grid md:grid-cols-2 md:gap-y-5 md:divide-y-0 lg:grid-cols-4">
       {items.map((c) => (
         <StoryCardView key={c.key} c={c} now={now} figures={items.some((x) => x.figure)} />
       ))}
@@ -250,15 +250,18 @@ export function StoryRow({ items, now }: { items: StoryCard[]; now: number }) {
   );
 }
 
-/** The calculators as compact tiles: two rows that swipe sideways on a phone, a grid from md. */
+/** The calculators as instrument tiles: an icon for the kind of question, the title and the question it answers. */
 export function ToolTiles({ items }: { items: Tool[] }) {
   return (
-    <ul className="swipe-row -mx-4 mt-3 grid auto-cols-[minmax(11.5rem,52%)] grid-flow-col grid-rows-2 gap-2.5 overflow-x-auto px-4 pb-1 md:mx-0 md:auto-cols-auto md:grid-flow-row md:grid-cols-4 md:grid-rows-none md:overflow-visible md:px-0">
+    <ul className={`mt-3 grid grid-cols-2 gap-2.5 ${items.length % 5 === 0 ? "lg:grid-cols-5" : "lg:grid-cols-4"}`}>
       {items.map((t) => (
         <li key={t.href} className="min-w-0">
-          <Link href={t.href} className="flex h-full min-h-11 flex-col rounded-xl border border-rule bg-surface px-3 py-2.5 hover:border-ink">
-            <span className="truncate text-[14px] font-semibold leading-5 text-ink">{t.title}</span>
-            <span className="line-clamp-2 text-[12.5px] leading-[1.1rem] text-muted md:line-clamp-1">{t.answers}</span>
+          <Link href={t.href} className="af-tool group flex h-full min-h-11 items-center gap-2.5 rounded-2xl border border-rule bg-surface px-3 py-2.5 sm:items-start sm:gap-3 sm:px-3.5 sm:py-3">
+            <ToolIcon group={t.group} className="h-8 w-8 sm:h-10 sm:w-10" />
+            <span className="min-w-0 max-w-full">
+              <span className="block text-[13.5px] font-semibold leading-[1.15rem] text-ink group-hover:text-forest sm:truncate sm:text-[14.5px] sm:leading-5">{t.title}</span>
+              <span className="mt-0.5 hidden text-[12.5px] leading-[1.1rem] text-muted sm:line-clamp-2">{t.answers}</span>
+            </span>
           </Link>
         </li>
       ))}

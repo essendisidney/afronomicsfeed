@@ -11,39 +11,27 @@ import { loadLatency } from "@/lib/data/latency";
 import { renderTime } from "@/lib/data/fetcher";
 import { rpc } from "@/lib/store";
 import { moneyLabel } from "@/lib/billing/plans";
-import { CONTACTED } from "@/lib/strategy/board";
 import { DeskKey } from "./DeskKey";
 import { OwnerDevice } from "./OwnerDevice";
 import { MoneyPanel, type Money, type Referral } from "./MoneyPanel";
-import { CommandCentre, toUsd, type PilotKey } from "./CommandCentre";
-import { StrategyBoard } from "./StrategyBoard";
+import { toUsd, type PilotKey } from "./money-core";
 import { FunnelPanel, type Funnel } from "./FunnelPanel";
 import { loadFxQuote } from "@/lib/data/fx";
-import { AddCorrection, AddPress, GrantAccess, HideReport } from "./DeskActions";
+import { AddCorrection, AddIdea, AddPress, GrantAccess, HideReport } from "./DeskActions";
 import { country as reportCountry, item as reportItem } from "@/lib/reader-reports-core";
-import { TodayStrip, type Gate } from "./TodayStrip";
-import { PipelineBoard } from "./PipelineBoard";
+import { TodayStrip } from "./TodayStrip";
 import { Inbox } from "./Inbox";
 import { PilotsPanel } from "./PilotsPanel";
-import { CasebookPanel } from "./CasebookPanel";
-import { loadCases } from "@/lib/cases";
 import { ContentPanel, type Campaign } from "./ContentPanel";
-import { DecisionsPanel, HealthPanel, RoutinesPanel, type Freshness } from "./OpsPanels";
-import { Cockpit } from "./Cockpit";
-import { MwananchiPanel } from "./MwananchiPanel";
-import { loadPains } from "@/lib/data/mwananchi";
-import { nextMoves } from "@/lib/mwananchi-core";
+import { SignalsPanel, type Signals } from "./SignalsPanel";
+import { HealthPanel, type Freshness } from "./OpsPanels";
 import { Glance } from "./Glance";
-import { contentLane, healthLane, moneyLane, readersLane } from "./cockpit-core";
-import { loadReceipts } from "@/lib/receipts";
-import { editorialRows } from "@/lib/editorial";
 import {
   inboxFallback,
   inboxFromRaw,
   needsToday,
   readSocialLog,
   readStoryLog,
-  type DealRow,
   type KeyRow,
   type MoneyWindow,
   type RawInbox,
@@ -187,9 +175,9 @@ const value = <T,>(r: { ok: boolean; value?: unknown } | null, isOk: (v: unknown
 const NAIROBI = 3 * 3600000;
 
 /** A folded reference group: everything the morning panels do not need, one tap away. */
-function Ref({ id, title, note, children }: { id: string; title: string; note: string; children: React.ReactNode }) {
+function Ref({ id, title, note, open, children }: { id: string; title: string; note: string; open?: boolean; children: React.ReactNode }) {
   return (
-    <details id={id} className="scroll-mt-20 rounded-2xl border border-rule bg-surface px-4 py-3 sm:px-5">
+    <details id={id} open={open} className="scroll-mt-20 rounded-2xl border border-rule bg-surface px-4 py-3 sm:px-5">
       <summary className="cursor-pointer list-none">
         <span className="font-serif text-lg text-ink">{title}</span>
         <span className="block text-[12px] text-muted">{note}</span>
@@ -202,16 +190,14 @@ function Ref({ id, title, note, children }: { id: string; title: string; note: s
 const NAV: [string, string][] = [
   ["#cockpit", "At a glance"],
   ["#needs", "Today"],
-  ["#pipeline", "Pipeline"],
-  ["#inbox", "Inbox"],
-  ["#pilots", "Pilots"],
   ["#content", "Content"],
-  ["#mwananchi", "Build next"],
+  ["#signals", "Readers"],
+  ["#pilots", "API keys"],
+  ["#inbox", "Inbox"],
   ["#health", "Data"],
-  ["#routines", "Routines"],
-  ["#decisions", "Decisions"],
-  ["#casebook", "Casebook"],
-  ["#reference", "Reference"],
+  ["#ref-audience", "Audience"],
+  ["#ref-traffic", "Traffic"],
+  ["#ref-funnel", "Funnel"],
 ];
 
 export default async function DeskPage() {
@@ -225,7 +211,7 @@ export default async function DeskPage() {
   if (!desk) {
     return (
       <PageShell share={false} crumbs={[{ href: "/", label: "Home" }, { label: "Desk" }]} kicker="Private" title="The desk">
-        <p className="max-w-xl text-sm text-ink-soft">The owner’s view of Afronomics: money, the pipeline, the inbox, pilots, content and data health. Enter the desk key.</p>
+        <p className="max-w-xl text-sm text-ink-soft">The owner’s view of Afronomics: readers, content, money, API use and data health. Enter the desk key.</p>
         <div className="mt-6 max-w-sm">
           <DeskKey wrong={Boolean(key)} />
         </div>
@@ -235,18 +221,18 @@ export default async function DeskPage() {
 
   // Every desk function at once (each re-checks the key); the page waits for the slowest, not the sum.
   const call = (fn: string, args: Record<string, unknown> = {}) => (preview ? Promise.resolve(null) : rpc(fn, { p_secret: key, ...args }));
-  const [pay, aud, ppl, mon, ref, keyList, dl, fun, rep, tod, inb, fx] = await Promise.all([
+  const [pay, aud, ppl, mon, ref, keyList, fun, rep, tod, inb, sig, fx] = await Promise.all([
     call("af_payments"),
     call("af_desk_audience"),
     call("af_desk_people"),
     call("af_desk_money"),
     call("af_desk_referrals"),
     call("af_api_keys_list"),
-    call("af_deals_list"),
     call("af_desk_funnel"),
     call("af_reader_report_list", { p_limit: 60 }),
     call("af_desk_today"),
     call("af_desk_inbox", { p_days: 30 }),
+    call("af_desk_signals"),
     preview ? Promise.resolve(null) : loadFxQuote(),
   ]);
   const payments = value<Payments>(pay);
@@ -255,11 +241,11 @@ export default async function DeskPage() {
   const money = value<Money>(mon);
   const referrals = value<Referral[]>(ref, Array.isArray) ?? [];
   const apiKeys = value<ApiKey[]>(keyList, Array.isArray) ?? [];
-  const deals = value<DealRow[]>(dl, Array.isArray) ?? [];
   const funnel = value<Funnel>(fun);
   const reports = value<ReaderReport[]>(rep, Array.isArray) ?? [];
   const today0040 = value<TodayData>(tod);
   const rawInbox = value<RawInbox>(inb, Array.isArray);
+  const signals = value<Signals>(sig);
   // Units of each currency per US dollar; a fixed fallback for KES only if the live rate is unavailable.
   const perUsd: Record<string, number> = { USD: 1, ...(fx?.rates ?? { KES: 129 }) };
   const fxNote = fx ? `${fx.sourceName} rates of ${fx.updated.slice(5, 16)}` : "a fixed KES 129 to the dollar (live rate unavailable)";
@@ -294,8 +280,6 @@ export default async function DeskPage() {
           count: money ? money.revenue.reduce((n, r) => n + r.payments, 0) : (payments?.totals ?? []).reduce((n, t) => n + t.count, 0),
         },
       ];
-  const paidCount = windows[3].count ?? 0;
-  const firstPaid = successes.map((p) => p.paid_at).sort()[0];
 
   // Keys: the list, plus 7-day use and markets (af_desk_funnel) and days used (af_desk_today).
   const usage = new Map((funnel?.keys ?? []).map((k) => [k.id, k]));
@@ -320,18 +304,7 @@ export default async function DeskPage() {
   if (!process.env.DOWNLOAD_SECRET) setup.push({ label: "Set DOWNLOAD_SECRET in Vercel", detail: "Download sessions are signed with a key derived from PAID_KEY_SECRET or the cron secret until it is set." });
   if (!process.env.PAYSTACK_SECRET_KEY) setup.push({ label: "PAYSTACK_SECRET_KEY is not set here", detail: "Checkout and payment checks cannot run on this deployment." });
 
-  const needs = needsToday({ payments: payments?.recent ?? [], deals, inbox, keys, setup, now, today: todayNbo });
-
-  const contacted = deals.filter((d) => d.stage !== "prospect").length;
-  const gate: Gate = {
-    contacts: contacted,
-    contactsNote: `deals past prospect; ${CONTACTED.count} sent per the decision log`,
-    pilots5: today0040 ? today0040.key_days.filter((k) => k.plan === "trial" && k.days_used >= 5).length : null,
-    pilotsNote: today0040
-      ? `of ${keys.filter((k) => k.plan === "trial").length} pilot keys issued`
-      : "needs migration 0040",
-    firstPayment: firstPaid ? firstPaid.slice(0, 10) : paidCount > 0 ? "yes" : null,
-  };
+  const needs = needsToday({ payments: payments?.recent ?? [], inbox, setup, now });
 
   // Content: the last 7 days of stories and LinkedIn posts, and what each campaign brought.
   const stories = readStoryLog(weekAgoDay);
@@ -366,28 +339,6 @@ export default async function DeskPage() {
   const returningShare = audience && desk.views_7d ? Math.round((audience.returning_7d / desk.views_7d) * 100) : null;
   const linkedin7d = audience ? audience.linkedin.reduce((n, r) => n + (r.views_7d ?? 0), 0) : null;
   const health = loadHealth();
-  const lanes = [
-    moneyLane({
-      windows,
-      perUsd,
-      deals,
-      keys,
-      failedPayments7d: (payments?.recent ?? []).filter((p) => p.status === "failed" && (!p.paid_at || now - Date.parse(p.paid_at) < 7 * DAY)).length,
-      now,
-    }),
-    readersLane({
-      people7d: people?.people_7d ?? null,
-      peoplePrev7d: people?.people_prev_7d ?? null,
-      views7d: desk.views_7d,
-      viewsPrev7d: desk.views_prev_7d,
-      signups7d: desk.subscribers_7d,
-      topSource: people?.people_sources_7d[0] ? sourceLabel(people.people_sources_7d[0].source) : (desk.referrers[0]?.host ?? null),
-    }),
-    contentLane({ receipts: loadReceipts(), calls: editorialRows(todayNbo), ideas: reports.filter((r) => r.kind === "story" && r.status === "new").length, today: todayNbo }),
-    healthLane({ health, staleFeeds: freshness.filter((f) => f.stale).map((f) => f.name) }),
-  ];
-  // The Mwananchi engine: this month (Nairobi) and the 7-day page views the desk already has.
-  const moves = nextMoves(loadPains(), { month: Number(todayNbo.slice(5, 7)), views: desk.top_pages });
   // The first screen (Glance): people per UTC day from af_desk_people; today is so far, yesterday and the 7-day mean are full days.
   const utcDay = (d: number) => new Date(now - d * DAY).toISOString().slice(0, 10);
   const peopleOn = (day: string) => people?.people_by_day.find((r) => r.day === day)?.people ?? 0;
@@ -417,18 +368,12 @@ export default async function DeskPage() {
         ))}
       </nav>
 
-      <Glance lanes={lanes} figures={glance} needs={needs} />
+      <Glance figures={glance} needs={needs} />
 
       <div className="mt-10" />
-      <Cockpit lanes={lanes} />
-
-      <div className="mt-12" />
-      <TodayStrip windows={windows} perUsd={perUsd} moneyNote={moneyNote} gate={gate} needs={needs} />
+      <TodayStrip windows={windows} perUsd={perUsd} moneyNote={moneyNote} needs={needs} />
 
       <div className="mt-12 space-y-12">
-        <PipelineBoard deals={deals} today={todayNbo} />
-        <Inbox items={inbox} now={now} canHandle={Boolean(rawInbox)} />
-        <PilotsPanel keys={keys} now={now} daysKnown={Boolean(today0040)} />
         <ContentPanel
           stories={stories}
           posts={posts}
@@ -440,29 +385,17 @@ export default async function DeskPage() {
               : "LinkedIn only, from af_desk_audience; every campaign and people counts after migration 0040."
           }
         />
-        <MwananchiPanel
-          {...moves}
-          signalsNote="Scored on reach, harm, season, data we hold, ways to earn and this week's page views (lib/mwananchi-core.ts). Readers' empty searches join once migration 0043 is applied."
-        />
+        <div className="max-w-2xl">
+          <AddIdea />
+        </div>
+        <SignalsPanel signals={signals} />
+        <PilotsPanel keys={keys} now={now} daysKnown={Boolean(today0040)} />
+        <Inbox items={inbox} now={now} canHandle={Boolean(rawInbox)} />
         <HealthPanel health={health} latency={loadLatency()} freshness={freshness} />
-        <RoutinesPanel />
-        <DecisionsPanel />
-        <CasebookPanel cases={loadCases()} />
       </div>
 
       <section id="reference" className="mt-14 scroll-mt-20 space-y-3">
-        <SectionTitle kicker="Reference" title="Everything else, folded" note="The weekly views: the USD 1m command centre, the funnel, model vs reality, money by product, audience, payments, traffic, reader reports and admin forms." />
-        <Ref id="ref-command" title="Command centre and strategy" note="Collected vs signed vs pipeline; milestones to USD 1m a month; model vs reality; status board">
-          <CommandCentre money={money} deals={deals} pilots={apiKeys} perUsd={perUsd} fxNote={fxNote} />
-          <StrategyBoard
-            collectedThisMonthUsd={toUsd((money?.revenue ?? []).map((r) => ({ currency: r.currency, amount: r.this_month })), perUsd).total}
-            payingInstitutions={deals.filter((x) => x.stage === "won").length}
-            pilots={apiKeys.filter((k) => k.plan === "trial" && !k.revoked_at).length}
-            prospects={deals.filter((x) => x.stage === "prospect").length}
-            apiCalls7d={apiCalls}
-            now={now}
-          />
-        </Ref>
+        <SectionTitle kicker="Analytics" title="Audience, traffic, funnel and money" note="Audience and traffic open by default; the funnel, money by product, payments, reader reports and admin forms one tap away." />
         <Ref id="ref-funnel" title="Funnel: visitor to payment" note="Real counts, 7 and 30 days; moments that matter; survey answers">
           <FunnelPanel funnel={funnel} now={now} />
         </Ref>
@@ -498,7 +431,7 @@ export default async function DeskPage() {
             ) : null}
           </section>
         </Ref>
-        <Ref id="ref-audience" title="Audience" note={`${desk.views_7d} views and ${people?.people_7d ?? "—"} people in 7 days; subscribers, sign-ups, downloads, API`}>
+        <Ref id="ref-audience" open title="Audience" note={`${desk.views_7d} views and ${people?.people_7d ?? "—"} people in 7 days; subscribers, sign-ups, downloads, API`}>
                     <section className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule grid-cols-2 lg:grid-cols-4">
             <Stat label="Page views, 7 days" value={desk.views_7d} note={change == null ? "no prior week" : `${change > 0 ? "+" : ""}${change}% vs prior week`} tone={change == null ? undefined : change >= 0 ? "up" : "down"} />
             <Stat label="Returning readers, 7 days" value={audience ? audience.returning_7d : "—"} note={returningShare == null ? "not available" : `${returningShare}% of views · counted from 5 Oct`} />
@@ -582,7 +515,7 @@ export default async function DeskPage() {
             )}
           </section>
         </Ref>
-        <Ref id="ref-traffic" title="Traffic" note="Views over 30 days, LinkedIn by page over 90 days, top pages, referrers, downloads, API and embeds">
+        <Ref id="ref-traffic" open title="Traffic" note="Views over 30 days, LinkedIn by page over 90 days, top pages, referrers, downloads, API and embeds">
                     <section className="mt-10">
             <SectionTitle kicker="Traffic" title="Views, last 30 days" />
             <div className="mt-4">

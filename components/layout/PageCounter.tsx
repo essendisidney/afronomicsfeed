@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { cohortWeek, depthsReached, ENGAGED_SECONDS, READING_PAGE, returnWindow } from "@/lib/signals-core";
 import { isOwnerDevice, isTrackEvent, track } from "@/lib/track";
 
 /** Sends one anonymous page-view beacon per navigation. See app/api/hit/route.ts. */
@@ -17,10 +18,20 @@ export function PageCounter() {
     let visitor = false;
     try {
       const today = new Date().toISOString().slice(0, 10);
-      returning = localStorage.getItem("af_seen") !== null;
+      const seen = localStorage.getItem("af_seen");
+      returning = seen !== null;
       if (!returning) localStorage.setItem("af_seen", today);
       visitor = localStorage.getItem("af_day") !== today;
       if (visitor) localStorage.setItem("af_day", today);
+      // Return windows by the week this browser first came (lib/signals-core.ts): one count per browser per window.
+      if (!seen) track("first_visit", cohortWeek(today), "/");
+      else if (visitor) {
+        const slot = returnWindow(seen, today);
+        if (slot && !localStorage.getItem(`af_ret_${slot}`)) {
+          localStorage.setItem(`af_ret_${slot}`, today);
+          track("return_reader", `${cohortWeek(seen)}.${slot}`, "/");
+        }
+      }
     } catch {}
     // Campaign tags (utm_source/utm_campaign) on the landing link, so clicks from our own posts are counted by post.
     const params = new URLSearchParams(window.location.search);
@@ -31,6 +42,43 @@ export function PageCounter() {
         void fetch("/api/hit", { method: "POST", body, headers: { "Content-Type": "application/json" }, keepalive: true });
       }
     } catch {}
+  }, [pathname]);
+  // How far a story is read and how long it holds attention (lib/signals-core.ts): each depth and each engaged mark
+  // once per page view. Engaged time only runs while the tab is in front and the reader moved in the last 15 seconds
+  // (time to read a paragraph).
+  useEffect(() => {
+    if (!pathname || !READING_PAGE.test(pathname) || isOwnerDevice()) return;
+    const sent = new Set<number>();
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const fraction = doc.scrollHeight > 0 ? (window.scrollY + window.innerHeight) / doc.scrollHeight : 0;
+      for (const depth of depthsReached(fraction)) {
+        if (sent.has(depth)) continue;
+        sent.add(depth);
+        track("read_depth", String(depth), pathname);
+      }
+    };
+    let active = Date.now();
+    let seconds = 0;
+    const marks: number[] = [...ENGAGED_SECONDS];
+    const onActivity = () => {
+      active = Date.now();
+    };
+    const timer = window.setInterval(() => {
+      if (document.visibilityState !== "visible" || Date.now() - active > 15000) return;
+      seconds += 1;
+      while (marks.length && seconds >= marks[0]) track("engaged", String(marks.shift()), pathname);
+      if (!marks.length) window.clearInterval(timer);
+    }, 1000);
+    const activity = ["scroll", "keydown", "pointerdown", "pointermove", "touchstart"] as const;
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // Depths count only once the reader scrolls, so a short page that fits the screen is not "read to the end".
+    for (const name of activity) window.addEventListener(name, onActivity, { passive: true });
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("scroll", onScroll);
+      for (const name of activity) window.removeEventListener(name, onActivity);
+    };
   }, [pathname]);
   // Clicks that matter, counted anonymously (lib/track.ts): data downloads (the strongest demand signal), anything
   // tagged data-track="<event>", and calls to action on /pricing. The one-question survey listens for downloads.

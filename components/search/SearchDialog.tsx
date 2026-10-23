@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { searchIndex, type SearchHit } from "@/lib/search-core";
+import { useSearchMiss } from "./useSearchMiss";
 
 export function SearchDialog({
   index,
@@ -25,6 +26,7 @@ export function SearchDialog({
   }, [open, onClose]);
 
   const results = useMemo(() => searchIndex(query, index, 12), [index, query]);
+  useSearchMiss(query, results.length);
 
   if (!open) return null;
 

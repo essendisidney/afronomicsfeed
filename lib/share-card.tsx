@@ -7,6 +7,7 @@ import { calcUi, shareUi, ui, type ShareLang } from "@/lib/learn-ui";
 import { pct, type Card } from "@/lib/og-card";
 import type { SignatureCard } from "@/lib/og-signature";
 import { numberSignature } from "@/lib/share-cards";
+import { foundSignature } from "@/lib/found-share";
 import { fairSentence, fairWho, rateText, sharePath, whole, type ShareSpec } from "@/lib/share";
 
 /**
@@ -40,6 +41,11 @@ export function shareView(spec: ShareSpec): ShareView | null {
   if (spec.kind === "number") {
     const n = numberSignature(spec);
     return n ? { signature: n.card, title: n.title, description: n.description } : null;
+  }
+
+  if (spec.kind === "found") {
+    const f = foundSignature(spec);
+    return f ? { signature: f.card, title: f.title, description: f.description } : null;
   }
 
   if (spec.kind === "fair") {

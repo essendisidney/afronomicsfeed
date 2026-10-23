@@ -1,0 +1,16 @@
+{
+  "note": "The named-verdict gate (docs/editorial/named-institutions.md, D-028). A Receipt whose verdict names a company, institution or person is counted here once it is published with the founder's approval. The founder's one-tap approval stays until `target` such Receipts have run with no correction. Corrections are counted from lib/corrections.ts (a correction whose pieceHref is /receipts/<slug>). `replies` is the right-of-reply log (rule 3): one entry per right of reply sent. Append only: never delete or rewrite an entry; add a new one that says what it corrects. No email addresses and no names of people here (public repository).",
+  "updated": "2026-10-22",
+  "target": 30,
+  "verdicts": [
+    { "slug": "2026-10-14-quickmart-ipo", "names": ["Quickmart"], "approved": "D-020", "how": "Founder approval; live offer; lawyer's read waived", "reply": "None on file (published before D-028)" },
+    { "slug": "2026-10-15-dangote-refinery-ipo", "names": ["Dangote"], "approved": "D-022", "how": "Founder one tap; live offer; lawyer's read waived", "reply": "None on file (published before D-028)" },
+    { "slug": "2026-10-15-banks-lend-to-government", "names": ["KCB", "Equity", "Co-op Bank"], "approved": "D-025", "how": "Founder approval after the in-house legal read", "reply": "None on file (published before D-028)" },
+    { "slug": "2026-10-15-fuliza-true-cost", "names": ["Safaricom", "NCBA", "KCB", "Sidian"], "approved": "D-027", "how": "Founder approval", "reply": "Skipped by the founder (D-027); no retroactive email (D-028)" },
+    { "slug": "2026-10-15-kenya-airways-bailout-bill", "names": ["Kenya Airways"], "approved": "D-027", "how": "Founder approval", "reply": "Skipped by the founder (D-027); no retroactive email (D-028)" }
+  ],
+  "held": [
+    { "slug": "2026-10-15-safaricom-stake-sale", "names": ["Safaricom", "Vodacom"], "why": "In litigation: needs an advocate's read (D-023, D-025, D-027, D-028)" }
+  ],
+  "replies": []
+}

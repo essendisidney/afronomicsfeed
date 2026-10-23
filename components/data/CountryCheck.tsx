@@ -4,6 +4,7 @@ import { CountryFairRate } from "@/components/data/CountryFairRate";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import type { CountryBench } from "@/lib/data/west-africa-rates";
+import { countrySaveOptions } from "@/lib/found-data";
 
 /** The Nigeria and Ghana fair-rate pages: the check, then every benchmark it uses with its source. */
 export function CountryCheck({ bench, slug, intro }: { bench: CountryBench | null; slug: "nigeria" | "ghana"; intro: React.ReactNode }) {
@@ -26,7 +27,7 @@ export function CountryCheck({ bench, slug, intro }: { bench: CountryBench | nul
         </p>
       ) : (
         <>
-          <CountryFairRate bench={bench} />
+          <CountryFairRate bench={bench} options={countrySaveOptions(slug)} />
           <section className="mt-12 grid gap-10 lg:grid-cols-2">
             <div>
               <SectionTitle kicker="Saving" title="What your money could earn" />

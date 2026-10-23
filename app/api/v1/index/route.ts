@@ -23,7 +23,7 @@ export async function GET(request: Request) {
       name: indexName,
       short: indexShort,
       tenor,
-      method: "https://www.afronomicsfeed.com/markets/bill-index",
+      method: "https://www.afronomicsfeed.com/markets/bill-index/method",
       latest: idx.latest,
       change_bps: { week: idx.bpsWeek, month: idx.bpsMonth, year: idx.bpsYear },
       high: idx.high,

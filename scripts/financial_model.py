@@ -33,7 +33,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "strategy" / "afronomics-financial-model.xlsx"
-MODEL_JSON = ROOT / "data" / "strategy" / "model.json"  # read by the desk's command centre (app/desk/StrategyBoard.tsx)
+MODEL_JSON = ROOT / "data" / "strategy" / "model.json"
 START = "2026-10"  # month 1 of the model
 MONTHS = 36
 MILESTONES = [10_000, 50_000, 100_000, 250_000, 500_000, 1_000_000]

@@ -139,9 +139,9 @@
    "area": "Bond auctions",
    "name": "WAEMU (UMOA-Titres)",
    "status": "ok",
-   "detail": "latest result 20 Oct (auctions weekly)",
-   "latest": "2026-10-20",
-   "due_by": "2026-10-27",
+   "detail": "latest result 23 Oct (auctions weekly)",
+   "latest": "2026-10-23",
+   "due_by": "2026-10-30",
    "link": "/markets/bonds/waemu"
   },
   {
@@ -211,8 +211,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 22 Oct",
-   "latest": "2026-10-22",
+   "detail": "14.0% read 23 Oct",
+   "latest": "2026-10-23",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -365,19 +365,19 @@
   {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-10-22",
+   "day": "2026-10-23",
    "failures_in_row": 0
   },
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-10-22",
+   "day": "2026-10-23",
    "failures_in_row": 0
   },
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-10-22",
+   "day": "2026-10-23",
    "failures_in_row": 0
   },
   {

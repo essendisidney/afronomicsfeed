@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 10,
-  "results": 23,
+  "results": 24,
   "p50_h": 3.4,
   "p90_h": 11.7
  },
@@ -209,7 +209,7 @@
    "kind": "bonds",
    "market": "waemu",
    "name": "WAEMU (UMOA-Titres)",
-   "results": 3,
+   "results": 4,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -227,6 +227,15 @@
    "published_at": "2026-10-22T14:35:30+00:00",
    "published_how": "Last-Modified of the result's own document",
    "delay_h": 0.65
+  },
+  {
+   "key": "bonds:waemu:2026-10-23:senegal",
+   "kind": "bonds",
+   "market": "waemu",
+   "date": "2026-10-23",
+   "first_seen_at": "2026-10-23T15:14:40+00:00",
+   "published_at": null,
+   "published_how": null
   },
   {
    "key": "bills:uganda:2026-10-21",
@@ -828,5 +837,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-22T15:29:28+00:00"
+ "updated_at": "2026-10-23T15:20:33+00:00"
 }

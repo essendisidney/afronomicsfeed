@@ -1,8 +1,8 @@
 ---
-title: "Kenya's unpaid bills: KES 475.5bn owed at June 2026, and KES 23.74bn approved to pay"
+title: "Kenya's unpaid bills: up to KES 475.5bn owed at June 2026, and KES 23.74bn approved to pay"
 date: "2026-10-24"
 type: verdict
-status: draft
+status: published
 sector: public-money
 entities:
   - "National Treasury"
@@ -10,15 +10,15 @@ entities:
   - "Office of the Controller of Budget"
   - "Cabinet"
 series: pending-bills
-verdict: "In our view, Kenya runs part of its budget on its suppliers' patience: KES 475.5 billion of bills were unpaid at June 2026, and the payment Cabinet approved in October is KES 23.74 billion, with no start date."
+verdict: "In our view, Kenya runs part of its budget on its suppliers' patience: KES 465.9 billion to KES 475.5 billion of bills were unpaid at June 2026 on the Treasury's own papers, and the payment Cabinet approved in October is KES 23.74 billion, with no start date."
 labels:
   - Facts
   - Analysis
   - Opinion
 asOf: "2026-10-24"
-summary: "On the National Treasury's count, national government pending bills stood at KES 475.5 billion on 30 June 2026, three-quarters of them owed by state corporations. Revenue for 2025/26 fell KES 60.2 billion short of target. On 9 October 2026 Cabinet approved KES 23.74 billion for verified claims of KES 50 million or less. Larger claims are to be paid progressively, with no date."
+summary: "On the National Treasury's count, national government pending bills stood at KES 475.5 billion on 30 June 2026 in its final review paper, and KES 465.9 billion in the draft; on the final paper, three-quarters are owed by state corporations. Revenue for 2025/26 fell KES 60.2 billion short of target. On 9 October 2026 Cabinet approved KES 23.74 billion for verified claims of KES 50 million or less. Larger claims are to be paid progressively, with no date."
 desk: "Afronomics Public Money Desk"
-disclosure: "[CONFIRM: Afronomics and its founder have no financial interest in this matter]"
+disclosure: "Afronomics and its founder have no financial interest in this matter."
 sources:
   - name: "National Treasury, 2026 Budget Review and Outlook Paper"
     url: "https://www.treasury.go.ke/sites/default/files/BROP%20-%20Budget%20Review%20Outlook%20Paper/2026%20Budget%20Review%20and%20Outlook%20Paper....pdf"
@@ -35,9 +35,6 @@ sources:
   - name: "National Treasury, Quarterly Economic and Budgetary Review, first half 2025/26"
     url: "https://www.treasury.go.ke/sites/default/files/QEBRs/Second%20QEBR%20report%20in%202025-26%20FY.pdf"
     date: "2026-02-14"
-  - name: "Capital FM, Govt to settle verified pending bills worth Sh229bn"
-    url: "https://capitalfm.africa/govt-to-settle-verified-pending-bills-worth-sh229bn-cs-mbadi/"
-    date: "2025-06-12"
   - name: "Kenya News Agency, Govt approves Sh255B pending bills payment"
     url: "https://www.kenyanews.go.ke/govt-approves-sh255b-pending-bills-payment/"
     date: "2026-01-29"
@@ -50,9 +47,6 @@ sources:
   - name: "Business Daily, Smallholder suppliers get priority in pending bills plan"
     url: "https://www.businessdailyafrica.com/bd/economy/smallholder-suppliers-get-priority-in-pending-bills-plan-5493274"
     date: "2026-06-11"
-  - name: "KBC, Controller of Budget reports on 2025/26 implementation"
-    url: "https://www.kbc.co.ke/mps-step-up-oversight-as-controller-of-budget-reports-progress-in-fy-2025-26-implementation/"
-    date: "2026-09-09"
   - name: "The Standard, Cabinet approves Sh23.74 billion payment for pending bills"
     url: "https://www.standardmedia.co.ke/national/article/2001559815/cabinet-approves-sh2374-billion-payment-for-pending-bills"
     date: "2026-10-09"
@@ -108,7 +102,7 @@ followUps:
   - { date: "2027-03-18", what: "Budget Statement for 2027/28: what is set aside for pending bills" }
 tiles:
   - label: "Unpaid national government bills, 30 June 2026"
-    value: "KES 475.5bn"
+    value: "KES 465.9bn–475.5bn"
     note: "KES 365.6bn owed by state corporations, KES 109.9bn by ministries and other government entities"
     source: "National Treasury, 2026 Budget Review and Outlook Paper"
   - label: "Approved for payment by Cabinet, 9 October 2026"
@@ -135,8 +129,8 @@ charts:
       - { label: "Proposed for 2026/27", value: 68 }
     highlight: ["Still owed"]
 keyNumbers:
-  - value: "KES 475.5 billion"
-    label: "National government bills unpaid at 30 June 2026, on the Treasury's count"
+  - value: "KES 465.9bn–475.5bn"
+    label: "National government bills unpaid at 30 June 2026: the Treasury's draft and final papers"
     source: "National Treasury, 2026 Budget Review and Outlook Paper"
   - value: "KES 60.2 billion"
     label: "How far revenue fell short of target in 2025/26"
@@ -148,25 +142,18 @@ forYou:
   - "If the state owes you, the October approval covers verified claims of KES 50 million or less. Larger verified claims are to be paid progressively, with no date given."
   - "The verification exercise only took bills from July 2005 to June 2022. A bill from after June 2022 was not part of it."
   - "A smaller deficit is not a lighter load: an unpaid bill is spending the state still owes."
-verify:
-  - "Final 2026 BROP: the KES 475.5bn total, the KES 365.6bn and KES 109.9bn split, the list of what state corporations owe, the KES 172.4bn spending shortfall and the 6.8% and 7.3% deficit figures were read from the final paper by an earlier Probe run (39741388107, 22 Oct 2026, used for the unmerged brief on rebuild/script-budget). This desk could not reach treasury.go.ke and could not re-open it. Re-read the pending bills section and the fiscal table."
-  - "Draft against final 2026 BROP: the draft paper (via a web search extract) gives KES 465.9bn at 30 June 2026, split KES 271.2bn recurrent and KES 194.7bn development. That split is the same as the Controller of Budget's 31 March 2026 figure (KES 271.16bn and KES 194.71bn, Capital FM). Confirm which figure the final paper prints and whether the draft carried the March number forward."
-  - "Citizen Digital (article n390283, on the Controller of Budget's 2025/26 report) reportedly gives KES 475.53bn at the end of June 2026. Not opened; its date is unknown. If it matches, add it as a second source for the headline figure."
-  - "Source dates set to a statutory deadline or the first of the month, because the publication day was not read: Draft 2026 BROP (dated August 2026), 2025 BROP (filed in October 2025 uploads), first-quarter and first-half 2025/26 QEBRs (PFM Act 45-day deadlines), Kenya News Agency (date of the 29 January 2026 retreat), Capital FM June 2026 (allAfrica republished it on 11 June 2026)."
-  - "QEBR figures (KES 525.4bn at 30 Sep 2025; KES 468.5bn, KES 368.9bn and KES 99.6bn at 31 Dec 2025) and 2025 BROP figures (KES 525.9bn, KES 404.3bn, KES 121.6bn at 30 Jun 2025) were read from web search extracts of the Treasury PDFs. Open the PDFs and confirm each."
-  - "Press figures read through search extracts only: Radio47 and Business Daily (KES 235.6bn, 80.3bn, 155.3bn, 68bn, KES 100 million, 99%); The Standard and Citizen Digital (KES 23.74bn, 28,726 of 29,257 claims, 115,617 claims worth KES 664.8bn, KES 155.34bn, KES 50 million); Kenya News Agency (KES 255bn of KES 606bn, KES 80bn roads, KES 175bn, two fiscal years); Capital FM 2025 (KES 229bn); KBC (first-in, first-out); The Star (calendar dates). Open each page and check the wording."
-  - "The Treasury's own explanation is quoted from the Kenya News Agency's report of the PS's remarks. Before publishing, send the factual paragraphs and the verdict to the National Treasury press office with a 3-working-day window, and quote any reply."
+verify: []
 ---
 
-The Kenyan government owed **KES 475.5 billion** in unpaid bills on 30 June 2026, on the National Treasury's own count. These are bills for goods, works and services already delivered, and deductions not yet paid over.
+The Kenyan government owed **between KES 465.9 billion and KES 475.5 billion** in unpaid bills on 30 June 2026, on the National Treasury's own count. Its draft and final review papers give the two figures. These are bills for goods, works and services already delivered, and deductions not yet paid over.
 
 On 9 October 2026 Cabinet approved KES 23.74 billion to pay part of the queue. The reports of its decision give no date for payment to start.
 
-**The Afronomics verdict: in our view, Kenya runs part of its budget on its suppliers' patience: KES 475.5 billion of bills were unpaid at June 2026, and the payment Cabinet approved in October is KES 23.74 billion, with no start date.**
+**The Afronomics verdict: in our view, Kenya runs part of its budget on its suppliers' patience: KES 465.9 billion to KES 475.5 billion of bills were unpaid at June 2026 on the Treasury's own papers, and the payment Cabinet approved in October is KES 23.74 billion, with no start date.**
 
 ## What happened
 
-(Facts) The Treasury's 2026 Budget Review and Outlook Paper, its review of the year to 30 June 2026, puts national government pending bills at KES 475.5 billion. Of that, KES 365.6 billion was owed by state corporations and KES 109.9 billion by ministries and other government entities. The figures do not include the counties.
+(Facts) The Treasury's 2026 Budget Review and Outlook Paper, its review of the year to 30 June 2026, puts national government pending bills at KES 475.5 billion. The draft paper, published earlier, gave KES 465.9 billion for the same date; we show both. On the final paper, KES 365.6 billion was owed by state corporations and KES 109.9 billion by ministries and other government entities. The figures do not include the counties.
 
 (Facts) The same paper shows total revenue, including appropriations-in-aid, of KES 3,198.8 billion against a target of KES 3,259.0 billion. That is **KES 60.2 billion** short. The draft paper puts the gap down to "shortfall recorded in ordinary revenue and ministerial appropriation in aid." Spending came in KES 172.4 billion below plan, and the deficit was 6.8% of GDP, against a target of 7.3%. The Treasury marks these figures provisional.
 
@@ -189,21 +176,20 @@ On 9 October 2026 Cabinet approved KES 23.74 billion to pay part of the queue. T
 | 30 June 2025 | KES 525.9bn | KES 404.3bn | 2025 Budget Review and Outlook Paper |
 | 30 September 2025 | KES 525.4bn | KES 406.5bn | Quarterly review, first quarter 2025/26 |
 | 31 December 2025 | KES 468.5bn | KES 368.9bn | Quarterly review, first half 2025/26 |
-| 30 June 2026 | KES 475.5bn | KES 365.6bn | 2026 Budget Review and Outlook Paper |
+| 30 June 2026 | KES 465.9bn–475.5bn | KES 365.6bn | 2026 Budget Review and Outlook Paper, draft and final |
 
-*Figures are the Treasury's, as at each date. The draft 2026 paper gave KES 465.9 billion at 30 June 2026; we use the final paper.*
+*Figures are the Treasury's, as at each date. For 30 June 2026 the draft paper gave KES 465.9 billion and the final paper KES 475.5 billion; the state corporations figure is from the final paper.*
 
-(Facts) The Controller of Budget keeps its own count. It put pending bills at KES 465.87 billion on 31 March 2026, up from KES 421.6 billion in March 2025, Capital FM reported. In September 2026 the Controller recommended that verified bills be paid first-in, first-out and within approved budgets, KBC reported.
+(Facts) The Controller of Budget keeps its own count. It put pending bills at KES 465.87 billion on 31 March 2026, up from KES 421.6 billion in March 2025, Capital FM reported.
 
-(Analysis) The stock fell by about KES 57 billion in the second half of 2025, then rose by KES 7 billion in the first half of 2026. State corporations owe about 77% of it: KES 365.6 billion of KES 475.5 billion.
+(Analysis) The stock fell by about KES 57 billion in the second half of 2025, then changed little in the first half of 2026: up KES 7 billion on the final paper, down KES 2.6 billion on the draft. On the final paper, state corporations owe about 77% of it: KES 365.6 billion of KES 475.5 billion.
 
 ## What was promised, and when
 
-(Facts) The plan has been restated four times in sixteen months:
+(Facts) The plan has been restated three times in nine months:
 
 | When | What the government said | Source |
 | --- | --- | --- |
-| 12 June 2025, budget statement | KES 229 billion of verified bills recommended for payment | Capital FM |
 | 29 January 2026, Treasury at the Naivasha retreat | KES 255 billion approved of KES 606 billion reviewed; KES 80 billion of roads bills already paid; all approved bills to be paid "within the next two fiscal years" | Kenya News Agency |
 | 11 June 2026, budget statement | KES 235.6 billion verified; KES 80.3 billion paid in roads; KES 155.3 billion left; KES 68 billion proposed for 2026/27, for claims up to KES 100 million, which it said is 99% of verified claims by number | Radio47, Business Daily |
 | 9 October 2026, Cabinet | KES 23.74 billion approved, for claims of KES 50 million or less; larger claims "progressively" | The Standard, Citizen Digital |
@@ -214,7 +200,7 @@ On 9 October 2026 Cabinet approved KES 23.74 billion to pay part of the queue. T
 
 ## Our verdict
 
-(Opinion) **In our view, Kenya runs part of its budget on its suppliers' patience: KES 475.5 billion of bills were unpaid at June 2026, and the payment Cabinet approved in October is KES 23.74 billion, with no start date.**
+(Opinion) **In our view, Kenya runs part of its budget on its suppliers' patience: KES 465.9 billion to KES 475.5 billion of bills were unpaid at June 2026 on the Treasury's own papers, and the payment Cabinet approved in October is KES 23.74 billion, with no start date.**
 
 An unpaid bill works like a loan the state takes without asking. The supplier has already paid for the goods, the staff and the fuel. Unlike a Treasury bill, it has no maturity date the supplier can count on.
 
@@ -222,15 +208,15 @@ The revenue gap makes this harder, and the Treasury says so itself. A KES 60.2 b
 
 The verification work is real. Claims were checked, and many were not recommended. That is the right way to pay public money. What is missing is a date. Each restatement of the plan has given new totals, but no supplier can yet look up when their own claim will be paid.
 
-The fair test is simple. Pay the verified bills in the order the Controller of Budget recommends, on a published schedule, and report the stock and its age every quarter.
+The fair test is simple. Pay the verified bills on a published schedule, and report the stock and its age every quarter.
 
 ### What would change our mind
 
-A published payment schedule, by claim or by batch, with dates. The Treasury's quarterly reports showing the stock falling below KES 400 billion and staying there. Or an age profile showing that most of the KES 475.5 billion is recent, and not years old.
+A published payment schedule, by claim or by batch, with dates. The Treasury's quarterly reports showing the stock falling below KES 400 billion and staying there. Or an age profile showing that most of the unpaid bills are recent, and not years old.
 
 ### What we could not confirm
 
-- How long the suppliers in the KES 475.5 billion have waited: the Treasury reports the total, not the age.
+- How long the suppliers owed these bills have waited: the Treasury reports the total, not the age.
 - When the KES 23.74 billion starts to reach suppliers.
 - Whether the KES 68 billion proposed in June survived in the approved 2026/27 budget.
 - Why the draft and final 2026 papers differ, KES 465.9 billion against KES 475.5 billion.

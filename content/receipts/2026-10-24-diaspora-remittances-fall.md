@@ -65,7 +65,6 @@ calls:
     unit: "%"
     check_source: "CBK, Diaspora Remittances page (monthly inflows by source)"
     check_date: "2027-01-29"
-    check_date: "2027-01-29"
 followUps:
   - { date: "2026-11-20", what: "October 2026 remittances: grade the North America October call" }
   - { date: "2027-01-22", what: "Full-year 2026 remittances in the CBK Weekly Bulletin: grade the yearly call" }

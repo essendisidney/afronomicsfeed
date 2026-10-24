@@ -101,9 +101,9 @@ followUps:
   - { date: "2027-02-14", what: "First-half 2026/27 Quarterly Economic and Budgetary Review: pending bills at 31 December" }
   - { date: "2027-03-18", what: "Budget Statement for 2027/28: what is set aside for pending bills" }
 tiles:
-  - label: "Unpaid national government bills, 30 June 2026"
-    value: "KES 465.9bn–475.5bn"
-    note: "KES 365.6bn owed by state corporations, KES 109.9bn by ministries and other government entities"
+  - label: "Unpaid national government bills, 30 June 2026 (final paper)"
+    value: "KES 475.5bn"
+    note: "The Treasury's draft paper gave KES 465.9bn. KES 365.6bn owed by state corporations, KES 109.9bn by ministries and other government entities"
     source: "National Treasury, 2026 Budget Review and Outlook Paper"
   - label: "Approved for payment by Cabinet, 9 October 2026"
     value: "KES 23.74bn"

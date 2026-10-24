@@ -363,9 +363,15 @@
  ],
  "workflows": [
   {
+   "name": "Institutions registry",
+   "result": "failure",
+   "day": "2026-10-24",
+   "failures_in_row": 1
+  },
+  {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-10-23",
+   "day": "2026-10-24",
    "failures_in_row": 0
   },
   {
@@ -377,7 +383,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-10-23",
+   "day": "2026-10-24",
    "failures_in_row": 0
   },
   {
@@ -406,6 +412,12 @@
   },
   {
    "name": "Reader tests",
+   "result": "success",
+   "day": "2026-10-24",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Remittance prices",
    "result": "success",
    "day": "2026-10-24",
    "failures_in_row": 0

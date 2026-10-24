@@ -453,6 +453,42 @@
    "unit": null,
    "check_source": "Kenya Airways PLC announcements on the NSE and USE",
    "check_date": "2027-06-30"
+  },
+  {
+   "id": "RC-2026-10-24-diaspora-remittances-fall-1",
+   "receipt": "2026-10-24-diaspora-remittances-fall",
+   "written_at": "2026-10-24T09:07:14Z",
+   "statement": "Money from North America in October 2026 is below October 2025's",
+   "measure": "North America inflows, October 2026 against October 2025, % change, CBK Diaspora Remittances table (monthly inflows by source)",
+   "comparator": "<",
+   "threshold": 0,
+   "unit": "%",
+   "check_source": "CBK, Diaspora Remittances page (monthly inflows by source); CBK Weekly Bulletin carrying October 2026 remittances",
+   "check_date": "2026-11-20"
+  },
+  {
+   "id": "RC-2026-10-24-diaspora-remittances-fall-2",
+   "receipt": "2026-10-24-diaspora-remittances-fall",
+   "written_at": "2026-10-24T09:07:14Z",
+   "statement": "Kenya's total remittances for 2026 come in below 2025's",
+   "measure": "Cumulative remittance inflows for the 12 months to December 2026, % change on a year earlier, as the CBK Weekly Bulletin reports it",
+   "comparator": "<",
+   "threshold": 0,
+   "unit": "%",
+   "check_source": "CBK Weekly Bulletin carrying December 2026 remittances; CBK, Diaspora Remittances page",
+   "check_date": "2027-01-22"
+  },
+  {
+   "id": "RC-2026-10-24-diaspora-remittances-fall-3",
+   "receipt": "2026-10-24-diaspora-remittances-fall",
+   "written_at": "2026-10-24T09:07:14Z",
+   "statement": "Money from North America for the whole of 2026 is down by more than 8% on 2025",
+   "measure": "North America inflows, January to December 2026 against January to December 2025, % change, CBK Diaspora Remittances table",
+   "comparator": "<",
+   "threshold": -8,
+   "unit": "%",
+   "check_source": "CBK, Diaspora Remittances page (monthly inflows by source)",
+   "check_date": "2027-01-29"
   }
  ],
  "outcomes": [],

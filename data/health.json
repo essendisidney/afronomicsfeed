@@ -381,6 +381,12 @@
    "failures_in_row": 0
   },
   {
+   "name": "Documents",
+   "result": "success",
+   "day": "2026-10-24",
+   "failures_in_row": 0
+  },
+  {
    "name": "Forecast ledger",
    "result": "success",
    "day": "2026-10-24",

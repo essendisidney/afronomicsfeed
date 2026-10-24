@@ -9,7 +9,7 @@
 "currency": "EGP",
 "rate_note": "weighted average yield of accepted bids, percent per annum; amounts in EGP millions; one row per auction (new issue or reopening) of each bond",
 "updated": "2026-10-20",
-"read_at": "2026-10-24T14:08:44+00:00",
+"read_at": "2026-10-24T16:44:16+00:00",
 "compiled_by": "Afronomics (afronomicsfeed.com)",
 "rows": [
 {

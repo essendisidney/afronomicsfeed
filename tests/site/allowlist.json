@@ -12,6 +12,12 @@
       "page": "*",
       "match": "guaranteed aircraft loan",
       "reason": "Factual: the Kenya Airways aircraft loan carries a US Exim Bank guarantee backed by the Government of Kenya, per the Treasury's debt report (Kenya Airways Receipt, a draft)."
+    },
+    {
+      "check": "copy",
+      "page": "/markets",
+      "match": "10% rental guarantee",
+      "reason": "A publisher's headline shown verbatim in the /markets news feed (a Nairobi property developer's offer at The Marlow), not a claim made by Afronomics."
     }
   ]
 }

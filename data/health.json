@@ -103,9 +103,9 @@
    "area": "Bond auctions",
    "name": "Egypt",
    "status": "ok",
-   "detail": "latest result 20 Oct (auctions weekly)",
-   "latest": "2026-10-20",
-   "due_by": "2026-11-01",
+   "detail": "latest result 27 Oct (auctions weekly)",
+   "latest": "2026-10-27",
+   "due_by": "2026-11-08",
    "link": "/markets/bonds/egypt"
   },
   {
@@ -193,7 +193,7 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.52% read 26 Oct",
+   "detail": "10.46% read 26 Oct",
    "latest": "2026-10-26",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
@@ -211,8 +211,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 25 Oct",
-   "latest": "2026-10-25",
+   "detail": "14.0% read 26 Oct",
+   "latest": "2026-10-26",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -371,7 +371,7 @@
   {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-10-25",
+   "day": "2026-10-26",
    "failures_in_row": 0
   },
   {
@@ -383,19 +383,25 @@
   {
    "name": "Documents",
    "result": "success",
-   "day": "2026-10-24",
+   "day": "2026-10-26",
    "failures_in_row": 0
   },
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-10-25",
+   "day": "2026-10-26",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Index release",
+   "result": "success",
+   "day": "2026-10-26",
    "failures_in_row": 0
   },
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-10-25",
+   "day": "2026-10-26",
    "failures_in_row": 0
   },
   {

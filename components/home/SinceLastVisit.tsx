@@ -15,6 +15,8 @@ const HOUR = 3_600_000;
 export function SinceLastVisit({ marks, stories, now }: { marks: Mark[]; stories: Story[]; now: string }) {
   const [line, setLine] = useState<string | null>(null);
   useEffect(() => {
+    // Browser storage can only be read after mount, so the line is set from this effect.
+    /* eslint-disable react-hooks/set-state-in-effect */
     try {
       const held = sessionStorage.getItem(VIEW);
       const prev = JSON.parse(localStorage.getItem(KEY) ?? "null") as Snapshot | null;
@@ -28,6 +30,7 @@ export function SinceLastVisit({ marks, stories, now }: { marks: Mark[]; stories
     } catch {
       // Storage blocked (private window): the invitation stays.
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [marks, stories, now]);
   return (
     <p className="mt-2 flex min-h-11 items-center overflow-hidden rounded-xl border border-rule bg-surface px-3 text-[13px] leading-5" aria-live="polite">
@@ -35,7 +38,7 @@ export function SinceLastVisit({ marks, stories, now }: { marks: Mark[]; stories
         {line ? (
           <span className="font-medium text-ink">{line}</span>
         ) : (
-          <span className="text-muted">Come back tomorrow: this line will show what changed since now.</span>
+          <span className="text-muted">Come back tomorrow to see what changed since this visit.</span>
         )}
       </span>
     </p>

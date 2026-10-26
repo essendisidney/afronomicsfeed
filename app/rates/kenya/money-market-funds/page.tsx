@@ -12,6 +12,8 @@ import { ShareResult } from "@/components/ui/ShareResult";
 import { fundSlug } from "@/lib/data/fund-links";
 import { fundLeague, loadFundHistory, rateOptions } from "@/lib/data/kenya-rates";
 import { fundAnswers } from "@/lib/seo/answers";
+import { FundFound } from "@/components/data/FundFound";
+import { fundOptions } from "@/lib/found-data";
 import { mmfSentence } from "@/lib/share-card";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
@@ -201,6 +203,12 @@ export default function MoneyMarketFundsPage() {
           </p>
         </section>
       )}
+
+      {funds.length ? (
+        <div className="mt-12">
+          <FundFound funds={fundOptions()} />
+        </div>
+      ) : null}
 
       {days.length >= 7 ? (
         <section className="mt-14">

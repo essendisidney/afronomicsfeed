@@ -38,7 +38,7 @@ export function FollowUp({
         </div>
         <div>
           <p className="text-[15px] font-semibold text-ink">
-            The Morning, every weekday at 7:00
+            The Morning, every weekday before 07:30
           </p>
           <p className="mt-1 text-[13px] leading-5 text-ink-soft">
             Rates, currencies and auction results before the day starts. Free, with our guide to where your shilling earns most.

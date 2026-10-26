@@ -88,6 +88,6 @@ The data and the automation are ahead of the audience. The next quarter is about
 - The navigation leads with the price of money. ~~Economy, Capital, Climate, Technology and Trade stay live
   in the footer but are not where effort goes.~~ Parked in the rebuild (14 Oct 2026): they redirect to `/numbers`
   and return later as Coverage pages.
-- No verdict on a named institution in public. A SACCO is set against SASRA's minimums only in its own private Watch
-  pack.
+- Verdicts on named companies, institutions and people follow `docs/editorial/named-institutions.md` (D-028). A SACCO
+  is set against SASRA's minimums only in its own private Watch pack.
 - Code does the arithmetic; a model never produces a number a reader sees.

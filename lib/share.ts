@@ -1,3 +1,4 @@
+import { isFoundTool, type FoundTool } from "@/lib/found";
 import { isShareLang, type ShareLang } from "@/lib/learn-ui";
 import { site } from "@/lib/site";
 
@@ -25,7 +26,18 @@ export type ShareSpec =
    * figure tile by the Receipt's slug and the tile's place (1-based). The value, label, source and date are read from
    * the data when the card is drawn, never from the link.
    */
-  | { kind: "number"; receipt: string | null; tile: string };
+  | { kind: "number"; receipt: string | null; tile: string }
+  /**
+   * A "shillings found" result (lib/found.ts). By default only the tool and its market: the card shows the comparable
+   * option we hold, from the data. With `mine` (the reader ticked "include my figures") it carries the reader's own
+   * inputs, and the card recomputes the difference from them and the data; the link never carries a difference.
+   */
+  | { kind: "found"; tool: FoundTool; market: string; mine: FoundFigures | null };
+
+/** The reader's own inputs on a found card, each validated and clamped like every other share. */
+export type FoundFigures = { rate?: number; amount?: number; product?: string; days?: number; times?: number; fund?: string; src?: string; firm?: string; sends?: number };
+const SLUG = /^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?$/;
+const slugParam = (raw: string | null) => (raw != null && SLUG.test(raw) ? raw : null);
 
 /** The Today tiles that can be shared as a number (ids from lib/today-board.ts). */
 export const todayTileIds = ["bill-91", "bill-364", "cbr", "mmf"] as const;
@@ -82,6 +94,33 @@ export function parseShare(q: URLSearchParams): ShareSpec | null {
     if (receipt.length > 100 || !RECEIPT_SLUG.test(receipt) || tile == null || !/^(?:[1-9]|1[0-2])$/.test(tile)) return null;
     return { kind, receipt, tile };
   }
+  if (kind === "found") {
+    const tool = q.get("tool");
+    const market = q.get("market") ?? "";
+    if (!isFoundTool(tool) || !SLUG.test(market)) return null;
+    if (tool === "save_check" ? !["kenya", "ghana", "nigeria"].includes(market) : tool !== "remit" && market !== "kenya") return null;
+    if (q.get("mine") !== "1") return { kind, tool, market, mine: null };
+    const amount = num(q.get("amount"), 1, MAX_AMOUNT, 0);
+    let mine: FoundFigures | null = null;
+    if (tool === "save_check") {
+      const rate = num(q.get("rate"), 0, 100, 2);
+      if (rate != null && amount != null) mine = { rate, amount };
+    } else if (tool === "mobile_loans" || tool === "fuliza") {
+      const product = slugParam(q.get("product"));
+      const days = num(q.get("days"), 1, 30, 0);
+      const times = num(q.get("times"), 1, 365, 0);
+      if (product && amount != null && days != null && times != null) mine = { product, amount, days, times };
+    } else if (tool === "mmf") {
+      const fund = slugParam(q.get("fund"));
+      if (fund && amount != null) mine = { fund, amount };
+    } else {
+      const src = q.get("src");
+      const firm = slugParam(q.get("firm"));
+      const sends = num(q.get("sends"), 1, 365, 0);
+      if (src && /^[A-Z]{3}$/.test(src) && firm && sends != null) mine = { src, firm, sends };
+    }
+    return mine ? { kind, tool, market, mine } : null;
+  }
   if (kind === "mmf_month") {
     const month = q.get("month");
     if (month != null && !/^20\d\d-(0[1-9]|1[0-2])$/.test(month)) return null;
@@ -112,6 +151,16 @@ export function shareQuery(spec: ShareSpec): URLSearchParams {
     q.set("tile", spec.tile);
   } else if (spec.kind === "mmf_month" && spec.month) {
     q.set("month", spec.month);
+  } else if (spec.kind === "found") {
+    q.set("tool", spec.tool);
+    q.set("market", spec.market);
+    if (spec.mine) {
+      q.set("mine", "1");
+      for (const k of ["rate", "amount", "product", "days", "times", "fund", "src", "firm", "sends"] as const) {
+        const v = spec.mine[k];
+        if (v != null) q.set(k, String(v));
+      }
+    }
   }
   return q;
 }
@@ -133,6 +182,8 @@ export function sharePath(spec: ShareSpec): { path: string; hash: string } {
       return { path: "/rates/kenya/mobile-loans", hash: "" };
     case "number":
       return spec.receipt ? { path: `/receipts/${spec.receipt}`, hash: "" } : { path: "/", hash: "#today" };
+    case "found":
+      return foundPath(spec.tool, spec.market);
   }
 }
 
@@ -170,4 +221,20 @@ export function fairSentence(spec: Extract<ShareSpec, { kind: "fair" }>, bench: 
   return spec.mode === "save"
     ? `${fairWho(spec)} pays ${rateText(spec.mine)}% a year. The 364-day Treasury bill pays ${bench.bill364Gross.toFixed(2)}%.`
     : `${fairWho(spec)} charges ${rateText(spec.mine)}% a year. Kenyan banks charge ${bench.lendingAvg.toFixed(2)}% on average.`;
+}
+
+/** The page a found result comes from (and a found share sends the reader back to). */
+export function foundPath(tool: FoundTool, market: string): { path: string; hash: string } {
+  switch (tool) {
+    case "save_check":
+      return { path: `/rates/${market === "ghana" || market === "nigeria" ? market : "kenya"}/check`, hash: "" };
+    case "mobile_loans":
+      return { path: "/rates/kenya/mobile-loans", hash: "#found" };
+    case "fuliza":
+      return { path: "/rates/kenya/mpesa-charges", hash: "#fuliza" };
+    case "mmf":
+      return { path: "/rates/kenya/money-market-funds", hash: "#found" };
+    case "remit":
+      return { path: "/rates/remittances", hash: "#found" };
+  }
 }

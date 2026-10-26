@@ -5,7 +5,8 @@ import { PageShell } from "@/components/data/PageShell";
 import { confirmReturnWithKey } from "@/lib/billing/confirm";
 import { isAnalystPlan, type KeyOutcome } from "@/lib/billing/paidkey";
 import { getCheckoutPlan, moneyLabel } from "@/lib/billing/plans";
-import { institutionalTier, rateCard } from "@/lib/billing/ratecard";
+import { institutionalPilot, institutionalTier, rateCard } from "@/lib/billing/ratecard";
+import { ButtonLink } from "@/components/ui/Button";
 import { nextStep } from "@/lib/billing/record";
 import { site } from "@/lib/site";
 import { CopyKey } from "./CopyKey";
@@ -145,15 +146,15 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
           ) : (
             <p>The checkout was closed before paying, so nothing was charged.</p>
           )}
-          <p>
-            <Link href="/pricing" className="font-semibold text-forest underline underline-offset-2">
-              Back to pricing
-            </Link>{" "}
-            ·{" "}
-            <Link href="/pricing?plan=enterprise#invoice" className="underline underline-offset-2">
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            <ButtonLink href="/pricing">Back to pricing</ButtonLink>
+            <ButtonLink href={institutionalPilot.href} variant="secondary" data-track="pricing_cta_click">
+              Start a free {institutionalPilot.days}-day pilot
+            </ButtonLink>
+            <Link href="/pricing?plan=enterprise#invoice" className="inline-flex min-h-11 items-center px-1 text-[14px] font-semibold text-forest underline underline-offset-2">
               Pay by invoice instead
             </Link>
-          </p>
+          </div>
         </div>
       </PageShell>
     );

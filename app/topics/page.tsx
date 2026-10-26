@@ -17,7 +17,7 @@ export default function TopicsPage() {
       <PageHeader
         kicker="Topics"
         title="The file by subject"
-        lede="A short shelf for the ninety-day wedge. Topics are filing labels, not trading themes."
+        lede="Our briefs and explainers filed by subject: Kenya’s banking, markets and financial regulators. Information, not advice."
       />
       <ul className="mt-12 space-y-4">
         {topics.map((topic) => {

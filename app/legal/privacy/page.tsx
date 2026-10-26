@@ -43,6 +43,11 @@ export default function PrivacyPage() {
           personal details in the free-text box.
         </li>
         <li>
+          <strong>Shillings found</strong> &mdash; when a money tool shows you a yearly difference against the best option we track, our server
+          works it out again from the figures you typed and adds only the tool, the market, the currency and the difference to an anonymous daily
+          total; your figures are not stored, and no cookie, IP address or device id is kept with it.
+        </li>
+        <li>
           <strong>Payments</strong> — if you subscribe, Paystack processes your payment. We receive your email, plan and payment status, never
           your full card details.
         </li>

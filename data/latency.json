@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 11,
-  "results": 26,
+  "results": 28,
   "p50_h": 2.8,
   "p90_h": 11.4
  },
@@ -88,7 +88,7 @@
    "kind": "bills",
    "market": "egypt",
    "name": "Egypt",
-   "results": 1,
+   "results": 2,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -99,7 +99,7 @@
    "kind": "bills",
    "market": "southafrica",
    "name": "South Africa",
-   "results": 1,
+   "results": 2,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -224,6 +224,24 @@
    "market": "egypt",
    "date": "2026-10-27",
    "first_seen_at": "2026-10-26T16:50:15+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:egypt:2026-10-27",
+   "kind": "bills",
+   "market": "egypt",
+   "date": "2026-10-27",
+   "first_seen_at": "2026-10-27T09:48:08+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:southafrica:2026-10-26",
+   "kind": "bills",
+   "market": "southafrica",
+   "date": "2026-10-26",
+   "first_seen_at": "2026-10-27T09:48:24+00:00",
    "published_at": null,
    "published_how": null
   },
@@ -856,5 +874,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-26T17:05:29+00:00"
+ "updated_at": "2026-10-27T10:06:23+00:00"
 }

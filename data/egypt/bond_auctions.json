@@ -9,7 +9,7 @@
 "currency": "EGP",
 "rate_note": "weighted average yield of accepted bids, percent per annum; amounts in EGP millions; one row per auction (new issue or reopening) of each bond",
 "updated": "2026-10-27",
-"read_at": "2026-10-26T22:40:34+00:00",
+"read_at": "2026-10-27T09:51:07+00:00",
 "compiled_by": "Afronomics (afronomicsfeed.com)",
 "rows": [
 {
@@ -31,6 +31,26 @@
 "benchmark": "6M T-Bills Max Rate",
 "spread": 0.5,
 "source": "https://www.cbe.org.eg/en/auctions/egp-t-bonds-frn/historical-data"
+},
+{
+"kind": "fixed",
+"isin": "EGBGR07221F7",
+"issue_date": "2026-10-27",
+"original_issue_date": null,
+"maturity": "2029-10-06",
+"tenor_years": 3.0,
+"type": "reopening",
+"offered_egp_m": 20000.0,
+"received_egp_m": 22292.0,
+"accepted_egp_m": 1105.0,
+"bid_cover": 20.17,
+"min_yield": 24.2,
+"max_yield": 24.45,
+"weighted_avg_yield": 24.432,
+"coupon": 23.981,
+"benchmark": null,
+"spread": null,
+"source": "https://www.cbe.org.eg/en/auctions/egp-t-bonds-fixed-coupon/historical-data"
 },
 {
 "kind": "floating",

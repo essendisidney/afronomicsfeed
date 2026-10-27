@@ -121,9 +121,9 @@
    "area": "Bond auctions",
    "name": "Morocco",
    "status": "ok",
-   "detail": "latest result 20 Oct (auctions weekly)",
-   "latest": "2026-10-20",
-   "due_by": "2026-11-01",
+   "detail": "latest result 27 Oct (auctions weekly)",
+   "latest": "2026-10-27",
+   "due_by": "2026-11-08",
    "link": "/markets/bonds/morocco"
   },
   {
@@ -148,9 +148,9 @@
    "area": "Bond auctions",
    "name": "WAEMU (UMOA-Titres)",
    "status": "ok",
-   "detail": "latest result 23 Oct (auctions weekly)",
-   "latest": "2026-10-23",
-   "due_by": "2026-10-30",
+   "detail": "latest result 27 Oct (auctions weekly)",
+   "latest": "2026-10-27",
+   "due_by": "2026-11-03",
    "link": "/markets/bonds/waemu"
   },
   {

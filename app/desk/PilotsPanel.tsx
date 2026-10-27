@@ -5,9 +5,8 @@ import { marketsOf } from "./FunnelPanel";
 import { pilotFlag, type KeyRow } from "./today-core";
 
 /**
- * Every data key: usage, days used (the D-004 test counts pilots used on 5+ days), days left, and the flag to ask for
- * payment or to nudge. Revoke is one click. There is no safe "extend" function (a new key would be revealed here),
- * so an extension is the manual step from docs/sales/sales-operator.md §3, and only once the founder approves A3.
+ * Every data key and how it is used: calls, days used, last call, markets, days left. Usage only: no flags to chase
+ * anyone (D-034). Revoke is one click.
  */
 
 const n = (v: number | null | undefined) => (v == null || Number.isNaN(v) ? "—" : v.toLocaleString("en-US"));
@@ -26,9 +25,9 @@ export function PilotsPanel({ keys, now, daysKnown }: { keys: KeyRow[]; now: num
   return (
     <section id="pilots" className="scroll-mt-20">
       <SectionTitle
-        kicker="Pilots and keys"
+        kicker="API keys"
         title={`${trials.length} live pilot${trials.length === 1 ? "" : "s"}, ${live.length - trials.length} paid or licensed key${live.length - trials.length === 1 ? "" : "s"}`}
-        note="Ask for payment in the last week of a pilot when it is in use, or once it has been used on 5+ days. Nudge a pilot with no calls after day 7."
+        note="How each key is used: calls, days used, last call and markets."
       />
       {live.length ? (
         <ul className="mt-4 grid gap-3 lg:grid-cols-2">
@@ -38,7 +37,7 @@ export function PilotsPanel({ keys, now, daysKnown }: { keys: KeyRow[]; now: num
               <li key={k.id} className="rounded-2xl border border-rule bg-surface px-4 py-3">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="min-w-0 text-sm font-semibold text-ink [overflow-wrap:anywhere]">{k.label}</span>
-                  {f.flag === "ask" ? <Badge tone="warn">Ask for payment</Badge> : f.flag === "nudge" ? <Badge>Nudge: idle</Badge> : f.flag === "expired" ? <Badge tone="down">Expired</Badge> : null}
+                  {f.expired ? <Badge tone="down">Expired</Badge> : null}
                 </div>
                 <p className="mt-0.5 text-[12px] text-muted">
                   {k.plan}
@@ -73,21 +72,7 @@ export function PilotsPanel({ keys, now, daysKnown }: { keys: KeyRow[]; now: num
       {!daysKnown ? <p className="mt-2 text-[12px] text-muted">Days used per key needs migration 0040 (af_desk_today).</p> : null}
       {revoked.length ? <p className="mt-2 text-[12px] text-muted">{revoked.length} revoked key{revoked.length === 1 ? "" : "s"} not shown.</p> : null}
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-2">
-        <details className="rounded-2xl border border-rule bg-surface px-4 py-3">
-          <summary className="cursor-pointer text-[14px] font-semibold text-ink">Extend a pilot (manual steps)</summary>
-          <ol className="mt-2 list-decimal space-y-1 pl-5 text-[13px] text-ink-soft">
-            <li>Only once you have approved A3 (one 15-day extension per organisation, for keys used on 5+ days). Until then, extensions are your call each time.</li>
-            <li>
-              In the Supabase SQL editor run{" "}
-              <code className="break-all font-mono text-[12px]">
-                select af_trial_key_issue((select value from af_secrets where name = &apos;cron&apos;), &apos;&lt;their work email&gt;&apos;, &apos;Pilot extension: &lt;Organisation&gt;&apos;, 15);
-              </code>
-            </li>
-            <li>The new key is shown once: paste it only into your reply to that person. “exists” means their current key is still live: wait until it ends; “limited” means the domain cap is reached.</li>
-            <li>Move the deal’s next step to “Extension ends” and the date to today + 15.</li>
-          </ol>
-        </details>
+      <div className="mt-4">
         <details className="rounded-2xl border border-rule bg-surface px-4 py-3">
           <summary className="cursor-pointer text-[14px] font-semibold text-ink">Issue a key</summary>
           <div className="mt-3">

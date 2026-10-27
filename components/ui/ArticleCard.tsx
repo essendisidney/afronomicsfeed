@@ -41,9 +41,10 @@ export function ArticleCard({
       </ul>
       <Link
         href={href}
-        className="mt-1 text-[12.5px] font-semibold text-forest hover:text-gold"
+        className="inline-flex min-h-11 items-center self-start text-[13px] font-semibold text-forest hover:text-gold sm:min-h-0"
       >
-        Read →
+        Read<span className="sr-only">: {article.title}</span>
+        <span aria-hidden="true">&nbsp;→</span>
       </Link>
     </article>
   );

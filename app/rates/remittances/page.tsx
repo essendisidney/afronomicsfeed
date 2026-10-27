@@ -6,6 +6,8 @@ import { SectionTitle } from "@/components/data/parts";
 import { Questions } from "@/components/seo/Questions";
 import { AFRICA_ISO3, banksDearest, byDestination, countryName, loadRemittances, periodLabel, SDG_TARGET, type Corridor } from "@/lib/data/remittances";
 import { remittanceAnswers } from "@/lib/seo/remittances";
+import { RemitFound } from "@/components/data/RemitFound";
+import { fxRef, remitCorridors, remitSurvey } from "@/lib/found-data";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
 
@@ -39,8 +41,10 @@ function typeLine(c: Corridor) {
     .join(" · ");
 }
 
-export default function RemittancesPage() {
+export default async function RemittancesPage() {
   const file = loadRemittances();
+  const survey = remitSurvey();
+  const { ref: fx } = await fxRef();
   const dests = byDestination();
   const all = file?.corridors ?? [];
   const within = all.filter((c) => AFRICA_ISO3.has(c.src));
@@ -96,6 +100,12 @@ export default function RemittancesPage() {
               </div>
             ))}
           </section>
+
+          {survey ? (
+            <div className="mt-8">
+              <RemitFound corridors={remitCorridors()} survey={survey} fx={fx} />
+            </div>
+          ) : null}
 
           {avgWithin != null && avgAbroad != null && avgWithin > avgAbroad ? (
             <p className="mt-4 max-w-3xl text-sm leading-6 text-ink-soft">

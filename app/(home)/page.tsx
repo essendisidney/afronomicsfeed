@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadStory, MoveRow, movesRule, SectionHead, StoryRow, TodayStrip, ToolTiles } from "@/components/home/FrontPage";
 import { SinceLastVisit } from "@/components/home/SinceLastVisit";
+import { FoundCounter } from "@/components/home/FoundCounter";
 import { SectionNav, type SectionLink } from "@/components/layout/SectionNav";
 import { ButtonLink } from "@/components/ui/Button";
 import { SubscribeForm } from "@/components/ui/SubscribeForm";
+import { WhatsAppChannel } from "@/components/ui/WhatsAppChannel";
 import { institutionalPilot, institutionalTier, localInstitutionPrices, localPriceText } from "@/lib/billing/ratecard";
 import { renderTime } from "@/lib/data/fetcher";
 import { editorialRows, editorialScore } from "@/lib/editorial";
@@ -119,6 +121,7 @@ export default async function TodayPage() {
               <span className="text-forest group-hover:text-ink"> →</span>
             </span>
           </Link>
+          <FoundCounter />
         </section>
 
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
@@ -164,14 +167,15 @@ export default async function TodayPage() {
             <div className="mt-2">
               <SubscribeForm button="Send it to me" />
             </div>
+            <WhatsAppChannel variant="link" className="mt-1" />
           </section>
 
-          <section aria-labelledby="for-institutions-band" className="on-night rounded-2xl bg-night px-5 py-5 text-night-ink sm:px-6">
+          <section aria-labelledby="for-institutions-band" className="on-night rounded-2xl bg-night px-5 py-5 text-night-ink ring-1 ring-night-line sm:px-6">
             <p className="t-label text-accent">For institutions</p>
             <h2 id="for-institutions-band" className="mt-1.5 font-serif text-[1.45rem] leading-tight text-night-ink text-balance">
               Boards, banks, SACCOs and funds: the full dated record, by API, pack or CSV.
             </h2>
-            <p className="tabular mt-1.5 hidden text-[14px] leading-6 text-night-soft sm:block">
+            <p className="tabular mt-1.5 text-[14px] leading-6 text-night-soft">
               {institutionalTier("analyst").name} from USD {institutionalTier("analyst").monthlyUsd} a month
               {kenya ? `; Kenyan institutions from ${localPriceText(kenya, "analyst")}` : ""}. Free {institutionalPilot.days}-day pilot.
             </p>

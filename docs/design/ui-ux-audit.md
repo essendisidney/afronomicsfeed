@@ -254,3 +254,94 @@ Screenshots: session scratchpad, `…/scratchpad/uiux-2026-10-15/` (`before-<pag
 
 Checks: `npx tsc --noEmit -p .`, `npx eslint` on changed files, `python3 -m pytest -q tests/site` (98 passed, 2
 skipped), `next build`, `scripts/site-qa.mjs --serve` PASS including the speed pass.
+
+---
+
+# Weekly pass 3: 22 October 2026 (ISO week 43, slice s–z)
+
+**Scope.** (a) Header, phone menu and tab bar, footer, Today, `/pricing` (with the pilot form), the pilot path
+(`/data/frontier-local-debt#pilot`, `/thank-you`), `/data/frontier-local-debt`, `/markets/bonds`. (b) Pages changed in
+the last 7 days, led by the Redesign v3 work (PR #216, 21 Oct): `components/home/FrontPage.tsx` (board, lead story,
+story columns, tool tiles), `components/ui/ToolIcon.tsx`, `components/layout/SectionNav.tsx`, `app/(home)/page.tsx`,
+`app/tools/page.tsx`, `app/globals.css`; plus `/markets/kenya-tbills` (and its calculator), the `/rates/kenya/*`
+calculators, `/record`, `/morning`, `/markets/tbills`, `/markets/ipo-calculator`, `/for-institutions`, `/explainers`,
+`/diaspora`, `/receipts`, `/legal/privacy`. (c) Slice s–z (the fourth of a–f, g–l, m–r, s–z): `/search`, `/status`,
+`/stories`, `/subscribe`, `/sw`, `/thank-you`, `/tools`, `/topics`, `/trust`, `/weekly`, `/widgets`. All at 390px and
+1280px, light and dark, on a production build with `SUPABASE_URL` pointed at a dead port. (d) The latest Site QA run on
+`main` (run 39726693313, 22 Oct 05:12 UTC) passed; its artifact could not be downloaded from this sandbox, so
+`scripts/site-qa.mjs --serve` was run locally.
+
+Screenshots: session scratchpad, `…/scratchpad/uiux-2026-10-22/` (`before-…`, `after-…`, `week-…` for the pages of
+(b) audited once, `before-menu-390.png` / `after-menu-390.png`).
+
+## Baseline
+
+| Check | Before | After |
+| --- | --- | --- |
+| Site QA (78 pages × 4 variants, 1,062 links) | PASS, but the two "dark" variants rendered **light** (finding 1) | PASS with real dark runs |
+| axe WCAG A/AA, horizontal scroll at 390px | none on the 44 pages audited, both themes | none |
+| Today at 390px | 7,257px; Tools block five rows of 90px tiles | 7,153px; five rows of 56px tiles |
+| Phone menu: first sight of the pilot | below the fold, after reader links and the theme switch | first screen, under the five sections |
+
+## Findings, ranked (trust and conversion first)
+
+1. **The QA gate's dark runs were not dark.** The theme follows the reader's clock (`lib/theme.ts`), not
+   `prefers-color-scheme`, so emulating the scheme did nothing: every daytime CI run checked light twice. *Fixed:*
+   `scripts/site-qa.mjs` sets the theme the way a reader does (`af-theme` in localStorage) for each variant; noted in
+   `docs/qa.md`. All 78 pages pass in true dark.
+2. **The pilot fell below the fold of the phone menu again** (Redesign v3 ordered Sections, For readers, Theme, then
+   the institutional block). *Fixed* (`components/layout/Header.tsx`): the "For boards, banks, SACCOs and funds" block
+   follows the sections on phones; on desktop it stays in the right column and no longer stretches to the row height.
+3. **Timing claims for the Morning drifted back to "7:00"** (`/morning` "In your inbox at 7:00" and its newsletter band,
+   the `/subscribe` kicker, the shared `NewsletterBand` and `FollowUp`, the subscribe success message). The job starts
+   at 07:00 Nairobi, so mail cannot be in the inbox at 7:00; the title and Today already say "before 07:30". *Fixed:*
+   "before 07:30" everywhere on the site.
+4. **Internal jargon and stale labels in reader copy.** `/topics` opened with "A short shelf for the ninety-day wedge";
+   `/subscribe` linked "Pro" (renamed Reader plans last week); the topic label read "Saccos" where every other surface
+   says "SACCOs". *Fixed.*
+5. **Today's figure board cut the source to "Central …" on phones** (date and publisher on one 11px line). *Fixed:* date
+   and publisher on two lines; every cell keeps the same height, so nothing shifts.
+6. **"See all →" floated above its section head** on every Today section (centred in a 44px box beside a
+   bottom-aligned head). *Fixed:* bottom-aligned with the head.
+7. **Tool tiles were bulky on phones and left two orphans on desktop.** The icon sat above the title (90px tiles, 450px
+   for ten links); on desktop ten tiles in four columns left a half row. *Fixed:* icon beside the title on phones (56px
+   tiles); five across on desktop when the count fills the rows.
+8. **The institutional band on Today hid its price on phones and melted into the dark page.** *Fixed:* the "from USD
+   250 a month; Kenyan institutions from KES 16,000" line (rate-card figures, unchanged) shows at every width, and the
+   band has the night hairline ring used by `ActionTile`.
+9. **Today's first-visit line was truncated on phones** ("…what changed si…"). *Fixed:* a shorter invitation that fits.
+10. **`/thank-you` without a payment was a dead end** (carried over from pass 1). *Fixed:* "Back to pricing" and "Start a
+    free 30-day pilot" buttons, invoice link at 44px.
+11. **Tap targets and cramped tables.** `/explainers`, `/weekly`, `/topics/*` cards had 20px topic chips and full-width
+    21px "Read →" links with identical names. *Fixed:* chips 36px on phones (28px from 640px), "Read" 44px on phones with
+    the title for screen readers. The `/morning` results table broke "91-day", "+155 bps" and dates over two lines; now
+    one line each (the table scrolls with its edge shadow).
+
+## Left, and why
+
+- **Welcome email still says "every weekday at 7:00"** (`lib/welcome-email.ts`): email copy, outside a UI pass.
+- **"Five minutes on 54 economies"** for the Weekly (`/subscribe`, `/weekly` description): its sections are Kenya-led
+  auctions, currencies, prints and capital; whether it spans 54 economies is an editorial call.
+- **`/markets/bonds` pilot tile: "Every market, delivered daily"**: a pilot is an API key over data read every two hours
+  on weekdays; "delivered daily" reads as a push feed. Worth rewording with the founder.
+- **Header on phones has no pilot or "For institutions" entry** (search and Menu only, by the v3 design). Finding 2 puts
+  the pilot on the menu's first screen rather than adding a third control to the bar.
+- **Lead-story source line truncates** ("Safaricom, Fuliza page (charge…") at both widths; the full source is in the
+  chart foot and on the Receipt. A two-line source needs the board's fixed-height treatment.
+- **`/stories` filter chips**: "NSE disclosures" sits alone on a second row at 1280px. Cosmetic.
+- **Table date links on `/markets/kenya-tbills`** (14px tall, about 60 rows): inline table links, exempt in QA; a
+  whole-row link would be the fix.
+- Carried over: `/pricing` Institutions/Readers switch on phones; Egypt's two "1.5y" and Kenya's two "30y" rows without
+  issue codes; USD approximations from two sources; breadcrumb height.
+
+## Changed in code
+
+`scripts/site-qa.mjs`, `docs/qa.md`, `components/layout/Header.tsx`, `components/home/FrontPage.tsx`,
+`components/home/SinceLastVisit.tsx`, `app/(home)/page.tsx`, `app/morning/page.tsx`, `app/subscribe/page.tsx`,
+`app/topics/page.tsx`, `app/thank-you/page.tsx`, `lib/taxonomy.ts`, `components/ui/ArticleCard.tsx`,
+`components/ui/TopicChips.tsx`, `components/ui/FollowUp.tsx`, `components/ui/SubscribeForm.tsx`,
+`components/data/NewsletterBand.tsx`. No prices or figures changed; the only claims changed are timing claims made
+consistent with the 07:00 job.
+
+Checks: `npx tsc --noEmit -p .`, `npx eslint` on changed files, `python3 -m pytest -q tests/site` (219 passed, 13
+skipped), `next build`, `scripts/site-qa.mjs --serve` PASS (78 pages × 4 variants, 1,062 links, speed pass in budget).

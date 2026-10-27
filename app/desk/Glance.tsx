@@ -1,15 +1,12 @@
 import Link from "next/link";
-import type { Lane, Light } from "./cockpit-core";
 import type { Need } from "./today-core";
 
 /**
- * The first phone screen of the desk, the way newsroom dashboards open: the four lights, how many people are reading
- * today, money collected today, and the three things that need the founder. Everything here links down to its full
+ * The first phone screen of the desk: how many people are reading today, money collected today, sign-ups, returning
+ * readers, and the three things that need the founder. Everything here links down to its full
  * panel; nothing is counted here that the panels below do not also show.
  */
 
-const DOT: Record<Light, string> = { green: "bg-up", amber: "bg-warn", red: "bg-down" };
-const WORD: Record<Light, string> = { green: "On track", amber: "Watch", red: "Act today" };
 const TONE = { down: "text-down", warn: "text-opinion", neutral: "text-ink-soft" } as const;
 
 export type GlanceFigures = {
@@ -35,7 +32,7 @@ function Figure({ label, value, note, href }: { label: string; value: string; no
   );
 }
 
-export function Glance({ lanes, figures: f, needs }: { lanes: Lane[]; figures: GlanceFigures; needs: Need[] }) {
+export function Glance({ figures: f, needs }: { figures: GlanceFigures; needs: Need[] }) {
   const pace =
     f.peopleToday == null
       ? "not available"
@@ -45,24 +42,10 @@ export function Glance({ lanes, figures: f, needs }: { lanes: Lane[]; figures: G
       <h2 id="glance-h" className="sr-only">
         The business at a glance
       </h2>
-      <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4" aria-label="Lights">
-        {lanes.map((l) => (
-          <li key={l.id}>
-            <a href={`#lane-${l.id}`} className="flex min-h-12 items-center gap-2.5 rounded-xl border border-rule bg-surface px-3 py-1.5 hover:border-ink">
-              <span aria-hidden="true" className={`h-3 w-3 shrink-0 rounded-full ${DOT[l.light]}`} />
-              <span className="min-w-0">
-                <span className="block text-[13px] font-semibold leading-4 text-ink">{l.title}</span>
-                <span className="block text-[12px] leading-4 text-muted">{WORD[l.light]}</span>
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-2 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-rule bg-rule sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-rule bg-rule sm:grid-cols-4">
         <Figure label="Readers today" value={f.peopleToday == null ? "—" : String(f.peopleToday)} note={pace || "first day of data"} href="#ref-audience" />
         <Figure label="Collected today" value={f.collectedToday} note={`${f.paymentsToday} payment${f.paymentsToday === 1 ? "" : "s"} · real only`} href="#needs" />
-        <Figure label="Sign-ups, 7 days" value={String(f.signups7d)} note={f.topSource7d ? `top source: ${f.topSource7d}` : "newsletter"} href="#lane-readers" />
+        <Figure label="Sign-ups, 7 days" value={String(f.signups7d)} note={f.topSource7d ? `top source: ${f.topSource7d}` : "newsletter"} href="#ref-audience" />
         <Figure label="Returning, 7 days" value={f.returningShare7d == null ? "—" : `${f.returningShare7d}%`} note="of page views" href="#ref-audience" />
       </div>
 

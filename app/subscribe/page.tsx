@@ -16,7 +16,7 @@ export default async function SubscribePage({ searchParams }: { searchParams: Pr
     <PageShell
       share={false}
       crumbs={[{ href: "/", label: "Home" }, { label: "Newsletter" }]}
-      kicker="Free · every weekday at 7:00 and every Monday"
+      kicker="Free · every weekday before 07:30, and every Monday"
       title="The Afronomics Morning and Weekly"
       lede={
         <p>
@@ -68,7 +68,7 @@ export default async function SubscribePage({ searchParams }: { searchParams: Pr
             </li>
           </ul>
           <p>
-            Want more than the weekly? <Link href="/pricing">Pro</Link> adds full analysis and alerts.
+            Want more than the weekly? <Link href="/pricing#readers">Reader plans</Link> add full analysis and alerts.
           </p>
         </div>
       </div>

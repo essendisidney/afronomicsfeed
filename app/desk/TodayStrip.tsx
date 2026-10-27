@@ -2,57 +2,32 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { moneyLabel } from "@/lib/billing/plans";
-import { toUsd } from "./CommandCentre";
+import { toUsd } from "./money-core";
 import { GrantAccess } from "./DeskActions";
 import type { MoneyWindow, Need } from "./today-core";
 
 /**
- * The first screen of the desk: money (real payments only), the D-004 gate, and what needs the founder today.
- * Collected money is the only money here; pipeline and model figures stay in the reference section.
+ * The first screen of the desk: money (real payments only) and what needs the founder today.
+ * Collected money is the only money here.
  */
 
 const usd = (n: number) => `$${n < 10 && n > 0 ? n.toFixed(2) : Math.round(n).toLocaleString("en-US")}`;
 const toneClass = { down: "text-down", warn: "text-opinion", neutral: "text-ink-soft" } as const;
 
-export type Gate = {
-  contacts: number;
-  contactsNote: string;
-  pilots5: number | null;
-  pilotsNote: string;
-  firstPayment: string | null;
-};
-
-function GateMeter({ label, value, target, note, done }: { label: string; value: string; target: string; note: string; done: boolean }) {
-  return (
-    <div className="min-w-0 bg-surface px-3 py-3 sm:px-4">
-      <p className="text-[12px] leading-4 text-muted">{label}</p>
-      <p className={`mt-1 font-serif text-2xl tabular-nums ${done ? "text-up" : "text-ink"}`}>
-        {value}
-        <span className="text-base text-muted"> {target}</span>
-      </p>
-      <p className="mt-0.5 text-[11px] leading-4 text-muted">{note}</p>
-    </div>
-  );
-}
-
 export function TodayStrip({
   windows,
   perUsd,
   moneyNote,
-  gate,
   needs,
 }: {
   windows: MoneyWindow[];
   perUsd: Record<string, number>;
   moneyNote: string;
-  gate: Gate;
   needs: Need[];
 }) {
   const rules = [...new Set(needs.map((n) => n.rule))].map((r) => ({ rule: r, n: needs.filter((x) => x.rule === r).length, tone: needs.find((x) => x.rule === r)!.tone }));
   const top = needs.slice(0, 3);
   const rest = needs.slice(3);
-  const contactsOk = gate.contacts >= 25;
-  const pilotsOk = (gate.pilots5 ?? 0) >= 3;
 
   return (
     <section aria-labelledby="today-title" className="grid gap-4 lg:grid-cols-12 lg:items-start">
@@ -78,16 +53,6 @@ export function TodayStrip({
             })}
           </div>
           <p className="border-t border-rule px-4 py-2 text-[11px] text-muted">{moneyNote}</p>
-        </Card>
-
-        <Card className="!px-0 !py-0 overflow-hidden">
-          <p className="px-4 pt-3 text-[13px] font-semibold text-gold">D-004 gate · the wedge test</p>
-          <div className="mt-2 grid grid-cols-3 gap-px bg-rule">
-            <GateMeter label="Qualified contacts" value={String(gate.contacts)} target="/ 25" note={gate.contactsNote} done={contactsOk} />
-            <GateMeter label="Pilots used on 5+ days" value={gate.pilots5 == null ? "—" : String(gate.pilots5)} target="/ 3" note={gate.pilotsNote} done={pilotsOk} />
-            <GateMeter label="First payment" value={gate.firstPayment ? "Yes" : "No"} target="" note={gate.firstPayment ? `first: ${gate.firstPayment}` : "target: by about 7 Dec"} done={Boolean(gate.firstPayment)} />
-          </div>
-          <p className="border-t border-rule px-4 py-2 text-[11px] text-muted">Kill rule: no pilot after 25 qualified contacts, or no payment after 3 used pilots.</p>
         </Card>
       </div>
 
@@ -121,7 +86,7 @@ export function TodayStrip({
             ))}
           </ol>
         ) : (
-          <p className="mt-2 text-sm text-muted">No overdue follow-ups, no waiting inbox items, no pilots to chase, no setup gaps detected.</p>
+          <p className="mt-2 text-sm text-muted">No payments waiting for access, no waiting inbox items, no setup gaps detected.</p>
         )}
         {rest.length ? (
           <details className="mt-3">

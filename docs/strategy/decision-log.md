@@ -301,3 +301,89 @@ what we changed. Newest at the bottom. Read this first every week.
   prominence. Quote any reply on the Receipt the same day.
 - **Still held:** the Safaricom stake sale, until the judgment is read and an advocate has reviewed it (the founder gave no
   instruction to release it).
+
+### D-028 · 22 Oct 2026 · One rule for named companies, institutions and people
+- **Believed:** the repository said two things: `README.md`, `AFRONOMICS_BUILD_PLAN.md` and `BRIEF.md` forbade a
+  public verdict on a named institution, while `RECEIPTS.md`, D-019 to D-027 and five live Receipts published them.
+  `RECEIPTS.md` also said no human approves a Receipt; D-019 required the founder's tap for the first 30.
+- **Decided by the founder:** "approve the rule". `docs/editorial/named-institutions.md` is the one rule, and the four
+  files now point to it. Data, sector and government-borrowing Receipts are autonomous behind the confirming agent. A
+  verdict naming a company, institution or person needs the confirming agent and the founder's one-tap approval on
+  `/desk` until 30 have run with no correction (the count starts at 5), a 3-working-day right of reply through
+  `desk@` (facts-only may publish first for breaking events), and an advocate's read for a live offer or anything in
+  litigation; a waiver is logged as its own decision. Ratings or scores of named institutions follow the same gate,
+  with the method public first.
+- **Not changed:** the Safaricom stake-sale Receipt stays held. No retroactive right-of-reply emails for Fuliza or
+  Kenya Airways (outgoing email is on hold).
+### D-029 · 22 Oct 2026 · U2 "Shillings found" plan approved
+- **Decided by the founder:** "approve U2 plan" (`docs/rebuild/upgrade-U2-plan.md`), with decisions A to E as
+  recommended: count only options a reader can take (never the gap to an average); start the public counter on
+  release day with no back-filling; cap each result (KES 500,000 a year; USD 2,000 a year on sending money home);
+  ship the line and counter in Kiswahili too; "Shillings found" on Kenya pages, "Money found" elsewhere.
+- **Next:** one pull request for the phase; migration 0046 is applied only after the founder approves that pull
+  request.
+
+### D-030 · 22 Oct 2026 · No follow-up emails to the wave 2–4 contacts
+- **Decided by the founder:** "dont send the follow ups". The one follow-up planned for 21–22 Oct (D-013, D-017) is
+  cancelled for every contacted organisation that has not replied (27 in wave 2–4, plus Ashmore and William Blair).
+  None was sent. No routine sends one later; a contact who writes to us is answered as usual.
+- **Replies on file:** Meristem and ICEA Lion (customer service, passed to their teams); NSSF Uganda, ARM and
+  Afrinvest (automatic receipts only).
+
+### D-031 · 22 Oct 2026 · Stories for 27, 29 and 30 Oct approved
+- **Decided by the founder:** "approve all three stories": Uganda's one-year bill (#227, Tue 27 Oct), Kenya's 2025/26
+  budget review (#228, Thu 29 Oct) and Quickmart's offer closing (#229, Fri 30 Oct).
+- Each is released by its scheduled task at 06:45 Nairobi on its day (merge, check live, company-page post, log),
+  not before: the Quickmart brief says "closes today".
+- The Quickmart brief is facts only, from the company's offer announcement, with no verdict. D-028 rule 4 (advocate's
+  read for live offers) is read as covering verdicts; the founder's approval of this facts-only brief is logged here.
+- The budget brief does not repeat the Treasury's remark on the Safaricom divestiture (held topic, in litigation).
+
+### D-032 · 22 Oct 2026 · U2 "Shillings found" approved and migration 0046 applied
+- **Decided by the founder:** "approve U2 and apply migration 0046". The U2 pull request (#232) is merged and
+  `supabase/migrations/0046_shillings_found.sql` is applied to production (new table `found_daily` and the functions
+  `af_found_add` and `af_found_total`; nothing existing changed).
+- The counter shows once the first result is counted; "since" is the first counted day (no back-filling, D-029 B).
+- Differences from the plan, accepted with the pull request: Ghana and Nigeria compared before tax on both sides (no
+  tax rule held); "from" prices never used as the cheapest option; the default share card carries no personal figures.
+
+### D-033 · 22 Oct 2026 · U3, U4, U6 and U7 approved as recommended
+- **Decided by the founder:** "approve U3, U4, U6 and U7 as recommended". Each pull request (#235, #234, #236, #233)
+  is merged with every decision taken at its plan's recommended option.
+- **U3 Kenya Poverty Premium** (`upgrade-U3-plan.md` §7): name "The Kenya Poverty Premium"; household examples as
+  built; published now with the SACCO-loan and deposit-cover gaps marked and the remittance line marked old; the
+  364-day T-bill as the saving comparator; no headline total; English first, `/sw` summary the following month; lives
+  at `/data/poverty-premium` with `/method#poverty-premium` and links from `/data` and `/rates/kenya` to follow; the
+  monthly workflow runs from the merge.
+- **U4 reference rates** (`upgrade-U4-plan.md` §5): loan-app reports stay out of the KCCI; the frozen Monday release is
+  the ASBI value of record, later results listed as revisions; no benchmark licences offered until an oversight panel
+  exists (terms text stays, no price set); names ASBI and "Afronomics Kenya Cost of Credit Index (KCCI)"; KCCI monthly
+  on the first working day; "from" prices shown, not counted; panel shape as in the governance file (names only once
+  people agree in writing, any fee the founder's). **Still the founder's:** the method owner's conflicts declaration.
+- **U6 Get found** (`upgrade-U6-plan.md` §4): desk@ stays the press contact; mark files offered one by one; outside
+  citations listed on `/press` once logged; one WhatsApp Channel in English, Kiswahili text on the desk; the weekly
+  press email stays held. **Still the founder's:** create the channel and set `WHATSAPP_CHANNEL_URL` (Vercel, needs
+  his yes to the setting); submit the sitemap in Google Search Console and Bing; whether to withdraw the old navy and
+  red `public/brand/logo-*` files (no recommendation was made).
+- **U7 desks** (`upgrade-U7-plan.md` §7): mandates in `docs/desks/` approved; log only runs that did something, and a
+  desk may merge its own docs-only log pull request; quiet lines "No story today.", "No post today.", "Data quiet.";
+  escalations at the top of each routine's own report while outgoing email is on hold (sales-operator urgent email
+  and D-017 A1 sends stay paused); right-of-reply emails drafted in Gmail and sent only on the founder's yes per
+  message; `lib/desk/reference.ts` updated (A1, A3, A4 decided; outreach follow-ups cancelled); compliance stays as
+  standing rules. **Still the founder's:** pointing each routine's prompt at its mandate file.
+
+### D-034 · 22 Oct 2026 · No follow-ups; the desk keeps the analytics
+- **Decided by the founder:** "no follow ups actually remove this communications also clean up the desk and leave the
+  relevant analytics we need". Extends D-030 from the wave 2–4 contacts to everyone.
+- **Follow-ups:** none, to anyone. No follow-up emails, no nudges to idle pilots, no asking pilots for payment, no
+  deal next steps or next dates. A deal changes only when someone writes to us. Unsent outreach drafts in Gmail
+  (Britam, Standard Bank CIB, Global Evolution, Cbonds) deleted.
+- **Routines:** the sales operator is switched off. The desk operator and the sale watch never send email: replies
+  to people who wrote, and a welcome email on a payment, are left as Gmail drafts for the founder (outgoing email
+  is still on hold, D-030, D-033).
+- **The desk (`/desk`):** keeps the analytics: readers today, money collected, what needs the founder (access to
+  send, inbox items, setup gaps), content and campaigns, reader signals, API key usage, inbound inbox, data health,
+  audience, traffic, the funnel, money by product, payments, reader reports and the admin forms. Removed: the
+  pipeline board, the four lanes, the D-004 gate, the command centre and strategy board, "Build next", the desks,
+  routines, decisions and casebook panels (`lib/desk/reference.ts` and `lib/strategy/board.ts` removed with them;
+  the mandates in `docs/desks/` and the case files are unchanged, and cases still open at `/desk/cases/<id>`).

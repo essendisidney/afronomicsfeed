@@ -146,7 +146,7 @@ export function needsToday({
 }): Need[] {
   const out: Need[] = [];
   for (const p of payments.filter((x) => x.status === "success" && !x.access_sent_at)) {
-    out.push({ rule: "Access not sent", label: `${p.plan ?? "payment"} paid ${p.paid_at.slice(0, 10)}`, detail: p.reference, href: "#ref-payments", tone: "down", action: { kind: "access", reference: p.reference } });
+    out.push({ rule: "Access not sent", label: `${p.plan ?? "payment"} paid ${p.paid_at.slice(0, 10)}`, detail: p.reference, href: "?tab=money#ref-payments", tone: "down", action: { kind: "access", reference: p.reference } });
   }
   const weekAgo = new Date(now - 7 * DAY).toISOString();
   const waiting = inbox.filter((i) => !i.handled && i.at >= weekAgo);

@@ -387,3 +387,26 @@ what we changed. Newest at the bottom. Read this first every week.
   pipeline board, the four lanes, the D-004 gate, the command centre and strategy board, "Build next", the desks,
   routines, decisions and casebook panels (`lib/desk/reference.ts` and `lib/strategy/board.ts` removed with them;
   the mandates in `docs/desks/` and the case files are unchanged, and cases still open at `/desk/cases/<id>`).
+
+### D-035 · 28 Oct 2026 · The Kenya Treasury Desk leads; the global data licence goes inbound-only
+- **Decided by the founder:** "approve D-035" (the recommendation in `founder-strategy-pack.md`, sections A, D and N).
+- **Believed:** global funds would license African local-debt data (D-004).
+- **Happened:** 35 institutions contacted 12–22 Oct; no genuine reply (customer-service and automatic receipts
+  only); 3 keys issued, none used since 14 Oct; USD 0 collected. (VERIFIED, desk and payments, 28 Oct.)
+- **Changed:** the lead product is the Kenya Treasury Desk: the Investment Committee Pack (Board Pack KES 18,000 a
+  month), same-day auction alerts and the quarterly benchmark, sold to Kenyan SACCOs, pension schemes and their
+  administrators, and fund managers. The data licence and API stay on sale at the same prices, answered when someone
+  asks, with no new selling effort. Facts only: no recommendation, rating or ranking of a named institution (D-028).
+- **Test and kill line:** section K of the strategy pack. Ten paying institutions and KES 300,000 a month booked by
+  day 90; fewer than 3 paying after 40 qualified conversations ends the thesis in this form.
+
+### D-036 · 28 Oct 2026 · D-034 lifted for 60 named Kenyan institutions
+- **Decided by the founder:** "lift D-034 for the 60 names".
+- **Scope:** the 60 institutions in `docs/sales/treasury-desk-targets.md` only. For them, first contact, a follow-up
+  the prospect asked for, a named sample pack, quotes, and deal next steps and dates are allowed again. Everyone else
+  stays under D-034: a deal changes only when someone writes to us.
+- **Not changed:** outgoing email stays on hold (D-030, D-033). Contact goes through the founder's own channels
+  (LinkedIn from the founder's own account, phone, introductions, in person); the desk prepares Gmail drafts and sample packs and
+  sends nothing. No routine contacts anyone; the sales operator stays off.
+- **Before the first conversation:** the CMA disclaimer on the pack pages, and a lawyer booked on the five questions
+  in appendix B of the strategy pack.

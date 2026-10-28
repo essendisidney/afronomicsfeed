@@ -3,7 +3,7 @@
 28 October 2026. Outreach is allowed to these 60 institutions only (D-036): first contact, a follow-up the prospect asked for, a named sample pack, quotes, and deal next steps. Everyone else stays under D-034. Outgoing email stays on hold. The founder makes contact through their own channels; the desk sends nothing.
 
 - **What this list is.** Institution names only. There are no individual people, emails or phone numbers. The founder finds the right person (CEO, finance manager, principal officer, chief investment officer) through people they know or on LinkedIn.
-- **Where the figures come from.** Press reports of SASRA, RBA and CMA data, found by search. None was checked against the regulators' own PDFs: the session could not open sasra.go.ke, rba.go.ke or cma.or.ke. **Rows marked "check first" must be confirmed on the regulator's register before contact.**
+- **Where the figures come from.** The size figures are press reports of SASRA, RBA and CMA data, found by search, not the regulators' own tables: the session could not open sasra.go.ke, rba.go.ke or cma.or.ke. **The SACCOs are checked against SASRA's 2026 licence list (below). Pension and fund-manager rows marked "check first" must be confirmed on the RBA or CMA register before contact.**
 - **Not an assessment.** The size column is for internal sales order only, never for publication (D-028).
 - **The machine-readable copy** is `data/sales/treasury-desk-targets.json`. The desk loads it as deals (stage "prospect", product "pack", source "D-036 list") once migration 0048 is applied.
 - **Waves.** Wave 1 (22 names) is the first four weeks, wave 2 (18) weeks 5–8 and wave 3 (20) weeks 9–12. Within a wave, start with anyone the founder already knows: an introduction beats a cold message every time.
@@ -15,38 +15,40 @@
 
 ## SACCOs (30): Board Pack, KES 18,000 a month
 
-| # | Institution | Type | Offer | Size (source year) | Wave | Check first |
-|---|---|---|---|---|---|---|
-| 1 | Mwalimu National SACCO | deposit-taking SACCO | Board Pack | [KES 76.31bn assets (2025)](https://paybillke.com/sacco/rankings-2025) | 1 | — |
-| 2 | Stima SACCO | deposit-taking SACCO | Board Pack | [KES 75.27bn (2025)](https://paybillke.com/sacco/rankings-2025) | 1 | — |
-| 3 | Kenya National Police DT SACCO | deposit-taking SACCO | Board Pack | [KES 66.40bn (2025)](https://paybillke.com/sacco/rankings-2025) | 1 | 2026 licence status unresolved: check the SASRA register before contact |
-| 4 | Harambee SACCO | deposit-taking SACCO | Board Pack | [KES 38.70bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 | — |
-| 5 | Tower SACCO | deposit-taking SACCO | Board Pack | [KES 28.04bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 | — |
-| 6 | Unaitas SACCO | deposit-taking SACCO | Board Pack | [KES 26.12bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 | — |
-| 7 | Imarisha SACCO | deposit-taking SACCO | Board Pack | [KES 24.58bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 | — |
-| 8 | Afya SACCO | deposit-taking SACCO | Board Pack | [KES 22.79bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 | — |
-| 9 | United Nations SACCO | deposit-taking SACCO | Board Pack | [KES 19.15bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 1 | — |
-| 10 | Hazina SACCO | deposit-taking SACCO | Board Pack | [KES 16.87bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 1 | — |
-| 11 | Ukulima SACCO | deposit-taking SACCO | Board Pack | [KES 14.66bn (2022, old)](https://biasharaleo.co.ke/top-20-deposit-taking-saccos-in-kenya/) | 2 | — |
-| 12 | Bandari SACCO | deposit-taking SACCO | Board Pack | [KES 13.70bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 | — |
-| 13 | Mentor SACCO | deposit-taking SACCO | Board Pack | [KES 13.47bn (2023)](https://biasharaleo.co.ke/sasra-ranks-the-top-performing-dt-saccos-in-2023/) | 2 | — |
-| 14 | Boresha SACCO | deposit-taking SACCO | Board Pack | [KES 13.03bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 | — |
-| 15 | Gusii Mwalimu SACCO | deposit-taking SACCO | Board Pack | [KES 12.85bn (2022, old)](https://biasharaleo.co.ke/top-20-deposit-taking-saccos-in-kenya/) | 2 | — |
-| 16 | Kimisitu SACCO | deposit-taking SACCO | Board Pack | [KES 12.06bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 | — |
-| 17 | Kenya Bankers SACCO | deposit-taking SACCO | Board Pack | [KES 10.29bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 | — |
-| 18 | Sheria SACCO | deposit-taking SACCO | Board Pack | [KES 10.20bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 | — |
-| 19 | Safaricom SACCO | deposit-taking SACCO | Board Pack | [on the 2026 deposit-taking list](https://kenyanwallstreet.com/176-saccos-cleared-by-sasra-for-deposit-taking-in-2026) | 2 | — |
-| 20 | Fortune SACCO | deposit-taking SACCO | Board Pack | [deposit-taking; absorbed Nufaika (2025)](https://www.kenyans.co.ke/news/120382-sasra-publishes-list-authorised-saccos-restricts-revokes-licences-7-others) | 2 | — |
-| 21 | Winas SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
-| 22 | Mhasibu SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
-| 23 | Kenversity SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
-| 24 | Nyambene Arimi SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
-| 25 | Ollin SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
-| 26 | Solution SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
-| 27 | Magereza SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
-| 28 | Waumini SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
-| 29 | Kitui Teachers SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
-| 30 | Asili SACCO | deposit-taking SACCO | Board Pack | reported among the largest; no cited figure | 3 | not verified: check the SASRA 2026 deposit-taking list before contact |
+Every name was checked against SASRA's 2026 list of licensed and authorised SACCOs (`data/registry/sasra_licences.json`, read 14 Oct 2026; source https://www.sasra.go.ke/?wpdmdl=1573). All 30 hold a 2026 deposit-taking licence. Three names the press ranks among the largest (Ukulima, Safaricom and Kitui Teachers) are not on the 2026 list, so they were replaced by Ukristo Na Ufanisi DT, Shirika DT and Wanandege.
+
+| # | Institution (name on the SASRA 2026 list) | Licence 2026 | Offer | Size (source year) | Wave |
+|---|---|---|---|---|---|
+| 1 | Mwalimu National SACCO (Mwalimu National Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 76.31bn assets (2025)](https://paybillke.com/sacco/rankings-2025) | 1 |
+| 2 | Stima SACCO (Stima DT Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 75.27bn (2025)](https://paybillke.com/sacco/rankings-2025) | 1 |
+| 3 | Kenya National Police DT SACCO (Kenya National Police DT Sacco) | deposit-taking, licensed 2026 | Board Pack | [KES 66.40bn (2025)](https://paybillke.com/sacco/rankings-2025) | 1 |
+| 4 | Harambee SACCO (Harambee DT Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 38.70bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 |
+| 5 | Tower SACCO (Tower Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 28.04bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 |
+| 6 | Unaitas SACCO (Unaitas Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 26.12bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 |
+| 7 | Imarisha SACCO (Imarisha Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 24.58bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 |
+| 8 | Afya SACCO (Afya Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 22.79bn (2024)](https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/) | 1 |
+| 9 | United Nations SACCO (United Nations DT Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 19.15bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 1 |
+| 10 | Hazina SACCO (Hazina Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 16.87bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 1 |
+| 11 | Ukristo Na Ufanisi DT SACCO (Ukristo Na Ufanisi DT Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [licensed deposit-taking, 2026; size not cited](https://www.sasra.go.ke/?wpdmdl=1573) | 2 |
+| 12 | Bandari SACCO (Bandari Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 13.70bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 |
+| 13 | Mentor SACCO (Mentor Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 13.47bn (2023)](https://biasharaleo.co.ke/sasra-ranks-the-top-performing-dt-saccos-in-2023/) | 2 |
+| 14 | Boresha SACCO (Boresha Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 13.03bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 |
+| 15 | Gusii Mwalimu SACCO (Gusii Mwalimu Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 12.85bn (2022, old)](https://biasharaleo.co.ke/top-20-deposit-taking-saccos-in-kenya/) | 2 |
+| 16 | Kimisitu SACCO (Kimisitu Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 12.06bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 |
+| 17 | Kenya Bankers SACCO (The Kenya Bankers Sacco Society Ltd.) | deposit-taking, licensed 2026 | Board Pack | [KES 10.29bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 |
+| 18 | Sheria SACCO (Sheria Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [KES 10.20bn (2024)](https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/) | 2 |
+| 19 | Shirika DT SACCO (Shirika DT Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [licensed deposit-taking, 2026; size not cited](https://www.sasra.go.ke/?wpdmdl=1573) | 2 |
+| 20 | Fortune SACCO (Fortune Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [deposit-taking; absorbed Nufaika (2025)](https://www.kenyans.co.ke/news/120382-sasra-publishes-list-authorised-saccos-restricts-revokes-licences-7-others) | 2 |
+| 21 | Winas SACCO (Winas Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | reported among the largest; no cited figure | 3 |
+| 22 | Mhasibu SACCO (Mhasibu DT Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | reported among the largest; no cited figure | 3 |
+| 23 | Kenversity SACCO (Kenversity Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | reported among the largest; no cited figure | 3 |
+| 24 | Nyambene Arimi SACCO (Nyambene Arimi Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | reported among the largest; no cited figure | 3 |
+| 25 | Ollin SACCO (Ollin Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | reported among the largest; no cited figure | 3 |
+| 26 | Solution SACCO (Solution Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | reported among the largest; no cited figure | 3 |
+| 27 | Magereza SACCO (Magereza Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | reported among the largest; no cited figure | 3 |
+| 28 | Waumini SACCO (Waumini Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | reported among the largest; no cited figure | 3 |
+| 29 | Wanandege SACCO (Wanandege Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | [licensed deposit-taking, 2026; size not cited](https://www.sasra.go.ke/?wpdmdl=1573) | 3 |
+| 30 | Asili SACCO (Asili Sacco Society Ltd) | deposit-taking, licensed 2026 | Board Pack | reported among the largest; no cited figure | 3 |
 
 ## Pension schemes and administrators (15): Treasury Desk for administrators, Board Pack and benchmark for schemes
 

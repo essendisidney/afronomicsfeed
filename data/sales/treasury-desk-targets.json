@@ -11,7 +11,10 @@
    "size": "KES 76.31bn assets (2025)",
    "source": "https://paybillke.com/sacco/rankings-2025",
    "flag": "",
-   "wave": 1
+   "wave": 1,
+   "register_name": "Mwalimu National Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Stima SACCO",
@@ -21,7 +24,10 @@
    "size": "KES 75.27bn (2025)",
    "source": "https://paybillke.com/sacco/rankings-2025",
    "flag": "",
-   "wave": 1
+   "wave": 1,
+   "register_name": "Stima DT Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Kenya National Police DT SACCO",
@@ -30,8 +36,11 @@
    "offer": "Board Pack",
    "size": "KES 66.40bn (2025)",
    "source": "https://paybillke.com/sacco/rankings-2025",
-   "flag": "2026 licence status unresolved: check the SASRA register before contact",
-   "wave": 1
+   "flag": "",
+   "wave": 1,
+   "register_name": "Kenya National Police DT Sacco",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Harambee SACCO",
@@ -41,7 +50,10 @@
    "size": "KES 38.70bn (2024)",
    "source": "https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/",
    "flag": "",
-   "wave": 1
+   "wave": 1,
+   "register_name": "Harambee DT Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Tower SACCO",
@@ -51,7 +63,10 @@
    "size": "KES 28.04bn (2024)",
    "source": "https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/",
    "flag": "",
-   "wave": 1
+   "wave": 1,
+   "register_name": "Tower Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Unaitas SACCO",
@@ -61,7 +76,10 @@
    "size": "KES 26.12bn (2024)",
    "source": "https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/",
    "flag": "",
-   "wave": 1
+   "wave": 1,
+   "register_name": "Unaitas Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Imarisha SACCO",
@@ -71,7 +89,10 @@
    "size": "KES 24.58bn (2024)",
    "source": "https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/",
    "flag": "",
-   "wave": 1
+   "wave": 1,
+   "register_name": "Imarisha Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Afya SACCO",
@@ -81,7 +102,10 @@
    "size": "KES 22.79bn (2024)",
    "source": "https://thekenyatimes.com/latest-kenya-times-news/sasra-wealthiest-saccos/",
    "flag": "",
-   "wave": 1
+   "wave": 1,
+   "register_name": "Afya Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "United Nations SACCO",
@@ -91,7 +115,10 @@
    "size": "KES 19.15bn (2024)",
    "source": "https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/",
    "flag": "",
-   "wave": 1
+   "wave": 1,
+   "register_name": "United Nations DT Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Hazina SACCO",
@@ -101,17 +128,23 @@
    "size": "KES 16.87bn (2024)",
    "source": "https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/",
    "flag": "",
-   "wave": 1
+   "wave": 1,
+   "register_name": "Hazina Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
-   "name": "Ukulima SACCO",
+   "name": "Ukristo Na Ufanisi DT SACCO",
    "group": "sacco",
    "kind": "deposit-taking SACCO",
    "offer": "Board Pack",
-   "size": "KES 14.66bn (2022, old)",
-   "source": "https://biasharaleo.co.ke/top-20-deposit-taking-saccos-in-kenya/",
+   "size": "licensed deposit-taking, 2026; size not cited",
+   "source": "https://www.sasra.go.ke/?wpdmdl=1573",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "Ukristo Na Ufanisi DT Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Bandari SACCO",
@@ -121,7 +154,10 @@
    "size": "KES 13.70bn (2024)",
    "source": "https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "Bandari Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Mentor SACCO",
@@ -131,7 +167,10 @@
    "size": "KES 13.47bn (2023)",
    "source": "https://biasharaleo.co.ke/sasra-ranks-the-top-performing-dt-saccos-in-2023/",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "Mentor Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Boresha SACCO",
@@ -141,7 +180,10 @@
    "size": "KES 13.03bn (2024)",
    "source": "https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "Boresha Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Gusii Mwalimu SACCO",
@@ -151,7 +193,10 @@
    "size": "KES 12.85bn (2022, old)",
    "source": "https://biasharaleo.co.ke/top-20-deposit-taking-saccos-in-kenya/",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "Gusii Mwalimu Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Kimisitu SACCO",
@@ -161,7 +206,10 @@
    "size": "KES 12.06bn (2024)",
    "source": "https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "Kimisitu Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Kenya Bankers SACCO",
@@ -171,7 +219,10 @@
    "size": "KES 10.29bn (2024)",
    "source": "https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "The Kenya Bankers Sacco Society Ltd.",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Sheria SACCO",
@@ -181,17 +232,23 @@
    "size": "KES 10.20bn (2024)",
    "source": "https://biznakenya.com/wealthiest-saccos-in-kenya-by-assets-and-deposits/",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "Sheria Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
-   "name": "Safaricom SACCO",
+   "name": "Shirika DT SACCO",
    "group": "sacco",
    "kind": "deposit-taking SACCO",
    "offer": "Board Pack",
-   "size": "on the 2026 deposit-taking list",
-   "source": "https://kenyanwallstreet.com/176-saccos-cleared-by-sasra-for-deposit-taking-in-2026",
+   "size": "licensed deposit-taking, 2026; size not cited",
+   "source": "https://www.sasra.go.ke/?wpdmdl=1573",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "Shirika DT Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Fortune SACCO",
@@ -201,7 +258,10 @@
    "size": "deposit-taking; absorbed Nufaika (2025)",
    "source": "https://www.kenyans.co.ke/news/120382-sasra-publishes-list-authorised-saccos-restricts-revokes-licences-7-others",
    "flag": "",
-   "wave": 2
+   "wave": 2,
+   "register_name": "Fortune Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Winas SACCO",
@@ -210,8 +270,11 @@
    "offer": "Board Pack",
    "size": "reported among the largest; no cited figure",
    "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "flag": "",
+   "wave": 3,
+   "register_name": "Winas Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Mhasibu SACCO",
@@ -220,8 +283,11 @@
    "offer": "Board Pack",
    "size": "reported among the largest; no cited figure",
    "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "flag": "",
+   "wave": 3,
+   "register_name": "Mhasibu DT Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Kenversity SACCO",
@@ -230,8 +296,11 @@
    "offer": "Board Pack",
    "size": "reported among the largest; no cited figure",
    "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "flag": "",
+   "wave": 3,
+   "register_name": "Kenversity Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Nyambene Arimi SACCO",
@@ -240,8 +309,11 @@
    "offer": "Board Pack",
    "size": "reported among the largest; no cited figure",
    "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "flag": "",
+   "wave": 3,
+   "register_name": "Nyambene Arimi Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Ollin SACCO",
@@ -250,8 +322,11 @@
    "offer": "Board Pack",
    "size": "reported among the largest; no cited figure",
    "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "flag": "",
+   "wave": 3,
+   "register_name": "Ollin Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Solution SACCO",
@@ -260,8 +335,11 @@
    "offer": "Board Pack",
    "size": "reported among the largest; no cited figure",
    "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "flag": "",
+   "wave": 3,
+   "register_name": "Solution Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Magereza SACCO",
@@ -270,8 +348,11 @@
    "offer": "Board Pack",
    "size": "reported among the largest; no cited figure",
    "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "flag": "",
+   "wave": 3,
+   "register_name": "Magereza Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Waumini SACCO",
@@ -280,18 +361,24 @@
    "offer": "Board Pack",
    "size": "reported among the largest; no cited figure",
    "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "flag": "",
+   "wave": 3,
+   "register_name": "Waumini Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
-   "name": "Kitui Teachers SACCO",
+   "name": "Wanandege SACCO",
    "group": "sacco",
    "kind": "deposit-taking SACCO",
    "offer": "Board Pack",
-   "size": "reported among the largest; no cited figure",
-   "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "size": "licensed deposit-taking, 2026; size not cited",
+   "source": "https://www.sasra.go.ke/?wpdmdl=1573",
+   "flag": "",
+   "wave": 3,
+   "register_name": "Wanandege Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "Asili SACCO",
@@ -300,8 +387,11 @@
    "offer": "Board Pack",
    "size": "reported among the largest; no cited figure",
    "source": "",
-   "flag": "not verified: check the SASRA 2026 deposit-taking list before contact",
-   "wave": 3
+   "flag": "",
+   "wave": 3,
+   "register_name": "Asili Sacco Society Ltd",
+   "licence": "dt licensed 2026",
+   "licence_source": "https://www.sasra.go.ke/?wpdmdl=1573"
   },
   {
    "name": "NSSF Kenya",
@@ -603,5 +693,6 @@
    "flag": "",
    "wave": 3
   }
- ]
+ ],
+ "checked_against": "SACCO names and licences checked against data/registry/sasra_licences.json (SASRA 2026 list, read 14 Oct 2026)"
 }

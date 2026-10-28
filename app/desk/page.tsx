@@ -22,6 +22,7 @@ import { country as reportCountry, item as reportItem } from "@/lib/reader-repor
 import { TodayPanel, type TodayFigures } from "./TodayPanel";
 import { MoneyWindows } from "./MoneyWindows";
 import { PeoplePanel, type PeopleList } from "./PeoplePanel";
+import { TreasuryPanel, type Treasury } from "./TreasuryPanel";
 import { Inbox } from "./Inbox";
 import { PilotsPanel } from "./PilotsPanel";
 import { ContentPanel, type Campaign } from "./ContentPanel";
@@ -188,9 +189,10 @@ function Ref({ id, title, note, open, children }: { id: string; title: string; n
   );
 }
 
-/** Four tabs, one job each. Server-rendered from ?tab=, so every tab is a plain link and works without JavaScript. */
+/** Five tabs, one job each. Server-rendered from ?tab=, so every tab is a plain link and works without JavaScript. */
 const TABS = [
   { id: "today", label: "Today", note: "Three numbers and what needs you" },
+  { id: "treasury", label: "Treasury Desk", note: "The 60 targets, paying institutions, packs due" },
   { id: "people", label: "People", note: "Who signed up, and readers" },
   { id: "money", label: "Money and pilots", note: "Payments, keys, funnel" },
   { id: "site", label: "Site", note: "Content, traffic, data health" },
@@ -221,7 +223,7 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
 
   // Every desk function at once (each re-checks the key); the page waits for the slowest, not the sum.
   const call = (fn: string, args: Record<string, unknown> = {}) => (preview ? Promise.resolve(null) : rpc(fn, { p_secret: key, ...args }));
-  const [pay, aud, ppl, mon, ref, keyList, fun, rep, tod, inb, sig, fx, pl] = await Promise.all([
+  const [pay, aud, ppl, mon, ref, keyList, fun, rep, tod, inb, sig, fx, pl, trs] = await Promise.all([
     call("af_payments"),
     call("af_desk_audience"),
     call("af_desk_people"),
@@ -235,6 +237,7 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
     call("af_desk_signals"),
     preview ? Promise.resolve(null) : loadFxQuote(),
     call("af_desk_people_list", { p_limit: 300 }),
+    tab === "treasury" ? call("af_desk_treasury") : Promise.resolve(null),
   ]);
   const payments = value<Payments>(pay);
   const audience = value<Audience>(aud);
@@ -248,6 +251,7 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
   const rawInbox = value<RawInbox>(inb, Array.isArray);
   const signals = value<Signals>(sig);
   const peopleList = value<PeopleList>(pl);
+  const treasury = value<Treasury>(trs);
   // Units of each currency per US dollar; a fixed fallback for KES only if the live rate is unavailable.
   const perUsd: Record<string, number> = { USD: 1, ...(fx?.rates ?? { KES: 129 }) };
   const fxNote = fx ? `${fx.sourceName} rates of ${fx.updated.slice(5, 16)}` : "a fixed KES 129 to the dollar (live rate unavailable)";
@@ -377,6 +381,13 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
           <TodayPanel figures={todayFigures} needs={needs} />
           <Inbox items={inbox} now={now} canHandle={Boolean(rawInbox)} />
         </div>
+      ) : null}
+
+      {tab === "treasury" ? (
+        <TreasuryPanel
+          data={treasury}
+          applyNote={missing(trs) ? "Waiting for migration 0048 (supabase/migrations/0048_treasury_desk.sql). It is applied only on the founder’s yes; until then the 60 names are in docs/sales/treasury-desk-targets.md." : null}
+        />
       ) : null}
 
       {tab === "people" ? (

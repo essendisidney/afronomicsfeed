@@ -87,7 +87,7 @@ export default function EditorialStandardsPage() {
         </li>
         <li>
           We do not carry advertising or sponsorship from anyone who needs a licence from the CMA, CBK, SASRA or RBA and does not hold one, and we refuse
-          copy that promises or implies guaranteed returns. Paid listings and sponsorship are labelled where they appear.
+          copy that promises a return or says one cannot be lost. Paid listings and sponsorship are labelled where they appear.
         </li>
       </ul>
 

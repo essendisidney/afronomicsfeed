@@ -110,11 +110,20 @@ export async function POST(request: Request) {
         p_secret: key, p_org_name: s("organisation", 160), p_kind: s("kind", 20), p_product: product, p_months: num("months") ?? 0,
         p_amount_kes_month: num("amount") ?? 0, p_source: s("source", 10), p_reference: s("reference", 120), p_schemes: num("schemes") ?? 1,
       });
-    } else if (b.action === "treasury_rename") result = await rpc("af_desk_org_rename", { p_secret: key, p_org: num("org") ?? 0, p_name: s("name", 160), p_kind: s("kind", 20) });
+    } else if (b.action === "treasury_benchmark_review") {
+      result = await rpc("af_desk_benchmark_review", { p_secret: key, p_id: num("id") ?? 0, p_reviewed_by: s("reviewed_by", 80), p_release: b.release === "1" });
+    } else if (b.action === "treasury_invoice_create") {
+      const currency = s("currency", 3) ?? "KES";
+      if (!["KES", "USD"].includes(currency)) return Response.json({ ok: false, reason: "KES or USD." }, { status: 400 });
+      result = await rpc("af_desk_invoice_create", { p_secret: key, p_org: num("org") ?? 0, p_amount: num("amount") ?? 0, p_currency: currency, p_issued_on: date("issued_on") });
+    } else if (b.action === "treasury_invoice_paid") {
+      result = await rpc("af_desk_invoice_paid", { p_secret: key, p_id: num("id") ?? 0, p_paid_on: date("paid_on"), p_method: s("method", 10) });
+    } else if (b.action === "treasury_kra") result = await rpc("af_desk_org_kra", { p_secret: key, p_org: num("org") ?? 0, p_kra_pin: s("kra_pin", 11) });
+    else if (b.action === "treasury_rename") result = await rpc("af_desk_org_rename", { p_secret: key, p_org: num("org") ?? 0, p_name: s("name", 160), p_kind: s("kind", 20) });
     else if (b.action === "treasury_pack_mark") {
       result = await rpc("af_desk_pack_issue_mark", { p_secret: key, p_org: num("org") ?? 0, p_period: s("period", 7), p_checked_by: s("checked_by", 80), p_sent: b.sent === "1" });
     } else return Response.json({ ok: false, reason: "Unknown action." }, { status: 400 });
-    if (!result.ok && /PGRST202|404/.test(result.reason)) return Response.json({ ok: false, reason: "Needs migration 0048." }, { status: 501 });
+    if (!result.ok && /PGRST202|404/.test(result.reason)) return Response.json({ ok: false, reason: "Needs migrations 0048 and 0049." }, { status: 501 });
     const v = result.ok ? (result.value as { ok?: boolean; reason?: string } | null) : null;
     if (v && v.ok === false) return Response.json({ ok: false, reason: v.reason ?? "Refused." }, { status: 400 });
   } else return Response.json({ ok: false, reason: "Unknown action." }, { status: 400 });

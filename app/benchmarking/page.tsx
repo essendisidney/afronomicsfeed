@@ -122,7 +122,7 @@ export default async function BenchmarkingPage({ searchParams }: { searchParams:
           <li>It does not say what to buy or sell, and it does not rate your fund manager, bank or adviser. Decisions stay with the board and its licensed adviser.</li>
           <li>Fund yields are shown as each manager published them, in alphabetical order, never ranked.</li>
           <li>
-            Your file is used only to make your page, kept privately and deleted after a year unless you ask us to keep it. See the{" "}
+            Your file is used only to make your page, kept privately and deleted 15 months after you send it (the quarter and a year after it). See the{" "}
             <Link href="/legal/privacy" className="underline underline-offset-2">
               privacy notice
             </Link>

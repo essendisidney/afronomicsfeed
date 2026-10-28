@@ -62,6 +62,33 @@ export default function EditorialStandardsPage() {
           tax alone, and funds that pay nothing will be listed the same way.
         </li>
         <li>We do not give buy, sell or hold recommendations or promise returns. Everything here is information, not advice.</li>
+        <li>
+          Afronomics is not licensed by the Capital Markets Authority as an investment adviser. We do not answer &ldquo;what should I buy&rdquo; for any
+          reader or client; we point to the licensed advisers on the CMA and CBK registers.
+        </li>
+      </ul>
+
+      <h2 id="treasury-desk">The Investment Committee Pack and the treasury benchmark</h2>
+      <ul>
+        <li>
+          The pack and the benchmark describe the market. Government securities are listed by term, and every fund, bank and SACCO is listed in
+          alphabetical order, never ranked, rated or recommended.
+        </li>
+        <li>A benchmark compares a client&rsquo;s own holdings with the published auction results, in shillings, before tax on both sides. It never says what to hold.</li>
+        <li>A client&rsquo;s name and figures are private to that client. We do not say who our clients are without their written agreement.</li>
+        <li>Every figure carries its source and date; a wrong one is corrected for every client who received it, and listed on the corrections page.</li>
+      </ul>
+
+      <h2 id="declarations">Declarations and advertising</h2>
+      <ul>
+        <li>
+          Anyone who writes or compiles for Afronomics declares to the editor any holding in a security, fund or institution they cover, and does not cover it
+          where the holding is material. Declarations are kept on file.
+        </li>
+        <li>
+          We do not carry advertising or sponsorship from anyone who needs a licence from the CMA, CBK, SASRA or RBA and does not hold one, and we refuse
+          copy that promises or implies guaranteed returns. Paid listings and sponsorship are labelled where they appear.
+        </li>
       </ul>
 
       <h2 id="labels">Labels, dates and bylines</h2>

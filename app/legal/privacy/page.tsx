@@ -52,6 +52,16 @@ export default function PrivacyPage() {
           your full card details.
         </li>
         <li>
+          <strong>Institutions that subscribe</strong> — for the Investment Committee Pack and the Treasury Desk we keep the institution&rsquo;s name, its
+          KRA PIN for invoices, what it subscribes to and its invoices. Private links to its pack and benchmark pages are signed, expire, and close if the
+          subscription lapses.
+        </li>
+        <li>
+          <strong>Treasury benchmarking files</strong> — the holdings an institution sends through its private page (instrument, kind, amount, rate and
+          dates). We ask for no member or personal data. Only the parsed holdings are kept, used only to make that institution&rsquo;s page, seen only by the
+          desk, and deleted 15 months after they are sent (the quarter and a year after it).
+        </li>
+        <li>
           <strong>Emails you send us</strong> — kept to answer you and to keep a record of corrections and agreements.
         </li>
         <li>
@@ -91,7 +101,8 @@ export default function PrivacyPage() {
       </p>
       <h2>Where it is kept</h2>
       <p>
-        Data is stored with our hosting and database providers, which may process it outside Kenya under appropriate safeguards. Newsletter data
+        Data is stored with our hosting provider (Vercel) and database provider (Supabase), which may process it outside Kenya under their data
+        processing terms; as the Data Protection Act 2019 requires, we keep a record of these transfers and the safeguards that apply. Newsletter data
         is kept until you unsubscribe, alert data as described above; payment records as long as the law requires.
       </p>
       <h2>Your rights</h2>

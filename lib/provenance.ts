@@ -19,8 +19,8 @@ export type FileProvenance = {
   updated_at: string | null;
 };
 
-const RATE_KEYS = ["weighted_avg_rate", "stop_rate", "rate", "yield"];
-const DATE_KEYS = ["value_date", "auction_date", "settlement_date", "issue_date"];
+const RATE_KEYS = ["weighted_avg_rate", "stop_rate", "rate", "yield", "weighted_rate"];
+const DATE_KEYS = ["value_date", "auction_date", "operation_date", "settlement_date", "issue_date", "date_as_printed", "first_seen"];
 
 function walk(dir: string): string[] {
   if (!fs.existsSync(dir)) return [];

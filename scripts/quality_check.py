@@ -25,9 +25,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "quality" / "report.json"
 KNOWN = ROOT / "data" / "quality" / "known.json"  # reviewed issues, each with the reason it is accepted for now
-RATE_KEYS = ("weighted_avg_rate", "stop_rate", "rate", "yield")
-DATE_KEYS = ("value_date", "auction_date", "settlement_date", "issue_date")
-ID_KEYS = ("isin", "issue", "cbn_id", "auction_no", "tender", "series", "instrument", "kind")
+RATE_KEYS = ("weighted_avg_rate", "stop_rate", "rate", "yield", "weighted_rate")
+DATE_KEYS = ("value_date", "auction_date", "operation_date", "settlement_date", "issue_date")
+ID_KEYS = ("isin", "issue", "cbn_id", "auction_no", "tender", "series", "instrument", "kind", "country", "maturity", "months", "coupon")
 FLAG_BP = 150
 FLAG_DAYS = 90
 SKIP = {"policy_rates.json", "policy_rate_history.json"}
@@ -98,7 +98,7 @@ def check_file(path: Path, today: date) -> tuple[list[dict], list[str], int]:
         if received is not None and accepted is not None and received > 0 and accepted > received * 1.02:
             errors.append({"key": error_key(rel, r, "accepted above received"), "text": f"{where}: accepted {accepted} is more than bids received {received}"})
         tenor = r.get("tenor", r.get("tenor_days", r.get("tenor_years")))
-        key = (tenor, dv, *(r.get(k) for k in ID_KEYS), rate)
+        key = (tenor, dv, *(r.get(k) for k in ID_KEYS), rate, src)
         if key in seen:
             errors.append({"key": error_key(rel, r, "repeated row"), "text": f"{where}: repeats an earlier row"})
         seen.add(key)

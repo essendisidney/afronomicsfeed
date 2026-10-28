@@ -58,7 +58,10 @@ export default async function BenchmarkingPage({ searchParams }: { searchParams:
                 <PaystackCheckout plan="benchmarking" label="Order this quarter" variant="primary" />
               </div>
             ) : null}
-            <a href="#enquiry" className="mt-3 inline-flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
+            <a href="/benchmarking/sample" target="_blank" rel="noopener" className="mt-3 block min-h-11 py-2 text-[14px] font-semibold text-forest underline underline-offset-2">
+              See a sample page
+            </a>
+            <a href="#enquiry" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
               Or ask for an invoice
             </a>
           </div>

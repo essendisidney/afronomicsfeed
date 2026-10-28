@@ -12,7 +12,7 @@ const signedKes = (n: number | null) => (n == null ? "—" : `${n > 0 ? "+" : n 
 const pct = (n: number | null) => (n == null ? "—" : `${n.toFixed(2)}%`);
 const KIND: Record<string, string> = { tbill: "Treasury bill", bond: "Bond", deposit: "Deposit", fund: "Fund", other: "Other" };
 
-export function benchmarkHtml(o: { name: string; quarter: string; holdings: Holding[]; draft?: boolean }): string | null {
+export function benchmarkHtml(o: { name: string; quarter: string; holdings: Holding[]; draft?: boolean; sample?: boolean }): string | null {
   const b = benchmark(o.quarter, o.holdings, loadTbills().rows);
   if (!b) return null;
   const rows = b.lines
@@ -26,10 +26,11 @@ export function benchmarkHtml(o: { name: string; quarter: string; holdings: Hold
     series: "Treasury benchmark",
     title: `${o.quarter.replace("-", " ")}: the money beside the auctions`,
     subtitle: `Each holding of ${o.name} in ${b.from} to ${b.to}, beside what the same shillings would have earned at the Central Bank of Kenya's Treasury bill auction of the nearest tenor, in the same weeks.`,
-    number: `AF-BENCH-${o.quarter}${o.draft ? "-DRAFT" : ""}`,
+    number: `AF-BENCH-${o.sample ? "SAMPLE-" : ""}${o.quarter}${o.draft ? "-DRAFT" : ""}`,
     edition: o.quarter.replace("-", " "),
     asOf: b.to,
-    preparedFor: o.name,
+    preparedFor: o.sample ? undefined : o.name,
+    sample: o.sample,
     sections: ["The quarter beside the auctions"],
     method: [
       "Days are those a holding was held inside the quarter, on a 365-day year. Earned is the amount times the holding's own annual rate, as the client reported it, before tax.",
@@ -37,10 +38,12 @@ export function benchmarkHtml(o: { name: string; quarter: string; holdings: Hold
       "Both sides are before withholding tax, which is the same 15% on bills, deposits and fund returns for a resident institution. This page states what happened; it does not say what to hold.",
     ],
     sources: [
-      { name: "The institution", note: `holdings for ${o.quarter}, as supplied` },
+      { name: o.sample ? "Illustrative holdings" : "The institution", note: o.sample ? "made up for this sample; not any institution's portfolio" : `holdings for ${o.quarter}, as supplied` },
       ...sources.slice(0, 12).map((url) => ({ name: "Central Bank of Kenya", note: "Treasury bill auction result", url })),
     ],
-    licence: "Prepared for the named institution's board or trustees. Not for circulation outside it.",
+    licence: o.sample
+      ? "Sample: the holdings are illustrative, the auction results are real. Free to share with credit to Afronomics."
+      : "Prepared for the named institution's board or trustees. Not for circulation outside it.",
     href: "/benchmarking",
   };
   const body = section(

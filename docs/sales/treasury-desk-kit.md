@@ -110,7 +110,7 @@ Priority 1 categories are in the 60-name list. Priority 2 categories are reached
    - **Page 2:** the curve. "Bills pay almost the same at three months and a year. The term premium is in bonds of 15 years and longer." Present this as a description of the market, not advice.
    - **Page 3:** the funds' published yields, alphabetical, each with its source and date.
    - **Page 4:** the calendar and the region.
-3. **The benchmark (4 minutes; Treasury Desk prospects only).** Show the sample benchmark page from `/benchmarking`. "You send holdings; we show what the same shillings earned elsewhere, in shillings. Facts only; your adviser and your board decide."
+3. **The benchmark (4 minutes; Treasury Desk prospects only).** Open the sample benchmark page at `/benchmarking/sample`. "You send holdings; we show what the same shillings earned elsewhere, in shillings. Facts only; your adviser and your board decide."
 4. **Independence and corrections (2 minutes).** Show `/trust` and `/corrections`. "We are not paid by any fund or bank on that page."
 5. **The close (4 minutes).**
    - "Shall I send next month's pack, with your name on it, before your board meets on [date]?" This is the free sample.

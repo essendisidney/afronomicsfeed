@@ -200,3 +200,112 @@ export function MarkPack({ org, period }: { org: number; period: string }) {
     </Form>
   );
 }
+
+export function CreateInvoice({ org }: { org: number }) {
+  return (
+    <Form action="treasury_invoice_create" submit="Create invoice" className="flex flex-wrap items-end gap-2">
+      <input type="hidden" name="org" value={org} />
+      <label className="block">
+        <span className={label}>Amount</span>
+        <input name="amount" inputMode="decimal" required className={field} placeholder="216000" />
+      </label>
+      <label className="block">
+        <span className={label}>Currency</span>
+        <select name="currency" className={field} defaultValue="KES">
+          <option value="KES">KES</option>
+          <option value="USD">USD</option>
+        </select>
+      </label>
+    </Form>
+  );
+}
+
+export function MarkInvoicePaid({ id }: { id: number }) {
+  return (
+    <Form action="treasury_invoice_paid" submit="Mark paid" className="flex flex-wrap items-end gap-2">
+      <input type="hidden" name="id" value={id} />
+      <label className="block">
+        <span className={label}>Paid on</span>
+        <input type="date" name="paid_on" className={field} />
+      </label>
+      <label className="block">
+        <span className={label}>By</span>
+        <select name="method" className={field} defaultValue="bank">
+          <option value="bank">Bank</option>
+          <option value="mpesa">M-Pesa</option>
+          <option value="cheque">Cheque</option>
+          <option value="paystack">Paystack</option>
+        </select>
+      </label>
+    </Form>
+  );
+}
+
+export function SetKraPin({ org }: { org: number }) {
+  return (
+    <Form action="treasury_kra" submit="Save PIN" className="flex flex-wrap items-end gap-2">
+      <input type="hidden" name="org" value={org} />
+      <label className="block">
+        <span className={label}>Their KRA PIN</span>
+        <input name="kra_pin" className={field} placeholder="P051234567X" maxLength={11} />
+      </label>
+    </Form>
+  );
+}
+
+export function ReviewBenchmark({ id }: { id: number }) {
+  return (
+    <Form action="treasury_benchmark_review" submit="Save" reset={false} className="flex flex-wrap items-end gap-2">
+      <input type="hidden" name="id" value={id} />
+      <label className="block">
+        <span className={label}>Checked by</span>
+        <input name="reviewed_by" required className={field} placeholder="Founder" maxLength={80} />
+      </label>
+      <label className="flex items-center gap-2 pb-2 text-[13px] text-ink">
+        <input type="checkbox" name="release" value="1" /> release to the client
+      </label>
+    </Form>
+  );
+}
+
+export function CopyLink({ href, label: text }: { href: string; label: string }) {
+  const [done, setDone] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        void navigator.clipboard?.writeText(new URL(href, window.location.origin).toString()).then(() => setDone(true));
+      }}
+      className="inline-flex min-h-11 items-center text-[13px] font-semibold text-forest underline underline-offset-2"
+    >
+      {done ? "Copied" : text}
+    </button>
+  );
+}
+
+export function AddWebhook() {
+  return (
+    <Form action="treasury_webhook_add" submit="Add webhook" className="grid gap-2 sm:grid-cols-3">
+      <label className="block">
+        <span className={label}>API key number</span>
+        <input name="key_id" inputMode="numeric" required className={field} placeholder="12" />
+      </label>
+      <label className="block sm:col-span-2">
+        <span className={label}>Their https URL</span>
+        <input name="url" type="url" required className={field} placeholder="https://example.com/hooks/afronomics" />
+      </label>
+      <label className="block sm:col-span-3">
+        <span className={label}>Markets (blank for all), e.g. kenya, ghana</span>
+        <input name="markets" className={field} />
+      </label>
+    </Form>
+  );
+}
+
+export function StopWebhook({ id }: { id: number }) {
+  return (
+    <Form action="treasury_webhook_off" submit="Stop" reset={false}>
+      <input type="hidden" name="id" value={id} />
+    </Form>
+  );
+}

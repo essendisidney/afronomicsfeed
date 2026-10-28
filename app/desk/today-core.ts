@@ -138,11 +138,20 @@ export function needsToday({
   inbox,
   setup,
   now,
+  treasury,
 }: {
   payments: { reference: string; plan: string | null; amount: number; currency: string | null; status: string; paid_at: string; access_sent_at: string | null }[];
   inbox: InboxItem[];
   setup: { label: string; detail: string }[];
   now: number;
+  /** Treasury Desk work (migrations 0048 and 0049): packs not yet sent this month, uploads to check, unpaid invoices,
+   * and D-036 targets whose next step the founder set for today or earlier. */
+  treasury?: {
+    packsUnsent: { name: string }[];
+    benchmarksToCheck: { name: string; quarter: string }[];
+    unpaidInvoices: { number: string; name: string; issued_on: string }[];
+    targetsDue: { organisation: string; next_step: string | null; next_date: string }[];
+  };
 }): Need[] {
   const out: Need[] = [];
   for (const p of payments.filter((x) => x.status === "success" && !x.access_sent_at)) {
@@ -153,6 +162,17 @@ export function needsToday({
   const order: InboxCategory[] = ["pilot", "invoice", "enquiry", "survey", "feedback"];
   for (const i of waiting.sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category) || b.at.localeCompare(a.at))) {
     out.push({ rule: `${CATEGORY_LABEL[i.category]} waiting`, label: i.title, detail: i.meta, href: "#inbox", tone: i.category === "pilot" || i.category === "invoice" ? "warn" : "neutral" });
+  }
+  if (treasury) {
+    const today = new Date(now + 3 * 3600000).toISOString().slice(0, 10);
+    for (const p of treasury.packsUnsent) out.push({ rule: "Pack not sent", label: p.name, detail: "This month's pack", href: "?tab=treasury", tone: "down" });
+    for (const b of treasury.benchmarksToCheck) out.push({ rule: "Benchmark to check", label: b.name, detail: b.quarter.replace("-", " "), href: "?tab=treasury", tone: "warn" });
+    for (const t of treasury.targetsDue.filter((x) => x.next_date <= today)) {
+      out.push({ rule: "Your next step", label: t.organisation, detail: [t.next_step, t.next_date].filter(Boolean).join(" · "), href: "?tab=treasury", tone: "warn" });
+    }
+    for (const i of treasury.unpaidInvoices.filter((x) => x.issued_on <= new Date(now - 14 * DAY).toISOString().slice(0, 10))) {
+      out.push({ rule: "Invoice unpaid 14+ days", label: `${i.number} · ${i.name}`, detail: `issued ${i.issued_on}`, href: "?tab=treasury", tone: "neutral" });
+    }
   }
   for (const s of setup) out.push({ rule: "Setup", label: s.label, detail: s.detail, href: "#needs", tone: "neutral" });
   return out;

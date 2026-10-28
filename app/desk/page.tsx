@@ -22,7 +22,9 @@ import { country as reportCountry, item as reportItem } from "@/lib/reader-repor
 import { TodayPanel, type TodayFigures } from "./TodayPanel";
 import { MoneyWindows } from "./MoneyWindows";
 import { PeoplePanel, type PeopleList } from "./PeoplePanel";
-import { TreasuryPanel, type Treasury } from "./TreasuryPanel";
+import { TreasuryPanel, type DeskBenchmark, type DeskInvoice, type DeskWebhook, type OrgLinks, type Treasury } from "./TreasuryPanel";
+import { subscriptionSecret } from "@/lib/webhooks";
+import { orgLinkPath, orgLinkToken } from "@/lib/org-links";
 import { Inbox } from "./Inbox";
 import { PilotsPanel } from "./PilotsPanel";
 import { ContentPanel, type Campaign } from "./ContentPanel";
@@ -223,7 +225,7 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
 
   // Every desk function at once (each re-checks the key); the page waits for the slowest, not the sum.
   const call = (fn: string, args: Record<string, unknown> = {}) => (preview ? Promise.resolve(null) : rpc(fn, { p_secret: key, ...args }));
-  const [pay, aud, ppl, mon, ref, keyList, fun, rep, tod, inb, sig, fx, pl, trs] = await Promise.all([
+  const [pay, aud, ppl, mon, ref, keyList, fun, rep, tod, inb, sig, fx, pl, trs, invs, bms, hooks] = await Promise.all([
     call("af_payments"),
     call("af_desk_audience"),
     call("af_desk_people"),
@@ -237,7 +239,10 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
     call("af_desk_signals"),
     preview ? Promise.resolve(null) : loadFxQuote(),
     call("af_desk_people_list", { p_limit: 300 }),
-    tab === "treasury" ? call("af_desk_treasury") : Promise.resolve(null),
+    tab === "treasury" || tab === "today" ? call("af_desk_treasury") : Promise.resolve(null),
+    tab === "treasury" || tab === "today" ? call("af_desk_invoices") : Promise.resolve(null),
+    tab === "treasury" || tab === "today" ? call("af_desk_benchmarks") : Promise.resolve(null),
+    tab === "treasury" ? call("af_desk_webhooks") : Promise.resolve(null),
   ]);
   const payments = value<Payments>(pay);
   const audience = value<Audience>(aud);
@@ -252,6 +257,16 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
   const signals = value<Signals>(sig);
   const peopleList = value<PeopleList>(pl);
   const treasury = value<Treasury>(trs);
+  const deskInvoices = value<DeskInvoice[]>(invs, Array.isArray);
+  const deskBenchmarks = value<DeskBenchmark[]>(bms, Array.isArray);
+  const deskWebhooks = value<Omit<DeskWebhook, "secret">[]>(hooks, Array.isArray)?.map((w) => ({ ...w, secret: subscriptionSecret(process.env.AF_CRON_SECRET ?? "", w.id) })) ?? null;
+  // Private links for each paying organisation, signed here on the server (lib/org-links.ts).
+  const orgLinks: OrgLinks = {};
+  for (const o of treasury?.orgs ?? []) {
+    const pack = orgLinkToken(o.org_id, "pack");
+    const bench = orgLinkToken(o.org_id, "benchmark");
+    orgLinks[o.org_id] = { pack: pack ? orgLinkPath("pack", pack) : null, benchmark: bench ? orgLinkPath("benchmark", bench) : null };
+  }
   // Units of each currency per US dollar; a fixed fallback for KES only if the live rate is unavailable.
   const perUsd: Record<string, number> = { USD: 1, ...(fx?.rates ?? { KES: 129 }) };
   const fxNote = fx ? `${fx.sourceName} rates of ${fx.updated.slice(5, 16)}` : "a fixed KES 129 to the dollar (live rate unavailable)";
@@ -311,7 +326,20 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
   if (!process.env.DOWNLOAD_SECRET) setup.push({ label: "Set DOWNLOAD_SECRET in Vercel", detail: "Download sessions are signed with a key derived from PAID_KEY_SECRET or the cron secret until it is set." });
   if (!process.env.PAYSTACK_SECRET_KEY) setup.push({ label: "PAYSTACK_SECRET_KEY is not set here", detail: "Checkout and payment checks cannot run on this deployment." });
 
-  const needs = needsToday({ payments: payments?.recent ?? [], inbox, setup, now });
+  const needs = needsToday({
+    payments: payments?.recent ?? [],
+    inbox,
+    setup,
+    now,
+    treasury: treasury
+      ? {
+          packsUnsent: treasury.packs_due.filter((p) => !p.sent_at).map((p) => ({ name: p.name })),
+          benchmarksToCheck: (deskBenchmarks ?? []).filter((b) => !b.reviewed_at).map((b) => ({ name: b.name, quarter: b.quarter })),
+          unpaidInvoices: (deskInvoices ?? []).filter((i) => !i.paid_on),
+          targetsDue: treasury.targets.filter((t): t is typeof t & { next_date: string } => Boolean(t.next_date) && !["won", "lost"].includes(t.stage)),
+        }
+      : undefined,
+  });
 
   // Content: the last 7 days of stories and LinkedIn posts, and what each campaign brought.
   const stories = readStoryLog(weekAgoDay);
@@ -386,6 +414,11 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
       {tab === "treasury" ? (
         <TreasuryPanel
           data={treasury}
+          links={orgLinks}
+          invoices={deskInvoices}
+          benchmarks={deskBenchmarks}
+          webhooks={deskWebhooks}
+          at={now}
           applyNote={missing(trs) ? "Waiting for migration 0048 (supabase/migrations/0048_treasury_desk.sql). It is applied only on the founder’s yes; until then the 60 names are in docs/sales/treasury-desk-targets.md." : null}
         />
       ) : null}

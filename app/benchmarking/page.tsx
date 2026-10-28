@@ -58,7 +58,10 @@ export default async function BenchmarkingPage({ searchParams }: { searchParams:
                 <PaystackCheckout plan="benchmarking" label="Order this quarter" variant="primary" />
               </div>
             ) : null}
-            <a href="#enquiry" className="mt-3 inline-flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
+            <a href="/benchmarking/sample" target="_blank" rel="noopener" className="mt-3 block min-h-11 py-2 text-[14px] font-semibold text-forest underline underline-offset-2">
+              See a sample page
+            </a>
+            <a href="#enquiry" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
               Or ask for an invoice
             </a>
           </div>
@@ -122,7 +125,7 @@ export default async function BenchmarkingPage({ searchParams }: { searchParams:
           <li>It does not say what to buy or sell, and it does not rate your fund manager, bank or adviser. Decisions stay with the board and its licensed adviser.</li>
           <li>Fund yields are shown as each manager published them, in alphabetical order, never ranked.</li>
           <li>
-            Your file is used only to make your page, kept privately and deleted after a year unless you ask us to keep it. See the{" "}
+            Your file is used only to make your page, kept privately and deleted 15 months after you send it (the quarter and a year after it). See the{" "}
             <Link href="/legal/privacy" className="underline underline-offset-2">
               privacy notice
             </Link>

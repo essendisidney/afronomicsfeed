@@ -1,5 +1,6 @@
 import { SectionTitle } from "@/components/data/parts";
-import { GrantEntitlement, LoadTargets, MarkPack, RenameOrg, STAGES, UpdateTarget } from "./TreasuryActions";
+import { Scorecard } from "./Scorecard";
+import { AddWebhook, CopyLink, CreateInvoice, StopWebhook, GrantEntitlement, LoadTargets, MarkInvoicePaid, MarkPack, RenameOrg, ReviewBenchmark, SetKraPin, STAGES, UpdateTarget } from "./TreasuryActions";
 
 export type Treasury = {
   period: string;
@@ -28,6 +29,11 @@ export type Treasury = {
   packs_due: { org_id: number; name: string; product: string; checked_by: string | null; checked_at: string | null; sent_at: string | null }[];
 };
 
+export type DeskInvoice = { id: number; number: string; org_id: number; name: string; kra_pin: string | null; amount: number; currency: string; issued_on: string; paid_on: string | null; method: string | null };
+export type DeskBenchmark = { id: number; org_id: number; name: string; quarter: string; holdings: number; uploaded_at: string; reviewed_by: string | null; reviewed_at: string | null; released_at: string | null };
+export type DeskWebhook = { id: number; key_id: number; key_label: string; url: string; markets: string[] | null; active: boolean; delivered: number; failed: number; secret: string | null };
+export type OrgLinks = Record<number, { pack: string | null; benchmark: string | null }>;
+
 /** The 90-day test's goals (founder-strategy-pack.md section K; D-035). */
 const GOALS = [
   { key: "conversations", label: "Qualified conversations", d45: 20, d90: 40 },
@@ -40,7 +46,7 @@ const GOALS = [
 const kes = (n: number) => new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(n);
 const stageLabel = (id: string) => STAGES.find((s) => s.id === id)?.label ?? id;
 
-export function TreasuryPanel({ data, applyNote }: { data: Treasury | null; applyNote: string | null }) {
+export function TreasuryPanel({ data, applyNote, links = {}, invoices = null, benchmarks = null, webhooks = null, at }: { data: Treasury | null; applyNote: string | null; links?: OrgLinks; invoices?: DeskInvoice[] | null; benchmarks?: DeskBenchmark[] | null; webhooks?: DeskWebhook[] | null; at: number }) {
   if (!data) {
     return (
       <section>
@@ -60,6 +66,7 @@ export function TreasuryPanel({ data, applyNote }: { data: Treasury | null; appl
   };
   return (
     <div className="space-y-12">
+      <Scorecard data={data} now={at} />
       <section>
         <SectionTitle kicker="The 90-day test · D-035" title="Against the goals" note="Kill line: fewer than 3 paying after 40 qualified conversations." />
         <div className="mt-3 overflow-x-auto">
@@ -171,17 +178,120 @@ export function TreasuryPanel({ data, applyNote }: { data: Treasury | null; appl
                     {o.product.replace("_", " ")} · KES {kes(o.amount_kes_month)} a month · {o.source} · to {o.ends_at.slice(0, 10)}
                   </p>
                 </div>
+                <div className="flex flex-wrap items-center gap-4">
+                  {links[o.org_id]?.pack ? <CopyLink href={links[o.org_id].pack!} label="Copy private pack link" /> : null}
+                  {links[o.org_id]?.benchmark && ["benchmarking", "treasury_desk"].includes(o.product) ? <CopyLink href={links[o.org_id].benchmark!} label="Copy benchmarking link" /> : null}
+                </div>
                 {/^(Unnamed payer|[a-z0-9.-]+\.[a-z]{2,}$)/.test(o.name) ? <RenameOrg org={o.org_id} name={o.name} /> : null}
+                <details className="w-full">
+                  <summary className="cursor-pointer text-[13px] text-ink-soft">Invoice or KRA PIN</summary>
+                  <div className="mt-2 space-y-3">
+                    <CreateInvoice org={o.org_id} />
+                    <SetKraPin org={o.org_id} />
+                  </div>
+                </details>
               </li>
             ))}
           </ul>
         )}
+        <p className="mt-3 text-[12px] text-muted">Private links expire (packs 45 days, benchmarking 120 days) and close at once if the subscription lapses. Share them yourself; nothing is emailed.</p>
         <details className="mt-6 max-w-2xl">
           <summary className="cursor-pointer text-sm font-semibold text-ink">Open an entitlement for an invoice or a paid pilot</summary>
           <div className="mt-3">
             <GrantEntitlement />
           </div>
         </details>
+      </section>
+      <section>
+        <SectionTitle kicker="Quarterly benchmarks" title="Uploads to check" note="Open the draft, check it against the client's figures, then release it to their private page." />
+        {benchmarks == null ? (
+          <p className="mt-3 text-sm text-ink-soft">Waiting for migration 0049.</p>
+        ) : benchmarks.length === 0 ? (
+          <p className="mt-3 text-sm text-ink-soft">No uploads yet.</p>
+        ) : (
+          <ul className="mt-3 divide-y divide-rule border-y border-rule">
+            {benchmarks.map((u) => (
+              <li key={u.id} className="flex flex-wrap items-end justify-between gap-3 py-3">
+                <div>
+                  <p className="text-sm font-semibold text-ink">
+                    {u.name} · {u.quarter.replace("-", " ")}
+                  </p>
+                  <p className="text-[12px] text-muted">
+                    {u.holdings} holdings · uploaded {u.uploaded_at.slice(0, 10)} ·{" "}
+                    {u.released_at ? `released ${u.released_at.slice(0, 10)}` : u.reviewed_by ? `checked by ${u.reviewed_by}, not released` : "not checked"}
+                  </p>
+                  <a href={`/desk/benchmark?id=${u.id}`} target="_blank" rel="noopener" className="text-[13px] font-semibold text-forest underline underline-offset-2">
+                    Open the {u.released_at ? "page" : "draft"}
+                  </a>
+                </div>
+                {u.released_at ? null : <ReviewBenchmark id={u.id} />}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section>
+        <SectionTitle kicker="Invoices" title="Issued and paid" note="Print to PDF and hand over or send yourself." />
+        {invoices == null ? (
+          <p className="mt-3 text-sm text-ink-soft">Waiting for migration 0049.</p>
+        ) : invoices.length === 0 ? (
+          <p className="mt-3 text-sm text-ink-soft">None yet. Create one from a paying organisation above.</p>
+        ) : (
+          <ul className="mt-3 divide-y divide-rule border-y border-rule">
+            {invoices.map((i) => (
+              <li key={i.id} className="flex flex-wrap items-end justify-between gap-3 py-3">
+                <div>
+                  <p className="text-sm font-semibold text-ink">
+                    {i.number} · {i.name}
+                  </p>
+                  <p className="text-[12px] text-muted">
+                    {i.currency} {kes(Number(i.amount))} · issued {i.issued_on} · {i.paid_on ? `paid ${i.paid_on} by ${i.method}` : "unpaid"}
+                  </p>
+                  <a href={`/desk/invoice?id=${i.id}`} target="_blank" rel="noopener" className="text-[13px] font-semibold text-forest underline underline-offset-2">
+                    Open to print
+                  </a>
+                </div>
+                {i.paid_on ? null : <MarkInvoicePaid id={i.id} />}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+      <section>
+        <SectionTitle kicker="Data licence" title="auction.published webhooks" note="Signed POSTs after each auction lands. Give the customer the signing secret yourself; see /developers#webhooks." />
+        {webhooks == null ? (
+          <p className="mt-3 text-sm text-ink-soft">Waiting for migration 0050.</p>
+        ) : (
+          <>
+            {webhooks.length ? (
+              <ul className="mt-3 divide-y divide-rule border-y border-rule">
+                {webhooks.map((w) => (
+                  <li key={w.id} className="flex flex-wrap items-end justify-between gap-3 py-3">
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-ink">
+                        {w.key_label} · <span className="break-all font-normal">{w.url}</span>
+                      </p>
+                      <p className="text-[12px] text-muted">
+                        {w.markets?.length ? w.markets.join(", ") : "all markets"} · {w.delivered} delivered · {w.failed} failed · {w.active ? "on" : "off"}
+                      </p>
+                      {w.secret && w.active ? <p className="mt-1 break-all font-mono text-[11px] text-ink-soft">Signing secret: {w.secret}</p> : null}
+                    </div>
+                    {w.active ? <StopWebhook id={w.id} /> : null}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-3 text-sm text-ink-soft">None yet.</p>
+            )}
+            <details className="mt-4 max-w-2xl">
+              <summary className="cursor-pointer text-sm font-semibold text-ink">Add a webhook for an API key</summary>
+              <div className="mt-3">
+                <AddWebhook />
+              </div>
+            </details>
+          </>
+        )}
       </section>
     </div>
   );

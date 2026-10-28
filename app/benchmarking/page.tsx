@@ -10,12 +10,12 @@ import { paystackConfigured } from "@/lib/billing/paystack";
 import { priceText, rateItem } from "@/lib/billing/ratecard";
 import { rateOptions } from "@/lib/data/kenya-rates";
 import { site } from "@/lib/site";
-import { fitDescription } from "@/lib/seo";
+import { fitDescription, fitTitle } from "@/lib/seo";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Treasury benchmarking: your quarter against the market",
+  title: fitTitle("Treasury benchmarking for boards and trustees"),
   description: fitDescription("For SACCO boards and pension trustees: send your holdings and get one sourced page showing, in shillings, what the same money earned against Kenya's Treasury auctions and the funds' published yields over the quarter. Facts, not advice."),
   alternates: { canonical: `${site.url}/benchmarking` },
 };

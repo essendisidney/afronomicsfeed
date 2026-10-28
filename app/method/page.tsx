@@ -6,6 +6,7 @@ import { deskLabels, indicatorDefs } from "@/lib/data/indicators";
 import { projectsSource } from "@/lib/data/projects";
 import { feeds } from "@/lib/data/wire";
 import { site } from "@/lib/site";
+import { SOURCES } from "@/lib/source-registry";
 
 export const metadata: Metadata = {
   title: "Sources and method",
@@ -166,6 +167,20 @@ export default function MethodPage() {
         Every series can be downloaded as CSV from its data page. Cite it as “Source: Afronomics, compiled from [publisher]”. The underlying
         World Bank data is licensed CC BY 4.0.
       </p>
+      <h2 id="source-registry">Source registry and reuse terms</h2>
+      <p>
+        Every publisher our paid products draw on, what we take and on what terms. A source that needs written permission stays out of paid products
+        until it is granted; facts from all of them are reported with attribution. The same list is at{" "}
+        <a href="/api/v1/sources">/api/v1/sources</a>, and the fingerprint, row count and newest date of every dataset deployed is at{" "}
+        <a href="/api/v1/provenance">/api/v1/provenance</a>. Every row is checked for a source link, a date and a rate in range before it is published.
+      </p>
+      <ul>
+        {SOURCES.map((x) => (
+          <li key={x.id}>
+            <strong>{x.publisher}</strong>, {x.what.toLowerCase()} ({x.frequency}). {x.terms}
+          </li>
+        ))}
+      </ul>
     </ProsePage>
   );
 }

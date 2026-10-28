@@ -282,3 +282,30 @@ export function CopyLink({ href, label: text }: { href: string; label: string })
     </button>
   );
 }
+
+export function AddWebhook() {
+  return (
+    <Form action="treasury_webhook_add" submit="Add webhook" className="grid gap-2 sm:grid-cols-3">
+      <label className="block">
+        <span className={label}>API key number</span>
+        <input name="key_id" inputMode="numeric" required className={field} placeholder="12" />
+      </label>
+      <label className="block sm:col-span-2">
+        <span className={label}>Their https URL</span>
+        <input name="url" type="url" required className={field} placeholder="https://example.com/hooks/afronomics" />
+      </label>
+      <label className="block sm:col-span-3">
+        <span className={label}>Markets (blank for all), e.g. kenya, ghana</span>
+        <input name="markets" className={field} />
+      </label>
+    </Form>
+  );
+}
+
+export function StopWebhook({ id }: { id: number }) {
+  return (
+    <Form action="treasury_webhook_off" submit="Stop" reset={false}>
+      <input type="hidden" name="id" value={id} />
+    </Form>
+  );
+}

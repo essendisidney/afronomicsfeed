@@ -1,5 +1,5 @@
 import { SectionTitle } from "@/components/data/parts";
-import { CopyLink, CreateInvoice, GrantEntitlement, LoadTargets, MarkInvoicePaid, MarkPack, RenameOrg, ReviewBenchmark, SetKraPin, STAGES, UpdateTarget } from "./TreasuryActions";
+import { AddWebhook, CopyLink, CreateInvoice, StopWebhook, GrantEntitlement, LoadTargets, MarkInvoicePaid, MarkPack, RenameOrg, ReviewBenchmark, SetKraPin, STAGES, UpdateTarget } from "./TreasuryActions";
 
 export type Treasury = {
   period: string;
@@ -30,6 +30,7 @@ export type Treasury = {
 
 export type DeskInvoice = { id: number; number: string; org_id: number; name: string; kra_pin: string | null; amount: number; currency: string; issued_on: string; paid_on: string | null; method: string | null };
 export type DeskBenchmark = { id: number; org_id: number; name: string; quarter: string; holdings: number; uploaded_at: string; reviewed_by: string | null; reviewed_at: string | null; released_at: string | null };
+export type DeskWebhook = { id: number; key_id: number; key_label: string; url: string; markets: string[] | null; active: boolean; delivered: number; failed: number; secret: string | null };
 export type OrgLinks = Record<number, { pack: string | null; benchmark: string | null }>;
 
 /** The 90-day test's goals (founder-strategy-pack.md section K; D-035). */
@@ -44,7 +45,7 @@ const GOALS = [
 const kes = (n: number) => new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(n);
 const stageLabel = (id: string) => STAGES.find((s) => s.id === id)?.label ?? id;
 
-export function TreasuryPanel({ data, applyNote, links = {}, invoices = null, benchmarks = null }: { data: Treasury | null; applyNote: string | null; links?: OrgLinks; invoices?: DeskInvoice[] | null; benchmarks?: DeskBenchmark[] | null }) {
+export function TreasuryPanel({ data, applyNote, links = {}, invoices = null, benchmarks = null, webhooks = null }: { data: Treasury | null; applyNote: string | null; links?: OrgLinks; invoices?: DeskInvoice[] | null; benchmarks?: DeskBenchmark[] | null; webhooks?: DeskWebhook[] | null }) {
   if (!data) {
     return (
       <section>
@@ -253,6 +254,41 @@ export function TreasuryPanel({ data, applyNote, links = {}, invoices = null, be
               </li>
             ))}
           </ul>
+        )}
+      </section>
+      <section>
+        <SectionTitle kicker="Data licence" title="auction.published webhooks" note="Signed POSTs after each auction lands. Give the customer the signing secret yourself; see /developers#webhooks." />
+        {webhooks == null ? (
+          <p className="mt-3 text-sm text-ink-soft">Waiting for migration 0050.</p>
+        ) : (
+          <>
+            {webhooks.length ? (
+              <ul className="mt-3 divide-y divide-rule border-y border-rule">
+                {webhooks.map((w) => (
+                  <li key={w.id} className="flex flex-wrap items-end justify-between gap-3 py-3">
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-ink">
+                        {w.key_label} · <span className="break-all font-normal">{w.url}</span>
+                      </p>
+                      <p className="text-[12px] text-muted">
+                        {w.markets?.length ? w.markets.join(", ") : "all markets"} · {w.delivered} delivered · {w.failed} failed · {w.active ? "on" : "off"}
+                      </p>
+                      {w.secret && w.active ? <p className="mt-1 break-all font-mono text-[11px] text-ink-soft">Signing secret: {w.secret}</p> : null}
+                    </div>
+                    {w.active ? <StopWebhook id={w.id} /> : null}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-3 text-sm text-ink-soft">None yet.</p>
+            )}
+            <details className="mt-4 max-w-2xl">
+              <summary className="cursor-pointer text-sm font-semibold text-ink">Add a webhook for an API key</summary>
+              <div className="mt-3">
+                <AddWebhook />
+              </div>
+            </details>
+          </>
         )}
       </section>
     </div>

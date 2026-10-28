@@ -23,22 +23,22 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 7,
-  "results": 18,
-  "p50_h": 3.9,
-  "p90_h": 12.8
+  "timed": 12,
+  "results": 31,
+  "p50_h": 2.5,
+  "p90_h": 11.0
  },
  "summary": [
   {
    "kind": "bills",
    "market": "kenya",
    "name": "Kenya",
-   "results": 1,
-   "timed": 1,
+   "results": 2,
+   "timed": 2,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the result's own document",
-   "status": "1 timed result so far; figures from 5"
+   "status": "2 timed results so far; figures from 5"
   },
   {
    "kind": "bills",
@@ -55,40 +55,40 @@
    "kind": "bills",
    "market": "ghana",
    "name": "Ghana",
-   "results": 1,
-   "timed": 1,
+   "results": 2,
+   "timed": 2,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "upload time in the Bank of Ghana's media index",
-   "status": "1 timed result so far; figures from 5"
+   "status": "2 timed results so far; figures from 5"
   },
   {
    "kind": "bills",
    "market": "uganda",
    "name": "Uganda",
-   "results": 0,
-   "timed": 0,
+   "results": 1,
+   "timed": 1,
    "p50_h": null,
    "p90_h": null,
-   "publisher_time": null,
-   "status": "no new result since measuring began"
+   "publisher_time": "Last-Modified of the result's own document",
+   "status": "1 timed result so far; figures from 5"
   },
   {
    "kind": "bills",
    "market": "tanzania",
    "name": "Tanzania",
-   "results": 0,
+   "results": 1,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": null,
-   "status": "no new result since measuring began"
+   "status": "publisher time unknown"
   },
   {
    "kind": "bills",
    "market": "egypt",
    "name": "Egypt",
-   "results": 1,
+   "results": 2,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -99,7 +99,7 @@
    "kind": "bills",
    "market": "southafrica",
    "name": "South Africa",
-   "results": 1,
+   "results": 2,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -121,7 +121,7 @@
    "kind": "bills",
    "market": "malawi",
    "name": "Malawi",
-   "results": 4,
+   "results": 5,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -132,12 +132,12 @@
    "kind": "bills",
    "market": "mozambique",
    "name": "Mozambique",
-   "results": 1,
-   "timed": 1,
+   "results": 2,
+   "timed": 2,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the publisher's file (this result is the newest in it)",
-   "status": "1 timed result so far; figures from 5"
+   "status": "2 timed results so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -154,18 +154,18 @@
    "kind": "bonds",
    "market": "nigeria",
    "name": "Nigeria",
-   "results": 0,
+   "results": 1,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": null,
-   "status": "no new result since measuring began"
+   "status": "publisher time unknown"
   },
   {
    "kind": "bonds",
    "market": "egypt",
    "name": "Egypt",
-   "results": 1,
+   "results": 2,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -198,18 +198,18 @@
    "kind": "bonds",
    "market": "morocco",
    "name": "Morocco",
-   "results": 2,
-   "timed": 2,
+   "results": 3,
+   "timed": 3,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the result's own document",
-   "status": "2 timed results so far; figures from 5"
+   "status": "3 timed results so far; figures from 5"
   },
   {
    "kind": "bonds",
    "market": "waemu",
    "name": "WAEMU (UMOA-Titres)",
-   "results": 3,
+   "results": 5,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -218,6 +218,119 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:waemu:2026-10-27:cote-divoire",
+   "kind": "bonds",
+   "market": "waemu",
+   "date": "2026-10-27",
+   "first_seen_at": "2026-10-27T20:54:45+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bonds:morocco:2026-10-27",
+   "kind": "bonds",
+   "market": "morocco",
+   "date": "2026-10-27",
+   "first_seen_at": "2026-10-27T20:47:15+00:00",
+   "published_at": "2026-10-27T18:34:01+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 2.22
+  },
+  {
+   "key": "bonds:egypt:2026-10-27",
+   "kind": "bonds",
+   "market": "egypt",
+   "date": "2026-10-27",
+   "first_seen_at": "2026-10-26T16:50:15+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:malawi:2026-10-27",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-10-27",
+   "first_seen_at": "2026-10-28T10:35:37+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:egypt:2026-10-27",
+   "kind": "bills",
+   "market": "egypt",
+   "date": "2026-10-27",
+   "first_seen_at": "2026-10-27T09:48:08+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:southafrica:2026-10-26",
+   "kind": "bills",
+   "market": "southafrica",
+   "date": "2026-10-26",
+   "first_seen_at": "2026-10-27T09:48:24+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:kenya:2026-10-26",
+   "kind": "bills",
+   "market": "kenya",
+   "date": "2026-10-26",
+   "first_seen_at": "2026-10-22T15:14:46+00:00",
+   "published_at": "2026-10-22T14:35:30+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 0.65
+  },
+  {
+   "key": "bonds:waemu:2026-10-23:senegal",
+   "kind": "bonds",
+   "market": "waemu",
+   "date": "2026-10-23",
+   "first_seen_at": "2026-10-23T15:14:40+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:ghana:2026-10-23",
+   "kind": "bills",
+   "market": "ghana",
+   "date": "2026-10-23",
+   "first_seen_at": "2026-10-23T19:57:26+00:00",
+   "published_at": "2026-10-23T18:31:48+00:00",
+   "published_how": "upload time in the Bank of Ghana's media index",
+   "delay_h": 1.43
+  },
+  {
+   "key": "bills:uganda:2026-10-21",
+   "kind": "bills",
+   "market": "uganda",
+   "date": "2026-10-21",
+   "first_seen_at": "2026-10-21T15:26:28+00:00",
+   "published_at": "2026-10-21T12:39:50+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 2.78
+  },
+  {
+   "key": "bills:tanzania:2026-10-21",
+   "kind": "bills",
+   "market": "tanzania",
+   "date": "2026-10-21",
+   "first_seen_at": "2026-10-21T15:13:18+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:mozambique:2026-10-21",
+   "kind": "bills",
+   "market": "mozambique",
+   "date": "2026-10-21",
+   "first_seen_at": "2026-10-22T15:15:46+00:00",
+   "published_at": "2026-10-22T07:49:34+00:00",
+   "published_how": "Last-Modified of the publisher's file (this result is the newest in it)",
+   "delay_h": 7.44
+  },
   {
    "key": "bonds:waemu:2026-10-20:cote-divoire",
    "kind": "bonds",
@@ -252,6 +365,15 @@
    "market": "egypt",
    "date": "2026-10-20",
    "first_seen_at": "2026-10-20T09:24:17+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bonds:nigeria:2026-10-19",
+   "kind": "bonds",
+   "market": "nigeria",
+   "date": "2026-10-19",
+   "first_seen_at": "2026-10-22T09:27:18+00:00",
    "published_at": null,
    "published_how": null
   },
@@ -780,5 +902,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-21T09:34:22+00:00"
+ "updated_at": "2026-10-28T10:47:18+00:00"
 }

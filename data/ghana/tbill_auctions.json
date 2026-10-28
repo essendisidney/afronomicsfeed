@@ -3,12 +3,48 @@
  "publisher": "Bank of Ghana",
  "source_page": "https://www.bog.gov.gh/gog_auction_results/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-17T09:28:38+00:00",
+ "updated_at": "2026-10-23T19:57:26+00:00",
  "units": {
   "amounts": "GHS millions",
   "rates": "percent per annum (interest-rate equivalent; discount rate also given)"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "tender": 2030,
+   "auction_date": "2026-10-23",
+   "value_date": "2026-10-26",
+   "received_ghs_m": 873.69,
+   "accepted_ghs_m": 420.24,
+   "discount_rate": 8.8206,
+   "weighted_avg_rate": 9.6739,
+   "target_total_ghs_m": 3798.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/10/Auctresults-2030.pdf"
+  },
+  {
+   "tenor": 182,
+   "tender": 2030,
+   "auction_date": "2026-10-23",
+   "value_date": "2026-10-26",
+   "received_ghs_m": 533.28,
+   "accepted_ghs_m": 420.66,
+   "discount_rate": 6.1009,
+   "weighted_avg_rate": 6.2929,
+   "target_total_ghs_m": 3798.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/10/Auctresults-2030.pdf"
+  },
+  {
+   "tenor": 91,
+   "tender": 2030,
+   "auction_date": "2026-10-23",
+   "value_date": "2026-10-26",
+   "received_ghs_m": 2859.63,
+   "accepted_ghs_m": 2551.76,
+   "discount_rate": 4.5609,
+   "weighted_avg_rate": 4.6135,
+   "target_total_ghs_m": 3798.0,
+   "source": "https://www.bog.gov.gh/wp-content/uploads/2026/10/Auctresults-2030.pdf"
+  },
   {
    "tenor": 364,
    "tender": 2029,
@@ -16830,6 +16866,14 @@
    ]
   },
   "https://www.bog.gov.gh/wp-content/uploads/2026/10/Auctresults-2029.pdf": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://www.bog.gov.gh/wp-content/uploads/2026/10/Auctresults-2030.pdf": {
    "status": "parsed",
    "tenors": [
     91,

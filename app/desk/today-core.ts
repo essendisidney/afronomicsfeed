@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { Deal, PilotKey } from "./CommandCentre";
+import type { PilotKey } from "./money-core";
 
 /**
- * The logic behind the morning desk (docs/desk-redesign.md): what needs the founder today, the D-004 gate, pilot
- * flags and the inbox. Pure functions over what the desk functions return, so the page stays a plain layout.
+ * The logic behind the morning desk: what needs the founder today, key status and the inbox. There are no follow-ups
+ * here: the founder stopped all follow-ups and chasing on 22 Oct 2026 (D-034). Pure functions over what the desk functions return, so the page stays a plain layout.
  */
 
 export const DAY = 86400000;
@@ -19,8 +19,6 @@ export type TodayData = {
 };
 
 export type MoneyWindow = { label: string; rows: { currency: string | null; amount: number }[]; count?: number };
-
-export type DealRow = Deal & { notes?: string | null };
 
 /** A key with everything the pilots panel shows. */
 export type KeyRow = PilotKey & {
@@ -124,73 +122,37 @@ export function inboxFallback(
   return items.sort((a, b) => b.at.localeCompare(a.at));
 }
 
-/** Pilot status for one key: the day of the pilot, days left, and what to do. */
+/** Status for one key: the day of a pilot, days left, and whether it has ended. */
 export function pilotFlag(k: KeyRow, now: number) {
-  const age = Math.floor((now - Date.parse(k.created_at)) / DAY);
-  const day = age + 1;
+  const day = Math.floor((now - Date.parse(k.created_at)) / DAY) + 1;
   const end = k.expires_at ? Date.parse(k.expires_at) : k.plan === "trial" ? Date.parse(k.created_at) + PILOT_DAYS * DAY : null;
   const daysLeft = end == null ? null : Math.ceil((end - now) / DAY);
-  const active7 = (k.calls_7d ?? 0) > 0 || (k.days_used_7d ?? 0) > 0;
-  let flag: "ask" | "nudge" | "expired" | null = null;
-  if (k.revoked_at) flag = null;
-  else if (daysLeft != null && daysLeft <= 0) flag = "expired";
-  else if (k.plan === "trial" && (((daysLeft ?? 99) <= 7 || day >= 23) && active7)) flag = "ask";
-  else if (k.plan === "trial" && (k.days_used ?? 0) >= 5) flag = "ask";
-  else if (k.plan === "trial" && day > 7 && !active7) flag = "nudge";
-  return { day, daysLeft, flag };
+  return { day, daysLeft, expired: !k.revoked_at && daysLeft != null && daysLeft <= 0 };
 }
 
 export type Need = { rule: string; label: string; detail?: string; href: string; tone: "down" | "warn" | "neutral"; action?: { kind: "access"; reference: string } };
 
-const FOUNDER_STEP = /^\s*founder\b/i;
-/** The newest note line holds ESC (the sales operator's escalation marker, sales-operator §4). */
-export function escalation(d: DealRow) {
-  if (d.stage === "won" || d.stage === "lost") return null;
-  if (d.next_step && FOUNDER_STEP.test(d.next_step)) return d.next_step;
-  const last = (d.notes ?? "").trim().split(/\n|·/).map((x) => x.trim()).filter(Boolean).at(-1) ?? "";
-  return /\bESC\b/.test(last) ? last : null;
-}
-
-/** "Needs you today", in the order of docs/desk-redesign.md §2. */
+/** "Needs you today": access to send, inbox items waiting, setup gaps. Never a follow-up. */
 export function needsToday({
   payments,
-  deals,
   inbox,
-  keys,
   setup,
   now,
-  today,
 }: {
   payments: { reference: string; plan: string | null; amount: number; currency: string | null; status: string; paid_at: string; access_sent_at: string | null }[];
-  deals: DealRow[];
   inbox: InboxItem[];
-  keys: KeyRow[];
   setup: { label: string; detail: string }[];
   now: number;
-  today: string;
 }): Need[] {
   const out: Need[] = [];
   for (const p of payments.filter((x) => x.status === "success" && !x.access_sent_at)) {
-    out.push({ rule: "Access not sent", label: `${p.plan ?? "payment"} paid ${p.paid_at.slice(0, 10)}`, detail: p.reference, href: "#ref-payments", tone: "down", action: { kind: "access", reference: p.reference } });
-  }
-  for (const d of deals) {
-    const e = escalation(d);
-    if (e) out.push({ rule: "Escalation", label: `#${d.id} ${d.organisation}`, detail: e, href: "#pipeline", tone: "down" });
-  }
-  const open = deals.filter((d) => d.stage !== "won" && d.stage !== "lost" && d.next_date && d.next_date <= today && !escalation(d));
-  for (const d of open.sort((a, b) => (a.next_date ?? "").localeCompare(b.next_date ?? ""))) {
-    out.push({ rule: d.next_date! < today ? "Overdue follow-up" : "Follow-up today", label: `#${d.id} ${d.organisation}`, detail: `${d.next_step ?? "no next step"} (${d.next_date})`, href: "#pipeline", tone: d.next_date! < today ? "down" : "warn" });
+    out.push({ rule: "Access not sent", label: `${p.plan ?? "payment"} paid ${p.paid_at.slice(0, 10)}`, detail: p.reference, href: "?tab=money#ref-payments", tone: "down", action: { kind: "access", reference: p.reference } });
   }
   const weekAgo = new Date(now - 7 * DAY).toISOString();
   const waiting = inbox.filter((i) => !i.handled && i.at >= weekAgo);
   const order: InboxCategory[] = ["pilot", "invoice", "enquiry", "survey", "feedback"];
   for (const i of waiting.sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category) || b.at.localeCompare(a.at))) {
     out.push({ rule: `${CATEGORY_LABEL[i.category]} waiting`, label: i.title, detail: i.meta, href: "#inbox", tone: i.category === "pilot" || i.category === "invoice" ? "warn" : "neutral" });
-  }
-  for (const k of keys) {
-    const f = pilotFlag(k, now);
-    if (f.flag === "ask") out.push({ rule: "Ask for payment", label: k.label, detail: `pilot day ${f.day}${f.daysLeft != null ? `, ${f.daysLeft} d left` : ""}`, href: "#pilots", tone: "warn" });
-    else if (f.flag === "nudge") out.push({ rule: "Pilot idle", label: k.label, detail: `no calls in 7 days, day ${f.day}`, href: "#pilots", tone: "neutral" });
   }
   for (const s of setup) out.push({ rule: "Setup", label: s.label, detail: s.detail, href: "#needs", tone: "neutral" });
   return out;

@@ -27,8 +27,8 @@ grades its own forecasts in public.
 - **Code does the arithmetic; models only write words.** A model never produces a number that is shown to a reader.
 - Every story and every pack passes `scripts/story_check.py` (or its successor) before it ships.
 - Information, not advice: no buy/sell/hold, no promised returns.
-- Warnings about a **named** institution go only to that institution's own board, privately. Public pages show
-  sector-level patterns only.
+- Named companies, institutions and people: one rule, in `docs/editorial/named-institutions.md` (D-028). Warnings
+  about a SACCO's own position against SASRA's minimums stay private to its board (Watch pack).
 - Labels: Facts, Analysis, Opinion, as in `docs/editorial/voice.md`.
 - Least cost: no new paid services. Stay on Vercel, Supabase, GitHub Actions. Model calls only where words are written.
 - Authority rests on the institution, not on one person. No founder photos or personal branding on the site.

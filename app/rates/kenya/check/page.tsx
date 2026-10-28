@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FairRate } from "@/components/data/FairRate";
 import { PageShell } from "@/components/data/PageShell";
 import { fairBench } from "@/lib/data/kenya-rates";
+import { kenyaSaveOptions } from "@/lib/found-data";
 import { site } from "@/lib/site";
 import { fitDescription, withSocial } from "@/lib/seo";
 
@@ -34,7 +35,7 @@ export default function FairRatePage() {
         </p>
       }
     >
-      {bench ? <FairRate bench={bench} /> : <p className="text-sm text-ink-soft">Benchmarks are loading.</p>}
+      {bench ? <FairRate bench={bench} options={kenyaSaveOptions()} /> : <p className="text-sm text-ink-soft">Benchmarks are loading.</p>}
       <section className="mt-12 grid gap-8 md:grid-cols-3 text-sm leading-6 text-ink-soft">
         <div>
           <h3 className="font-serif text-xl text-ink">Where the benchmarks come from</h3>

@@ -3,9 +3,19 @@
  "publisher": "Central Bank of Nigeria",
  "source": "https://www.cbn.gov.ng/rates/mnymktind.html",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "read_at": "2026-10-21T09:32:12+00:00",
+ "read_at": "2026-10-28T10:44:48+00:00",
  "note": "Money Market Indicators as the CBN publishes them, % a year: monetary policy rate, Treasury bill rate, savings deposit rate, deposit rates by term, prime and maximum lending rates.",
  "rows": [
+  {
+   "month": "2026-09",
+   "mpr": 23.0,
+   "tbill": 16.24,
+   "savings": 5.36,
+   "deposit_3m": 10.33,
+   "deposit_12m": 10.5,
+   "prime_lending": 19.04,
+   "max_lending": 32.62
+  },
   {
    "month": "2026-08",
    "mpr": 26.5,
@@ -1195,16 +1205,6 @@
    "deposit_12m": 6.25,
    "prime_lending": 17.1,
    "max_lending": 27.69
-  },
-  {
-   "month": "2016-09",
-   "mpr": 14.0,
-   "tbill": 14.0,
-   "savings": 4.05,
-   "deposit_3m": 7.68,
-   "deposit_12m": 5.75,
-   "prime_lending": 17.09,
-   "max_lending": 27.49
   }
  ]
 }

@@ -4,7 +4,7 @@ export function NewsletterBand({ title = "The Afronomics Morning", lede }: { tit
   return (
     <section className="on-night mt-16 grid gap-8 rounded-3xl bg-night px-6 py-10 text-night-ink sm:px-10 lg:grid-cols-2 lg:py-12">
       <div>
-        <p className="text-[14px] font-medium text-accent">Free · a two-minute read at 7:00, every weekday</p>
+        <p className="text-[14px] font-medium text-accent">Free · a two-minute read before 07:30, every weekday</p>
         <h2 className="mt-2 font-serif text-4xl leading-none">{title}</h2>
         <p className="mt-3 max-w-md text-sm leading-6 text-night-soft">
           {lede ??

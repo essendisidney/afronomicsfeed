@@ -1,0 +1,426 @@
+{
+ "dataset": "Kenya Poverty Premium",
+ "version": 1,
+ "month": "2026-10",
+ "generatedAt": "2026-10-22T08:29:30Z",
+ "compiledBy": "Afronomics (afronomicsfeed.com)",
+ "amounts": {
+  "fulizaKes": 1000,
+  "fulizaDays": 7,
+  "mobileLoanKes": 5000,
+  "mobileLoanDays": 30,
+  "savingKes": 10000,
+  "sendUsd": 200
+ },
+ "taxRate": 0.15,
+ "lines": [
+  {
+   "id": "borrow-overdraft-week",
+   "need": "Borrowing",
+   "status": "ok",
+   "title": "A week's overdraft on the phone",
+   "example": "KES 1,000 for 7 days",
+   "currency": "KES",
+   "low": {
+    "label": "M-PESA overdraft (Fuliza)",
+    "detail": "one-off 1% access fee plus the published daily fee for the balance band, excise included",
+    "kind": "option",
+    "rate": 271.14,
+    "money": 52,
+    "source": {
+     "file": "data/kenya/mpesa_tariffs.json",
+     "field": "fuliza.access_fee_pct, fuliza.daily",
+     "publisher": "Safaricom",
+     "url": "https://www.safaricom.co.ke/main-m-pesa/m-pesa-services/credit-and-savings/fuliza-mobile",
+     "asOf": "2026-10-15"
+    }
+   },
+   "best": {
+    "label": "Bank loan, industry average",
+    "detail": "weighted average lending rate across commercial banks, charged for the same days",
+    "kind": "benchmark",
+    "rate": 14.34,
+    "money": 2.75,
+    "source": {
+     "file": "data/kenya/rates.json",
+     "field": "bank_rates.rows[0].lending",
+     "publisher": "Central Bank of Kenya",
+     "url": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
+     "asOf": "2026-08"
+    }
+   },
+   "premium": 49.25,
+   "premiumRatePoints": 256.8,
+   "formula": "overdraft = amount × access fee % + daily band fee × days; bank = amount × average lending rate × days ÷ 365; premium = overdraft − bank",
+   "note": "The bank figure is an average, not a loan anyone can take for a week; a bank loan needs time, a credit check and often security."
+  },
+  {
+   "id": "borrow-mobile-loan-month",
+   "need": "Borrowing",
+   "status": "ok",
+   "title": "A month's mobile loan",
+   "example": "KES 5,000 for 30 days",
+   "currency": "KES",
+   "low": {
+    "label": "Mobile loan, the lowest published charge we track",
+    "detail": "M-Shwari loan: the provider's published charge, over its 30-day term",
+    "kind": "option",
+    "rate": 109.5,
+    "money": 450,
+    "source": {
+     "file": "data/kenya/mobile_loans.json",
+     "field": "rows[product=M-Shwari loan].pct",
+     "publisher": "NCBA Bank with Safaricom",
+     "url": "https://www.safaricom.co.ke/main-mpesa/m-pesa-services/credit-and-savings/m-shwari",
+     "asOf": "2026-10-05"
+    }
+   },
+   "best": {
+    "label": "Bank loan, industry average",
+    "detail": "weighted average lending rate across commercial banks, charged for the same days",
+    "kind": "benchmark",
+    "rate": 14.34,
+    "money": 58.93,
+    "source": {
+     "file": "data/kenya/rates.json",
+     "field": "bank_rates.rows[0].lending",
+     "publisher": "Central Bank of Kenya",
+     "url": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
+     "asOf": "2026-08"
+    }
+   },
+   "premium": 391.07,
+   "premiumRatePoints": 95.16,
+   "formula": "mobile loan = amount × published charge % for its term; bank = amount × average lending rate × days ÷ 365; premium = mobile loan − bank",
+   "note": "2 mobile loans held; the lowest charge is used, so the premium is the least a mobile borrower pays over the average."
+  },
+  {
+   "id": "borrow-sacco-loan",
+   "need": "Borrowing",
+   "status": "gap",
+   "title": "A SACCO loan",
+   "missing": "SACCO loan rates. We hold SACCO dividends and interest on deposits, not what SACCOs charge borrowers.",
+   "wouldNeed": "Loan rates published by SACCOs or by SASRA, read from the primary page and dated."
+  },
+  {
+   "id": "save-year",
+   "need": "Saving",
+   "status": "ok",
+   "title": "A year's savings",
+   "example": "KES 10,000 for a year, after 15% withholding tax",
+   "currency": "KES",
+   "low": {
+    "label": "Bank savings account, industry average",
+    "detail": "weighted average savings rate across commercial banks, after tax",
+    "kind": "benchmark",
+    "rate": 3.01,
+    "money": 300.9,
+    "source": {
+     "file": "data/kenya/rates.json",
+     "field": "bank_rates.rows[0].savings",
+     "publisher": "Central Bank of Kenya",
+     "url": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
+     "asOf": "2026-08"
+    }
+   },
+   "best": {
+    "label": "364-day Treasury bill",
+    "detail": "weighted average rate at the latest auction, after tax; the Central Bank's minimum is KES 50,000 face value",
+    "kind": "option",
+    "rate": 7.68,
+    "money": 768.26,
+    "source": {
+     "file": "data/kenya/tbill_auctions.json",
+     "field": "rows[tenor=364].weighted_avg_rate",
+     "publisher": "Central Bank of Kenya",
+     "url": "https://www.centralbank.go.ke/uploads/91_day_historical_treasury_bill_results/1647758237_RESULTS%202704-091%202678-182%202633-364%20DATED%2019-10-2026.pdf",
+     "asOf": "2026-10-19"
+    }
+   },
+   "premium": 467.36,
+   "premiumRatePoints": 4.67,
+   "formula": "earnings = amount × gross yearly rate × (1 − 15% tax); premium = Treasury bill earnings − bank savings earnings",
+   "context": [
+    {
+     "label": "Money market fund, median published yield",
+     "detail": "middle of the 5 funds whose yield we read, after tax",
+     "kind": "benchmark",
+     "rate": 8.8,
+     "money": 879.75,
+     "source": {
+      "file": "data/kenya/rates.json",
+      "field": "money_market_funds.rows[].effective_annual_yield",
+      "publisher": "each fund manager",
+      "url": "/rates/kenya/money-market-funds",
+      "asOf": "2026-10-21"
+     }
+    },
+    {
+     "label": "Money market fund, highest published yield",
+     "detail": "Zimele Fixed Income Fund (Savings Plan), after tax",
+     "kind": "option",
+     "rate": 11.4,
+     "money": 1139.85,
+     "source": {
+      "file": "data/kenya/rates.json",
+      "field": "money_market_funds.rows[name=Zimele Fixed Income Fund (Savings Plan)].effective_annual_yield",
+      "publisher": "Zimele Asset Management",
+      "url": "https://www.zimele.co.ke/",
+      "asOf": "2026-10-21"
+     }
+    }
+   ],
+   "note": "A saver with less than KES 50,000 cannot buy the bill. Money market funds are shown beside it; we do not hold their minimum deposits."
+  },
+  {
+   "id": "send-can-ken",
+   "need": "Sending money",
+   "status": "ok",
+   "title": "Sending home from Canada",
+   "example": "USD 200 sent once",
+   "currency": "USD",
+   "low": {
+    "label": "Average service surveyed",
+    "detail": "average fee plus exchange-rate margin across the 27 services surveyed",
+    "kind": "benchmark",
+    "rate": 7.28,
+    "money": 14.56,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=CAN,dst=KEN].avg_cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "best": {
+    "label": "Cheapest service surveyed",
+    "detail": "the lowest-cost service in the same survey (bank)",
+    "kind": "option",
+    "rate": 2.17,
+    "money": 4.34,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=CAN,dst=KEN].cheapest.cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "premium": 10.22,
+   "premiumRatePoints": 5.11,
+   "formula": "cost = USD 200 × cost % (fee plus exchange-rate margin); premium = average service cost − cheapest service cost"
+  },
+  {
+   "id": "send-rwa-ken",
+   "need": "Sending money",
+   "status": "ok",
+   "title": "Sending home from Rwanda",
+   "example": "USD 200 sent once",
+   "currency": "USD",
+   "low": {
+    "label": "Average service surveyed",
+    "detail": "average fee plus exchange-rate margin across the 7 services surveyed",
+    "kind": "benchmark",
+    "rate": 17.72,
+    "money": 35.44,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=RWA,dst=KEN].avg_cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "best": {
+    "label": "Cheapest service surveyed",
+    "detail": "the lowest-cost service in the same survey (bank)",
+    "kind": "option",
+    "rate": 4.16,
+    "money": 8.32,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=RWA,dst=KEN].cheapest.cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "premium": 27.12,
+   "premiumRatePoints": 13.56,
+   "formula": "cost = USD 200 × cost % (fee plus exchange-rate margin); premium = average service cost − cheapest service cost"
+  },
+  {
+   "id": "send-zaf-ken",
+   "need": "Sending money",
+   "status": "ok",
+   "title": "Sending home from South Africa",
+   "example": "USD 200 sent once",
+   "currency": "USD",
+   "low": {
+    "label": "Average service surveyed",
+    "detail": "average fee plus exchange-rate margin across the 36 services surveyed",
+    "kind": "benchmark",
+    "rate": 10.45,
+    "money": 20.9,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=ZAF,dst=KEN].avg_cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "best": {
+    "label": "Cheapest service surveyed",
+    "detail": "the lowest-cost service in the same survey (money transfer operator)",
+    "kind": "option",
+    "rate": 4.38,
+    "money": 8.76,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=ZAF,dst=KEN].cheapest.cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "premium": 12.14,
+   "premiumRatePoints": 6.07,
+   "formula": "cost = USD 200 × cost % (fee plus exchange-rate margin); premium = average service cost − cheapest service cost"
+  },
+  {
+   "id": "send-tza-ken",
+   "need": "Sending money",
+   "status": "ok",
+   "title": "Sending home from Tanzania",
+   "example": "USD 200 sent once",
+   "currency": "USD",
+   "low": {
+    "label": "Average service surveyed",
+    "detail": "average fee plus exchange-rate margin across the 10 services surveyed",
+    "kind": "benchmark",
+    "rate": 58.17,
+    "money": 116.34,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=TZA,dst=KEN].avg_cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "best": {
+    "label": "Cheapest service surveyed",
+    "detail": "the lowest-cost service in the same survey (money transfer operator)",
+    "kind": "option",
+    "rate": 8.22,
+    "money": 16.44,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=TZA,dst=KEN].cheapest.cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "premium": 99.9,
+   "premiumRatePoints": 49.95,
+   "formula": "cost = USD 200 × cost % (fee plus exchange-rate margin); premium = average service cost − cheapest service cost"
+  },
+  {
+   "id": "send-gbr-ken",
+   "need": "Sending money",
+   "status": "ok",
+   "title": "Sending home from United Kingdom",
+   "example": "USD 200 sent once",
+   "currency": "USD",
+   "low": {
+    "label": "Average service surveyed",
+    "detail": "average fee plus exchange-rate margin across the 32 services surveyed",
+    "kind": "benchmark",
+    "rate": 4.44,
+    "money": 8.88,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=GBR,dst=KEN].avg_cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "best": {
+    "label": "Cheapest service surveyed",
+    "detail": "the lowest-cost service in the same survey (money transfer operator)",
+    "kind": "option",
+    "rate": 1.57,
+    "money": 3.14,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=GBR,dst=KEN].cheapest.cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "premium": 5.74,
+   "premiumRatePoints": 2.87,
+   "formula": "cost = USD 200 × cost % (fee plus exchange-rate margin); premium = average service cost − cheapest service cost"
+  },
+  {
+   "id": "send-usa-ken",
+   "need": "Sending money",
+   "status": "ok",
+   "title": "Sending home from United States",
+   "example": "USD 200 sent once",
+   "currency": "USD",
+   "low": {
+    "label": "Average service surveyed",
+    "detail": "average fee plus exchange-rate margin across the 31 services surveyed",
+    "kind": "benchmark",
+    "rate": 5.2,
+    "money": 10.4,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=USA,dst=KEN].avg_cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "best": {
+    "label": "Cheapest service surveyed",
+    "detail": "the lowest-cost service in the same survey (money transfer operator)",
+    "kind": "option",
+    "rate": 0.27,
+    "money": 0.54,
+    "source": {
+     "file": "data/remittances/corridors.json",
+     "field": "corridors[src=USA,dst=KEN].cheapest.cost_pct",
+     "publisher": "World Bank, Remittance Prices Worldwide",
+     "url": "https://remittanceprices.worldbank.org/data-download",
+     "asOf": "2025-03-31"
+    }
+   },
+   "premium": 9.86,
+   "premiumRatePoints": 4.93,
+   "formula": "cost = USD 200 × cost % (fee plus exchange-rate margin); premium = average service cost − cheapest service cost"
+  },
+  {
+   "id": "protect-deposit-cover",
+   "need": "Protection",
+   "status": "gap",
+   "title": "Deposit cover: a bank saver against a SACCO saver",
+   "missing": "A dated, primary-source file of the deposit cover limit for bank deposits and the protection, if any, for SACCO deposits.",
+   "wouldNeed": "The Kenya Deposit Insurance Corporation's published cover limit and SASRA's or the law's statement on SACCO deposits, each read from the primary page."
+  }
+ ],
+ "oldInputs": [
+  {
+   "id": "data/remittances/corridors.json#corridors",
+   "asOf": "2025-03-31",
+   "ageDays": 579
+  }
+ ],
+ "notice": "Every figure is computed by code from the published sources named on each line. Information, not advice."
+}

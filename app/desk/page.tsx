@@ -11,40 +11,28 @@ import { loadLatency } from "@/lib/data/latency";
 import { renderTime } from "@/lib/data/fetcher";
 import { rpc } from "@/lib/store";
 import { moneyLabel } from "@/lib/billing/plans";
-import { CONTACTED } from "@/lib/strategy/board";
 import { DeskKey } from "./DeskKey";
 import { OwnerDevice } from "./OwnerDevice";
 import { MoneyPanel, type Money, type Referral } from "./MoneyPanel";
-import { CommandCentre, toUsd, type PilotKey } from "./CommandCentre";
-import { StrategyBoard } from "./StrategyBoard";
+import { toUsd, type PilotKey } from "./money-core";
 import { FunnelPanel, type Funnel } from "./FunnelPanel";
 import { loadFxQuote } from "@/lib/data/fx";
-import { AddCorrection, AddPress, GrantAccess, HideReport } from "./DeskActions";
+import { AddCorrection, AddIdea, AddPress, GrantAccess, HideReport } from "./DeskActions";
 import { country as reportCountry, item as reportItem } from "@/lib/reader-reports-core";
-import { TodayStrip, type Gate } from "./TodayStrip";
-import { PipelineBoard } from "./PipelineBoard";
+import { TodayPanel, type TodayFigures } from "./TodayPanel";
+import { MoneyWindows } from "./MoneyWindows";
+import { PeoplePanel, type PeopleList } from "./PeoplePanel";
 import { Inbox } from "./Inbox";
 import { PilotsPanel } from "./PilotsPanel";
-import { CasebookPanel } from "./CasebookPanel";
-import { loadCases } from "@/lib/cases";
 import { ContentPanel, type Campaign } from "./ContentPanel";
 import { SignalsPanel, type Signals } from "./SignalsPanel";
-import { DecisionsPanel, HealthPanel, RoutinesPanel, type Freshness } from "./OpsPanels";
-import { Cockpit } from "./Cockpit";
-import { MwananchiPanel } from "./MwananchiPanel";
-import { loadPains } from "@/lib/data/mwananchi";
-import { nextMoves } from "@/lib/mwananchi-core";
-import { Glance } from "./Glance";
-import { contentLane, healthLane, moneyLane, readersLane } from "./cockpit-core";
-import { loadReceipts } from "@/lib/receipts";
-import { editorialRows } from "@/lib/editorial";
+import { HealthPanel, type Freshness } from "./OpsPanels";
 import {
   inboxFallback,
   inboxFromRaw,
   needsToday,
   readSocialLog,
   readStoryLog,
-  type DealRow,
   type KeyRow,
   type MoneyWindow,
   type RawInbox,
@@ -188,9 +176,9 @@ const value = <T,>(r: { ok: boolean; value?: unknown } | null, isOk: (v: unknown
 const NAIROBI = 3 * 3600000;
 
 /** A folded reference group: everything the morning panels do not need, one tap away. */
-function Ref({ id, title, note, children }: { id: string; title: string; note: string; children: React.ReactNode }) {
+function Ref({ id, title, note, open, children }: { id: string; title: string; note: string; open?: boolean; children: React.ReactNode }) {
   return (
-    <details id={id} className="scroll-mt-20 rounded-2xl border border-rule bg-surface px-4 py-3 sm:px-5">
+    <details id={id} open={open} className="scroll-mt-20 rounded-2xl border border-rule bg-surface px-4 py-3 sm:px-5">
       <summary className="cursor-pointer list-none">
         <span className="font-serif text-lg text-ink">{title}</span>
         <span className="block text-[12px] text-muted">{note}</span>
@@ -200,23 +188,19 @@ function Ref({ id, title, note, children }: { id: string; title: string; note: s
   );
 }
 
-const NAV: [string, string][] = [
-  ["#cockpit", "At a glance"],
-  ["#needs", "Today"],
-  ["#pipeline", "Pipeline"],
-  ["#inbox", "Inbox"],
-  ["#pilots", "Pilots"],
-  ["#content", "Content"],
-  ["#signals", "Readers"],
-  ["#mwananchi", "Build next"],
-  ["#health", "Data"],
-  ["#routines", "Routines"],
-  ["#decisions", "Decisions"],
-  ["#casebook", "Casebook"],
-  ["#reference", "Reference"],
-];
+/** Four tabs, one job each. Server-rendered from ?tab=, so every tab is a plain link and works without JavaScript. */
+const TABS = [
+  { id: "today", label: "Today", note: "Three numbers and what needs you" },
+  { id: "people", label: "People", note: "Who signed up, and readers" },
+  { id: "money", label: "Money and pilots", note: "Payments, keys, funnel" },
+  { id: "site", label: "Site", note: "Content, traffic, data health" },
+] as const;
+type Tab = (typeof TABS)[number]["id"];
+const isTab = (t: string | undefined): t is Tab => TABS.some((x) => x.id === t);
 
-export default async function DeskPage() {
+export default async function DeskPage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
+  const { tab: tabParam } = await searchParams;
+  const tab: Tab = isTab(tabParam) ? tabParam : "today";
   const key = (await cookies()).get("af_desk")?.value ?? "";
   // Local development only: the desk key "preview-empty" opens the desk with no data, to check layout and empty
   // states without the real key. Never active in a production build.
@@ -227,7 +211,7 @@ export default async function DeskPage() {
   if (!desk) {
     return (
       <PageShell share={false} crumbs={[{ href: "/", label: "Home" }, { label: "Desk" }]} kicker="Private" title="The desk">
-        <p className="max-w-xl text-sm text-ink-soft">The owner’s view of Afronomics: money, the pipeline, the inbox, pilots, content and data health. Enter the desk key.</p>
+        <p className="max-w-xl text-sm text-ink-soft">The owner’s view of Afronomics: readers, content, money, API use and data health. Enter the desk key.</p>
         <div className="mt-6 max-w-sm">
           <DeskKey wrong={Boolean(key)} />
         </div>
@@ -237,20 +221,20 @@ export default async function DeskPage() {
 
   // Every desk function at once (each re-checks the key); the page waits for the slowest, not the sum.
   const call = (fn: string, args: Record<string, unknown> = {}) => (preview ? Promise.resolve(null) : rpc(fn, { p_secret: key, ...args }));
-  const [pay, aud, ppl, mon, ref, keyList, dl, fun, rep, tod, inb, sig, fx] = await Promise.all([
+  const [pay, aud, ppl, mon, ref, keyList, fun, rep, tod, inb, sig, fx, pl] = await Promise.all([
     call("af_payments"),
     call("af_desk_audience"),
     call("af_desk_people"),
     call("af_desk_money"),
     call("af_desk_referrals"),
     call("af_api_keys_list"),
-    call("af_deals_list"),
     call("af_desk_funnel"),
     call("af_reader_report_list", { p_limit: 60 }),
     call("af_desk_today"),
     call("af_desk_inbox", { p_days: 30 }),
     call("af_desk_signals"),
     preview ? Promise.resolve(null) : loadFxQuote(),
+    call("af_desk_people_list", { p_limit: 300 }),
   ]);
   const payments = value<Payments>(pay);
   const audience = value<Audience>(aud);
@@ -258,12 +242,12 @@ export default async function DeskPage() {
   const money = value<Money>(mon);
   const referrals = value<Referral[]>(ref, Array.isArray) ?? [];
   const apiKeys = value<ApiKey[]>(keyList, Array.isArray) ?? [];
-  const deals = value<DealRow[]>(dl, Array.isArray) ?? [];
   const funnel = value<Funnel>(fun);
   const reports = value<ReaderReport[]>(rep, Array.isArray) ?? [];
   const today0040 = value<TodayData>(tod);
   const rawInbox = value<RawInbox>(inb, Array.isArray);
   const signals = value<Signals>(sig);
+  const peopleList = value<PeopleList>(pl);
   // Units of each currency per US dollar; a fixed fallback for KES only if the live rate is unavailable.
   const perUsd: Record<string, number> = { USD: 1, ...(fx?.rates ?? { KES: 129 }) };
   const fxNote = fx ? `${fx.sourceName} rates of ${fx.updated.slice(5, 16)}` : "a fixed KES 129 to the dollar (live rate unavailable)";
@@ -298,8 +282,6 @@ export default async function DeskPage() {
           count: money ? money.revenue.reduce((n, r) => n + r.payments, 0) : (payments?.totals ?? []).reduce((n, t) => n + t.count, 0),
         },
       ];
-  const paidCount = windows[3].count ?? 0;
-  const firstPaid = successes.map((p) => p.paid_at).sort()[0];
 
   // Keys: the list, plus 7-day use and markets (af_desk_funnel) and days used (af_desk_today).
   const usage = new Map((funnel?.keys ?? []).map((k) => [k.id, k]));
@@ -319,23 +301,13 @@ export default async function DeskPage() {
   // Setup gaps the server can see without revealing a value: a missing migration, an unset secret.
   const setup: { label: string; detail: string }[] = [];
   if (!preview && (missing(tod) || missing(inb))) setup.push({ label: "Apply migration 0040", detail: "supabase/migrations/0040_desk_today.sql: days used, money today, inbox “mark handled”, traffic by campaign" });
+  if (!preview && missing(pl)) setup.push({ label: "Apply migration 0047", detail: "supabase/migrations/0047_desk_people_list.sql: the People tab (one row per person who gave us an email)" });
   if (!preview && missing(fun)) setup.push({ label: "Apply migration 0034", detail: "the funnel, click counts and surveys" });
   if (!process.env.PAID_KEY_SECRET) setup.push({ label: "Set PAID_KEY_SECRET in Vercel", detail: "Paid keys are derived from the Paystack secret until it is set (security review L-5). A fresh 32-byte random value." });
   if (!process.env.DOWNLOAD_SECRET) setup.push({ label: "Set DOWNLOAD_SECRET in Vercel", detail: "Download sessions are signed with a key derived from PAID_KEY_SECRET or the cron secret until it is set." });
   if (!process.env.PAYSTACK_SECRET_KEY) setup.push({ label: "PAYSTACK_SECRET_KEY is not set here", detail: "Checkout and payment checks cannot run on this deployment." });
 
-  const needs = needsToday({ payments: payments?.recent ?? [], deals, inbox, keys, setup, now, today: todayNbo });
-
-  const contacted = deals.filter((d) => d.stage !== "prospect").length;
-  const gate: Gate = {
-    contacts: contacted,
-    contactsNote: `deals past prospect; ${CONTACTED.count} sent per the decision log`,
-    pilots5: today0040 ? today0040.key_days.filter((k) => k.plan === "trial" && k.days_used >= 5).length : null,
-    pilotsNote: today0040
-      ? `of ${keys.filter((k) => k.plan === "trial").length} pilot keys issued`
-      : "needs migration 0040",
-    firstPayment: firstPaid ? firstPaid.slice(0, 10) : paidCount > 0 ? "yes" : null,
-  };
+  const needs = needsToday({ payments: payments?.recent ?? [], inbox, setup, now });
 
   // Content: the last 7 days of stories and LinkedIn posts, and what each campaign brought.
   const stories = readStoryLog(weekAgoDay);
@@ -370,151 +342,47 @@ export default async function DeskPage() {
   const returningShare = audience && desk.views_7d ? Math.round((audience.returning_7d / desk.views_7d) * 100) : null;
   const linkedin7d = audience ? audience.linkedin.reduce((n, r) => n + (r.views_7d ?? 0), 0) : null;
   const health = loadHealth();
-  const lanes = [
-    moneyLane({
-      windows,
-      perUsd,
-      deals,
-      keys,
-      failedPayments7d: (payments?.recent ?? []).filter((p) => p.status === "failed" && (!p.paid_at || now - Date.parse(p.paid_at) < 7 * DAY)).length,
-      now,
-    }),
-    readersLane({
-      people7d: people?.people_7d ?? null,
-      peoplePrev7d: people?.people_prev_7d ?? null,
-      views7d: desk.views_7d,
-      viewsPrev7d: desk.views_prev_7d,
-      signups7d: desk.subscribers_7d,
-      topSource: people?.people_sources_7d[0] ? sourceLabel(people.people_sources_7d[0].source) : (desk.referrers[0]?.host ?? null),
-    }),
-    contentLane({ receipts: loadReceipts(), calls: editorialRows(todayNbo), ideas: reports.filter((r) => r.kind === "story" && r.status === "new").length, today: todayNbo }),
-    healthLane({ health, staleFeeds: freshness.filter((f) => f.stale).map((f) => f.name) }),
-  ];
-  // The Mwananchi engine: this month (Nairobi) and the 7-day page views the desk already has.
-  const moves = nextMoves(loadPains(), { month: Number(todayNbo.slice(5, 7)), views: desk.top_pages, misses: signals?.search_misses ?? [] });
-  // The first screen (Glance): people per UTC day from af_desk_people; today is so far, yesterday and the 7-day mean are full days.
-  const utcDay = (d: number) => new Date(now - d * DAY).toISOString().slice(0, 10);
-  const peopleOn = (day: string) => people?.people_by_day.find((r) => r.day === day)?.people ?? 0;
-  const glance = {
-    peopleToday: people ? peopleOn(utcDay(0)) : null,
-    peopleYesterday: people ? peopleOn(utcDay(1)) : null,
-    peopleAvg7: people ? Math.round([1, 2, 3, 4, 5, 6, 7].reduce((n, d) => n + peopleOn(utcDay(d)), 0) / 7) : null,
-    collectedToday: (() => {
-      const t = toUsd(windows[0].rows, perUsd).total;
-      return `$${t < 10 && t > 0 ? t.toFixed(2) : Math.round(t).toLocaleString("en-US")}`;
-    })(),
-    paymentsToday: windows[0].count ?? 0,
-    signups7d: desk.subscribers_7d,
-    returningShare7d: returningShare,
-    topSource7d: people?.people_sources_7d[0] ? sourceLabel(people.people_sources_7d[0].source) : (desk.referrers[0]?.host ?? null),
+  // The Today tab: 30-day money, readers this week, new people this week.
+  const t30 = toUsd(windows[2].rows, perUsd).total;
+  const todayFigures: TodayFigures = {
+    collected30d: `$${t30 < 10 && t30 > 0 ? t30.toFixed(2) : Math.round(t30).toLocaleString("en-US")}`,
+    // From the 50 latest payments; exact until the 51st payment in a month.
+    payments30d: successes.filter((p) => Date.parse(p.paid_at) >= now - 30 * DAY).length,
+    people7d: people?.people_7d ?? null,
+    peoplePrev7d: people?.people_prev_7d ?? null,
+    newPeople7d: peopleList?.new_7d ?? desk.subscribers_7d,
+    knownPeople: peopleList?.total ?? null,
   };
   const moneyNote = `Real payments only (status “success”; tests never counted). Today starts at midnight Nairobi. US dollars at ${fxNote}.${today0040 ? "" : " Before migration 0040, today is read from the 50 latest payments."}`;
 
   return (
     <PageShell share={false} crumbs={[{ href: "/", label: "Home" }, { label: "Desk" }]} kicker={`Private · ${new Date(now + NAIROBI).toUTCString().replace(" GMT", "").slice(0, -3)} Nairobi`} title="The desk">
-      {/* One scrolling row on a phone, so the glance below stays on the first screen. */}
-      <nav aria-label="Desk sections" className="-mx-4 -mt-2 mb-4 flex gap-1.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:mb-5 sm:flex-wrap sm:overflow-visible sm:px-0">
-        {NAV.map(([href, label]) => (
-          <a key={href} href={href} className="inline-flex min-h-9 shrink-0 items-center rounded-full border border-rule px-3 text-[12px] font-medium text-ink-soft hover:border-accent hover:text-forest">
-            {label}
-          </a>
+      <nav aria-label="Desk tabs" className="-mx-4 -mt-2 mb-6 flex gap-1 overflow-x-auto border-b border-rule px-4 sm:mx-0 sm:px-0">
+        {TABS.map((t) => (
+          <Link
+            key={t.id}
+            href={t.id === "today" ? "/desk" : `/desk?tab=${t.id}`}
+            aria-current={tab === t.id ? "page" : undefined}
+            className={`-mb-px inline-flex min-h-11 shrink-0 items-center border-b-2 px-3 text-sm font-semibold ${
+              tab === t.id ? "border-accent text-ink" : "border-transparent text-muted hover:text-forest"
+            }`}
+          >
+            {t.label}
+          </Link>
         ))}
       </nav>
 
-      <Glance lanes={lanes} figures={glance} needs={needs} />
+      {tab === "today" ? (
+        <div className="space-y-10">
+          <TodayPanel figures={todayFigures} needs={needs} />
+          <Inbox items={inbox} now={now} canHandle={Boolean(rawInbox)} />
+        </div>
+      ) : null}
 
-      <div className="mt-10" />
-      <Cockpit lanes={lanes} />
-
-      <div className="mt-12" />
-      <TodayStrip windows={windows} perUsd={perUsd} moneyNote={moneyNote} gate={gate} needs={needs} />
-
-      <div className="mt-12 space-y-12">
-        <PipelineBoard deals={deals} today={todayNbo} />
-        <Inbox items={inbox} now={now} canHandle={Boolean(rawInbox)} />
-        <PilotsPanel keys={keys} now={now} daysKnown={Boolean(today0040)} />
-        <ContentPanel
-          stories={stories}
-          posts={posts}
-          briefViews={briefViews}
-          campaigns={campaigns}
-          campaignsNote={
-            today0040
-              ? "Every tagged link (utm source/campaign): LinkedIn posts, email alerts, Telegram, widgets, shares. People = one browser a day."
-              : "LinkedIn only, from af_desk_audience; every campaign and people counts after migration 0040."
-          }
-        />
-        <SignalsPanel signals={signals} />
-        <MwananchiPanel
-          {...moves}
-          signalsNote="Scored on reach, harm, season, data we hold, ways to earn, this week's page views and readers' searches that found nothing (lib/mwananchi-core.ts)."
-        />
-        <HealthPanel health={health} latency={loadLatency()} freshness={freshness} />
-        <RoutinesPanel />
-        <DecisionsPanel />
-        <CasebookPanel cases={loadCases()} />
-      </div>
-
-      <section id="reference" className="mt-14 scroll-mt-20 space-y-3">
-        <SectionTitle kicker="Reference" title="Everything else, folded" note="The weekly views: the USD 1m command centre, the funnel, model vs reality, money by product, audience, payments, traffic, reader reports and admin forms." />
-        <Ref id="ref-command" title="Command centre and strategy" note="Collected vs signed vs pipeline; milestones to USD 1m a month; model vs reality; status board">
-          <CommandCentre money={money} deals={deals} pilots={apiKeys} perUsd={perUsd} fxNote={fxNote} />
-          <StrategyBoard
-            collectedThisMonthUsd={toUsd((money?.revenue ?? []).map((r) => ({ currency: r.currency, amount: r.this_month })), perUsd).total}
-            payingInstitutions={deals.filter((x) => x.stage === "won").length}
-            pilots={apiKeys.filter((k) => k.plan === "trial" && !k.revoked_at).length}
-            prospects={deals.filter((x) => x.stage === "prospect").length}
-            apiCalls7d={apiCalls}
-            now={now}
-          />
-        </Ref>
-        <Ref id="ref-funnel" title="Funnel: visitor to payment" note="Real counts, 7 and 30 days; moments that matter; survey answers">
-          <FunnelPanel funnel={funnel} now={now} />
-        </Ref>
-        <Ref id="ref-money" title="Money by product and reader funnels" note="Revenue by plan, recurring, test payments counted apart, money-transfer referrals">
-          <MoneyPanel money={money} referrals={referrals} />
-        </Ref>
-        <Ref id="ref-payments" title="Payments" note="The 20 latest, with “mark access granted”">
-                    <section className="mt-10">
-            <SectionTitle kicker="Revenue" title="Payments" />
-            <div className="mt-3 flex flex-wrap gap-3 text-sm">
-              {payments?.totals.length ? (
-                payments.totals.map((t) => (
-                  <span key={t.currency ?? "x"} className="rounded-full border border-rule bg-surface px-3 py-1">
-                    <strong>{moneyLabel(t.month_amount, t.currency)}</strong> this month · {moneyLabel(t.amount, t.currency)} all time · {t.count} payment{t.count === 1 ? "" : "s"}
-                  </span>
-                ))
-              ) : (
-                <span className="text-muted">No payments yet{process.env.PAYSTACK_SECRET_KEY ? "" : " — Paystack key not set"}.</span>
-              )}
-            </div>
-            {payments?.recent.length ? (
-              <ul className="mt-2 divide-y divide-rule">
-                {payments.recent.slice(0, 20).map((p) => (
-                  <li key={p.reference} className="flex flex-wrap items-baseline gap-x-3 py-2 text-sm">
-                    <span className="font-semibold text-ink">{moneyLabel(p.amount, p.currency)}</span>
-                    <span className="text-ink-soft">{p.plan ?? "—"}</span>
-                    <a href={`mailto:${p.email ?? ""}`} className="underline">{p.email ?? "no email"}</a>
-                    <span className="text-[12px] text-muted">{p.channel ?? ""} · {ago(p.paid_at, now)} · {p.reference}</span>
-                    {p.access_sent_at ? <span className="text-[12px] text-up">access sent</span> : <GrantAccess reference={p.reference} />}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </section>
-        </Ref>
-        <Ref id="ref-audience" title="Audience" note={`${desk.views_7d} views and ${people?.people_7d ?? "—"} people in 7 days; subscribers, sign-ups, downloads, API`}>
-                    <section className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule grid-cols-2 lg:grid-cols-4">
-            <Stat label="Page views, 7 days" value={desk.views_7d} note={change == null ? "no prior week" : `${change > 0 ? "+" : ""}${change}% vs prior week`} tone={change == null ? undefined : change >= 0 ? "up" : "down"} />
-            <Stat label="Returning readers, 7 days" value={audience ? audience.returning_7d : "—"} note={returningShare == null ? "not available" : `${returningShare}% of views · counted from 5 Oct`} />
-            <Stat label="LinkedIn visits, 7 days" value={linkedin7d ?? "—"} note="from posts and linkedin.com" />
-            <Stat label="Subscribers" value={desk.subscribers} note={`+${desk.subscribers_7d} this week${desk.unsubscribed_7d ? `, −${desk.unsubscribed_7d}` : ""}`} tone="up" />
-            <Stat label="Alert sign-ups" value={desk.alert_subs} note={`+${desk.alert_subs_7d} this week`} />
-            <Stat label="Data downloads, 7 days" value={downloads} />
-            <Stat label="API calls, 7 days" value={apiCalls} />
-            <Stat label="Leads" value={desk.leads_total} note={desk.feedback_found_rate == null ? "no feedback yet" : `${desk.feedback_found_rate}% found what they came for`} />
-          </section>
-                    <section className="mt-10">
+      {tab === "people" ? (
+        <div>
+          <PeoplePanel list={peopleList} applyNote={missing(pl) ? "Waiting for migration 0047 (supabase/migrations/0047_desk_people_list.sql). Until it is applied, the inbox on the Today tab lists pilot requests and enquiries." : null} />
+          <section id="readers" className="mt-12 scroll-mt-20">
             <SectionTitle kicker={`Outside readers · counted from ${PEOPLE_FROM}`} title="People, not page views" note="One person = one browser on one day. Your own devices are left out." />
                 {people ? (
               <div className="mt-3 grid gap-8 lg:grid-cols-3">
@@ -586,8 +454,85 @@ export default async function DeskPage() {
               <p className="mt-2 text-sm text-muted">Not available.</p>
             )}
           </section>
+        </div>
+      ) : null}
+
+      {tab === "money" ? (
+        <div className="space-y-10">
+          <MoneyWindows windows={windows} perUsd={perUsd} moneyNote={moneyNote} />
+          <PilotsPanel keys={keys} now={now} daysKnown={Boolean(today0040)} />
+          <div className="space-y-3">
+            <Ref id="ref-funnel" open title="Funnel: visitor to payment" note="Real counts, 7 and 30 days; moments that matter; survey answers">
+          <FunnelPanel funnel={funnel} now={now} />
         </Ref>
-        <Ref id="ref-traffic" title="Traffic" note="Views over 30 days, LinkedIn by page over 90 days, top pages, referrers, downloads, API and embeds">
+            <Ref id="ref-payments" title="Payments" note="The 20 latest, with “mark access granted”">
+                    <section className="mt-10">
+            <SectionTitle kicker="Revenue" title="Payments" />
+            <div className="mt-3 flex flex-wrap gap-3 text-sm">
+              {payments?.totals.length ? (
+                payments.totals.map((t) => (
+                  <span key={t.currency ?? "x"} className="rounded-full border border-rule bg-surface px-3 py-1">
+                    <strong>{moneyLabel(t.month_amount, t.currency)}</strong> this month · {moneyLabel(t.amount, t.currency)} all time · {t.count} payment{t.count === 1 ? "" : "s"}
+                  </span>
+                ))
+              ) : (
+                <span className="text-muted">No payments yet{process.env.PAYSTACK_SECRET_KEY ? "" : " — Paystack key not set"}.</span>
+              )}
+            </div>
+            {payments?.recent.length ? (
+              <ul className="mt-2 divide-y divide-rule">
+                {payments.recent.slice(0, 20).map((p) => (
+                  <li key={p.reference} className="flex flex-wrap items-baseline gap-x-3 py-2 text-sm">
+                    <span className="font-semibold text-ink">{moneyLabel(p.amount, p.currency)}</span>
+                    <span className="text-ink-soft">{p.plan ?? "—"}</span>
+                    <a href={`mailto:${p.email ?? ""}`} className="underline">{p.email ?? "no email"}</a>
+                    <span className="text-[12px] text-muted">{p.channel ?? ""} · {ago(p.paid_at, now)} · {p.reference}</span>
+                    {p.access_sent_at ? <span className="text-[12px] text-up">access sent</span> : <GrantAccess reference={p.reference} />}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </section>
+        </Ref>
+            <Ref id="ref-money" title="Money by product and reader funnels" note="Revenue by plan, recurring, test payments counted apart, money-transfer referrals">
+          <MoneyPanel money={money} referrals={referrals} />
+        </Ref>
+          </div>
+        </div>
+      ) : null}
+
+      {tab === "site" ? (
+        <div className="space-y-12">
+          <ContentPanel
+            stories={stories}
+            posts={posts}
+            briefViews={briefViews}
+            campaigns={campaigns}
+            campaignsNote={
+              today0040
+                ? "Every tagged link (utm source/campaign): LinkedIn posts, email alerts, Telegram, widgets, shares. People = one browser a day."
+                : "LinkedIn only, from af_desk_audience; every campaign and people counts after migration 0040."
+            }
+          />
+          <div className="max-w-2xl">
+            <AddIdea />
+          </div>
+          <SignalsPanel signals={signals} />
+          <HealthPanel health={health} latency={loadLatency()} freshness={freshness} />
+          <div className="space-y-3">
+            <Ref id="ref-audience" open title="Audience" note={`${desk.views_7d} views and ${people?.people_7d ?? "—"} people in 7 days; subscribers, sign-ups, downloads, API`}>
+                    <section className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule grid-cols-2 lg:grid-cols-4">
+            <Stat label="Page views, 7 days" value={desk.views_7d} note={change == null ? "no prior week" : `${change > 0 ? "+" : ""}${change}% vs prior week`} tone={change == null ? undefined : change >= 0 ? "up" : "down"} />
+            <Stat label="Returning readers, 7 days" value={audience ? audience.returning_7d : "—"} note={returningShare == null ? "not available" : `${returningShare}% of views · counted from 5 Oct`} />
+            <Stat label="LinkedIn visits, 7 days" value={linkedin7d ?? "—"} note="from posts and linkedin.com" />
+            <Stat label="Subscribers" value={desk.subscribers} note={`+${desk.subscribers_7d} this week${desk.unsubscribed_7d ? `, −${desk.unsubscribed_7d}` : ""}`} tone="up" />
+            <Stat label="Alert sign-ups" value={desk.alert_subs} note={`+${desk.alert_subs_7d} this week`} />
+            <Stat label="Data downloads, 7 days" value={downloads} />
+            <Stat label="API calls, 7 days" value={apiCalls} />
+            <Stat label="Leads" value={desk.leads_total} note={desk.feedback_found_rate == null ? "no feedback yet" : `${desk.feedback_found_rate}% found what they came for`} />
+          </section>
+        </Ref>
+            <Ref id="ref-traffic" open title="Traffic" note="Views over 30 days, LinkedIn by page over 90 days, top pages, referrers, downloads, API and embeds">
                     <section className="mt-10">
             <SectionTitle kicker="Traffic" title="Views, last 30 days" />
             <div className="mt-4">
@@ -706,7 +651,7 @@ export default async function DeskPage() {
             </div>
           </section>
         </Ref>
-        <Ref id="ref-readers" title="Reader reports" note="Stories for the editor and prices readers paid; hide a wrong figure">
+            <Ref id="ref-readers" title="Reader reports" note="Stories for the editor and prices readers paid; hide a wrong figure">
                     <section className="mt-10 grid gap-10 lg:grid-cols-2">
             <div>
               <SectionTitle kicker="Readers" title="Stories for the editor" note="Never published as sent. Check before reporting anything." />
@@ -746,7 +691,7 @@ export default async function DeskPage() {
             </div>
           </section>
         </Ref>
-        <Ref id="ref-admin" title="Corrections and press list" note="Log a correction to a published figure; add to the Monday ASBI release list">
+            <Ref id="ref-admin" title="Corrections and press list" note="Log a correction to a published figure; add to the Monday ASBI release list">
                     <section className="mt-10 grid gap-10 lg:grid-cols-2">
             <div>
               <SectionTitle kicker="Reference" title="Log a correction to a published figure" />
@@ -762,13 +707,13 @@ export default async function DeskPage() {
             </div>
           </section>
         </Ref>
-      </section>
+          </div>
+          <OwnerDevice />
+        </div>
+      ) : null}
 
-      <div className="mt-8">
-        <OwnerDevice />
-      </div>
-            <p className="mt-10 text-xs text-muted">
-        Counts come from the privacy-first page counter (no cookies, no IPs). Leads and feedback are what people typed. GitHub Actions and Vercel logs hold the rest.
+      <p className="mt-10 text-xs text-muted">
+        Counts come from the privacy-first page counter (no cookies, no IPs). Leads, sign-ups and feedback are what people typed. GitHub Actions and Vercel logs hold the rest.
       </p>
     </PageShell>
   );

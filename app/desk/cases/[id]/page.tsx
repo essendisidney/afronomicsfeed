@@ -20,7 +20,7 @@ export default async function DeskCasePage({ params }: { params: Promise<{ id: s
   const c = getCase((await params).id, true);
   if (!c) notFound();
   return (
-    <PageShell share={false} crumbs={[{ href: "/desk", label: "Desk" }, { href: "/desk#casebook", label: "Casebook" }, { label: c.id }]} kicker={`Case ${c.id}`} title={c.title} lede={c.summary}>
+    <PageShell share={false} crumbs={[{ href: "/desk", label: "Desk" }, { label: c.id }]} kicker={`Case ${c.id}`} title={c.title} lede={c.summary}>
       <CaseView c={c} />
     </PageShell>
   );

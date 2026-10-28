@@ -67,7 +67,12 @@ export function packHtml(pack: Pack, opts: { client?: string; sample?: boolean; 
     .join("");
   // Government securities in maturity order, then every other option A to Z: the pack describes the market and never
   // ranks a named institution (D-028, D-035).
-  const government = pack.kenya.options.filter((o) => o.group === "Government");
+  // Bills by tenor, then bonds by years to maturity (lockIn reads "364 days" or "21.2 years to maturity").
+  const term = (lockIn: string) => {
+    const n = parseFloat(lockIn);
+    return /year/.test(lockIn) ? n * 365 : n;
+  };
+  const government = pack.kenya.options.filter((o) => o.group === "Government").sort((a, b) => term(a.lockIn) - term(b.lockIn));
   const others = pack.kenya.options.filter((o) => o.group !== "Government").sort((a, b) => a.name.localeCompare(b.name));
   const bill364 = government.find((o) => o.name.startsWith("364-day"));
   const optionRows = [...government, ...others]

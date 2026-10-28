@@ -32,7 +32,8 @@ export default async function BenchmarkingPage({ searchParams }: { searchParams:
   const query = await searchParams;
   const item = rateItem("benchmarking");
   const live = paystackConfigured();
-  const government = rateOptions().options.filter((o) => o.group === "Government");
+  const term = (lockIn: string) => parseFloat(lockIn) * (/year/.test(lockIn) ? 365 : 1);
+  const government = rateOptions().options.filter((o) => o.group === "Government").sort((a, b) => term(a.lockIn) - term(b.lockIn));
 
   return (
     <PageShell

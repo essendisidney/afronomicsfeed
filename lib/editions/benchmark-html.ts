@@ -24,7 +24,7 @@ export function benchmarkHtml(o: { name: string; quarter: string; holdings: Hold
   const sources = [...new Set(b.lines.map((l) => l.auctionSource).filter((s): s is string => Boolean(s)))];
   const meta: DocMeta = {
     series: "Treasury benchmark",
-    title: `${o.quarter.replace("-", " ")}: the money beside the auctions`,
+    title: "The money beside the auctions",
     subtitle: `Each holding of ${o.name} in ${b.from} to ${b.to}, beside what the same shillings would have earned at the Central Bank of Kenya's Treasury bill auction of the nearest tenor, in the same weeks.`,
     number: `AF-BENCH-${o.sample ? "SAMPLE-" : ""}${o.quarter}${o.draft ? "-DRAFT" : ""}`,
     edition: o.quarter.replace("-", " "),
@@ -59,7 +59,7 @@ ${exhibit({
   title: "Each holding beside the auction of the nearest tenor",
   body: `<table><thead><tr><th>Holding</th><th class="num">KES</th><th class="num">Rate</th><th class="num">Days</th><th class="num">Earned</th><th class="num">Auction</th><th class="num">At auction</th><th class="num">Difference</th></tr></thead><tbody>${rows}</tbody></table>`,
   note: "Before tax on both sides. A positive difference means the holding earned more than the auction yardstick over the same days.",
-  source: "The institution's holdings; Central Bank of Kenya, Treasury bill auction results",
+  source: `${o.sample ? "Illustrative holdings" : "The institution's holdings"}; Central Bank of Kenya, Treasury bill auction results`,
   asOf: b.to,
   wide: true,
 })}`,

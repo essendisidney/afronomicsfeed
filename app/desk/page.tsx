@@ -418,6 +418,7 @@ export default async function DeskPage({ searchParams }: { searchParams: Promise
           invoices={deskInvoices}
           benchmarks={deskBenchmarks}
           webhooks={deskWebhooks}
+          at={now}
           applyNote={missing(trs) ? "Waiting for migration 0048 (supabase/migrations/0048_treasury_desk.sql). It is applied only on the founder’s yes; until then the 60 names are in docs/sales/treasury-desk-targets.md." : null}
         />
       ) : null}

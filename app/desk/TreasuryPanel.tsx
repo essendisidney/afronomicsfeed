@@ -1,4 +1,5 @@
 import { SectionTitle } from "@/components/data/parts";
+import { Scorecard } from "./Scorecard";
 import { AddWebhook, CopyLink, CreateInvoice, StopWebhook, GrantEntitlement, LoadTargets, MarkInvoicePaid, MarkPack, RenameOrg, ReviewBenchmark, SetKraPin, STAGES, UpdateTarget } from "./TreasuryActions";
 
 export type Treasury = {
@@ -45,7 +46,7 @@ const GOALS = [
 const kes = (n: number) => new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(n);
 const stageLabel = (id: string) => STAGES.find((s) => s.id === id)?.label ?? id;
 
-export function TreasuryPanel({ data, applyNote, links = {}, invoices = null, benchmarks = null, webhooks = null }: { data: Treasury | null; applyNote: string | null; links?: OrgLinks; invoices?: DeskInvoice[] | null; benchmarks?: DeskBenchmark[] | null; webhooks?: DeskWebhook[] | null }) {
+export function TreasuryPanel({ data, applyNote, links = {}, invoices = null, benchmarks = null, webhooks = null, at }: { data: Treasury | null; applyNote: string | null; links?: OrgLinks; invoices?: DeskInvoice[] | null; benchmarks?: DeskBenchmark[] | null; webhooks?: DeskWebhook[] | null; at: number }) {
   if (!data) {
     return (
       <section>
@@ -65,6 +66,7 @@ export function TreasuryPanel({ data, applyNote, links = {}, invoices = null, be
   };
   return (
     <div className="space-y-12">
+      <Scorecard data={data} now={at} />
       <section>
         <SectionTitle kicker="The 90-day test · D-035" title="Against the goals" note="Kill line: fewer than 3 paying after 40 qualified conversations." />
         <div className="mt-3 overflow-x-auto">

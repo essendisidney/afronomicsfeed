@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
+import { AdviceDisclaimer } from "@/components/legal/AdviceDisclaimer";
 import { CheckoutNotice } from "@/components/billing/CheckoutNotice";
 import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
 import { paystackConfigured } from "@/lib/billing/paystack";
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 const contents = [
   { n: "1", t: "Treasury bill rates, ten African markets", d: "91-, 182- and 364-day rates with one-month and one-year changes, a 12-month line per market, real yields after inflation and auction demand." },
   { n: "2", t: "Kenya’s government yield curve", d: "Every bill and bond auction placed on one curve, and the bond auctions settled in the last 30 days with rates, coupons, take-up and bid-to-cover." },
-  { n: "3", t: "Where the shilling earns most", d: "Bills, bonds, money market funds and bank averages on one scale, after withholding tax, with the Central Bank’s deposit and lending averages." },
+  { n: "3", t: "Where the shilling earns most", d: "Bills, bonds, money market funds and bank averages after withholding tax, government securities first and the rest A to Z (never ranked), with the Central Bank’s deposit and lending averages." },
   { n: "4", t: "Currencies and the month ahead", d: "Fourteen African currencies against the dollar over the month, and the expected date of each market’s next auction result." },
 ];
 
@@ -107,6 +108,8 @@ export default async function PackPage({ searchParams }: { searchParams: Promise
         </div>
         <p className="mt-3 text-xs text-muted">Annual billing takes two months off. Pay by M-Pesa, card or bank transfer, or ask for an invoice in KES or USD. First pack within two working days.</p>
       </section>
+
+      <AdviceDisclaimer />
 
       <section className="mt-14 max-w-2xl" id="enquiry">
         <SectionTitle kicker="Invoice instead" title="Prefer an invoice, or want the group version?" />

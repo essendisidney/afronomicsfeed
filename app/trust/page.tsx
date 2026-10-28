@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
+import { AdviceDisclaimer } from "@/components/legal/AdviceDisclaimer";
 import { Card } from "@/components/ui/Card";
 import { TableScroll } from "@/components/ui/DataTable";
 import { Stat, StatGroup } from "@/components/ui/Stat";
@@ -290,6 +291,7 @@ export default function TrustPage() {
           </p>
         </div>
       </section>
+      <AdviceDisclaimer />
     </PageShell>
   );
 }

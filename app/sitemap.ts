@@ -102,6 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...[...(loadLenders()?.lenders ?? []), ...(loadLenders()?.removed ?? [])].map((l) => page(lenderHref(l.name), "monthly", 0.6)),
     page("/for-institutions", "monthly", 0.7),
     page("/pack", "monthly", 0.7),
+    page("/benchmarking", "monthly", 0.6),
     page("/developers", "monthly", 0.6, debt),
     page("/data-api", "monthly", 0.7, bills),
     page("/data/frontier-local-debt", "weekly", 0.9, debt),

@@ -8,6 +8,13 @@ import { site } from "@/lib/site";
  */
 
 export { esc };
+
+/** A prospect's name for the cover: letters, digits, spaces and common name punctuation, at most 80 characters. */
+export function coverName(raw: string | null) {
+  const name = (raw ?? "").normalize("NFKC").replace(/[^\p{L}\p{N} &.,'’()\-]/gu, "").replace(/\s+/g, " ").trim().slice(0, 80);
+  return name.length >= 2 ? name : null;
+}
+
 export const pct = (v: number | null | undefined, d = 2) => (v == null ? "—" : `${v.toFixed(d)}%`);
 export const signed = (v: number | null | undefined, d = 2, unit = "") => (v == null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : "±"}${Math.abs(v).toFixed(d)}${unit}`);
 export const d = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
@@ -40,7 +47,7 @@ function curveChart(curve: Pack["kenya"]["curve"], w = 700, h = 220) {
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="max-width:100%">${ticks.join("")}${xt.join("")}<path d="${path}" fill="none" stroke="#45372f" stroke-width="2"/>${dots.join("")}</svg>`;
 }
 
-export function packHtml(pack: Pack, opts: { client?: string; sample?: boolean } = {}) {
+export function packHtml(pack: Pack, opts: { client?: string; sample?: boolean; preparedFor?: string } = {}) {
   const client = opts.client ?? "Sample";
   const sortedMarkets = [...pack.markets].sort((a, b) => a.market.country.localeCompare(b.market.country));
   const marketRows = sortedMarkets
@@ -58,8 +65,12 @@ export function packHtml(pack: Pack, opts: { client?: string; sample?: boolean }
   const bondRows = pack.kenya.bonds
     .map((b) => `<tr><td>${esc(b.issue)} <span class="muted small">${esc(b.kind)}</span></td><td class="num">${pct(b.weighted_avg_rate, 3)}</td><td class="num">${b.coupon != null ? pct(b.coupon) : "—"}</td><td class="num">${b.accepted_kes_m != null ? `${(b.accepted_kes_m / 1000).toFixed(1)}bn` : "—"}</td><td class="num">${b.bid_to_cover != null ? `${b.bid_to_cover.toFixed(2)}×` : "—"}</td><td class="small">${d.format(new Date(b.value_date))}</td></tr>`)
     .join("");
-  const optionRows = pack.kenya.options
-    .slice(0, 14)
+  // Government securities in maturity order, then every other option A to Z: the pack describes the market and never
+  // ranks a named institution (D-028, D-035).
+  const government = pack.kenya.options.filter((o) => o.group === "Government");
+  const others = pack.kenya.options.filter((o) => o.group !== "Government").sort((a, b) => a.name.localeCompare(b.name));
+  const bill364 = government.find((o) => o.name.startsWith("364-day"));
+  const optionRows = [...government, ...others]
     .map((o) => `<tr><td>${esc(o.name)}<div class="muted small">${esc(o.publisher)}</div></td><td class="num">${pct(o.gross)}</td><td class="num"><strong>${pct(o.net)}</strong></td><td class="small">${esc(o.lockIn)}</td><td class="small">${esc(o.asOf)}</td></tr>`)
     .join("");
   const fxRows = pack.fx.map((f) => `<tr><td>${esc(f.name)} <span class="muted small">${f.code}</span></td><td class="num">${f.now.toFixed(f.now >= 100 ? 2 : 4)}</td><td class="num">${f.monthAgo ? f.monthAgo.toFixed(f.monthAgo >= 100 ? 2 : 4) : "—"}</td><td class="num ${f.changePct == null ? "" : f.changePct >= 0 ? "up" : "down"}">${signed(f.changePct, 2, "%")}</td></tr>`).join("");
@@ -81,7 +92,7 @@ export function packHtml(pack: Pack, opts: { client?: string; sample?: boolean }
     number: `AF-PACK-${opts.sample ? "SAMPLE-" : ""}${monthNumber}`,
     edition: pack.month,
     asOf: pack.asOf,
-    preparedFor: opts.sample ? undefined : client,
+    preparedFor: opts.preparedFor ?? (opts.sample ? undefined : client),
     sample: opts.sample,
     sections: ["Treasury bill rates, ten African markets", "Kenya: the government yield curve", "Kenya: where the shilling earns most", "Currencies and the month ahead"],
     method: [
@@ -150,12 +161,12 @@ ${exhibit({
   <div class="kpi"><b>${bankNow ? pct(bankNow.deposit) : "—"}</b><span>Bank deposit rate, industry average${bankNow?.month ? `, ${esc(bankNow.month)}` : ""}</span></div>
   <div class="kpi"><b>${bankNow ? pct(bankNow.lending) : "—"}</b><span>Bank lending rate, industry average</span></div>
   <div class="kpi"><b>${bankNow && bankYr ? signed(Math.round((bankNow.deposit - bankYr.deposit) * 100), 0, " bps") : "—"}</b><span>Deposit rate change, 12 months</span></div>
-  <div class="kpi"><b>${pack.kenya.options[0] ? pct(pack.kenya.options[0].net) : "—"}</b><span>Highest after-tax return: ${esc(pack.kenya.options[0]?.name ?? "")}</span></div>
+  <div class="kpi"><b>${bill364 ? pct(bill364.net) : "—"}</b><span>364-day Treasury bill after withholding tax</span></div>
 </div>
 ${exhibit({
-  title: "Shilling options ranked by return after withholding tax",
+  title: "Shilling options after withholding tax: government securities, then A to Z",
   body: `<table><thead><tr><th>Option</th><th class="num">Published</th><th class="num">After tax</th><th>Money tied up</th><th>As of</th></tr></thead><tbody>${optionRows}</tbody></table>`,
-  note: "Withholding tax for residents: 15% on bills, deposits and fund returns; 10% on bonds of ten years or more; none on infrastructure bonds.",
+  note: "Listed in alphabetical order, not ranked. Withholding tax for residents: 15% on bills, deposits and fund returns; 10% on bonds of ten years or more; none on infrastructure bonds.",
   source: "Central Bank of Kenya; fund managers’ published yields",
   asOf: pack.asOf,
 })}`,

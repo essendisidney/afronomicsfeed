@@ -225,6 +225,14 @@
    "upper": null,
    "date_as_printed": "2026-10-27",
    "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
+  {
+   "first_seen": "2026-10-28",
+   "market": "southafrica",
+   "rate": 7.25,
+   "upper": null,
+   "date_as_printed": "2026-10-28",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
   }
  ]
 }

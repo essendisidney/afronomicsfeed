@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 12,
-  "results": 30,
+  "results": 31,
   "p50_h": 2.5,
   "p90_h": 11.0
  },
@@ -121,7 +121,7 @@
    "kind": "bills",
    "market": "malawi",
    "name": "Malawi",
-   "results": 4,
+   "results": 5,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -243,6 +243,15 @@
    "market": "egypt",
    "date": "2026-10-27",
    "first_seen_at": "2026-10-26T16:50:15+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:malawi:2026-10-27",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-10-27",
+   "first_seen_at": "2026-10-28T10:35:37+00:00",
    "published_at": null,
    "published_how": null
   },
@@ -893,5 +902,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-27T20:58:18+00:00"
+ "updated_at": "2026-10-28T10:47:18+00:00"
 }

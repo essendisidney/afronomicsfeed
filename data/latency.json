@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 12,
-  "results": 31,
-  "p50_h": 2.5,
-  "p90_h": 11.0
+  "timed": 13,
+  "results": 34,
+  "p50_h": 2.8,
+  "p90_h": 10.6
  },
  "summary": [
   {
@@ -44,7 +44,7 @@
    "kind": "bills",
    "market": "nigeria",
    "name": "Nigeria",
-   "results": 1,
+   "results": 2,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -187,12 +187,12 @@
    "kind": "bonds",
    "market": "uganda",
    "name": "Uganda",
-   "results": 0,
-   "timed": 0,
+   "results": 1,
+   "timed": 1,
    "p50_h": null,
    "p90_h": null,
-   "publisher_time": null,
-   "status": "no new result since measuring began"
+   "publisher_time": "Last-Modified of the result's own document",
+   "status": "1 timed result so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -209,7 +209,7 @@
    "kind": "bonds",
    "market": "waemu",
    "name": "WAEMU (UMOA-Titres)",
-   "results": 5,
+   "results": 6,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -218,6 +218,34 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:waemu:2026-10-28:mali",
+   "kind": "bonds",
+   "market": "waemu",
+   "date": "2026-10-28",
+   "first_seen_at": "2026-10-28T18:31:34+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bonds:uganda:2026-10-28",
+   "kind": "bonds",
+   "market": "uganda",
+   "date": "2026-10-28",
+   "first_seen_at": "2026-10-28T18:33:45+00:00",
+   "published_at": "2026-10-28T14:12:17+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 4.36
+  },
+  {
+   "key": "bills:nigeria:2026-10-28",
+   "kind": "bills",
+   "market": "nigeria",
+   "date": "2026-10-28",
+   "first_seen_at": "2026-10-28T18:20:05+00:00",
+   "published_at": null,
+   "published_how": null
+  },
   {
    "key": "bonds:waemu:2026-10-27:cote-divoire",
    "kind": "bonds",
@@ -902,5 +930,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-28T10:47:18+00:00"
+ "updated_at": "2026-10-28T18:33:46+00:00"
 }

@@ -3,12 +3,54 @@
  "publisher": "Central Bank of Nigeria",
  "source_page": "https://www.cbn.gov.ng/rates/GovtSecurities.html",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-17T09:28:22+00:00",
+ "updated_at": "2026-10-28T18:20:05+00:00",
  "units": {
   "amounts": "NGN millions",
   "rates": "percent per annum; stop rate is the CBN's published issue rate"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "value_date": "2026-10-28",
+   "maturity": "2027-10-28",
+   "offered_ngn_m": 600000.0,
+   "received_ngn_m": 1836141.54,
+   "accepted_ngn_m": 38376.759,
+   "stop_rate": 15.8,
+   "true_yield": null,
+   "bid_range_low": 15.0,
+   "bid_range_high": 18.24,
+   "cbn_id": 7892,
+   "source": "https://www.cbn.gov.ng/rates/GovtSecurities.html"
+  },
+  {
+   "tenor": 182,
+   "value_date": "2026-10-28",
+   "maturity": "2027-04-29",
+   "offered_ngn_m": 100000.0,
+   "received_ngn_m": 20268.623,
+   "accepted_ngn_m": 10447.786,
+   "stop_rate": 15.79,
+   "true_yield": null,
+   "bid_range_low": 15.3,
+   "bid_range_high": 16.65,
+   "cbn_id": 7891,
+   "source": "https://www.cbn.gov.ng/rates/GovtSecurities.html"
+  },
+  {
+   "tenor": 91,
+   "value_date": "2026-10-28",
+   "maturity": "2027-01-28",
+   "offered_ngn_m": 100000.0,
+   "received_ngn_m": 51556.394,
+   "accepted_ngn_m": 22331.664,
+   "stop_rate": 15.4,
+   "true_yield": null,
+   "bid_range_low": 14.9,
+   "bid_range_high": 19.0,
+   "cbn_id": 7890,
+   "source": "https://www.cbn.gov.ng/rates/GovtSecurities.html"
+  },
   {
    "tenor": 182,
    "value_date": "2026-10-14",

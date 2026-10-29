@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 14,
-  "results": 35,
-  "p50_h": 3.4,
-  "p90_h": 10.2
+  "timed": 15,
+  "results": 36,
+  "p50_h": 3.9,
+  "p90_h": 9.8
  },
  "summary": [
   {
@@ -110,12 +110,12 @@
    "kind": "bills",
    "market": "zambia",
    "name": "Zambia",
-   "results": 1,
-   "timed": 1,
+   "results": 2,
+   "timed": 2,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "last-changed time of the auction entry in the Bank of Zambia's JSON:API",
-   "status": "1 timed result so far; figures from 5"
+   "status": "2 timed results so far; figures from 5"
   },
   {
    "kind": "bills",
@@ -227,6 +227,16 @@
    "published_at": "2026-10-29T13:37:30+00:00",
    "published_how": "Last-Modified of the result's own document",
    "delay_h": 4.6
+  },
+  {
+   "key": "bills:zambia:2026-10-29",
+   "kind": "bills",
+   "market": "zambia",
+   "date": "2026-10-29",
+   "first_seen_at": "2026-10-29T18:29:18+00:00",
+   "published_at": "2026-10-29T14:01:58+00:00",
+   "published_how": "last-changed time of the auction entry in the Bank of Zambia's JSON:API",
+   "delay_h": 4.46
   },
   {
    "key": "bonds:waemu:2026-10-28:mali",
@@ -940,5 +950,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-29T18:13:50+00:00"
+ "updated_at": "2026-10-29T18:41:46+00:00"
 }

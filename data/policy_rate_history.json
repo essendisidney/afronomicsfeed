@@ -241,6 +241,14 @@
    "upper": null,
    "date_as_printed": "2026-10-29",
    "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
+  },
+  {
+   "first_seen": "2026-10-29",
+   "market": "egypt",
+   "rate": 20.0,
+   "upper": 21.0,
+   "date_as_printed": null,
+   "source": "https://www.cbe.org.eg/en"
   }
  ]
 }

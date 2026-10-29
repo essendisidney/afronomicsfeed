@@ -64,7 +64,7 @@ export default async function BondAuctionPage({ params }: Props) {
           <BondMeaning rows={story.rows} />
         </>
       }
-      after={<NewsletterBand lede="Every Monday: the week's auctions, currencies and the stories that moved African markets. Free." />}
+      after={<NewsletterBand lede="The Morning every weekday, and every Monday the Weekly: the week's auctions, currencies and the stories that moved African markets. Free." />}
     />
   );
 }

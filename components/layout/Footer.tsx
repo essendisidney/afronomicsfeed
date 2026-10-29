@@ -62,7 +62,8 @@ export function Footer() {
           ))}
         </div>
 
-        <nav aria-label="Afronomics" className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-1 text-[14px] text-night-soft">
+        {/* Three to a row on a phone, so the sixth link does not wrap onto a line of its own. */}
+        <nav aria-label="Afronomics" className="mt-10 grid grid-cols-3 gap-x-5 text-[14px] text-night-soft sm:flex sm:flex-wrap sm:items-center sm:gap-y-1">
           {footerLine.map((item) => (
             <Link key={item.href} href={item.href} className="inline-flex min-h-11 min-w-11 items-center hover:text-night-ink sm:min-h-0 sm:min-w-0">
               {item.label}
@@ -71,7 +72,7 @@ export function Footer() {
         </nav>
 
         <div className="mt-8 flex flex-col gap-4 border-t border-night-line pt-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center gap-x-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:min-w-11 [&>a]:items-center [&>a]:justify-center sm:[&>a]:min-h-0 sm:[&>a]:min-w-0">
+          <div className="flex flex-wrap items-center gap-x-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:min-w-11 [&>a]:items-center sm:[&>a]:min-h-0 sm:[&>a]:min-w-0">
             {legal.map((item) => (
               <Link key={item.href} href={item.href} className="text-xs text-night-muted hover:text-night-ink">
                 {item.label}
@@ -81,7 +82,7 @@ export function Footer() {
               RSS
             </a>
           </div>
-          <div className="flex flex-wrap items-center gap-x-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:min-w-11 [&>a]:items-center [&>a]:justify-center sm:[&>a]:min-h-0 sm:[&>a]:min-w-0">
+          <div className="flex flex-wrap items-center gap-x-5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:min-w-11 [&>a]:items-center sm:[&>a]:min-h-0 sm:[&>a]:min-w-0">
             <a href={`mailto:${site.contactEmail}`} className="text-xs text-night-muted hover:text-night-ink">
               {site.contactEmail}
             </a>

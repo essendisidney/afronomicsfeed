@@ -22,7 +22,7 @@ export function DataTerms() {
                 <li key={p}>{p}</li>
               ))}
             </ul>
-            <Link href={c.link.href} className="mt-4 text-[13px] font-semibold text-forest underline underline-offset-2">
+            <Link href={c.link.href} className="mt-3 inline-flex min-h-11 items-center self-start text-[13px] font-semibold text-forest underline underline-offset-2">
               {c.link.label}
             </Link>
           </div>

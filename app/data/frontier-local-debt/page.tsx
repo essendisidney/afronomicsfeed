@@ -135,10 +135,10 @@ export default function FrontierLocalDebtPage() {
                     <span className="block text-[11px] text-muted">{r.m.publisher}</span>
                   </td>
                   <td>{r.edge ?? <span className="text-muted">not in the index</span>}</td>
-                  <td className="text-right">{r.results.toLocaleString("en-US")}</td>
-                  <td className="text-right">{r.first ? monthYear(r.first) : "—"}</td>
-                  <td className="text-right">{r.last ? longDate(r.last) : "—"}</td>
-                  <td className="text-[13px]">
+                  <td data-num className="text-right">{r.results.toLocaleString("en-US")}</td>
+                  <td data-num className="text-right">{r.first ? monthYear(r.first) : "—"}</td>
+                  <td data-num className="text-right">{r.last ? longDate(r.last) : "—"}</td>
+                  <td className="whitespace-nowrap text-[13px]">
                     {bonds[r.m.slug]?.results && bonds[r.m.slug].first ? (
                       <span>
                         {bonds[r.m.slug].results.toLocaleString("en-US")} results since {monthYear(bonds[r.m.slug].first!)}
@@ -161,7 +161,7 @@ export default function FrontierLocalDebtPage() {
                   <td className="text-right text-muted" colSpan={3}>
                     {covered[u.country]?.n ? "Bill results not shown yet" : "Not covered yet"}
                   </td>
-                  <td className="text-[13px]">
+                  <td className="whitespace-nowrap text-[13px]">
                     {covered[u.country]?.n && covered[u.country].first ? (
                       <span>
                         {covered[u.country].n.toLocaleString("en-US")} results since {monthYear(covered[u.country].first!)}

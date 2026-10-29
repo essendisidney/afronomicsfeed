@@ -184,7 +184,7 @@ export default function DevelopersPage() {
       </section>
 
       <section className="mt-14 max-w-3xl" id="webhooks">
-        <SectionTitle kicker="Licensed keys" title="Webhooks: each auction result as it lands" />
+        <SectionTitle kicker="Licensed keys" title="Webhooks: an event for each new auction result" />
         <p className="mt-3 text-sm leading-6 text-ink-soft">
           Team and API and Enterprise licences can receive an <code className="text-[13px]">auction.published</code> event at an https address of their choice,
           once per market, tenor and auction date, within minutes of the result reaching the site. Ask the desk to set it up; you receive a signing secret.

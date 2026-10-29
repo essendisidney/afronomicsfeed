@@ -142,13 +142,13 @@ export function ArticleTemplate({
               <p id="toc-heading" className="text-[11.5px] font-semibold uppercase tracking-[0.18em] text-muted">
                 In this story
               </p>
-              <ol className="mt-3 space-y-1.5 text-[15px]">
+              <ol className="mt-2 text-[15px] sm:mt-3 sm:space-y-1.5">
                 {headings.map((heading, index) => (
-                  <li key={heading.id} className="flex gap-3">
+                  <li key={heading.id} className="flex items-center gap-3 sm:items-start">
                     <span aria-hidden="true" className="w-5 shrink-0 font-mono text-[12.5px] leading-6 text-muted">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <a href={`#${heading.id}`} className="text-forest underline decoration-transparent underline-offset-4 hover:text-accent hover:decoration-accent">
+                    <a href={`#${heading.id}`} className="flex min-h-11 items-center text-forest underline sm:block sm:min-h-0 decoration-transparent underline-offset-4 hover:text-accent hover:decoration-accent">
                       {heading.title}
                     </a>
                   </li>

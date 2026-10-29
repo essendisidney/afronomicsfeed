@@ -127,7 +127,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
         </div>
       </header>
 
-      <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y border-rule py-2.5 font-medium text-[12px]">
+      <nav className="mt-8 flex flex-wrap gap-x-5 border-y border-rule font-medium text-[12px] sm:gap-y-2 sm:py-2.5 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:items-center sm:[&>a]:min-h-0">
         {[
           ["#data", "Data"],
           ["#news", "Headlines"],
@@ -247,7 +247,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
         </ul>
       </section>
 
-      <NewsletterBand lede={`Get ${country.name} and 53 other economies in one Monday email: the prints that moved, new DFI approvals, and what to watch.`} />
+      <NewsletterBand lede="Rates, currencies and auction results in the Morning every weekday, and the week across Africa in the Weekly every Monday." />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { Questions } from "@/components/seo/Questions";
+import { TableScroll } from "@/components/ui/DataTable";
 import { AFRICA_ISO3, banksDearest, byDestination, countryName, loadRemittances, periodLabel, SDG_TARGET, type Corridor } from "@/lib/data/remittances";
 import { remittanceAnswers } from "@/lib/seo/remittances";
 import { RemitFound } from "@/components/data/RemitFound";
@@ -143,7 +144,7 @@ export default async function RemittancesPage() {
             <SectionTitle kicker="By country" title="Find your corridor" note="Average total cost across the services surveyed; the cheapest single service; the change on the quarter before." />
             <nav className="mt-3 flex flex-wrap gap-1.5">
               {dests.map((d) => (
-                <a key={d.dst} href={`#${d.dst}`} className="rounded-full border border-rule bg-surface px-3 py-1 text-[13px] hover:border-accent">
+                <a key={d.dst} href={`#${d.dst}`} className="inline-flex min-h-11 items-center rounded-full border border-rule bg-surface px-3 text-[13px] hover:border-accent sm:min-h-8">
                   {countryName(d.name)}
                 </a>
               ))}
@@ -152,7 +153,7 @@ export default async function RemittancesPage() {
               {dests.map((d) => (
                 <div key={d.dst} id={d.dst}>
                   <h3 className="font-serif text-2xl text-ink">Sending money to {countryName(d.name)}</h3>
-                  <div className="mt-2 overflow-x-auto">
+                  <TableScroll label={`Sending money to ${countryName(d.name)}`} className="mt-2">
                     <table className="data-table">
                       <thead>
                         <tr>
@@ -183,7 +184,7 @@ export default async function RemittancesPage() {
                         ))}
                       </tbody>
                     </table>
-                  </div>
+                  </TableScroll>
                 </div>
               ))}
             </div>

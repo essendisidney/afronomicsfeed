@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
+import { TableScroll } from "@/components/ui/DataTable";
 import { CopyCitation } from "@/components/ui/CopyCitation";
 import { billIndexLatest, indexName, indexShort } from "@/lib/data/bill-index";
 import { renderTime } from "@/lib/data/fetcher";
@@ -89,7 +90,7 @@ export default async function ReferencePage() {
         Each market’s “rate” is the one its central bank itself headlines, taken from the published result and never re-computed. Where a bank publishes
         several figures, this is which one we carry.
       </p>
-      <div className="overflow-x-auto">
+      <TableScroll label="Which rate each market headlines">
         <table className="data-table mt-4">
           <thead>
             <tr>
@@ -120,7 +121,7 @@ export default async function ReferencePage() {
             ))}
           </tbody>
         </table>
-      </div>
+      </TableScroll>
       <p className="mt-3 text-sm leading-6 text-ink-soft">
         Dates are value (issue) dates as the bank prints them. Amounts are local currency, millions, where the bank publishes them; a blank means the bank
         did not. Rows the bank later restates are replaced and the change logged below.
@@ -169,7 +170,7 @@ export default async function ReferencePage() {
           publications, so this is our side of the record: the value date the bank printed, and when the figure was live here with its source.
           Rows marked “history load” came in with a market’s initial import rather than live detection.
         </p>
-        <div className="overflow-x-auto">
+        <TableScroll label="When each result appeared on Afronomics">
           <table className="data-table mt-4">
             <thead>
               <tr>
@@ -214,7 +215,7 @@ export default async function ReferencePage() {
               ) : null}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
         <p className="mt-3 text-xs text-muted">
           {live.length} live detections in the last 90 days. The pipeline checks every central bank three times each working day and the monitor every
           twenty minutes; alerts go out the same minute a result is confirmed.

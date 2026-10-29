@@ -50,7 +50,7 @@ export default function BondAuctionsIndex() {
       }
       aside={
         <ActionTile href="/data/frontier-local-debt#pilot" data-track="pricing_cta_click" kicker="For desks and funds" title="Request a 30-day pilot">
-          Every market, delivered daily
+          Every market’s full history, by API
         </ActionTile>
       }
     >
@@ -127,7 +127,7 @@ export default function BondAuctionsIndex() {
                   ) : null}
                   <Link
                     href={`/markets/bonds/${market.slug}`}
-                    className="mt-auto self-start pt-5 text-[13px] font-medium text-forest hover:text-gold"
+                    className="mt-auto inline-flex min-h-11 items-center self-start pt-3 text-[13px] font-medium text-forest hover:text-gold"
                   >
                     All {shortName(market)} results →
                   </Link>

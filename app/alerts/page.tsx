@@ -16,7 +16,7 @@ export const revalidate = 900;
 
 export const metadata: Metadata = {
   title: "Alerts — follow the markets you care about",
-  description: fitDescription("Get the Treasury bill result on your phone the moment each central bank publishes it: Kenya, Nigeria, Ghana, Uganda, Tanzania, Egypt, South Africa, Zambia, Malawi and Mozambique. Free, no app store, and WhatsApp for Kenya."),
+  description: fitDescription("Get each Treasury bill result on your phone soon after the central bank publishes it: Kenya, Nigeria, Ghana, Uganda, Tanzania, Egypt, South Africa, Zambia, Malawi and Mozambique. Free, no app store, and WhatsApp for Kenya."),
   alternates: { canonical: `${site.url}/alerts` },
 };
 
@@ -32,7 +32,7 @@ export default function AlertsPage() {
       share={false}
       crumbs={[{ href: "/", label: "Home" }, { label: "Alerts" }]}
       kicker="Follow your markets"
-      title="The result on your phone, the minute it lands"
+      title="The auction result on your phone, with its source"
       lede={
         <p>
           Pick the markets you watch. When the central bank publishes an auction result, Afronomics reads it, checks it and sends one notification
@@ -138,7 +138,7 @@ export default function AlertsPage() {
                 return (
                   <li key={m.slug} className="bg-surface px-5 py-5">
                     <div className="flex items-baseline justify-between gap-3">
-                      <Link href={m.href} className="text-[15px] font-semibold text-ink hover:text-accent">
+                      <Link href={m.href} className="-my-3 inline-flex min-h-11 items-center text-[15px] font-semibold text-ink hover:text-accent sm:my-0 sm:min-h-0">
                         {m.country}
                       </Link>
                       <span className="text-[12px] text-muted">{next.get(m.slug) ? `next expected ${next.get(m.slug)}` : ""}</span>

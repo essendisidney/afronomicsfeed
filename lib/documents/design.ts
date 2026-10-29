@@ -231,5 +231,7 @@ svg { max-width: 100%; height: auto; }
   .grid2, .kpis { grid-template-columns: 1fr; }
   table { font-size: 12px; }
   .ex-note, .src, .small { font-size: 11px; }
+  /* Source addresses are long unbroken URLs: let them break so the page does not scroll sideways on a phone. */
+  .sources a, .cite, .closing p { overflow-wrap: anywhere; }
 }
 `;

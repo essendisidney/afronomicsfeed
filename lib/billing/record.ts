@@ -123,7 +123,7 @@ export function nextStep(plan: string | null, key?: KeyOutcome) {
     case "sacco_listing":
       return "Reply with the SACCO's name, its SASRA licence category, the declared dividend and deposit rates with a link to the SACCO's own notice, a logo and a link for joining; the listing goes live once the rates are verified against the notice.";
     default:
-      return "Your access is set up from this address within one business day. The Morning note starts tomorrow; auction alerts follow as each market reports.";
+      return "Your access is set up from this address within one working day. The Morning note starts tomorrow; auction alerts follow as each market reports.";
   }
 }
 

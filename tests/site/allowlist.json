@@ -18,6 +18,12 @@
       "page": "/markets",
       "match": "10% rental guarantee",
       "reason": "A publisher's headline shown verbatim in the /markets news feed (a Nairobi property developer's offer at The Marlow), not a claim made by Afronomics."
+    },
+    {
+      "check": "copy",
+      "page": "/advertise",
+      "match": "best money market fund Kenya",
+      "reason": "The rates-page sponsor line (lib/billing/ratecard.ts) quotes the search query that page competes for; it is not a claim that any fund is best."
     }
   ]
 }

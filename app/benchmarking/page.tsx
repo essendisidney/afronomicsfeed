@@ -5,6 +5,7 @@ import { SectionTitle } from "@/components/data/parts";
 import { AdviceDisclaimer } from "@/components/legal/AdviceDisclaimer";
 import { CheckoutNotice } from "@/components/billing/CheckoutNotice";
 import { PaystackCheckout } from "@/components/billing/PaystackCheckout";
+import { buttonClass } from "@/components/ui/Button";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { paystackConfigured } from "@/lib/billing/paystack";
 import { priceText, rateItem } from "@/lib/billing/ratecard";
@@ -58,10 +59,11 @@ export default async function BenchmarkingPage({ searchParams }: { searchParams:
                 <PaystackCheckout plan="benchmarking" label="Order this quarter" variant="primary" />
               </div>
             ) : null}
-            <a href="/benchmarking/sample" target="_blank" rel="noopener" className="mt-3 block min-h-11 py-2 text-[14px] font-semibold text-forest underline underline-offset-2">
+            {/* The sample is the card's main action until checkout is live: a button, not a text link. */}
+            <a href="/benchmarking/sample" target="_blank" rel="noopener" className={buttonClass({ variant: live ? "secondary" : "primary", className: "mt-4" })}>
               See a sample page
             </a>
-            <a href="#enquiry" className="inline-flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
+            <a href="#enquiry" className="mt-1 flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
               Or ask for an invoice
             </a>
           </div>
@@ -108,9 +110,9 @@ export default async function BenchmarkingPage({ searchParams }: { searchParams:
                       o.name
                     )}
                   </td>
-                  <td className="text-right text-sm">{pct(o.gross)}</td>
-                  <td className="text-right text-sm">{pct(o.net)}</td>
-                  <td className="text-right text-sm">{o.asOf}</td>
+                  <td data-num className="text-right text-sm">{pct(o.gross)}</td>
+                  <td data-num className="text-right text-sm">{pct(o.net)}</td>
+                  <td data-num className="text-right text-sm">{o.asOf}</td>
                 </tr>
               ))}
             </tbody>

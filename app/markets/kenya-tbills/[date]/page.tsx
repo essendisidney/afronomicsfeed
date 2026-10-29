@@ -106,7 +106,7 @@ export default async function TbillAuctionPage({ params }: Props) {
       </section>
 
       <AuctionNav base="/markets/kenya-tbills" newer={newer?.date ?? null} older={older?.date ?? null} />
-      <NewsletterBand lede="Every Monday: the week's auctions, currencies and the stories that moved African markets. Free." />
+      <NewsletterBand lede="The Morning every weekday, and every Monday the Weekly: the week's auctions, currencies and the stories that moved African markets. Free." />
     </PageShell>
   );
 }

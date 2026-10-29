@@ -133,8 +133,8 @@ export default function MethodPage() {
       <p>
         Five tools end with one line worked out by code: what the reader&rsquo;s option costs or earns, the cheapest or best-earning option we hold
         for the same use, and the difference over a year, with the source and date of both sides. Is my rate fair? (saving, in Kenya, Ghana and
-        Nigeria) compares with the best money market fund or Treasury bill; mobile loans and Fuliza with the cheapest mobile loan whose charge is
-        published as a fixed figure, for the same amount and days; money market funds with the best fund after 15% withholding tax; sending money
+        Nigeria) compares with the highest-yielding money market fund or Treasury bill; mobile loans and Fuliza with the cheapest mobile loan whose charge is
+        published as a fixed figure, for the same amount and days; money market funds with the highest-yielding fund after 15% withholding tax; sending money
         home with the cheapest service the World Bank surveyed on the same corridor. Only options a reader can take are compared: a gap to an
         average, such as the Central Bank&rsquo;s bank lending average, is shown on the page but never counted. If we hold no comparable option,
         the tool says nothing new. If the reader&rsquo;s option is already the best we hold, it says so and nothing is counted.

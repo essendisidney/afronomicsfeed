@@ -88,7 +88,7 @@ export default function ForInstitutionsPage() {
       aside={
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <p className="text-[14px] font-semibold text-ink">Talk to the desk</p>
-          <p className="mt-1 text-[13px] leading-5 text-ink-soft">A 20-minute walkthrough on your own market, or an invoice in KES or USD. Reply within one business day.</p>
+          <p className="mt-1 text-[13px] leading-5 text-ink-soft">A 20-minute walkthrough on your own market, or an invoice in KES or USD. Reply within one working day.</p>
           <a href="#enquiry" className="mt-4 inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
             Book a walkthrough
           </a>
@@ -238,7 +238,7 @@ export default function ForInstitutionsPage() {
             <p className="mt-2 text-sm leading-6 text-ink-soft">
               {rateItem("trial") ? `${priceText(rateItem("trial")!)} by M-Pesa: ` : ""}the Morning by email, auction alerts and every brief in full.
             </p>
-            <Link href="/pricing" className="mt-3 inline-block text-[14px] font-semibold text-forest underline underline-offset-2">
+            <Link href="/pricing" className="mt-3 inline-flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
               Start the trial
             </Link>
           </div>

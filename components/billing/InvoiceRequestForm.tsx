@@ -60,7 +60,7 @@ export function InvoiceRequestForm({ plan = "enterprise", localPricing = false }
     );
   }
 
-  const field = "mt-1 w-full border border-rule bg-paper px-3 py-3 sm:py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
+  const field = "mt-1 min-h-11 w-full border border-rule bg-paper px-3 py-3 sm:py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
   const label = "block text-[13px] font-medium leading-5 text-muted";
   return (
     <form className="grid gap-3 sm:grid-cols-2" onSubmit={submit}>

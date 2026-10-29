@@ -18,7 +18,7 @@ export async function CheckoutNotice({ query }: { query: { checkout?: string; re
         <strong>Payment confirmed — thank you.</strong> {moneyLabel(payment.amount, payment.currency)}, reference{" "}
         <span className="font-mono">{payment.reference}</span>. A receipt is on its way to {payment.email}
         {payment.plan === "pro" || payment.plan === "professional" || payment.plan === "trial"
-          ? ", and your access is set up from that address within one business day."
+          ? ", and your access is set up from that address within one working day."
           : "; it says what to reply with so the desk can set this up for you."}
       </p>
     );

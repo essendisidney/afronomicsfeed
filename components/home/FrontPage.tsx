@@ -30,7 +30,7 @@ export function SectionHead({ id, title, blurb, more, moreLabel }: { id: string;
         {blurb ? <p className="mt-0.5 hidden pl-[1.15rem] text-[13px] leading-5 text-muted sm:block">{blurb}</p> : null}
       </div>
       {more ? (
-        <Link href={more} className="inline-flex min-h-11 shrink-0 items-center text-[14px] font-semibold text-forest hover:text-ink">
+        <Link href={more} className="inline-flex min-h-11 shrink-0 items-end pb-0.5 text-[14px] font-semibold text-forest hover:text-ink">
           See all<span className="sr-only"> {moreLabel ?? title}</span>
           <span aria-hidden="true">&nbsp;→</span>
         </Link>
@@ -77,13 +77,13 @@ export function TodayStrip({ tiles }: { tiles: BoardTile[] }) {
                 rel="noopener noreferrer"
                 data-track="source_click"
                 aria-label={`Source: ${t.evidence.source}, ${t.evidence.dateKind === "value" ? "for value" : "as of"} ${asOfLabel(t.evidence.asOf)} (opens the source)`}
-                className="relative z-10 mt-1.5 block truncate text-[11px] leading-5 text-muted underline decoration-rule underline-offset-2 hover:text-ink"
+                className="relative z-10 mt-1.5 block text-[11px] leading-4 text-muted underline decoration-rule underline-offset-2 hover:text-ink"
               >
-                <time dateTime={t.evidence.asOf} className="tabular">
+                <time dateTime={t.evidence.asOf} className="tabular block truncate">
                   {t.evidence.dateKind === "value" ? "Value " : ""}
                   {asOfLabel(t.evidence.asOf)}
-                </time>{" "}
-                · {t.evidence.source}
+                </time>
+                <span className="block truncate">{t.evidence.source}</span>
               </a>
             </div>
           </li>
@@ -253,13 +253,13 @@ export function StoryRow({ items, now }: { items: StoryCard[]; now: number }) {
 /** The calculators as instrument tiles: an icon for the kind of question, the title and the question it answers. */
 export function ToolTiles({ items }: { items: Tool[] }) {
   return (
-    <ul className="mt-3 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
+    <ul className={`mt-3 grid grid-cols-2 gap-2.5 ${items.length % 5 === 0 ? "lg:grid-cols-5" : "lg:grid-cols-4"}`}>
       {items.map((t) => (
         <li key={t.href} className="min-w-0">
-          <Link href={t.href} className="af-tool group flex h-full min-h-11 flex-col items-start gap-2 rounded-2xl border border-rule bg-surface px-3 py-3 sm:flex-row sm:gap-3 sm:px-3.5">
-            <ToolIcon group={t.group} className="h-9 w-9 sm:h-10 sm:w-10" />
+          <Link href={t.href} className="af-tool group flex h-full min-h-11 items-center gap-2.5 rounded-2xl border border-rule bg-surface px-3 py-2.5 sm:items-start sm:gap-3 sm:px-3.5 sm:py-3">
+            <ToolIcon group={t.group} className="h-8 w-8 sm:h-10 sm:w-10" />
             <span className="min-w-0 max-w-full">
-              <span className="block text-[14px] font-semibold leading-5 text-ink group-hover:text-forest sm:truncate sm:text-[14.5px]">{t.title}</span>
+              <span className="block text-[13.5px] font-semibold leading-[1.15rem] text-ink group-hover:text-forest sm:truncate sm:text-[14.5px] sm:leading-5">{t.title}</span>
               <span className="mt-0.5 hidden text-[12.5px] leading-[1.1rem] text-muted sm:line-clamp-2">{t.answers}</span>
             </span>
           </Link>

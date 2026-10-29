@@ -1,3 +1,4 @@
+import { ADVICE_DISCLAIMER } from "@/lib/legal";
 import { site } from "@/lib/site";
 
 /**
@@ -110,6 +111,8 @@ ${meta.method.map((p) => `<p>${esc(p)}</p>`).join("")}
 <p class="cite">${esc(citation(meta))}</p>
 <h3>Corrections</h3>
 <p>If a figure here is wrong, write to ${esc(site.contactEmail)}. Corrections are listed at ${esc(site.url.replace(/^https?:\/\//, ""))}/corrections with the date and what changed.</p>
+<h3>Not investment advice</h3>
+<p>${esc(ADVICE_DISCLAIMER)}</p>
 <p class="end-mark">Information, not advice. © Afronomics ${meta.asOf.slice(0, 4)}.</p>
 </section>`;
 }

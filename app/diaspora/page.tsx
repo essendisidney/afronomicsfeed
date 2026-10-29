@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DiasporaSendPicker, type SendRow } from "@/components/data/DiasporaSendPicker";
+import { fxRef, remitCorridors, remitSurvey } from "@/lib/found-data";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { Questions } from "@/components/seo/Questions";
@@ -119,6 +120,7 @@ export default async function DiasporaPage() {
   const fxDate = fx ? dayFmt.format(new Date(fx.updated)) : null;
   const earn = earnings();
   const kesPerUsd = fx?.rates.KES ?? null;
+  const { ref: fxFound } = await fxRef();
 
   const items = [
     {
@@ -188,7 +190,7 @@ export default async function DiasporaPage() {
         <div className="mt-5 grid gap-6 lg:grid-cols-5">
           <div className="lg:col-span-3">
             {rows.length ? (
-              <DiasporaSendPicker rows={rows} period={period} />
+              <DiasporaSendPicker rows={rows} period={period} corridors={remitCorridors().filter((c) => c.dst === "KEN")} survey={remitSurvey()} fx={fxFound} />
             ) : (
               <p className="text-sm text-muted">The World Bank survey data is being compiled.</p>
             )}

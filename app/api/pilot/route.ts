@@ -83,8 +83,8 @@ export async function POST(request: Request) {
     const keyNote = result.status === "issued" ? `Trial key ${result.prefix}… issued, ends ${day(result.expiresAt)}.` : "Key to issue from /desk (plan: trial).";
     const deal = await rpc("af_deal_save", {
       p_secret: secret, p_id: null, p_organisation: organisation, p_segment: "other", p_product: "frontier_debt", p_stage: "pilot",
-      p_value_usd_month: null, p_source: "Self-serve pilot form", p_next_step: result.status === "issued" ? "Check in before the pilot ends: which plan fits?" : "Issue the 30-day trial key and send it",
-      p_next_date: new Date(Date.now() + (result.status === "issued" ? 21 : 1) * 86_400_000).toISOString().slice(0, 10),
+      // No next step or date: no follow-ups (D-034). A key still to issue shows in the desk inbox as a waiting pilot request.
+      p_value_usd_month: null, p_source: "Self-serve pilot form", p_next_step: null, p_next_date: null,
       p_notes: `${name} <${email}>. Markets: ${marketText}. Would pay for next: ${nextText}.${localText}${webmail ? " Personal email address." : ""} ${keyNote}`, p_signed_at: null,
     });
     if (!deal.ok || deal.value == null) console.log(`[pilot] deal not stored: ${deal.ok ? "rejected" : redactEmails(deal.reason)}`);

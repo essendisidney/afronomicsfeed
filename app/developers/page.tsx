@@ -183,6 +183,32 @@ export default function DevelopersPage() {
         </ul>
       </section>
 
+      <section className="mt-14 max-w-3xl" id="webhooks">
+        <SectionTitle kicker="Licensed keys" title="Webhooks: each auction result as it lands" />
+        <p className="mt-3 text-sm leading-6 text-ink-soft">
+          Team and API and Enterprise licences can receive an <code className="text-[13px]">auction.published</code> event at an https address of their choice,
+          once per market, tenor and auction date, within minutes of the result reaching the site. Ask the desk to set it up; you receive a signing secret.
+          Every request carries <code className="text-[13px]">X-Afronomics-Signature: t=&lt;unix seconds&gt;,v1=&lt;hex&gt;</code>, the HMAC-SHA256 of{" "}
+          <code className="text-[13px]">&lt;t&gt;.&lt;body&gt;</code> with your secret. Reject a timestamp more than five minutes old, and answer 2xx within ten
+          seconds; anything else is retried on the next run for up to four days.
+        </p>
+        <pre tabIndex={0} className="mt-4 max-w-full overflow-x-auto rounded-2xl bg-night p-5 text-[13px] leading-6 text-night-ink">
+          <code>{`import hashlib, hmac, time
+
+def verify(secret: str, header: str, body: bytes) -> bool:
+    parts = dict(p.split("=", 1) for p in header.split(","))
+    t = int(parts["t"])
+    if abs(time.time() - t) > 300:
+        return False
+    want = hmac.new(secret.encode(), f"{t}.".encode() + body, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(want, parts["v1"])
+
+# Body: {"id": "kenya:tbill:91:2026-10-26", "type": "auction.published", "market": "kenya",
+#  "instrument": "tbill", "tenor_days": 91, "value_date": "2026-10-26", "rate_pct": 8.7478,
+#  "offered_m": 8000, "received_m": 14336.6, "accepted_m": 14334.2, "source_url": "https://..."}`}</code>
+        </pre>
+      </section>
+
       <section className="mt-14" id="terms">
         <SectionTitle kicker="Terms" title="Free to read and cite; a key for history and commercial use" />
         <DataTerms />

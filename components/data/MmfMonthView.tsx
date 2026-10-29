@@ -47,7 +47,7 @@ function answers(m: MonthRanking): QA[] {
   return items;
 }
 
-export function MmfMonthView({ m, all }: { m: MonthRanking; all: MonthRanking[] }) {
+export function MmfMonthView({ m, all, found }: { m: MonthRanking; all: MonthRanking[]; found?: React.ReactNode }) {
   const top = m.rows[0];
   const others = all.filter((x) => x.month !== m.month);
   // Funds the data check flags (yield frozen on the manager's page): ranked, but with the warning beside them.
@@ -146,6 +146,8 @@ export function MmfMonthView({ m, all }: { m: MonthRanking; all: MonthRanking[] 
           </p>
         </section>
       )}
+
+      {found ? <div className="mt-12">{found}</div> : null}
 
       <section className="mt-12 grid gap-6 rounded-2xl border border-rule bg-surface px-5 py-6 sm:px-6 lg:grid-cols-2">
         <div>

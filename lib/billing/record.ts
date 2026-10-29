@@ -263,6 +263,20 @@ export async function notifyPayment(p: PaymentRecord, key: KeyOutcome = { kind: 
  * the desk note once per reference (callers run it in after()). With `reveal` (the /thank-you path) the outcome
  * carries the key for showing on screen once, even when the webhook issued it first.
  */
+/** Treasury Desk products whose payment opens an entitlement (migration 0048; D-035). */
+const TREASURY_PLANS = new Set(["pack", "pack_plus", "benchmarking"]);
+
+/** Open the entitlement for a confirmed Treasury Desk payment, once per reference. Returns a log phrase, never the address. */
+async function recordEntitlement(p: PaymentRecord) {
+  const result = await rpc("af_entitlement_from_payment", {
+    p_secret: secret(), p_reference: p.reference, p_email: p.email, p_plan: p.plan, p_amount: p.amount, p_currency: p.currency, p_paid_at: p.paidAt,
+  });
+  if (!result.ok) return /PGRST202|^404/.test(result.reason) ? "entitlement waits for migration 0048" : `entitlement not opened: ${result.reason.slice(0, 80)}`;
+  const v = result.value as { ok?: boolean; created?: boolean; months?: number; reason?: string } | null;
+  if (!v?.ok) return `entitlement not opened: ${v?.reason ?? "secret rejected"}`;
+  return v.created ? `entitlement opened for ${v.months} month(s)` : "entitlement already open";
+}
+
 export async function fulfilPayment(p: PaymentRecord, opts: { reveal: boolean; source: "webhook" | "return" }) {
   const stored = await recordPayment(p);
   // Logs: reference and email domain only, never the address or a key.
@@ -273,6 +287,7 @@ export async function fulfilPayment(p: PaymentRecord, opts: { reveal: boolean; s
   let fresh = false;
   if (stored.ok) ({ outcome, fresh } = await issuePaidKey(p, { reveal: opts.reveal }));
   else if (isKeyPlan(p.plan)) outcome = { kind: "manual", reason: "payment not stored" };
+  if (stored.ok && p.status === "success" && TREASURY_PLANS.has(p.plan ?? "")) log(await recordEntitlement(p));
   if (outcome.kind === "manual") log(`key not issued: ${outcome.reason}`);
   else if (outcome.kind !== "none") log(`key ${outcome.kind}${fresh ? "" : " earlier"}${opts.reveal && outcome.kind === "issued" && outcome.key ? ", shown on the page" : ""}`);
 

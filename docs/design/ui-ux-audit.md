@@ -254,3 +254,212 @@ Screenshots: session scratchpad, `…/scratchpad/uiux-2026-10-15/` (`before-<pag
 
 Checks: `npx tsc --noEmit -p .`, `npx eslint` on changed files, `python3 -m pytest -q tests/site` (98 passed, 2
 skipped), `next build`, `scripts/site-qa.mjs --serve` PASS including the speed pass.
+
+---
+
+# Weekly pass 3: 22 October 2026 (ISO week 43, slice s–z)
+
+**Scope.** (a) Header, phone menu and tab bar, footer, Today, `/pricing` (with the pilot form), the pilot path
+(`/data/frontier-local-debt#pilot`, `/thank-you`), `/data/frontier-local-debt`, `/markets/bonds`. (b) Pages changed in
+the last 7 days, led by the Redesign v3 work (PR #216, 21 Oct): `components/home/FrontPage.tsx` (board, lead story,
+story columns, tool tiles), `components/ui/ToolIcon.tsx`, `components/layout/SectionNav.tsx`, `app/(home)/page.tsx`,
+`app/tools/page.tsx`, `app/globals.css`; plus `/markets/kenya-tbills` (and its calculator), the `/rates/kenya/*`
+calculators, `/record`, `/morning`, `/markets/tbills`, `/markets/ipo-calculator`, `/for-institutions`, `/explainers`,
+`/diaspora`, `/receipts`, `/legal/privacy`. (c) Slice s–z (the fourth of a–f, g–l, m–r, s–z): `/search`, `/status`,
+`/stories`, `/subscribe`, `/sw`, `/thank-you`, `/tools`, `/topics`, `/trust`, `/weekly`, `/widgets`. All at 390px and
+1280px, light and dark, on a production build with `SUPABASE_URL` pointed at a dead port. (d) The latest Site QA run on
+`main` (run 39726693313, 22 Oct 05:12 UTC) passed; its artifact could not be downloaded from this sandbox, so
+`scripts/site-qa.mjs --serve` was run locally.
+
+Screenshots: session scratchpad, `…/scratchpad/uiux-2026-10-22/` (`before-…`, `after-…`, `week-…` for the pages of
+(b) audited once, `before-menu-390.png` / `after-menu-390.png`).
+
+## Baseline
+
+| Check | Before | After |
+| --- | --- | --- |
+| Site QA (78 pages × 4 variants, 1,062 links) | PASS, but the two "dark" variants rendered **light** (finding 1) | PASS with real dark runs |
+| axe WCAG A/AA, horizontal scroll at 390px | none on the 44 pages audited, both themes | none |
+| Today at 390px | 7,257px; Tools block five rows of 90px tiles | 7,153px; five rows of 56px tiles |
+| Phone menu: first sight of the pilot | below the fold, after reader links and the theme switch | first screen, under the five sections |
+
+## Findings, ranked (trust and conversion first)
+
+1. **The QA gate's dark runs were not dark.** The theme follows the reader's clock (`lib/theme.ts`), not
+   `prefers-color-scheme`, so emulating the scheme did nothing: every daytime CI run checked light twice. *Fixed:*
+   `scripts/site-qa.mjs` sets the theme the way a reader does (`af-theme` in localStorage) for each variant; noted in
+   `docs/qa.md`. All 78 pages pass in true dark.
+2. **The pilot fell below the fold of the phone menu again** (Redesign v3 ordered Sections, For readers, Theme, then
+   the institutional block). *Fixed* (`components/layout/Header.tsx`): the "For boards, banks, SACCOs and funds" block
+   follows the sections on phones; on desktop it stays in the right column and no longer stretches to the row height.
+3. **Timing claims for the Morning drifted back to "7:00"** (`/morning` "In your inbox at 7:00" and its newsletter band,
+   the `/subscribe` kicker, the shared `NewsletterBand` and `FollowUp`, the subscribe success message). The job starts
+   at 07:00 Nairobi, so mail cannot be in the inbox at 7:00; the title and Today already say "before 07:30". *Fixed:*
+   "before 07:30" everywhere on the site.
+4. **Internal jargon and stale labels in reader copy.** `/topics` opened with "A short shelf for the ninety-day wedge";
+   `/subscribe` linked "Pro" (renamed Reader plans last week); the topic label read "Saccos" where every other surface
+   says "SACCOs". *Fixed.*
+5. **Today's figure board cut the source to "Central …" on phones** (date and publisher on one 11px line). *Fixed:* date
+   and publisher on two lines; every cell keeps the same height, so nothing shifts.
+6. **"See all →" floated above its section head** on every Today section (centred in a 44px box beside a
+   bottom-aligned head). *Fixed:* bottom-aligned with the head.
+7. **Tool tiles were bulky on phones and left two orphans on desktop.** The icon sat above the title (90px tiles, 450px
+   for ten links); on desktop ten tiles in four columns left a half row. *Fixed:* icon beside the title on phones (56px
+   tiles); five across on desktop when the count fills the rows.
+8. **The institutional band on Today hid its price on phones and melted into the dark page.** *Fixed:* the "from USD
+   250 a month; Kenyan institutions from KES 16,000" line (rate-card figures, unchanged) shows at every width, and the
+   band has the night hairline ring used by `ActionTile`.
+9. **Today's first-visit line was truncated on phones** ("…what changed si…"). *Fixed:* a shorter invitation that fits.
+10. **`/thank-you` without a payment was a dead end** (carried over from pass 1). *Fixed:* "Back to pricing" and "Start a
+    free 30-day pilot" buttons, invoice link at 44px.
+11. **Tap targets and cramped tables.** `/explainers`, `/weekly`, `/topics/*` cards had 20px topic chips and full-width
+    21px "Read →" links with identical names. *Fixed:* chips 36px on phones (28px from 640px), "Read" 44px on phones with
+    the title for screen readers. The `/morning` results table broke "91-day", "+155 bps" and dates over two lines; now
+    one line each (the table scrolls with its edge shadow).
+
+## Left, and why
+
+- **Welcome email still says "every weekday at 7:00"** (`lib/welcome-email.ts`): email copy, outside a UI pass.
+- **"Five minutes on 54 economies"** for the Weekly (`/subscribe`, `/weekly` description): its sections are Kenya-led
+  auctions, currencies, prints and capital; whether it spans 54 economies is an editorial call.
+- **`/markets/bonds` pilot tile: "Every market, delivered daily"**: a pilot is an API key over data read every two hours
+  on weekdays; "delivered daily" reads as a push feed. Worth rewording with the founder.
+- **Header on phones has no pilot or "For institutions" entry** (search and Menu only, by the v3 design). Finding 2 puts
+  the pilot on the menu's first screen rather than adding a third control to the bar.
+- **Lead-story source line truncates** ("Safaricom, Fuliza page (charge…") at both widths; the full source is in the
+  chart foot and on the Receipt. A two-line source needs the board's fixed-height treatment.
+- **`/stories` filter chips**: "NSE disclosures" sits alone on a second row at 1280px. Cosmetic.
+- **Table date links on `/markets/kenya-tbills`** (14px tall, about 60 rows): inline table links, exempt in QA; a
+  whole-row link would be the fix.
+- Carried over: `/pricing` Institutions/Readers switch on phones; Egypt's two "1.5y" and Kenya's two "30y" rows without
+  issue codes; USD approximations from two sources; breadcrumb height.
+
+## Changed in code
+
+`scripts/site-qa.mjs`, `docs/qa.md`, `components/layout/Header.tsx`, `components/home/FrontPage.tsx`,
+`components/home/SinceLastVisit.tsx`, `app/(home)/page.tsx`, `app/morning/page.tsx`, `app/subscribe/page.tsx`,
+`app/topics/page.tsx`, `app/thank-you/page.tsx`, `lib/taxonomy.ts`, `components/ui/ArticleCard.tsx`,
+`components/ui/TopicChips.tsx`, `components/ui/FollowUp.tsx`, `components/ui/SubscribeForm.tsx`,
+`components/data/NewsletterBand.tsx`. No prices or figures changed; the only claims changed are timing claims made
+consistent with the 07:00 job.
+
+Checks: `npx tsc --noEmit -p .`, `npx eslint` on changed files, `python3 -m pytest -q tests/site` (219 passed, 13
+skipped), `next build`, `scripts/site-qa.mjs --serve` PASS (78 pages × 4 variants, 1,062 links, speed pass in budget).
+
+---
+
+# Weekly pass 4: 29 October 2026 (ISO week 44, slice a–f)
+
+**Scope.** (a) Header, phone menu and tab bar, footer, Today, `/pricing` (with the pilot form), the pilot path
+(`/data/frontier-local-debt#pilot`, `/thank-you`), `/data/frontier-local-debt`, `/markets/bonds`. (b) Pages changed in
+the last 7 days, led by the new `/benchmarking`, `/benchmarking/sample`, `/for-institutions`, `/developers#webhooks`,
+`/method#source-registry`, `/editorial-standards`, `/legal/privacy` and the brief
+`/brief/kenya-budget-2025-26-revenue-short-pending-bills`; also `/data`, `/data/poverty-premium`, `/diaspora`,
+`/markets/bill-index` (and its method), `/morning` and `/morning/sw`, `/pack`, `/press`, the `/rates/kenya/*` pages,
+`/rates/remittances`, `/reference`, `/subscribe`, `/sw`, `/thank-you`, `/topics`, `/trust`. (c) This week's slice, a–f
+(week 44 mod 4 = 0, the first of a–f, g–l, m–r, s–z): all 140 sitemap pages under `/about`, `/advertise`, `/advisory`,
+`/alerts`, `/archive`, `/benchmarking`, `/brief/*` (29), `/buying`, `/chama`, `/compare`, `/contact`, `/corrections`,
+`/countries/*` (55), `/data/*` (26), `/data-api`, `/developers`, `/diaspora`, `/east-africa`, `/editorial-standards`,
+`/explainers/*` (12), `/for-institutions`. Every page at 390px and 1280px, light and dark, on a production build
+(`SUPABASE_URL` pointed at a dead port, as before), read as a pension-fund or SACCO treasurer and as a Kenyan reader on
+a phone. (d) The latest Site QA run on `main` (run 40816355578, 29 Oct 04:11 UTC) passed; its artifact could not be
+downloaded from this sandbox (the artifact store answers 403), so `scripts/site-qa.mjs` was run locally on the usual list
+and on a second list of the 163 pages in (b) and (c).
+
+Screenshots: session scratchpad, `…/scratchpad/uiux-2026-10-29/` (`before-<page>-<width>[-dark].png`, `after-…`).
+`/weekly` and `/markets/kenya-tbills` have after shots only (one line of copy changed there).
+
+## Baseline
+
+| Check | Before | After |
+| --- | --- | --- |
+| Site QA, usual list (84 pages × 4 variants) | PASS apart from 2 links to `/api/data/*`, which answer 503 only because this sandbox cannot reach the World Bank | PASS (1,090 links; speed pass in budget) |
+| Site QA, slice and this week's pages (163 × 4) | **FAIL, 41**: 37 tap targets, 2 axe (`scrollable-region-focusable`), 2 copy | PASS (626 links) |
+| `/benchmarking/sample` at 390px | 556px wide (source addresses did not wrap) | 390px |
+| Brief cards at 390px (`/brief`, `/archive`, `/explainers`, `/topics`) | up to three lines of spaced capitals ("WATCH 3 MIN KENYAN TAXPAYERS, GOVERNMENT…") above each headline | one short sentence-case line |
+
+## Findings, ranked (trust and conversion first)
+
+1. **Timing overclaims on the alert and API pages.** `/alerts` was headed "The result on your phone, the minute it
+   lands" (its description said "the moment each central bank publishes it", its search entry the same) while its own
+   lede says "usually within minutes". `/developers#webhooks` was headed "each auction result as it lands". The pilot
+   tile on `/markets/bonds` said "Every market, delivered daily" (flagged last week): a pilot is an API key, not a
+   daily feed. *Fixed:* "The auction result on your phone, with its source"; "soon after the central bank publishes
+   it"; "Webhooks: an event for each new auction result"; "Every market's full history, by API".
+2. **The newsletter band contradicted itself on 59 pages.** Under "Free · a two-minute read before 07:30, every
+   weekday" and the title "The Afronomics Morning", the 55 country files, `/markets/kenya-bonds`,
+   `/markets/kenya-tbills` and their dated pages said "in one Monday email" (and "53 other economies", an editorial
+   claim flagged last week); `/weekly` presented the Weekly as "The Afronomics Morning". One sign-up gets both editions
+   (`lib/welcome-email.ts`). *Fixed:* the ledes name both ("the Morning every weekday, and the Weekly every Monday");
+   `/weekly`'s band is titled "The Afronomics Weekly" with its own kicker (`NewsletterBand` now takes `kicker`).
+3. **The benchmarking sample scrolled sideways on a phone.** `/benchmarking/sample` (linked from `/benchmarking` and the
+   sales kit) was 556px wide at 390px: the CBK source addresses are unbroken URLs. *Fixed* in the shared document styles
+   (`lib/documents/design.ts`, phone screens only; print and the PDFs are unchanged).
+4. **`/benchmarking`'s main action was a text link.** "See a sample page" was an underlined link under the price; the
+   yardstick table broke "2026-10-26" over two lines on a phone. *Fixed:* a kit button (primary until checkout is live,
+   then secondary under "Order this quarter"); figures and dates never wrap.
+5. **The shared enquiry form was off-kit** (`/benchmarking`, `/for-institutions`, `/developers`, `/contact`,
+   `/advertise`, `/advisory`, `/licensing`, `/pack`, `/prices`): 42px fields, a 39px select and a laterite "Send" where
+   every other form uses the ink primary button. *Fixed:* 44px fields and `buttonClass({ variant: "primary" })`. The
+   pilot and invoice form selects (43px) are 44px too.
+6. **Brief cards were cluttered.** The card meta ran urgency, reading time and audience in 11px spaced capitals (up to
+   three lines), and "Watch 3 min" read like a video. *Fixed:* category and date stay in capitals; urgency, "3 min read"
+   and who it is for sit on their own sentence-case line (`ArticleCard`, `DeskMeta`).
+7. **Tap targets under 44px** in the parts every visitor sees and in this week's pages: `/markets/bonds` "All …
+   results →" (41px), the `DataTerms` links on `/developers` and `/data-api` (21px), `/for-institutions` "Start the
+   trial" (23px), `/pricing` "Local institution in Africa? See local prices" (20px), the brief's "In this story" links
+   (25px), the country files' jump links (20px), `/alerts` market names (25px), `/rates/remittances` country chips (31px,
+   QA failure), `/morning/sw` "Jisajili" (36px, QA failure; now the kit button). *Fixed* (44px on phones; unchanged
+   from 640px).
+8. **Keyboard access to wide tables** (axe, QA failure): the 36 corridor tables on `/rates/remittances` and two tables on
+   `/reference` were scroll regions a keyboard could not reach. *Fixed* with the kit's `TableScroll` (labelled,
+   focusable, pinned first column).
+9. **Copy-rule failures.** `/method` "compares with the best money market fund" and "the best fund after 15%
+   withholding tax" (the rule asks what it ranks by): now "highest-yielding", which is what the tools compare with. `/advertise` quotes the search query
+   "best money market fund Kenya" in a sponsorship line: allowlisted with the reason (`tests/site/allowlist.json`).
+10. **Smaller consistency fixes.** Footer on phones: the sixth link ("Kiswahili") sat alone on a second row; now three
+    to a row. Legal row: short links were centred in their 44px boxes, so the gaps looked uneven. "Reply within one
+    business day" in five places against "working day" in 32: now "working day" throughout.
+    `/data/frontier-local-debt` coverage table: the bond column wrapped "1,287 results since Feb 2020" over three lines
+    on a phone; now one line, and the rows are shorter.
+
+## Left, and why
+
+- **D-028 and fund ordering (for the founder).** Public pages order named institutions by a figure: Today's board shows
+  "Top money market fund by yield, after tax" (Zimele); `/east-africa` says its fund table is "ranked by yield after
+  the 15% withholding tax" and links "This month's ranking"; `/rates/remittances` names the "Cheapest surveyed" firm
+  per corridor; `/rates/kenya/best-money-market-fund` exists. These are published figures sorted, not grades, and the
+  QA rule accepts "best … by yield"; but `/benchmarking` promises fund yields "in alphabetical order, never ranked", and
+  this pass's brief reads D-028 as "facts only, A–Z". Re-ordering live tables is a product decision, not polish.
+- **Country files when the World Bank does not answer** (seen here because the sandbox has no internet): every card says
+  "Not published by source" and the lede "0 of 22 tracked series are published for this country". In production that
+  happens only on a failed fetch, but then the page blames the source. The fix (an honest "did not load this hour"
+  state, as pass 1 finding 9 proposed for Today) needs the fetcher to tell "empty" from "failed".
+- **Pinned first column still tall on `/data/frontier-local-debt`** (the publisher under each market wraps to two or
+  three lines on a phone). Cards per row (`DataTable mobile="cards"`) would read better; the table has two row shapes
+  (covered and uncovered markets), so it is a template change.
+- **Service promises to confirm:** "If we get one wrong, we correct it publicly within a day" (`/for-institutions`); the
+  footer and `/about` promise "from the source, the day it is published" for every series, including annual World Bank
+  data. Neither is a layout defect; both are the founder's to word.
+- **Brief index pages are long on a phone** (`/brief` and `/archive` about 32,000px; 101 topic chips at 36px). A shorter
+  card on index pages (no teaser bullets) is a template decision.
+- **`/about` "Who publishes" table**: right-aligned labels wrap ("Published / from") on a phone. Cosmetic.
+- Carried over: Kenya's two "30y" rows and Egypt's two "1.5y" rows without issue codes; USD approximations from two
+  sources; breadcrumb height; `/pricing` Institutions/Readers switch; lead-story source truncation; welcome email
+  "every weekday at 7:00".
+
+## Changed in code
+
+`app/alerts/page.tsx`, `app/benchmarking/page.tsx`, `app/countries/[slug]/page.tsx`,
+`app/data/frontier-local-debt/page.tsx`, `app/developers/page.tsx`, `app/for-institutions/page.tsx`,
+`app/markets/bonds/page.tsx`, `app/markets/kenya-bonds/page.tsx` and `[date]`, `app/markets/kenya-tbills/page.tsx` and
+`[date]`, `app/method/page.tsx`, `app/morning/sw/page.tsx`, `app/pricing/page.tsx`, `app/rates/remittances/page.tsx`,
+`app/reference/page.tsx`, `app/weekly/page.tsx`, `components/article/ArticleTemplate.tsx`,
+`components/billing/{CheckoutNotice,DataTerms,InvoiceRequestForm,PilotForm}.tsx`, `components/data/NewsletterBand.tsx`,
+`components/layout/Footer.tsx`, `components/ui/{ArticleCard,DeskMeta,EnquiryForm}.tsx`, `lib/documents/design.ts`,
+`lib/search.ts`, `lib/billing/record.ts`, `tests/site/allowlist.json`. No prices or figures changed; the claims changed
+are the timing overclaims above, the newsletter cadence lines and one "best" without its measure.
+
+Checks: `npx tsc --noEmit -p .`, `npx eslint` on changed files, `python -m pytest -q tests/site` (292 passed, 13
+skipped), `npm run build`, `scripts/site-qa.mjs --serve` PASS on the usual list (84 pages × 4 variants) and on the
+slice and this week's pages (163 × 4), both with `--skip-links '^/api/data/'` because this sandbox has no internet.

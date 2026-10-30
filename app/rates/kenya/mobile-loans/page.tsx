@@ -9,6 +9,8 @@ import { CiteBlock } from "@/components/ui/CiteBlock";
 import { ShareResult } from "@/components/ui/ShareResult";
 import { fairBench } from "@/lib/data/kenya-rates";
 import { mobileLoanBoard } from "@/lib/data/mobile-loans";
+import { MobileLoanFound } from "@/components/data/MobileLoanFound";
+import { fulizaTariff, loanProducts } from "@/lib/found-data";
 import { mobileLoanAnswers } from "@/lib/seo/answers";
 import { mobileSentence } from "@/lib/share-card";
 import { site } from "@/lib/site";
@@ -117,6 +119,10 @@ export default function MobileLoansPage() {
         </p>
         {cheapest && bench ? <ShareResult spec={{ kind: "mobile" }} text={`${mobileSentence(cheapest, bench.lendingAvg)}. Compare every provider:`} /> : null}
       </section>
+
+      <div className="mt-10">
+        <MobileLoanFound products={loanProducts()} fuliza={fulizaTariff()} />
+      </div>
 
       <section className="mt-12 max-w-3xl">
         <SectionTitle kicker="Before you borrow" title="Three questions" />

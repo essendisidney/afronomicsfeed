@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { BASE, MmfMonthView, mmfMonthDescription, mmfMonthTitle } from "@/components/data/MmfMonthView";
 import { mmfMonths } from "@/lib/data/mmf-months";
+import { FundFound } from "@/components/data/FundFound";
+import { fundOptions } from "@/lib/found-data";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
 
@@ -17,5 +19,6 @@ export default function BestMoneyMarketFundPage() {
   const all = mmfMonths();
   const m = all[0];
   if (!m) return <p className="mx-auto max-w-3xl px-4 py-16 text-sm text-muted">No fund yields have been read yet.</p>;
-  return <MmfMonthView m={m} all={all} />;
+  // Today's yields, not the month's average: the line compares what each fund publishes now (lib/found.ts).
+  return <MmfMonthView m={m} all={all} found={<FundFound funds={fundOptions()} />} />;
 }

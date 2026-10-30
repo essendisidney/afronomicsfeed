@@ -258,7 +258,7 @@ export default async function PricingPage({
                     </a>
                   )}
                   {tier.id === "enterprise" ? null : (
-                    <Link href="/licensing#local" className="block text-center text-[12px] text-muted underline underline-offset-2 hover:text-forest">
+                    <Link href="/licensing#local" className="flex min-h-11 items-center justify-center text-center text-[12px] text-muted underline underline-offset-2 hover:text-forest sm:min-h-8">
                       Local institution in Africa? See local prices
                     </Link>
                   )}
@@ -418,7 +418,7 @@ export default async function PricingPage({
               "Paying from Africa",
               live
                 ? "M-Pesa, Kenyan and Nigerian cards, bank transfer and any Visa or Mastercard, through Paystack. Teams and institutions can be invoiced in KES or USD instead."
-                : "Invoiced in USD or KES, payable by bank transfer or M-Pesa. Request access and the desk sends an invoice within one business day.",
+                : "Invoiced in USD or KES, payable by bank transfer or M-Pesa. Request access and the desk sends an invoice within one working day.",
             ],
             ["Citing our data", "Free with attribution: “Source: Afronomics, compiled from [publisher]”. Every CSV and API response carries its source lines."],
           ].map(([title, body]) => (

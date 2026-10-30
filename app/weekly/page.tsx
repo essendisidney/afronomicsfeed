@@ -221,7 +221,7 @@ export default async function WeeklyPage() {
         </div>
       </section>
 
-      <NewsletterBand lede="This edition, in your inbox every Monday morning, East Africa time. Free." />
+      <NewsletterBand title="The Afronomics Weekly" kicker="Free · every Monday, with the Morning on weekdays" lede="This edition, in your inbox every Monday morning, East Africa time. Free." />
 
       {archive.length ? (
         <section className="mt-16 max-w-3xl">

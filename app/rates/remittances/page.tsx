@@ -4,8 +4,11 @@ import { NewsletterBand } from "@/components/data/NewsletterBand";
 import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { Questions } from "@/components/seo/Questions";
+import { TableScroll } from "@/components/ui/DataTable";
 import { AFRICA_ISO3, banksDearest, byDestination, countryName, loadRemittances, periodLabel, SDG_TARGET, type Corridor } from "@/lib/data/remittances";
 import { remittanceAnswers } from "@/lib/seo/remittances";
+import { RemitFound } from "@/components/data/RemitFound";
+import { fxRef, remitCorridors, remitSurvey } from "@/lib/found-data";
 import { site } from "@/lib/site";
 import { fitDescription, fitTitle } from "@/lib/seo";
 
@@ -39,8 +42,10 @@ function typeLine(c: Corridor) {
     .join(" · ");
 }
 
-export default function RemittancesPage() {
+export default async function RemittancesPage() {
   const file = loadRemittances();
+  const survey = remitSurvey();
+  const { ref: fx } = await fxRef();
   const dests = byDestination();
   const all = file?.corridors ?? [];
   const within = all.filter((c) => AFRICA_ISO3.has(c.src));
@@ -97,6 +102,12 @@ export default function RemittancesPage() {
             ))}
           </section>
 
+          {survey ? (
+            <div className="mt-8">
+              <RemitFound corridors={remitCorridors()} survey={survey} fx={fx} />
+            </div>
+          ) : null}
+
           {avgWithin != null && avgAbroad != null && avgWithin > avgAbroad ? (
             <p className="mt-4 max-w-3xl text-sm leading-6 text-ink-soft">
               Sending money between African countries costs about {(avgWithin / avgAbroad).toFixed(1)} times as much as sending it from outside
@@ -133,7 +144,7 @@ export default function RemittancesPage() {
             <SectionTitle kicker="By country" title="Find your corridor" note="Average total cost across the services surveyed; the cheapest single service; the change on the quarter before." />
             <nav className="mt-3 flex flex-wrap gap-1.5">
               {dests.map((d) => (
-                <a key={d.dst} href={`#${d.dst}`} className="rounded-full border border-rule bg-surface px-3 py-1 text-[13px] hover:border-accent">
+                <a key={d.dst} href={`#${d.dst}`} className="inline-flex min-h-11 items-center rounded-full border border-rule bg-surface px-3 text-[13px] hover:border-accent sm:min-h-8">
                   {countryName(d.name)}
                 </a>
               ))}
@@ -142,7 +153,7 @@ export default function RemittancesPage() {
               {dests.map((d) => (
                 <div key={d.dst} id={d.dst}>
                   <h3 className="font-serif text-2xl text-ink">Sending money to {countryName(d.name)}</h3>
-                  <div className="mt-2 overflow-x-auto">
+                  <TableScroll label={`Sending money to ${countryName(d.name)}`} className="mt-2">
                     <table className="data-table">
                       <thead>
                         <tr>
@@ -173,7 +184,7 @@ export default function RemittancesPage() {
                         ))}
                       </tbody>
                     </table>
-                  </div>
+                  </TableScroll>
                 </div>
               ))}
             </div>

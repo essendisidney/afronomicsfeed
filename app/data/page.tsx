@@ -47,6 +47,12 @@ export default async function DataHubPage() {
           .
         </p>
       </section>
+      <p className="mb-6 text-[14px] text-ink-soft">
+        <Link href="/data/poverty-premium" className="font-semibold text-forest underline underline-offset-2">
+          Kenya Poverty Premium
+        </Link>
+        : what the same need costs on the options open to small amounts, every figure worked out from data we hold. Monthly, with CSV.
+      </p>
       <section className="mb-12 border border-gold/40 bg-paper-2 px-5 py-5">
         <p className="text-[12px] font-semibold text-gold">Afronomics datasets</p>
         <p className="mt-2 font-serif text-2xl">

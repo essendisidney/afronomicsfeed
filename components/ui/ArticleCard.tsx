@@ -21,8 +21,9 @@ export function ArticleCard({
       <div className="flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.14em] text-muted">
         <span className="font-mono font-semibold text-forest">{categoryLabel(article.category)}</span>
         <time dateTime={article.date}>{formatDate(article.date)}</time>
-        <DeskMeta urgency={article.urgency} minutes={article.minutes} fileFor={article.fileFor} />
       </div>
+      {/* Reading time and who it is for in sentence case: in the spaced capitals above, the audience ran to three lines. */}
+      <DeskMeta urgency={article.urgency} minutes={article.minutes} fileFor={article.fileFor} />
       <h2 className={`font-serif leading-snug text-ink ${featured ? "text-3xl" : "text-2xl"}`}>
         <Link href={href} className="hover:text-forest">
           {article.title}
@@ -41,9 +42,10 @@ export function ArticleCard({
       </ul>
       <Link
         href={href}
-        className="mt-1 text-[12.5px] font-semibold text-forest hover:text-gold"
+        className="inline-flex min-h-11 items-center self-start text-[13px] font-semibold text-forest hover:text-gold sm:min-h-0"
       >
-        Read →
+        Read<span className="sr-only">: {article.title}</span>
+        <span aria-hidden="true">&nbsp;→</span>
       </Link>
     </article>
   );

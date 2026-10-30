@@ -1,9 +1,7 @@
 import { SectionTitle } from "@/components/data/parts";
 import { HealthList } from "@/components/data/HealthList";
-import { Badge } from "@/components/ui/Badge";
 import type { Health } from "@/lib/data/health";
 import { hoursText, type Latency } from "@/lib/data/latency";
-import { FOUNDER_DECISIONS, REFERENCE_UPDATED, ROUTINES } from "@/lib/desk/reference";
 
 /** Data health, routines and founder decisions: the bottom of the morning desk. */
 
@@ -71,57 +69,6 @@ export function HealthPanel({ health, latency, freshness }: { health: Health | n
           ))}
         </div>
       </details>
-    </section>
-  );
-}
-
-export function RoutinesPanel() {
-  return (
-    <section id="routines" className="scroll-mt-20">
-      <SectionTitle
-        kicker={`Routines · reference of ${REFERENCE_UPDATED}`}
-        title="What runs on its own"
-        note="Times are Nairobi. This is the schedule, not live status: the site cannot see the Claude routines or GitHub Actions runs. Check the routine list in Claude and the Actions tab on GitHub."
-      />
-      <ul className="mt-2 divide-y divide-rule">
-        {ROUTINES.map((r) => (
-          <li key={r.name} className="grid gap-x-4 py-2 text-sm sm:grid-cols-[minmax(0,14rem)_minmax(0,12rem)_1fr]">
-            <span className="font-medium text-ink">{r.name}</span>
-            <span className="text-[12px] text-ink-soft">{r.when}</span>
-            <span className="text-[12px] text-muted">
-              {r.does} · {r.where}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-export function DecisionsPanel() {
-  const open = FOUNDER_DECISIONS.filter((d) => d.status === "open");
-  return (
-    <section id="decisions" className="scroll-mt-20">
-      <SectionTitle
-        kicker={`Decisions · reference of ${REFERENCE_UPDATED}`}
-        title={`${open.length} decisions wait on you`}
-        note="F1–F11 from master-plan-v2 §7 and partners-and-revenue §3.4; A1–A4 from the sales operator. Record each answer in docs/strategy/decision-log.md."
-      />
-      <ul className="mt-2 divide-y divide-rule">
-        {[...open, ...FOUNDER_DECISIONS.filter((d) => d.status !== "open")].map((d) => (
-          <li key={d.id} className={`flex gap-3 py-2 ${d.status === "open" ? "" : "opacity-70"}`}>
-            <span className="w-8 shrink-0 font-mono text-[12px] text-muted">{d.id}</span>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm text-ink">
-                {d.ask} <Badge tone={d.status === "open" ? "warn" : d.status === "decided" ? "up" : "neutral"}>{d.status}</Badge>
-              </p>
-              <p className="text-[12px] text-muted">
-                {d.note} · {d.source}
-              </p>
-            </div>
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }

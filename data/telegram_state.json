@@ -1,26 +1,28 @@
 {
  "note": "What scripts/telegram_post.py has already posted to the Telegram channel, by item.",
  "posted": {
-  "bills:egypt": "2026-10-20",
-  "bills:ghana": "2026-10-19",
-  "bills:kenya": "2026-10-19",
-  "bills:malawi": "2026-10-13",
-  "bills:mozambique": "2026-10-14",
-  "bills:nigeria": "2026-10-14",
-  "bills:southafrica": "2026-10-19",
+  "bills:egypt": "2026-10-27",
+  "bills:ghana": "2026-10-26",
+  "bills:kenya": "2026-11-02",
+  "bills:malawi": "2026-10-27",
+  "bills:mozambique": "2026-10-21",
+  "bills:nigeria": "2026-10-28",
+  "bills:southafrica": "2026-10-26",
   "bills:tanzania": "2026-10-21",
   "bills:uganda": "2026-10-22",
-  "bills:zambia": "2026-10-15",
+  "bills:zambia": "2026-10-29",
   "intro": "posted",
   "launch:auction": "2026-10-15",
   "launch:chama": "2026-10-14",
   "launch:diaspora": "2026-10-16",
   "launch:loan-apps": "2026-10-13",
+  "policy:egypt": "2026-10-29",
   "policy:nigeria": "2026-10-20",
   "story:sending-200-dollars-to-ghana-what-it-costs": "2026-10-21",
   "story:sending-200-dollars-to-kenya-what-it-costs": "2026-10-12",
   "story:sending-200-dollars-to-nigeria-what-it-costs": "2026-10-16",
   "story:sending-200-dollars-to-south-africa-what-it-costs": "2026-10-21",
-  "story:sending-200-dollars-to-uganda-what-it-costs": "2026-10-19"
+  "story:sending-200-dollars-to-uganda-what-it-costs": "2026-10-19",
+  "story:uganda-one-year-bill-rises-to-14-50": "2026-10-27"
  }
 }

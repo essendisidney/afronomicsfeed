@@ -28,7 +28,7 @@ export function SubscribeForm({ tone = "paper", button = "Get it free" }: { tone
       if (response.ok && body.ok) {
         setState("done");
         track("newsletter_signup");
-        setMessage("You’re in. Your guide is on its way to your inbox, and the Morning lands at 7:00 on weekdays.");
+        setMessage("You’re in. Your guide is on its way to your inbox, and the Morning lands before 07:30 on weekdays.");
         setEmail("");
       } else {
         setState("error");

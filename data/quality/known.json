@@ -1,0 +1,100 @@
+{
+ "note": "Reviewed data-quality issues: each stays listed until fixed at the source. The gate (scripts/quality_check.py) fails on anything not here.",
+ "issues": [
+  {
+   "key": "data/mozambique/tbill_auctions.json|https://www.bancomoc.mz/media/dfrd4b4d/s%C3%A9rie-leil%C3%B5es-bilhetes-de-tesouro.xlsx|91|12.55|accepted above received",
+   "reason": "Accepted (994m) above bids received (944m) as read from Banco de Mo\u00e7ambique's series spreadsheet; likely a transposition in the source or the read. Fix: check the 11 Jun 2025 auction against the bank's notice.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/PRESS_RELEASE_TBILLS_11_APRIL_2024_a19c46b98f.pdf|364|13.285|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/PRESS_RELEASE_TBILL_ISSUE_1159_16_AUG_2023_eadea66fc2.pdf|364|12.5|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/PRESS_RELEASE_TBILL_ISSUE_1160_30_AUG_2023_73b6a62e5a.pdf|364|13.001|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1043_d843fd8580.pdf|364|12.5|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1041_9de8132e0d.pdf|364|11.514|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1042_eb8cc40075.pdf|364|11.501|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/PRESS_RELEASE_TBILLS_11_APRIL_2024_a19c46b98f.pdf|182|12.001|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/PRESS_RELEASE_TBILL_ISSUE_1159_16_AUG_2023_eadea66fc2.pdf|182|10.5|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/PRESS_RELEASE_TBILL_ISSUE_1160_30_AUG_2023_73b6a62e5a.pdf|182|12.001|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1043_d843fd8580.pdf|182|10.713|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1041_9de8132e0d.pdf|182|11.001|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1042_eb8cc40075.pdf|182|10.573|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/PRESS_RELEASE_TBILLS_11_APRIL_2024_a19c46b98f.pdf|91|9.102|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/PRESS_RELEASE_TBILL_ISSUE_1159_16_AUG_2023_eadea66fc2.pdf|91|10.002|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/PRESS_RELEASE_TBILL_ISSUE_1160_30_AUG_2023_73b6a62e5a.pdf|91|10.002|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1043_d843fd8580.pdf|91|9.749|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1041_9de8132e0d.pdf|91|9.501|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  },
+  {
+   "key": "data/uganda/tbill_auctions.json|https://bou.or.ug/uploads/Press_Release_T_Bills_Issue_Number_1042_eb8cc40075.pdf|91|9.501|no valid date",
+   "reason": "Bank of Uganda press release read without a date; the site leaves undated rows out (lib/data/sovereign-bills.ts). Fix: re-read the date from the press release.",
+   "logged": "2026-10-28"
+  }
+ ]
+}

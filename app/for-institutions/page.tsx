@@ -4,6 +4,7 @@ import { PageShell } from "@/components/data/PageShell";
 import { SectionTitle } from "@/components/data/parts";
 import { HubLinks } from "@/components/hub/HubSections";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
+import { AdviceDisclaimer } from "@/components/legal/AdviceDisclaimer";
 import { aboutText, priceText, rateItem } from "@/lib/billing/ratecard";
 import { policyBoard } from "@/lib/data/policy-rates";
 import { billMarkets, loadBillMarket } from "@/lib/data/sovereign-bills";
@@ -34,7 +35,7 @@ const buyers: Buyer[] = [
     id: "committees",
     who: "SACCOs, pension funds and insurers",
     job: "Table the rates, the curve and where the money earns most at every investment committee, without an analyst losing a day to it.",
-    products: ["pack", "pack_plus", "benchmarking", "bidding"],
+    products: ["pack_plus", "pack", "treasury_desk", "benchmarking", "bidding"],
     start: { href: "/documents/committee-pack-sample.pdf", label: "Download this month's sample pack (PDF)", external: true },
   },
   {
@@ -87,7 +88,7 @@ export default function ForInstitutionsPage() {
       aside={
         <div className="rounded-2xl border border-rule bg-surface px-5 py-5">
           <p className="text-[14px] font-semibold text-ink">Talk to the desk</p>
-          <p className="mt-1 text-[13px] leading-5 text-ink-soft">A 20-minute walkthrough on your own market, or an invoice in KES or USD. Reply within one business day.</p>
+          <p className="mt-1 text-[13px] leading-5 text-ink-soft">A 20-minute walkthrough on your own market, or an invoice in KES or USD. Reply within one working day.</p>
           <a href="#enquiry" className="mt-4 inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
             Book a walkthrough
           </a>
@@ -106,6 +107,58 @@ export default function ForInstitutionsPage() {
             <p className="mt-1 text-[12px] text-muted">{s.k}</p>
           </div>
         ))}
+      </section>
+
+      <section className="mt-12" id="treasury-desk" aria-labelledby="treasury-desk-title">
+        <p className="text-[13px] font-semibold text-gold">The Treasury Desk</p>
+        <h2 id="treasury-desk-title" className="mt-1 font-serif text-3xl text-ink sm:text-4xl">Your board&rsquo;s rates page, done.</h2>
+        <p className="mt-3 max-w-3xl text-[15px] leading-7 text-ink-soft">
+          Every Treasury bill and bond auction, the yield curve, the funds&rsquo; published yields and the shilling, on four sourced A4 pages with your
+          institution&rsquo;s name on the cover, on the first working day of each month.
+        </p>
+        <ul className="mt-5 grid gap-6 md:grid-cols-3">
+          {[
+            ["Independent", "We do not manage money, sell funds or take commissions. We report what the market did."],
+            ["Sourced to the line", "Every figure links to the CBK, CMA or fund document it came from. If we get one wrong, we correct it publicly within a day."],
+            ["On time", "An alert the day each auction result lands, and the pack before your committee meets."],
+          ].map(([t, d]) => (
+            <li key={t}>
+              <h3 className="font-serif text-xl text-ink">{t}</h3>
+              <p className="mt-1 text-sm leading-6 text-ink-soft">{d}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-3">
+          {[
+            { id: "pack_plus", label: "For SACCOs and schemes", href: "/pack" },
+            { id: "treasury_desk", label: "For administrators and fund managers", href: "#enquiry" },
+            { id: "benchmarking", label: "For trustees, each quarter", href: "/benchmarking" },
+          ].map(({ id, label, href }) => {
+            const i = rateItem(id);
+            if (!i) return null;
+            return (
+              <div key={id} className="bg-surface px-5 py-5">
+                <p className="text-[13px] font-semibold text-gold">{label}</p>
+                <p className="mt-1 font-serif text-xl text-ink">{i.name}</p>
+                <p className="mt-1 text-sm text-ink">
+                  <strong>{priceText(i)}</strong> {i.unit}
+                </p>
+                <p className="mt-2 text-[13px] leading-5 text-ink-soft">{i.what}</p>
+                <Link href={href} className="mt-3 inline-flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
+                  {id === "treasury_desk" ? "Ask for a quote" : "See what it includes"}
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <a href="#enquiry" className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2 text-[14px] font-semibold text-paper hover:bg-forest">
+            Get a sample with your name on it
+          </a>
+          <a href="/pack/sample" target="_blank" rel="noopener" className="inline-flex min-h-11 items-center rounded-full border border-rule px-4 py-2 text-[14px] font-semibold text-ink hover:border-accent">
+            See this month&rsquo;s pack
+          </a>
+        </div>
       </section>
 
       <section className="mt-12">
@@ -185,7 +238,7 @@ export default function ForInstitutionsPage() {
             <p className="mt-2 text-sm leading-6 text-ink-soft">
               {rateItem("trial") ? `${priceText(rateItem("trial")!)} by M-Pesa: ` : ""}the Morning by email, auction alerts and every brief in full.
             </p>
-            <Link href="/pricing" className="mt-3 inline-block text-[14px] font-semibold text-forest underline underline-offset-2">
+            <Link href="/pricing" className="mt-3 inline-flex min-h-11 items-center text-[14px] font-semibold text-forest underline underline-offset-2">
               Start the trial
             </Link>
           </div>
@@ -253,8 +306,10 @@ export default function ForInstitutionsPage() {
         <HubLinks links={institutionSections} />
       </section>
 
+      <AdviceDisclaimer />
+
       <section className="mt-14 max-w-2xl" id="enquiry">
-        <SectionTitle kicker="Talk to the desk" title="Book a walkthrough or ask for an invoice" />
+        <SectionTitle kicker="Talk to the desk" title="Book a walkthrough, a named sample or an invoice" />
         <div className="mt-4">
           <EnquiryForm interest="pack" cta="Send" />
         </div>

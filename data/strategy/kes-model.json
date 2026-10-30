@@ -1,0 +1,1602 @@
+{
+ "tiers": {
+  "board": {
+   "name": "Board Pack",
+   "kes_month": 18000,
+   "basis": "VERIFIED: pack_plus in ratecard.ts"
+  },
+  "desk": {
+   "name": "Treasury Desk",
+   "kes_month": 65000,
+   "basis": "ASSUMED: pack for several schemes + quarterly benchmarking + data + 10 seats"
+  },
+  "data": {
+   "name": "Data licence / API",
+   "kes_month": 194000,
+   "basis": "VERIFIED: Team and API USD 1,500 at KES 129"
+  }
+ },
+ "inputs": {
+  "board_new_start": {
+   "label": "ASSUMED",
+   "basis": "new Board Pack customers a month from month 3",
+   "values": {
+    "Conservative": 0.5,
+    "Base": 1.5,
+    "Upside": 3
+   }
+  },
+  "board_new_m12": {
+   "label": "ASSUMED",
+   "basis": "new Board Pack customers a month by month 12",
+   "values": {
+    "Conservative": 2,
+    "Base": 5,
+    "Upside": 8
+   }
+  },
+  "desk_new_start": {
+   "label": "ASSUMED",
+   "basis": "new Treasury Desk customers a month from month 4",
+   "values": {
+    "Conservative": 0.2,
+    "Base": 0.5,
+    "Upside": 1
+   }
+  },
+  "desk_new_m12": {
+   "label": "ASSUMED",
+   "basis": "new Treasury Desk customers a month by month 12",
+   "values": {
+    "Conservative": 0.7,
+    "Base": 2,
+    "Upside": 3.5
+   }
+  },
+  "data_new": {
+   "label": "ASSUMED",
+   "basis": "new data-licence customers a month from month 6 (global funds, fintechs)",
+   "values": {
+    "Conservative": 0.1,
+    "Base": 0.25,
+    "Upside": 0.5
+   }
+  },
+  "regional_from": {
+   "label": "ASSUMED",
+   "basis": "month Uganda, Tanzania and Rwanda packs go on sale",
+   "values": {
+    "Conservative": 99,
+    "Base": 19,
+    "Upside": 13
+   }
+  },
+  "regional_uplift": {
+   "label": "ASSUMED",
+   "basis": "new-customer multiplier once the regional packs exist",
+   "values": {
+    "Conservative": 1.0,
+    "Base": 1.6,
+    "Upside": 2.0
+   }
+  },
+  "pool_board": {
+   "label": "ESTIMATED",
+   "basis": "Kenyan buyers of a board pack: regulated SACCOs, scheme trustee boards, MFIs, chamas with treasuries",
+   "values": {
+    "Conservative": 250,
+    "Base": 400,
+    "Upside": 600
+   }
+  },
+  "pool_desk": {
+   "label": "ESTIMATED",
+   "basis": "fund managers, pension administrators, insurers, banks' treasury and wealth desks, family offices",
+   "values": {
+    "Conservative": 60,
+    "Base": 90,
+    "Upside": 120
+   }
+  },
+  "churn_year": {
+   "label": "ASSUMED",
+   "basis": "logo churn a year (an unproven vendor; boards renew yearly)",
+   "values": {
+    "Conservative": 0.3,
+    "Base": 0.2,
+    "Upside": 0.12
+   }
+  },
+  "upgrade_year": {
+   "label": "ASSUMED",
+   "basis": "share of Board Pack customers moving to Treasury Desk in a year",
+   "values": {
+    "Conservative": 0.03,
+    "Base": 0.06,
+    "Upside": 0.1
+   }
+  },
+  "realisation": {
+   "label": "ASSUMED",
+   "basis": "share of list price actually paid (annual prepay discount, launch prices)",
+   "values": {
+    "Conservative": 0.8,
+    "Base": 0.88,
+    "Upside": 0.95
+   }
+  },
+  "services_share": {
+   "label": "ASSUMED",
+   "basis": "training, benchmarking add-ons and commissioned research, as a share of MRR",
+   "values": {
+    "Conservative": 0.05,
+    "Base": 0.1,
+    "Upside": 0.15
+   }
+  },
+  "fees": {
+   "label": "ASSUMED",
+   "basis": "payment and FX fees, share of revenue (Paystack / M-Pesa / bank)",
+   "values": {
+    "Conservative": 0.035,
+    "Base": 0.03,
+    "Upside": 0.03
+   }
+  },
+  "base_opex": {
+   "label": "ASSUMED",
+   "basis": "hosting, database, data runs, software, accounting (Supabase invoice alone is about KES 20,000)",
+   "values": {
+    "Conservative": 120000,
+    "Base": 150000,
+    "Upside": 200000
+   }
+  },
+  "legal_opex": {
+   "label": "ASSUMED",
+   "basis": "lawyer on retainer, ODPC registration, insurance from month 3",
+   "values": {
+    "Conservative": 25000,
+    "Base": 40000,
+    "Upside": 60000
+   }
+  },
+  "founder_salary": {
+   "label": "ASSUMED",
+   "basis": "founder draw",
+   "values": {
+    "Conservative": 250000,
+    "Base": 350000,
+    "Upside": 450000
+   }
+  },
+  "founder_paid_from": {
+   "label": "ASSUMED",
+   "basis": "month the founder draws a salary",
+   "values": {
+    "Conservative": 13,
+    "Base": 7,
+    "Upside": 4
+   }
+  },
+  "cost_of_sale": {
+   "label": "ASSUMED",
+   "basis": "events, travel, demo materials per new logo",
+   "values": {
+    "Conservative": 15000,
+    "Base": 20000,
+    "Upside": 25000
+   }
+  }
+ },
+ "hires": [
+  {
+   "at_mrr": 400000,
+   "role": "Data analyst (pack production, QA)",
+   "kes_month": 180000
+  },
+  {
+   "at_mrr": 1000000,
+   "role": "Institutional seller",
+   "kes_month": 250000
+  },
+  {
+   "at_mrr": 2000000,
+   "role": "Engineer",
+   "kes_month": 350000
+  },
+  {
+   "at_mrr": 3500000,
+   "role": "Second analyst (regional packs)",
+   "kes_month": 180000
+  },
+  {
+   "at_mrr": 5000000,
+   "role": "Head of research / compliance",
+   "kes_month": 400000
+  },
+  {
+   "at_mrr": 7500000,
+   "role": "Second seller + customer success",
+   "kes_month": 400000
+  }
+ ],
+ "scenarios": [
+  {
+   "scenario": "Conservative",
+   "rows": [
+    {
+     "month": 1,
+     "customers": 0.0,
+     "board": 0.0,
+     "desk": 0.0,
+     "data": 0.0,
+     "mrr": 0,
+     "costs": 120000,
+     "net": -120000,
+     "cash": -120000,
+     "team": 1
+    },
+    {
+     "month": 2,
+     "customers": 0.0,
+     "board": 0.0,
+     "desk": 0.0,
+     "data": 0.0,
+     "mrr": 0,
+     "costs": 120000,
+     "net": -120000,
+     "cash": -240000,
+     "team": 1
+    },
+    {
+     "month": 3,
+     "customers": 0.5,
+     "board": 0.5,
+     "desk": 0.0,
+     "data": 0.0,
+     "mrr": 7560,
+     "costs": 152765,
+     "net": -145205,
+     "cash": -385205,
+     "team": 1
+    },
+    {
+     "month": 4,
+     "customers": 1.4,
+     "board": 1.2,
+     "desk": 0.2,
+     "data": 0.0,
+     "mrr": 28389,
+     "costs": 158994,
+     "net": -130605,
+     "cash": -515810,
+     "team": 1
+    },
+    {
+     "month": 5,
+     "customers": 2.4,
+     "board": 1.9,
+     "desk": 0.5,
+     "data": 0.0,
+     "mrr": 54605,
+     "costs": 163349,
+     "net": -108744,
+     "cash": -624553,
+     "team": 1
+    },
+    {
+     "month": 6,
+     "customers": 3.8,
+     "board": 2.9,
+     "desk": 0.8,
+     "data": 0.1,
+     "mrr": 102362,
+     "costs": 169958,
+     "net": -67596,
+     "cash": -692149,
+     "team": 1
+    },
+    {
+     "month": 7,
+     "customers": 5.3,
+     "board": 4.0,
+     "desk": 1.1,
+     "data": 0.2,
+     "mrr": 154746,
+     "costs": 175229,
+     "net": -20482,
+     "cash": -712632,
+     "team": 1
+    },
+    {
+     "month": 8,
+     "customers": 7.0,
+     "board": 5.2,
+     "desk": 1.6,
+     "data": 0.3,
+     "mrr": 211637,
+     "costs": 180657,
+     "net": 30980,
+     "cash": -681652,
+     "team": 1
+    },
+    {
+     "month": 9,
+     "customers": 8.9,
+     "board": 6.5,
+     "desk": 2.1,
+     "data": 0.4,
+     "mrr": 272915,
+     "costs": 186240,
+     "net": 86675,
+     "cash": -594977,
+     "team": 1
+    },
+    {
+     "month": 10,
+     "customers": 11.0,
+     "board": 8.0,
+     "desk": 2.6,
+     "data": 0.5,
+     "mrr": 338464,
+     "costs": 191971,
+     "net": 146493,
+     "cash": -448484,
+     "team": 1
+    },
+    {
+     "month": 11,
+     "customers": 13.3,
+     "board": 9.5,
+     "desk": 3.2,
+     "data": 0.6,
+     "mrr": 408172,
+     "costs": 377849,
+     "net": 30324,
+     "cash": -418160,
+     "team": 2
+    },
+    {
+     "month": 12,
+     "customers": 15.7,
+     "board": 11.2,
+     "desk": 3.8,
+     "data": 0.6,
+     "mrr": 481930,
+     "costs": 383868,
+     "net": 98062,
+     "cash": -320098,
+     "team": 2
+    },
+    {
+     "month": 13,
+     "customers": 18.0,
+     "board": 12.9,
+     "desk": 4.4,
+     "data": 0.7,
+     "mrr": 553697,
+     "costs": 636379,
+     "net": -82682,
+     "cash": -402780,
+     "team": 2
+    },
+    {
+     "month": 14,
+     "customers": 20.3,
+     "board": 14.5,
+     "desk": 5.0,
+     "data": 0.8,
+     "mrr": 623527,
+     "costs": 638823,
+     "net": -15296,
+     "cash": -418076,
+     "team": 2
+    },
+    {
+     "month": 15,
+     "customers": 22.5,
+     "board": 16.0,
+     "desk": 5.6,
+     "data": 0.9,
+     "mrr": 691471,
+     "costs": 641201,
+     "net": 50270,
+     "cash": -367807,
+     "team": 2
+    },
+    {
+     "month": 16,
+     "customers": 24.6,
+     "board": 17.5,
+     "desk": 6.2,
+     "data": 1.0,
+     "mrr": 757580,
+     "costs": 643515,
+     "net": 114064,
+     "cash": -253742,
+     "team": 2
+    },
+    {
+     "month": 17,
+     "customers": 26.7,
+     "board": 18.9,
+     "desk": 6.7,
+     "data": 1.0,
+     "mrr": 821901,
+     "costs": 645767,
+     "net": 176135,
+     "cash": -77608,
+     "team": 2
+    },
+    {
+     "month": 18,
+     "customers": 28.7,
+     "board": 20.3,
+     "desk": 7.3,
+     "data": 1.1,
+     "mrr": 884483,
+     "costs": 647957,
+     "net": 236526,
+     "cash": 158919,
+     "team": 2
+    },
+    {
+     "month": 19,
+     "customers": 30.7,
+     "board": 21.7,
+     "desk": 7.8,
+     "data": 1.2,
+     "mrr": 945373,
+     "costs": 650088,
+     "net": 295285,
+     "cash": 454203,
+     "team": 2
+    },
+    {
+     "month": 20,
+     "customers": 32.6,
+     "board": 23.0,
+     "desk": 8.4,
+     "data": 1.2,
+     "mrr": 1004614,
+     "costs": 902161,
+     "net": 102453,
+     "cash": 556656,
+     "team": 3
+    },
+    {
+     "month": 21,
+     "customers": 34.4,
+     "board": 24.3,
+     "desk": 8.9,
+     "data": 1.3,
+     "mrr": 1062252,
+     "costs": 904179,
+     "net": 158073,
+     "cash": 714729,
+     "team": 3
+    },
+    {
+     "month": 22,
+     "customers": 36.2,
+     "board": 25.5,
+     "desk": 9.4,
+     "data": 1.4,
+     "mrr": 1118329,
+     "costs": 906142,
+     "net": 212187,
+     "cash": 926916,
+     "team": 3
+    },
+    {
+     "month": 23,
+     "customers": 38.0,
+     "board": 26.7,
+     "desk": 9.9,
+     "data": 1.4,
+     "mrr": 1172886,
+     "costs": 908051,
+     "net": 264835,
+     "cash": 1191751,
+     "team": 3
+    },
+    {
+     "month": 24,
+     "customers": 39.7,
+     "board": 27.8,
+     "desk": 10.3,
+     "data": 1.5,
+     "mrr": 1225964,
+     "costs": 909909,
+     "net": 316056,
+     "cash": 1507807,
+     "team": 3
+    },
+    {
+     "month": 25,
+     "customers": 41.3,
+     "board": 29.0,
+     "desk": 10.8,
+     "data": 1.5,
+     "mrr": 1277604,
+     "costs": 911716,
+     "net": 365887,
+     "cash": 1873694,
+     "team": 3
+    },
+    {
+     "month": 26,
+     "customers": 42.9,
+     "board": 30.0,
+     "desk": 11.3,
+     "data": 1.6,
+     "mrr": 1327842,
+     "costs": 913474,
+     "net": 414368,
+     "cash": 2288062,
+     "team": 3
+    },
+    {
+     "month": 27,
+     "customers": 44.4,
+     "board": 31.1,
+     "desk": 11.7,
+     "data": 1.6,
+     "mrr": 1376717,
+     "costs": 915185,
+     "net": 461532,
+     "cash": 2749594,
+     "team": 3
+    },
+    {
+     "month": 28,
+     "customers": 45.9,
+     "board": 32.1,
+     "desk": 12.2,
+     "data": 1.7,
+     "mrr": 1424266,
+     "costs": 916849,
+     "net": 507416,
+     "cash": 3257010,
+     "team": 3
+    },
+    {
+     "month": 29,
+     "customers": 47.4,
+     "board": 33.1,
+     "desk": 12.6,
+     "data": 1.7,
+     "mrr": 1470523,
+     "costs": 918468,
+     "net": 552054,
+     "cash": 3809065,
+     "team": 3
+    },
+    {
+     "month": 30,
+     "customers": 48.8,
+     "board": 34.0,
+     "desk": 13.0,
+     "data": 1.8,
+     "mrr": 1515523,
+     "costs": 920043,
+     "net": 595480,
+     "cash": 4404545,
+     "team": 3
+    },
+    {
+     "month": 31,
+     "customers": 50.2,
+     "board": 34.9,
+     "desk": 13.4,
+     "data": 1.8,
+     "mrr": 1559300,
+     "costs": 921576,
+     "net": 637725,
+     "cash": 5042270,
+     "team": 3
+    },
+    {
+     "month": 32,
+     "customers": 51.5,
+     "board": 35.8,
+     "desk": 13.8,
+     "data": 1.9,
+     "mrr": 1601888,
+     "costs": 923066,
+     "net": 678822,
+     "cash": 5721091,
+     "team": 3
+    },
+    {
+     "month": 33,
+     "customers": 52.8,
+     "board": 36.7,
+     "desk": 14.2,
+     "data": 1.9,
+     "mrr": 1643317,
+     "costs": 924516,
+     "net": 718800,
+     "cash": 6439892,
+     "team": 3
+    },
+    {
+     "month": 34,
+     "customers": 54.0,
+     "board": 37.5,
+     "desk": 14.6,
+     "data": 2.0,
+     "mrr": 1683618,
+     "costs": 925927,
+     "net": 757692,
+     "cash": 7197583,
+     "team": 3
+    },
+    {
+     "month": 35,
+     "customers": 55.3,
+     "board": 38.3,
+     "desk": 14.9,
+     "data": 2.0,
+     "mrr": 1722823,
+     "costs": 927299,
+     "net": 795524,
+     "cash": 7993108,
+     "team": 3
+    },
+    {
+     "month": 36,
+     "customers": 56.4,
+     "board": 39.1,
+     "desk": 15.3,
+     "data": 2.1,
+     "mrr": 1760961,
+     "costs": 928634,
+     "net": 832327,
+     "cash": 8825434,
+     "team": 3
+    }
+   ],
+   "mrr_m6": 102362,
+   "mrr_m12": 481930,
+   "mrr_m24": 1225964,
+   "mrr_m36": 1760961,
+   "customers_m12": 15.7,
+   "customers_m36": 56.4,
+   "targets": {
+    "1000000": 20,
+    "5000000": null,
+    "10000000": null
+   },
+   "break_even_month": 8,
+   "cash_need": 712632,
+   "team_m36": 3
+  },
+  {
+   "scenario": "Base",
+   "rows": [
+    {
+     "month": 1,
+     "customers": 0.0,
+     "board": 0.0,
+     "desk": 0.0,
+     "data": 0.0,
+     "mrr": 0,
+     "costs": 150000,
+     "net": -150000,
+     "cash": -150000,
+     "team": 1
+    },
+    {
+     "month": 2,
+     "customers": 0.0,
+     "board": 0.0,
+     "desk": 0.0,
+     "data": 0.0,
+     "mrr": 0,
+     "costs": 150000,
+     "net": -150000,
+     "cash": -300000,
+     "team": 1
+    },
+    {
+     "month": 3,
+     "customers": 1.5,
+     "board": 1.5,
+     "desk": 0.0,
+     "data": 0.0,
+     "mrr": 26136,
+     "costs": 220784,
+     "net": -194648,
+     "cash": -494648,
+     "team": 1
+    },
+    {
+     "month": 4,
+     "customers": 3.9,
+     "board": 3.4,
+     "desk": 0.5,
+     "data": 0.0,
+     "mrr": 90377,
+     "costs": 240489,
+     "net": -150112,
+     "cash": -644760,
+     "team": 1
+    },
+    {
+     "month": 5,
+     "customers": 6.8,
+     "board": 5.6,
+     "desk": 1.2,
+     "data": 0.0,
+     "mrr": 172443,
+     "costs": 254479,
+     "net": -82036,
+     "cash": -726796,
+     "team": 1
+    },
+    {
+     "month": 6,
+     "customers": 10.4,
+     "board": 8.1,
+     "desk": 2.1,
+     "data": 0.2,
+     "mrr": 319032,
+     "costs": 275404,
+     "net": 43627,
+     "cash": -683169,
+     "team": 1
+    },
+    {
+     "month": 7,
+     "customers": 14.6,
+     "board": 11.0,
+     "desk": 3.2,
+     "data": 0.5,
+     "mrr": 482087,
+     "costs": 821824,
+     "net": -339737,
+     "cash": -1022905,
+     "team": 2
+    },
+    {
+     "month": 8,
+     "customers": 19.3,
+     "board": 14.1,
+     "desk": 4.4,
+     "data": 0.7,
+     "mrr": 661382,
+     "costs": 838730,
+     "net": -177348,
+     "cash": -1200253,
+     "team": 2
+    },
+    {
+     "month": 9,
+     "customers": 24.4,
+     "board": 17.6,
+     "desk": 5.8,
+     "data": 1.0,
+     "mrr": 856693,
+     "costs": 856117,
+     "net": 576,
+     "cash": -1199678,
+     "team": 2
+    },
+    {
+     "month": 10,
+     "customers": 30.1,
+     "board": 21.4,
+     "desk": 7.4,
+     "data": 1.2,
+     "mrr": 1067798,
+     "costs": 1123978,
+     "net": -56180,
+     "cash": -1255858,
+     "team": 3
+    },
+    {
+     "month": 11,
+     "customers": 36.2,
+     "board": 25.6,
+     "desk": 9.2,
+     "data": 1.4,
+     "mrr": 1294478,
+     "costs": 1142307,
+     "net": 152172,
+     "cash": -1103686,
+     "team": 3
+    },
+    {
+     "month": 12,
+     "customers": 42.8,
+     "board": 29.9,
+     "desk": 11.2,
+     "data": 1.7,
+     "mrr": 1536516,
+     "costs": 1161095,
+     "net": 375421,
+     "cash": -728265,
+     "team": 3
+    },
+    {
+     "month": 13,
+     "customers": 49.3,
+     "board": 34.2,
+     "desk": 13.1,
+     "data": 1.9,
+     "mrr": 1775124,
+     "costs": 1168254,
+     "net": 606870,
+     "cash": -121394,
+     "team": 3
+    },
+    {
+     "month": 14,
+     "customers": 55.6,
+     "board": 38.4,
+     "desk": 15.1,
+     "data": 2.1,
+     "mrr": 2010341,
+     "costs": 1525310,
+     "net": 485031,
+     "cash": 363636,
+     "team": 4
+    },
+    {
+     "month": 15,
+     "customers": 61.8,
+     "board": 42.5,
+     "desk": 17.0,
+     "data": 2.3,
+     "mrr": 2242205,
+     "costs": 1532266,
+     "net": 709939,
+     "cash": 1073575,
+     "team": 4
+    },
+    {
+     "month": 16,
+     "customers": 67.9,
+     "board": 46.5,
+     "desk": 18.9,
+     "data": 2.5,
+     "mrr": 2470755,
+     "costs": 1539123,
+     "net": 931633,
+     "cash": 2005208,
+     "team": 4
+    },
+    {
+     "month": 17,
+     "customers": 73.9,
+     "board": 50.4,
+     "desk": 20.8,
+     "data": 2.7,
+     "mrr": 2696031,
+     "costs": 1545881,
+     "net": 1150150,
+     "cash": 3155358,
+     "team": 4
+    },
+    {
+     "month": 18,
+     "customers": 79.8,
+     "board": 54.2,
+     "desk": 22.7,
+     "data": 2.9,
+     "mrr": 2918069,
+     "costs": 1552542,
+     "net": 1365527,
+     "cash": 4520884,
+     "team": 4
+    },
+    {
+     "month": 19,
+     "customers": 89.8,
+     "board": 61.0,
+     "desk": 25.7,
+     "data": 3.1,
+     "mrr": 3264684,
+     "costs": 1646941,
+     "net": 1617744,
+     "cash": 6138628,
+     "team": 4
+    },
+    {
+     "month": 20,
+     "customers": 99.6,
+     "board": 67.5,
+     "desk": 28.8,
+     "data": 3.3,
+     "mrr": 3606486,
+     "costs": 1837195,
+     "net": 1769292,
+     "cash": 7907920,
+     "team": 5
+    },
+    {
+     "month": 21,
+     "customers": 109.2,
+     "board": 73.9,
+     "desk": 31.8,
+     "data": 3.5,
+     "mrr": 3943527,
+     "costs": 1847306,
+     "net": 2096221,
+     "cash": 10004141,
+     "team": 5
+    },
+    {
+     "month": 22,
+     "customers": 118.6,
+     "board": 80.2,
+     "desk": 34.8,
+     "data": 3.7,
+     "mrr": 4275858,
+     "costs": 1857276,
+     "net": 2418582,
+     "cash": 12422723,
+     "team": 5
+    },
+    {
+     "month": 23,
+     "customers": 127.9,
+     "board": 86.3,
+     "desk": 37.7,
+     "data": 3.9,
+     "mrr": 4603530,
+     "costs": 1867106,
+     "net": 2736424,
+     "cash": 15159148,
+     "team": 5
+    },
+    {
+     "month": 24,
+     "customers": 137.0,
+     "board": 92.3,
+     "desk": 40.7,
+     "data": 4.0,
+     "mrr": 4926595,
+     "costs": 1876798,
+     "net": 3049798,
+     "cash": 18208945,
+     "team": 5
+    },
+    {
+     "month": 25,
+     "customers": 145.9,
+     "board": 98.1,
+     "desk": 43.6,
+     "data": 4.2,
+     "mrr": 5245105,
+     "costs": 2286353,
+     "net": 2958752,
+     "cash": 21167697,
+     "team": 6
+    },
+    {
+     "month": 26,
+     "customers": 154.7,
+     "board": 103.8,
+     "desk": 46.5,
+     "data": 4.4,
+     "mrr": 5559109,
+     "costs": 2295773,
+     "net": 3263336,
+     "cash": 24431033,
+     "team": 6
+    },
+    {
+     "month": 27,
+     "customers": 163.3,
+     "board": 109.3,
+     "desk": 49.4,
+     "data": 4.6,
+     "mrr": 5868659,
+     "costs": 2305060,
+     "net": 3563599,
+     "cash": 27994632,
+     "team": 6
+    },
+    {
+     "month": 28,
+     "customers": 171.7,
+     "board": 114.8,
+     "desk": 52.2,
+     "data": 4.7,
+     "mrr": 6173806,
+     "costs": 2314214,
+     "net": 3859592,
+     "cash": 31854223,
+     "team": 6
+    },
+    {
+     "month": 29,
+     "customers": 180.0,
+     "board": 120.1,
+     "desk": 55.1,
+     "data": 4.9,
+     "mrr": 6474600,
+     "costs": 2323238,
+     "net": 4151362,
+     "cash": 36005585,
+     "team": 6
+    },
+    {
+     "month": 30,
+     "customers": 188.2,
+     "board": 125.2,
+     "desk": 57.9,
+     "data": 5.0,
+     "mrr": 6771091,
+     "costs": 2332133,
+     "net": 4438958,
+     "cash": 40444543,
+     "team": 6
+    },
+    {
+     "month": 31,
+     "customers": 196.1,
+     "board": 130.3,
+     "desk": 60.7,
+     "data": 5.2,
+     "mrr": 7063329,
+     "costs": 2340900,
+     "net": 4722430,
+     "cash": 45166972,
+     "team": 6
+    },
+    {
+     "month": 32,
+     "customers": 204.0,
+     "board": 135.2,
+     "desk": 63.4,
+     "data": 5.4,
+     "mrr": 7351365,
+     "costs": 2349541,
+     "net": 5001825,
+     "cash": 50168797,
+     "team": 6
+    },
+    {
+     "month": 33,
+     "customers": 211.7,
+     "board": 140.0,
+     "desk": 66.1,
+     "data": 5.5,
+     "mrr": 7635248,
+     "costs": 2758057,
+     "net": 4877191,
+     "cash": 55045988,
+     "team": 7
+    },
+    {
+     "month": 34,
+     "customers": 219.2,
+     "board": 144.7,
+     "desk": 68.8,
+     "data": 5.7,
+     "mrr": 7915028,
+     "costs": 2766451,
+     "net": 5148577,
+     "cash": 60194565,
+     "team": 7
+    },
+    {
+     "month": 35,
+     "customers": 226.6,
+     "board": 149.3,
+     "desk": 71.5,
+     "data": 5.8,
+     "mrr": 8190752,
+     "costs": 2774723,
+     "net": 5416029,
+     "cash": 65610594,
+     "team": 7
+    },
+    {
+     "month": 36,
+     "customers": 233.9,
+     "board": 153.8,
+     "desk": 74.2,
+     "data": 5.9,
+     "mrr": 8462470,
+     "costs": 2782874,
+     "net": 5679596,
+     "cash": 71290190,
+     "team": 7
+    }
+   ],
+   "mrr_m6": 319032,
+   "mrr_m12": 1536516,
+   "mrr_m24": 4926595,
+   "mrr_m36": 8462470,
+   "customers_m12": 42.8,
+   "customers_m36": 233.9,
+   "targets": {
+    "1000000": 10,
+    "5000000": 25,
+    "10000000": null
+   },
+   "break_even_month": 9,
+   "cash_need": 1255858,
+   "team_m36": 7
+  },
+  {
+   "scenario": "Upside",
+   "rows": [
+    {
+     "month": 1,
+     "customers": 0.0,
+     "board": 0.0,
+     "desk": 0.0,
+     "data": 0.0,
+     "mrr": 0,
+     "costs": 200000,
+     "net": -200000,
+     "cash": -200000,
+     "team": 1
+    },
+    {
+     "month": 2,
+     "customers": 0.0,
+     "board": 0.0,
+     "desk": 0.0,
+     "data": 0.0,
+     "mrr": 0,
+     "costs": 200000,
+     "net": -200000,
+     "cash": -400000,
+     "team": 1
+    },
+    {
+     "month": 3,
+     "customers": 3.0,
+     "board": 3.0,
+     "desk": 0.0,
+     "data": 0.0,
+     "mrr": 58995,
+     "costs": 336770,
+     "net": -277775,
+     "cash": -677775,
+     "team": 1
+    },
+    {
+     "month": 4,
+     "customers": 7.5,
+     "board": 6.5,
+     "desk": 1.0,
+     "data": 0.0,
+     "mrr": 200649,
+     "costs": 829908,
+     "net": -629259,
+     "cash": -1307034,
+     "team": 1
+    },
+    {
+     "month": 5,
+     "customers": 12.9,
+     "board": 10.5,
+     "desk": 2.4,
+     "data": 0.0,
+     "mrr": 375488,
+     "costs": 856855,
+     "net": -481367,
+     "cash": -1788401,
+     "team": 1
+    },
+    {
+     "month": 6,
+     "customers": 19.5,
+     "board": 14.9,
+     "desk": 4.1,
+     "data": 0.5,
+     "mrr": 689353,
+     "costs": 1080472,
+     "net": -391120,
+     "cash": -2179521,
+     "team": 2
+    },
+    {
+     "month": 7,
+     "customers": 27.0,
+     "board": 19.9,
+     "desk": 6.1,
+     "data": 1.0,
+     "mrr": 1035011,
+     "costs": 1362543,
+     "net": -327532,
+     "cash": -2507053,
+     "team": 3
+    },
+    {
+     "month": 8,
+     "customers": 35.2,
+     "board": 25.3,
+     "desk": 8.5,
+     "data": 1.5,
+     "mrr": 1412338,
+     "costs": 1395565,
+     "net": 16774,
+     "cash": -2490279,
+     "team": 3
+    },
+    {
+     "month": 9,
+     "customers": 44.2,
+     "board": 31.1,
+     "desk": 11.2,
+     "data": 2.0,
+     "mrr": 1821204,
+     "costs": 1429532,
+     "net": 391672,
+     "cash": -2098607,
+     "team": 3
+    },
+    {
+     "month": 10,
+     "customers": 54.0,
+     "board": 37.4,
+     "desk": 14.2,
+     "data": 2.4,
+     "mrr": 2261477,
+     "costs": 1814442,
+     "net": 447036,
+     "cash": -1651571,
+     "team": 4
+    },
+    {
+     "month": 11,
+     "customers": 64.6,
+     "board": 44.1,
+     "desk": 17.5,
+     "data": 2.9,
+     "mrr": 2733024,
+     "costs": 1850289,
+     "net": 882734,
+     "cash": -768837,
+     "team": 4
+    },
+    {
+     "month": 12,
+     "customers": 75.9,
+     "board": 51.3,
+     "desk": 21.2,
+     "data": 3.4,
+     "mrr": 3235707,
+     "costs": 1887071,
+     "net": 1348635,
+     "cash": 579798,
+     "team": 4
+    },
+    {
+     "month": 13,
+     "customers": 98.6,
+     "board": 66.3,
+     "desk": 28.5,
+     "data": 3.9,
+     "mrr": 4142135,
+     "costs": 2381764,
+     "net": 1760371,
+     "cash": 2340169,
+     "team": 5
+    },
+    {
+     "month": 14,
+     "customers": 121.1,
+     "board": 81.0,
+     "desk": 35.7,
+     "data": 4.3,
+     "mrr": 5045695,
+     "costs": 2808871,
+     "net": 2236824,
+     "cash": 4576993,
+     "team": 6
+    },
+    {
+     "month": 15,
+     "customers": 143.3,
+     "board": 95.4,
+     "desk": 43.1,
+     "data": 4.8,
+     "mrr": 5946287,
+     "costs": 2835889,
+     "net": 3110398,
+     "cash": 7687391,
+     "team": 6
+    },
+    {
+     "month": 16,
+     "customers": 165.3,
+     "board": 109.6,
+     "desk": 50.5,
+     "data": 5.2,
+     "mrr": 6843815,
+     "costs": 2862814,
+     "net": 3981000,
+     "cash": 11668391,
+     "team": 6
+    },
+    {
+     "month": 17,
+     "customers": 187.0,
+     "board": 123.5,
+     "desk": 57.9,
+     "data": 5.7,
+     "mrr": 7738186,
+     "costs": 3289646,
+     "net": 4448540,
+     "cash": 16116932,
+     "team": 7
+    },
+    {
+     "month": 18,
+     "customers": 208.5,
+     "board": 137.1,
+     "desk": 65.3,
+     "data": 6.1,
+     "mrr": 8629310,
+     "costs": 3316379,
+     "net": 5312931,
+     "cash": 21429862,
+     "team": 7
+    },
+    {
+     "month": 19,
+     "customers": 229.8,
+     "board": 150.4,
+     "desk": 72.8,
+     "data": 6.5,
+     "mrr": 9517102,
+     "costs": 3343013,
+     "net": 6174089,
+     "cash": 27603951,
+     "team": 7
+    },
+    {
+     "month": 20,
+     "customers": 250.9,
+     "board": 163.5,
+     "desk": 80.4,
+     "data": 7.0,
+     "mrr": 10401479,
+     "costs": 3369544,
+     "net": 7031934,
+     "cash": 34635886,
+     "team": 7
+    },
+    {
+     "month": 21,
+     "customers": 271.7,
+     "board": 176.4,
+     "desk": 88.0,
+     "data": 7.4,
+     "mrr": 11282360,
+     "costs": 3395971,
+     "net": 7886389,
+     "cash": 42522275,
+     "team": 7
+    },
+    {
+     "month": 22,
+     "customers": 292.3,
+     "board": 188.9,
+     "desk": 95.6,
+     "data": 7.8,
+     "mrr": 12159670,
+     "costs": 3422290,
+     "net": 8737380,
+     "cash": 51259655,
+     "team": 7
+    },
+    {
+     "month": 23,
+     "customers": 312.7,
+     "board": 201.3,
+     "desk": 103.2,
+     "data": 8.2,
+     "mrr": 13033335,
+     "costs": 3448500,
+     "net": 9584835,
+     "cash": 60844490,
+     "team": 7
+    },
+    {
+     "month": 24,
+     "customers": 332.9,
+     "board": 213.4,
+     "desk": 110.9,
+     "data": 8.6,
+     "mrr": 13903284,
+     "costs": 3474599,
+     "net": 10428685,
+     "cash": 71273175,
+     "team": 7
+    },
+    {
+     "month": 25,
+     "customers": 352.9,
+     "board": 225.3,
+     "desk": 118.6,
+     "data": 9.1,
+     "mrr": 14769449,
+     "costs": 3500583,
+     "net": 11268865,
+     "cash": 82542040,
+     "team": 7
+    },
+    {
+     "month": 26,
+     "customers": 372.7,
+     "board": 236.9,
+     "desk": 126.3,
+     "data": 9.5,
+     "mrr": 15631765,
+     "costs": 3526453,
+     "net": 12105312,
+     "cash": 94647353,
+     "team": 7
+    },
+    {
+     "month": 27,
+     "customers": 392.2,
+     "board": 248.3,
+     "desk": 134.0,
+     "data": 9.9,
+     "mrr": 16490171,
+     "costs": 3552205,
+     "net": 12937966,
+     "cash": 107585318,
+     "team": 7
+    },
+    {
+     "month": 28,
+     "customers": 411.6,
+     "board": 259.5,
+     "desk": 141.8,
+     "data": 10.3,
+     "mrr": 17344606,
+     "costs": 3577838,
+     "net": 13766768,
+     "cash": 121352086,
+     "team": 7
+    },
+    {
+     "month": 29,
+     "customers": 430.7,
+     "board": 270.5,
+     "desk": 149.5,
+     "data": 10.6,
+     "mrr": 18195013,
+     "costs": 3603350,
+     "net": 14591663,
+     "cash": 135943749,
+     "team": 7
+    },
+    {
+     "month": 30,
+     "customers": 449.6,
+     "board": 281.3,
+     "desk": 157.3,
+     "data": 11.0,
+     "mrr": 19041338,
+     "costs": 3628740,
+     "net": 15412598,
+     "cash": 151356347,
+     "team": 7
+    },
+    {
+     "month": 31,
+     "customers": 468.4,
+     "board": 291.8,
+     "desk": 165.1,
+     "data": 11.4,
+     "mrr": 19883529,
+     "costs": 3654006,
+     "net": 16229524,
+     "cash": 167585871,
+     "team": 7
+    },
+    {
+     "month": 32,
+     "customers": 486.9,
+     "board": 302.2,
+     "desk": 172.9,
+     "data": 11.8,
+     "mrr": 20721537,
+     "costs": 3679146,
+     "net": 17042391,
+     "cash": 184628261,
+     "team": 7
+    },
+    {
+     "month": 33,
+     "customers": 505.2,
+     "board": 312.4,
+     "desk": 180.7,
+     "data": 12.2,
+     "mrr": 21555313,
+     "costs": 3704159,
+     "net": 17851153,
+     "cash": 202479414,
+     "team": 7
+    },
+    {
+     "month": 34,
+     "customers": 523.4,
+     "board": 322.3,
+     "desk": 188.5,
+     "data": 12.5,
+     "mrr": 22384812,
+     "costs": 3729044,
+     "net": 18655768,
+     "cash": 221135182,
+     "team": 7
+    },
+    {
+     "month": 35,
+     "customers": 541.3,
+     "board": 332.1,
+     "desk": 196.4,
+     "data": 12.9,
+     "mrr": 23209993,
+     "costs": 3753800,
+     "net": 19456193,
+     "cash": 240591376,
+     "team": 7
+    },
+    {
+     "month": 36,
+     "customers": 559.1,
+     "board": 341.7,
+     "desk": 204.2,
+     "data": 13.3,
+     "mrr": 24030814,
+     "costs": 3778424,
+     "net": 20252390,
+     "cash": 260843765,
+     "team": 7
+    }
+   ],
+   "mrr_m6": 689353,
+   "mrr_m12": 3235707,
+   "mrr_m24": 13903284,
+   "mrr_m36": 24030814,
+   "customers_m12": 75.9,
+   "customers_m36": 559.1,
+   "targets": {
+    "1000000": 7,
+    "5000000": 14,
+    "10000000": 20
+   },
+   "break_even_month": 8,
+   "cash_need": 2507053,
+   "team_m36": 7
+  }
+ ],
+ "customers_needed": {
+  "KES 1m": {
+   "arpa": 32544,
+   "total": 31,
+   "board": 23,
+   "desk": 7,
+   "data": 1
+  },
+  "KES 5m": {
+   "arpa": 44363,
+   "total": 113,
+   "board": 68,
+   "desk": 37,
+   "data": 8
+  },
+  "KES 10m": {
+   "arpa": 50384,
+   "total": 198,
+   "board": 109,
+   "desk": 69,
+   "data": 20
+  }
+ }
+}

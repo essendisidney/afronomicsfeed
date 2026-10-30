@@ -257,7 +257,7 @@ export default function KenyaTbillsPage() {
       <CiteBlock title="Kenya Treasury bill auction results" path="/markets/kenya-tbills" publisher="the Central Bank of Kenya" csv="/api/data/kenya-tbills" />
       <Questions items={tbillAnswers().items} />
       <DebtDataLinks country="Kenya" current="/markets/kenya-tbills" />
-      <NewsletterBand lede="Kenya’s auction results, plus 53 other economies, in one Monday email." />
+      <NewsletterBand lede="Kenya’s auction results in the Morning every weekday, and the week across Africa in the Weekly every Monday." />
       <FollowSheet />
     </PageShell>
   );

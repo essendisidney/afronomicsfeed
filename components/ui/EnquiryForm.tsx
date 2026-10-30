@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { track } from "@/lib/track";
+import { buttonClass } from "@/components/ui/Button";
 
 const options = [
   { value: "sponsorship", label: "Sponsorship / advertising" },
@@ -33,7 +34,7 @@ export function EnquiryForm({ interest = "other", cta = "Send enquiry" }: { inte
       if (response.ok && body.ok) {
         setState("done");
         track("enquiry");
-        setMessage("Received. The desk replies within one business day.");
+        setMessage("Received. The desk replies within one working day.");
       } else {
         setState("error");
         setMessage(body.reason ?? "That didn’t go through. Please try again.");
@@ -44,7 +45,8 @@ export function EnquiryForm({ interest = "other", cta = "Send enquiry" }: { inte
     }
   }
 
-  const field = "mt-1 w-full border border-rule bg-paper px-3 py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
+  // 44px on a phone (a thumb target), as on the pilot and invoice forms.
+  const field = "mt-1 min-h-11 w-full border border-rule bg-paper px-3 py-2.5 text-sm text-ink outline-none placeholder:text-muted focus:ring-2 focus:ring-gold/40";
   const label = "text-[13px] font-medium text-muted";
 
   if (state === "done") {
@@ -84,7 +86,7 @@ export function EnquiryForm({ interest = "other", cta = "Send enquiry" }: { inte
         <button
           type="submit"
           disabled={state === "pending"}
-          className="inline-flex min-h-11 items-center justify-center rounded-full bg-forest px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest-deep disabled:opacity-60 sm:min-h-10"
+          className={buttonClass({ variant: "primary" })}
         >
           {state === "pending" ? "Sending…" : cta}
         </button>

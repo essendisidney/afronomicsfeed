@@ -1,0 +1,4 @@
+name,kind,amount_kes,rate_pct,start,end
+91-day Treasury bill (issue 2105),tbill,5000000,8.75,2026-07-06,2026-10-05
+Fixed deposit at a bank,deposit,10000000,7.25,2026-06-15,2026-12-15
+Money market fund,fund,3000000,9.10,2026-01-01,2026-12-31

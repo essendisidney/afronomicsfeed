@@ -1,0 +1,5 @@
+{
+  "$comment": "Outside citations of Afronomics: every article, report or post that quoted or linked one of our figures. Append with scripts/log_citation.py; never edit or delete a row. Withdraw a wrong entry with a new one whose 'corrects' is its id. Fields and rules: lib/citations-core.ts. Plan: docs/rebuild/upgrade-U6-plan.md, item C. No people's names or contact details here.",
+  "updated_at": null,
+  "entries": []
+}

@@ -180,7 +180,7 @@ export default function KenyaBondsPage() {
       )}
       <CiteBlock title="Kenya Treasury bond auction results" path="/markets/kenya-bonds" publisher="the Central Bank of Kenya" csv="/api/data/kenya-bonds" />
       <DebtDataLinks country="Kenya" current="/markets/kenya-bonds" />
-      <NewsletterBand lede="Kenya’s bond and bill auctions, plus 53 other economies, in one Monday email." />
+      <NewsletterBand lede="Kenya’s bond and bill auction results in the Morning every weekday, and the week across Africa in the Weekly every Monday." />
     </PageShell>
   );
 }

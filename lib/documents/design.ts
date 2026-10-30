@@ -1,3 +1,4 @@
+import { ADVICE_DISCLAIMER } from "@/lib/legal";
 import { site } from "@/lib/site";
 
 /**
@@ -110,6 +111,8 @@ ${meta.method.map((p) => `<p>${esc(p)}</p>`).join("")}
 <p class="cite">${esc(citation(meta))}</p>
 <h3>Corrections</h3>
 <p>If a figure here is wrong, write to ${esc(site.contactEmail)}. Corrections are listed at ${esc(site.url.replace(/^https?:\/\//, ""))}/corrections with the date and what changed.</p>
+<h3>Not investment advice</h3>
+<p>${esc(ADVICE_DISCLAIMER)}</p>
 <p class="end-mark">Information, not advice. © Afronomics ${meta.asOf.slice(0, 4)}.</p>
 </section>`;
 }
@@ -228,5 +231,7 @@ svg { max-width: 100%; height: auto; }
   .grid2, .kpis { grid-template-columns: 1fr; }
   table { font-size: 12px; }
   .ex-note, .src, .small { font-size: 11px; }
+  /* Source addresses are long unbroken URLs: let them break so the page does not scroll sideways on a phone. */
+  .sources a, .cite, .closing p { overflow-wrap: anywhere; }
 }
 `;

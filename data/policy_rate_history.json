@@ -249,6 +249,14 @@
    "upper": 21.0,
    "date_as_printed": null,
    "source": "https://www.cbe.org.eg/en"
+  },
+  {
+   "first_seen": "2026-10-30",
+   "market": "southafrica",
+   "rate": 7.25,
+   "upper": null,
+   "date_as_printed": "2026-10-30",
+   "source": "https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates"
   }
  ]
 }

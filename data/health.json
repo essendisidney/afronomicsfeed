@@ -1,12 +1,12 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-10-30",
+ "checked_on": "2026-10-31",
  "summary": {
   "failed": 0,
-  "late": 6,
+  "late": 7,
   "gap": 1,
-  "ok": 32
+  "ok": 31
  },
  "items": [
   {
@@ -62,6 +62,15 @@
    "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
+  },
+  {
+   "area": "T-bill auctions",
+   "name": "Mozambique",
+   "status": "late",
+   "detail": "latest auction 21 Oct; it usually auctions weekly",
+   "latest": "2026-10-21",
+   "due_by": "2026-10-30",
+   "link": "/markets/tbills/mozambique"
   },
   {
    "area": "Policy rates",
@@ -184,8 +193,8 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.46% read 30 Oct",
-   "latest": "2026-10-30",
+   "detail": "10.46% read 31 Oct",
+   "latest": "2026-10-31",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -283,9 +292,9 @@
    "area": "T-bill auctions",
    "name": "Ghana",
    "status": "ok",
-   "detail": "latest auction 23 Oct (auctions weekly)",
-   "latest": "2026-10-23",
-   "due_by": "2026-11-03",
+   "detail": "latest auction 30 Oct (auctions weekly)",
+   "latest": "2026-10-30",
+   "due_by": "2026-11-10",
    "link": "/markets/tbills/ghana"
   },
   {
@@ -305,15 +314,6 @@
    "latest": "2026-10-27",
    "due_by": "2026-11-05",
    "link": "/markets/tbills/malawi"
-  },
-  {
-   "area": "T-bill auctions",
-   "name": "Mozambique",
-   "status": "ok",
-   "detail": "latest auction 21 Oct (auctions weekly)",
-   "latest": "2026-10-21",
-   "due_by": "2026-10-30",
-   "link": "/markets/tbills/mozambique"
   },
   {
    "area": "T-bill auctions",

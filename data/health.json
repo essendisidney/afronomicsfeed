@@ -184,9 +184,9 @@
    "area": "Money market funds",
    "name": "Etica Money Market Fund (KES)",
    "status": "ok",
-   "detail": "monthly fact sheet for September 2026",
-   "latest": "2026-09-30",
-   "due_by": "2026-11-09",
+   "detail": "monthly fact sheet for October 2026",
+   "latest": "2026-10-31",
+   "due_by": "2026-12-10",
    "link": "/rates/kenya/money-market-funds"
   },
   {
@@ -371,7 +371,7 @@
   {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-10-31",
+   "day": "2026-11-01",
    "failures_in_row": 0
   },
   {
@@ -383,7 +383,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-10-31",
+   "day": "2026-11-01",
    "failures_in_row": 0
   },
   {
@@ -425,7 +425,7 @@
   {
    "name": "Remittance prices",
    "result": "success",
-   "day": "2026-10-24",
+   "day": "2026-11-01",
    "failures_in_row": 0
   },
   {

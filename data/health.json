@@ -1,14 +1,23 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-10-31",
+ "checked_on": "2026-11-01",
  "summary": {
-  "failed": 0,
-  "late": 7,
+  "failed": 1,
+  "late": 6,
   "gap": 1,
   "ok": 31
  },
  "items": [
+  {
+   "area": "Money market funds",
+   "name": "CIC Money Market Fund",
+   "status": "failed",
+   "detail": "not read on the last run: error: ReadTimeout: HTTPSConnectionPool(host='ke.cicinsurancegroup.com', port=443): Read timed out. (read timeout=20)",
+   "latest": null,
+   "due_by": null,
+   "link": "/rates/kenya/money-market-funds"
+  },
   {
    "area": "Eurobond yields",
    "name": "Nigeria",
@@ -17,15 +26,6 @@
    "latest": "2026-10-23",
    "due_by": "2026-10-27",
    "link": "/markets/eurobonds"
-  },
-  {
-   "area": "Money market funds",
-   "name": "CIC Money Market Fund",
-   "status": "late",
-   "detail": "published yield unchanged at 8.43% since 06 Oct: the page may not be current",
-   "latest": "2026-10-06",
-   "due_by": null,
-   "link": "/rates/kenya/money-market-funds"
   },
   {
    "area": "Money market funds",
@@ -193,8 +193,8 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.46% read 31 Oct",
-   "latest": "2026-10-31",
+   "detail": "10.46% read 01 Nov",
+   "latest": "2026-11-01",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -202,8 +202,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "20.0% read 31 Oct",
-   "latest": "2026-10-31",
+   "detail": "20.0% read 01 Nov",
+   "latest": "2026-11-01",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -211,8 +211,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 31 Oct",
-   "latest": "2026-10-31",
+   "detail": "14.0% read 01 Nov",
+   "latest": "2026-11-01",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -220,8 +220,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 31 Oct",
-   "latest": "2026-10-31",
+   "detail": "8.75% read 01 Nov",
+   "latest": "2026-11-01",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -229,8 +229,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 31 Oct",
-   "latest": "2026-10-31",
+   "detail": "24.0% read 01 Nov",
+   "latest": "2026-11-01",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +238,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "23.0% read 31 Oct",
-   "latest": "2026-10-31",
+   "detail": "23.0% read 01 Nov",
+   "latest": "2026-11-01",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +247,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 31 Oct",
-   "latest": "2026-10-31",
+   "detail": "7.25% read 01 Nov",
+   "latest": "2026-11-01",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +256,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 31 Oct",
-   "latest": "2026-10-31",
+   "detail": "6.25% read 01 Nov",
+   "latest": "2026-11-01",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -265,8 +265,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 31 Oct",
-   "latest": "2026-10-31",
+   "detail": "10.75% read 01 Nov",
+   "latest": "2026-11-01",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -375,15 +375,9 @@
    "failures_in_row": 0
   },
   {
-   "name": "Calls ledger",
-   "result": "success",
-   "day": "2026-10-24",
-   "failures_in_row": 0
-  },
-  {
    "name": "Documents",
    "result": "success",
-   "day": "2026-10-26",
+   "day": "2026-11-01",
    "failures_in_row": 0
   },
   {
@@ -401,7 +395,7 @@
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-10-31",
+   "day": "2026-11-01",
    "failures_in_row": 0
   },
   {
@@ -414,6 +408,12 @@
    "name": "Morning note",
    "result": "success",
    "day": "2026-10-30",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Poverty Premium",
+   "result": "success",
+   "day": "2026-11-01",
    "failures_in_row": 0
   },
   {
@@ -431,7 +431,7 @@
   {
    "name": "Site QA",
    "result": "success",
-   "day": "2026-10-31",
+   "day": "2026-11-01",
    "failures_in_row": 0
   },
   {

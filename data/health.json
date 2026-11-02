@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-02",
+ "checked_on": "2026-11-03",
  "summary": {
   "failed": 0,
   "late": 8,
@@ -121,9 +121,9 @@
    "area": "Bond auctions",
    "name": "Egypt",
    "status": "ok",
-   "detail": "latest result 27 Oct (auctions weekly)",
-   "latest": "2026-10-27",
-   "due_by": "2026-11-08",
+   "detail": "latest result 03 Nov (auctions weekly)",
+   "latest": "2026-11-03",
+   "due_by": "2026-11-15",
    "link": "/markets/bonds/egypt"
   },
   {
@@ -371,31 +371,31 @@
   {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-11-01",
+   "day": "2026-11-02",
    "failures_in_row": 0
   },
   {
    "name": "Documents",
    "result": "success",
-   "day": "2026-11-01",
+   "day": "2026-11-02",
    "failures_in_row": 0
   },
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-01",
+   "day": "2026-11-02",
    "failures_in_row": 0
   },
   {
    "name": "Index release",
    "result": "success",
-   "day": "2026-10-26",
+   "day": "2026-11-02",
    "failures_in_row": 0
   },
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-11-01",
+   "day": "2026-11-02",
    "failures_in_row": 0
   },
   {

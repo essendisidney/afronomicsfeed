@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 16,
-  "results": 37,
+  "results": 38,
   "p50_h": 3.4,
   "p90_h": 9.4
  },
@@ -165,7 +165,7 @@
    "kind": "bonds",
    "market": "egypt",
    "name": "Egypt",
-   "results": 2,
+   "results": 3,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -218,6 +218,15 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:egypt:2026-11-03",
+   "kind": "bonds",
+   "market": "egypt",
+   "date": "2026-11-03",
+   "first_seen_at": "2026-11-02T22:51:56+00:00",
+   "published_at": null,
+   "published_how": null
+  },
   {
    "key": "bills:kenya:2026-11-02",
    "kind": "bills",
@@ -960,5 +969,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-10-30T22:30:54+00:00"
+ "updated_at": "2026-11-02T23:04:42+00:00"
 }

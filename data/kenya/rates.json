@@ -1,7 +1,7 @@
 {
  "dataset": "Kenya savings and lending rates",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-11-01T18:36:52+00:00",
+ "updated_at": "2026-11-02T12:30:57+00:00",
  "bank_rates": {
   "publisher": "Central Bank of Kenya",
   "source": "https://www.centralbank.go.ke/commercial-banks-weighted-average-rates/",
@@ -2251,7 +2251,7 @@
  },
  "money_market_funds": {
   "note": "Each yield is read from the fund manager's own website at the time shown; funds publishing yields only as images or PDFs are not yet included.",
-  "as_of": "2026-11-01T18:36:52+00:00",
+  "as_of": "2026-11-02T12:30:57+00:00",
   "rows": [
    {
     "name": "Zimele Fixed Income Fund (Savings Plan)",
@@ -2286,13 +2286,17 @@
     "effective_annual_yield": 10.13,
     "basis": "average for October 2026, net of fees, from the monthly fact sheet",
     "period_end": "2026-10-31"
+   },
+   {
+    "name": "CIC Money Market Fund",
+    "manager": "CIC Asset Management",
+    "source": "https://ke.cicinsurancegroup.com/individual-solutions/investment-solutions/?tab=money-market",
+    "status": "ok",
+    "daily_yield": 8.12,
+    "effective_annual_yield": 8.43
    }
   ],
   "unread": [
-   {
-    "name": "CIC Money Market Fund",
-    "status": "error: ReadTimeout: HTTPSConnectionPool(host='ke.cicinsurancegroup.com', port=443): Read timed out. (read timeout=20)"
-   },
    {
     "name": "NCBA Money Market Fund (KES)",
     "status": "stale: the manager's page was last updated 18 Aug 2026"

@@ -139,9 +139,9 @@
    "area": "Bond auctions",
    "name": "Morocco",
    "status": "ok",
-   "detail": "latest result 27 Oct (auctions weekly)",
-   "latest": "2026-10-27",
-   "due_by": "2026-11-08",
+   "detail": "latest result 03 Nov (auctions weekly)",
+   "latest": "2026-11-03",
+   "due_by": "2026-11-15",
    "link": "/markets/bonds/morocco"
   },
   {
@@ -166,9 +166,9 @@
    "area": "Bond auctions",
    "name": "WAEMU (UMOA-Titres)",
    "status": "ok",
-   "detail": "latest result 28 Oct (auctions weekly)",
-   "latest": "2026-10-28",
-   "due_by": "2026-11-04",
+   "detail": "latest result 03 Nov (auctions weekly)",
+   "latest": "2026-11-03",
+   "due_by": "2026-11-10",
    "link": "/markets/bonds/waemu"
   },
   {
@@ -363,9 +363,15 @@
  ],
  "workflows": [
   {
+   "name": "Institutions registry",
+   "result": "failure",
+   "day": "2026-11-03",
+   "failures_in_row": 1
+  },
+  {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-11-02",
+   "day": "2026-11-03",
    "failures_in_row": 0
   },
   {
@@ -377,7 +383,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-02",
+   "day": "2026-11-03",
    "failures_in_row": 0
   },
   {
@@ -389,7 +395,7 @@
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-11-02",
+   "day": "2026-11-03",
    "failures_in_row": 0
   },
   {

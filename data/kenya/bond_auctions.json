@@ -3,12 +3,50 @@
  "publisher": "Central Bank of Kenya",
  "source_page": "https://www.centralbank.go.ke/bills-bonds/treasury-bonds/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-14T15:06:29+00:00",
+ "updated_at": "2026-11-04T19:43:09+00:00",
  "units": {
   "amounts": "KES millions",
   "rates": "percent per annum"
  },
  "rows": [
+  {
+   "value_date": "2026-11-09",
+   "issue": "FXD3/2019/015",
+   "type": "Fixed coupon",
+   "tenor_years": 15,
+   "maturity": "2034-07-10",
+   "kind": "reopening",
+   "offered_total_kes_m": 50000.0,
+   "received_kes_m": 37069.54,
+   "accepted_kes_m": 29904.78,
+   "competitive_kes_m": 7172.23,
+   "noncompetitive_kes_m": 22732.55,
+   "bid_to_cover": 1.24,
+   "market_weighted_avg_rate": 12.8717,
+   "weighted_avg_rate": 12.7404,
+   "price_per_100": 101.8243,
+   "coupon": 12.34,
+   "source": "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/1535245295_RESULTS%20FXD3-2019-015%20AND%20FXD1-2026-030%20DATED%2009-11-2026.pdf"
+  },
+  {
+   "value_date": "2026-11-09",
+   "issue": "FXD1/2026/030",
+   "type": "Fixed coupon",
+   "tenor_years": 30,
+   "maturity": "2056-03-13",
+   "kind": "reopening",
+   "offered_total_kes_m": 50000.0,
+   "received_kes_m": 62397.8,
+   "accepted_kes_m": 40954.62,
+   "competitive_kes_m": 25007.16,
+   "noncompetitive_kes_m": 15947.46,
+   "bid_to_cover": 1.52,
+   "market_weighted_avg_rate": 14.1711,
+   "weighted_avg_rate": 14.1266,
+   "price_per_100": 89.3921,
+   "coupon": 12.5,
+   "source": "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/1535245295_RESULTS%20FXD3-2019-015%20AND%20FXD1-2026-030%20DATED%2009-11-2026.pdf"
+  },
   {
    "value_date": "2026-10-19",
    "issue": "SDB1/2011/030",
@@ -9108,6 +9146,13 @@
    "status": "parsed",
    "issues": [
     "SDB1/2011/030",
+    "FXD1/2026/030"
+   ]
+  },
+  "https://www.centralbank.go.ke//uploads/historical_treasury_bond_results/1535245295_RESULTS%20FXD3-2019-015%20AND%20FXD1-2026-030%20DATED%2009-11-2026.pdf": {
+   "status": "parsed",
+   "issues": [
+    "FXD3/2019/015",
     "FXD1/2026/030"
    ]
   }

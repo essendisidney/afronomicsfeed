@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 18,
-  "results": 44,
-  "p50_h": 2.5,
-  "p90_h": 8.6
+  "timed": 19,
+  "results": 47,
+  "p50_h": 2.8,
+  "p90_h": 8.2
  },
  "summary": [
   {
@@ -44,7 +44,7 @@
    "kind": "bills",
    "market": "nigeria",
    "name": "Nigeria",
-   "results": 2,
+   "results": 3,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -143,12 +143,12 @@
    "kind": "bonds",
    "market": "kenya",
    "name": "Kenya",
-   "results": 1,
-   "timed": 1,
+   "results": 2,
+   "timed": 2,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the result's own document",
-   "status": "1 timed result so far; figures from 5"
+   "status": "2 timed results so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -209,7 +209,7 @@
    "kind": "bonds",
    "market": "waemu",
    "name": "WAEMU (UMOA-Titres)",
-   "results": 7,
+   "results": 8,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -219,6 +219,25 @@
  ],
  "results": [
   {
+   "key": "bonds:kenya:2026-11-09",
+   "kind": "bonds",
+   "market": "kenya",
+   "date": "2026-11-09",
+   "first_seen_at": "2026-11-04T19:43:09+00:00",
+   "published_at": "2026-11-04T12:26:57+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 7.27
+  },
+  {
+   "key": "bonds:waemu:2026-11-04:burkina-faso",
+   "kind": "bonds",
+   "market": "waemu",
+   "date": "2026-11-04",
+   "first_seen_at": "2026-11-04T19:52:33+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
    "key": "bills:uganda:2026-11-04",
    "kind": "bills",
    "market": "uganda",
@@ -227,6 +246,15 @@
    "published_at": "2026-11-04T10:53:06+00:00",
    "published_how": "Last-Modified of the result's own document",
    "delay_h": 1.38
+  },
+  {
+   "key": "bills:nigeria:2026-11-04",
+   "kind": "bills",
+   "market": "nigeria",
+   "date": "2026-11-04",
+   "first_seen_at": "2026-11-04T19:43:11+00:00",
+   "published_at": null,
+   "published_how": null
   },
   {
    "key": "bonds:waemu:2026-11-03:cote-divoire",
@@ -1025,5 +1053,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-04T12:17:06+00:00"
+ "updated_at": "2026-11-04T19:56:30+00:00"
 }

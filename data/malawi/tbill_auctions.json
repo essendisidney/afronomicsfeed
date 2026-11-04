@@ -3,12 +3,54 @@
  "publisher": "Reserve Bank of Malawi",
  "source_page": "https://www.rbm.mw/FinancialMarkets/TreasuryBills/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-28T10:35:37+00:00",
+ "updated_at": "2026-11-04T12:07:58+00:00",
  "units": {
   "amounts": "MWK millions",
   "rates": "average yield of allotted bids, percent per annum"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "auction_date": "2026-11-03",
+   "value_date": "2026-11-03",
+   "kind": "primary",
+   "offered_mwk_m": null,
+   "received_mwk_m": 32175.93,
+   "accepted_mwk_m": 26325.93,
+   "accepted_cost_mwk_m": 22703.35,
+   "lowest_yield": 16.0,
+   "highest_yield": 16.0,
+   "weighted_avg_rate": 16.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63853"
+  },
+  {
+   "tenor": 182,
+   "auction_date": "2026-11-03",
+   "value_date": "2026-11-03",
+   "kind": "primary",
+   "offered_mwk_m": null,
+   "received_mwk_m": 447.23,
+   "accepted_mwk_m": 107.23,
+   "accepted_cost_mwk_m": 100.0,
+   "lowest_yield": 14.5,
+   "highest_yield": 14.5,
+   "weighted_avg_rate": 14.5,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63853"
+  },
+  {
+   "tenor": 91,
+   "auction_date": "2026-11-03",
+   "value_date": "2026-11-03",
+   "kind": "primary",
+   "offered_mwk_m": null,
+   "received_mwk_m": 41.2,
+   "accepted_mwk_m": 41.2,
+   "accepted_cost_mwk_m": 40.0,
+   "lowest_yield": 12.0,
+   "highest_yield": 12.0,
+   "weighted_avg_rate": 12.0,
+   "source": "https://www.rbm.mw/Home/GetContentFile/?ContentID=63853"
+  },
   {
    "tenor": 364,
    "auction_date": "2026-10-27",
@@ -25991,6 +26033,14 @@
   },
   "https://www.rbm.mw/Home/GetContentFile/?ContentID=63824": {
    "status": "no sale"
+  },
+  "https://www.rbm.mw/Home/GetContentFile/?ContentID=63853": {
+   "status": "parsed",
+   "tenors": [
+    91,
+    182,
+    364
+   ]
   }
  }
 }

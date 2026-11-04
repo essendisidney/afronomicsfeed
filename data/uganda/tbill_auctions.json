@@ -3,12 +3,57 @@
  "publisher": "Bank of Uganda",
  "source_page": "https://www.bou.or.ug/bouwebsite/FinancialMarkets/tbillsauctionresults.html",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-10-21T15:26:28+00:00",
+ "updated_at": "2026-11-04T12:16:02+00:00",
  "units": {
   "amounts": "UGX millions",
   "rates": "money-market yield, percent per annum (discount rate and effective yield also given)"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "auction_no": 1237,
+   "auction_date": "2026-11-04",
+   "value_date": "2026-11-05",
+   "offered_ugx_m": 300000.0,
+   "received_ugx_m": 933526.7,
+   "accepted_ugx_m": 424526.7,
+   "discount_rate": 12.858,
+   "weighted_avg_rate": 14.75,
+   "effective_yield": 14.752,
+   "price_per_100": 87.177,
+   "bid_to_cover": 2.199,
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_5e5fc8423c.pdf"
+  },
+  {
+   "tenor": 182,
+   "auction_no": 1237,
+   "auction_date": "2026-11-04",
+   "value_date": "2026-11-05",
+   "offered_ugx_m": 35000.0,
+   "received_ugx_m": 60251.3,
+   "accepted_ugx_m": 10251.3,
+   "discount_rate": 12.209,
+   "weighted_avg_rate": 13.001,
+   "effective_yield": 13.425,
+   "price_per_100": 93.912,
+   "bid_to_cover": 5.877,
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_5e5fc8423c.pdf"
+  },
+  {
+   "tenor": 91,
+   "auction_no": 1237,
+   "auction_date": "2026-11-04",
+   "value_date": "2026-11-05",
+   "offered_ugx_m": 15000.0,
+   "received_ugx_m": 81934.9,
+   "accepted_ugx_m": 4234.9,
+   "discount_rate": 10.898,
+   "weighted_avg_rate": 11.202,
+   "effective_yield": 11.682,
+   "price_per_100": 97.283,
+   "bid_to_cover": 19.348,
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_5e5fc8423c.pdf"
+  },
   {
    "tenor": 364,
    "auction_no": 1236,
@@ -8233,6 +8278,15 @@
    ]
   },
   "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_21_OCT_2026_c8a80b0a6b.pdf": {
+   "status": "parsed",
+   "ocr": false,
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_5e5fc8423c.pdf": {
    "status": "parsed",
    "ocr": false,
    "tenors": [

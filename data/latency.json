@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 17,
-  "results": 42,
-  "p50_h": 2.8,
-  "p90_h": 9.0
+  "timed": 18,
+  "results": 44,
+  "p50_h": 2.5,
+  "p90_h": 8.6
  },
  "summary": [
   {
@@ -66,12 +66,12 @@
    "kind": "bills",
    "market": "uganda",
    "name": "Uganda",
-   "results": 1,
-   "timed": 1,
+   "results": 2,
+   "timed": 2,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the result's own document",
-   "status": "1 timed result so far; figures from 5"
+   "status": "2 timed results so far; figures from 5"
   },
   {
    "kind": "bills",
@@ -121,7 +121,7 @@
    "kind": "bills",
    "market": "malawi",
    "name": "Malawi",
-   "results": 5,
+   "results": 6,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -219,6 +219,16 @@
  ],
  "results": [
   {
+   "key": "bills:uganda:2026-11-04",
+   "kind": "bills",
+   "market": "uganda",
+   "date": "2026-11-04",
+   "first_seen_at": "2026-11-04T12:16:02+00:00",
+   "published_at": "2026-11-04T10:53:06+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 1.38
+  },
+  {
    "key": "bonds:waemu:2026-11-03:cote-divoire",
    "kind": "bonds",
    "market": "waemu",
@@ -243,6 +253,15 @@
    "market": "egypt",
    "date": "2026-11-03",
    "first_seen_at": "2026-11-02T22:51:56+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:malawi:2026-11-03",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-11-03",
+   "first_seen_at": "2026-11-04T12:07:58+00:00",
    "published_at": null,
    "published_how": null
   },
@@ -1006,5 +1025,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-03T19:47:39+00:00"
+ "updated_at": "2026-11-04T12:17:06+00:00"
 }

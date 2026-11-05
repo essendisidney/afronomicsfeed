@@ -4,9 +4,9 @@
  "checked_on": "2026-11-05",
  "summary": {
   "failed": 0,
-  "late": 7,
+  "late": 6,
   "gap": 1,
-  "ok": 31
+  "ok": 32
  },
  "items": [
   {
@@ -62,15 +62,6 @@
    "latest": "2026-10-13",
    "due_by": null,
    "link": "/rates/policy"
-  },
-  {
-   "area": "T-bill auctions",
-   "name": "Mozambique",
-   "status": "late",
-   "detail": "latest auction 21 Oct; it usually auctions weekly",
-   "latest": "2026-10-21",
-   "due_by": "2026-10-30",
-   "link": "/markets/tbills/mozambique"
   },
   {
    "area": "Policy rates",
@@ -220,8 +211,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 04 Nov",
-   "latest": "2026-11-04",
+   "detail": "8.75% read 05 Nov",
+   "latest": "2026-11-05",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -301,9 +292,9 @@
    "area": "T-bill auctions",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest auction 02 Nov (auctions weekly)",
-   "latest": "2026-11-02",
-   "due_by": "2026-11-13",
+   "detail": "latest auction 09 Nov (auctions weekly)",
+   "latest": "2026-11-09",
+   "due_by": "2026-11-20",
    "link": "/markets/kenya-tbills"
   },
   {
@@ -314,6 +305,15 @@
    "latest": "2026-11-03",
    "due_by": "2026-11-13",
    "link": "/markets/tbills/malawi"
+  },
+  {
+   "area": "T-bill auctions",
+   "name": "Mozambique",
+   "status": "ok",
+   "detail": "latest auction 04 Nov (auctions weekly)",
+   "latest": "2026-11-04",
+   "due_by": "2026-11-13",
+   "link": "/markets/tbills/mozambique"
   },
   {
    "area": "T-bill auctions",
@@ -371,7 +371,7 @@
   {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-11-04",
+   "day": "2026-11-05",
    "failures_in_row": 0
   },
   {
@@ -383,7 +383,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-04",
+   "day": "2026-11-05",
    "failures_in_row": 0
   },
   {
@@ -395,13 +395,13 @@
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-11-04",
+   "day": "2026-11-05",
    "failures_in_row": 0
   },
   {
    "name": "Kenya quick check",
    "result": "success",
-   "day": "2026-10-29",
+   "day": "2026-11-05",
    "failures_in_row": 0
   },
   {

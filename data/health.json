@@ -1,12 +1,12 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-04",
+ "checked_on": "2026-11-05",
  "summary": {
   "failed": 0,
-  "late": 8,
+  "late": 7,
   "gap": 1,
-  "ok": 30
+  "ok": 31
  },
  "items": [
   {
@@ -33,15 +33,6 @@
    "status": "late",
    "detail": "published yield unchanged at 10.42% since 22 Oct: the page may not be current",
    "latest": "2026-10-22",
-   "due_by": null,
-   "link": "/rates/kenya/money-market-funds"
-  },
-  {
-   "area": "Money market funds",
-   "name": "Madison Money Market Fund",
-   "status": "late",
-   "detail": "published yield unchanged at 10.46% since 26 Oct: the page may not be current",
-   "latest": "2026-10-26",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -199,11 +190,20 @@
    "link": "/rates/kenya/money-market-funds"
   },
   {
+   "area": "Money market funds",
+   "name": "Madison Money Market Fund",
+   "status": "ok",
+   "detail": "10.02% read 05 Nov",
+   "latest": "2026-11-05",
+   "due_by": null,
+   "link": "/rates/kenya/money-market-funds"
+  },
+  {
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "20.0% read 04 Nov",
-   "latest": "2026-11-04",
+   "detail": "20.0% read 05 Nov",
+   "latest": "2026-11-05",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -211,8 +211,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 04 Nov",
-   "latest": "2026-11-04",
+   "detail": "14.0% read 05 Nov",
+   "latest": "2026-11-05",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -229,8 +229,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 04 Nov",
-   "latest": "2026-11-04",
+   "detail": "24.0% read 05 Nov",
+   "latest": "2026-11-05",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +238,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "23.0% read 04 Nov",
-   "latest": "2026-11-04",
+   "detail": "23.0% read 05 Nov",
+   "latest": "2026-11-05",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +247,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 04 Nov",
-   "latest": "2026-11-04",
+   "detail": "7.25% read 05 Nov",
+   "latest": "2026-11-05",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +256,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 03 Nov",
-   "latest": "2026-11-03",
+   "detail": "6.25% read 05 Nov",
+   "latest": "2026-11-05",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -265,8 +265,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 04 Nov",
-   "latest": "2026-11-04",
+   "detail": "10.75% read 05 Nov",
+   "latest": "2026-11-05",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -407,7 +407,7 @@
   {
    "name": "Morning note",
    "result": "success",
-   "day": "2026-11-04",
+   "day": "2026-11-05",
    "failures_in_row": 0
   },
   {
@@ -431,7 +431,7 @@
   {
    "name": "Site QA",
    "result": "success",
-   "day": "2026-11-04",
+   "day": "2026-11-05",
    "failures_in_row": 0
   },
   {

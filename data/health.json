@@ -148,9 +148,9 @@
    "area": "Bond auctions",
    "name": "WAEMU (UMOA-Titres)",
    "status": "ok",
-   "detail": "latest result 04 Nov (auctions weekly)",
-   "latest": "2026-11-04",
-   "due_by": "2026-11-11",
+   "detail": "latest result 06 Nov (auctions weekly)",
+   "latest": "2026-11-06",
+   "due_by": "2026-11-13",
    "link": "/markets/bonds/waemu"
   },
   {
@@ -166,9 +166,9 @@
    "area": "Eurobond yields",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest prices 29 Oct",
-   "latest": "2026-10-29",
-   "due_by": "2026-11-07",
+   "detail": "latest prices 30 Oct",
+   "latest": "2026-10-30",
+   "due_by": "2026-11-08",
    "link": "/markets/eurobonds"
   },
   {
@@ -371,7 +371,7 @@
   {
    "name": "African auctions",
    "result": "success",
-   "day": "2026-11-05",
+   "day": "2026-11-06",
    "failures_in_row": 0
   },
   {
@@ -383,7 +383,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-05",
+   "day": "2026-11-06",
    "failures_in_row": 0
   },
   {
@@ -395,7 +395,7 @@
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-11-05",
+   "day": "2026-11-06",
    "failures_in_row": 0
   },
   {

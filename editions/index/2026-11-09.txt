@@ -1,0 +1,23 @@
+Afronomics African Sovereign Bill Index — week of 9 November 2026
+
+The Afronomics African Sovereign Bill Index (ASBI) stands at 12.69% for the week of 9 November 2026, up 4 basis points from the previous week, +32 bps on the month and −182 bps on the year.
+
+Week on week, Uganda rose 25 bps to 14.75%, Egypt rose 16 bps to 26.08%; the other 8 markets had no new one-year result.
+
+The index is the equal-weighted average of the latest 364-day Treasury bill rate in 10 markets. Egypt pays most (26.08%) and Tanzania least (6.13%). The series high is 19.82% (11 March 2024) and the low 9.27% (27 July 2020).
+
+By market (364-day, latest):
+• Egypt 26.08% (+16 bps) · 2026-11-03
+• Malawi 16.00% (+0 bps) · 2026-11-03
+• Nigeria 15.80% (+0 bps) · 2026-11-04
+• Uganda 14.75% (+25 bps) · 2026-11-05
+• Mozambique 12.10% (+0 bps) · 2026-11-04
+• Zambia 10.00% (+0 bps) · 2026-10-29
+• Ghana 9.60% (+0 bps) · 2026-11-02
+• Kenya 9.03% (+0 bps) · 2026-11-09
+• South Africa 7.42% (+0 bps) · 2026-11-02
+• Tanzania 6.13% (+0 bps) · 2026-10-21
+
+Chart, series and contributions: https://www.afronomicsfeed.com/markets/bill-index?utm_source=email&utm_medium=release&utm_campaign=asbi
+
+The Afronomics African Sovereign Bill Index is published every Monday by Afronomics from the auction results of 10 African central banks. Method, series and contributions: https://www.afronomicsfeed.com/markets/bill-index. Free to quote with attribution to Afronomics.

@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 20,
-  "results": 52,
-  "p50_h": 3.4,
-  "p90_h": 7.8
+  "timed": 21,
+  "results": 54,
+  "p50_h": 3.9,
+  "p90_h": 9.4
  },
  "summary": [
   {
@@ -143,12 +143,12 @@
    "kind": "bonds",
    "market": "kenya",
    "name": "Kenya",
-   "results": 2,
-   "timed": 2,
+   "results": 3,
+   "timed": 3,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the result's own document",
-   "status": "2 timed results so far; figures from 5"
+   "status": "3 timed results so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -165,7 +165,7 @@
    "kind": "bonds",
    "market": "egypt",
    "name": "Egypt",
-   "results": 3,
+   "results": 4,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -218,6 +218,25 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:kenya:2026-11-11",
+   "kind": "bonds",
+   "market": "kenya",
+   "date": "2026-11-11",
+   "first_seen_at": "2026-11-09T23:25:52+00:00",
+   "published_at": "2026-11-09T14:01:29+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 9.41
+  },
+  {
+   "key": "bonds:egypt:2026-11-10",
+   "kind": "bonds",
+   "market": "egypt",
+   "date": "2026-11-10",
+   "first_seen_at": "2026-11-09T23:28:59+00:00",
+   "published_at": null,
+   "published_how": null
+  },
   {
    "key": "bonds:kenya:2026-11-09",
    "kind": "bonds",
@@ -1099,5 +1118,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-06T19:42:20+00:00"
+ "updated_at": "2026-11-09T23:37:53+00:00"
 }

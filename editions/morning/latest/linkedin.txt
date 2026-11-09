@@ -1,27 +1,35 @@
-The Afronomics Morning, Friday 6 November
+The Afronomics Morning, Monday 9 November
 
-Uganda’s 364-day Treasury bill cleared at 14.75%, up 25 bps. The Egyptian pound gained 1.61% against the dollar overnight. Results due: Mozambique (today).
+Kenya’s 364-day Treasury bill cleared at 9.03%, unchanged. Kenya’s FXD1/2026/030 bond (29.3 years) cleared at 14.13%, 1.52× covered. The Congolese franc lost 1.90% against the dollar overnight. Results due: Ghana (today), South Africa (today), Mozambique (today), Egypt (tomorrow), Malawi (tomorrow).
 
 Overnight, against the dollar
-• Egyptian pound 53.90/$ (+1.61%)
-• Ugandan shilling 4008.14/$ (+1.50%)
-• Botswana pula 14.01/$ (−1.05%)
-• Congolese franc 2264.05/$ (+0.99%)
-• Angolan kwanza 927.74/$ (−0.97%)
+• Congolese franc 2299.32/$ (−1.90%)
+• Botswana pula 13.93/$ (+1.81%)
+• Ugandan shilling 4023.53/$ (−0.89%)
+• Malawian kwacha 1735.11/$ (+0.53%)
+• Tunisian dinar 2.99/$ (+0.53%)
 
 Auction results in
-• Uganda 91-day: 11.20% (−5 bps)
-• Uganda 182-day: 13.00% (−40 bps)
-• Uganda 364-day: 14.75% (+25 bps)
+• Kenya 91-day: 8.75% (±0 bps)
+• Kenya 182-day: 8.85% (−1 bps)
+• Kenya 364-day: 9.03% (±0 bps)
+
+Bond auctions settled
+• Kenya FXD1/2026/030 (29.3y): 14.13%, coupon 12.50%
+• Kenya FXD3/2019/015 (7.7y): 12.74%, coupon 12.34%
 
 Due
+• Ghana: today
+• South Africa: today
 • Mozambique: today
+• Egypt: tomorrow
+• Malawi: tomorrow
 
 Headlines
-• Nigerian EV manufacturers, importers lament limited access to bank forex (Nairametrics)
-• Kenyan private uni Strathmore aims to prep students for workplace (African Business)
-• From Kraaifontein to World Cup glory: The making of Cheslin Kolbe (Moneyweb)
-• MoMo PSB Supports Federal Government’s ₦50,000 NERSI Relief Disbursement to Vulnerable Nigerians (Nairametrics)
+• African firms pay 1.8% more for credit than their rich-country peers, IFC study shows (TechCabal)
+• Nigeria: Borno Targets Regional Economic Hub Status, Woos Investors for Agric, Livestock Industries (AllAfrica)
+• Mozambique: Chapo Believes Golf Is Crucial for Investment Stimulation (AllAfrica)
+• Nigeria restores over 1,000MW to Lagos complex after power disruption (Nairametrics)
 
 Numbers, charts and sources: https://www.afronomicsfeed.com/morning?utm_source=linkedin&utm_medium=social&utm_campaign=morning
 

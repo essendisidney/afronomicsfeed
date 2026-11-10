@@ -184,7 +184,7 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.22% read 10 Nov",
+   "detail": "10.5% read 10 Nov",
    "latest": "2026-11-10",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
@@ -193,8 +193,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "20.0% read 09 Nov",
-   "latest": "2026-11-09",
+   "detail": "20.0% read 10 Nov",
+   "latest": "2026-11-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -202,8 +202,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 09 Nov",
-   "latest": "2026-11-09",
+   "detail": "14.0% read 10 Nov",
+   "latest": "2026-11-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -211,8 +211,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 09 Nov",
-   "latest": "2026-11-09",
+   "detail": "8.75% read 10 Nov",
+   "latest": "2026-11-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -220,8 +220,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 09 Nov",
-   "latest": "2026-11-09",
+   "detail": "24.0% read 10 Nov",
+   "latest": "2026-11-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -229,8 +229,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "23.0% read 09 Nov",
-   "latest": "2026-11-09",
+   "detail": "23.0% read 10 Nov",
+   "latest": "2026-11-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +238,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 09 Nov",
-   "latest": "2026-11-09",
+   "detail": "7.25% read 10 Nov",
+   "latest": "2026-11-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +247,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 09 Nov",
-   "latest": "2026-11-09",
+   "detail": "6.25% read 10 Nov",
+   "latest": "2026-11-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +256,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 09 Nov",
-   "latest": "2026-11-09",
+   "detail": "10.75% read 10 Nov",
+   "latest": "2026-11-10",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -274,9 +274,9 @@
    "area": "T-bill auctions",
    "name": "Egypt",
    "status": "ok",
-   "detail": "latest auction 03 Nov (auctions weekly)",
-   "latest": "2026-11-03",
-   "due_by": "2026-11-14",
+   "detail": "latest auction 10 Nov (auctions weekly)",
+   "latest": "2026-11-10",
+   "due_by": "2026-11-21",
    "link": "/markets/tbills/egypt"
   },
   {
@@ -328,9 +328,9 @@
    "area": "T-bill auctions",
    "name": "South Africa",
    "status": "ok",
-   "detail": "latest auction 02 Nov (auctions weekly)",
-   "latest": "2026-11-02",
-   "due_by": "2026-11-13",
+   "detail": "latest auction 09 Nov (auctions weekly)",
+   "latest": "2026-11-09",
+   "due_by": "2026-11-20",
    "link": "/markets/tbills/southafrica"
   },
   {
@@ -366,6 +366,12 @@
    "name": "Institutions registry",
    "result": "failure",
    "day": "2026-11-03",
+   "failures_in_row": 1
+  },
+  {
+   "name": "Site QA",
+   "result": "failure",
+   "day": "2026-11-10",
    "failures_in_row": 1
   },
   {
@@ -407,7 +413,7 @@
   {
    "name": "Morning note",
    "result": "success",
-   "day": "2026-11-09",
+   "day": "2026-11-10",
    "failures_in_row": 0
   },
   {
@@ -426,12 +432,6 @@
    "name": "Remittance prices",
    "result": "success",
    "day": "2026-11-01",
-   "failures_in_row": 0
-  },
-  {
-   "name": "Site QA",
-   "result": "success",
-   "day": "2026-11-09",
    "failures_in_row": 0
   },
   {

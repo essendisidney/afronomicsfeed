@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 21,
-  "results": 54,
+  "results": 56,
   "p50_h": 3.9,
   "p90_h": 9.4
  },
@@ -88,7 +88,7 @@
    "kind": "bills",
    "market": "egypt",
    "name": "Egypt",
-   "results": 3,
+   "results": 4,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -99,7 +99,7 @@
    "kind": "bills",
    "market": "southafrica",
    "name": "South Africa",
-   "results": 3,
+   "results": 4,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -238,6 +238,15 @@
    "published_how": null
   },
   {
+   "key": "bills:egypt:2026-11-10",
+   "kind": "bills",
+   "market": "egypt",
+   "date": "2026-11-10",
+   "first_seen_at": "2026-11-10T12:35:47+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
    "key": "bonds:kenya:2026-11-09",
    "kind": "bonds",
    "market": "kenya",
@@ -246,6 +255,15 @@
    "published_at": "2026-11-04T12:26:57+00:00",
    "published_how": "Last-Modified of the result's own document",
    "delay_h": 7.27
+  },
+  {
+   "key": "bills:southafrica:2026-11-09",
+   "kind": "bills",
+   "market": "southafrica",
+   "date": "2026-11-09",
+   "first_seen_at": "2026-11-10T12:36:03+00:00",
+   "published_at": null,
+   "published_how": null
   },
   {
    "key": "bills:kenya:2026-11-09",
@@ -1118,5 +1136,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-09T23:37:53+00:00"
+ "updated_at": "2026-11-10T12:46:29+00:00"
 }

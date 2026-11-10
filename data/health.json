@@ -1,12 +1,12 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-10",
+ "checked_on": "2026-11-11",
  "summary": {
   "failed": 0,
-  "late": 7,
+  "late": 8,
   "gap": 1,
-  "ok": 31
+  "ok": 30
  },
  "items": [
   {
@@ -73,6 +73,15 @@
    "link": "/rates/policy"
   },
   {
+   "area": "T-bill auctions",
+   "name": "Ghana",
+   "status": "late",
+   "detail": "latest auction 30 Oct; it usually auctions weekly",
+   "latest": "2026-10-30",
+   "due_by": "2026-11-10",
+   "link": "/markets/tbills/ghana"
+  },
+  {
    "area": "Policy rates",
    "name": "Uganda",
    "status": "gap",
@@ -130,9 +139,9 @@
    "area": "Bond auctions",
    "name": "Morocco",
    "status": "ok",
-   "detail": "latest result 03 Nov (auctions weekly)",
-   "latest": "2026-11-03",
-   "due_by": "2026-11-15",
+   "detail": "latest result 10 Nov (auctions weekly)",
+   "latest": "2026-11-10",
+   "due_by": "2026-11-22",
    "link": "/markets/bonds/morocco"
   },
   {
@@ -184,8 +193,8 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.5% read 10 Nov",
-   "latest": "2026-11-10",
+   "detail": "10.5% read 11 Nov",
+   "latest": "2026-11-11",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -281,15 +290,6 @@
   },
   {
    "area": "T-bill auctions",
-   "name": "Ghana",
-   "status": "ok",
-   "detail": "latest auction 30 Oct (auctions weekly)",
-   "latest": "2026-10-30",
-   "due_by": "2026-11-10",
-   "link": "/markets/tbills/ghana"
-  },
-  {
-   "area": "T-bill auctions",
    "name": "Kenya",
    "status": "ok",
    "detail": "latest auction 09 Nov (auctions weekly)",
@@ -301,9 +301,9 @@
    "area": "T-bill auctions",
    "name": "Malawi",
    "status": "ok",
-   "detail": "latest auction 03 Nov (auctions weekly)",
-   "latest": "2026-11-03",
-   "due_by": "2026-11-13",
+   "detail": "latest auction 10 Nov (auctions weekly)",
+   "latest": "2026-11-10",
+   "due_by": "2026-11-21",
    "link": "/markets/tbills/malawi"
   },
   {
@@ -363,6 +363,12 @@
  ],
  "workflows": [
   {
+   "name": "African auctions",
+   "result": "failure",
+   "day": "2026-11-10",
+   "failures_in_row": 1
+  },
+  {
    "name": "Institutions registry",
    "result": "failure",
    "day": "2026-11-03",
@@ -375,12 +381,6 @@
    "failures_in_row": 1
   },
   {
-   "name": "African auctions",
-   "result": "success",
-   "day": "2026-11-09",
-   "failures_in_row": 0
-  },
-  {
    "name": "Documents",
    "result": "success",
    "day": "2026-11-09",
@@ -389,7 +389,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-09",
+   "day": "2026-11-10",
    "failures_in_row": 0
   },
   {
@@ -401,7 +401,7 @@
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-11-09",
+   "day": "2026-11-10",
    "failures_in_row": 0
   },
   {

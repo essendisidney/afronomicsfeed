@@ -202,8 +202,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "20.0% read 10 Nov",
-   "latest": "2026-11-10",
+   "detail": "20.0% read 11 Nov",
+   "latest": "2026-11-11",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -211,8 +211,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 10 Nov",
-   "latest": "2026-11-10",
+   "detail": "14.0% read 11 Nov",
+   "latest": "2026-11-11",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -220,8 +220,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 10 Nov",
-   "latest": "2026-11-10",
+   "detail": "8.75% read 11 Nov",
+   "latest": "2026-11-11",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -229,8 +229,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 10 Nov",
-   "latest": "2026-11-10",
+   "detail": "24.0% read 11 Nov",
+   "latest": "2026-11-11",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +238,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "23.0% read 10 Nov",
-   "latest": "2026-11-10",
+   "detail": "23.0% read 11 Nov",
+   "latest": "2026-11-11",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +247,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 10 Nov",
-   "latest": "2026-11-10",
+   "detail": "7.25% read 11 Nov",
+   "latest": "2026-11-11",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +256,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 10 Nov",
-   "latest": "2026-11-10",
+   "detail": "6.25% read 11 Nov",
+   "latest": "2026-11-11",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -265,8 +265,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 10 Nov",
-   "latest": "2026-11-10",
+   "detail": "10.75% read 11 Nov",
+   "latest": "2026-11-11",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -366,18 +366,12 @@
    "name": "African auctions",
    "result": "failure",
    "day": "2026-11-10",
-   "failures_in_row": 1
+   "failures_in_row": 2
   },
   {
    "name": "Institutions registry",
    "result": "failure",
    "day": "2026-11-03",
-   "failures_in_row": 1
-  },
-  {
-   "name": "Site QA",
-   "result": "failure",
-   "day": "2026-11-10",
    "failures_in_row": 1
   },
   {
@@ -413,7 +407,7 @@
   {
    "name": "Morning note",
    "result": "success",
-   "day": "2026-11-10",
+   "day": "2026-11-11",
    "failures_in_row": 0
   },
   {
@@ -432,6 +426,12 @@
    "name": "Remittance prices",
    "result": "success",
    "day": "2026-11-01",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Site QA",
+   "result": "success",
+   "day": "2026-11-11",
    "failures_in_row": 0
   },
   {

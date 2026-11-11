@@ -1,6 +1,6 @@
-The Afronomics Morning, Tuesday 10 November
+The Afronomics Morning, Wednesday 11 November
 
-Kenya’s 364-day Treasury bill cleared at 9.03%, unchanged. Kenya’s FXD1/2026/030 bond (29.3 years) cleared at 14.13%, 1.52× covered. The Congolese franc gained 1.64% against the dollar overnight. Results due: Egypt (today), Malawi (today), Mozambique (today).
+Egypt’s 364-day Treasury bill cleared at 26.03%, down 5 bps. Kenya’s FXD4/2019/010 bond (3.0 years) cleared at 11.24%, 1.00× covered. The Congolese franc gained 1.64% against the dollar overnight. Results due: Mozambique (today), Zambia (tomorrow).
 
 Overnight, against the dollar
 • Congolese franc 2262.25/$ (+1.64%)
@@ -10,24 +10,25 @@ Overnight, against the dollar
 • Angolan kwanza 916.55/$ (+0.66%)
 
 Auction results in
-• Kenya 91-day: 8.75% (±0 bps)
-• Kenya 182-day: 8.85% (−1 bps)
-• Kenya 364-day: 9.03% (±0 bps)
+• Egypt 91-day: 24.86% (−14 bps)
+• Egypt 182-day: 25.25% (−20 bps)
+• Egypt 364-day: 26.03% (−5 bps)
+• Malawi 91-day: 12.00% (±0 bps)
+• Malawi 182-day: 14.50% (±0 bps)
+• Malawi 364-day: 16.00% (±0 bps)
 
 Bond auctions settled
-• Kenya FXD1/2026/030 (29.3y): 14.13%, coupon 12.50%
-• Kenya FXD3/2019/015 (7.7y): 12.74%, coupon 12.34%
+• Kenya FXD4/2019/010 (3.0y): 11.24%, coupon 12.28%
 
 Due
-• Egypt: today
-• Malawi: today
 • Mozambique: today
+• Zambia: tomorrow
 
 Headlines
-• Nigeria: Nigeria's Active Telecom Lines Hit 200m As 5G Share Crosses 5% (AllAfrica)
-• Coalition crunch: Parties must deliver more than deals for positions (Moneyweb)
-• Eight Nigerian founders get over $29,000 in government-backed business support (TechCabal)
-• Nigeria: Nigerian Government Urges Africa to Turn Resource Wealth Into Economic Prosperity (AllAfrica)
+• Dipula lifts full-year dividend as earnings rise (Moneyweb)
+• Nigeria: Group Seeks Independent Review of Nnpcl Operations, Questions ₦7.2tn Profit (AllAfrica)
+• South Africa’s fintechs chase a lucrative opportunity beyond payments (TechCabal)
+• Nigeria: Wike Assures Abaji Residents of Electricity Before Election (AllAfrica)
 
 Numbers, charts and sources: https://www.afronomicsfeed.com/morning?utm_source=linkedin&utm_medium=social&utm_campaign=morning
 

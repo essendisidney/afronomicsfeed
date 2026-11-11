@@ -56,10 +56,13 @@ export function StatTile({
   def,
   reading,
   href,
+  unread = false,
 }: {
   def: IndicatorDef;
   reading: Reading | null;
   href?: string;
+  /** The World Bank feed could not be read at all for this series, so a missing figure is ours, not the publisher's. */
+  unread?: boolean;
 }) {
   const body = (
     <>
@@ -80,7 +83,7 @@ export function StatTile({
           </div>
         </>
       ) : (
-        <p className="mt-2 text-sm text-muted">Not published by source</p>
+        <p className="mt-2 text-sm text-muted">{unread ? "Could not be read just now" : "Not published by source"}</p>
       )}
     </>
   );

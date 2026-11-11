@@ -64,6 +64,8 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
     return { file, reading, rank: position >= 0 ? { position: position + 1, of: table.length } : null };
   });
   const published = readings.filter((item) => item.reading).length;
+  // A series with no figure for any country means the feed was not read (outage, timeout), not that this country is silent.
+  const unread = readings.filter((item) => item.file.latestYear === null).length;
 
   const pipeline = projects.filter((project) => project.status === "Pipeline");
   const active = projects.filter((project) => project.status === "Active");
@@ -110,7 +112,9 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
           <h1 className="mt-3 font-serif text-4xl leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl">{country.name}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-ink-soft">
             {summary.length ? `${country.name} is ${summary.join(", ")}.` : `The ${country.name} file: data, capital flows and headlines.`}{" "}
-            {published} of {indicatorDefs.length} tracked series are published for this country.
+            {unread === indicatorDefs.length
+              ? "The World Bank figures could not be read just now; they return on the next refresh."
+              : `${published} of ${indicatorDefs.length - unread} tracked series are published for this country${unread ? ` (${unread} could not be read just now)` : ""}.`}
           </p>
         </div>
         <div className="grid grid-cols-2 gap-px bg-rule lg:col-span-4">
@@ -154,7 +158,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
               <div className="mt-4 grid grid-cols-1 gap-px bg-rule sm:grid-cols-2 lg:grid-cols-4">
                 {items.map(({ file, reading, rank }) => (
                   <div key={file.def.slug} className="relative">
-                    <StatTile def={file.def} reading={reading} href={`/data/${file.def.slug}#${country.iso.toLowerCase()}`} />
+                    <StatTile def={file.def} reading={reading} unread={file.latestYear === null} href={`/data/${file.def.slug}#${country.iso.toLowerCase()}`} />
                     {rank ? (
                       <span className="pointer-events-none absolute right-3 top-4 font-medium text-[12px] text-muted">
                         #{rank.position} of {rank.of}

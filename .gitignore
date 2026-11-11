@@ -53,3 +53,6 @@ data/story_leads.json
 
 # site QA output (scripts/site-qa.mjs)
 /qa-report/
+
+# Named sample packs (scripts/pack_samples.py): private, never committed
+/packs/

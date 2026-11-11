@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 22,
-  "results": 58,
+  "results": 60,
   "p50_h": 3.4,
   "p90_h": 9.2
  },
@@ -44,7 +44,7 @@
    "kind": "bills",
    "market": "nigeria",
    "name": "Nigeria",
-   "results": 3,
+   "results": 4,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -209,7 +209,7 @@
    "kind": "bonds",
    "market": "waemu",
    "name": "WAEMU (UMOA-Titres)",
-   "results": 9,
+   "results": 10,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -219,6 +219,15 @@
  ],
  "results": [
   {
+   "key": "bonds:waemu:2026-11-11:mali",
+   "kind": "bonds",
+   "market": "waemu",
+   "date": "2026-11-11",
+   "first_seen_at": "2026-11-11T19:45:10+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
    "key": "bonds:kenya:2026-11-11",
    "kind": "bonds",
    "market": "kenya",
@@ -227,6 +236,15 @@
    "published_at": "2026-11-09T14:01:29+00:00",
    "published_how": "Last-Modified of the result's own document",
    "delay_h": 9.41
+  },
+  {
+   "key": "bills:nigeria:2026-11-11",
+   "kind": "bills",
+   "market": "nigeria",
+   "date": "2026-11-11",
+   "first_seen_at": "2026-11-11T19:33:33+00:00",
+   "published_at": null,
+   "published_how": null
   },
   {
    "key": "bonds:morocco:2026-11-10",
@@ -1155,5 +1173,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-10T21:03:42+00:00"
+ "updated_at": "2026-11-11T19:47:58+00:00"
 }

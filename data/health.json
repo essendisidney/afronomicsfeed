@@ -166,9 +166,9 @@
    "area": "Bond auctions",
    "name": "WAEMU (UMOA-Titres)",
    "status": "ok",
-   "detail": "latest result 06 Nov (auctions weekly)",
-   "latest": "2026-11-06",
-   "due_by": "2026-11-13",
+   "detail": "latest result 11 Nov (auctions weekly)",
+   "latest": "2026-11-11",
+   "due_by": "2026-11-18",
    "link": "/markets/bonds/waemu"
   },
   {
@@ -319,9 +319,9 @@
    "area": "T-bill auctions",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "latest auction 04 Nov (auctions every two weeks)",
-   "latest": "2026-11-04",
-   "due_by": "2026-11-25",
+   "detail": "latest auction 11 Nov (auctions every two weeks)",
+   "latest": "2026-11-11",
+   "due_by": "2026-11-26",
    "link": "/markets/tbills/nigeria"
   },
   {
@@ -365,8 +365,8 @@
   {
    "name": "African auctions",
    "result": "failure",
-   "day": "2026-11-10",
-   "failures_in_row": 2
+   "day": "2026-11-11",
+   "failures_in_row": 3
   },
   {
    "name": "Institutions registry",
@@ -383,7 +383,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-10",
+   "day": "2026-11-11",
    "failures_in_row": 0
   },
   {
@@ -395,7 +395,7 @@
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-11-10",
+   "day": "2026-11-11",
    "failures_in_row": 0
   },
   {

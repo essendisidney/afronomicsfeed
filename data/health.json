@@ -1,12 +1,12 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-11",
+ "checked_on": "2026-11-12",
  "summary": {
   "failed": 0,
-  "late": 8,
+  "late": 9,
   "gap": 1,
-  "ok": 30
+  "ok": 29
  },
  "items": [
   {
@@ -38,15 +38,6 @@
   },
   {
    "area": "Money market funds",
-   "name": "Kasha Money Market Fund",
-   "status": "late",
-   "detail": "published yield unchanged at 10.42% since 22 Oct: the page may not be current",
-   "latest": "2026-10-22",
-   "due_by": null,
-   "link": "/rates/kenya/money-market-funds"
-  },
-  {
-   "area": "Money market funds",
    "name": "NCBA Money Market Fund (KES)",
    "status": "late",
    "detail": "the manager's page was last updated 18 Aug 2026; left out until it is updated",
@@ -73,6 +64,15 @@
    "link": "/rates/policy"
   },
   {
+   "area": "Savings bonds",
+   "name": "Nigeria FGN Savings Bond",
+   "status": "late",
+   "detail": "October 2026 offer",
+   "latest": "2026-10-05",
+   "due_by": "2026-11-11",
+   "link": "/rates/nigeria/savings-bond"
+  },
+  {
    "area": "T-bill auctions",
    "name": "Ghana",
    "status": "late",
@@ -80,6 +80,15 @@
    "latest": "2026-10-30",
    "due_by": "2026-11-10",
    "link": "/markets/tbills/ghana"
+  },
+  {
+   "area": "T-bill auctions",
+   "name": "Tanzania",
+   "status": "late",
+   "detail": "latest auction 21 Oct; it usually auctions every two weeks",
+   "latest": "2026-10-21",
+   "due_by": "2026-11-11",
+   "link": "/markets/tbills/tanzania"
   },
   {
    "area": "Policy rates",
@@ -191,10 +200,19 @@
   },
   {
    "area": "Money market funds",
+   "name": "Kasha Money Market Fund",
+   "status": "ok",
+   "detail": "10.33% read 12 Nov",
+   "latest": "2026-11-12",
+   "due_by": null,
+   "link": "/rates/kenya/money-market-funds"
+  },
+  {
+   "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.5% read 11 Nov",
-   "latest": "2026-11-11",
+   "detail": "10.5% read 12 Nov",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -202,8 +220,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "20.0% read 11 Nov",
-   "latest": "2026-11-11",
+   "detail": "20.0% read 12 Nov",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -211,8 +229,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 11 Nov",
-   "latest": "2026-11-11",
+   "detail": "14.0% read 12 Nov",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -220,8 +238,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 11 Nov",
-   "latest": "2026-11-11",
+   "detail": "8.75% read 12 Nov",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -229,8 +247,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 11 Nov",
-   "latest": "2026-11-11",
+   "detail": "24.0% read 12 Nov",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +256,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "23.0% read 11 Nov",
-   "latest": "2026-11-11",
+   "detail": "23.0% read 12 Nov",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +265,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 11 Nov",
-   "latest": "2026-11-11",
+   "detail": "7.25% read 12 Nov",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +274,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 11 Nov",
-   "latest": "2026-11-11",
+   "detail": "6.25% read 12 Nov",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -265,19 +283,10 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 11 Nov",
-   "latest": "2026-11-11",
+   "detail": "10.75% read 12 Nov",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/policy"
-  },
-  {
-   "area": "Savings bonds",
-   "name": "Nigeria FGN Savings Bond",
-   "status": "ok",
-   "detail": "October 2026 offer",
-   "latest": "2026-10-05",
-   "due_by": "2026-11-11",
-   "link": "/rates/nigeria/savings-bond"
   },
   {
    "area": "T-bill auctions",
@@ -335,15 +344,6 @@
   },
   {
    "area": "T-bill auctions",
-   "name": "Tanzania",
-   "status": "ok",
-   "detail": "latest auction 21 Oct (auctions every two weeks)",
-   "latest": "2026-10-21",
-   "due_by": "2026-11-11",
-   "link": "/markets/tbills/tanzania"
-  },
-  {
-   "area": "T-bill auctions",
    "name": "Uganda",
    "status": "ok",
    "detail": "latest auction 04 Nov (auctions monthly)",
@@ -366,7 +366,7 @@
    "name": "African auctions",
    "result": "failure",
    "day": "2026-11-11",
-   "failures_in_row": 3
+   "failures_in_row": 4
   },
   {
    "name": "Institutions registry",
@@ -407,19 +407,13 @@
   {
    "name": "Morning note",
    "result": "success",
-   "day": "2026-11-11",
+   "day": "2026-11-12",
    "failures_in_row": 0
   },
   {
    "name": "Poverty Premium",
    "result": "success",
    "day": "2026-11-01",
-   "failures_in_row": 0
-  },
-  {
-   "name": "Reader tests",
-   "result": "success",
-   "day": "2026-10-30",
    "failures_in_row": 0
   },
   {
@@ -431,7 +425,7 @@
   {
    "name": "Site QA",
    "result": "success",
-   "day": "2026-11-11",
+   "day": "2026-11-12",
    "failures_in_row": 0
   },
   {

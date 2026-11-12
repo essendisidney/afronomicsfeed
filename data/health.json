@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-12",
+ "checked_on": "2026-11-13",
  "summary": {
   "failed": 0,
   "late": 9,
@@ -202,8 +202,8 @@
    "area": "Money market funds",
    "name": "Kasha Money Market Fund",
    "status": "ok",
-   "detail": "10.33% read 12 Nov",
-   "latest": "2026-11-12",
+   "detail": "10.33% read 13 Nov",
+   "latest": "2026-11-13",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -211,8 +211,8 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.5% read 12 Nov",
-   "latest": "2026-11-12",
+   "detail": "10.5% read 13 Nov",
+   "latest": "2026-11-13",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -301,9 +301,9 @@
    "area": "T-bill auctions",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest auction 09 Nov (auctions weekly)",
-   "latest": "2026-11-09",
-   "due_by": "2026-11-20",
+   "detail": "latest auction 16 Nov (auctions weekly)",
+   "latest": "2026-11-16",
+   "due_by": "2026-11-27",
    "link": "/markets/kenya-tbills"
   },
   {
@@ -355,9 +355,9 @@
    "area": "T-bill auctions",
    "name": "Zambia",
    "status": "ok",
-   "detail": "latest auction 29 Oct (auctions every two weeks)",
-   "latest": "2026-10-29",
-   "due_by": "2026-11-19",
+   "detail": "latest auction 12 Nov (auctions every two weeks)",
+   "latest": "2026-11-12",
+   "due_by": "2026-12-03",
    "link": "/markets/tbills/zambia"
   }
  ],
@@ -365,13 +365,19 @@
   {
    "name": "African auctions",
    "result": "failure",
-   "day": "2026-11-11",
-   "failures_in_row": 4
+   "day": "2026-11-12",
+   "failures_in_row": 5
   },
   {
    "name": "Institutions registry",
    "result": "failure",
    "day": "2026-11-03",
+   "failures_in_row": 1
+  },
+  {
+   "name": "Kenya quick check",
+   "result": "failure",
+   "day": "2026-11-12",
    "failures_in_row": 1
   },
   {
@@ -383,7 +389,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-11",
+   "day": "2026-11-12",
    "failures_in_row": 0
   },
   {
@@ -395,13 +401,7 @@
   {
    "name": "IndexNow",
    "result": "success",
-   "day": "2026-11-11",
-   "failures_in_row": 0
-  },
-  {
-   "name": "Kenya quick check",
-   "result": "success",
-   "day": "2026-11-05",
+   "day": "2026-11-12",
    "failures_in_row": 0
   },
   {

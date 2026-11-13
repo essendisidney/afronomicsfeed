@@ -4,20 +4,11 @@
  "checked_on": "2026-11-13",
  "summary": {
   "failed": 0,
-  "late": 9,
+  "late": 8,
   "gap": 1,
-  "ok": 29
+  "ok": 30
  },
  "items": [
-  {
-   "area": "Eurobond yields",
-   "name": "Kenya",
-   "status": "late",
-   "detail": "latest prices 30 Oct",
-   "latest": "2026-10-30",
-   "due_by": "2026-11-08",
-   "link": "/markets/eurobonds"
-  },
   {
    "area": "Eurobond yields",
    "name": "Nigeria",
@@ -188,6 +179,15 @@
    "latest": "2026-09-25",
    "due_by": "2026-11-16",
    "link": "/markets/bonds/zambia"
+  },
+  {
+   "area": "Eurobond yields",
+   "name": "Kenya",
+   "status": "ok",
+   "detail": "latest prices 12 Nov",
+   "latest": "2026-11-12",
+   "due_by": "2026-11-21",
+   "link": "/markets/eurobonds"
   },
   {
    "area": "Money market funds",
@@ -365,8 +365,14 @@
   {
    "name": "African auctions",
    "result": "failure",
-   "day": "2026-11-12",
-   "failures_in_row": 6
+   "day": "2026-11-13",
+   "failures_in_row": 7
+  },
+  {
+   "name": "IndexNow",
+   "result": "failure",
+   "day": "2026-11-13",
+   "failures_in_row": 1
   },
   {
    "name": "Institutions registry",
@@ -395,19 +401,13 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-12",
+   "day": "2026-11-13",
    "failures_in_row": 0
   },
   {
    "name": "Index release",
    "result": "success",
    "day": "2026-11-09",
-   "failures_in_row": 0
-  },
-  {
-   "name": "IndexNow",
-   "result": "success",
-   "day": "2026-11-12",
    "failures_in_row": 0
   },
   {

@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-13",
+ "checked_on": "2026-11-14",
  "summary": {
   "failed": 0,
   "late": 8,
@@ -65,12 +65,12 @@
   },
   {
    "area": "T-bill auctions",
-   "name": "Ghana",
+   "name": "Mozambique",
    "status": "late",
-   "detail": "latest auction 30 Oct; it usually auctions weekly",
-   "latest": "2026-10-30",
-   "due_by": "2026-11-10",
-   "link": "/markets/tbills/ghana"
+   "detail": "latest auction 04 Nov; it usually auctions weekly",
+   "latest": "2026-11-04",
+   "due_by": "2026-11-13",
+   "link": "/markets/tbills/mozambique"
   },
   {
    "area": "T-bill auctions",
@@ -202,8 +202,8 @@
    "area": "Money market funds",
    "name": "Kasha Money Market Fund",
    "status": "ok",
-   "detail": "10.33% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "10.33% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -211,8 +211,8 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.5% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "10.5% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -220,8 +220,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "20.0% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "20.0% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -229,8 +229,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "14.0% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +238,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "8.75% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +247,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "24.0% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +256,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "23.0% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "23.0% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -265,8 +265,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "7.25% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -274,8 +274,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "6.25% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -283,8 +283,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 13 Nov",
-   "latest": "2026-11-13",
+   "detail": "10.75% read 14 Nov",
+   "latest": "2026-11-14",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -296,6 +296,15 @@
    "latest": "2026-11-10",
    "due_by": "2026-11-21",
    "link": "/markets/tbills/egypt"
+  },
+  {
+   "area": "T-bill auctions",
+   "name": "Ghana",
+   "status": "ok",
+   "detail": "latest auction 13 Nov (auctions weekly)",
+   "latest": "2026-11-13",
+   "due_by": "2026-11-24",
+   "link": "/markets/tbills/ghana"
   },
   {
    "area": "T-bill auctions",
@@ -314,15 +323,6 @@
    "latest": "2026-11-10",
    "due_by": "2026-11-21",
    "link": "/markets/tbills/malawi"
-  },
-  {
-   "area": "T-bill auctions",
-   "name": "Mozambique",
-   "status": "ok",
-   "detail": "latest auction 04 Nov (auctions weekly)",
-   "latest": "2026-11-04",
-   "due_by": "2026-11-13",
-   "link": "/markets/tbills/mozambique"
   },
   {
    "area": "T-bill auctions",
@@ -366,13 +366,13 @@
    "name": "African auctions",
    "result": "failure",
    "day": "2026-11-13",
-   "failures_in_row": 7
+   "failures_in_row": 8
   },
   {
    "name": "IndexNow",
    "result": "failure",
-   "day": "2026-11-13",
-   "failures_in_row": 1
+   "day": "2026-11-14",
+   "failures_in_row": 2
   },
   {
    "name": "Institutions registry",
@@ -411,12 +411,6 @@
    "failures_in_row": 0
   },
   {
-   "name": "Poverty Premium",
-   "result": "success",
-   "day": "2026-11-01",
-   "failures_in_row": 0
-  },
-  {
    "name": "Remittance prices",
    "result": "success",
    "day": "2026-11-01",
@@ -425,7 +419,7 @@
   {
    "name": "Site QA",
    "result": "success",
-   "day": "2026-11-13",
+   "day": "2026-11-14",
    "failures_in_row": 0
   },
   {

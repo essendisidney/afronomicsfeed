@@ -365,8 +365,8 @@
   {
    "name": "African auctions",
    "result": "failure",
-   "day": "2026-11-14",
-   "failures_in_row": 10
+   "day": "2026-11-15",
+   "failures_in_row": 11
   },
   {
    "name": "IndexNow",
@@ -401,13 +401,19 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-14",
+   "day": "2026-11-15",
    "failures_in_row": 0
   },
   {
    "name": "Index release",
    "result": "success",
    "day": "2026-11-09",
+   "failures_in_row": 0
+  },
+  {
+   "name": "Remittance prices",
+   "result": "success",
+   "day": "2026-11-15",
    "failures_in_row": 0
   },
   {

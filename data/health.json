@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-15",
+ "checked_on": "2026-11-16",
  "summary": {
   "failed": 0,
   "late": 8,
@@ -202,8 +202,8 @@
    "area": "Money market funds",
    "name": "Kasha Money Market Fund",
    "status": "ok",
-   "detail": "10.33% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "10.33% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -211,8 +211,8 @@
    "area": "Money market funds",
    "name": "Madison Money Market Fund",
    "status": "ok",
-   "detail": "10.5% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "10.5% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -220,8 +220,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "20.0% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "20.0% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -229,8 +229,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "14.0% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +238,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "8.75% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +247,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "24.0% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +256,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "23.0% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "23.0% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -265,8 +265,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "7.25% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -274,8 +274,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "6.25% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -283,8 +283,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 15 Nov",
-   "latest": "2026-11-15",
+   "detail": "10.75% read 16 Nov",
+   "latest": "2026-11-16",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -366,13 +366,19 @@
    "name": "African auctions",
    "result": "failure",
    "day": "2026-11-15",
-   "failures_in_row": 11
+   "failures_in_row": 12
   },
   {
    "name": "IndexNow",
    "result": "failure",
    "day": "2026-11-15",
    "failures_in_row": 3
+  },
+  {
+   "name": "Morning note",
+   "result": "failure",
+   "day": "2026-11-16",
+   "failures_in_row": 2
   },
   {
    "name": "Institutions registry",
@@ -387,9 +393,15 @@
    "failures_in_row": 1
   },
   {
-   "name": "Morning note",
+   "name": "Site QA",
    "result": "failure",
-   "day": "2026-11-13",
+   "day": "2026-11-16",
+   "failures_in_row": 1
+  },
+  {
+   "name": "Weekly edition snapshot",
+   "result": "failure",
+   "day": "2026-11-16",
    "failures_in_row": 1
   },
   {
@@ -414,18 +426,6 @@
    "name": "Remittance prices",
    "result": "success",
    "day": "2026-11-15",
-   "failures_in_row": 0
-  },
-  {
-   "name": "Site QA",
-   "result": "success",
-   "day": "2026-11-15",
-   "failures_in_row": 0
-  },
-  {
-   "name": "Weekly edition snapshot",
-   "result": "success",
-   "day": "2026-11-09",
    "failures_in_row": 0
   }
  ]

@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 25,
-  "results": 63,
+  "results": 66,
   "p50_h": 4.4,
   "p90_h": 8.6
  },
@@ -121,7 +121,7 @@
    "kind": "bills",
    "market": "malawi",
    "name": "Malawi",
-   "results": 7,
+   "results": 8,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -154,7 +154,7 @@
    "kind": "bonds",
    "market": "nigeria",
    "name": "Nigeria",
-   "results": 1,
+   "results": 2,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -165,7 +165,7 @@
    "kind": "bonds",
    "market": "egypt",
    "name": "Egypt",
-   "results": 4,
+   "results": 5,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -218,6 +218,33 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:egypt:2026-11-17",
+   "kind": "bonds",
+   "market": "egypt",
+   "date": "2026-11-17",
+   "first_seen_at": "2026-11-16T23:25:45+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bonds:nigeria:2026-11-16",
+   "kind": "bonds",
+   "market": "nigeria",
+   "date": "2026-11-16",
+   "first_seen_at": "2026-11-16T23:26:55+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:malawi:2026-11-16",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-11-16",
+   "first_seen_at": "2026-11-16T23:25:22+00:00",
+   "published_at": null,
+   "published_how": null
+  },
   {
    "key": "bills:kenya:2026-11-16",
    "kind": "bills",
@@ -1203,5 +1230,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-14T12:30:22+00:00"
+ "updated_at": "2026-11-16T23:36:58+00:00"
 }

@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-17",
+ "checked_on": "2026-11-18",
  "summary": {
   "failed": 0,
   "late": 10,
@@ -157,9 +157,9 @@
    "area": "Bond auctions",
    "name": "Morocco",
    "status": "ok",
-   "detail": "latest result 10 Nov (auctions weekly)",
-   "latest": "2026-11-10",
-   "due_by": "2026-11-22",
+   "detail": "latest result 17 Nov (auctions weekly)",
+   "latest": "2026-11-17",
+   "due_by": "2026-11-29",
    "link": "/markets/bonds/morocco"
   },
   {
@@ -211,8 +211,8 @@
    "area": "Money market funds",
    "name": "Kasha Money Market Fund",
    "status": "ok",
-   "detail": "10.33% read 17 Nov",
-   "latest": "2026-11-17",
+   "detail": "10.33% read 18 Nov",
+   "latest": "2026-11-18",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -365,14 +365,14 @@
   {
    "name": "African auctions",
    "result": "failure",
-   "day": "2026-11-16",
-   "failures_in_row": 14
+   "day": "2026-11-17",
+   "failures_in_row": 15
   },
   {
    "name": "IndexNow",
    "result": "failure",
-   "day": "2026-11-16",
-   "failures_in_row": 4
+   "day": "2026-11-17",
+   "failures_in_row": 5
   },
   {
    "name": "Morning note",
@@ -413,7 +413,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-16",
+   "day": "2026-11-17",
    "failures_in_row": 0
   },
   {

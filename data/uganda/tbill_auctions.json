@@ -3,12 +3,57 @@
  "publisher": "Bank of Uganda",
  "source_page": "https://www.bou.or.ug/bouwebsite/FinancialMarkets/tbillsauctionresults.html",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "updated_at": "2026-11-16T23:36:04+00:00",
+ "updated_at": "2026-11-18T13:06:51+00:00",
  "units": {
   "amounts": "UGX millions",
   "rates": "money-market yield, percent per annum (discount rate and effective yield also given)"
  },
  "rows": [
+  {
+   "tenor": 364,
+   "auction_no": 1238,
+   "auction_date": "2026-11-18",
+   "value_date": "2026-11-19",
+   "offered_ugx_m": 300000.0,
+   "received_ugx_m": 945759.1,
+   "accepted_ugx_m": 473364.1,
+   "discount_rate": 13.041,
+   "weighted_avg_rate": 14.99,
+   "effective_yield": 14.993,
+   "price_per_100": 86.995,
+   "bid_to_cover": 1.998,
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_18_Nov_2026_df4ee8a393.pdf"
+  },
+  {
+   "tenor": 182,
+   "auction_no": 1238,
+   "auction_date": "2026-11-18",
+   "value_date": "2026-11-19",
+   "offered_ugx_m": 35000.0,
+   "received_ugx_m": 45953.7,
+   "accepted_ugx_m": 2953.7,
+   "discount_rate": 12.209,
+   "weighted_avg_rate": 13.001,
+   "effective_yield": 13.425,
+   "price_per_100": 93.912,
+   "bid_to_cover": 15.558,
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_18_Nov_2026_df4ee8a393.pdf"
+  },
+  {
+   "tenor": 91,
+   "auction_no": 1238,
+   "auction_date": "2026-11-18",
+   "value_date": "2026-11-19",
+   "offered_ugx_m": 15000.0,
+   "received_ugx_m": 105719.4,
+   "accepted_ugx_m": 73052.6,
+   "discount_rate": 10.705,
+   "weighted_avg_rate": 10.999,
+   "effective_yield": 11.461,
+   "price_per_100": 97.331,
+   "bid_to_cover": 1.447,
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_18_Nov_2026_df4ee8a393.pdf"
+  },
   {
    "tenor": 364,
    "auction_no": 1237,
@@ -22,7 +67,7 @@
    "effective_yield": 14.752,
    "price_per_100": 87.177,
    "bid_to_cover": 2.199,
-   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_14baa85145.pdf"
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_d4306c74f4.pdf"
   },
   {
    "tenor": 182,
@@ -37,7 +82,7 @@
    "effective_yield": 13.425,
    "price_per_100": 93.912,
    "bid_to_cover": 5.877,
-   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_14baa85145.pdf"
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_d4306c74f4.pdf"
   },
   {
    "tenor": 91,
@@ -52,7 +97,7 @@
    "effective_yield": 11.682,
    "price_per_100": 97.283,
    "bid_to_cover": 19.348,
-   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_14baa85145.pdf"
+   "source": "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_d4306c74f4.pdf"
   },
   {
    "tenor": 364,
@@ -8296,6 +8341,24 @@
    ]
   },
   "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_14baa85145.pdf": {
+   "status": "parsed",
+   "ocr": false,
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_04_Nov_2026_d4306c74f4.pdf": {
+   "status": "parsed",
+   "ocr": false,
+   "tenors": [
+    91,
+    182,
+    364
+   ]
+  },
+  "https://bou.or.ug/uploads/Press_Release_Report_for_the_91_Days_182_Days_364_Days_T_Bills_Auction_18_Nov_2026_df4ee8a393.pdf": {
    "status": "parsed",
    "ocr": false,
    "tenors": [

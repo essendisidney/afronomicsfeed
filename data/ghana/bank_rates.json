@@ -3,9 +3,27 @@
  "publisher": "Bank of Ghana",
  "source": "https://www.bog.gov.gh/monetary-policy/summary-of-economic-and-financial-data/",
  "compiled_by": "Afronomics (afronomicsfeed.com)",
- "read_at": "2026-11-17T22:22:42+00:00",
+ "read_at": "2026-11-18T13:05:07+00:00",
  "note": "Table 3a of the Bank of Ghana's monthly Summary of Economic and Financial Data, % a year: monetary policy rate, 91- and 364-day bills (interest equivalent), savings deposits, 3-month time deposits, average lending rate.",
  "rows": [
+  {
+   "month": "2026-10",
+   "mpr": 14.0,
+   "tbill91": 4.62,
+   "tbill364": 9.74,
+   "savings": 4.0,
+   "deposit_3m": 9.72,
+   "lending": 15.79
+  },
+  {
+   "month": "2026-09",
+   "mpr": 14.0,
+   "tbill91": 4.72,
+   "tbill364": 12.16,
+   "savings": 4.01,
+   "deposit_3m": 9.72,
+   "lending": 15.78
+  },
   {
    "month": "2026-08",
    "mpr": 14.0,
@@ -104,24 +122,6 @@
    "savings": 5.0,
    "deposit_3m": 10.5,
    "lending": 22.22
-  },
-  {
-   "month": "2025-09",
-   "mpr": 21.5,
-   "tbill91": 10.45,
-   "tbill364": 12.94,
-   "savings": 5.0,
-   "deposit_3m": 10.5,
-   "lending": 22.71
-  },
-  {
-   "month": "2025-08",
-   "mpr": 25.0,
-   "tbill91": 10.26,
-   "tbill364": 13.11,
-   "savings": 5.0,
-   "deposit_3m": 10.5,
-   "lending": 24.15
   }
  ]
 }

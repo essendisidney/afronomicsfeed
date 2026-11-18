@@ -4,23 +4,11 @@
 "source": "https://tenders.go.ke/api/ocds/tenders?fy=2026-2027",
 "financial_year": "2026/2027",
 "published": "2026-10-31T23:59:10+03:00",
-"read_at": "2026-11-17T13:23:48+00:00",
+"read_at": "2026-11-18T13:06:42+00:00",
 "compiled_by": "Afronomics (afronomicsfeed.com)",
 "releases_in_file": 7047,
 "note": "Open means the closing date is today or later. Check the full notice and documents on tenders.go.ke before bidding.",
 "tenders": [
-{
-"id": "20261022112559-309404-CBK/056/2026-2027",
-"ref": "CBK/056/2026-2027",
-"title": "Tender for Proposed Enhancements and Improvement of Electrical Power Systems and Associated Data Centre Works at Kisumu Branch for Central Bank of Kenya",
-"buyer": "Central Bank of Kenya",
-"category": "works",
-"method": "open",
-"published": "2026-10-22",
-"closes": "2026-11-18T10:30+03:00",
-"value": null,
-"first_seen": "2026-11-01T15:07+03:00"
-},
 {
 "id": "20261029170850-310527-KP1/9A.3/OT/07/FA/26-27",
 "ref": "KP1/9A.3/OT/07/FA/26-27",
@@ -440,6 +428,7 @@
 "20261022095622-309374-MU/AMP/T/003/2026-2027": "2026-11-01T15:07+03:00",
 "20261022100844-309378--MU/AMP/T/008/2026-2027": "2026-11-01T15:07+03:00",
 "20261022100932-309379-2654592-2026/2027": "2026-11-01T15:07+03:00",
+"20261022112559-309404-CBK/056/2026-2027": "2026-11-01T15:07+03:00",
 "20261022115818-309416-KCA/S/002/2026-2027": "2026-11-01T15:07+03:00",
 "20261022150149-309446-CGOKTI/MEECCFNMR/001/2026-2027": "2026-11-01T15:07+03:00",
 "20261022160714-309459-KU/TNDR/G/015/SD-GA/2026-2027": "2026-11-01T15:07+03:00",

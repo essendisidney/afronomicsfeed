@@ -1,14 +1,32 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-18",
+ "checked_on": "2026-11-19",
  "summary": {
   "failed": 0,
-  "late": 9,
+  "late": 11,
   "gap": 1,
-  "ok": 29
+  "ok": 27
  },
  "items": [
+  {
+   "area": "Bond auctions",
+   "name": "Uganda",
+   "status": "late",
+   "detail": "latest result 28 Oct; it usually auctions every two weeks",
+   "latest": "2026-10-28",
+   "due_by": "2026-11-18",
+   "link": "/markets/bonds/uganda"
+  },
+  {
+   "area": "Bond auctions",
+   "name": "WAEMU (UMOA-Titres)",
+   "status": "late",
+   "detail": "latest result 11 Nov; it usually auctions weekly",
+   "latest": "2026-11-11",
+   "due_by": "2026-11-18",
+   "link": "/markets/bonds/waemu"
+  },
   {
    "area": "Bond auctions",
    "name": "Zambia",
@@ -33,6 +51,15 @@
    "status": "late",
    "detail": "published yield unchanged at 8.43% since 06 Oct: the page may not be current",
    "latest": "2026-10-06",
+   "due_by": null,
+   "link": "/rates/kenya/money-market-funds"
+  },
+  {
+   "area": "Money market funds",
+   "name": "Kasha Money Market Fund",
+   "status": "late",
+   "detail": "published yield unchanged at 10.33% since 12 Nov: the page may not be current",
+   "latest": "2026-11-12",
    "due_by": null,
    "link": "/rates/kenya/money-market-funds"
   },
@@ -80,15 +107,6 @@
    "latest": "2026-10-05",
    "due_by": "2026-11-11",
    "link": "/rates/nigeria/savings-bond"
-  },
-  {
-   "area": "T-bill auctions",
-   "name": "Mozambique",
-   "status": "late",
-   "detail": "latest auction 04 Nov; it usually auctions weekly",
-   "latest": "2026-11-04",
-   "due_by": "2026-11-13",
-   "link": "/markets/tbills/mozambique"
   },
   {
    "area": "Policy rates",
@@ -139,9 +157,9 @@
    "area": "Bond auctions",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest result 11 Nov (auctions every two weeks)",
-   "latest": "2026-11-11",
-   "due_by": "2026-11-29",
+   "detail": "latest result 23 Nov (auctions every two weeks)",
+   "latest": "2026-11-23",
+   "due_by": "2026-12-11",
    "link": "/markets/bonds/kenya"
   },
   {
@@ -163,24 +181,6 @@
    "link": "/markets/bonds/nigeria"
   },
   {
-   "area": "Bond auctions",
-   "name": "Uganda",
-   "status": "ok",
-   "detail": "latest result 28 Oct (auctions every two weeks)",
-   "latest": "2026-10-28",
-   "due_by": "2026-11-18",
-   "link": "/markets/bonds/uganda"
-  },
-  {
-   "area": "Bond auctions",
-   "name": "WAEMU (UMOA-Titres)",
-   "status": "ok",
-   "detail": "latest result 11 Nov (auctions weekly)",
-   "latest": "2026-11-11",
-   "due_by": "2026-11-18",
-   "link": "/markets/bonds/waemu"
-  },
-  {
    "area": "Eurobond yields",
    "name": "Kenya",
    "status": "ok",
@@ -199,15 +199,6 @@
    "link": "/rates/kenya/money-market-funds"
   },
   {
-   "area": "Money market funds",
-   "name": "Kasha Money Market Fund",
-   "status": "ok",
-   "detail": "10.33% read 18 Nov",
-   "latest": "2026-11-18",
-   "due_by": null,
-   "link": "/rates/kenya/money-market-funds"
-  },
-  {
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
@@ -220,7 +211,7 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "14.0% read 18 Nov",
+   "detail": "11.0% read 18 Nov",
    "latest": "2026-11-18",
    "due_by": null,
    "link": "/rates/policy"
@@ -317,6 +308,15 @@
   },
   {
    "area": "T-bill auctions",
+   "name": "Mozambique",
+   "status": "ok",
+   "detail": "latest auction 11 Nov (auctions weekly)",
+   "latest": "2026-11-11",
+   "due_by": "2026-11-20",
+   "link": "/markets/tbills/mozambique"
+  },
+  {
+   "area": "T-bill auctions",
    "name": "Nigeria",
    "status": "ok",
    "detail": "latest auction 11 Nov (auctions every two weeks)",
@@ -365,14 +365,14 @@
   {
    "name": "African auctions",
    "result": "failure",
-   "day": "2026-11-17",
-   "failures_in_row": 16
+   "day": "2026-11-18",
+   "failures_in_row": 17
   },
   {
    "name": "IndexNow",
    "result": "failure",
-   "day": "2026-11-17",
-   "failures_in_row": 5
+   "day": "2026-11-18",
+   "failures_in_row": 6
   },
   {
    "name": "Morning note",
@@ -413,7 +413,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-17",
+   "day": "2026-11-18",
    "failures_in_row": 0
   },
   {

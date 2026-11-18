@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 27,
-  "results": 71,
-  "p50_h": 3.9,
-  "p90_h": 8.2
+  "timed": 29,
+  "results": 73,
+  "p50_h": 4.4,
+  "p90_h": 9.7
  },
  "summary": [
   {
@@ -132,23 +132,23 @@
    "kind": "bills",
    "market": "mozambique",
    "name": "Mozambique",
-   "results": 5,
-   "timed": 2,
+   "results": 6,
+   "timed": 3,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the publisher's file (this result is the newest in it)",
-   "status": "2 timed results so far; figures from 5"
+   "status": "3 timed results so far; figures from 5"
   },
   {
    "kind": "bonds",
    "market": "kenya",
    "name": "Kenya",
-   "results": 3,
-   "timed": 3,
+   "results": 4,
+   "timed": 4,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the result's own document",
-   "status": "3 timed results so far; figures from 5"
+   "status": "4 timed results so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -218,6 +218,16 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:kenya:2026-11-23",
+   "kind": "bonds",
+   "market": "kenya",
+   "date": "2026-11-23",
+   "first_seen_at": "2026-11-18T21:54:10+00:00",
+   "published_at": "2026-11-18T10:57:01+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 10.95
+  },
   {
    "key": "bills:uganda:2026-11-18",
    "kind": "bills",
@@ -349,6 +359,16 @@
    "first_seen_at": "2026-11-11T19:33:33+00:00",
    "published_at": null,
    "published_how": null
+  },
+  {
+   "key": "bills:mozambique:2026-11-11",
+   "kind": "bills",
+   "market": "mozambique",
+   "date": "2026-11-11",
+   "first_seen_at": "2026-11-18T21:55:04+00:00",
+   "published_at": "2026-11-18T15:36:37+00:00",
+   "published_how": "Last-Modified of the publisher's file (this result is the newest in it)",
+   "delay_h": 6.31
   },
   {
    "key": "bonds:morocco:2026-11-10",
@@ -1277,5 +1297,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-18T13:07:54+00:00"
+ "updated_at": "2026-11-18T22:01:09+00:00"
 }

@@ -4,35 +4,11 @@
 "source": "https://tenders.go.ke/api/ocds/tenders?fy=2026-2027",
 "financial_year": "2026/2027",
 "published": "2026-10-31T23:59:10+03:00",
-"read_at": "2026-11-18T13:06:42+00:00",
+"read_at": "2026-11-19T13:05:53+00:00",
 "compiled_by": "Afronomics (afronomicsfeed.com)",
 "releases_in_file": 7047,
 "note": "Open means the closing date is today or later. Check the full notice and documents on tenders.go.ke before bidding.",
 "tenders": [
-{
-"id": "20261029170850-310527-KP1/9A.3/OT/07/FA/26-27",
-"ref": "KP1/9A.3/OT/07/FA/26-27",
-"title": "Three Year Framework Agreement for Supply of Treated Wooden Poles (local Manufacturers Only)",
-"buyer": "Kenya Power & Lighting Company",
-"category": "goods",
-"method": "open",
-"published": "2026-10-29",
-"closes": "2026-11-19T10:00+03:00",
-"value": null,
-"first_seen": "2026-11-01T15:07+03:00"
-},
-{
-"id": "20261031233541-310794-TENDERNO:NCCG/IDE/T/039/2026-2027",
-"ref": "TENDERNO:NCCG/IDE/T/039/2026-2027",
-"title": "Supply, Installation, Configuration, Testing and Commissioning of Sd-wan, Mpls and Internet Connectivity, Including Associated Network Equipment and Accessories",
-"buyer": "Nairobi County Government",
-"category": "services",
-"method": "open",
-"published": "2026-10-31",
-"closes": "2026-11-19T11:00+03:00",
-"value": null,
-"first_seen": "2026-11-01T15:07+03:00"
-},
 {
 "id": "20261031121022-310752-KWS/ONT/BDM/53/2026-2027",
 "ref": "KWS/ONT/BDM/53/2026-2027",
@@ -930,6 +906,7 @@
 "20261029170325-310523-NG-CDF/KIN/EM/MICHINDPS/TEND/01/2026-2027": "2026-11-01T15:07+03:00",
 "20261029170544-310525-KLF-S/NG-CDF/MAPS/2026/2027-6": "2026-11-01T15:07+03:00",
 "20261029170603-310526-NG-CDF/KIN/EM/NANDARPS/TEND/02/2026-2027": "2026-11-01T15:07+03:00",
+"20261029170850-310527-KP1/9A.3/OT/07/FA/26-27": "2026-11-01T15:07+03:00",
 "20261029170950-310528-NGCDF/LKPN/KAPINYONGIPRYSCH/01/10/2026": "2026-11-01T15:07+03:00",
 "20261029171047-310529-NG-CDF/KIN/EM/NANDARPS/TEND/03/2026-2027": "2026-11-01T15:07+03:00",
 "20261029171311-310530-TSNP/2026-2027/WPBP/01": "2026-11-01T15:07+03:00",
@@ -1023,6 +1000,7 @@
 "20261031112410-310743-CGL/ONT/MS/2659732/010/2026-2027": "2026-11-01T15:07+03:00",
 "20261031133333-310771-L/L/NG-CDF/TD/2630209/08/2026-2027": "2026-11-01T15:07+03:00",
 "20261031142304-310773-L/L/NG-CDF/TD/2630209/09/2026-2027": "2026-11-01T15:07+03:00",
-"20261031204218-310779-KMPS/REN/001/2026/2027": "2026-11-01T15:07+03:00"
+"20261031204218-310779-KMPS/REN/001/2026/2027": "2026-11-01T15:07+03:00",
+"20261031233541-310794-TENDERNO:NCCG/IDE/T/039/2026-2027": "2026-11-01T15:07+03:00"
 }
 }

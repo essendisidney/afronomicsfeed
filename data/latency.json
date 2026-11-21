@@ -23,20 +23,20 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 29,
-  "results": 73,
-  "p50_h": 4.4,
-  "p90_h": 9.7
+  "timed": 33,
+  "results": 77,
+  "p50_h": 4.5,
+  "p90_h": 15.6
  },
  "summary": [
   {
    "kind": "bills",
    "market": "kenya",
    "name": "Kenya",
-   "results": 5,
-   "timed": 5,
-   "p50_h": 4.6,
-   "p90_h": 5.7,
+   "results": 6,
+   "timed": 6,
+   "p50_h": 5.0,
+   "p90_h": 26.5,
    "publisher_time": "Last-Modified of the result's own document",
    "status": "measured"
   },
@@ -55,12 +55,12 @@
    "kind": "bills",
    "market": "ghana",
    "name": "Ghana",
-   "results": 4,
-   "timed": 4,
-   "p50_h": null,
-   "p90_h": null,
+   "results": 5,
+   "timed": 5,
+   "p50_h": 6.8,
+   "p90_h": 14.0,
    "publisher_time": "upload time in the Bank of Ghana's media index",
-   "status": "4 timed results so far; figures from 5"
+   "status": "measured"
   },
   {
    "kind": "bills",
@@ -132,12 +132,12 @@
    "kind": "bills",
    "market": "mozambique",
    "name": "Mozambique",
-   "results": 6,
-   "timed": 3,
+   "results": 7,
+   "timed": 4,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the publisher's file (this result is the newest in it)",
-   "status": "3 timed results so far; figures from 5"
+   "status": "4 timed results so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -176,12 +176,12 @@
    "kind": "bonds",
    "market": "zambia",
    "name": "Zambia",
-   "results": 0,
-   "timed": 0,
+   "results": 1,
+   "timed": 1,
    "p50_h": null,
    "p90_h": null,
-   "publisher_time": null,
-   "status": "no new result since measuring began"
+   "publisher_time": "last-changed time of the auction entry in the Bank of Zambia's JSON:API",
+   "status": "1 timed result so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -229,6 +229,36 @@
    "delay_h": 10.95
   },
   {
+   "key": "bills:kenya:2026-11-23",
+   "kind": "bills",
+   "market": "kenya",
+   "date": "2026-11-23",
+   "first_seen_at": "2026-11-21T13:32:50+00:00",
+   "published_at": "2026-11-19T14:34:24+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 46.97
+  },
+  {
+   "key": "bonds:zambia:2026-11-20",
+   "kind": "bonds",
+   "market": "zambia",
+   "date": "2026-11-20",
+   "first_seen_at": "2026-11-21T13:36:27+00:00",
+   "published_at": "2026-11-20T18:21:12+00:00",
+   "published_how": "last-changed time of the auction entry in the Bank of Zambia's JSON:API",
+   "delay_h": 19.25
+  },
+  {
+   "key": "bills:ghana:2026-11-20",
+   "kind": "bills",
+   "market": "ghana",
+   "date": "2026-11-20",
+   "first_seen_at": "2026-11-21T13:33:31+00:00",
+   "published_at": "2026-11-20T21:47:02+00:00",
+   "published_how": "upload time in the Bank of Ghana's media index",
+   "delay_h": 15.77
+  },
+  {
    "key": "bills:uganda:2026-11-18",
    "kind": "bills",
    "market": "uganda",
@@ -246,6 +276,16 @@
    "first_seen_at": "2026-11-18T13:00:08+00:00",
    "published_at": null,
    "published_how": null
+  },
+  {
+   "key": "bills:mozambique:2026-11-18",
+   "kind": "bills",
+   "market": "mozambique",
+   "date": "2026-11-18",
+   "first_seen_at": "2026-11-21T13:34:09+00:00",
+   "published_at": "2026-11-20T16:27:28+00:00",
+   "published_how": "Last-Modified of the publisher's file (this result is the newest in it)",
+   "delay_h": 21.11
   },
   {
    "key": "bonds:morocco:2026-11-17",
@@ -1297,5 +1337,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-18T22:01:09+00:00"
+ "updated_at": "2026-11-21T13:41:12+00:00"
 }

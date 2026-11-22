@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-22",
+ "checked_on": "2026-11-23",
  "summary": {
   "failed": 0,
   "late": 10,
@@ -365,14 +365,14 @@
   {
    "name": "African auctions",
    "result": "failure",
-   "day": "2026-11-21",
-   "failures_in_row": 21
+   "day": "2026-11-22",
+   "failures_in_row": 22
   },
   {
    "name": "IndexNow",
    "result": "failure",
-   "day": "2026-11-21",
-   "failures_in_row": 8
+   "day": "2026-11-22",
+   "failures_in_row": 9
   },
   {
    "name": "Morning note",
@@ -413,7 +413,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-21",
+   "day": "2026-11-22",
    "failures_in_row": 0
   },
   {

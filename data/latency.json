@@ -24,7 +24,7 @@
  },
  "overall": {
   "timed": 33,
-  "results": 80,
+  "results": 81,
   "p50_h": 4.5,
   "p90_h": 15.6
  },
@@ -99,7 +99,7 @@
    "kind": "bills",
    "market": "southafrica",
    "name": "South Africa",
-   "results": 6,
+   "results": 7,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -245,6 +245,15 @@
    "published_at": "2026-11-18T10:57:01+00:00",
    "published_how": "Last-Modified of the result's own document",
    "delay_h": 10.95
+  },
+  {
+   "key": "bills:southafrica:2026-11-23",
+   "kind": "bills",
+   "market": "southafrica",
+   "date": "2026-11-23",
+   "first_seen_at": "2026-11-24T14:50:09+00:00",
+   "published_at": null,
+   "published_how": null
   },
   {
    "key": "bills:kenya:2026-11-23",
@@ -1276,5 +1285,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-24T03:01:35+00:00"
+ "updated_at": "2026-11-24T14:57:23+00:00"
 }

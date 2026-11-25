@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-24",
+ "checked_on": "2026-11-25",
  "summary": {
   "failed": 0,
   "late": 9,
@@ -148,9 +148,9 @@
    "area": "Bond auctions",
    "name": "Morocco",
    "status": "ok",
-   "detail": "latest result 17 Nov (auctions weekly)",
-   "latest": "2026-11-17",
-   "due_by": "2026-11-29",
+   "detail": "latest result 24 Nov (auctions weekly)",
+   "latest": "2026-11-24",
+   "due_by": "2026-12-06",
    "link": "/markets/bonds/morocco"
   },
   {
@@ -202,8 +202,8 @@
    "area": "Policy rates",
    "name": "Egypt",
    "status": "ok",
-   "detail": "20.0% read 24 Nov",
-   "latest": "2026-11-24",
+   "detail": "20.0% read 25 Nov",
+   "latest": "2026-11-25",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -211,8 +211,8 @@
    "area": "Policy rates",
    "name": "Ghana",
    "status": "ok",
-   "detail": "11.0% read 24 Nov",
-   "latest": "2026-11-24",
+   "detail": "11.0% read 25 Nov",
+   "latest": "2026-11-25",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -220,8 +220,8 @@
    "area": "Policy rates",
    "name": "Kenya",
    "status": "ok",
-   "detail": "8.75% read 24 Nov",
-   "latest": "2026-11-24",
+   "detail": "8.75% read 25 Nov",
+   "latest": "2026-11-25",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -229,8 +229,8 @@
    "area": "Policy rates",
    "name": "Malawi",
    "status": "ok",
-   "detail": "24.0% read 24 Nov",
-   "latest": "2026-11-24",
+   "detail": "24.0% read 25 Nov",
+   "latest": "2026-11-25",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -238,8 +238,8 @@
    "area": "Policy rates",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "23.0% read 24 Nov",
-   "latest": "2026-11-24",
+   "detail": "23.0% read 25 Nov",
+   "latest": "2026-11-25",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -247,8 +247,8 @@
    "area": "Policy rates",
    "name": "South Africa",
    "status": "ok",
-   "detail": "7.25% read 24 Nov",
-   "latest": "2026-11-24",
+   "detail": "7.25% read 25 Nov",
+   "latest": "2026-11-25",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -256,8 +256,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 24 Nov",
-   "latest": "2026-11-24",
+   "detail": "6.25% read 25 Nov",
+   "latest": "2026-11-25",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -265,8 +265,8 @@
    "area": "Policy rates",
    "name": "Zambia",
    "status": "ok",
-   "detail": "10.75% read 24 Nov",
-   "latest": "2026-11-24",
+   "detail": "10.75% read 25 Nov",
+   "latest": "2026-11-25",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -301,9 +301,9 @@
    "area": "T-bill auctions",
    "name": "Malawi",
    "status": "ok",
-   "detail": "latest auction 16 Nov (auctions weekly)",
-   "latest": "2026-11-16",
-   "due_by": "2026-11-26",
+   "detail": "latest auction 24 Nov (auctions weekly)",
+   "latest": "2026-11-24",
+   "due_by": "2026-12-03",
    "link": "/markets/tbills/malawi"
   },
   {
@@ -371,8 +371,8 @@
   {
    "name": "IndexNow",
    "result": "failure",
-   "day": "2026-11-23",
-   "failures_in_row": 10
+   "day": "2026-11-24",
+   "failures_in_row": 11
   },
   {
    "name": "Morning note",
@@ -413,7 +413,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-24",
+   "day": "2026-11-25",
    "failures_in_row": 0
   },
   {

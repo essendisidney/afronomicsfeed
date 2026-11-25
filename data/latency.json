@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 33,
-  "results": 81,
+  "timed": 34,
+  "results": 84,
   "p50_h": 4.5,
-  "p90_h": 15.6
+  "p90_h": 15.5
  },
  "summary": [
   {
@@ -121,7 +121,7 @@
    "kind": "bills",
    "market": "malawi",
    "name": "Malawi",
-   "results": 8,
+   "results": 10,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -198,10 +198,10 @@
    "kind": "bonds",
    "market": "morocco",
    "name": "Morocco",
-   "results": 6,
-   "timed": 6,
-   "p50_h": 2.1,
-   "p90_h": 9.1,
+   "results": 7,
+   "timed": 7,
+   "p50_h": 2.2,
+   "p90_h": 9.8,
    "publisher_time": "Last-Modified of the result's own document",
    "status": "measured"
   },
@@ -219,11 +219,30 @@
  ],
  "results": [
   {
+   "key": "bonds:morocco:2026-11-24",
+   "kind": "bonds",
+   "market": "morocco",
+   "date": "2026-11-24",
+   "first_seen_at": "2026-11-25T00:42:36+00:00",
+   "published_at": "2026-11-24T18:19:11+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 6.39
+  },
+  {
    "key": "bonds:egypt:2026-11-24",
    "kind": "bonds",
    "market": "egypt",
    "date": "2026-11-24",
    "first_seen_at": "2026-11-24T02:56:16+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:malawi:2026-11-24",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-11-24",
+   "first_seen_at": "2026-11-25T00:41:36+00:00",
    "published_at": null,
    "published_how": null
   },
@@ -339,6 +358,15 @@
    "market": "southafrica",
    "date": "2026-11-17",
    "first_seen_at": "2026-11-23T14:32:18+00:00",
+   "published_at": null,
+   "published_how": null
+  },
+  {
+   "key": "bills:malawi:2026-11-17",
+   "kind": "bills",
+   "market": "malawi",
+   "date": "2026-11-17",
+   "first_seen_at": "2026-11-25T00:41:36+00:00",
    "published_at": null,
    "published_how": null
   },
@@ -1259,31 +1287,7 @@
    "date": "2026-09-28",
    "baseline": true,
    "first_seen_at": null
-  },
-  {
-   "key": "bonds:zambia:2026-09-25",
-   "kind": "bonds",
-   "market": "zambia",
-   "date": "2026-09-25",
-   "baseline": true,
-   "first_seen_at": null
-  },
-  {
-   "key": "bonds:waemu:2026-09-25:senegal",
-   "kind": "bonds",
-   "market": "waemu",
-   "date": "2026-09-25",
-   "baseline": true,
-   "first_seen_at": null
-  },
-  {
-   "key": "bills:ghana:2026-09-25",
-   "kind": "bills",
-   "market": "ghana",
-   "date": "2026-09-25",
-   "baseline": true,
-   "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-24T14:57:23+00:00"
+ "updated_at": "2026-11-25T00:45:25+00:00"
 }

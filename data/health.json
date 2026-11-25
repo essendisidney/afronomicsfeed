@@ -1,23 +1,14 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-25",
+ "checked_on": "2026-11-26",
  "summary": {
   "failed": 0,
-  "late": 9,
+  "late": 8,
   "gap": 1,
-  "ok": 29
+  "ok": 30
  },
  "items": [
-  {
-   "area": "Bond auctions",
-   "name": "Uganda",
-   "status": "late",
-   "detail": "latest result 28 Oct; it usually auctions every two weeks",
-   "latest": "2026-10-28",
-   "due_by": "2026-11-18",
-   "link": "/markets/bonds/uganda"
-  },
   {
    "area": "Bond auctions",
    "name": "WAEMU (UMOA-Titres)",
@@ -161,6 +152,15 @@
    "latest": "2026-11-16",
    "due_by": "2026-12-28",
    "link": "/markets/bonds/nigeria"
+  },
+  {
+   "area": "Bond auctions",
+   "name": "Uganda",
+   "status": "ok",
+   "detail": "latest result 25 Nov (auctions every two weeks)",
+   "latest": "2026-11-25",
+   "due_by": "2026-12-16",
+   "link": "/markets/bonds/uganda"
   },
   {
    "area": "Bond auctions",
@@ -319,9 +319,9 @@
    "area": "T-bill auctions",
    "name": "Nigeria",
    "status": "ok",
-   "detail": "latest auction 11 Nov (auctions every two weeks)",
-   "latest": "2026-11-11",
-   "due_by": "2026-11-26",
+   "detail": "latest auction 25 Nov (auctions every two weeks)",
+   "latest": "2026-11-25",
+   "due_by": "2026-12-16",
    "link": "/markets/tbills/nigeria"
   },
   {
@@ -366,13 +366,13 @@
    "name": "African auctions",
    "result": "failure",
    "day": "2026-11-25",
-   "failures_in_row": 23
+   "failures_in_row": 24
   },
   {
    "name": "IndexNow",
    "result": "failure",
-   "day": "2026-11-24",
-   "failures_in_row": 11
+   "day": "2026-11-25",
+   "failures_in_row": 12
   },
   {
    "name": "Morning note",

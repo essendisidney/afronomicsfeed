@@ -23,10 +23,10 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 34,
-  "results": 84,
-  "p50_h": 4.5,
-  "p90_h": 15.5
+  "timed": 35,
+  "results": 86,
+  "p50_h": 4.6,
+  "p90_h": 15.4
  },
  "summary": [
   {
@@ -44,7 +44,7 @@
    "kind": "bills",
    "market": "nigeria",
    "name": "Nigeria",
-   "results": 4,
+   "results": 5,
    "timed": 0,
    "p50_h": null,
    "p90_h": null,
@@ -187,12 +187,12 @@
    "kind": "bonds",
    "market": "uganda",
    "name": "Uganda",
-   "results": 1,
-   "timed": 1,
+   "results": 2,
+   "timed": 2,
    "p50_h": null,
    "p90_h": null,
    "publisher_time": "Last-Modified of the result's own document",
-   "status": "1 timed result so far; figures from 5"
+   "status": "2 timed results so far; figures from 5"
   },
   {
    "kind": "bonds",
@@ -218,6 +218,25 @@
   }
  ],
  "results": [
+  {
+   "key": "bonds:uganda:2026-11-25",
+   "kind": "bonds",
+   "market": "uganda",
+   "date": "2026-11-25",
+   "first_seen_at": "2026-11-25T23:13:42+00:00",
+   "published_at": "2026-11-25T14:24:24+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 8.82
+  },
+  {
+   "key": "bills:nigeria:2026-11-25",
+   "kind": "bills",
+   "market": "nigeria",
+   "date": "2026-11-25",
+   "first_seen_at": "2026-11-25T23:06:06+00:00",
+   "published_at": null,
+   "published_how": null
+  },
   {
    "key": "bonds:morocco:2026-11-24",
    "kind": "bonds",
@@ -1289,5 +1308,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-25T00:45:25+00:00"
+ "updated_at": "2026-11-25T23:13:42+00:00"
 }

@@ -1,7 +1,7 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-26",
+ "checked_on": "2026-11-27",
  "summary": {
   "failed": 0,
   "late": 8,
@@ -292,9 +292,9 @@
    "area": "T-bill auctions",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest auction 23 Nov (auctions weekly)",
-   "latest": "2026-11-23",
-   "due_by": "2026-12-04",
+   "detail": "latest auction 30 Nov (auctions weekly)",
+   "latest": "2026-11-30",
+   "due_by": "2026-12-11",
    "link": "/markets/kenya-tbills"
   },
   {
@@ -355,9 +355,9 @@
    "area": "T-bill auctions",
    "name": "Zambia",
    "status": "ok",
-   "detail": "latest auction 12 Nov (auctions every two weeks)",
-   "latest": "2026-11-12",
-   "due_by": "2026-12-03",
+   "detail": "latest auction 26 Nov (auctions every two weeks)",
+   "latest": "2026-11-26",
+   "due_by": "2026-12-17",
    "link": "/markets/tbills/zambia"
   }
  ],
@@ -365,20 +365,20 @@
   {
    "name": "African auctions",
    "result": "failure",
-   "day": "2026-11-25",
+   "day": "2026-11-26",
    "failures_in_row": 24
   },
   {
    "name": "IndexNow",
    "result": "failure",
-   "day": "2026-11-25",
-   "failures_in_row": 12
+   "day": "2026-11-26",
+   "failures_in_row": 13
   },
   {
    "name": "Morning note",
    "result": "failure",
    "day": "2026-11-26",
-   "failures_in_row": 9
+   "failures_in_row": 8
   },
   {
    "name": "Documents",
@@ -399,6 +399,12 @@
    "failures_in_row": 2
   },
   {
+   "name": "Kenya quick check",
+   "result": "failure",
+   "day": "2026-11-26",
+   "failures_in_row": 1
+  },
+  {
    "name": "?",
    "result": "startup_failure",
    "day": "2026-11-21",
@@ -407,7 +413,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-25",
+   "day": "2026-11-26",
    "failures_in_row": 0
   },
   {

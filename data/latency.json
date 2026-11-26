@@ -23,9 +23,9 @@
   "bonds:zambia": "2026-10-13"
  },
  "overall": {
-  "timed": 35,
-  "results": 86,
-  "p50_h": 4.6,
+  "timed": 36,
+  "results": 87,
+  "p50_h": 5.0,
   "p90_h": 15.4
  },
  "summary": [
@@ -33,10 +33,10 @@
    "kind": "bills",
    "market": "kenya",
    "name": "Kenya",
-   "results": 6,
-   "timed": 6,
-   "p50_h": 5.0,
-   "p90_h": 26.5,
+   "results": 7,
+   "timed": 7,
+   "p50_h": 5.3,
+   "p90_h": 23.1,
    "publisher_time": "Last-Modified of the result's own document",
    "status": "measured"
   },
@@ -218,6 +218,16 @@
   }
  ],
  "results": [
+  {
+   "key": "bills:kenya:2026-11-30",
+   "kind": "bills",
+   "market": "kenya",
+   "date": "2026-11-30",
+   "first_seen_at": "2026-11-26T21:08:44+00:00",
+   "published_at": "2026-11-26T13:53:00+00:00",
+   "published_how": "Last-Modified of the result's own document",
+   "delay_h": 7.26
+  },
   {
    "key": "bonds:uganda:2026-11-25",
    "kind": "bonds",
@@ -1308,5 +1318,5 @@
    "first_seen_at": null
   }
  ],
- "updated_at": "2026-11-25T23:13:42+00:00"
+ "updated_at": "2026-11-26T21:08:46+00:00"
 }

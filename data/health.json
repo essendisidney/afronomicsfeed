@@ -1,12 +1,12 @@
 {
  "dataset": "Afronomics data health",
  "note": "Whether each figure on the site is as fresh as its publisher's own release rhythm says it should be. Written by scripts/data_health.py at the end of each data run.",
- "checked_on": "2026-11-27",
+ "checked_on": "2026-11-28",
  "summary": {
   "failed": 0,
-  "late": 8,
+  "late": 9,
   "gap": 1,
-  "ok": 30
+  "ok": 29
  },
  "items": [
   {
@@ -80,6 +80,15 @@
    "latest": "2026-10-05",
    "due_by": "2026-11-11",
    "link": "/rates/nigeria/savings-bond"
+  },
+  {
+   "area": "T-bill auctions",
+   "name": "Mozambique",
+   "status": "late",
+   "detail": "latest auction 18 Nov; it usually auctions weekly",
+   "latest": "2026-11-18",
+   "due_by": "2026-11-27",
+   "link": "/markets/tbills/mozambique"
   },
   {
    "area": "Policy rates",
@@ -175,9 +184,9 @@
    "area": "Eurobond yields",
    "name": "Kenya",
    "status": "ok",
-   "detail": "latest prices 19 Nov",
-   "latest": "2026-11-19",
-   "due_by": "2026-11-28",
+   "detail": "latest prices 26 Nov",
+   "latest": "2026-11-26",
+   "due_by": "2026-12-05",
    "link": "/markets/eurobonds"
   },
   {
@@ -256,8 +265,8 @@
    "area": "Policy rates",
    "name": "Tanzania",
    "status": "ok",
-   "detail": "6.25% read 26 Nov",
-   "latest": "2026-11-26",
+   "detail": "6.25% read 27 Nov",
+   "latest": "2026-11-27",
    "due_by": null,
    "link": "/rates/policy"
   },
@@ -283,9 +292,9 @@
    "area": "T-bill auctions",
    "name": "Ghana",
    "status": "ok",
-   "detail": "latest auction 20 Nov (auctions weekly)",
-   "latest": "2026-11-20",
-   "due_by": "2026-12-01",
+   "detail": "latest auction 27 Nov (auctions weekly)",
+   "latest": "2026-11-27",
+   "due_by": "2026-12-08",
    "link": "/markets/tbills/ghana"
   },
   {
@@ -305,15 +314,6 @@
    "latest": "2026-11-24",
    "due_by": "2026-12-03",
    "link": "/markets/tbills/malawi"
-  },
-  {
-   "area": "T-bill auctions",
-   "name": "Mozambique",
-   "status": "ok",
-   "detail": "latest auction 18 Nov (auctions weekly)",
-   "latest": "2026-11-18",
-   "due_by": "2026-11-27",
-   "link": "/markets/tbills/mozambique"
   },
   {
    "area": "T-bill auctions",
@@ -365,14 +365,14 @@
   {
    "name": "African auctions",
    "result": "failure",
-   "day": "2026-11-26",
+   "day": "2026-11-27",
    "failures_in_row": 23
   },
   {
    "name": "IndexNow",
    "result": "failure",
-   "day": "2026-11-26",
-   "failures_in_row": 12
+   "day": "2026-11-27",
+   "failures_in_row": 13
   },
   {
    "name": "Morning note",
@@ -413,7 +413,7 @@
   {
    "name": "Forecast ledger",
    "result": "success",
-   "day": "2026-11-26",
+   "day": "2026-11-27",
    "failures_in_row": 0
   },
   {
